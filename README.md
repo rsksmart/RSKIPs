@@ -76,7 +76,7 @@ RSK Improvement Proposals
 | 42       | Remove world midstates from receipts                                             | 22-JUN-17 | SDL       | Sca      | CORE     | 1 | Adopted  |
 | 43       | Sequential Address format                                                        | 23-JUN-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
 | 44       | Remove the zero-byte discount in data                                            | 24-JUN-17 | SDL       | Sca      | CORE     | 1 | DRAFT    |
-| 45       | Event Tree and new LOG features                                                  | 26-JUN-17 | SDL       | Sca      | CORE     | 2 | Adopted  |
+| 45       | [New Event Tree and Extended LOG](IPs/RSKIP45.md)                                | 26-JUN-17 | SDL       | Sca      | CORE     | 2 | Adopted  |
 | 46       | Block Mining Fees Information Mechanism                                          | 04-OCT-17 | MM        | Usa      | Node     | 1 | Adopted  |
 | 47       | CALLNUM opcode                                                                   | 18-OCT-17 | SDL       | Sca      | CORE     | 1 | DRAFT    |
 | 48       | Informing average free gas per block                                             | 28-NOV-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
