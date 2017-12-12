@@ -83,9 +83,11 @@ RSK Improvement Proposals
 | 49       | One-To-Many hub payment channels                                                 | 01-DIC-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
 | 50       | [Script Versions using HEADER pesuo-opcode](IPs/RSKIP50.md)                      | 07-DIC-17 | SDL       | Sca      | CORE     | 1 | Adopted  |
 | 51       | [Memory-Mapped configuration register](IPs/RSKIP51.md)                           | 10-DIC-17 | SDL       | Usa      | CORE     | 1 | Adopted  |
-| 52       | Native Probabilistic payments                                                    | 12-DIC-17 | SDL       | Sca      | CORE     | 2 | DRAFT*   | 
+| 52       | [Cache Oriented Storage Rent](IPs/RSKIP52.md)                                    | 12-DIC-17 | SDL       | Sca      | CORE     | 2 | DRAFT*   | 
 | 53       | Lumino Transaction Compression (LTCP)                                            | 20-FEB-17 | SDL       | Sca      | CORE     | 3 | DRAFT*   |
 | 54       | Transaction amount & destination privacy                                         | 07-MAR-17 | SDL       | Usa      | CORE     | 3 | DRAFT    |
+| 55       | Native Probabilistic payments                                                    | 11-MAR-17 | SDL       | Usa      | CORE     | 3 | DRAFT*   |
+
 
 (*) Under evaluation to be implemented in the next reference client release
 
