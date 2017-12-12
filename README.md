@@ -42,7 +42,7 @@ RSK Improvement Proposals
 | 8        | Verification-less mining                                                         | 29-SEP-16 | SDL       | Fair     | CORE     | 2 | DRAFT    |
 | 9        | Negotiated Minimum Gas Price                                                     | 21-OCT-16 | SDL       | Sca      | CORE     | 2 | Adopted  |
 | 10       | Transactions never invalidate blocks                                             | 21-OCT-16 | SDL       | Sca      | CORE     | 2 | DRAFT    |
-| 11       | TXINDEX Opcode                                                                   | 07-AUG-16 | SDL       | Sca      | CORE     | 1 | Adopted  |
+| 11       | [TXINDEX Opcode](IPs/RSKIP11.md)                                                                    | 07-AUG-16 | SDL       | Sca      | CORE     | 1 | Adopted  |
 | 12       | Contract Sleep                                                                   | 06-AUG-16 | SDL       | Sca      | CORE     | 1 | DRAFT    |
 | 13       | Support for stable assets & token issuance                                       | 08-AUG-16 | SDL       | Sca      | CORE     | 3 | DRAFT    |
 | 14       | Reward Manager Smart Contract (REMASC)                                           | 10-NOV-16 | SDL       | Sca      | CORE     | 3 | Rejected |
