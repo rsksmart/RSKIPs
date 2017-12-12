@@ -3,9 +3,9 @@ RSK Improvement Proposals folder
 
 ## RSKIP status terms
 * **Draft** - an RSKIP that is open for consideration
-* **Accepted** - an RSKIP that is planned for immediate adoption in the reference client, i.e. expected to be included in the next reference client hard fork.
-* **Adopted** - an RSKIP that has been adopted in a previous reference client hard fork.
-* **Deferred** - an RSKIP that is not being considered for immediate adoption in the reference client. May be reconsidered in the future for a subsequent hard fork of the reference client.
+* **Accepted** - an RSKIP that is planned for immediate adoption in the reference client, i.e. expected to be included in the next reference client release.
+* **Adopted** - an RSKIP that has been adopted in a previous reference client relese.
+* **Deferred** - an RSKIP that is not being considered for immediate adoption in the reference client. May be reconsidered in the future for a subsequent release of the reference client.
 * **Rejected** - an RSKIP that was rejected
 
 ## RSKIP purpose terms
