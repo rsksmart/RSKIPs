@@ -14,6 +14,15 @@ RSK Improvement Proposals folder
 * **Fair** - an RSKIP that has improves fairness
 * **Sec** - an RSKIP that that improves security
 
+## Layer
+* **CORE** - CORE, consensus related
+* **Node** - Related to node manager interfaces, such as RPC
+* **UI** - User Interface
+* **2nd** - 2nd layer proteocols, such as off-chain payment channels
+* **Net** - related to p2p networking
+* **DApp** - Dapp application interfaces
+
+
 ## Implementation Complexity
 * **1** - Minimal
 * **2** - Medium
@@ -68,7 +77,7 @@ RSK Improvement Proposals folder
 | 43       | Sequential Address format                                                        | 23-JUN-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
 | 44       | Remove the zero-byte discount in data                                            | 24-JUN-17 | SDL       | Sca      | CORE     | 1 | DRAFT    |
 | 45       | Event Tree and new LOG features                                                  | 26-JUN-17 | SDL       | Sca      | CORE     | 2 | Adopted  |
-| 46       | Block Mining Fees Information Mechanism                                          | 04-OCT-17 | MM        | Usa      | CORE     | 1 | Adopted  |
+| 46       | Block Mining Fees Information Mechanism                                          | 04-OCT-17 | MM        | Usa      | Node     | 1 | Adopted  |
 | 47       | CALLNUM opcode                                                                   | 18-OCT-17 | SDL       | Sca      | CORE     | 1 | DRAFT    |
 | 48       | Informing average free gas per block                                             | 28-NOV-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
 | 49       | One-To-Many hub payment channels                                                 | 01-DIC-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
