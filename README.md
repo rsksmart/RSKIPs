@@ -64,7 +64,7 @@ RSK Improvement Proposals
 | 30       | Code Pagination                                                                  | 01-JAN-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
 | 31       | Hibernation Compression                                                          | 10-JAN-17 | SDL       | Sca      | CORE     | 3 | DRAFT    |
 | 32       | Double-Hashed Addresses                                                          | 10-JAN-17 | SDL       | Sca      | CORE     | 2 | DRAFT*   |
-| 33       | CODEREPLACE opcode                                                               | 17-JAN-17 | SDL       | Sec/Usa  | CORE     | 2 | DRAFT    |
+| 33       | [CODEREPLACE opcode](IPs/RSKIP33.md)                                             | 17-JAN-17 | SDL       | Sec/Usa  | CORE     | 2 | DRAFT    |
 | 34       | Contract const DATA Sections                                                     | 20-JAN-17 | SDL       | Sca      | CORE     | 1 | DRAFT*   |
 | 35       | Managing BridgeMaster Federation Members                                         | 02-FEB-17 | SDL       | Sca      | CORE     | 3 | DRAFT    |
 | 36       | Transaction Encapsulation                                                        | 02-FEB-17 | SDL       | Sca      | CORE     | 2 | DRAFT    |
