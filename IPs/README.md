@@ -1,24 +1,25 @@
 # RSKIPs
 RSK Improvement Proposals folder 
 
-# RSKIP status terms
+## RSKIP status terms
 * **Draft** - an RSKIP that is open for consideration
 * **Accepted** - an RSKIP that is planned for immediate adoption in the reference client, i.e. expected to be included in the next reference client hard fork.
 * **Adopted** - an RSKIP that has been adopted in a previous reference client hard fork.
 * **Deferred** - an RSKIP that is not being considered for immediate adoption in the reference client. May be reconsidered in the future for a subsequent hard fork of the reference client.
 * **Rejected** - an RSKIP that was rejected
 
-# RSKIP purpose terms
+## RSKIP purpose terms
 * **Sca** - an RSKIP that improves scalability
 * **Usa** - an RSKIP that improves usability
 * **Fair** - an RSKIP that has improves fairness
 * **Sec** - an RSKIP that that improves security
 
-# Implementation Complexity
+## Implementation Complexity
 * **1** - Minimal
 * **2** - Medium
 * **3** - High
 
+# Index
 
 | Nr       | Title                                                                            | Creation Date | Author    | Pur      | Layer    | C | Status   |
 |----------|----------------------------------------------------------------------------------|-----------|-----------|----------|----------|---|----------|
