@@ -43,7 +43,7 @@ RSK Improvement Proposals
 | 9        | [Negotiated Minimum Gas Price](IPs/RSKIP9.md)                                    | 21-OCT-16 | SDL       | Sca      | CORE     | 2 | Adopted  |
 | 10       | [Transactions never invalidate blocks](IPs/RSKIP10.md)                           | 21-OCT-16 | SDL       | Sca      | CORE     | 2 | DRAFT    |
 | 11       | [TXINDEX Opcode](IPs/RSKIP11.md)                                                 | 07-AUG-16 | SDL       | Sca      | CORE     | 1 | Adopted  |
-| 12       | [Contract Sleep](IPs/RSKIP12.md)                                                 | 06-AUG-16 | SDL       | Sca      | CORE     | 1 | DRAFT    |
+| 12       | [Contract Sleep](IPs/RSKIP12.md)                                                 | 06-AUG-16 | SDL       | Sca      | CORE     | 1 | Rejected |
 | 13       | [Support for stable assets & token issuance](IPs/RSKIP13.md)                     | 08-AUG-16 | SDL       | Sca      | CORE     | 3 | DRAFT    |
 | 14       | [Reward Manager Smart Contract (REMASC)](IPs/RSKIP14.md)                         | 10-NOV-16 | SDL       | Sca      | CORE     | 3 | Rejected |
 | 15       | [Simplified Reward Manager Smart Contract (REMASC)](IPs/RSKIP15.md)              | 14-NOV-16 | SDL       | Sca      | CORE     | 2 | Adopted  |
