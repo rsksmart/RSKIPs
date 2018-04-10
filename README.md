@@ -87,7 +87,7 @@ RSK Improvement Proposals
 | 53       | [Lumino Transaction Compression (LTCP)](IPs/RSKIP53.md)                          | 20-FEB-17 | SDL       | Sca      | CORE     | 3 | DRAFT*   |
 | 54       | [Transaction amount & destination privacy](IPs/RSKIP54.md)                       | 07-MAR-17 | SDL       | Usa      | CORE     | 3 | DRAFT    |
 | 55       | [Native Probabilistic payments](IPs/RSKIP55.md)                                  | 11-MAR-17 | SDL       | Usa      | CORE     | 3 | DRAFT*   |
-| 59       | [Child Contracts](IPs/RSKIP59.md)                                                | 11-JUN-16 | SDL       | Sca      | CORE     | 3 | DRAFT*   |
+| 59       | [Child Contracts](IPs/RSKIP59.md)                                                | 11-JUN-16 | SDL       | Sca      | CORE     | 1 | DRAFT*   |
 
 (*) Under evaluation to be implemented in the next reference client release
 
