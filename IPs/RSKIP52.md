@@ -33,7 +33,35 @@ This RSKIP does not interfere with the plan to add parallel transaction executio
 
 The rent is paid by extending the transaction to add a new field "maximumRentGas".  The total gas consumed by a transaction will be equal to the normal gas consumed plus the rent gas consumed. If the rent gas to consume becomes higher than maximumRentGas, the transaction is aborted with OOG. As with normal gas, the full maximumRentGas amount is deducted from the origin address and then the remaining is reimbursed. 
 
-Each account/contract has a new field lastRentPaidTime. Let d be the timestamp of the block in which the call is executed. Both fields are given in seconds. The following pseudo-code ilustrates how rent is computed and paid.
+Each account/contract has a new field lastRentPaidTime. Let d be the timestamp of the block in which the call is executed. Both fields are given in seconds. 
+
+The following code ilustrates how rent is prePaid in full when transaction starts execution and when it finishes:
+```
+// called on Start
+void prepayAllRentGas(transactionMaximumRentGas) {
+ sourceAccount.subtract(transactionMaximumRentGas*gasPrice);
+ availableRentGas = transactionMaximumRentGas
+}
+
+// Called during execution
+void consumeRentGas(gas) {
+ rentGasConsumed +=gas;
+ availableRentGas -=gas;
+}
+// Called during execution
+void reimburseRentGas(gas) {
+rentGasConsumed -=gas;
+ availableRentGas +=gas;
+}
+
+// Called on finish
+void finalizeRentGas() {
+ sourceAccount.add(availableRentGas*gasPrice);
+ minerAccount.add(rentGasConsumed *gasPrice);
+}
+```
+
+The following pseudo-code ilustrates how rent is computed and paid.
 
 ```
 if (d>lastRentPaidTime)
@@ -41,7 +69,7 @@ if (d>lastRentPaidTime)
 else
   rentGas = 0
   
-prepayRentGas(rentGas)
+consumeRentGas(rentGas)
 dest_contract.call()
 if (dest_contract modified its state) {
   if (rentGas<1000) 
