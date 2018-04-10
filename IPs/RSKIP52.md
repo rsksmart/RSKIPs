@@ -28,9 +28,10 @@ This RSKIP specifies the third approach, as it is the less interfering and can b
 
 ## Specification
 
-In case the call do not change the storage or account state of the target contract (including the balance) then the rent will only be paid if the rent is higher than 10000 gas. If the state of the called contract is changed, then the rent will be paid if the rent is higher than 1000. This protects from costly micro-transactions. To allow parallelization if transactions that do not modify the state of a contract, the miner should create a schedule where a single transaction pays for the rent is serialized with the remaining transactions, which can be safely parallelized because they do not modify the account state.
+In case the call do not change the storage or account state of the target contract (including the balance) then the rent will only be paid if the rent is higher than 10000 gas. If the state of the called contract is changed, then the rent will be paid if the rent is higher than 1000. This protects from costly micro-transactions. 
+This RSKIP does not interfere with the plan to add parallel transaction execution if the transactions are scheduled properly. 
 
-The rent is paid by extending the transaction to add a new field "maximumRentGas".  The total gas consumed by a transaction will be equal to the normal gas consumed plus the rent gas consumed. If the ren gas to consume becomes higher than maximumRentGas, the transaction is aborted with OOG. As with normal gas, the full maximumRentGas amount is deducted from the origin address and then the remaining is reimbursed.
+The rent is paid by extending the transaction to add a new field "maximumRentGas".  The total gas consumed by a transaction will be equal to the normal gas consumed plus the rent gas consumed. If the rent gas to consume becomes higher than maximumRentGas, the transaction is aborted with OOG. As with normal gas, the full maximumRentGas amount is deducted from the origin address and then the remaining is reimbursed. 
 
 Each account/contract has a new field lastRentPaidTime. Let d be the timestamp of the block in which the call is executed. Both fields are given in seconds. The following pseudo-code ilustrates how rent is computed and paid.
 
@@ -71,6 +72,30 @@ When a contract is created, the lastRentPaidTime is set 6 months in the future. 
 The opcodes EXTCODECOPY, EXTCODESIZE and BALANCE opcodes also must pay rent, because they access other contracts.
 
 The block gas limit does not apply to rents: the amount of rents paid in gas may be higher than the gas limit. Therefore the rent is an additional uncapped revenue stream for the miners.
+
+# New Transaction Format
+
+The transaction format is modified. Currently the transaction contains the following fields:
+1. Nonce
+2. GasPrice
+3. GasLimit
+4. ReceiveAddress
+5. Value
+6. Data
+7. v
+8. r
+9. s
+
+If the transaction has 10 fields or more, then field at index 10 (starting from 1) will correspond to the field maximumRentGas. The same size restrictions on the field gasLimit will apply to maximumRentGas. Also the maximumRentGas is subtracted in full from the sender's balance, and then the amount unspent is reimbursed. If the transaction does not specify a maximumRentGas, then maximumRentGas is assumed to consume all remaining sender's balance: the account balance minus the value transferred, divided by the GasPrice specified. 
+If the rent cannot be paid because the maximumRentGas is reached, then the transaction is reverted and all the gas consumed so far is deducted (not reimbursed) as if a REVERT opcode had been executed. 
+
+# New Receipt status values
+
+If a transaction is reverted manually (REVERT), a new status of (-1) is recorded in the transaction receipt.
+If a transaction is reverted because of standard OOG, the old empty-vector status is still used.
+If a transaction is reverted because of rent OOG, a new status of (-2) is recorded in the transaction receipt.
+
+If an VM instruction would generate simultaneously a standard OOG and a rent OOG execption, the standard OOG is reported.
 
 # Future Impromenets
 
