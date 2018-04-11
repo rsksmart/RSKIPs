@@ -1,4 +1,4 @@
-# Derivation path
+# Derivation Path for Hierarchical Deterministic Wallets
 
 ```
 RSKIP 56
