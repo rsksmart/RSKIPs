@@ -2,7 +2,7 @@
 
 ```
 RSKIP 56
-    Title: Derivation Path
+    Title: Derivation Path for Hierarchical Deterministic Wallets
     Type: Process
     Author: Ilan Olkies <ilanolkies@gmail.com>
     Created: 2018-03-20
