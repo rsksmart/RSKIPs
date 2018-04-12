@@ -1,7 +1,7 @@
 # Derivation Path for Hierarchical Deterministic Wallets
 
 ```
-RSKIP 56
+RSKIP 57
     Title: Derivation Path for Hierarchical Deterministic Wallets
     Type: Process
     Author: Ilan Olkies <ilanolkies@gmail.com>
