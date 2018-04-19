@@ -43,7 +43,7 @@ RSK Improvement Proposals
 | 9        | [Negotiated Minimum Gas Price](IPs/RSKIP9.md)                                    | 21-OCT-16 | SDL       | Sca      | CORE     | 2 | Adopted  |
 | 10       | [Transactions never invalidate blocks](IPs/RSKIP10.md)                           | 21-OCT-16 | SDL       | Sca      | CORE     | 2 | DRAFT    |
 | 11       | [TXINDEX Opcode](IPs/RSKIP11.md)                                                 | 07-AUG-16 | SDL       | Sca      | CORE     | 1 | Adopted  |
-| 12       | [Contract Sleep](IPs/RSKIP12.md)                                                 | 06-AUG-16 | SDL       | Sca      | CORE     | 1 | DRAFT    |
+| 12       | [Contract Sleep](IPs/RSKIP12.md)                                                 | 06-AUG-16 | SDL       | Sca      | CORE     | 1 | Rejected |
 | 13       | [Support for stable assets & token issuance](IPs/RSKIP13.md)                     | 08-AUG-16 | SDL       | Sca      | CORE     | 3 | DRAFT    |
 | 14       | [Reward Manager Smart Contract (REMASC)](IPs/RSKIP14.md)                         | 10-NOV-16 | SDL       | Sca      | CORE     | 3 | Rejected |
 | 15       | [Simplified Reward Manager Smart Contract (REMASC)](IPs/RSKIP15.md)              | 14-NOV-16 | SDL       | Sca      | CORE     | 2 | Adopted  |
@@ -87,8 +87,8 @@ RSK Improvement Proposals
 | 53       | [Lumino Transaction Compression (LTCP)](IPs/RSKIP53.md)                          | 20-FEB-17 | SDL       | Sca      | CORE     | 3 | DRAFT*   |
 | 54       | [Transaction amount & destination privacy](IPs/RSKIP54.md)                       | 07-MAR-17 | SDL       | Usa      | CORE     | 3 | DRAFT    |
 | 55       | [Native Probabilistic payments](IPs/RSKIP55.md)                                  | 11-MAR-17 | SDL       | Usa      | CORE     | 3 | DRAFT*   |
-| 57       | [Derivation Path for Hierarchical Deterministic Wallets](IPs/RSKIP56.md)                                                | 05-ABR-18 | Ilan Olkies | Usa    | Net      | 1 | DRAFT    |
-
+| 57       | [Derivation Path for Hierarchical Deterministic Wallets](IPs/RSKIP56.md)         | 05-ABR-18 | Ilan Olkies | Usa    | Net      | 1 | DRAFT    |
+| 59       | [Child Contracts](IPs/RSKIP59.md)                                                | 11-JUN-16 | SDL       | Sca      | CORE     | 1 | DRAFT*   |
 
 (*) Under evaluation to be implemented in the next reference client release
 
