@@ -38,11 +38,11 @@ Wallets implementing RSK support must use the following derivation path:
 |RSK TestNet|m / 44' / 37310' / 0' / 0 / N|
 
 ## History
-[BIP-0032](https://www.github.com/bitcoin/bipc/blob/master/bip-0032.mediawiki) describes hierarchical deterministic wallets (or "HD Wallets"): wallets which can be shared partially or entirely with different systems, each with or without the ability to spend coins. The specification consists of two parts. In a first part, a system for deriving a tree of keypairs from a single seed is presented. The second part demonstrates how to build a wallet structure on top of such a tree.
+[BIP-0032](https://www.github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) describes hierarchical deterministic wallets (or "HD Wallets"): wallets which can be shared partially or entirely with different systems, each with or without the ability to spend coins. The specification consists of two parts. In a first part, a system for deriving a tree of keypairs from a single seed is presented. The second part demonstrates how to build a wallet structure on top of such a tree.
 
-[BIP-0043](https://www.github.com/bitcoin/bipc/blob/master/bip-0043.mediawiki) introduces a "Purpose Field" for use in deterministic wallets based on algorithm described in BIP-0032.
+[BIP-0043](https://www.github.com/bitcoin/bips/blob/master/bip-0043.mediawiki) introduces a "Purpose Field" for use in deterministic wallets based on algorithm described in BIP-0032.
 
-[BIP-0044](https://www.github.com/bitcoin/bipc/blob/master/bip-0044.mediawiki) defines a logical hierarchy for deterministic wallets based on an algorithm described in BIP-0032 and purpose scheme described in BIP-0043. This BIP is a particular application of BIP43.
+[BIP-0044](https://www.github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) defines a logical hierarchy for deterministic wallets based on an algorithm described in BIP-0032 and purpose scheme described in BIP-0043. This BIP is a particular application of BIP43.
 
 [SLIP-0044](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) specifies the Coin Type body described on BIP-0044.
 
