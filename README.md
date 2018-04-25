@@ -13,6 +13,7 @@ RSK Improvement Proposals
 * **Usa** - an RSKIP that improves usability
 * **Fair** - an RSKIP that has improves fairness
 * **Sec** - an RSKIP that that improves security
+* **ST** - an RSKIP that proposes a standard track
 
 ## Layer
 * **CORE** - CORE, consensus related
@@ -89,6 +90,7 @@ RSK Improvement Proposals
 | 55       | [Native Probabilistic payments](IPs/RSKIP55.md)                                  | 11-MAR-17 | SDL       | Usa      | CORE     | 3 | DRAFT*   |
 | 57       | [Derivation Path for Hierarchical Deterministic Wallets](IPs/RSKIP56.md)         | 05-ABR-18 | Ilan Olkies | Usa    | Net      | 1 | DRAFT    |
 | 59       | [Child Contracts](IPs/RSKIP59.md)                                                | 11-JUN-16 | SDL       | Sca      | CORE     | 1 | DRAFT*   |
+| 60       | [Checksum Address Encoding](IPs/RSKIP60.md)                                      | 25-JUN-16 | Ilan Olkies | ST     | Net      | 1 | DRAFT*   |
 
 (*) Under evaluation to be implemented in the next reference client release
 

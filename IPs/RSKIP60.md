@@ -1,19 +1,16 @@
-# Checksum address encoding
+# Checksum Address Encoding
 ```
 RSKIP:
-	Title: Checksum address encoding
+	Title: Checksum Address Encoding
 	Authors:
 		Julian Len <julianlen@gmail.com>
 		Ilan Olkies <ilanolkies@gmail.com>
 	Type: Standard Track
-	Created: 2018-03-06
+	Created: 2018-25-06
 ```
 ## Abstract
 
-RSKIP describes a checksum mechanism that aims to avoid typing errors and prevent confusion between different networks.
-
-## Motivation
-
+RSKIP-0060 **describes an address checksum mechanism** that can be implemented in any network, to prevent the misuse of these and avoid typing errors, based on [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)
 
 ## Specification
 ```python
