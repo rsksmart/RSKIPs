@@ -4,7 +4,7 @@ RSKIP:
 	Title: Checksum Address Encoding
 	Authors:
 		Julian Len <julianlen@gmail.com>
-		Ilan Olkies <ilanolkies@gmail.com>
+		Ilan Olkies <ilanolkies@outlook.com>
 	Type: Standard Track
 	Created: 2018-25-06
 ```
