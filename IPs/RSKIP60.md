@@ -8,9 +8,15 @@ RSKIP:
 	Type: Standard Track
 	Created: 2018-25-06
 ```
+## Motivation
+
+- Avoid typing confusion in adresses.
+- Differentiate addresses of different networks.
+
 ## Abstract
 
-RSKIP-0060 **describes an address checksum mechanism** that can be implemented in any network, to prevent the misuse of these and avoid typing errors, based on [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)
+Addresses can be validated using an injective function that makes capital letters redundant.
+RSKIP-0060 **describes an address checksum mechanism** that can be implemented in any network based on [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md).
 
 ## Specification
 ```python
