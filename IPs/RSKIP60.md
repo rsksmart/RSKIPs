@@ -19,30 +19,6 @@ Addresses can be validated using an injective function that makes capital letter
 RSKIP-0060 **describes an address checksum mechanism** that can be implemented in any network based on [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md).
 
 ## Specification
-```python
-def checksum_encode(addr, chain_id = None):
-    o = '0x'
-    addr_prefix = '' if None else str(chain_id) + addr.lower()
-    addr_hexa = addr_prefix.hex().encode('utf8')
-    addr_digest = bytes(keccak_256(addr_hexa).digest())
-    v = big_endian_to_int(addr_digest)
-    for i, c in enumerate(addr.hex()):
-        if c in '0123456789':
-            o += c
-        else:
-            o += c.upper() if (v & (2**(255 - 4*i))) else c.lower()
-    return o
- ```
-Adds the chain id as a prefix. Converts the address to hexadecimal. Calculates [keccak](https://csrc.nist.gov/csrc/media/publications/fips/202/final/documents/fips_202_draft.pdf) with the prefixed address. Prints `i` digit if it's a number, otherwise checks if the `4*i` bit of the hash of the keccak. If it's 1 then prints uppercase, otherwise lowercase.
-
-## Rationale
- 
-Benefit:
-- Allows implementation in any network. Can distinguish between testnets and mainnets.
-- Backwards compatiblity with many hex parsers that accept mixed case, allowing it to be easily introduced over time.
-- Compatibility with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) checksum implementation (using no chain id).
- 
-## Implementation
 In Javascript:
 ```javascript
 function toChecksumAddress(address, chainId = null) {
@@ -59,7 +35,15 @@ function toChecksumAddress(address, chainId = null) {
     return output
 }
 ```
+Adds the chain id as a prefix. Converts the address to hexadecimal. Calculates [keccak](https://csrc.nist.gov/csrc/media/publications/fips/202/final/documents/fips_202_draft.pdf) with the prefixed address. Prints `i` digit if it's a number, otherwise checks if `i` byte of the hash of the keccak. If it's grater than 8 prints uppercase, otherwise lowercase.
 
+## Rationale
+ 
+Benefit:
+- Allows implementation in any network. Can distinguish between testnets and mainnets.
+- Backwards compatiblity with many hex parsers that accept mixed case, allowing it to be easily introduced over time.
+- Compatibility with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) checksum implementation (using no chain id).
+ 
 ## Test cases
 
 ```
