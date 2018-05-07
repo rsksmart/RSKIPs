@@ -23,7 +23,7 @@ In Javascript:
 ```javascript
 function toChecksumAddress(address, chainId = null) {
     const strip_address = stripHexPrefix(address).toLowerCase()
-    const prefix = chainId != null ? chainId.toString() : ''
+    const prefix = chainId != null ? (chainId.toString() + '|') : ''
     const keccak_hash = keccak(prefix + strip_address).toString('hex')
     let output = '0x'
 
@@ -48,16 +48,16 @@ Benefit:
 
 ```
 Valid with network id: 137
-    0x5Aaeb6053f3E94c9b9a09F33669435E7ef1BEAED
-    0xFb6916095ca1Df60bb79ce92CE3EA74C37C5D359
-    0xDBf03B407c01E7cd3CBea99509D93F8DDdc8c6Fb
-    0xD1220a0cF47C7B9be7A2e6ba89F429762e7B9aDb
+    0x5aaeb6053f3E94c9B9A09F33669435E7ef1bEaed
+    0xfb6916095CA1dF60bB79Ce92CE3ea74C37C5D359
+    0xdbF03b407c01e7cD3cbEa99509D93F8ddDC8c6fb
+    0xD1220A0cF47C7B9BE7a2e6ba89f429762E7B9adb
 
 Valid with network id: 37310
-    0x5AAeB6053f3E94c9b9a09F33669435e7EF1bEaed
-    0xfB6916095Ca1dF60bB79ce92CE3EA74C37C5d359
-    0xdbf03b407C01E7cd3CBEa99509d93F8DDDC8C6fB
-    0xD1220a0Cf47c7B9be7A2e6BA89F429762E7B9aDb
+    0x5Aaeb6053f3e94C9b9A09f33669435e7eF1BeAED
+    0xFB6916095CA1dF60bb79CE92cE3eA74C37C5D359
+    0xDbF03b407c01E7CD3CbEa99509D93f8Dddc8c6fb
+    0xd1220A0CF47c7b9Be7A2e6bA89f429762E7B9ADb
 
 Valid with network id: None
     0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed
