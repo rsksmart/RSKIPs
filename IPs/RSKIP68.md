@@ -1,4 +1,4 @@
-RSKIP: 
+RSKIP: 68
   Title: Federation Notification System
   Status: Draft
   Type: Net
