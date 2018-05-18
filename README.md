@@ -92,6 +92,7 @@ RSK Improvement Proposals
 | 59       | [Child Contracts](IPs/RSKIP59.md)                                                | 11-JUN-16 | SDL       | Sca      | CORE     | 1 | DRAFT*   |
 | 60       | [Checksum Address Encoding](IPs/RSKIP60.md)                                      | 25-JUN-16 | Ilan Olkies | ST     | Net      | 1 | DRAFT*   |
 | 61       | [Cache Oriented Storage Rent (collect at EOT version)](IPs/RSKIP61.md)           | 03-MAY-18 | SDL       | Sca      | CORE     | 2 | DRAFT*   |
+| 62       | [Compressed block propagation using state trie update batch (COBLO)](IPs/RSKIP62.md)| 07-MAY-18 | SDL       | Sca      | CORE     | 2 | DRAFT*   |  
 
 (*) Under evaluation to be implemented in the next reference client release
 
