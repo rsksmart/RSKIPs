@@ -80,6 +80,7 @@ RSK Improvement Proposals
 | 44       | [Remove the zero-byte discount in data](IPs/RSKIP44.md)                          | 24-JUN-17 | SDL       | Sca      | Core     | 1 | Draft    |
 | 45       | [New Event Tree and Extended LOG](IPs/RSKIP45.md)                                | 26-JUN-17 | SDL       | Sca      | Core     | 2 | Adopted  |
 | 46       | [Block Mining Fees Information Mechanism](IPs/RSKIP46.md)                        | 04-OCT-17 | MM        | Usa      | Node     | 1 | Adopted  |
+<<<<<<< HEAD
 | 47       | [CALLNUM opcode](IPs/RSKIP47.md)                                                 | 18-OCT-17 | SDL       | Sca      | Core     | 1 | Draft    |
 | 48       | [Informing average free gas per block](IPs/RSKIP48.md)                           | 28-NOV-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 49       | [One-To-Many hub payment channels](IPs/RSKIP49.md)                               | 01-DIC-17 | SDL       | Sca      | Core     | 2 | Draft    |
@@ -98,6 +99,7 @@ RSK Improvement Proposals
 | 62       | [Compressed block propagation using state trie update batch (COBLO)](IPs/RSKIP62.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft*   |
 | 63       | [Double Signing for Delayed Signature Aggregation](IPs/RSKIP63.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 64       | [Garbage Collector for State Pruning](IPs/RSKIP64.md) | 29-MAY-18 | SDL & MMa | Sca,Usa      | Core     | 2 | Draft   |
+| 65       | [MINGASPRICE Opcode](IPs/RSKIP64.md)                                             | 18-MAY-18 | JIO       | Sec      | CORE     | 2 | DRAFT   |
 | 70       | [Default TX Data](IPs/RSKIP70.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 71 | [Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
 | 75       | [Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
@@ -120,7 +122,6 @@ RSK Improvement Proposals
 | 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Draft |
 | 135 | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
-
 
 (*) Under evaluation to be implemented in the next reference client release
 
