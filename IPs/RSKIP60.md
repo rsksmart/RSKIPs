@@ -37,14 +37,18 @@ function toChecksumAddress(address, chainId = null) {
 ```
 Adds the chain id as a prefix. Converts the address to hexadecimal. Calculates [keccak](https://csrc.nist.gov/csrc/media/publications/fips/202/final/documents/fips_202_draft.pdf) with the prefixed address. Prints `i` digit if it's a number, otherwise checks if `i` byte of the hash of the keccak. If it's grater than 8 prints uppercase, otherwise lowercase.
 
+## Implementation
+
+`chainId` unique values defined in [EIP-155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md).
+
+This algorithm is compatible with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md). This can be achieved using `chainId = null`.
 
 ## Rationale
  
 Benefit:
 - Allows implementation in any network. Can distinguish between testnets and mainnets.
 - Backwards compatiblity with many hex parsers that accept mixed case, allowing it to be easily introduced over time.
-- Compatibility with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) checksum implementation (using no chain id).
-- `chainId` unique values defined in [EIP-155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md).
+- Compatibility with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) checksum implementation.
 
 ## Test cases
 
