@@ -19,6 +19,7 @@ Stateful blockchains continuously generate state data. This data becomes useless
 
 Currently every RSK full node keeps all historical data about the state after each block generated. After thousands of confirmation blocks, there is no need to access historical and overwritten state data while deep reorganizations become unfeasible. This historical state data consumes storage while it could be regenerated if needed.  It's clearly desirable to discard this state data in full nodes to reduce resource consumption and full node cost.
 
+
 ## Specification
 
 Each block will be assigned an epoch based on its height. Every N=20000 RSK blocks (between 3.5 days and 7 days depending on the number of average block uncles) a new epoch will be generated. The first block of every epoch will be called its `frontier block`. 

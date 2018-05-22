@@ -1,13 +1,14 @@
 # MINGASPRICE Opcode
 
-|**RSKIP** | 64  |
-|**Title** | MINGASPRICE Opcode |
-|**Date** | 11-MAY-18 |
-|**Author** | JIO |
-|**Purpose** | Sec |
-|**Layer** | Core |
-|**Complexity** | |
-|**Status**| Draft |
+| RSKIP         | 64           |
+| ------------- |:-------------:|
+|**Title**      | MINGASPRICE Opcode |
+|**Created**    | 11-MAY-18 |
+|**Author**     | JIO |
+|**Purpose**    | Sec |
+|**Layer**      | Core |
+|**Complexity** | Minimal |
+|**Status**     | Draft |
 
 ## Abstract
 
