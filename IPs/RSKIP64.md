@@ -10,7 +10,6 @@
 | **Complexity** | 2                                   |
 | **Status**     | Draft                               |
 
-
 ## Abstract
 
 Stateful blockchains continuously generate state data. This data becomes useless when it is unreferenced by the best block and old enough that the node won't expect reverts of such depth. Also synchronized peers shouldn't request old state data and old data is not required to mine new blocks. This RSKIP proposes a method to reduce storage usage with very low overhead.
