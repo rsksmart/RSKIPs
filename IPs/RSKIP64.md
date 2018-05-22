@@ -11,7 +11,6 @@
 | **Status**     | Draft                               |
 
 
-
 ## Abstract
 
 Stateful blockchains continuously generate state data. This data becomes useless when it is unreferenced by the best block and old enough that the node won't expect reverts of such depth. Also synchronized peers shouldn't request old state data and old data is not required to mine new blocks. This RSKIP proposes a method to reduce storage usage with very low overhead.
@@ -25,6 +24,7 @@ Currently every RSK full node keeps all historical data about the state after ea
 Each block will be assigned an epoch based on its height. Every N=20000 RSK blocks (between 3.5 days and 7 days depending on the number of average block uncles) a new epoch will be generated. The first block of every epoch will be called its `frontier block`. 
 
 Each time a new frontier block is executed, a new database for the `state` is created. Any trie node added during execution must be written in the last created database without exception. A suggestion is to name the new database for a certain block height as database_name(height) = height % N, but this is not mandatory. While we recommend N=20000, implementations can change this parameter, as it's internal to each node. However a low N would require retrieving state checkpoints and re-executing blocks in case of a large blockchain re-org, while a higher N reduces the space savings.
+
 
 All new state data will be written to the last database created, while old data will be searched on the latest database, and if not found, on previous databases. Even if there is a blockchain reorganization, the database to start searching will be the last one created.
 
@@ -56,11 +56,12 @@ This proposal seeks to be easy to implement while improving notably the platform
 
 During database migration it's possible that queries performed using the JSON-RPC interface return results, a old databases could be deleted while the JSON-RPC command is being executed. Implementations should correctly handle this edge case.
 
+
 ## Backwards compatibility
-=======
 
 Once a full node has updated to support this new database scheme, the full node won't support downgrading unless a special database transformation is performed. 
 
-# **Copyright**
+## **Copyright**
+
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

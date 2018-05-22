@@ -1,24 +1,19 @@
-## MINGASPRICE Opcode
-  
-Code: RSKIP65
+# MINGASPRICE Opcode
 
-Author: JIO
+|**RSKIP** | 64  |
+|**Title** | MINGASPRICE Opcode |
+|**Date** | 11-MAY-18 |
+|**Author** | JIO |
+|**Purpose** | Sec |
+|**Layer** | Core |
+|**Complexity** | |
+|**Status**| Draft |
 
-Status: Draft
-
-Purpose: Sec
-
-Layer: CORE
-
-Complexity: 1 (Minimal)
-  
-Created: 2018-05-11
-
-# Abstract
+## Abstract
 
 In this RSKIP we propose an extra opcode. It will provide non-native smart contracts access to current block information about Minimum Gas Price. This information will allow smart contracts to mitigate some financial behavior attacks, based on statistics, by making them economically infeasible, i.e. the attack cannot make money by statistically manipulating the contract. We can also deal with network congestion from the smart contract.
 
-# Motivation
+## Motivation
 
 Minimum Gas Price per block is consensed statistically in RSK by miners and was implemented following RSKIP9 to avoid bribery attacks on miners [1,2,3]. This value is included in RSK block header and modified by the miner rewarded by consensus mechanism on each new block, between certain percentual limits. If available from all smart contract this information will allow reflective measurements of the blockchain economy so the smart contracts can adapt to hostile scenarios of at least the following two kinds:
 
@@ -29,7 +24,7 @@ For the first type of scenario the contract may be designed to reduce its activi
 
 For the second type of scenario the opcode will help with the self-control of smart contracts that change their dynamic behavior based on number of events per measure of time. In the last case, knowing the minimum gas price can help the smart contract estimate the cost of an attack to manipulate its behavior, thus limiting the attack, making it economically infeasible. This use case is a generalization of the case in which a smart token controling its supply be measuring the number of transactions per day is attack by a user trying to manipulate the number of transaction to inflate the token supply.
 
-# Specification
+## Specification
 
 A new opcode is added: MINGASPRICE
 
@@ -41,10 +36,10 @@ The opcode number is 0xAC = 172.
 The gas is consumed immediately when the opcode is executed.
 
 
-# Rationale
+## Rationale
 
 
-# References
+## References
 
 [1] https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP9.md
 
@@ -54,6 +49,4 @@ The gas is consumed immediately when the opcode is executed.
 
 [4] Solidity Learning: Revert(), Assert(), and Require() in Solidity, and the New REVERT Opcode in the EVM https://medium.com/blockchannel/the-use-of-revert-assert-and-require-in-solidity-and-the-new-revert-opcode-in-the-evm-1a3a7990e06e
 
-## Copyright
-
-Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+### Copyright
