@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Garbage Collector for State Pruning
 
 | RSKIP          | 64                                  |
@@ -58,6 +57,7 @@ This proposal seeks to be easy to implement while improving notably the platform
 During database migration it's possible that queries performed using the JSON-RPC interface return results, a old databases could be deleted while the JSON-RPC command is being executed. Implementations should correctly handle this edge case.
 
 ## Backwards compatibility
+=======
 
 Once a full node has updated to support this new database scheme, the full node won't support downgrading unless a special database transformation is performed. 
 

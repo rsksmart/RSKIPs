@@ -47,8 +47,11 @@ The gas is consumed immediately when the opcode is executed.
 # References
 
 [1] https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP9.md
+
 [2] Smart Contracts for Bribing Miners http://homepages.cs.ncl.ac.uk/patrick.mccorry/minerbribery.pdf
+
 [3] Talk at BPASE '18 - Smart Contracts for Bribing Miners https://www.youtube.com/watch?v=BIKrqRE9yAY
+
 [4] Solidity Learning: Revert(), Assert(), and Require() in Solidity, and the New REVERT Opcode in the EVM https://medium.com/blockchannel/the-use-of-revert-assert-and-require-in-solidity-and-the-new-revert-opcode-in-the-evm-1a3a7990e06e
 
 ## Copyright
