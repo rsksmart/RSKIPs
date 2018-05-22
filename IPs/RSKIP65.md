@@ -1,13 +1,13 @@
 # MINGASPRICE Opcode
 
 |RSKIP          |64           |
-| ------------- |:-------------:|
+| :------------ |:-------------|
 |**Title**      |MINGASPRICE Opcode |
 |**Created**    |11-MAY-18 |
 |**Author**     |JIO |
 |**Purpose**    |Sec |
 |**Layer**      |Core |
-|**Complexity** |Minimal |
+|**Complexity** |1 |
 |**Status**     |Draft |
 ## Abstract
 
