@@ -1,11 +1,18 @@
-RSKIP: 64
-  Title: MINGASPRICE Opcode
-  Status: Draft
-  Purpose: Sec
-  Layer: CORE
-  Complexity: Minimal
-  Authors: Jose Orlicki <jorlicki@rsk.co>
-  Created: 2018-05-11
+## MINGASPRICE Opcode
+  
+Code: RSKIP65
+
+Author: JIO
+
+Status: Draft
+
+Purpose: Sec
+
+Layer: CORE
+
+Complexity: 1 (Minimal)
+  
+Created: 2018-05-11
 
 # Abstract
 
