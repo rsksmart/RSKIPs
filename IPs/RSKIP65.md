@@ -38,6 +38,7 @@ The gas is consumed immediately when the opcode is executed.
 
 ## Rationale
 
+No need for for a high gas cost because is a read-only instruction, we are only reading best block header info.
 
 ## References
 
