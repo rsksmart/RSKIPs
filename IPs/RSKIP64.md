@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Garbage Collector for State Pruning
 
 | RSKIP          | 64                                  |
