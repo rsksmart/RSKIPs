@@ -1,8 +1,14 @@
 # Fast Hibernation Wakeup using Trie
 
-Code: RSKIP18
-
-Author: SDL
+|RSKIP          |18           |
+| :------------ |:-------------|
+|**Title**      |Fast Hibernation Wakeup using Trie |
+|**Created**    |28-SEP-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |2 |
+|**Status**     |Draft |
 
 ## Pre-git revisions
 

@@ -1,18 +1,22 @@
 # Block Size Limit
 
-Code: RSKIP6
+|RSKIP          |6           |
+| :------------ |:-------------|
+|**Title**      |Block Size Limit |
+|**Created**    |22-JUN-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |1 |
+|**Status**     |Adopted |
 
-Author: SDL
-
-Status: Draft
-
-# Abstract
+## Abstract
 
 This RSKIP defines changes in consensus to limit the block size. This prevents possible DoS vectors of attack.
 Motivation
 An invalid block is defined as a block with correct PoW but is considered invalid by consensus. It is generally considered that the attack of creating invalid blocks is expensive because miners have to invest electricity to build a block that passes the PoW check. That same amount of electricity could have been spent to mine a block containing reward, and therefore the attack has at least the cost of electricity or loss reward. As RSK blockchain is merge-mined, mining RSK blocks have very little additional electricity cost. The loss of reward will be low during an initial period of the platform. Therefore, in RSK, the miners could try to perform attacks that are normally economically discouraged in other blockchains. Miners that do not participate in the normal merge-mining of RSK could decide to attack the RSK blockchain by mining invalid blocks. A single attack has no longstanding consequences, but if sustained, an attack can delay the creation of honest blocks. 
 
-# Specification
+## Specification
 
 This RSKIP proposes the following changes:
 

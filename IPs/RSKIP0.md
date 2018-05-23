@@ -1,9 +1,14 @@
-    RSKIP: 0
-      	Title: RSKIP Purpose and Guidelines
-      	Status: Active
-      	Type: Process
-      	Author: Julián Len <julian@rsk.co>, Sergio Lerner <sergio@rsk.co>
-      	Created: 2018-03-06
+# RSKIP Purpose and Guidelines
+
+|RSKIP          |0           |
+| :------------ |:-------------|
+|**Title**      |RSKIP Purpose and Guidelines |
+|**Created**    |06-MAR-18 |
+|**Author**     |JL,SDL |
+|**Purpose**    |Sec |
+|**Layer**      |Misc |
+|**Complexity** |2 |
+|**Status**     |Active |
 
 ## What is a RSKIP?
 

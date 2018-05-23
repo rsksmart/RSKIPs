@@ -1,8 +1,14 @@
 # Combined State Tree
 
-Code: RSKIP16
-
-Author: SDL
+|RSKIP          |16           |
+| :------------ |:-------------|
+|**Title**      |Combined State Tree |
+|**Created**    |01-NOV-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |3 |
+|**Status**     |Draft |
 
 ## Pre-git revisions
 
