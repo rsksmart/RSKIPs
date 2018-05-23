@@ -7,7 +7,7 @@
 |**Author**     |INITIALS |
 |**Purpose**    |Sca,USa,Fair,Sec or ST |
 |**Layer**      |Core,Node,UI,2nd,Net or DApp |
-|**Complexity** |1, 2 or 2 |
+|**Complexity** |1, 2 or 3 |
 |**Status**     |Draft,Accepted,Adopted,Deferred or Rejected |
 
 ## Abstract
