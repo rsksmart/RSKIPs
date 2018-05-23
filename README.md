@@ -97,12 +97,12 @@ RSK Improvement Proposals
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
-| Initials | Full name                    |
-| -------- | ---------------------------- |
-| DM       | Diego Masini                 |
-| IO       | Ilan Olkies                  |
-| JIO      | Jose Ignacio Orlicki         |
-| JL       | Julian Len                   |
-| MM       | Martin Medina                |
-| SDL      | Sergio Demian Lerner         |
+| Initials | Full name                    | Email |
+| -------- | :----------------------------| :-----|     
+| DM       | Diego Masini                 | dmasini@rsk.co |
+| IO       | Ilan Olkies                  | ilan@rsk.co |
+| JIO      | Jose Ignacio Orlicki         | jorlicki@rsk.co |
+| JL       | Julian Len                   | julian@rsk.co |
+| MM       | Martin Medina                | smedina@rsk.co |
+| SDL      | Sergio Demian Lerner         | sergio@rsk.co |
 
