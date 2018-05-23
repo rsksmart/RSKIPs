@@ -103,6 +103,7 @@ RSK Improvement Proposals
 | IO       | Ilan Olkies                  | ilan@rsk.co |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@rsk.co |
 | JL       | Julian Len                   | julian@rsk.co |
-| MM       | Martin Medina                | smedina@rsk.co |
+| MMa      | Matias Marquez               | matias@rsk.co |
+| MM       | Martin Medina                | martin@rsk.co |
 | SDL      | Sergio Demian Lerner         | sergio@rsk.co |
 
