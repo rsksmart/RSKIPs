@@ -38,7 +38,7 @@ Each account/contract has a new field lastRentPaidTime. Let d be the timestamp o
 The following pseudo-code illustrates how rent is computed and paid for each called address "dest".
 ```
 if (d>lastRentPaidTime) {
-    callRentGas =  (storageSize+codeSize+256)*(d-lastRentPaidTime)*2000/2^32
+    callRentGas =  (storageSize+codeSize+256)*(d-lastRentPaidTime)/2^21
     if ((dest modified its state) && (callRentGas>=1000)) || 
        ((dest NOT modified its state) && (callRentGas>=10000)) {
         dest.lastRentPaidTime = now
@@ -47,9 +47,9 @@ if (d>lastRentPaidTime) {
 }
 ```
 
-There are 31536000 seconds in a year.  2^32 =4294967296. SecondsAYear/2^32= 0.00734. A byte pays 14.68 gas units a year. An simple account (without code) pays 3750 gas units/year. An simple account cannot consume rent more than four times a year.
+There are 31536000 seconds in a year.  2^32 =4294967296. SecondsAYear/2^32= 0.00734. A byte pays 14.68 gas units a year. A simple account (without code) pays 3750 gas units/year. A simple account cannot consume rent more than four times a year.
 
-This callRentGas is consumed from the transaction rentGas. If this becomes begative, the transaction is reverted. If it's still zero or positive, the value of lastRentPaidTime is updated.
+This callRentGas is consumed from the transaction rentGas. If this becomes negative, the transaction is reverted. If it's still zero or positive, the value of lastRentPaidTime is updated.
 
 The cost of a byte is 15.625 gas per byte a year.
 
