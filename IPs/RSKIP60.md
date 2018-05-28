@@ -5,7 +5,7 @@ RSKIP:
 	Authors:
 		Julian Len <julianlen@gmail.com>
 		Ilan Olkies <ilanolkies@outlook.com>
-        Juliano Rizzo <@juli>
+        	Juliano Rizzo <@juli>
 	Type: Standard Track
 	Created: 2018-25-06
 ```
