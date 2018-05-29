@@ -33,6 +33,7 @@ RSK Improvement Proposals
 
 | Nr       | Title                                                                            | Creation Date | Author    | Pur      | Layer    | C | Status   |
 |----------|----------------------------------------------------------------------------------|-----------|-----------|----------|----------|---|----------|
+| 0        | [RSKIP Purpose and Guidelines](IPs/RSKIP0.md)                                    | 07-MAY-18 | JL        |          |       |   |   Adopted  |
 | 1        | [Distributed Memory](IPs/RSKIP1.md)                                              | 09-JUN-16 | SDL       | Sca      | Core     | 2 | Draft    |
 | 2        | [Dynamic Contract Dependency](IPs/RSKIP2.md)                                     | 11-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
 | 3        | [Parallel Execution using static contract dependencies](IPs/RSKIP3.md)           | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
