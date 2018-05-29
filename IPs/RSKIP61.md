@@ -1,9 +1,9 @@
-# Cache Oriented Storage Rent
+# Cache Oriented Storage Rent (collect at EOT version)
 
-|RSKIP          |52           |
+|RSKIP          |61           |
 | :------------ |:-------------|
-|**Title**      |Cache Oriented Storage Rent |
-|**Created**    |12-DIC-17 |
+|**Title**      |Cache Oriented Storage Rent (collect at EOT version) |
+|**Created**    |03-MAY-18 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
 |**Layer**      |Core |
@@ -28,70 +28,32 @@ Three approaches have been devised:
 
 3. Same as before, but there is no hibernation. Nodes will have a multi-level cache to store contract data (account state, code and storage), so that when the pending rent is higher than two times the access cost to a slower storage, the data is moved, and when data is accessed, it is brought into the fastest cache. The exact thresholds when moving from one cache to another will be specified in another RSKIP, and are not subject to consensus rules because this is transparent to the network. A multi-level cache can consist of DRAM, an SSD drive and a HDD drive.
 
-This RSKIP specifies the third approach, as it is the less interfering and can be made more easily compatible with pre-built Ethereum application.
+This RSKIP specifies the third approach, as it is the less interfering and can be made more easily compatible with pre-built Ethereum application. A previous attempt to implement this functionality (RSKIP52) collected rent after each CALL, however this method failed when combined with low rent exceptions to possible attacks involving the use of recursive CALLs to prevent rent from being paid, by moving persistent data to auxiliary location. This version collects rents when transaction ends processing. 
 
 ## Specification
 
-In case the call do not change the storage or account state of the target contract (including the balance) then the rent will only be paid if the rent is higher than 10000 gas. If the state of the called contract is changed, then the rent will be paid if the rent is higher than 1000. This protects from costly micro-transactions. 
+When a transaction is executed, the address of every contract called is stored in a "called" map. Every contract that is created is stored in a "created" map. After the transaction has been fully processed, the called map is iterated, and a storage rent is collected for every call. In case the call does not change the storage or account state of the called contract (including the balance) then the rent will only be paid if the rent is higher than 10000 gas (see later for the formula to compute the rent). If the state of the called contract is changed, then the rent will be paid if the rent is higher than 1000. This protects the network from performing costly micro-transactions. 
 This RSKIP does not interfere with the plan to add parallel transaction execution if the transactions are scheduled properly. 
 
-The rent is paid by extending the transaction to add a new field "maximumRentGas".  The total gas consumed by a transaction will be equal to the normal gas consumed plus the rent gas consumed. If the rent gas to consume becomes higher than maximumRentGas, the transaction is aborted with OOG. As with normal gas, the full maximumRentGas amount is deducted from the origin address and then the remaining is reimbursed. 
+The rent is paid by extending the transaction to add a new field "rentGas".  The total gas consumed by a transaction will be equal to the normal gas consumed plus the rent gas consumed. If the rent gas to consume becomes higher than rentGas, the transaction is aborted and reverted. In this case, the remaining standard gas is not consumed (compared with the OOG exception). The storage rent is however consumed in full.  If the transaction ends because of OOG exception, then only 25% of the storage rent is paid, but called contract states are not modified. The 25% of storage rent is paid to compensate the cost of accessing the contracts from the caches. As with normal gas, the full rentGas amount is deducted from the origin address and then the remaining is reimbursed at the end of the transaction processing. 
 
 Each account/contract has a new field lastRentPaidTime. Let d be the timestamp of the block in which the call is executed. Both fields are given in seconds. 
 
-The following code ilustrates how rent is prePaid in full when transaction starts execution and when it finishes:
+The following pseudo-code illustrates how rent is computed and paid for each called address "dest".
 ```
-// called on Start
-void prepayAllRentGas(transactionMaximumRentGas) {
- sourceAccount.subtract(transactionMaximumRentGas*gasPrice);
- availableRentGas = transactionMaximumRentGas
-}
-
-// Called during execution
-void consumeRentGas(gas) {
- rentGasConsumed +=gas;
- availableRentGas -=gas;
-}
-// Called during execution
-void reimburseRentGas(gas) {
-rentGasConsumed -=gas;
- availableRentGas +=gas;
-}
-
-// Called on finish
-void finalizeRentGas() {
- sourceAccount.add(availableRentGas*gasPrice);
- minerAccount.add(rentGasConsumed *gasPrice);
+if (d>lastRentPaidTime) {
+    callRentGas =  (storageSize+codeSize+256)*(d-lastRentPaidTime)/2^21
+    if ((dest modified its state) && (callRentGas>=1000)) || 
+       ((dest NOT modified its state) && (callRentGas>=10000)) {
+        dest.lastRentPaidTime = now
+        consumeRentGas(callRentGas);
+      }
 }
 ```
 
-The following pseudo-code ilustrates how rent is computed and paid.
+There are 31536000 seconds in a year.  2^32 =4294967296. SecondsAYear/2^32= 0.00734. A byte pays 14.68 gas units a year. A simple account (without code) pays 3750 gas units/year. A simple account cannot consume rent more than four times a year.
 
-```
-if (d>lastRentPaidTime)
-  rentGas =  (storageSize+codeSize+256)*(d-lastRentPaidTime)*2000/2^32
-else
-  rentGas = 0
-  
-consumeRentGas(rentGas)
-dest_contract.call()
-if (dest_contract modified its state) {
-  if (rentGas<1000) 
-    reimburseRentGas(rentGas)
-   else
-    dest_contract.lastRentPaidTime = now
-
-} else {
-  if (rentGas<10000)
-    reimburseRentGas(rentGas)
-  else
-   dest_contract.lastRentPaidTime = now
-}
-```
-
-There are 31536000 seconds in a year.  2^32 =4294967296. SecondsAYear/2^32= 0.00734. A byte pays 14.68 gas units a year. An simple account (without code) pays 3750 gas units/year. An simple account cannot consume rent more than four times a year.
-
-This rentGas is consumed from the maximumRentGas. If this becomes zero, the out-of-gas exception is raised. On success, the value of d-lastRentPaidTime is updated).
+This callRentGas is consumed from the transaction rentGas. If this becomes negative, the transaction is reverted. If it's still zero or positive, the value of lastRentPaidTime is updated.
 
 The cost of a byte is 15.625 gas per byte a year.
 
@@ -101,9 +63,11 @@ If there are several calls in the same transaction or the same block, only the f
 
 When a contract is created, the lastRentPaidTime is set 6 months in the future. This means that some rent is prepaid. 
 
-The opcodes EXTCODECOPY, EXTCODESIZE and BALANCE opcodes also must pay rent, because they access other contracts.
+The opcodes EXTCODECOPY, EXTCODESIZE and BALANCE opcodes also must pay rent (therefore the addresses are stored in the called map), because they access other contracts.
 
 The block gas limit does not apply to rents: the amount of rents paid in gas may be higher than the gas limit. Therefore the rent is an additional uncapped revenue stream for the miners.
+
+The created map is scanned, and the lastRentPaidTime value of each contract is set to 6 months in the future (considering 30-day months).
 
 ## New Transaction Format
 
@@ -118,8 +82,11 @@ The transaction format is modified. Currently the transaction contains the follo
 8. r
 9. s
 
-If the transaction has 10 fields or more, then field at index 10 (starting from 1) will correspond to the field maximumRentGas. The same size restrictions on the field gasLimit will apply to maximumRentGas. Also the maximumRentGas is subtracted in full from the sender's balance, and then the amount unspent is reimbursed. If the transaction does not specify a maximumRentGas, then maximumRentGas is assumed to consume all remaining sender's balance: the account balance minus the value transferred, divided by the GasPrice specified. 
-If the rent cannot be paid because the maximumRentGas is reached, then the transaction is reverted and all the gas consumed so far is deducted (not reimbursed) as if a REVERT opcode had been executed. 
+If the transaction has 10 fields or more, then field at index 10 (starting from 1) will correspond to the field rentGasLimit. The same size restrictions on the field gasLimit will apply to rentGasLimit. Also the rentGasLimit is subtracted in full from the sender's balance, and then the amount unspent is reimbursed. If the transaction does not specify a rentGasLimit, then rentGasLimit is assumed to be equal to the gasLimit. If the rent cannot be paid because the rentGasLimit is reached, then the transaction is reverted and all the gas consumed so far is deducted (not reimbursed) as if a REVERT opcode had been executed. 
+
+## AccountState changes
+
+Two fields are added to the account state. The first is *flags* (currently always zero) and the second is the *lastRentPaidTime*. If the lastRentPaidTime is zero, the field is not serialized in RLP. If the flags is zero and the lastRentPaidTime  is zero, neither flags nor lastRentPaidTime fields are serialized.
 
 ## New Receipt status values
 
@@ -129,8 +96,10 @@ If a transaction is reverted because of rent OOG, a new status of (-2) is record
 
 If an VM instruction would generate simultaneously a standard OOG and a rent OOG execption, the standard OOG is reported.
 
-## Future Improvements
+## Future Impromenets
 
 If a contract unpaid rent becomes higher than a certain very high threshold, the contract could be hibernated. 
+
+Also this RSKIP can be combined with the SPV Compressed block propagation using state trie update batch (COBLOP)  method.
 
 
