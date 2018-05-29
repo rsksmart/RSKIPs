@@ -1,13 +1,16 @@
+# Persistent Storage Rent Paid by Code
 
-#  Persistent Storage Rent Paid by Code
+|RSKIP          |7           |
+| :------------ |:-------------|
+|**Title**      |Persistent Storage Rent Paid by Code |
+|**Created**    |11-JUN-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |3 |
+|**Status**     |Rejected |
 
-Code: RSKIP7
-
-Author: SDL
-
-Status: Rejected
-
-# Abstract
+## Abstract
 
 This RSKIP describes an implementation of storage rent based on enabling the code to periodically perform an operation to deposit the rent before the due time.
 Motivation
@@ -16,7 +19,7 @@ In principle, users should pay a storage rent (e.g. bitcoins/month) for consumin
 A well designed crowd-contract should add a revenue method for paying for the memory rent of persistent storage. For example, each operation should be accompanied by a payment in bitcoins, and payments should be collected by the contract. However, such revenue collecting method must be defined at day 0, and at that stage it will be unclear if the revenue model can sustain the memory rent. The simplest case is that every user pays rent independently for the memory it consumes. For example, a DNS-like contract will attach an account balance to every name registered, and users would be free to send money to the registered name account.
 When the time comes to pay the rent, the contract would see which names have enough balance, remove the names that cannot pay for the rent, subtract a fixed amount from each name balance, and pay the rent using LIFE_EXTEND-like opcode  (see RSKIP-08).
 
-# Discussion
+## Discussion
 
 Several problems arise:
 
@@ -106,7 +109,7 @@ Creates a child contract. The child contract address is Parent-address || 0 || p
 
 SET_FLAGS : new-bit ForbidExternalRentPayments (default 0 = false)
 
-# Chosen solution
+## Chosen solution
 
 Each persistent memory cell has an additional bit of information “survive”. When a cell is marked to survive (survive=true) then when the next NER  deadline arrives, the system tries to keep that cell for the next rent period. If the cell is not marked (survive=false) then when NER checking occurs, the cell is first cleared (no gas consumed for this)  and then the NER checking occurs. 
 
@@ -118,7 +121,7 @@ Contract persistent memory can be of any of three types:
 If it is hibernable, if rent is not enough, all the memory (contract+persistent mem) collapses into a single hash. To bring the contract alive again, a message paying the wakeup fee, containing all missing data must be sent.
 A new opcode HIBERNATE is added for self-inflicted or hibernation of 3rd parity contracts. This opcode could accept an argument (flags) of whether to hibernate code, data or both, but this was discarded for simplicity Data hibernation can always be achieved programmatically, by destroying data but keeping a hash in persistent memory. Internal hibernation freezes the contract until external wake up is performed. For simplicity, hibernation will always remove all contract code and memory. Self-hibernation can be used by contracts to sleep an amount of time, since no rent is paid during hibernation time.
  
-# Specification
+## Specification
 
 Every contract has two new fields:  rentPreDeposit and shrinkKillOrHibernationBounty (SKHBounty for short). rentPreDeposit field hold a value in gas, while SKHBounty values in bitcoins.
 
@@ -168,11 +171,11 @@ The cost of hibernation does not depend on the size of the memory, since this RS
 
 When the contract is hibernated, both the code, memory and balance are hashed and only a single hash digest is stored in the contract address. While the contract is hibernated it cannot receive nor send payments or messages except a special WAKEUP message. The user can awake the contract by sending the WAKEUP message containing the full code and persistent data. If the code and data does not fit into a message then the user needs to create a proxy contract that composes the code/data in chunks, append the chunks, and sends the contract a wakeup WAKEUP message using the WAKEUP opcode. The WAKEUP opcode has several arguments arguments: the code, the code size, the data, the data size, the contract address and the initial pre-deposit for the rent and pre-deposit for the bounty. WAKEUP returns an error code if the contract could not be woken up: the code 2 means that the code was invalid, 3 means that the data was invalid, and 4 means that the rent is too low for paying the re-hibernation cost.
 
-# Immortal contracts
+## Immortal contracts
 
 Contracts can also become immortal by calling IMMORTALIZE and paying 10 years*rentCost*s where s is the current memory consumed. The bitcoin bounty is paid back and moved to the contract normal balance. Immortal contracts may offer long term storage service to other contracts, and how this affects the market should be analyzed. Memory requested by immortal contracts pay a special immortalizeCost gas cost per SSTORE, but do not require a bitcoin bounty.
 
-# Security
+## Security
 
 This design only is secure if:
 
@@ -236,11 +239,11 @@ If the rent overflows the maximum accepted rent (6 months), the remaining is not
 
 new-bit ForbidExternalRentPayments (default 0 = false)
 
-# Performance
+## Performance
 
 If the survive flag is implemented as a bit attached to a cell, the shrink opcode would need to iterate over all memory cells and detect which are marked to survive. To make this process constant time, the memory will be split in two subspaces as two account substrees in the trie: the survive subspace and the perish subspace. The bit 255 of the keys will be used to decide which subtree the key belongs. If the contract code wishes to mark a cell to survive flag, the cell must be moved from the perish subspace to the survive subspace by setting the bit 255 of the key, and vive-versa. This means that the actual hash security of the trie is 1 bit less. When looking up a cell, the contract must first search it the survive subtree and if not found it must search it in the other substree. This must be done by masking the bit 255 and setting the bit 255.The contract must make sure a key will never be present in both subtrees. Removing a key requires trying removing the key in the first subtree, and if not found re-trying in the opposite subtree. The contract designer must decide to use or not the two available subspaces, and can ignore them. In that case the author can decide to place all keys in the survive or perish subspaces.
 
-# Sample Use Cases
+## Sample Use Cases
 
 ### User-asset contract
 

@@ -1,10 +1,14 @@
 # Transactions never invalidate blocks
 
-Code: RSKIP10
-
-Author: SDL
-
-Status: Accepted
+|RSKIP          |10           |
+| :------------ |:-------------|
+|**Title**      |Transactions never invalidate blocks |
+|**Created**    |21-OCT-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |2 |
+|**Status**     |Accepted |
 
 ## Pre-git revisions
 
@@ -15,7 +19,7 @@ Last Revision Date: 06-22-2017
 Revision: 3
 
 
-# Abstract
+## Abstract
 
 This RSKIP defines a reorganization of fields in the RSK block header and a change in the semantics of transaction execution to allow nodes to decide if a block is valid without executing any transaction in the block.
 Motivation
@@ -23,7 +27,7 @@ An e-invalid block is defined as a block with correct PoW but is considered inva
 
 This discussion assumes that each block defines a minimum gas price (minGasPrice, as defined by RSKIP09).
 
-# Specification
+## Specification
 
 When a block is propagated, it is propagated with all transactions so that the txTrieRoot can be validated. 
 
@@ -47,7 +51,7 @@ The rule 2 prevents a miner from filling a block with transactions without funds
 
 The underlying principle of this design is that once the block header is verified and transactions have been verified to be syntactically correct, the block is valid.
 
-# Side-effects
+## Side-effects
 
 This change has some side-effects that should be taken into account. SPV wallets can be given proofs that point to transactions which are being skipped, but the SPV client has no way to detect this.
 The way to prevent this is that the following block must include the number of transactions from the previous block that have been actually processed correctly (rule 3).
@@ -62,7 +66,7 @@ This does not prevent the invalid transaction to contain a huge amount of data i
 
 This is what RSKIP06 does (rule 5).
 
-# Other Competing Proposals
+## Other Competing Proposals
 
 RSKIP58 presents a header-first block propagation method that does not require verification-less mining and allows arbitrary transaction inclusion. 
 RSKIP58 consumes more bandwidth than this RSKIP, and therefore delays the propagation of blocks compared to RSKIP56, however RSKIP58 is superior because 

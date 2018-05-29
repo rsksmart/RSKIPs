@@ -1,12 +1,14 @@
 # Derivation Path for Hierarchical Deterministic Wallets
 
-```
-RSKIP 57
-    Title: Derivation Path for Hierarchical Deterministic Wallets
-    Type: Process
-    Author: Ilan Olkies <ilanolkies@gmail.com>
-    Created: 2018-03-20
-```
+|RSKIP          |57           |
+| :------------ |:-------------|
+|**Title**      |Derivation Path for Hierarchical Deterministic Wallets |
+|**Created**    |05-ABR-18 |
+|**Author**     |IO |
+|**Purpose**    |Usa |
+|**Layer**      |Net |
+|**Complexity** |1 |
+|**Status**     |Draft |
 
 ## Abstract
 

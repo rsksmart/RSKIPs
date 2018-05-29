@@ -1,23 +1,28 @@
-    RSKIP: 0
-      	Title: RSKIP Purpose and Guidelines
-      	Status: Active
-      	Type: Process
-      	Author: Julián Len <julian@rsk.co>, Sergio Lerner <sergio@rsk.co>
-      	Created: 2018-03-06
+# RSKIP Purpose and Guidelines
+
+|RSKIP          |0           |
+| :------------ |:-------------|
+|**Title**      |RSKIP Purpose and Guidelines |
+|**Created**    |06-MAR-18 |
+|**Author**     |JL,SDL |
+|**Purpose**    |Sec |
+|**Layer**      |Misc |
+|**Complexity** |2 |
+|**Status**     |Active |
 
 ## What is a RSKIP?
 
 RSKIP stands for RSK Improvement Proposal. A RSKIP is a design document providing information to the RSK community, or describing a new feature for RSK or its processes or environment.The RSKIP should provide 
 a consise technical specification of the feature and a rationale for the feature. 
 
---------------
+
 ## RSKIP Rational
 
 We intend RSKIPs to be the primary mechanisms for proposing new features, for collecting community input on an issue, and for documenting the design decisions that have gone into RSK. Because the RSKIPs are maintained as text files in a versioned repository, their revision history is the historical record of the feature proposal.
 
 For RSK implementers, RSKs are a convenient way to track the progress of their implementation. Ideally each implementation maintainer would list the RSKIPs that they have implemented. This will give end users a convenient way to know the current status of a given implementation or library.
 
---------------
+
 ## RSKIP Types
 
 There are three types of RSKIP:
@@ -33,7 +38,7 @@ There are three types of RSKIP:
 - A **Process RSKIP** describes a process surrounding RSK, or proposes a change to (or an event in) a process. Process RSKIPS are like Standards Track RSKIPs but apply to areas other than the RSK protocol itself. They may propose an implementation, but not to RSK's codebase; they often require community consensus; unlike Informational RSKIPs, they are more than recommendations, and users are typically not free to ignore them. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in RSK development. Any meta-RSK is also considered a Process RSK.
 
 
---------------
+
 ## RSKIP purpose terms
 
 Describes what aspects of RSK improves
@@ -43,7 +48,7 @@ Describes what aspects of RSK improves
 * **Fair** - an RSKIP that has improves fairness
 * **Sec** - an RSKIP that that improves security
 
---------------
+
 ## RSKIP purpose complexity
 
 It is also necessary to describe the complexity of the improvement with the following levels
@@ -52,7 +57,7 @@ It is also necessary to describe the complexity of the improvement with the foll
 * **2** - Medium
 * **3** - High
 
---------------
+
 ## RSKIP Work Flow
 
 The RSKIP repository Collaborators change the RSKIPs status. Please send all RSKIP-related email to the RSKIP Editors, which is listed under RSKIP Editors below. Also see RSKIP Editor Responsibilities & Workflow.
@@ -90,7 +95,7 @@ The possible paths of the status of RSKIPs are as follows:
   <img width="800" height="300" src="./RSKIProcess.png">
 </p>
 
---------------
+
 ## What belongs in a successful RSKIP?
 
 Each RSKIP should have the following parts:
@@ -124,12 +129,12 @@ Each RSKIP should have the following parts:
 
 -	The final implementation must include test code and documentation appropriate for the RSK protocol.
 
---------------
+
 ## RSKIP Formats and Templates
 
 RSKIPs should be written in markdown format. Image files should be included in a subdirectory for that RSKIP.
 
---------------
+
 ## RSKIP Header Preamble
 
 Each RSKIP must begin with an RFC 822 style header preamble. The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
@@ -177,24 +182,24 @@ RSKIPs may have a Requires header, indicating the RSKIP numbers that this RSKIP 
 
 RSKIPs may also have a Superseded-By header indicating that a RSKIP has been rendered obsolete by a later document; the value is the number of the RSKIP that replaces the current document. The newer RSKIP must have a Replaces header containing the number of the RSKIP that it rendered obsolete.
 
---------------
+
 ## Auxiliar Files
 
 RSKIPs may include auxiliary files such as diagrams. Such files must be named RSKIP-XXXX-Y.ext, where "XXXX" is the RSKIP number, "Y" is a serial number (starting at 1), and "ext" is replaced by the actual file extension (e.g. "png").
 
---------------
+
 ## Transferring RSKIP Ownership
 
 It occasionally becomes necessary to transfer ownership of RSKIPs to a new champion. In general, we'd like to retain the original author as a co-author of the transferred RSKIP, but that's really up to the original author. A good reason to transfer ownership is because the original author no longer has the time or interest in updating it or following through with the RSKIP process, or has fallen off the face of the 'net (i.e. is unreachable or not responding to email). A bad reason to transfer ownership is because you don't agree with the direction of the RSKIP. We try to build consensus around a RSKIP, but if that's not possible, you can always submit a competing RSKIP.
 
 If you are interested in assuming ownership of a RSKIP, send a message asking to take over, addressed to both the original author and the RSKIP editor. If the original author doesn't respond to email in a timely manner, the RSKIP editor will make a unilateral decision (it's not like such decisions can't be reversed :).
 
---------------
+
 ## RSKIP Editors
 
 ` * Sergio Lerner (@sergioLerner) `
 
---------------
+
 ## RSKIP Editor Responsibilities and Workflow
 
 For each new RSKIP that comes in, an editor does the following:
@@ -215,7 +220,7 @@ Many RSKIPs are written and maintained by developers with write access to the RS
 The editors don't pass judgment on RSKIPs. We merely do the administrative & editorial part.
 
 
---------------
+
 ## History
 
 This document was derived heavily from Ethereum's EIP-1 written by Martin Becze and from Bitcoin's BIP-0001 written by Amir Taaki which in turn was derived from Python's PEP-0001. In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the RSK Improvement Process, and should not be bothered with technical questions specific to RSK or the RSKIP. Please direct all comments to the RSKIP editors.

@@ -1,20 +1,24 @@
-## Compressed block propagation using state trie update batch (COBLO)
+# Compressed block propagation using state trie update batch (COBLO)
 
-Code: RSKIP62
+|RSKIP          |62           |
+| :------------ |:-------------|
+|**Title**      |Compressed block propagation using state trie update batch (COBLO) |
+|**Created**    |07-MAY-18 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |2 |
+|**Status**     |Draft |
 
-Author: SDL
-
-Status: Draft
-
-# **Abstract** 
+## Abstract 
 
 This RSKIP presents a method to propagate a block that reduce the time for block processing, and enable SPV mining (for a small period of time). The reduction of the block propagation increases the probability of successful consensus, increases the scalability of the blockchain by reducing idle states, and helps decentralization by reducing the pressure on node bandwidth and CPU processing capabilities. Header-first block propagation is an idea that originated in Bitcoin. However stateful Turing complete blockchains have limitations that do not exist in UTXO based blockchains: one transaction state can affect the following transaction pre-state, and only by executing the first the second can be processed. In UTXO-based blockchains, transactions can be almost pre-executed during the transaction propagation phase, since transaction verification do not rely on block context. In stateful Turing complete blockchains the block  may affect how a transaction is executed, as block fields such as timestamp, number and coinbase are accessible. Therefore transactions cannot be pre-executed and execution is performed in the critical path during block propagation. The longer the time it takes for a block to propagate, the higher the uncle rate, the lower the blockchain efficiency and fairness. This RSKIP proposes to forward along the block header the necessary changes to the state required to continue processing child blocks.
 
-# Discussion 
+## Discussion 
 
 There are two kinds to solutions to this problem: even/odd sharding and headers-first propagation. Even-odd sharing consist of splitting the blockchain state into two, one state that is updated on even blocks and another that is updated on odd blocks. Therefore miners can mine child blocks even if the parent block has not been executed. The drawback is that a queue-based communication mechanism between shards must be devised.  The standard headers-first solution does not work in RSK/Ethereum because the state trie needs to be updated with the parent block execution results, even if an empty block is mined. In this RSK we present a modification of this headers-first technique that allow miners to start mining a child block before the parent block has been fully verified, based on forwarding the batch of state modifications along the header of the block.
 
-# **Specification** 
+## **Specification** 
 
 
 
@@ -46,7 +50,7 @@ storageChanges is a list of elements of type StorageChange. a StorageChange is a
 
 
 
-# Key/Value Compression Scheme
+## Key/Value Compression Scheme
 
  
 
@@ -85,13 +89,13 @@ A new network message used to propagate COBLOs is created. When a non-miner full
 
 
 
-# How Miners process COBLOs
+## How Miners process COBLOs
 
 When a miner receives a COBLO, after step 4 and before step 5, the miner adds it to its local best branch by performing the changes specified by the changeBatch and executing the transactions not specified in the changeBatch. In case this COBLO is the new tip of the best chain, it starts mining a child of the COBLO. Even if the transactions in the COBLO are unknown, the miner can build a child block whose transactions ids do not match any of the prefixes specified in the compressedTransactionIds list. 
 
 While mining the child block, the steps following 4 continue to be executed. If this execution leads to the result that the COBLO is invalid, or if some transactions in the COBLO could not be fetched from peers, the COBLO is removed from the blockchain and mining is stopped and restarted from the previous state.
 
-# Attacks
+## Attacks
 
 Because the transaction ids are compressed, an attacker may try to create two transaction with colliding compressed ids. The attacker can then send one of them to the miners (or mine it privately) while distributing the other, in order to prevent a COBLO from being forwarded. The attack is detected when the node cannot reconstruct the transaction trie, and the correct transaction will be requested from the sending peer. Afterward a disambiguating COBLO will be broadcasted. Therefore the attack can only delay the propagation of the COBLO a single hop. 
 
