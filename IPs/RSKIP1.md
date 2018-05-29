@@ -1,22 +1,26 @@
 # Distributed Memory
 
-Code: RSKIP01
+|RSKIP          |1           |
+| :------------ |:-------------|
+|**Title**      |Distributed Memory |
+|**Created**    |09-JUN-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |2 |
+|**Status**     |Draft |
 
-Author: SDL
-
-Status: Draft
-
-# Abstract
+## Abstract
 
 RSKIP describes a new persistent memory system where data is distributed in user accounts instead of being centralized in the contract. This RSKIP also proposes modifications in the VM and consensus rules to allow scaling by transaction partitioning. The main motivation is preventing bottlenecks in transaction processing.
 
-# Motivation
+## Motivation
 
 This RSK contract memory is centralized. For contracts that are infrequently used this is not a problem. However contracts that are frequently used impose a bottleneck in transaction processing. If many transactions in a block use that contract, the transactions cannot be processed independently: they must be serialized. The prevents transaction execution to be parallelized in several processing cores. We can assume that the most used contracts will be liquid assets, such as other crypto-tokens and representations of fiat currencies, because these contracts serve as building blocks for dapps, are will be consumed by wallets. As an example, all accounts and contracts that hold or transact in cryptoUSD must communicate with the cryptoUSD issuer contract whenever they need to transfer cryptoUSD.
 
 Most assets will be bearer-instruments, and therefore the issuing smart-contract would not prevent free transactions of the assets. Therefore the issuing smart-contract does not need to access any central memory (at least not write access), and can execute the code accessing the distributed memory of the source and destination accounts (or contracts). IF the token managing contract does not write to local persistent memory, then it can be safely executed in parallel.
 
-# Discussion
+## Discussion
 
 Each Account or Contract is added an additional Trie data structure foreignStorage. The keys are the account addresses of the foreign contracts that are holding memory locally. Each cell holds a second level trie. Each key of this second level trie is an arbitrary key provided by the contract. The data is arbitrary (and of arbitrary length). 
 
@@ -26,7 +30,7 @@ To prevent contracts for storing undesired information in a user wallet, contrac
 
 Five new opcodes are added to move bytes from local to foreign distributed storage, and vice-versa.
 
-# Specification
+## Specification
 
 ### FSSTOREBYTES
 

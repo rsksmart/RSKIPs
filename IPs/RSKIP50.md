@@ -1,22 +1,24 @@
-# Script versions using HEADER pseudo-opcode
+# Script Versions using HEADER pseudo-opcode
 
-Code: RSKIP50
+|RSKIP          |50           |
+| :------------ |:-------------|
+|**Title**      |Script Versions using HEADER pseudo-opcode |
+|**Created**    |14-NOV-17 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |1 |
+|**Status**     |Adopted |
 
-Author: Sergio Demian Lerner
-
-Creation Date: November 14th, 2016
-
-Status: Draft
-
-# Abstract
+## Abstract
 
 This RSKIP defines a new pseudo-opcode that is used to mark the existence of a header in the script. This header defines the script VM version, the script language version and can define upto 256 additional header bytes for future use.
 
-# Motivation
+## Motivation
 
 RSK is definiting new functionality that is currently incompatible with the EVM. However RSK also wants to allow users to easily port their existing Ethereum solutions that do not make use of more advanced features. To acomplish this, we allow the VM code to define an optional header that specifies which virtual machine the code is targeted to.
 
-# Specification
+## Specification
 
 The new pseudo-opcode HEADER has value 0xfc. To specify a valid header, this opcode must stored at code address zero. If HEADER is stored at offset 0x00, then the following header values are interpreted:
 
