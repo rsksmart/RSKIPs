@@ -1,13 +1,15 @@
 # Checksum Address Encoding
-```
-RSKIP:
-	Title: Checksum Address Encoding
-	Authors:
-		Julian Len <julianlen@gmail.com>
-		Ilan Olkies <ilanolkies@outlook.com>
-	Type: Standard Track
-	Created: 2018-25-06
-```
+
+|RSKIP          |60           |
+| :------------ |:-------------|
+|**Title**      |Checksum Address Encoding |
+|**Created**    |25-JUN-16 |
+|**Author**     |JL,IO |
+|**Purpose**    |ST |
+|**Layer**      |Net |
+|**Complexity** |1 |
+|**Status**     |Draft* |
+
 ## Motivation
 
 - Avoid typing confusion in adresses.
@@ -37,27 +39,33 @@ function toChecksumAddress(address, chainId = null) {
 ```
 Adds the chain id as a prefix. Converts the address to hexadecimal. Calculates [keccak](https://csrc.nist.gov/csrc/media/publications/fips/202/final/documents/fips_202_draft.pdf) with the prefixed address. Prints `i` digit if it's a number, otherwise checks if `i` byte of the hash of the keccak. If it's grater than 8 prints uppercase, otherwise lowercase.
 
+## Implementation
+
+`chainId` unique values defined in [EIP-155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md).
+
+This algorithm is compatible with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md). This can be achieved using `chainId = null`.
+
 ## Rationale
  
 Benefit:
 - Allows implementation in any network. Can distinguish between testnets and mainnets.
 - Backwards compatiblity with many hex parsers that accept mixed case, allowing it to be easily introduced over time.
-- Compatibility with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) checksum implementation (using no chain id).
- 
+- Compatibility with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) checksum implementation.
+
 ## Test cases
 
 ```
-Valid with network id: 137
-    0x5aaeb6053f3E94c9B9A09F33669435E7ef1bEaed
-    0xfb6916095CA1dF60bB79Ce92CE3ea74C37C5D359
-    0xdbF03b407c01e7cD3cbEa99509D93F8ddDC8c6fb
-    0xD1220A0cF47C7B9BE7a2e6ba89f429762E7B9adb
+Valid with network id: 30
+    0x5AaEb6053f3e94C9B9A09f33669435e7Ef1BeaeD
+    0xFb6916095ca1dF60BB79Ce92cE3EA74C37C5D359
+    0xdbf03b407C01e7cd3CbEA99509D93F8Dddc8c6fB
+    0xD1220A0cF47C7B9bE7a2E6ba89F429762e7b9aDB
 
-Valid with network id: 37310
-    0x5Aaeb6053f3e94C9b9A09f33669435e7eF1BeAED
-    0xFB6916095CA1dF60bb79CE92cE3eA74C37C5D359
-    0xDbF03b407c01E7CD3CbEa99509D93f8Dddc8c6fb
-    0xd1220A0CF47c7b9Be7A2e6bA89f429762E7B9ADb
+Valid with network id: 31
+    0x5AAEb6053f3E94c9B9A09f33669435e7EF1BeaeD
+    0xfB6916095CA1Df60bb79ce92CE3Ea74c37C5D359
+    0xDBF03B407C01E7Cd3cBEa99509d93f8DddC8C6Fb
+    0xd1220a0cf47C7b9be7A2e6BA89f429762e7b9AdB
 
 Valid with network id: None
     0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed

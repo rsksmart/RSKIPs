@@ -1,8 +1,14 @@
-# Survive spaces
+# Survive and Ephemeral Memory Spaces
 
-Code: RSKIP20
-
-Author: SDL
+|RSKIP          |20           |
+| :------------ |:-------------|
+|**Title**      |Survive and Ephemeral Memory Spaces |
+|**Created**    |25-NOV-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |2 |
+|**Status**     |Draft |
 
 ## Pre-git revisions
 
