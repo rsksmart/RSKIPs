@@ -1,16 +1,20 @@
-# New Event Tree and Extended LOG 
+# New Event Tree and Extended LOG
 
-Code: RSKIP45
+|RSKIP          |45           |
+| :------------ |:-------------|
+|**Title**      |New Event Tree and Extended LOG |
+|**Created**    |26-JUN-17 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |2 |
+|**Status**     |Adopted |
 
-Author: SDL
-
-Status: Adopted
-
-# Abstract
+## Abstract
 
 Currently lightweight wallets must scan all transactions receipts of token contracts to detect if there has been a transfer of funds or the wallet contract has changed its state. Block header bloom filters help to narrow the amount of blocks to scan, but bloom filters can easily be spammed by other contracts to collude on the keys that are being scanned by wallets. In the worst case, if a lightweight node does not receive collaboration from peers, it needs to download every transaction receipt to identify those that affect the state of a specific contract (generally a wallet) to be monitored. This is impractical. Transactions that affect the state of several other contracts will force light clients from downloading receipts containing information they are not interested in. This RSKIP defines a new Event trie whose root is committed in the block header, and where logged items are clustered by contract address, not by transaction index. To write information to this tree, LOG opcode is extended. 
 
-# Discussion
+## Discussion
 
 The receipt trie is not well suited for lightweight wallets to use, therefore a new data structure  that reduce the stress on light clients is needed. This RSKIP introduces the Event trie structure, whose root is committed in the block header. The Event Trie is organized such that the keys are contract addresses, and each data element is itself a trie of logged events. The key of each second level trie entry is the log sequential number, and the payload is a RLP-encoded list of the list of topics, the LOG data, and the transaction index originating the log event. 
 
@@ -34,7 +38,7 @@ An alternate design is that each logged event key be a sequential number that do
 
 To allow logging the previous value of blockNumberOfLastEvent before the LOG command is executed, a new opcode is added: LASTEVENTBLOCKNUMBER. This opcode pushes into the stack the value of the blockNumberOfLastEvent field. This way light wallets can log this value, and light clients can learn the block number of the previous logged event when they access any logged event.
 
-# Specification
+## Specification
 
 ### Event Trie
 

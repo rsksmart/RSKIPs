@@ -1,16 +1,20 @@
 # Contract Sleep
 
-Code: RSKIP12
+|RSKIP          |12           |
+| :------------ |:-------------|
+|**Title**      |Contract Sleep |
+|**Created**    |06-AUG-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |1 |
+|**Status**     |Rejected |
 
-Author: SDL
-
-Date: 08-06-2016
+## Revisions
 
 Revision: 1
 
-Status: Rejected
-
-# Abstract
+## Abstract
 
 Currently this RSKIP does not meet the requirements of generality and simplicity required and was withdrawn.
 

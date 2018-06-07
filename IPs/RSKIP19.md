@@ -1,8 +1,14 @@
 # RSK Address formats
 
-Code: RSKIP19
-
-Author: SDL
+|RSKIP          |19           |
+| :------------ |:-------------|
+|**Title**      |RSK Address formats |
+|**Created**    |24-NOV-16 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |1 |
+|**Status**     |Draft* |
 
 ## Pre-git revisions
 
@@ -14,11 +20,11 @@ Revision: 2
 
 Status: Draft
 
-# Abstract
+## Abstract
 
 This RSKIP discusses different types of addresses that could be added in the future and how to prepare clients to support such address. RSKIP32 (Sequential Address format) discusses one of these types. The address formats presented here can be more securely copy-pasted or, although not normally recommended, typed. Double-hashed addresses [RSKIP32]  do not need a checksum, but the checksum allows fast off-chain validation in the client side (e.g. Web app).
 
-# Motivation
+## Motivation
 
 Current RSK addresses consist of 40 hexadecimal digits, such as “7ac5496aee77c1ba1f0854206a26dda82a81d6d8”. This addresses will be called “raw” addresses. Raw addresses are difficult to type without mistakes, and carry no checksum, so a of a human mistake can cause the transferred funds to be lost forever. Even if addresses should normally be copy-pasted, the fields where the address is pasted could be unintentionally modified by the user, and again transferred funds may be lost. As the system should support the upgrade of address formats, a format prefix is recommended, to avoid depending address lengths to differentiate them. Also it is important to be able to differentiate addresses in testnets from production nets, and addresses from different blockchains.
 Discussion
@@ -29,7 +35,7 @@ We define a simple way to differentiate different namespaces such as different s
 
 Base36 encoding has the drawback that 0 (zero), and O (capital o) look similar. Therefore we’ll use a base 35 encoding where the O is replaced by Z (the alphabet is therefore "0123456789ABCDEFGHIJKLMNZPQRSTUVWXY"). We’ll call this encoding Base35H.
 
-# Specification
+## Specification
 
 Every address starts with a network specifier. Current networks specifiers are:
 

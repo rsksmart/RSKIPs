@@ -1,14 +1,14 @@
 # Checksum Address Encoding
-```
-RSKIP:
-	Title: Checksum Address Encoding
-	Authors:
-		Julian Len <julianlen@gmail.com>
-		Ilan Olkies <ilanolkies@outlook.com>
-        	Juliano Rizzo <@juli>
-	Type: Standard Track
-	Created: 2018-25-06
-```
+|RSKIP          |60           |
+| :------------ |:-------------|
+|**Title**      |Checksum Address Encoding |
+|**Created**    |25-JUN-16 |
+|**Author**     |JL,IO |
+|**Purpose**    |ST |
+|**Layer**      |Net |
+|**Complexity** |1 |
+|**Status**     |Draft* |
+
 ## Motivation
 
 - Avoid typing confusion in adresses.
