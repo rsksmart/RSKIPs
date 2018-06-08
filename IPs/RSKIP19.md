@@ -27,13 +27,17 @@ This RSKIP discusses different types of addresses that could be added in the fut
 ## Motivation
 
 Current RSK addresses consist of 40 hexadecimal digits, such as “7ac5496aee77c1ba1f0854206a26dda82a81d6d8”. This addresses will be called “raw” addresses. Raw addresses are difficult to type without mistakes, and carry no checksum, so a of a human mistake can cause the transferred funds to be lost forever. Even if addresses should normally be copy-pasted, the fields where the address is pasted could be unintentionally modified by the user, and again transferred funds may be lost. As the system should support the upgrade of address formats, a format prefix is recommended, to avoid depending address lengths to differentiate them. Also it is important to be able to differentiate addresses in testnets from production nets, and addresses from different blockchains.
-Discussion
+
+## Discussion
+
 Bitcoin has a Base58 address format that includes a four-byte checksum. An example of a Bitcoin address is “1FXqE2ixnnSB1kvwbMtWma5xQ2bVbkSq3f”. The drawback of Bitcoin addresses is that, even if they include a network identifier, it is not obvious. Ethereum proposes the use of IBAN compatible addresses (ICAP addresses). However, there are several limitations with IBAN addresses: scarce space for address, short checksum, additional complexity. 
 Even if the address space in RSK is 160 bits, the number of effective addresses that will ever be created is much lower, probably not more than 2^30 or 1 billion addresses. One billion active addresses would consume about 100 Gigabytes of ledger state data. 
 
 We define a simple way to differentiate different namespaces such as different systems can use different addresses types and encodings.
 
 Base36 encoding has the drawback that 0 (zero), and O (capital o) look similar. Therefore we’ll use a base 35 encoding where the O is replaced by Z (the alphabet is therefore "0123456789ABCDEFGHIJKLMNZPQRSTUVWXY"). We’ll call this encoding Base35H.
+
+This protosal specifically adds an optional blockchain identifier (sometimes called chain ID). If the chain Id is not present, is is assumed it refers to the RSK mainchain. 
 
 ## Specification
 
@@ -42,13 +46,14 @@ Every address starts with a network specifier. Current networks specifiers are:
 
 |Prefix | Network type        |
 |-------|---------------------|
-|P      | Production network  | 
+|M      | Main network        | 
 |T      | Test network        |
 
-To avoid confusion with hexadecimal addresses, it is recommended that all network chars are not hexadecimal digits. Also it is recommended that the char “R” is not used as a network chars since IBAN-encoded addresses would start with R.
+Next to the the network specifier, is the optional chain Id, in decimal format.
+
+To avoid confusion with hexadecimal addresses, network specifiers should not be hexadecimal digits. Also it is recommended that the char “R” is not used as a network chars since IBAN-encoded addresses would start with R.
 
 Then follows an address type specifier character. Currently address types are:
-
 
 |Prefix | Address Type                         |
 |-------|--------------------------------------|
@@ -56,12 +61,11 @@ Then follows an address type specifier character. Currently address types are:
 |C      | Compact Raw address base35H encoded  |
 |S      | Sequential address                   | 
 
-
 Then follows the address body. Then a hyphen (-) is added and a 20-bit checksum encoded in BASE35H. The checksum is built as the first 3 bytes of SHA3 ( everything before the checksum not including the hyphen), zeroing the first 4 MSB bits.
 
-|Net type | Addr type   |Addr body        | checksum     |
-|---------|-------------|-----------------|--------------|
-|X        | X           |XXXXX….XXXXXX    | XXXX         |
+|Net type | [Chain Id]  |Addr type        |Addr body     | checksum     |
+|---------|-------------|-----------------|--------------|--------------|
+| X       | NNN         | XXXXX….XXXXXX   | XXXX         |              |
 
 ### Sequential address (S)
 
@@ -73,11 +77,16 @@ A raw address body consist of an address type byte (according to RSKIP16) and a 
 
 Examples: 
  20-byte single-hashed address
- PR007ac5496aee77c1ba1f0854206a26dda82a81d6d8-IJ5A
+ MR007ac5496aee77c1ba1f0854206a26dda82a81d6d8-IJ5A
+ 
+ 20-byte single-hashed address with chain ID
+ M60R007ac5496aee77c1ba1f0854206a26dda82a81d6d8-IJ5A
+
  20-byte double-hashed address
- PR027ac5496aee77c1ba1f0854206a26dda82a81d6d8-IJ5A
+ MR027ac5496aee77c1ba1f0854206a26dda82a81d6d8-IJ5A
+ 
  31-byte double-hashed address
- PR0396aee77c1ba1f0854206a26dda82a81d6d85496aee77c1ba1f0854206a26dda8-J5AI
+ MR0396aee77c1ba1f0854206a26dda82a81d6d85496aee77c1ba1f0854206a26dda8-J5AI
 
 ### Compact Raw Address (C) body
 
@@ -85,11 +94,12 @@ A compact raw address is similar to a raw address but the address consist of the
 
 Examples: 
  20-byte single-hashed address
- PCXDMDJRI6NFBGKY97LNI53E1FI5SZH9D-IJ5A
+ MCXDMDJRI6NFBGKY97LNI53E1FI5SZH9D-IJ5A
+ 
  Sample RSK addresses (with random checksums)
- PS9ZLDRMH33-B8JJ
+ MS9ZLDRMH33-B8JJ
  TS7A3C7YM-ZLDR
- PR007ac5496aee77c1ba1f0854206a26dda82a81d6d8-IJ5A
+ MR007ac5496aee77c1ba1f0854206a26dda82a81d6d8-IJ5A
 
 ### Encoding of standard RSK addresses into IBAN addresses
 
