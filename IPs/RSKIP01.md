@@ -10,11 +10,11 @@
 |**Complexity** |2 |
 |**Status**     |Draft |
 
-## Abstract
+# **Abstract**
 
 RSKIP describes a new persistent memory system where data is distributed in user accounts instead of being centralized in the contract. This RSKIP also proposes modifications in the VM and consensus rules to allow scaling by transaction partitioning. The main motivation is preventing bottlenecks in transaction processing.
 
-## Motivation
+# **Motivation**
 
 This RSK contract memory is centralized. For contracts that are infrequently used this is not a problem. However contracts that are frequently used impose a bottleneck in transaction processing. If many transactions in a block use that contract, the transactions cannot be processed independently: they must be serialized. The prevents transaction execution to be parallelized in several processing cores. We can assume that the most used contracts will be liquid assets, such as other crypto-tokens and representations of fiat currencies, because these contracts serve as building blocks for dapps, are will be consumed by wallets. As an example, all accounts and contracts that hold or transact in cryptoUSD must communicate with the cryptoUSD issuer contract whenever they need to transfer cryptoUSD.
 
@@ -30,7 +30,7 @@ To prevent contracts for storing undesired information in a user wallet, contrac
 
 Five new opcodes are added to move bytes from local to foreign distributed storage, and vice-versa.
 
-## Specification
+# **Specification**
 
 ### FSSTOREBYTES
 
@@ -106,3 +106,6 @@ Pushes 1 if contract at address is enabled to use the foreign storage or 0 other
 
 A new trieRoot field named foreignStorage is added as the last element of the account state. Initially this is an empty trie. The foreignStorage keys are the extenal contract addresses that can store local information. If the key is present, then foreign storage is enabled. The payload for each key is a trie containing (key,value) pairs were key is any 256-bit value and value is any byte array.
 
+# Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

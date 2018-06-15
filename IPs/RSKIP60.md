@@ -1,25 +1,26 @@
 # Checksum Address Encoding
+
 |RSKIP          |60           |
 | :------------ |:-------------|
 |**Title**      |Checksum Address Encoding |
-|**Created**    |25-JUN-16 |
+|**Created**    |25-JUN-2016 |
 |**Author**     |JL,IO |
 |**Purpose**    |ST |
 |**Layer**      |Net |
 |**Complexity** |1 |
 |**Status**     |Draft* |
 
-## Motivation
+# **Motivation**
 
 - Avoid typing confusion in adresses.
 - Differentiate addresses of different networks.
 
-## Abstract
+# **Abstract**
 
 Addresses can be validated using an injective function that makes capital letters redundant.
 RSKIP-0060 **describes an address checksum mechanism** that can be implemented in any network based on [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md).
 
-## Specification
+# **Specification**
 In Javascript:
 ```javascript
 function toChecksumAddress(address, chainId = null) {
@@ -38,20 +39,20 @@ function toChecksumAddress(address, chainId = null) {
 ```
 Adds the chain id as a prefix. Converts the address to hexadecimal. Calculates [keccak](https://csrc.nist.gov/csrc/media/publications/fips/202/final/documents/fips_202_draft.pdf) with the prefixed address. Prints `i` digit if it's a number, otherwise checks if `i` byte of the hash of the keccak. If it's grater than 8 prints uppercase, otherwise lowercase.
 
-## Implementation
+# **Implementation**
 
 `chainId` unique values defined in [EIP-155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md).
 
 This algorithm is compatible with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md). This can be achieved using `chainId = null`.
 
-## Rationale
+# **Rationale**
  
 Benefit:
 - Allows implementation in any network. Can distinguish between testnets and mainnets.
 - Backwards compatiblity with many hex parsers that accept mixed case, allowing it to be easily introduced over time.
 - Compatibility with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) checksum implementation.
 
-## Test cases
+# **Test cases**
 
 ```
 Valid with network id: 30
@@ -78,3 +79,6 @@ Invalid with network id: 1234
     0xDBF03B407C01E7CD3CBEA99509D93f8DDDC8C6FB
     0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb
 ```
+# **Copyright**
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

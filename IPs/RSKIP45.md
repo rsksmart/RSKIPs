@@ -3,42 +3,20 @@
 |RSKIP          |45           |
 | :------------ |:-------------|
 |**Title**      |New Event Tree and Extended LOG |
-|**Created**    |26-JUN-17 |
+|**Created**    |26-JUN-2017 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Adopted |
 
-## Abstract
+# **Abstract**
 
 Currently lightweight wallets must scan all transactions receipts of token contracts to detect if there has been a transfer of funds or the wallet contract has changed its state. Block header bloom filters help to narrow the amount of blocks to scan, but bloom filters can easily be spammed by other contracts to collude on the keys that are being scanned by wallets. In the worst case, if a lightweight node does not receive collaboration from peers, it needs to download every transaction receipt to identify those that affect the state of a specific contract (generally a wallet) to be monitored. This is impractical. Transactions that affect the state of several other contracts will force light clients from downloading receipts containing information they are not interested in. This RSKIP defines a new Event trie whose root is committed in the block header, and where logged items are clustered by contract address, not by transaction index. To write information to this tree, LOG opcode is extended. 
 
-## Discussion
+# **Specification**
 
-The receipt trie is not well suited for lightweight wallets to use, therefore a new data structure  that reduce the stress on light clients is needed. This RSKIP introduces the Event trie structure, whose root is committed in the block header. The Event Trie is organized such that the keys are contract addresses, and each data element is itself a trie of logged events. The key of each second level trie entry is the log sequential number, and the payload is a RLP-encoded list of the list of topics, the LOG data, and the transaction index originating the log event. 
-
-To log events in the new events trie, we propose the use of the same LOG opcode. Creating still another opcode seems not to be necessary and reduces compatibility with existent compilers. Also the same arguments would be required for the new LOG and the old LOG opcode, which consumes 4 byte addresses, one for each number of arguments. Therefore adding a new LOG opcode would consume for additional addresses, which seem excessive. It was decided to use the same LOG opcodes in an "extended mode". Two methods to switch to the extended mode were evaluated. 
-
-1. Use a specific topic (e.g. 0xff..ff), to log the same message in the two different trees.
-
-2. Switch to a new extended mode by other means using a previous code sequence, and then using the LOG event in the traditional way. 
-
-The last option was chosen because the first present some compatibility problems, duplicates the amount of information logged at the same cost (LOG cost cannot be increased without breaking the 2300 minimum gas sent barrier).
-
-To be as compatible as possible with Ethereum, we allow the VM to switch between old LOG mode and new LOG extended mode using the internal configuration register (COREG). This register is 32 bytes long, and is memory mapped. The description and reasons why we used a memory mapped register are described in RSKIP51. A single bit in the COREG changes the mode of LOG.
-
-When transactions are processed in parallel (RSKIP03), the order in which the logged items are stored should still be deterministic. Generally each transaction that modifies its state belongs to a single verification thread, therefore all transactions that use the new mode of the LOG opcode will belong to the same thread and so the order of logged events is deterministic. 
-
-However a contract that does not modify its state but logs information could be called from different threads. In this case a sequential log index does not work as key to the events trie. We could use as key the transaction index plus a sequential value which starts from zero on each new transaction. However, for simplicity, we decided using only a sequential number and force sequential processing of transactions in the cases of extended-mode LOGs without state modification. This is also because the new LOG mode modifies the account state, as follows.
-
-To allow light clients to follow the list of events created by a contract, a new field is added to each account/contract: blockNumberOfLastEvent. This field is updated each time the contract emits a LOG in extended mode, with the current block number. The initial value of this field is zero. Light clients can use this field to skip to the previous emitted LOG each time they detect a new LOG, and therefore process the list of all logged items in reverse.
-
-An alternate design is that each logged event key be a sequential number that does not reset on each block, but continues. The account state would store the sequential number of the las event logged. This design was not chosen, as it consumes more space, bringing little benefit.
-
-To allow logging the previous value of blockNumberOfLastEvent before the LOG command is executed, a new opcode is added: LASTEVENTBLOCKNUMBER. This opcode pushes into the stack the value of the blockNumberOfLastEvent field. This way light wallets can log this value, and light clients can learn the block number of the previous logged event when they access any logged event.
-
-## Specification
+See discussion [here].
 
 ### Event Trie
 
@@ -138,3 +116,10 @@ PUSH1 0x18 // memStart, offset 24 (last 8 LSBs of LASTEVENT...)
 LOG2
 ```
 
+[RSKIP51]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP51.md
+[RSKIP03]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP03.md
+[here]: https://github.com/rsksmart/RSKIPs/issues
+
+# **Copyright**
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

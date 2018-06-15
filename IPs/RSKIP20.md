@@ -3,7 +3,7 @@
 |RSKIP          |20           |
 | :------------ |:-------------|
 |**Title**      |Survive and Ephemeral Memory Spaces |
-|**Created**    |25-NOV-16 |
+|**Created**    |25-NOV-2016 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
 |**Layer**      |Core |
@@ -20,14 +20,15 @@ Revision: 1
 
 Status: Draft (unfinished)
 
-## Abstract
+# **Abstract**
 
 This RSKIP splits the storage memory into two subspaces: survive and ephemeral. The first is hibernated, but the second is destroyed on hibernation.
-Motivation
 
-This, combined with contract rent, allows a un-owned or public contract to choose which parts of the memory will persist will very low overhead and high efficiency if some clients of the contract do not pay the rent.
+# **Motivation**
 
-## Specification
+This, combined with contract rent, allows an un-owned or public contract to choose which parts of the memory will persist with very low overhead and high efficiency if some clients of the contract do not pay the rent.
+
+# **Specification**
 TBD
 
 ## Sample Use Cases
@@ -46,3 +47,6 @@ public payRent()
 }
 
 ```
+# **Copyright**
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

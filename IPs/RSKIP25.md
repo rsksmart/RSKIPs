@@ -3,7 +3,7 @@
 |RSKIP          |25           |
 | :------------ |:-------------|
 |**Title**      |Memory caches |
-|**Created**    |27-DIC-16 |
+|**Created**    |27-DIC-2016 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
 |**Layer**      |Core |
@@ -20,7 +20,7 @@ Revision: 3
 
 Status: Draft
 
-## Abstract
+# **Abstract**
 
 Storage rent has shown to be impractical, since most rent payments are microtransactions. This RSKIP defines another incentive structure for reducing the state size: the use of a hierarchy of caches.
 Motivation
@@ -52,7 +52,7 @@ This solution is complex and requires a lot of housekeeping. A better approach i
 
 Contracts specify if they wish to be stored in RAM and eventually SSD, or only in SSD. To be stored in RAM, they have to pay a high fixed cost (or recurrent cost in case storage rent is used). A contract can switch from RAM to SSD and vice-verse at any time, if programmed to do so. This is the solution chosen for this RSKIP.
 
-## Specification
+# **Specification**
 
 A contract (in full) can be stored in RAM or in SSD. When a contract is stored in RAM, the CALL cost is reduced 5 times to 140 (instead of 700) and the SLOAD/SSTORE costs are also reduced by 5 (400 for a 2K SSTORE cost). To move a contract to RAM, a new opcode is used SETSTORAGE. The only argument for this opcode is the destination: 0 is SSD, 1 is RAM. If the argument is equal to the current storage state, nothing happens, and the opcode costs 10 gas.  If the movement is from SSD to RAM, it has a proportional to the size of the contract, but with a very low multiplier. If  the movement is from SSD to RAM, the cost is proportional as specified:
 - 700  base cost (to bring code to RAM, plus additional page cost if paging is used)
@@ -60,3 +60,8 @@ A contract (in full) can be stored in RAM or in SSD. When a contract is stored i
 
 The recurrent cost is also adjusted by a 5x multiplier. 
 The reduction in cost for SSTOREs is based on the assumption that this system caches RAM data and only writes it to SSD every N blocks (e.g. N=60, but a minimum of N=5 is assumed). This means that the cost of storage writes is amortized.  If a full node is turned off, or the application exits abnormally, then the full node can always reconstruct the state by re-executing up to N past blocks.
+
+
+# **Copyright**
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

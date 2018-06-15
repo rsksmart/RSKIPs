@@ -3,18 +3,18 @@
 |RSKIP          |57           |
 | :------------ |:-------------|
 |**Title**      |Derivation Path for Hierarchical Deterministic Wallets |
-|**Created**    |05-ABR-18 |
+|**Created**    |05-ABR-2018 |
 |**Author**     |IO |
 |**Purpose**    |Usa |
 |**Layer**      |Net |
 |**Complexity** |1 |
 |**Status**     |Draft |
 
-## Abstract
+# **Abstract**
 
 This RSKIP proposes a unique derivation path for RSK deterministic wallet implementations, based on [BIP-0044](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki).
 
-## Motivation
+# **Motivation**
 
 From a base private key, users can derive different child keys for privacy reasons or to facilitate identification of incoming payments.
 
@@ -22,7 +22,7 @@ To avoid incompatibility between wallets due to the usage of different technique
 
 The best practice is to use the same derivation BIP-0044 path for all wallets.
 
-## Implementation
+# **Implementation**
 
 Wallets implementing RSK support must use the following derivation path:
 
@@ -49,3 +49,7 @@ Wallets implementing RSK support must use the following derivation path:
 [SLIP-0044](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) specifies the Coin Type body described on BIP-0044.
 
 RSK MainNet becomes network 137. RSK TestNet becomes network 37310.
+
+# **Copyright**
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
