@@ -1,24 +1,24 @@
 # Negotiated Minimum Gas Price
 
-|RSKIP          |9           |
+|RSKIP          |09           |
 | :------------ |:-------------|
 |**Title**      |Negotiated Minimum Gas Price |
-|**Created**    |21-OCT-16 |
+|**Created**    |21-OCT-2016 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Adopted |
 
-## Abstract
+# **Abstract**
 
 This RSKIP defines a change in the block validation rule and a change in the block header format so miners can negotiate a minimum gas price, to prevent dishonest miners from taking blockchain resources (CPU, state, storage, bandwidth) at zero cost when there are no transaction in the backlog (memory pool) paying enough fees. Also the minimum gas price prevent miner bribery attacks, and transaction fee side-channels.
 
-## Motivation
+# **Motivation**
 
 In Ethereum, miners have incentives to use the network for their own private uses when there are no transactions in memory pools to profit from. One of this private use is memory time arbitration, wherein a miners acquires a chunk of blank persistent memory at zero cost to be able to sell it later at a cost. Also a minimum gas price, if obeyed by miners,  can be a huge help to wallets for choosing a transaction gas price based on transaction priority. Last, because miners only get 10% of the fees collected by each block, having a minimum gas price prevents bribery attacks against the REMASC contract. In these attacks a side-channel is used to pay for transaction fees. Only if more than 50% of the miners are dishonest and lower the minimum gas price, side-channels can be built.
 
-## Specification
+# **Specification**
 
 A new field minGasPrice is added to the block header. Each miner can vote to increase or decrease the minGasPrice up to 0.01% (1 per 10K). This allows miners to increase the minGasPrice 100% in approximately one day, assuming a block every 10 seconds.
 
@@ -34,3 +34,6 @@ On the other side, if a majority of miners try to set the minGasPrice to a very 
 
 A minority of merge miners cannot increase or decrease the price, if the majority oppose.
 
+# **Copyright**
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
