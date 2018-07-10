@@ -1,6 +1,6 @@
 #  **Smoother Difficulty adjustment**  
 
-| RSKIP          | 74                             |
+| RSKIP          | 77                             |
 | :------------- | :----------------------------- |
 | **Title**      | Smoother Difficulty adjustment |
 | **Created**    | 2016                           |
@@ -24,7 +24,7 @@ The difficulty adjustment should be computed as the amount of accumulated work o
 
 
 
-![](RSKIP74\image2.png)
+![](RSKIP77\image2.png)
 
 # **Copyright**
 
