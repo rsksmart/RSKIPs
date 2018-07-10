@@ -16,7 +16,7 @@ Currently lightweight wallets must scan all transactions receipts of token contr
 
 # **Specification**
 
-See discussion [here].
+See discussion [here](https://github.com/rsksmart/RSKIPs/issues/82).
 
 ### Event Trie
 
