@@ -108,6 +108,7 @@ RSK Improvement Proposals
 # Author Index
 | Initials | Full name                    | Email |
 | -------- | :----------------------------| :-----|
+| AE       | Adrian Eidelman              | adrian@rsk.co |
 | DM       | Diego Masini                 | dmasini@rsk.co |
 | IO       | Ilan Olkies                  | ilan@rsk.co |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@rsk.co |
