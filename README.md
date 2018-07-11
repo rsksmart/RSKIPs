@@ -139,6 +139,7 @@ RSK Improvement Proposals
 | IO       | Ilan Olkies                  | ilan@iovlabs.org |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
 | JL       | Julian Len                   | julian@iovlabs.org |
+| JD       | Jose Dahlquist               | jose@rsk.co |
 | LS       | Lisandro Sebrie              | lisandro@iovlabs.org |
 | MMa      | Matias Marquez               |  |
 | MM       | Martin Medina                | martin@iovlabs.org |
