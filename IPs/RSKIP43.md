@@ -78,7 +78,6 @@ Sample numbers and their representations:
 The use of the BLOCKHASH as a randomization technique works in PoW-based blockchains such as RSK, but it is not suitable for PoS-based blockchains so in case a migration to PoS is needed, a new address format would be needed, or users would need to wait several confirmations after registering theirs addresses in the registry before using them.
 
 [RSKIP19]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP19.md
-[here]: https://github.com/rsksmart/RSKIPs/issues
 
 # **Copyright**
 

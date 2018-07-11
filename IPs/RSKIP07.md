@@ -21,7 +21,7 @@ When the time comes to pay the rent, the contract would see which names have eno
 
 # **Specification**
 
-See discussion [here]
+See discussion [here](https://github.com/rsksmart/RSKIPs/issues/78)
 
 Every contract has two new fields:  rentPreDeposit and shrinkKillOrHibernationBounty (SKHBounty for short). rentPreDeposit field hold a value in gas, while SKHBounty values in bitcoins.
 
@@ -204,7 +204,6 @@ Just after 6 months, the contracts has 260K records. The total amount of gas pai
 The deposit is 260K &#42;x/3. The bounty is 260K/3.
 
 [RSKIP08]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP08.md
-[here]: https://github.com/rsksmart/RSKIPs/issues
 
 # **Copyright**
 
