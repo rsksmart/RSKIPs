@@ -100,6 +100,7 @@ RSK Improvement Proposals
 | 70       | [Default TX Data](IPs/RSKIP70.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 75       | [Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 77 |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
+| 85 |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
 | 135       | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 
 
@@ -113,6 +114,7 @@ RSK Improvement Proposals
 | IO       | Ilan Olkies                  | ilan@rsk.co |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@rsk.co |
 | JL       | Julian Len                   | julian@rsk.co |
+| LS       | Lisandro Sebrie              | lisandro@rsk.co |
 | MMa      | Matias Marquez               | matias@rsk.co |
 | MM       | Martin Medina                | martin@rsk.co |
 | SDL      | Sergio Demian Lerner         | sergio@rsk.co |
