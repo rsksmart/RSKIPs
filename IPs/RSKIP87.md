@@ -21,21 +21,20 @@ Currently the whitelisting process implies re-whitelisting an address after a su
 
 ## Specification
 
-In order to implement this change we suggest to make the following modifications:
+In order to implement this change we suggest making the following modifications:
 * Rename the existing whitelist mode to One-Off.
 * Add a new whitelisting mode, Unlimited.
-* Add a query to know if a given address is whitelisted and in which mode is it.
+* Add a query query method to gain information on the whitelisting state of a given address.
 
 ### addOneOffLockWhitelistAddress (formerly addLockWhitelistAddress)
 
-Rename the existing method to avoid confusion on the type of whitelist used.
-It will work exactly as the previous one.
+Rename the existing method to avoid confusion on the type of whitelisting used, without any change in its actual behavior.
 ```
 function addOneOffLockWhitelistAddress(string address, int256 maxValue) returns (int256)
 ```
-Given a base58 BTC address and a maximum accepted value (in satoshis), it returns a value indicating success or failure.
+Given a base58 BTC address and a maximum accepted value (in satoshis), it will return a value indicating success or failure.
 
-This method will check if the address is valid, then will check if it's already whitelisted, and if it isn't it will add a new entry with the maximum value to the one-off storage otherwise. 
+This method will check if the address is valid, then will check if it's already whitelisted, finally it will add a new entry with the maximum value to the one-off storage. 
 
 This mode will:
 * reject any lock above the given maximum value.
@@ -47,9 +46,9 @@ This new method will allow the user to add an unlimited whitelisted address.
 ```
 function addUnlimitedLockWhitelistAddress(string address) returns (int256)
 ```
-The main difference is that it wont't require a maximum value as it won't have a lock limit. It will perform the same validations as the prevously described method and if they are sucessful it will add a new entry to the unlimited storage.
+The main difference is that it wont't require a maximum value as it won't have a lock limit. It will perform the same validations as the previously described method and if they are successful it will add a new entry to the unlimited storage.
 
-As opposed to the one-off mode, this whitelisted address won't be removed after the first usage, the caveat is that the consumer should call to the removeLockWhitelistAddress method when this address shouldn't remain whitelisted anymore.
+As opposed to the one-off mode, this whitelisted address won't be removed after the first usage; the caveat being that the user should call the removeLockWhitelistAddress method to prevent further locks from this address.
 
 
 Both methods will return the same coded results:
@@ -63,7 +62,7 @@ It's worth mentioning that if you whitelist an address using one mode and then t
 
 ### removeLockWhitelistAddress
 
-This method won't change but seems important to remark its existence and utility with the soon to be added unlimited mode.
+This method won't change but seems important to remark its existence and usefulness with the proposed unlimited mode.
 ```
 function removeLockWhitelistAddress(string address) returns (int256)
 ```
