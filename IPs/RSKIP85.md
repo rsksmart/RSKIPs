@@ -25,18 +25,16 @@ Process fees and rewards only when it’s meaningful for the network
 # Specification
 
 In this new implementation REMASC computes the fees by accessing data directly from the block headers instead of using its own storage. This involves three changes:
-
-Increase the size of the internal block cache, so required blocks to calculate rewards are present in a cache in local memory with high probability. 
 Remasc storage will hold no uncle information as this will be retrieved from the blockchain.
 A clean up of REMASC store will be done. The siblings data will be erased, and won’t be stored anymore
 Fees will be processed only when a minimum value is reached.
 
-Item 1 only changes the source of the information, but items 2, 3 and 4 can only be implemented through a hard fork.
+These items can only be implemented through a hard fork.
 So, starting on block N:
 
 REMASC will stop reading its storage for processing fees and will read it from the block headers instead. This involves all necessary information to calculate the mining reward and if a REMASC selection rule was broken. 
 
-A new rule is added. Minimum payable gas is defined as 21000. Mining reward is paid only if a minimum threshold of minimum payable gas * minimum gas price is exceeded. If the threshold is not satisfied the full block reward is not distributed and added back to the reward balance.
+A new rule is added. Minimum payable gas is defined as 200000. Mining reward is paid only if a minimum threshold of minimum payable gas * minimum gas price is exceeded. If the threshold is not satisfied the full block reward is not distributed and added back to the reward balance. An identical rule applies for federation, a minimum limit must be reached to distribute the fees for federators. 
 
 All siblings information in REMASC is erased.
 
@@ -45,9 +43,7 @@ All siblings information in REMASC is erased.
 REMASC currently stores a lot of redundant data which can be retrieved from the headers of the ancestor blocks. Also all the uncles are stored in a single cell which is only partially updated during block processing, causing high CPU and disk consumption. The first one when encoding and decoding rlp data, and the second one it’s because REMASC reserializes this kind of cells multiple times.
 The main goal for this improvement is to reduce the storage used by REMASC without any harm to cpu usage. At the same time, this proposition opens the door to some more improvements. For example, current lookup of blocks to process is linear and it can be improved to O(1) in average case and O(log n) in the worst case.
 
-The value of 21000 gas for the minimum payable gas was added to make payments meaningful for the state of the blockchain at any time. Payments update storage values and consume processing time, so it was considered that a minimum value was required.
-
-Some alternatives were considered, the first option was storing only the specific data about the uncles and the coinbase. This was interesting since the node would only need space on memory for this specific fields instead of the whole block. This alternative wasn’t picked since the information stored on the blockstore and the blockcache inside could be used for other purposes. Extending the current blockcache would enable to resolve other features in the node in a more efficient way by making available more data about blocks on memory.
+The value of 200000 gas for the minimum payable gas was added to make payments meaningful for the state of the blockchain at any time. Payments update storage values and consume processing time, so it was considered that a minimum value was required. The same applies to payments made to federators.
 
 # Backwards Compatibility
 
