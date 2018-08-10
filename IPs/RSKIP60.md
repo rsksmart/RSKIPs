@@ -3,7 +3,7 @@
 |RSKIP          |60           |
 | :------------ |:-------------|
 |**Title**      |Checksum Address Encoding |
-|**Created**    |25-JUN-2016 |
+|**Created**    |25-JUN-2018 |
 |**Author**     |JL,IO |
 |**Purpose**    |ST |
 |**Layer**      |Net |
