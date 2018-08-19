@@ -1,6 +1,6 @@
 #  **DELEGATECALL as an instruction set extension**  
 
-| RSKIP          | nn                             |
+| RSKIP          | 95                             |
 | :------------- | :----------------------------- |
 | **Title**      | DELEGATECALL as an instruction set extension |
 | **Created**    | 2018                           |
