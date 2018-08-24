@@ -45,15 +45,16 @@ The main goal for this improvement is to reduce the storage used by REMASC witho
 
 The value of 200000 gas for the minimum payable gas was defined because lower amounts cause resource consumption that costs more than the actual value transferred. All payments update storage values and consume processing time, so it was considered that a minimum value was an improvement with negligible economic change. The same applies to payments made to federators.
 
-The RSK blockchain protocol previously assumed that a full node that boostraps from a certain state required retrieving the past 256 block headers (because of the BLOCKHASH opcode). The proposal changes this fact, because from now on a pruned client would need to store not 256, but past 4000 headers, including all sibling headers of those blocks referenced as uncles.
+Currently the RSK blockchain protocol allows a node to boostraps from a certain trusted state without retrieving all past blocks, by retrieving the state trie only. However, to be able to continue processing contracts the client must also retrieve the past 256 block headers, because of the BLOCKHASH opcode may request them. The proposal changes this property, because from under the changes proposed a  pruned client would need to store not 256, but the past 4000 headers, including all sibling headers of those blocks referenced as uncles. These headers would be required by the REMASC contract to compute future rewards.
 
 # Backwards Compatibility
 
-This change should be introduced on a network upgrade. When the marked block is reached the change on the implementation will be reflected and the storage for the REMASC contract is going to stop erasing and saving blocks data. This will produce a great improvement for the disk usage of a RSK node.
+This change is not backwards compatible because it implies hard-fork. Old nodes would be disconnected from new nodes immediately afger the first block when the new rules apply is executed.
 
 # Performance
 
-With the changes explained on this document we expect to see an improvement on block processing time. Whenever a block doesn’t reach the minimum threshold, no rewards will be paid avoiding making changes on all the accounts involved for rewards. This will have impact only on some blocks since we expect that the minimum threshold will be surpassed on most blocks. However the other change introduced in REMASC will have a greater impact since it will avoid reading and writing a large amount of data from the disk. Now all this data on the average case will be read from the blockstore cache and won’t need to be stored anymore.
+With the changes proposed on this document we expect to see an improvement on block processing time. while the improvement in efficiency varies depending on the conditions, it has been empirically demostrated to be better in average cases. 
+Whenever a block reward doesn’t reach the minimum payment threshold, no rewards will be paid avoiding making changes on all the accounts involved in reward distribution. This has a huge impact during the initial times of the RSK blockchain, when most blocks are empty, but less impact in the future.  Reducing the disk I/O implied by contract storage operations will have a greater impact in the future since it will avoid reading and writing a large amount of data from the disk. If this proposal is imlemented, all required headers will be read from the blockstore cache with high probability.
 
 # **Copyright**
 
