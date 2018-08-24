@@ -53,7 +53,7 @@ This change is not backwards compatible because it implies hard-fork. Old nodes 
 
 # Performance
 
-With the changes proposed on this document we expect to see an improvement on block processing time. while the improvement in efficiency varies depending on the conditions, it has been empirically demostrated to be better in average cases. 
+With the changes proposed on this RSKIP we expect to see an improvement on block processing time. while the improvement in efficiency varies depending on the conditions, it has been empirically demostrated to be better in average cases. 
 Whenever a block reward doesn’t reach the minimum payment threshold, no rewards will be paid avoiding making changes on all the accounts involved in reward distribution. This has a huge impact during the initial times of the RSK blockchain, when most blocks are empty, but less impact in the future.  Reducing the disk I/O implied by contract storage operations will have a greater impact in the future since it will avoid reading and writing a large amount of data from the disk. If this proposal is imlemented, all required headers will be read from the blockstore cache with high probability.
 
 # **Copyright**
