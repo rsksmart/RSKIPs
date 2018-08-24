@@ -17,10 +17,10 @@ The REMASC contract on the current RSK reference implementation stores large set
 # Motivation
 
 The new REMASC implementation intends to accomplish 4 goals:
-Process and calculate rewards for the current block reading only block data from the blockchain
-Avoid storing any new data related to blocks on the state storage
-Be able to pay rewards in an efficient way, without using RLP encoding and decoding.
-Process fees and rewards only when it’s meaningful for the network
+* Process and calculate rewards for the current block reading only block data from the blockchain
+* Avoid storing any new data related to blocks on the state storage
+* Be able to pay rewards in an efficient way, without using RLP encoding and decoding.
+* Process fees and rewards only when it’s meaningful for the network
 
 # Specification
 
@@ -34,16 +34,18 @@ So, starting on block N:
 
 REMASC will stop reading its storage for processing fees and will read it from the block headers instead. This involves all necessary information to calculate the mining reward and if a REMASC selection rule was broken. 
 
-A new rule is added. Minimum payable gas is defined as 200000. Mining reward is paid only if a minimum threshold of minimum payable gas * minimum gas price is exceeded. If the threshold is not satisfied the full block reward is not distributed and added back to the reward balance. An identical rule applies for federation, a minimum limit must be reached to distribute the fees for federators. 
+A new rule is added. Minimum Payable Gas (MPG) is defined as 200000. All distributed rewards (including miner's, RSK Labs, and Federation) are paid only if the amount to be paid (expressed in smart bitcoins) is greater or equal than the MPG multiplied by the block's minimum gas price (BMGP). If the threshold is not reached the the ditributed rewards are not distributed and are returned to the REMASC reward balance. A similar rule applies for federation share of the fees. A special federation reward pool is created. This is simply a balance that is maintained in the REMASC contract storage. All payments to the federation go through this intermediate pool. A Minimum Payable Federation Gas is defined as XXXXX (MPFG). If the pool balance is greater or equal to the MPFG multiplied by the BMGP, then the full federation pool is distributed. If not, then the pool keeps the federation share for that block. 
 
-All siblings information in REMASC is erased.
+All siblings information in REMASC is erased at block N.
 
 # Rationale
 
-REMASC currently stores a lot of redundant data which can be retrieved from the headers of the ancestor blocks. Also all the uncles are stored in a single cell which is only partially updated during block processing, causing high CPU and disk consumption. The first one when encoding and decoding rlp data, and the second one it’s because REMASC reserializes this kind of cells multiple times.
-The main goal for this improvement is to reduce the storage used by REMASC without any harm to cpu usage. At the same time, this proposition opens the door to some more improvements. For example, current lookup of blocks to process is linear and it can be improved to O(1) in average case and O(log n) in the worst case.
+REMASC currently stores a lot of redundant data which can be retrieved from the headers of the ancestor blocks. Also all the uncles are stored in a single cell which is only partially updated during block processing, causing high CPU and disk consumption. The high CPU consumption occurs when encoding and decoding rlp data, and the high disk consumption occurs when REMASC reserializes these cells multiple times.
+The main goal for this improvement is to reduce the storage used by REMASC without increasing CPU usage. At the same time, this proposition opens the door to some more improvements. For example, current block lookup is linear and it can be improved to O(1) in average case and O(log n) in the worst case.
 
-The value of 200000 gas for the minimum payable gas was added to make payments meaningful for the state of the blockchain at any time. Payments update storage values and consume processing time, so it was considered that a minimum value was required. The same applies to payments made to federators.
+The value of 200000 gas for the minimum payable gas was defined because lower amounts cause resource consumption that costs more than the actual value transferred. All payments update storage values and consume processing time, so it was considered that a minimum value was an improvement with negligible economic change. The same applies to payments made to federators.
+
+The RSK blockchain protocol previously assumed that a full node that boostraps from a certain state required retrieving the past 256 block headers (because of the BLOCKHASH opcode). The proposal changes this fact, because from now on a pruned client would need to store not 256, but past 4000 headers, including all sibling headers of those blocks referenced as uncles.
 
 # Backwards Compatibility
 
