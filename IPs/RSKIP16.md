@@ -21,7 +21,9 @@ Status: Draft
 # **Abstract**
 
 The state of the RSK blockchain is split into several data structures. The account trie, the storage tries tries and the smart contracts code. This brings several problems. To prevent the state to fill all available persistent storage, old unused parts of the state must be removed (e.g. one month old). However to do this, it’s necessary to mark the modification date of every trie, and the platform may hold millions of them. Therefore it’s highly beneficial if all the information is held in a single trie. Therefore a single mark-and-sweep algorithm can remove unused parts. This RSKIP proposes a new structure for the world-state trie, combining accounts, contracts and storage, and enabling future improvements.
-Motivation
+
+# **Motivation**
+
 The current RSK trie (inherited from Ethereum) has several problems, both in its design and in its implementation:
 The world-state consist of the state trie, plus the contract storage tries, plus the contract codes. Each of these data structures must be  managed by an appropriate cache system that decides when to keep the data in memory, when to send it to SSD disk or even HDD disk. This multiplicity of caches of different kinds complicates the design of the platform node considerably. 
 The same for the removal of unused parts of the state.
@@ -50,44 +52,37 @@ in the account secured state tree, according to this rules:
 * Bits 4-7: Signature algorithm
   * 0000 = Bitcoin ECDSA curve
 
-3. Behind each account node, there is a Account node tree.  There are several fields in this tree. These fields are not randomized:
- * a. Storage cells (path 00)
- * b. Alternate storage cells (path 01) for future improvements.
- * c. BTC Balance (path 100)
- * d. Other balances for future improvements (path 101)
- * e. Code (path 11)
+3. Behind each account node, there is a Account node tree.  There are several fields in this tree. Each field is identified by a single byte fieldSelector. This byte is not "randomized" by a hash:
 
-Must further prevent confusion between accounts, storage and code. Possible solutions:
-Values are prefixed by node type when stored into the tree:
+ * a. 0x00: Storage cells
+ * b. 0x01: Code
+ * c. 0x02: Alternate storage cells for future improvements.
+ * d. 0x03: Future BTC Balance
+ * e. 0x04: Other balances for future improvements 
+
+Storage Cell keys are also randomized by a hash function application.
+
+Must further prevent confusion between accounts, storage and code. This helps SPV nodes detect maliciuous SPV proofs based on type-confusion. Therefore values in node data should be prefixed by node type when stored into the tree:
+
 * A for account
 * B for BTC Balance
-* C for contract
+* C for contractm
 * S for storage
 * D for coDe
 
-## Key Filter
+Another possibility is that the Account node is identified, and then the childs are scanned only if the Account is correct.
 
-The Trie is wrapped by the KeyFilteredTrie class. This class does key remapping. Each key is split into the four parts:
+## Path components 
 
-* Namespace [1 bit]
-* Account Type [1 bytes]
+Each key is split into the four parts:
+
+* Account Type & Namespace [1 byte, 1st bit is the namespace]
 * Account address [20, 31 or 32 bytes]
-* Account fields Selector [2 bits]
-* Storage Address [32 bytes]
+* Account fields Selector [1 byte]
+* Storage Address [32 bytes, only if in storage field]
 
-Only the Account address part is passed through a sha3 hash in the secure trie, and only if the address is a single-hashed address (double-hashed addresses do not require this).. In other words, a key is split into the four components, then the account part is replaced by a hashed version of itself, and then all parts are concatenated together to form the new key.
+Account address and storage addresses are  passed through a sha3 hash in the secure trie, but the address  only if it is a single-hashed address (double-hashed addresses do not require this). In other words, a key is split into the four components, then the account and storage keys are replaced by a hashed version of itself, and then all parts are concatenated together to form the new key.
 
-## Namespace Selector
-
-The namespace bit:
-0 represents the world-state
-1 represents other trees for future improvements 
-
-## Field Selector
-
-The field selector is used to select different fields that are part of the contract/account and also to specify different memory spaces (e.g. hibernable and disposable).
-
-The StorageAddress is the address of local storage within the contract.
 
 ## Possible Improvements
 
