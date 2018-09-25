@@ -43,12 +43,12 @@ into a 32-byte value. Note that the address type is NOT hashed.
 2. The type identifies both the signature algorithm (e.g. RSA, ECDSA, Merkle-Winternitz, etc.) and the length of the key 
 in the account secured state tree, according to this rules:
 * Bits 0,1:
- 00: Standard RSK or Ethereum keys. Single-hashed address (according to [RSKIP32]). 32 bytes (full SHA3 hash digest) keys.  Note that single-hashed 20-byte addresses are secured and therefore end up in a 32 byte key.
- 10: Double-hashed address (according to [RSKIP32]). The original 31-byte address is used to index into the trie.
- 11:  Double-hashed address (according to [RSKIP32]). The original 20 bytes prefix of the address are used.
+  * 00: Standard RSK or Ethereum keys. Single-hashed address (according to [RSKIP32]). 32 bytes (full SHA3 hash digest) keys.  Note that single-hashed 20-byte addresses are secured and therefore end up in a 32 byte key.
+  * 10: Double-hashed address (according to [RSKIP32]). The original 31-byte address is used to index into the trie.
+  * 11:  Double-hashed address (according to [RSKIP32]). The original 20 bytes prefix of the address are used.
 * Bit 2,3: reserved, must be 0.
 * Bits 4-7: Signature algorithm
- 0000 = Bitcoin ECDSA curve
+  * 0000 = Bitcoin ECDSA curve
 
 3. Behind each account node, there is a Account node tree.  There are several fields in this tree. These fields are not randomized:
  * a. Storage cells (path 00)
