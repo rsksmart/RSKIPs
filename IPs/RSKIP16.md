@@ -34,7 +34,7 @@ There is no space in this state to store a accounts controlled by a different si
 
 We merge the contract storage memory and account/contract memory into a single tree, as depicted by the following figure:
 
-![image alt text](figureRSKIP16.png)
+![image alt text](./RSKIP16/figureRSKIP16.png)
 
 
 Changes:
