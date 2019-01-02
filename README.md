@@ -103,7 +103,7 @@ RSK Improvement Proposals
 | 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
 | 135       | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
-
+| TBD | [TBD] | 02-JAN-19 | TBD | Usa | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
