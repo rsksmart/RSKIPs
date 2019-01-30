@@ -1,8 +1,8 @@
-#  **Transfer 2300 gas units for code execution in external transaction**  
+#  **Transfer 2300 gas units for code execution in external transactions**  
 
 | RSKIP          | --                                                           |
 | :------------- | :----------------------------------------------------------- |
-| **Title**      | Transfer 2300 gas units for code execution in external transaction |
+| **Title**      | Transfer 2300 gas units for code execution in external transactions |
 | **Created**    | 2019                                                         |
 | **Author**     | SDL                                                          |
 | **Purpose**    | Usa                                                          |
