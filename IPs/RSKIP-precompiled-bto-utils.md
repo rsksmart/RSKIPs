@@ -24,7 +24,8 @@ A new precompiled contract is to be accessible at the `0x00000000000000000000000
 
 - `toBase58Check(bytes20, byte) returns (string)`
 - `deriveExtendedPublicKey(string xpub, string path) returns (string)`
-- `extractPublicKeyFromExtendedPublicKey(string xpub) returns (byte[])`
+- `extractPublicKeyFromExtendedPublicKey(string xpub) returns (bytes)`
+- `getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes20)`
 
 ### toBase58Check
 
@@ -59,7 +60,7 @@ deriveExtendedPublicKey('tpubD6NzVbkrYhZ4XGUZhLnQuWNqmo6mYABHEYPf4WvkyoCw8RKYKx3
 
 ### extractPublicKeyFromExtendedPublicKey
 
-The method `extractPublicKeyFromExtendedPublicKey(string xpub) returns (byte[])` takes as input an extended public key encoded in base58Check (as described in ref #4) and returns a byte array corresponding to the compressed public key of the given extended public key.
+The method `extractPublicKeyFromExtendedPublicKey(string xpub) returns (bytes)` takes as input an extended public key encoded in base58Check (as described in ref #4) and returns a byte array corresponding to the compressed public key of the given extended public key.
 
 #### Sample usage
 
@@ -68,6 +69,26 @@ Given the base58Check-encoded extended public key `tpubDCwK6XsmwUx641qZ6Uyb2pcZX
 ```
 extractPublicKeyFromExtendedPublicKey('tpubDCwK6XsmwUx641qZ6Uyb2pcZXMCoFcyNBFZLbxwJT4iwgmUhY9DsW9FgaFUNE5s1KtM1upxpDuCvx1TbAqQMLMGFF5b1F6KpRpuHcLwcp4k') => '0x0360a7239100410a4f6019778fce803c6b168a9b1922a0eafbdff11e866070d9f8'
 ```
+
+### getMultisigScriptHash
+
+The method `getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes20)` takes as input a minimum required number of signatures and an array of compressed secp256k1 public keys and returns the 20-byte hash (i.e., output of `hash160`) of the Bitcoin N-of-M multisig scriptPub corresponding to the given arguments.
+
+#### Sample usage
+
+Given the following public keys:
+
+- 02276a07b202503d39a43896300224fb649818d1486b0eefde6c9cd7cf1e32eed8
+- 0363e3de0d55459387f221dcda80f9283e303a08bcfeb9cf32875a43fefc7ecb1f
+- 03173019874589385b0295b839bb70e5d3c33178c110bacd872e245b656b3e8f43
+
+and _two_ minimum required signatures, we would have that:
+
+```
+getMultisigScriptHash(2, ['0x02276a07b202503d39a43896300224fb649818d1486b0eefde6c9cd7cf1e32eed8', '0x0363e3de0d55459387f221dcda80f9283e303a08bcfeb9cf32875a43fefc7ecb1f', '0x03173019874589385b0295b839bb70e5d3c33178c110bacd872e245b656b3e8f43']) => '0xafa22d52922aa6657417c55b6cebdf708b594576'
+```
+
+_Note_: The public keys used here are compressed, but might as well be uncompressed. The output should be exactly the same since the function handles the conversion.
 
 ## Rationale
 
