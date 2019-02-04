@@ -22,21 +22,21 @@ With the arising need of BTOs (ICOs over Bitcoin) on top of the RSK network, a n
 
 A new precompiled contract is to be accessible at the `0x0000000000000000000000000000000000000009` address. It will implement the following functions (signatures and return values are as follows):
 
-- `toBase58Check(bytes20, byte) returns (string)`
+- `toBase58Check(bytes20, uint8) returns (string)`
 - `deriveExtendedPublicKey(string xpub, string path) returns (string)`
 - `extractPublicKeyFromExtendedPublicKey(string xpub) returns (bytes)`
 - `getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes20)`
 
 ### toBase58Check
 
-The method `toBase58Check(bytes20 hash, byte version) returns (string)` takes as input a 20-byte hash and a version (see ref #2 for possible version values) and returns a base58Check encoded string of the concatenation of `version` and `hash`.
+The method `toBase58Check(bytes20 hash, uint8 version) returns (string)` takes as input a 20-byte hash and a version (see ref #2 for possible version values) and returns a base58Check encoded string of the concatenation of `version` and `hash`.
 
 #### Sample usage
 
-Given a public key, we want to generate a Bitcoin P2PKH address for testnet. We have the compressed key (for uncompressed keys, compression would be needed first) `02e6930d0659a24df1cc0061203d7845ca2e0c6b96bc1ad16e44c1cef24be92de8`. Its `hash160` is the result of applying `ripemd160(sha256(bytes))` to it. That yields `0d3bf5f30dda7584645546079318e97f0e1d044f`, which is the `hash` parameter we need for our function. For testnet, we use version `111`, which is expressed as `0x6f` in hexadecimal notation. Therefore, we would have that:
+Given a public key, we want to generate a Bitcoin P2PKH address for testnet. We have the compressed key (for uncompressed keys, compression would be needed first) `02e6930d0659a24df1cc0061203d7845ca2e0c6b96bc1ad16e44c1cef24be92de8`. Its `hash160` is the result of applying `ripemd160(sha256(bytes))` to it. That yields `0d3bf5f30dda7584645546079318e97f0e1d044f`, which is the `hash` parameter we need for our function. For testnet, we use version `111`. Therefore, we would have that:
 
 ```
-toBase58Check('0x0d3bf5f30dda7584645546079318e97f0e1d044f', '0x6f') => 'mgivuh9jErcGdRr81cJ3A7YfgbJV7WNyZV'
+toBase58Check('0x0d3bf5f30dda7584645546079318e97f0e1d044f', 111) => 'mgivuh9jErcGdRr81cJ3A7YfgbJV7WNyZV'
 ```
 
 ### deriveExtendedPublicKey
