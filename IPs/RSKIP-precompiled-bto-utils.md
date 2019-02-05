@@ -22,14 +22,14 @@ With the arising need of BTOs (ICOs over Bitcoin) on top of the RSK network, a n
 
 A new precompiled contract is to be accessible at the `0x0000000000000000000000000000000000000009` address. It will implement the following functions (signatures and return values are as follows):
 
-- `toBase58Check(bytes20, uint8) returns (string)`
+- `toBase58Check(bytes, uint8) returns (string)`
 - `deriveExtendedPublicKey(string xpub, string path) returns (string)`
 - `extractPublicKeyFromExtendedPublicKey(string xpub) returns (bytes)`
-- `getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes20)`
+- `getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes)`
 
 ### toBase58Check
 
-The method `toBase58Check(bytes20 hash, uint8 version) returns (string)` takes as input a 20-byte hash and a version (see ref #2 for possible version values) and returns a base58Check encoded string of the concatenation of `version` and `hash`.
+The method `toBase58Check(bytes hash, uint8 version) returns (string)` takes as input a 20-byte hash and a version (see ref #2 for possible version values) and returns a base58Check encoded string of the concatenation of `version` and `hash`.
 
 #### Sample usage
 
@@ -72,7 +72,7 @@ extractPublicKeyFromExtendedPublicKey('tpubDCwK6XsmwUx641qZ6Uyb2pcZXMCoFcyNBFZLb
 
 ### getMultisigScriptHash
 
-The method `getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes20)` takes as input a minimum required number of signatures and an array of (either compressed or uncompressed) secp256k1 public keys and returns the 20-byte hash (i.e., output of `hash160`) of the Bitcoin N-of-M multisig scriptPub corresponding to the given arguments.
+The method `getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes)` takes as input a minimum required number of signatures and an array of (either compressed or uncompressed) secp256k1 public keys and returns the 20-byte hash (i.e., output of `hash160`) of the Bitcoin N-of-M multisig scriptPub corresponding to the given arguments.
 
 #### Sample usage
 
