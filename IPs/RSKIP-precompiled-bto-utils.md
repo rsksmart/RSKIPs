@@ -52,10 +52,10 @@ with `n` an unsigned integer - also as described in #4 - and produces a base58Ch
 
 #### Sample usage
 
-Given the base58Check-encoded extended public key `tpubD6NzVbkrYhZ4XGUZhLnQuWNqmo6mYABHEYPf4WvkyoCw8RKYKx3DzcikL6ahkH4pVCj8izaiPLsRCiA8amjRWYJUDCrBWfUofoRyZNMU5HK`, and the derivation path `M/2/3/4`, we would have that:
+Given the base58Check-encoded extended public key `tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r`, and the derivation path `M/2/3/4`, we would have that:
 
 ```
-deriveExtendedPublicKey('tpubD6NzVbkrYhZ4XGUZhLnQuWNqmo6mYABHEYPf4WvkyoCw8RKYKx3DzcikL6ahkH4pVCj8izaiPLsRCiA8amjRWYJUDCrBWfUofoRyZNMU5HK', 'M/2/3/4') => 'tpubDCwK6XsmwUx641qZ6Uyb2pcZXMCoFcyNBFZLbxwJT4iwgmUhY9DsW9FgaFUNE5s1KtM1upxpDuCvx1TbAqQMLMGFF5b1F6KpRpuHcLwcp4k'
+deriveExtendedPublicKey('tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r', 'M/2/3/4') => 'tpubDCGMkPKredy7oh6zw8f4ExWFdTgQCrAHToF1ytny3gbVy9GkUNK2Nqh7NbKbh8dkd5VtjUiLJPkbEkeg29NVHwxYwzHJFt9SazGLZrrU4Y4'
 ```
 
 ### extractPublicKeyFromExtendedPublicKey
