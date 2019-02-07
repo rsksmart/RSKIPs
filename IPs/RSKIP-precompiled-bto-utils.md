@@ -89,7 +89,7 @@ extractPublicKeyFromExtendedPublicKey('tpubDCwK6XsmwUx641qZ6Uyb2pcZXMCoFcyNBFZLb
 
 ### getMultisigScriptHash
 
-The method `getMultisigScriptHash(uint8 minimumSignatures, bytes[] publicKeys) returns (bytes)` takes as input a minimum required number of signatures and an array of (either compressed or uncompressed) secp256k1 public keys and returns the 20-byte hash (i.e., output of `hash160`) of the Bitcoin N-of-M multisig scriptPub corresponding to the given arguments.
+The method `getMultisigScriptHash(uint8 minimumSignatures, bytes[] publicKeys) returns (bytes)` takes as input a minimum required number of signatures and an array of (either compressed or uncompressed) secp256k1 public keys and returns the 20-byte hash (i.e., output of `hash160`) of the Bitcoin N-of-M multisig scriptPub corresponding to the given arguments. It is important to notice that the compressed version of the given public keys will be used to generate the script. Therefore, public key compression will not make a difference in the function output.
 
 #### Validations
 
