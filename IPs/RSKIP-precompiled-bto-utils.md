@@ -1,6 +1,6 @@
 # Precompiled contract with assorted BTO utility functions
 
-|RSKIP          |00 |
+|RSKIP          |106 |
 | :------------ |:------------- |
 |**Title**      |Precompiled contract with assorted BTO utility functions |
 |**Created**    |01-FEB-19 |
