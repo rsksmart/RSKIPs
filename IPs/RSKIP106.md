@@ -52,8 +52,7 @@ toBase58Check('0x0d3bf5f30dda7584645546079318e97f0e1d044f', 111) => 'mgivuh9jErc
 The method `deriveExtendedPublicKey(string xpub, string path) returns (string)` takes as input an extended public key encoded in base58Check (as described in ref #4), an HD derivation path - a string of the form
 
 ```
-S ::= M/P
-P ::= n | n/P
+S ::= n | n/S
 ```
 
 with `n` an unsigned integer - also as described in #4 - and produces a base58Check encoded string corresponding to the extended public key obtained by deriving the given extended public key with the given path.
@@ -65,10 +64,10 @@ with `n` an unsigned integer - also as described in #4 - and produces a base58Ch
 
 #### Sample usage
 
-Given the base58Check-encoded extended public key `tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r`, and the derivation path `M/2/3/4`, we would have that:
+Given the base58Check-encoded extended public key `tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r`, and the derivation path `2/3/4`, we would have that:
 
 ```
-deriveExtendedPublicKey('tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r', 'M/2/3/4') => 'tpubDCGMkPKredy7oh6zw8f4ExWFdTgQCrAHToF1ytny3gbVy9GkUNK2Nqh7NbKbh8dkd5VtjUiLJPkbEkeg29NVHwxYwzHJFt9SazGLZrrU4Y4'
+deriveExtendedPublicKey('tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r', '2/3/4') => 'tpubDCGMkPKredy7oh6zw8f4ExWFdTgQCrAHToF1ytny3gbVy9GkUNK2Nqh7NbKbh8dkd5VtjUiLJPkbEkeg29NVHwxYwzHJFt9SazGLZrrU4Y4'
 ```
 
 ### extractPublicKeyFromExtendedPublicKey
