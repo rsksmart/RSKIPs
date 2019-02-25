@@ -16,7 +16,7 @@ A new precompiled contract (i.e., native, hardwired onto the RSK consensus layer
 
 ## Motivation
 
-With the arising need of BTOs (ICOs over Bitcoin) on top of the RSK network, a need for different BTO token and/or token-emitting contracts to perform certain complex BTO-related operations on a regular basis is in place. If written in solidity (or assembly WOLOG) and executed on the RVM, each of these functions would be expensive - and even more expensive to write and test every time. Furthermore, different implementations can lead to errors potentially protruding to loss of funds. A well-written, tested and precompiled function set that covers these operations will leverage the complexity on the BTO contracts' side while at the same time enforcing a certain level of security by implementing these as part of the RSK consensus.
+With the arising need of BTOs (Bitcoin Token Offerings) on top of the RSK network, a need for different BTO token and/or token-emitting contracts to perform certain complex BTO-related operations on a regular basis is in place. If written in solidity (or assembly WOLOG) and executed on the RVM, each of these functions would be expensive - and even more expensive to write and test every time. Furthermore, different implementations can lead to errors potentially protruding to loss of funds. A well-written, tested and precompiled function set that covers these operations will leverage the complexity on the BTO contracts' side while at the same time enforcing a certain level of security by implementing these as part of the RSK consensus.
 
 ## Specification
 
