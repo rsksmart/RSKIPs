@@ -118,6 +118,6 @@ RSK Improvement Proposals
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
 | JL       | Julian Len                   | julian@iovlabs.org |
 | MMa      | Matias Marquez               | matias@iovlabs.org |
-| MM       | Martin Medina                | martin@iovlabs.orgo |
+| MM       | Martin Medina                | martin@iovlabs.org |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
 
