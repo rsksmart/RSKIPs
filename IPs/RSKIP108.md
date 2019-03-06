@@ -50,7 +50,7 @@ Clearly Solidity could have concatenated the field index (0x01) in the 21st byte
 | 0x00<br />SHA3(account_addr)[0:9]<br />account_addr          | rlp(nonce,amount,flags) | account state                              |
 | 0x00<br />SHA3(account_addr)[0:9]<br />account_addr<br />0x80 | byte array              | account code                               |
 | 0x00<br />SHA3(account_addr)[0:9]<br />account_addr<br />0x00 | 0x00                    | placeholder for isolating the storage tree |
-| 0x00<br />SHA3(account_addr)[0:9]<br />account_addr<br />0x00<br />SHA3(trimmed_storage_address)[0..9]   trimmed_storage_address | byte array              | value at a storage cell                    |
+| 0x00<br />SHA3(account_addr)[0:9]<br />account_addr<br />0x00<br />SHA3(storage_address)[0..9]   trimmed_storage_address | byte array              | value at a storage cell                    |
 
 trimmed_storage_address is the address without any leading zeros, except for the address 0x00 which is stored as a single byte 0x00. 
 
