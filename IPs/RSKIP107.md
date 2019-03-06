@@ -66,7 +66,7 @@ The new node format is as follows:
   - **valueHash**, 32 bytes: Hash digest of value stored
   - **valueLength**, uint24 (3 bytes): size of the value contained (if lvalue>0 and hasLongVal)
 
-- if the left node is present:
+- if the left and right nodes are not present:
 
   - **treeSize**, 0-9 bytes: the size of the tree, variable length integer
 
