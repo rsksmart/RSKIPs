@@ -45,8 +45,10 @@ The new node format is as follows:
   - **nodePresent**: 2 bits indicate left/right embedded node (bit 2 = left, bit 3 = right)
   - **nodeIsEmbedded**: 2 bits indicate left/right node presence (bit 0 = left, bit 1=right)
 - if sharedPrefixPresent>0
+
   - **lsharedCompressed**, uint (0-3 bytes): length of shared prefix, in compressed form.
 - if lshared>0
+
   - **encodedSharedPath**, variable: shared prefix
 - if nodePresent[0] 
   - if  !nodeIsEmbedded[0]:
@@ -66,7 +68,7 @@ The new node format is as follows:
 
 - if the left node is present:
 
-  - **leftTreeSize**, 0-8 bytes: the size of the left tree, variable length
+  - **treeSize**, 0-9 bytes: the size of the tree, variable length integer
 
 - if !hasLongVal:
   - **value**, variable-size extends up to the bounds of the node buffer: stored value 
@@ -77,7 +79,7 @@ The overhead for a small leaf node is 2 bytes (flags and 1-byte of prefix length
 
 Because an Unitrie account having 1 RBTC-wei occupies 3 bytes. Assuming a 27-byte shared prefix, the space consumed without node overhead  is 30 bytes. Therefore we've reduced the overhead of small accounts from 266% (80/30) to 7% (2/30).
 
-The value leftTreeSize enables sharding the state tree between nodes and requesting pieces in parallel from different nodes, while still being able to validate each piece independently, without the need to collect all pieces first.
+The value treeSize enables sharding the state tree between nodes and requesting pieces in parallel from different nodes by specifying and offset and size of the requested chunk, while still being able to validate each piece independently, without the need to collect all pieces first.
 
 **Shared Prefix Size Compression**
 
@@ -104,7 +106,7 @@ Integer can be encoded depending on the represented value to save space. Longer 
 
 **Recursive Embedding**
 
-While it's possible in a generic trie that one node has an embedded node which in turn has another node embedded, this will be highly rare in the Unitrie for RSK. Therefore, to reduce traversal complexity, we limit that embedded nodes must be terminal (they cannot contain child nodes, even if small).
+While it's possible in a generic trie that one node has an embedded node which in turn has another node embedded, this will be highly rare in the Unitrie for RSK. It can could happen for a group of four short storage cell, if RSKIP108 is implemented. However, to reduce traversal complexity, we limit that embedded nodes must be terminal (they cannot contain child nodes, even if small).
 
 
 # **Copyright**
