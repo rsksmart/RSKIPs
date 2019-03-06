@@ -4,7 +4,7 @@
 | :------------- | :--------------------------------- |
 | **Title**      | More Efficient Unitrie Key Mapping |
 | **Created**    | 2019                               |
-| **Author**     | SDL & AJ                           |
+| **Author**     | SDL & AL                           |
 |                | Sca, Usa                           |
 | **Layer**      |                                    |
 | **Complexity** | 2                                  |
@@ -24,17 +24,17 @@ When the same strategy is applied to storage cell keys, the size of the key resu
 
 This scheme incentivizes the use of shorter keys and shorter values. It's important to note that Solidity hashes the mapping keys with the field index using the SHA3 opcode to obtain cell addresses, even when the mapping index size is shorter than 256 bits. For instance, in the following code:
 
-
-​       
-    pragma solidity ^0.5.0;
-    contract hash {
+```
+pragma solidity ^0.5.0;
+contract hash {
         public uint useSlot0;
-        mapping (address => bool) public isOwner;
-            
-     	function add() public {
+        mapping (address => bool) public isOwner;    
+        function add() public {
             isOwner[msg.sender] = true;
         }
-    }
+}
+```
+
 The address for SSTORE in add() is obtained by padding msg.sender to 256-bits, appending a 256-bit number equal to 1, and then hashing with SHA3 to obtain a 256-bit result.
 
 Clearly Solidity could have concatenated the field index (0x01) in the 21st byte (1st byte being the LSB) with the address, which is a 20-byte field in the least significant part. This would yield a 21-byte key, instead of a 32-byte key,  and therefore each key/value would consume 11 bytes less.  Therefore by reducing the cost of using shorter keys we're incentivizing the compiler to implement more space-efficient constructions.
@@ -59,7 +59,7 @@ trimmed_storage_address is the address without any leading zeros, except for the
 The new gas cost for creating a new storage cell is changed from 20k to:
 
 ​	newCellCost = 5000 + size_cost
-	size_cost = 230*(keyBytes+dataBytes)
+​	size_cost = 230*(keyBytes+dataBytes)
 
 This is the SET cost. As 0x00 is trimmed to 0x00, the minimum value for keyBytes is 1, and the minimum value for dataBytes is 1.
 
@@ -84,3 +84,7 @@ The RESET cost now only accounts for value changes from a non-zero value to a di
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 
+
+```
+
+```
