@@ -20,7 +20,7 @@ Status: Draft
 
 # **Abstract**
 
-The state of the RSK blockchain is split into several data structures. The account trie, the storage tries tries and the smart contracts code. This brings several problems. To prevent the state to fill all available persistent storage, old unused parts of the state must be removed (e.g. one month old). However to do this, it’s necessary to mark the modification date of every trie, and the platform may hold millions of them. Therefore it’s highly beneficial if all the information is held in a single trie. Therefore a single mark-and-sweep algorithm can remove unused parts. This RSKIP proposes a new structure for the world-state trie, combining accounts, contracts and storage, and enabling future improvements.
+The state of the RSK blockchain is split into several data structures. The account trie, the storage tries tries and the smart contracts code. This brings several problems. To prevent the state to fill all available persistent storage, old unused parts of the state must be removed (e.g. one month old). However to do this, it’s necessary to mark the modification date of every trie, and the platform may hold millions of them. Therefore it’s highly beneficial if all the information is held in a single trie. Therefore a single mark-and-sweep algorithm can remove unused parts. This RSKIP proposes a new structure for the world-state trie (called **Unitrie**), combining accounts, contracts and storage, and enabling future improvements.
 
 # **Motivation**
 

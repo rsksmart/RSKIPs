@@ -104,6 +104,7 @@ RSK Improvement Proposals
 | 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
+| 108 |[More Efficient Unitrie Key Mapping](IPs/RSKIP108.md) | 2018 | SDL & AL | Usa,Sca  | Core | 2 | Draft |
 | 135       | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 
 
@@ -112,11 +113,12 @@ RSK Improvement Proposals
 # Author Index
 | Initials | Full name                    | Email |
 | -------- | :----------------------------| :-----|
-| DM       | Diego Masini                 | dmasini@rsk.co |
-| IO       | Ilan Olkies                  | ilan@rsk.co |
-| JIO      | Jose Ignacio Orlicki         | jorlicki@rsk.co |
-| JL       | Julian Len                   | julian@rsk.co |
-| MMa      | Matias Marquez               | matias@rsk.co |
-| MM       | Martin Medina                | martin@rsk.co |
-| SDL      | Sergio Demian Lerner         | sergio@rsk.co |
+| AL       | Angel Lopez                  | angel@iovlabs.org |
+| DM       | Diego Masini                 | dmasini@iovlabs.org |
+| IO       | Ilan Olkies                  | ilan@iovlabs.org |
+| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
+| JL       | Julian Len                   | julian@iovlabs.org |
+| MMa      | Matias Marquez               |  |
+| MM       | Martin Medina                | martin@iovlabs.org |
+| SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
 
