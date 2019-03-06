@@ -1,12 +1,12 @@
 #  More Efficient Unitrie Key Mapping  
 
-| RSKIP          | nn                                 |
+| RSKIP          | 108                                |
 | :------------- | :--------------------------------- |
 | **Title**      | More Efficient Unitrie Key Mapping |
 | **Created**    | 2019                               |
 | **Author**     | SDL & AL                           |
-|                | Sca, Usa                           |
-| **Layer**      |                                    |
+|                |                                    |
+| **Layer**      | Sca, Usa                           |
 | **Complexity** | 2                                  |
 | **Status**     | Draft                              |
 
