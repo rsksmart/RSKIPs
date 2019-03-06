@@ -113,11 +113,11 @@ RSK Improvement Proposals
 | Initials | Full name                    | Email |
 | -------- | :----------------------------| :-----|
 | AL       | Angel Lopez                  | angel@iovlabs.org |
-| DM       | Diego Masini                 | dmasini@rsk.co |
-| IO       | Ilan Olkies                  | ilan@rsk.co |
-| JIO      | Jose Ignacio Orlicki         | jorlicki@rsk.co |
-| JL       | Julian Len                   | julian@rsk.co |
-| MMa      | Matias Marquez               | matias@rsk.co |
-| MM       | Martin Medina                | martin@rsk.co |
-| SDL      | Sergio Demian Lerner         | sergio@rsk.co |
+| DM       | Diego Masini                 | dmasini@iovlabs.org |
+| IO       | Ilan Olkies                  | ilan@iovlabs.org |
+| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
+| JL       | Julian Len                   | julian@iovlabs.org |
+| MMa      | Matias Marquez               | matias@iovlabs.org |
+| MM       | Martin Medina                | martin@iovlabs.orgo |
+| SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
 
