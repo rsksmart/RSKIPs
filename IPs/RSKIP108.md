@@ -14,7 +14,7 @@
 
 The Unitrie RSKIP16 specifies that the account/contract trie is combined with the per contract storage tries. However that RSKIP uses the same key mapping as Ethereum: an account address is hashed with Keccak to obtain a 256-bit key, and the same for storage cell addresses.
 
-This mapping is inefficient in terms of space and also looses the pre-image information, which nodes must store elsewhere. We propose a new key mapping that not only preserves the original keys, but also consumes less space than in the previous system. We also change storage gas costs to incentivize using shorter keys and values.
+This mapping is inefficient in terms of space and also looses the pre-image information, which nodes must store elsewhere. We propose a new key mapping that not only preserves the original keys, but also consumes less space than in the previous system. This new key mapping works best by changing storage gas costs to incentivize using shorter keys and values, and this is attempted with RSKIP109.
 
 # Motivation
 
@@ -53,29 +53,6 @@ Clearly Solidity could have concatenated the field index (0x01) in the 21st byte
 | 0x00<br />SHA3(account_addr)[0:9]<br />account_addr<br />0x00<br />SHA3(storage_address)[0..9]   trimmed_storage_address | byte array              | value at a storage cell                    |
 
 trimmed_storage_address is the address without any leading zeros, except for the address 0x00 which is stored as a single byte 0x00. 
-
-[a:b] represents the most significant bytes starting with byte at offset "a" until byte at offset "b" (included).
-
-The new gas cost for creating a new storage cell is changed from 20k to:
-
-​	newCellCost = 5000 + size_cost
-​	size_cost = 230*(keyBytes+dataBytes)
-
-This is the SET cost. As 0x00 is trimmed to 0x00, the minimum value for keyBytes is 1, and the minimum value for dataBytes is 1.
-
-The maximum SET cost is: 19720
-
-The minimum SET cost is: 5460
-
-When a cell value is changed, the cost of the keyBytes stay constant, but the cost of dataBytes can change. Therefore both the REFUND value and the RESET cost must be modified.
-
-Any change attempt that does not modify the value has a cost of 200 (similar to SLOAD).  For instance zero to zero, or A to A.
-
-The REFUND value is computed as SET cost minus 5000. (Maximum 14720, minimum 460).
-
-The CLEAR cost is still computed as 5000.
-
-The RESET cost now only accounts for value changes from a non-zero value to a different non-zero value. This has a base cost of 5000 plus the difference between new cell costs and old cell cost (maximum 12130, minimum 5000).
 
 
 
