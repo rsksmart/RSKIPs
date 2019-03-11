@@ -108,6 +108,7 @@ RSK Improvement Proposals
 | 109 |[Lower Storage Gas Costs for Shorter Keys](IPs/RSKIP109.md) | 2019 | SDL  | Usa,Sca  | Core | 2 | Draft |
 | 110 |[Fork Detection Data in RSKBLOCK tags](IPs/RSKIP110.md) | 2019 | SDL  | Sec  | Core | 1 | Draft |
 | 112 |[Unitrie Node identifiers](IPs/RSKIP112.md) | 2019 | SDL  | Sec,Sca  | Core | 1 | Draft |
+| 113 |[Unified Cache Oriented Storage Rent for the Unitrie](IPs/RSKIP113.md) | 2019 | SDL  | Sec,Sca  | Core | 2 | Draft |
 | 135 | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 
 
