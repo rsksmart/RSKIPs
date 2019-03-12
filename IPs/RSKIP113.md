@@ -1,8 +1,8 @@
-# Unified Cache Oriented Storage Rent for the Unitrie
+# Unified Cache-Oriented Storage Rent for the Unitrie
 
-|RSKIP          |xx           |
+|RSKIP          |113           |
 | :------------ |:-------------|
-|**Title**      |Unified Cache Oriented Storage Rent for the Unitrie |
+|**Title**      |Unified Cache-Oriented Storage Rent for the Unitrie |
 |**Created**    |2019 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
