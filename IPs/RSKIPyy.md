@@ -20,7 +20,7 @@ All the horrible coin thefts that have occurred in Ethereum due to this design f
 
 # **Specification**
 
-There is a global counter LOCKCOUNTER starts as zero when a transaction is executed. When a contract calls another contract passing less than m=8000 units of gas, LOCKCOUNTER is incremented. Whenever a contract tries to execute SSTORE and the LOCKCOUNTER is non-zero, the contract generates an OOG exception. The SSTORE is not executed. 
+There is a global counter LOCKCOUNTER starts as zero when a transaction is executed. When a contract calls another contract (with CALL, DELEGATECALL or CALLCODE) passing less than m=8000 units of gas, LOCKCOUNTER is incremented. Whenever a contract tries to execute SSTORE and the LOCKCOUNTER is non-zero, the contract generates an OOG exception. The SSTORE is not executed. 
 
 When a CALL that incremented the LOCKCOUNTER returns, the LOCKCOUNTER is decremented. 
 
