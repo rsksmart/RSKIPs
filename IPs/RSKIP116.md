@@ -1,6 +1,6 @@
 # Failure of SSTORE on Low-Gas Recursive CALLs
 
-|RSKIP          |nn           |
+|RSKIP          |116           |
 | :------------ |:-------------|
 |**Title**      |Failure of SSTORE on Log-Gas Recursive CALLs |
 |**Created**    |2019 |
