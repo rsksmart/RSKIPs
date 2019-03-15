@@ -1,6 +1,6 @@
 #  Unitrie Node Hibernation with Miner-originated Awakening
 
-| RSKIP          | 113                                                   |
+| RSKIP          | zzz                                                   |
 | :------------- | :---------------------------------------------------- |
 | **Title**      | Unitrie Node Hibernation with Miner-originated Awaken |
 | **Created**    | 2019                                                  |
@@ -17,9 +17,9 @@ RSKIP61 presents the cache-oriented storage rent without hibernation. All previo
 
 # Specification
 
-A new field is added to Unitrie nodes lastRentPaidTime. T
+A new field is added to Unitrie nodes lastRentPaidTime. 
 
-FIRST we must port RSKIP61 to unitrie for storage cells.
+
 
 
 
