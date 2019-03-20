@@ -16,17 +16,19 @@ A contract being called can call back the caller, directly or with intermediate 
 
 # **Motivation**
 
-All the horrible coin thefts that have occurred in Ethereum due to this design flaw.
+There were many incidents where people lots funds in Ethereum due to this design flaw. The most known example is [The DAO hack](https://medium.com/swlh/the-story-of-the-dao-its-history-and-consequences-71e6a8a551ee). Also the Ethereum's EIP1283 would have introduced a potential recursive-call vulnerability if not cancelled. This RSKIP can allow EIP1283 to be deployed on RSK preventing the vulnerability.
 
 # **Specification**
 
-There is a global counter LOCKCOUNTER starts as zero when a transaction is executed. When a contract calls another contract (with CALL, DELEGATECALL or CALLCODE) passing less than m=8000 units of gas, LOCKCOUNTER is incremented. Whenever a contract tries to execute SSTORE and the LOCKCOUNTER is non-zero, the contract generates an OOG exception. The SSTORE is not executed. 
+There is a global counter LOCKCOUNTER starts as zero when a transaction is executed. When a contract calls another contract (with CALL, DELEGATECALL or CALLCODE) passing less than m=6400 units of gas, LOCKCOUNTER is incremented. Whenever a contract tries to execute SSTORE and the LOCKCOUNTER is non-zero, the contract generates an OOG exception. The SSTORE is not executed. 
 
 When a CALL that incremented the LOCKCOUNTER returns, the LOCKCOUNTER is decremented. 
 
 # **Discussion**
 
-There is another variant that was discarded: 
+The value m=6400 is computed as a value which must be lower or equal to the minimum cost to execute a a call with call-back and a SSTORE (700+700+5000). 
+
+There is a variant to this RSKIP that was analyzed but discarded: 
 
 Whenever a contract calls with CALL (not DELEGATECALL nor CALLCODE) a contract that exists in the LOCKED set, it automatically returns 0 (failure). The cost of the CALL (700) is charged, but no coins are transferred (it would generate OOG) and no execution gas consumption is charged. The effect is similar as if the call had hit the maximum stack depth limit.   
 
