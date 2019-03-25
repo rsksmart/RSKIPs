@@ -103,6 +103,7 @@ RSK Improvement Proposals
 | 75       | [Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 77 |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
 | 85 |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
+| 92 |[Merkle Proof serialization](IPs/RSKIP92.md) | 2018 | DLL & MC | Sca | Core | 2 | Adopted |
 | 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
 | 99 |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
@@ -128,7 +129,9 @@ RSK Improvement Proposals
 | AE       | Adrian Eidelman              | adrian@iovlabs.org |
 | AL       | Angel Lopez                  | angel@iovlabs.org |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
+| MC       | Martín Coll                  | mc@iovlabs.org |
 | DM       | Diego Masini                 | dmasini@iovlabs.org |
+| DLL      | Diego López León             | diegoll@iovlabs.org |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
 | JL       | Julian Len                   | julian@iovlabs.org |
