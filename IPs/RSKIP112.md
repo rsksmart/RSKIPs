@@ -26,8 +26,7 @@ The non-zero values in the trie are prefixed by the following type specifier as 
 - A for account or contract
 - S for contract storage cell
 - R for contract storage trie root
-- E for codE (C is reserved in case contracts are assigned their own type specifier)
-- D for Data (a data element whose size is greater than 32 bytes and must be stored separately)
+- D for coDe (C is reserved in case contracts are assigned their own type specifier)
 
 Specifiers are shown in ASCII.
 
