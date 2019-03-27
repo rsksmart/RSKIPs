@@ -39,6 +39,10 @@ The method `toBase58Check(bytes hash, uint8 version) returns (string)` takes as 
 
 - `hash` must be exactly 20 bytes long.
 
+#### Gas cost
+
+This method has a fixed cost of 8,000 gas units. On top of that, normal transaction gas costs apply.
+
 #### Sample usage
 
 Given a public key, we want to generate a Bitcoin P2PKH address for testnet. We have the compressed key (for uncompressed keys, compression would be needed first) `02e6930d0659a24df1cc0061203d7845ca2e0c6b96bc1ad16e44c1cef24be92de8`. Its `hash160` is the result of applying `ripemd160(sha256(bytes))` to it. That yields `0d3bf5f30dda7584645546079318e97f0e1d044f`, which is the `hash` parameter we need for our function. For testnet, we use version `111`. Therefore, we would have that:
@@ -62,6 +66,10 @@ with `n` an unsigned integer - also as described in #4 - and produces a base58Ch
 - `xpub` must be a valid base58check-encoded extended public key (either for mainnet or testnet).
 - `path` must be a valid path according to the BNF definition given above.
 
+#### Gas cost
+
+This method has a fixed cost of 55,000 gas units. On top of that, normal transaction gas costs apply.
+
 #### Sample usage
 
 Given the base58Check-encoded extended public key `tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r`, and the derivation path `2/3/4`, we would have that:
@@ -77,6 +85,10 @@ The method `extractPublicKeyFromExtendedPublicKey(string xpub) returns (bytes)` 
 #### Validations
 
 - `xpub` must be a valid base58check-encoded extended public key (either for mainnet or testnet).
+
+#### Gas cost
+
+This method has a fixed cost of 6,800 gas units. On top of that, normal transaction gas costs apply.
 
 #### Sample usage
 
@@ -95,6 +107,10 @@ The method `getMultisigScriptHash(uint8 minimumSignatures, bytes[] publicKeys) r
 - `minimumSignatures` must be greater than zero and lower or equal to the number of public keys.
 - `publicKeys` must be at least 1 and at most 15 (see ref #3 for details on the restriction).
 - Each of the elements of `publicKeys` must be either of size 33 (compressed) or size 65 (uncompressed).
+
+#### Gas cost
+
+This method has a base cost of 13,500 gas units for the minimum number of keys (2). Then, per additional key an extra cost of 500 gas units is charged. So, for example, for 5 keys we would have a base cost of 13,500 plus the additional cost on the 3 extra keys: 1,500. That would result in a total of 15,000 gas units. On top of that, normal transaction gas costs apply.
 
 #### Sample usage
 
