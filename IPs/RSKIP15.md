@@ -148,9 +148,8 @@ The rewards are handled by a the REMASC smart-contract. The balance of the REMAS
 
 **Pseudocode**:
 
-<table>
-  <tr>
-    <td>BigInteger rewardBalance = 0;
+```
+BigInteger rewardBalance = 0;
 BigInteger burnedBalance = 0;
 Boolean brokenSelectionRule = false;
 
@@ -264,9 +263,9 @@ class Sibling {
    byte[] includedBlockCoinbase;
    // Height of the block that included the sibling block as uncle
    long includedHeight;
-}</td>
-  </tr>
-</table>
+}
+```
+
 
 
 ## REMASC Tx
