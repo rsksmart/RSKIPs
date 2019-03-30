@@ -201,8 +201,9 @@ To obtain a transaction id of a transaction in certain block with a certain inde
 4. Hash the fullRec.
 
 
+### Security Considerations
 
-
+Let's suppose that a transaction R replaces a pre-existent preset with different saved fields is included in a block, and a transaction T refering to that preset is included afterward. It's possible that a chain reorganization removes R and therefore makes T refer to the first (deleted) preset instead of new one defined in R. This does not pose a security risk because all fields are signed, including those in the preset. Therefore the signature of T would become invalid if the transaction R is removed.
 
 ### Variations 
 
