@@ -1,14 +1,14 @@
 # Garbage Collector for State Pruning
 
-| RSKIP          | 64                                   |
-| :------------- | :----------------------------------- |
-| **Title**      | Garbage Collector for State Prunning |
-| **Created**    | 2018                                 |
-| **Author**     | SDL & MMa                            |
-| **Purpose**    | Sca, Usa                             |
-| **Layer**      | Core                                 |
-| **Complexity** | 2                                    |
-| **Status**     | Draft                                |
+| RSKIP          | 64                                  |
+| :------------- | :---------------------------------- |
+| **Title**      | Garbage Collector for State Pruning |
+| **Created**    | 2018                                |
+| **Author**     | SDL & MMa                           |
+| **Purpose**    | Sca, Usa                            |
+| **Layer**      | Core                                |
+| **Complexity** | 2                                   |
+| **Status**     | Draft                               |
 
 
 
