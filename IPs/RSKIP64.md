@@ -37,14 +37,18 @@ It's recommended that full nodes detect if a trie node part of the state data is
 1. `d(C)` is considered the new database for new updates.
 1. We take `s` the `state` at `b.`
 1. We travel `s` searching the trie for all entries in `d(A)` but not in `d(B)`.
-1. For each entry in `d(A)` and not in `d(B)`, the entry is copied into `d(B)`
+1. For each entry in `d(A)` and not in `d(B)`, the entry is copied into `d(B).` Children of copied nodes could be copied automatically without checking existence in d(B).
 1. `d(A)` is deleted (atomically)
 
 **Caveat  1**. The copying of entries in d(B) in step 4 must be reflected to any other active threads before the deletion of d(A) in step 5, to avoid race conditions.
 
 **Caveat  2**. It's possible to implement the scheme so that the garbage collector may or may not be executed on every frontier block. In this case the number of active databases could grow over 3, and lookups should follow a search order from newer to older databases. Migration however would always write to the previous to last database, and all old databases except the last two should be delated.
 
+**Caveat  3**. The creation of a new database is assumed to be atomic (if two block processing threads are executing competing frontier blocks, only one database gets created.
 
+**Note on Performance 1.** Performing the search in step 3 by checking first in d(A) or first in d(B) is indifferent to the result, but will affect the migration algorithm performance. If the blockchain is heavily used by a large set of users, then looking up the element in d(B) first is preferable, because this will result in only a single lookup on average. A practical heuristic would be to compare the sizes of both databases, and start with the larger one.
+
+**Note on Performance 2.** Children of copied trie nodes could be automatically copied to d(B) without prior checking existence in d(B). These children nodes could already exist in d(B) due to trie node deduplications, but the amount of deduplications is assumed to be low. The effectiveness of this heuristic, and the cases where it could not apply should be investigated.
 
 ## Rationale
 
