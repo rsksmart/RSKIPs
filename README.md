@@ -105,6 +105,7 @@ RSK Improvement Proposals
 | 85 |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
 | 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
+| 106 |[Precompiled contract for BTO utility functions](IPs/RSKIP106.md) | 2019 | AM | Usa  | Core | 1 | Draft |
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
 | 108 |[More Efficient Unitrie Key Mapping](IPs/RSKIP108.md) | 2019 | SDL & AL | Usa,Sca  | Core | 2 | Draft |
 | 109 |[Lower Storage Gas Costs for Shorter Keys](IPs/RSKIP109.md) | 2019 | SDL  | Usa,Sca  | Core | 2 | Draft |
@@ -124,6 +125,7 @@ RSK Improvement Proposals
 | -------- | :----------------------------| :-----|
 | AE       | Adrian Eidelman              | adrian@iovlabs.org |
 | AL       | Angel Lopez                  | angel@iovlabs.org |
+| AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
 | DM       | Diego Masini                 | dmasini@iovlabs.org |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
