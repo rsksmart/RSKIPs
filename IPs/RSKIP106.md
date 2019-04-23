@@ -1,8 +1,8 @@
-# Precompiled contract with assorted BTO utility functions
+# Precompiled contract for BTO utility functions
 
 |RSKIP          |106 |
 | :------------ |:------------- |
-|**Title**      |Precompiled contract with assorted BTO utility functions |
+|**Title**      |Precompiled contract for BTO utility functions |
 |**Created**    |01-FEB-19 |
 |**Author**     |AM |
 |**Purpose**    |Usa |
@@ -128,9 +128,6 @@ getMultisigScriptHash(2, ['0x02276a07b202503d39a43896300224fb649818d1486b0eefde6
 
 _Note_: The public keys used here are compressed, but might as well be uncompressed. The output should be exactly the same since the function handles the conversion.
 
-## Rationale
-
-TODO (if any)
 
 ## References
 
