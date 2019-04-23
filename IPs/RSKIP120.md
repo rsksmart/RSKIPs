@@ -12,11 +12,11 @@
 
 ## Abstract
 
-The purpose of this RSKIP is to add the opcodes of shift left, right and arithmetic shift right, as were added to the Ethereum VM in the [EIP 145](https://eips.ethereum.org/EIPS/eip-145), in order to reduce gas costs from the operation, in comparison to dividing by an exponent of 2
+The purpose of this RSKIP is to add the opcodes of shift left, right and arithmetic shift right, as added to the Ethereum VM in the [EIP 145](https://eips.ethereum.org/EIPS/eip-145).
 
 ## Motivation
 
-The RSK VM is lacking bitwise shifting operators, but this can be simulated by dividing by an exponent of two. The cost of this division is significantly larger than the one from shifting, which takes 3 gas. The following describes the requirements made by the Ethereum team which are implemented in their VM.
+The RSK VM is lacking bitwise shifting operators, but this can be simulated by dividing by a power of two. The cost of this division is significantly higher than the cost of shifting, which takes 3 gas. The following describes the requirements made by the Ethereum team which are implemented in their VM.
 
 ## Specification
 
