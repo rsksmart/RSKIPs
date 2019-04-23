@@ -62,9 +62,11 @@ The fees collected by any block are not paid directly to the miner of the block,
 
 The strategy proposed here is a variation of DECOR+. In a nutshell, the strategy is to share the block reward between all miners that have solved a block of the same height, and also with subsequent miners. To help the explanation we'll first assume for a moment that all block fees are almost equal so each miner receives almost the same net payment for a block (there is no difficulty adjustment, nor subsidy, only a never ending transaction backlog). We'll also simplify the explanation by limiting ourselves to a conflict between two miners, and we'll later show this is the most common case. Whenever two miners (Alice and Bob) mine two competing blocks (a block conflict) the following happens:
 
-- If one block has a reward higher than two times the other block reward, both miners decide to mine on top of the on one with highest reward
+- If one block has a reward higher than two times the other block reward, both miners decide to mine on top of the one with highest reward
 
 - Else, miners decide to mine on top of the block with the lowest hash.
+
+- No matter the reward value of the block, if one block has more uncles than the other, both miners should mine on top of the one with the highest number of uncles.
 
 This will be the conflict block selection rule. For miners to be able to compare competing blocks, all conflicting blocks headers that are not too old (no more than 10 steps back of the chain tip) are forwarded by the network. If a miner Carol (which could be also Alice or Bob) solves a following block, she can decide to include in her block a reference to the uncle block header that was left out of the main chain, can collect an extra prize when the coinbase of the conflicting block matures. 
 
@@ -148,9 +150,8 @@ The rewards are handled by a the REMASC smart-contract. The balance of the REMAS
 
 **Pseudocode**:
 
-<table>
-  <tr>
-    <td>BigInteger rewardBalance = 0;
+```
+BigInteger rewardBalance = 0;
 BigInteger burnedBalance = 0;
 Boolean brokenSelectionRule = false;
 
@@ -264,9 +265,9 @@ class Sibling {
    byte[] includedBlockCoinbase;
    // Height of the block that included the sibling block as uncle
    long includedHeight;
-}</td>
-  </tr>
-</table>
+}
+```
+
 
 
 ## REMASC Tx
