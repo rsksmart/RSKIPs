@@ -137,7 +137,6 @@ contract StandardToken is Token {
     mapping (address => mapping (address => uint256)) allowed;
 }
 
-[here]: https://github.com/rsksmart/RSKIPs/issues
 
 # **Copyright**
 

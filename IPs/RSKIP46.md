@@ -51,7 +51,6 @@ The method "getBlockFeesInfo" will receive a blockhash and inputHeight. With tha
 
 (3) Expose same methods on mnr interface as detailed in (1). Implement the search by using "[eth_newFilter](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_newfilter)", “[eth_getFilterChanges](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getfilterchanges)” and “[eht_getLogs](https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getlogs)” as shown in (2). Be aware that from the RSK node code the java implementation for those methods can be used instead of going through JSON-RPC.
 
-[here](https://github.com/rsksmart/RSKIPs/issues/83)
 
 
 # **Copyright**

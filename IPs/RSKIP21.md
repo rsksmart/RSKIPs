@@ -838,8 +838,6 @@ Even if initial cost could be reduced further, is preferably be conservative, as
 
 [RSKIP08]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP08.md
 
-[here]: https://github.com/rsksmart/RSKIPs/issues
-
 # **Copyright**
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
