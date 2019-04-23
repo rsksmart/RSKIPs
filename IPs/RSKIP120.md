@@ -1,8 +1,8 @@
-# Implementation of Shifting opcodes
+# Shifting opcodes
 
 |RSKIP          |120           |
 | :------------ |:-------------|
-|**Title**      |Implementation of Shifting opcodes |
+|**Title**      |Shifting opcodes |
 |**Created**    |23-APR-19 |
 |**Author**     |SMS |
 |**Purpose**    |ST |
