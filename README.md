@@ -38,7 +38,7 @@ RSK Improvement Proposals
 | 2        | [Dynamic Contract Dependency](IPs/RSKIP02.md)                                     | 11-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
 | 3        | [Parallel Execution using static contract dependencies](IPs/RSKIP03.md)           | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
 | 4        | [Parallel Execution using runtime contract dependencies](IPs/RSKIP04.md)          | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Accepted |
-| 5        | [Shift Operations](IPs/RSKIP05.md)                                                | 22-JUN-16 | SDL       | Sca      | Core     | 1 | Accepted |
+| 5        | [Shift Operations](IPs/RSKIP05.md)                                                | 22-JUN-16 | SDL       | Sca      | Core     | 1 | Rejected |
 | 6        | [Block Size Limit](IPs/RSKIP06.md)                                                | 22-JUN-16 | SDL       | Sca      | Core     | 1 | Adopted  |
 | 7        | [Persistent Storage Rent Paid by Code](IPs/RSKIP07.md)                            | 11-JUN-16 | SDL       | Sca      | Core     | 3 | Rejected |
 | 8        | [Verification-less mining](IPs/RSKIP08.md)                                        | 29-SEP-16 | SDL       | Fair     | Core     | 2 | Draft    |
@@ -97,25 +97,38 @@ RSK Improvement Proposals
 | 61       | [Cache Oriented Storage Rent (collect at EOT version)](IPs/RSKIP61.md)           | 03-MAY-18 | SDL       | Sca      | Core     | 2 | Draft*   |
 | 62       | [Compressed block propagation using state trie update batch (COBLO)](IPs/RSKIP62.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft*   |
 | 63       | [Double Signing for Delayed Signature Aggregation](IPs/RSKIP63.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
+| 64       | [Garbage Collector for State Pruning](IPs/RSKIP64.md) | 29-MAY-18 | SDL & MMa | Sca,Usa      | Core     | 2 | Draft   |
 | 70       | [Default TX Data](IPs/RSKIP70.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
+| 71 | [Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
 | 75       | [Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 77 |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
 | 85 |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
-| 135       | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
-
+| 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
+| 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
+| 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
+| 108 |[More Efficient Unitrie Key Mapping](IPs/RSKIP108.md) | 2019 | SDL & AL | Usa,Sca  | Core | 2 | Draft |
+| 109 |[Lower Storage Gas Costs for Shorter Keys](IPs/RSKIP109.md) | 2019 | SDL  | Usa,Sca  | Core | 2 | Draft |
+| 110 |[Fork Detection Data in RSKBLOCK tags](IPs/RSKIP110.md) | 2019 | SDL  | Sec  | Core | 1 | Draft |
+| 112 |[Unitrie Node identifiers](IPs/RSKIP112.md) | 2019 | SDL  | Sec,Sca  | Core | 1 | Draft |
+| 113 |[Unified Cache Oriented Storage Rent for the Unitrie](IPs/RSKIP113.md) | 2019 | SDL  | Sec,Sca  | Core | 2 | Draft |
+| 116 |[Failure of SSTORE on Low-Gas Recursive CALLs](IPs/RSKIP116.md) | 2019 | SDL  | Sec,Sca,Usa  | Core | 1 | Draft |
+| 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
+| 135 | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
 | Initials | Full name                    | Email |
 | -------- | :----------------------------| :-----|
-| AE       | Adrian Eidelman              | adrian@rsk.co |
-| DM       | Diego Masini                 | dmasini@rsk.co |
-| IO       | Ilan Olkies                  | ilan@rsk.co |
-| JIO      | Jose Ignacio Orlicki         | jorlicki@rsk.co |
-| JL       | Julian Len                   | julian@rsk.co |
-| LS       | Lisandro Sebrie              | lisandro@rsk.co |
-| MMa      | Matias Marquez               | matias@rsk.co |
-| MM       | Martin Medina                | martin@rsk.co |
-| SDL      | Sergio Demian Lerner         | sergio@rsk.co |
+| AE       | Adrian Eidelman              | adrian@iovlabs.co |
+| AL       | Angel Lopez                  | angel@iovlabs.org |
+| DM       | Diego Masini                 | dmasini@iovlabs.org |
+| IO       | Ilan Olkies                  | ilan@iovlabs.org |
+| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
+| JL       | Julian Len                   | julian@iovlabs.org |
+| LS       | Lisandro Sebrie              | lisandro@iovlabs.co |
+| MMa      | Matias Marquez               |  |
+| MM       | Martin Medina                | martin@iovlabs.org |
+| SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
+| SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
 
