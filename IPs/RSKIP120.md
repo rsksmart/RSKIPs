@@ -1,6 +1,6 @@
 # Implementation of Shifting opcodes
 
-|RSKIP          |pull_request_number_here           |
+|RSKIP          |120           |
 | :------------ |:-------------|
 |**Title**      |Implementation of Shifting opcodes |
 |**Created**    |23-APR-19 |
