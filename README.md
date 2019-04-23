@@ -102,6 +102,7 @@ RSK Improvement Proposals
 | 71 | [Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
 | 75       | [Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 77 |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
+| 85 |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
 | 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
@@ -114,17 +115,18 @@ RSK Improvement Proposals
 | 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 135 | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 
-
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
 | Initials | Full name                    | Email |
 | -------- | :----------------------------| :-----|
+| AE       | Adrian Eidelman              | adrian@iovlabs.co |
 | AL       | Angel Lopez                  | angel@iovlabs.org |
 | DM       | Diego Masini                 | dmasini@iovlabs.org |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
 | JL       | Julian Len                   | julian@iovlabs.org |
+| LS       | Lisandro Sebrie              | lisandro@iovlabs.co |
 | MMa      | Matias Marquez               |  |
 | MM       | Martin Medina                | martin@iovlabs.org |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
