@@ -1,8 +1,8 @@
-# Precompiled contract for inspectinf block headers
+# Precompiled contract for inspecting block headers
 
 |RSKIP          |119 |
 | :------------ |:------------- |
-|**Title**      |Precompiled contract for inspectinf block headers |
+|**Title**      |Precompiled contract for inspecting block headers |
 |**Created**    |01-APR-19 |
 |**Author**     |DM |
 |**Purpose**    |Usa |
