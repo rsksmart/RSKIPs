@@ -1,8 +1,8 @@
-# Removal of Unused Headers from The Bridge Contract
+# Removal of Unused Headers from the Bridge Contract
 
 |RSKIP          |115           |
 | :------------ |:-------------|
-|**Title**      |Removal of Unused Headers from The Bridge Contract |
+|**Title**      |Removal of Unused Headers from the Bridge Contract |
 |**Created**    |2019 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
