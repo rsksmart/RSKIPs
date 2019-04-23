@@ -5,7 +5,7 @@
 |**Title**      |Shifting opcodes |
 |**Created**    |23-APR-19 |
 |**Author**     |SMS |
-|**Purpose**    |ST |
+|**Purpose**    |Sca |
 |**Layer**      |Core|
 |**Complexity** | 1 |
 |**Status**     |Draft |
