@@ -1,9 +1,9 @@
-# Title
+# Implementation of Shifting opcodes
 
 |RSKIP          |pull_request_number_here           |
 | :------------ |:-------------|
 |**Title**      |Implementation of Shifting opcodes |
-|**Created**    |12-APR-19 |
+|**Created**    |23-APR-19 |
 |**Author**     |SMS |
 |**Purpose**    |ST |
 |**Layer**      |Core|
@@ -16,10 +16,9 @@ The purpose of this RSKIP is to add the opcodes of shift left, right and arithme
 
 ## Motivation
 
-The RSK VM is lacking bitwise shifting operators, but supports other logical and arithmetic operators. Shift operations can be implemented via arithmetic operators, but that has a higher cost and requires more processing time from the host. Implementing SHL and SHR using arithmetics cost each {EXP GAS COST + DIV GAS COST} gas, while the proposed instructions take 3 gas.
+The RSK VM is lacking bitwise shifting operators, but this can be simulated by dividing by an exponent of two. The cost of this division is significantly larger than the one from shifting, which takes 3 gas. The following describes the requirements made by the Ethereum team which are implemented in their VM.
 
 ## Specification
-
 
 
 The following instructions are introduced:
@@ -354,9 +353,6 @@ The newly introduced instructions have no effect on bytecode created in the past
     0x0000000000000000000000000000000000000000000000000000000000000000
     ```
 
-## Implementation
-
-[//]: # (LINK WITH PR)
 
 ### Copyright
 
