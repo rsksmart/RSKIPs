@@ -5,7 +5,7 @@
 |**Title**      |Create2 |
 |**Created**    |29-APR-19 |
 |**Author**     | SMS |
-|**Purpose**    |Sca |
+|**Purpose**    |Sca, Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
 |**Status**     |Draft |
@@ -94,12 +94,6 @@ Example 6
 * init_code `0x`
 * gas (assuming no mem expansion): `32000`
 * result: `0xE33C0C7F7df4809055C3ebA6c09CFe4BaF1BD9e0`
-
-## References
-
-[1] Other RSKIP https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP??.md
-
-[2] Other Articles such as Smart Contracts for Bribing Miners http://homepages.cs.ncl.ac.uk/patrick.mccorry/minerbribery.pdf
 
 ### Copyright
 
