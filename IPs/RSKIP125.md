@@ -43,6 +43,12 @@ The preimage for the final hashing round is thus always exactly `85` bytes long.
 
 Since address calculation depends on hashing the `init_code`, it would leave clients open to DoS attacks if executions could repeatedly cause hashing of large pieces of `init_code`, since expansion of memory is paid for only once. This EIP uses the same cost-per-word as the `SHA3` opcode. 
 
+### The `CREATE` behavior change
+
+The original [EIP](http://eips.ethereum.org/EIPS/eip-1014) specified what to do in cases of a hash collision of the new address. Basically, in order to prevent this problem, each new contract created by these opcodes would start with its nonce in one, instead of zero. In addition, when there is a collision there is a check done if the existing contract has either non empty code, or non zero nonce, if one of this checks is true then the contract creation fails as if the init_code program would fail. 
+
+This RSKIP introduces a new behavior for the `CREATE` opcode, because every contract created will start with nonce 1, and fail in the rare case that a contract with the same address was previously created. The behavior is exactly the same than in the Ethereum VM, thus improving compatibility.
+
 
 ### Examples
 
