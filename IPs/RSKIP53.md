@@ -51,18 +51,17 @@ A transaction that uses LTCP contains several fields, some of them optional and 
 - [8] **compressedAmount**: amount of funds to transfer in float format [optional]
 - [9] **signatures**: an RPL list of signature fields [RESERVED for multi-key accounts]. [not persistent]
 - [10] **signature**: represent a single ECDSA signature, as a list of fields (r,s,v, linkSigRecHash). [not persistent]
-- [11] **senderAccountIndex**: specifies the sender account. Used internally, cannot be specified by the user [persistent]  
+- [11] **senderAccountPrefix**: specifies the sender account. Used internally, cannot be specified by the user [persistent]  
 - [13] **writePreset**:  this value specifies the preset that must be overwritten with all transaction data fields reconstructed in this SigRec. [optional, persistent]
 - [14] **deletePreset**: this is used to erase a preset. It can be combined with readPreset or writePreset, but the same preset cannot be written and deleted. [optional, persistent]
-- [15] **properties**: holds a bitmap of additional flags. Currently a single bit is specified (bit 0). Bit 0 corresponds to the **linkBit** field. This field specifies if the transaction is linked to the previous one or not. The default value of this bit is 1 (linked). [optional,persistent]
+- [15] **properties**: holds a bitmap of additional flags (in the 3 upper bits, as explained later). Currently a single bit is specified (bit 5). Bit 5 corresponds to the **linkBit** field. This field specifies if the transaction is linked to the previous one or not. The default value of this bit is 1 (linked). [optional,persistent]
+- [16] **receiverPrefix**: a prefix of the address of the receiver [optional,persistent]
 
-The set of persistent fields in a transaction is called the Persistent Transaction Information (PTI). The senderAccountIndex is an increasing sequence number assigned to each new account created. The senderAccountIndex is used to locate the account and execute the transaction once the signature is removed. The PTI of a transaction is what is actually stored in the blockchain.
+The set of persistent fields in a transaction is called the Persistent Transaction Information (PTI). The senderAccounPrefix indicates how to locate the sender in the state trie. It's required once the signature is removed. The PTI of a transaction is what is actually stored in the blockchain.
 
 Either the "signature" field or the "signatures" fields can be specified (but not both). The signature field is used when there is a single signatory, while the signatures field is used when there are multiple signatories. This achieves a slight reduction in transaction size.
 
 The compressedAmount is a big integer represented by a base-10 exponent (lowest 5 bits) and a mantissa (most significative variable number of bits), allowing greater compression of the amount.  The transaction cannot specify both compressedAmount and amount. 
-
-A 4-byte senderAccountIndex can support more than one billion accounts. 
 
 Each signature contains the standard 3 fields (r,s,v).  The "linkBit" in the properties field of the transaction indicates if this signatures is linking to the previous one, or not. 
 
@@ -70,7 +69,7 @@ Transactions are serialized in a new format. Each field is identified by a singl
 
 ### Transaction Wire Format
 
-The transaction starts with a version byte 0x01, which means the transaction is formatted according to this RSKIP, and not the standard formatting. Standard transactions always start with a byte in the range [0xC0, 0xFF]. The fields are serialized in RLP format after this version byte. The values, interpreted as byte arrays. The most significant byte of each value is the field id, and when this byte is removed, the remaining bytes specify the value (as in the old format). For example, the following is a valid transaction calling a method in a contract.
+The transaction starts with a version byte 0x01, which means the transaction is formatted according to this RSKIP, and not the standard formatting. Standard transactions always start with a byte in the range [0xC0, 0xFF]. The fields are serialized in RLP format after this version byte. The values, interpreted as byte arrays. The most significant byte of each value is the idData. The lower 5 bits of IdData are used to specified the fieldId. The upper 3 bits are used to store additional flags whose definition depends on the fieldId. After the idData is removed, the remaining bytes specify the value (as in the old format). For example, the following is a valid transaction calling a method in a contract.
 
 0x01 | RLPList( RLP(0x030102030405060708090A0102030405060708090A), RLP(0x0701020304))
 
@@ -89,9 +88,9 @@ The following example shows a sequence of 2 transactions. The first, created by 
 - **T0-fullRec** = (nonce:0, amount:10, receiver: 0xFF, gasPrice: 10, gasLimit: 30000, data: [], senderAccountndex: 99, writePreset: 0, properties: 0) 
 - **T0-sigRec** = T0-fullRec
 - **(r0,s0,v0)** = Sign( privKey, T0-sigRec )
-- **T1-wire** = (nonce: 1, amount: 100, readPreset: 0, signature: s (r1,s1,v1) ). v1 has the linkBit set.
+- **T1-wire** = (nonce: 1, amount: 100, readPreset: 0, signature: s (r1,s1,v1), properties: 32 ). Properties has the linkBit set.
 - **T1-PTI** = ( amount: 100, readPreset: 0)
-- **T1-fullRec** = (nonce:0, amount:100, receiver: 0xFF, gasPrice: 10, gasLimit: 30000, data: [], senderAccountndex: 99, readPreset: 0)
+- **T1-fullRec** = (nonce:0, amount:100, receiver: 0xFF, gasPrice: 10, gasLimit: 30000, data: [], senderAccountndex: 99, readPreset: 0, properties: 32)
 - **T1-sigRec** = ( Hash(T1-fullRec) | Hash(T0-sigRec ) ]
 - **(r1,s1,v1)**= Sign( privKeyAlice,T1-SigRec ). 
 
@@ -99,27 +98,31 @@ To locate the last sigRec, the hash of the last sigRec is stored along the the s
 
 A transaction with nonce zero cannot have the linkBit set.
 
+### Storage of lastSigRecHash
+
+The lastSigRecHash of each account is stored in a node in the account trie, under the key 0x02 (similar to code and storage in RSKIP16). It comprises a 32-byte data field. If a transaction is included for an account at a certain block, then the lastSigRecHash will be modified, reflecting the signature included in that block.
+
 ### Gas Cost
 
-LTCP transaction format adds a cost per byte not only in the "data" part, but in the transaction itself. Each byte, either part of the RLP encoding, version byte, field id or remaining payload, costs 60 gas. No distinction for zero or non-zero bytes is made.   
+LTCP transaction format adds a cost per byte not only in the "data" part, but in the transaction itself. Each byte, either part of the RLP encoding, version byte, field id or remaining payload, costs 80 gas for non-zero bytes and 4 gas for zero bytes. 
 
-The base gas cost of a version 1 transaction is 10K gas, instead of 21K.
+The base gas cost of a version 1 transaction is 8K gas, instead of 21K.
 
-Additionally, the value of 5000 is added if it's a version 1 transaction and:
+Additionally, the value of 10000 is added if it's a version 1 transaction and:
 
 1. nonce is zero OR
 2. linkBit is zero
 
-This additional amount covers the initial cost of a single signature storage.  
+This additional amount covers the initial cost of a single signature storage and the lastSigRecHash storage.  
 
 For example, here is a break-down cost of a transaction: 
 
-0x01 | RLPList(  RLP(0x0001) | RLP(0x030102030405060708090A0102030405060708090A), RLP(0x0201))
+0x01 | RLPList(  RLP(0x2F) | RLP(0x030102030405060708090A0102030405060708090A), RLP(0x0201))
 
-* Base cost: 10000
-* Wire bytes cost:  30 * 60 = 1800 
+* Base cost: 8000
+* Wire bytes cost:  29 * 68 = 1972
 
-Total cost: 11800
+Total cost: 9972
 
 ### Rationale for Signing All Fields
 
@@ -127,11 +130,15 @@ All values are signed (not only the "deltas") to enable hardware wallets to know
 
 The delta compression can be provided by the wallet within an insecure computer. This could have a drawback: there could be transaction malleability attacks where peers expand the transaction with additional values. While this is true, normal peer will automatically compress the transaction again back to its minimal size because they need to access the specified preset. 
 
-### Preset Recall & Storage
+### Preset Set and Recall
 
-Since not all fields are stored, nodes need to store each preset. Presets are stored in the blockchain state. This is done by creating a subtree down the account node, with the fieldSelector equal to 02, according to RSKIP16. Each preset will be stored in its RLP format, with ordered fields, in a separate node.  Therefore the key will be the preset number and the value the RLP of the fields. Every transaction can overwrite a preset or use a preset. To overwrite a preset, the field "writePreset" must be used. The argument of this field is the preset index. To use a preset, the "readPreset" field must be used. To clear a preset, the field "clearPreset" is used. 
+Every transaction can overwrite a preset or use a preset. To overwrite a preset, the field "writePreset" must be used. The argument of this field is the preset index. To use a preset, the "readPreset" field must be used. To clear a preset, the field "clearPreset" is used. 
 
 More thought has to be dedicated to understanding how presets interact with storage rent, but it doesn't seem to be problematic.  
+
+### Preset Presistence
+
+Full nodes need to store each preset. Presets are stored in the blockchain state. This is done by creating a subtree down the account node, with the fieldSelector equal to 0x01, according to RSKIP16. Each preset will be stored in its RLP format, with ordered fields, in a separate node of the trie.  Therefore the key will be the preset number (without leading zeros, except the 0x00 preset, which is ecoded as 0x00), and the value the RLP of the fields. 
 
 ### Transaction Propagation Policy
 
@@ -162,32 +169,56 @@ To include a transaction version 1in a block, if the nonce is non-zero and the l
 
 The LTCP proposal requires a modification to the block format. Currently, the wire-block format is as follows:
 
-- wire-block = (header, tx_list, uncle_list ).
+- wire-block = (header, tx_list, uncle_list ,transaction_list, [, signature_list] ).
 
-For LTCP the block header much be changes. The transaction Merkle trie is modified. The new trie can contain both old-style (version 0) transactions and the transaction PTIs of transactions version 1.  Therefore the block PoW authenticates the actual compressed information contained, not the "meaning" for transactions version 1. 
+For LTCP the block header semantic must change. In particular the Merkle trie of the transaction list is modified. The new trie can contain both old-style (version 0) transactions and the transaction PTIs of transactions version 1.  Therefore the block PoW authenticates the actual compressed information contained, not the "meaning" for transactions version 1. 
 
-Signatures are not directly referenced in the block, but the block is invalid if the sender does not provide a set of valid signatures, or the future blocks do not provide valid linked signatures. It's clear that if signatures are removed, then the block must still be able to be validated, so the id doesn't reference them. 
+Signatures are not directly referenced in the block, but the block is invalid if the sender does not provide a set of valid signatures, or the future blocks do not provide valid linked signatures. It's clear that if signatures are removed, then the block must still be able to be validated, so the transaction id must not reference them. 
 
-The wire-block will be redefined as follows:
+The Uncle_list fields corresponds a the previous definition of block. The transaction_list contains can contain both version 0 transactions and version 1 PTIs. PTIs are always prefixed by the version byte 0x01.
 
-- wire-block = (newHeader, tx_list,   uncle_list, signature_list) . 
-
-The Uncle_list fields corresponds a the previous definition of block. The tx_list contains can contain both version 0 transactions and version 1 PTIs. PTIs are always prefixed by the version byte 0x01.
-
-The signature list is a list of tuples in the wireSig format, as specified:
+The signature_list is a list of tuples in the wireSig format, as specified:
 
 - wire-Sig = ( txIndex, (r,s,v)) .
 
 txIndex is the index in the tx_list which this signature is associated with. Indexes should be specified in ascending order. The signature_list may be empty if all signatures are removed. 
 
-To fully validate a block, many signatures for the involved accounts may need to be collected, both in this wire-block or in following wire-blocks, until all transactions in the block can be recovered.  In practice the process will be carried on backwards, as follows:
+### Blockchain Synchronization
 
-- All block headers until the blockchain tip are collected and chain validated
-- From the last block to the last validated block, all signature links are traversed
+To fully validate a block, many signatures for the involved accounts may need to be collected, both in this wire-block or in following wire-blocks, until all transactions in the block can be recovered.  In practice the blockchain synchronization protocol needs to be modified. Although this RSKIP does not specify the final protocol, we show an example protocol as a starting point. Four new wire-protocol commands are added:
 
-If all accounts have valid signatures, the block is valid. Note that when a version 0 transaction 
+- **getSignatures**(addressList,blockHash ) : requests the signatures of the list of provided addresses at block with the specified hash. 
+- **getSignaturePackage**(startingAddress, sigCount,blockHash ): requests a list of signatures, starting from a specified address, and continuing with addresses in the trie lexicographical order (hash prefix included).  The peer should return a sendSignaturePackage message
+- **sendSignaturePackage**(startingAddress, signature_list,blockHash ): sends a list of signatures, starting from a specified startingAddress
+- **sendSignature**(address, signature,blockHash ): sends a signature for a specified address
 
-It must be noted that a block should not be eternally marked as "invalid" if signatures do not match. In case a signature cannot be validated, the sender of such chain branch should be penalized, but the wire-block can be still stored, and re-used if another peer provides correct PTIs and signature lists.
+In the following protocol, Alice wants to synchronize the blockchain from zero.
+
+1. Alice discovers the best chain tip.
+2. Alice requests all headers from genesis to the chain tip from one or more peers.
+3. All block headers are collected and validated while being received
+4. Every block where (blockHeight % 10000==0) is defined as a checkpoint. 
+5. Alice finds the last checkpoint with at least 1000 confirmations. 
+6. Alice request the state at the checkpoint from one or more peers.
+7. Alice validates with inclusion proofs of the state chunks as received.
+8. Alice requests all signatures for that checkpoint using getSignaturePackage() from one or more peers.
+9. Alice validates the signatures as received, using the last hash stored in the account trie.
+10. Alice downloads blocks from genesis to the blockchain tip, and verify each block as received.
+
+It's important to note that all signatures are verified first, with the exception of accounts that have been deleted. Currently RSK does not support the deletion of accounts. If in the future is supports deletion, then the last signature for each deleted account should be sent in the block where it is deleted. Also the same could happen with other accounts if hibernation is implemented.
+
+If all accounts have valid signatures, the checkpoint block is considered sig-valid. However this does not imply the checkpoint block is valid according to all consensus rules.
+
+During full block download (step 10) it may be the case that a block received is invalid. If the invalid block is prior to the checkpoint or the checkpoint itself, then that block and all child blocks must be discarded: a new checkpoint should be requested prior the faulty block, or from other peer. The peer that informed the invalid checkpoint must be penalized. 
+
+### Lifetime of Signatures
+
+Old transaction signatures can be removed from the blockchain if:
+
+* There exist a new signature that links back to the old one and this signature is included in a block.
+* The block containing the new signature has at least two checkpoints past it.
+
+Because a checkpoint is built every 10k blocks, it's possible to prevent the blockchain from advancing if two checkpoints are reverted (at least 20k blocks, or about 7 days). Archive nodes or probabilistic archive nodes can be used to recover this data in case of a such devastating 51% attack. Probabilistic archive nodes are full nodes that will keep one more past checkpoint with probability 1/2, and the previous one with probability 1/4 and so on. 
 
 ### Identifying Transactions
 
@@ -200,13 +231,9 @@ To obtain a transaction id of a transaction in certain block with a certain inde
 3. Expand the PTI into a fullRec. 
 4. Hash the fullRec.
 
-
-
-
-
 ### Variations 
 
-Also it’s possible to replace the accountIndex with a shorter field, representing the block number delta and transaction index in the block of the previous transaction from the same account in the blockchain, using compact variable-length integers. For instance, if the prior transaction is the second of the previous block, the value (-1,2) would encode the reference, consuming no more than 2 bytes.
+Also it’s possible to replace the senderAccountPrefix a shorter field, representing the block number delta and transaction index in the block of the previous transaction from the same account in the blockchain, using compact variable-length integers. For instance, if the prior transaction is the second of the previous block, the value (-1,2) would encode the reference, consuming no more than 2 bytes.
 
 # **Copyright**
 
