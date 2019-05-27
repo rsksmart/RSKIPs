@@ -118,7 +118,6 @@ LOG2
 
 [RSKIP51]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP51.md
 [RSKIP03]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP03.md
-[here]: https://github.com/rsksmart/RSKIPs/issues
 
 # **Copyright**
 

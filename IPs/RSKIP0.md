@@ -223,7 +223,7 @@ The editors don't pass judgment on RSKIPs. We merely do the administrative & edi
 
 ## History
 
-This document was derived heavily from Ethereum's EIP-1 written by Martin Becze and from Bitcoin's BIP-0001 written by Amir Taaki which in turn was derived from Python's PEP-0001. In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the RSK Improvement Process, and should not be bothered with technical questions specific to RSK or the RSKIP. Please direct all comments to the RSKIP editors.
+This document was derived heavily from [Ethereum's EIP-1] written by Martin Becze and from [Bitcoin's BIP-0001] written by Amir Taaki which in turn was derived from [Python's PEP-0001]. In many places text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the RSK Improvement Process, and should not be bothered with technical questions specific to RSK or the RSKIP. Please direct all comments to the RSKIP editors.
 
 
   [the RSK subreddit]: https://www.reddit.com/r/rootstock/
@@ -232,8 +232,9 @@ This document was derived heavily from Ethereum's EIP-1 written by Martin Becze 
   [the Issues section of this repository]: https://github.com/rsksmart/RSKIPs/issues
   [markdown]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
   [README.md]: README.md "wikilink"
-  [Bitcoin's BIP-0001]: https://github.com/bitcoin/bips
+  [Bitcoin's BIP-0001]: https://github.com/bitcoin/bips/blob/master/bip-0001.mediawiki
   [Python's PEP-0001]: https://www.python.org/dev/peps/
+  [Ethereum's EIP-1]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1.md
   [pull request]: https://github.com/rsksmart/RSKIPs/pulls
 
 

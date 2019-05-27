@@ -231,6 +231,10 @@ To obtain a transaction id of a transaction in certain block with a certain inde
 3. Expand the PTI into a fullRec. 
 4. Hash the fullRec.
 
+### Security Considerations
+
+Let's suppose that a transaction R replacing a pre-existent preset with new fields is included in a block, and a transaction T refering to that preset is included afterward. It's possible that a chain reorganization removes R and therefore makes T refer to the first (deleted) preset instead of new one defined in R. This does not pose a security risk because all fields are signed, including those in the preset. Therefore the signature of T would become invalid if the transaction R is removed.
+
 ### Variations 
 
 Also it’s possible to replace the senderAccountPrefix a shorter field, representing the block number delta and transaction index in the block of the previous transaction from the same account in the blockchain, using compact variable-length integers. For instance, if the prior transaction is the second of the previous block, the value (-1,2) would encode the reference, consuming no more than 2 bytes.
