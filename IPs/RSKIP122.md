@@ -61,8 +61,9 @@ A merkle branch is a data structure that serves the purpose of proving the inclu
 7a2.       append mt[level][lix+1] to mbhashes (use mt[level][lix] if lix+1 is out of range)  
 7b.    else:  
 7b1.       append mt[level][lix-1] to mbhashes
+7c.    lix = floor(lix/2)
 
-9. Return (mbhashes, mbpath).
+8. Return (mbhashes, mbpath).
 ```
 
 ## References
