@@ -12,7 +12,7 @@
 
 # **Motivation**
 
-- Avoid typing confusion in adresses.
+- Avoid typing confusion in addresses.
 - Differentiate addresses of different networks.
 
 # **Abstract**
