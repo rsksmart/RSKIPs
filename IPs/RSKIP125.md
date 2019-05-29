@@ -16,8 +16,7 @@ The purpose of this IP is to implement the CREATE2 opcode, as added to the Ether
 
 ## Motivation
 
-Allows interactions to (actually or counterfactually in channels) be made with addresses that do not exist yet on-chain but can be relied on to only possibly eventually contain code that has been created by a particular piece of init code. Important for state-channel use cases that involve counterfactual interactions with contracts.
-
+Enables the creation of contracts with deterministic and repeatable addresses. This functionality is required for state channels interacting with a contract that only needs to be created on arbitration (also called counterfactual channels).
 
 ## Specification
 
