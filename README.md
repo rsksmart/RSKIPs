@@ -118,6 +118,7 @@ RSK Improvement Proposals
 | 116 |[Failure of SSTORE on Low-Gas Recursive CALLs](IPs/RSKIP116.md) | 2019 | SDL  | Sec,Sca,Usa  | Core | 1 | Draft |
 | 119 |[Precompiled contract for inspecting block headers](IPs/RSKIP119.md) | 2019 | DM  | Usa  | Core | 1 | Draft |
 | 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
+| 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Draft |
 | 135 | [Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 
 
@@ -140,4 +141,3 @@ RSK Improvement Proposals
 | MM       | Martin Medina                | martin@iovlabs.org |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
-
