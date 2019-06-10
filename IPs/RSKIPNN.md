@@ -1,4 +1,4 @@
-# Creating a contract destroyed on the same block
+# On creating a contract destroyed on the same block
 
 |RSKIP          |NN           |
 | :------------ |:-------------|
@@ -16,7 +16,7 @@ The purpose of this IP is to explain the logic behind the decision made to forbi
 
 ## Motivation
 
-Prevents the creation of a contract with the same address of a contract that was destroyed previously in the same block execution. In order to prevent cache inconsistencies across the different cache levels.  
+With the introduction of the opcode of `CREATE2` now exists the possibility that, given a transaction list to be executed on the same block, there would be a transaction that destroys. This normally would not be a problem, but, in order to reduce modification times on the Unitrie storage, several cache levels were implemented.
 
 ## Specification
 
