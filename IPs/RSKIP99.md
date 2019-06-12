@@ -8,7 +8,7 @@
 |**Purpose**    |Sca,Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 # **Abstract**
 
@@ -18,7 +18,7 @@ This RSKIP references all RSKIPs that are part of Orchid network upgrade.
 
 - Network upgrade codename: Orchid
 - Mainnet activation block number: 729,000
-- Testnet activation block number: 802,000
+
 - RSKIPs included:
   - [RSKIP 85](RSKIP85.md) - Performance and scalability improvements in Remasc native contract
   - [RSKIP 87](RSKIP87.md) 2-way-peg unlimited whitelisting support 

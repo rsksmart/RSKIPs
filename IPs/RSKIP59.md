@@ -8,7 +8,7 @@
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Rejected in favor of RSKIP125 |
+|**Status**     |Replaced by [RSKIP125](./RSKIP125) |
 
 # **Abstract**
 
