@@ -8,7 +8,7 @@
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft | 
+|**Status**     |Replaced [RSKIP53](./RSKIP53.md) | 
 
 
 # **Abstract**

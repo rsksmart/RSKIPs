@@ -385,13 +385,6 @@ We try to recover the coinbase address of an uncle for a block that is not beyon
 ```
 getUncleCoinbaseAddress(3500, 0) => []
 ```
-
-## Rationale
-
-TODO (if any)
-
-## References
-
 ### Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

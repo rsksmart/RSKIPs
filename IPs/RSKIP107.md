@@ -1,6 +1,6 @@
 #  **Smaller Unitrie Nodes for Higher Scalability**  
 
-| RSKIP          | --                                           |
+| RSKIP          | 107                                          |
 | :------------- | :------------------------------------------- |
 | **Title**      | Smaller Unitrie Nodes for Higher Scalability |
 | **Created**    | 2019                                         |

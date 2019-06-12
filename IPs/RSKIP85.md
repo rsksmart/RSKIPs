@@ -8,7 +8,7 @@
 | **Purpose**    | Sca, Medium                     |
 | **Layer**      | Core                            |
 | **Complexity** | 2                               |
-| **Status**     | Draft                           |
+| **Status**     | Adopted                         |
 
 # Abstract
 
