@@ -16,11 +16,19 @@ The purpose of this RSKIP is to explain the logic behind the decision made to fo
 
 ## Motivation
 
-With the introduction of the opcode of `CREATE2` now exists the possibility that, given a transaction list to be executed on the same block, there would be a transaction that destroys. This normally would not be a problem, but, in order to reduce modification times on the Unitrie storage, several cache levels were implemented. 
+With the introduction of the opcode `CREATE2` exists the possibility that, given a transaction list to be executed on a block, there would be a transaction that destroys a contract and afterwards another transaction creates a new contract on the same address. 
+
+This normally would not be a problem, but, in order to reduce accesses on the Unitrie storage, several cache levels were implemented. With this cache implementation the Unitrie is not touched until all transactions are finished, this would mean that, in our problem, there is in the Unitrie and address with all its code and storage, and in the cache there are two operations, one of deletion of this address and the second creation. 
+
+So, what should happen when we commit these changes? Should we consider the order of the operations? Should we make a special check on the commit phase for this case? It should be noted that this use case is both rare and expensive, given the contract creation that it involves (all called from the same address). 
+
+Considering all these questions we thought it was better to not change anything regarding the Unitrie implementation and all its cache levels, and put this logic on the place where the problem first occurs, the *contract creation*.
 
 ## Specification	
 
-In order to prevent this problem, a special check had to be implemented. Basically, we keep track of the deleted accounts on previous transactions in the execution of the block and, on the remote case that a `CREATE2` is invoked with the same parameters than the one deleted, then the execution is reverted, and the result is the zero address. As with any error produced by a contract transaction, all gas is spent. 
+In order to prevent this problem, a special check had to be implemented on the contract creation logic. Basically, we keep track of the deleted accounts on previous transactions executed on the block and, on the remote case that a `CREATE2` is invoked with the same parameters than the one deleted, then the execution is reverted, and the result is the zero address. As with any error produced by a contract transaction, all gas is spent. 
+
+
 
 ## Copyright
 
