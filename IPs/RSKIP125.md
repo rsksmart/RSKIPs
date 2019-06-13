@@ -8,7 +8,7 @@
 |**Purpose**    |Sca, Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
