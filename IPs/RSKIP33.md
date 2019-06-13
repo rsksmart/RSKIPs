@@ -8,7 +8,7 @@
 |**Purpose**    |Sec/Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Adopted |
+|**Status**     |Rejected |
 
 # **Abstract**
 

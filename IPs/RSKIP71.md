@@ -1,6 +1,6 @@
 #  **Transfer 2300 gas units for code execution in external transactions**  
 
-| RSKIP          | --                                                           |
+| RSKIP          | 71                                                           |
 | :------------- | :----------------------------------------------------------- |
 | **Title**      | Transfer 2300 gas units for code execution in external transactions |
 | **Created**    | 2019                                                         |

@@ -36,7 +36,7 @@ One can achieve compression by associating accounts by co-temporal creation. A n
 
 The following figure shows how it is achieved. Figure  (1c) shows an initial state of the tree. There are thee accoutns stored: A, B and C, each having a completely different address.  In (2c) a new account D is added to the tree. It is the fouth account added, and the creation index determines the position on the tree. In (3c) tha account A is hibernated (missing information is replaced by a hash digest, marked as an asterisk. In figure (4c) the account B is hibernated, which causes nodes 00 and 01 to be removed, and their states are re-hashed into their parent node 0x. No new account can be created as child of this parent node.
 
-![image alt text](3MTreesRSKIP31.png)
+![image alt text](./RSKIP31/3MTreesRSKIP31.png)
 
 **Pros and Cons**
 
