@@ -18,7 +18,7 @@ The purpose of this RSKIP is to explain the logic behind the decision made to fo
 
 With the introduction of the opcode `CREATE2` exists the possibility that, given a transaction list to be executed on a block, there would be a transaction that destroys a contract and afterwards another transaction creates a new contract on the same address. 
 
-This normally would not be a problem, but, in order to reduce accesses on the Unitrie storage, several cache levels were implemented. With this cache implementation the Unitrie is not touched until all transactions are finished, this would mean that, in our problem, there is in the Unitrie and address with all its code and storage, and in the cache there are two operations, one of deletion of this address and the second creation. 
+This normally would not be a problem, but, in order to reduce accesses on the Unitrie storage, several cache levels were implemented. With this cache implementation the Unitrie is not touched until all transactions are finished. This would mean that, in our problem, there is in the Unitrie an address with all its code and storage, and in the cache there are two operations, one of deletion of this address and the second creation. 
 
 So, what should happen when we commit these changes? Should we consider the order of the operations? Should we make a special check on the commit phase for this case? It should be noted that this use case is both rare and expensive, given the contract creation that it involves (all called from the same address). 
 
