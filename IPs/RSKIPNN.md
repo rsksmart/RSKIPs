@@ -28,7 +28,9 @@ Considering all these questions we thought it was better to not change anything 
 
 In order to prevent this problem, a special check had to be implemented on the contract creation logic. Basically, we keep track of the deleted accounts on previous transactions executed on the block and, on the remote case that a `CREATE2` is invoked with the same parameters than the one deleted, then the execution is reverted, and the result is the zero address. As with any error produced by a contract transaction, all gas is spent. 
 
+## Backwards Compatibility
 
+This RSKIP defines the behavior to be included with the `CREATE2` opcode, as specified in RSKIP125. All changes originated from this RSKIP are tied to the RSKIP125 and won't be implemented on its own.
 
 ## Copyright
 
