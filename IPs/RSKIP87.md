@@ -2,18 +2,17 @@
 
 | RSKIP          | 87                             |
 | :------------- | :----------------------------- |
-| **Title**      | Whitelisting unlimited mode |
+| **Title**      | Whitelisting unlimited mode 	  |
 | **Created**    | 2018                           |
-| **Author**     | JD                            |
-| **Purpose**    | Sca, Usa                      |
+| **Author**     | JD                             |
+| **Purpose**    | Usa 		                      |
 | **Layer**      | Core                           |
 | **Complexity** | 2                              |
-| **Status**     | Adopted                          |
+| **Status**     | Adopted                        |
 
 ## Abstract
 
 This RSKIP proposes a new whitelisting mode which will ease the whitelisting process.
-
 
 ## Motivation
 
@@ -84,9 +83,12 @@ Finally, this method will return information associated to the whitelisting stat
 function getLockWhitelistEntryByAddress(string address) returns (int256)
 ```
 given a valid base58 address it will return a coded result:
-* not existing: -1
-* Unlimited mode: 0
+* Not existing (LOCK_WHITELIST_ENTRY_NOT_FOUND_CODE): -1.
+	** When address queried is not in the LockWhitelist.
+* Unlimited mode (LOCK_WHITELIST_UNLIMITED_MODE_CODE): 0
+	** If the mode is not One-Off, then it is unlimited.
 * One-off mode: any value bigger than zero, where that value is the amount of satoshis used as the maximum value. 
+
 
 # **Copyright**
 
