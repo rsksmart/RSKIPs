@@ -10,12 +10,12 @@
 | **Complexity** | 2                              |
 | **Status**     | Adopted                          |
 
-# Abstract
+## Abstract
 
 This RSKIP proposes a new whitelisting mode which will ease the whitelisting process.
 
 
-# Motivation
+## Motivation
 
 Currently the whitelisting process implies re-whitelisting an address after a successful lock. In order to provide a more fluid service we propose adding a new whitelisting mode which enables locking BTC from and address indefinitely until set otherwise.
 
@@ -24,7 +24,7 @@ Currently the whitelisting process implies re-whitelisting an address after a su
 In order to implement this change we suggest making the following modifications:
 * Rename the existing whitelist mode to One-Off.
 * Add a new whitelisting mode, Unlimited.
-* Add a query query method to gain information on the whitelisting state of a given address.
+* Add a query method to gain information on the whitelisting state of a given address.
 
 ### addOneOffLockWhitelistAddress (formerly addLockWhitelistAddress)
 
@@ -51,12 +51,19 @@ The main difference is that it wont't require a maximum value as it won't have a
 As opposed to the one-off mode, this whitelisted address won't be removed after the first usage; the caveat being that the user should call the removeLockWhitelistAddress method to prevent further locks from this address.
 
 
-Both methods will return the same coded results:
-* success: 1
-* unauthorized call: -10
-* invalid address: -2
-* already existing address: -1
-* unknown error: 0
+Both methods will return the same coded results. All results are returned by BridgeSupport class.
+
+* Success (LOCK_WHITELIST_SUCCESS_CODE): 1.
+	** Format address is correct.
+	** The sender of the change to the whitelist is authorized to perform the change.
+	** The address added to the whitelist hasn't been added before.  
+* Unauthorized call (LOCK_WHITELIST_GENERIC_ERROR_CODE): -10
+	** The new address is being added to the whitelist, but the sender of the operation is not authorized to perform the change.
+* Invalid address (LOCK_WHITELIST_INVALID_ADDRESS_FORMAT_ERROR_CODE): -2
+	** The function `getParsedAddress` takes a base58address and returns an RSK Address. If the base58address doesn't belong to any network, getParsedAddress throw this error.
+* Already existing address (LOCK_WHITELIST_ALREADY_EXISTS_ERROR_CODE): -1.
+	** The address added to the whitelist has been added before.
+* Unknown error (LOCK_WHITELIST_UNKNOWN_ERROR_CODE): 0
 
 It's worth mentioning that if you whitelist an address using one mode and then try to whitelist it using the other mode, this will produce a `-1` response. Always make sure to remove the whitelisted address before trying to add it again.
 
