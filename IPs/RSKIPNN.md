@@ -20,7 +20,7 @@ With the introduction of the opcode `CREATE2` exists the possibility that, given
 
 This normally would not be a problem, but, in order to reduce accesses on the Unitrie storage, several cache levels were implemented. With this cache implementation the Unitrie is not touched until all transactions are finished. This would mean that, in our problem, there is in the Unitrie an address with all its code and storage, and in the cache there are two operations, one of deletion of this address and the second creation. 
 
-So, what should happen when we commit these changes? Should we consider the order of the operations? Should we make a special check on the commit phase for this case? It should be noted that this use case is both rare and expensive, given the contract creation that it involves (all called from the same address). 
+So, what should happen when we commit these changes? Should we consider the order of the operations? Should we make a special check on the commit phase for this case? It should be noted that this use case is rare, given the contract creation that it involves (all called from the same address). 
 
 Considering all these questions we thought it was better to not change anything regarding the Unitrie implementation and all its cache levels, and put this logic on the place where the problem first occurs, the *contract creation*.
 
@@ -30,7 +30,7 @@ In order to prevent this problem, a special check had to be implemented on the c
 
 ## Backwards Compatibility
 
-This RSKIP defines the behavior to be included with the `CREATE2` opcode, as specified in [RSKIP125](IPs/RSKIP125.md) . All changes originated from this RSKIP are tied to the RSKIP125 and won't be implemented on its own.
+This RSKIP defines the behavior to be included with the `CREATE2` opcode, as specified in [RSKIP125](IPs/RSKIP125.md). All changes originated from this RSKIP are tied to the RSKIP125 and won't be implemented on its own.
 
 ## Copyright
 
