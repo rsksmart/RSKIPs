@@ -1,6 +1,6 @@
 # On creating a contract destroyed on the same block
 
-|RSKIP          |NN           |
+|RSKIP          |131           |
 | :------------ |:-------------|
 |**Title**      |Creating a contract destroyed on the same block |
 |**Created**    |10-JUN-19 |
