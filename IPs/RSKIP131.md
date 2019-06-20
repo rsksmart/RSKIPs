@@ -1,8 +1,8 @@
-# Denying creation of contract after destroy in the same block
+# Preventing CREATE2-after-SUICIDE in the same block
 
 |RSKIP          |131           |
 | :------------ |:-------------|
-|**Title**      |Denying creation of contract after destroy in the same block |
+|**Title**      |Preventing CREATE2-after-SUICIDE in the same block |
 |**Created**    |10-JUN-19 |
 |**Author**     | SMS & SDL |
 |**Purpose**    |Sca, Usa |
