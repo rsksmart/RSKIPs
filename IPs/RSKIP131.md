@@ -4,7 +4,7 @@
 | :------------ |:-------------|
 |**Title**      |Denying creation of contract after destroy in the same block |
 |**Created**    |10-JUN-19 |
-|**Author**     | SMS |
+|**Author**     | SMS & SDL |
 |**Purpose**    |Sca, Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
