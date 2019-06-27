@@ -77,7 +77,7 @@ The 32-byte block header hash-for-merge-mining is replaced by a 32-byte byte arr
 
 The CPV field is a vector V with elements v(i) (i = 0..6) where each v(i) consist of the the least significant byte (LSB) of the Bitcoin Block ID associated with the RSK block at height ( (BN-1/64)\*64 - i\*64 ).
 
-The number of uncles (NU) can be zero if the last 32 blocks do not reference any uncle. The uncles referenced can be siblings of blocks that are prior to the last 32 blocks. The block being mined does not count. Each block can reference a maximum of 7 uncles, so 32 blocks can only reference 224 uncles, so 1 bytes is enough.
+The number of uncles (NU) can be zero if the last 32 blocks do not reference any uncle. The uncles referenced can be siblings of blocks that are prior to the last 32 blocks. The block being mined does not count. Each block can reference a maximum of 10 uncles, so 32 blocks can reference 320 uncles, but he space used by the NU field is only 1 byte. Therefore, if the number of uncles is above 255, the value 255 is stored. The existence of the amount of uncles would indicate an exceptionally abnormal situation of the network or an attack.
 
 The BN field must correspond to the RSK block height that is being mined.
 
