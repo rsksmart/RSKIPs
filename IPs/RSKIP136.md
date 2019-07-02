@@ -29,7 +29,9 @@ C) Having B_pos blocks headers from B onwards which validate the proof of work f
 
 D) In order to execute blocks from B onwards the REMASC information (currently being uncles and header) from at least the last B_pre blocks is required.
 
-<img src="./RSKIP136/timeline.jpg">
+<p align="center">
+    <img src="./RSKIP136/timeline.jpg" height=125>
+</p>
 
 The goal for this new algorithm, which we'll call STATE-SYNC, is to reach a synchronized blockchain at a B but without paying the cost of downloading and executing all the missing blocks.
 
@@ -49,24 +51,42 @@ Having the B_pos constraint forces to have at least the information for the last
 ### 2) Retrieve the headers and validate the PoW
 To validate that the state we'll try to rebuild is valid, every header from genesis to tip is required.
 
-### 3) Retrieve every block from B - B_pre to B+B_pos
+### 3) Retrieve every block from B-B_pre to B+B_pos
 By now we only have the verified headers, the block bodies is needed to resume execution.
 
 ### 4) Retrieve the state at point B
 The state can be synchronized at the same time as 3).
 The root hash must be requested first, this information will be the metadata we need to build the entire tree.
 
-Every node in the tree has the size information of their childrens. This allows an inorder traversal of the tree by increasing an offset value.
+Every node in the tree has the size information of their childrens. This allows a postorder traversal of the tree by increasing an offset value.
 
-The idea is to divide the whole tree in CHUNKS of size of at least CHUNK_SIZE and transfer this unit of data in each request.
+The idea is to divide the whole tree in CHUNKS of size at around CHUNK_SIZE and transfer this unit of data in each request. Every CHUNK contains a variable amount of tree nodes and every node in the chunk must be fully serialized, it cannot be split. To verify CHUNKS by themselves, extra information in the form of hashes also have to be added to the packet. 
 
-COMPLETE_ME
+<p align="center">
+    <img src="./RSKIP136/complementary-hashes.jpg" height="300">
+</p>
+
+If only nodes 1 to 4 fit in the CHUNK, hashes for nodes 5 and 10 are required to verify the tree up to the root hash.
+
+If a node starting offset is not multiple of CHUNK_SIZE, it will be sent in the next CHUNK.
+
+<p align="center">
+    <img src="./RSKIP136/split-node.jpg" height="200">
+</p>
+
 
 ### 5) Continue regular blockchain execution
 At this stage, every requirement to have a synchronized node is fulfilled. The blockchain header is B.
 
+### 6) Download old blocks (optional)
+Download old blocks body along with their receipts.
+
 # Rationale
 
+Before downloading the state it's important to verify that we actually have the correct block. That's why old headers are required.
+Posterior headers further verify the B block and requires possible attackers to generate at least B_pos valid headers.
+
+The state transfer protocol allows to have a sequential snapshot file on disk and avoid redundant reads.
 
 # **Copyright**
 
