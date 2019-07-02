@@ -12,22 +12,58 @@
 
 # **Abstract**
 
-This document describes a new mechanism to synchronize RSK nodes. This mechanism would allow to synchronize the RSK blockchain by downloading an state and other necessary components to have a syncrhonized node to a current state.
+This document describes a new mechanism to synchronize RSK nodes. This mechanism would allow a faster synchronization to the RSK blockchain by downloading only the state and other necessary components.
 
 
 # Motivation
 
-This new sync mechanism sustains on the idea that a blockchain can start processing blocks whenever it gets to download the state that represents to the current best block of the blockchain. In order to validate the new downloaded state, we need to verfiy the proof of work from the current block, so all  the previous headers are required too. Finally in the case of the RSK blockchain we need to retrieve the information about 4000 blocks behind to process the next block and be able to pay the fees in the REMASC contract.
+The current synchronization mechanism requires the transfer of every block in the blockchain and their sequential execution to both validate and generate the updated state. A different approach is required if we want to scale the synchronization process with a long blockchain.
 
-We'll call this new sync mechanism STATE-SYNC from now on. The goal for this new algorithm is to reach a synchronized blockchain at a SYNC-BLOCK but without paying the cost of downloading and executing all the missing blocks. To achieve this __data__ is required:
+A node is considered synchronized at block number B if it has all the neccesary information to start downloading and executing blocks from B onwards in a secure way. There are some pieces of information required:
 
-* The current state at SYNC-BLOCK
-* The previous 4000 blocks from behind the SYNC-BLOCK, to allow REMASC contract to be executed on the next block and subsequents
-* All the previous headers in order to validate the proof of work for the SYNC-BLOCK
+A) The addresses state at block number B implemented by the merkle tree. This is currently obtained by executing the transactions since the genesis block. 
+
+B) Having a verified block B which matches the merkle tree. This requires the validation of the proof of work on block B, which recursively requires every block header since the genesis block.
+
+C) Having B_pos blocks headers from B onwards which validate the proof of work for both B and the state downloaded at B.
+
+D) In order to execute blocks from B onwards the REMASC information (currently being uncles and header) from at least the last B_pre blocks is required.
+
+<img src="./RSKIP136/timeline.jpg">
+
+The goal for this new algorithm, which we'll call STATE-SYNC, is to reach a synchronized blockchain at a B but without paying the cost of downloading and executing all the missing blocks.
 
 # Specification
 
+In order to achieve this the process will be divided in a series of sequential steps.
 
+### 1) Define the block B
+The idea is that nodes only synchronize at possible "checkpoints". 
+
+If the number of the tip is TIP = 10090,  checkpoints are defined every CHK = 1000 blocks, and B_pos = 100. 
+
+B would be set as (B_tip-B_pos // CHK)*CHK = 9000.
+
+Having the B_pos constraint forces to have at least the information for the last two checkpoints to be able to answer this request.
+
+### 2) Retrieve the headers and validate the PoW
+To validate that the state we'll try to rebuild is valid, every header from genesis to tip is required.
+
+### 3) Retrieve every block from B - B_pre to B+B_pos
+By now we only have the verified headers, the block bodies is needed to resume execution.
+
+### 4) Retrieve the state at point B
+The state can be synchronized at the same time as 3).
+The root hash must be requested first, this information will be the metadata we need to build the entire tree.
+
+Every node in the tree has the size information of their childrens. This allows an inorder traversal of the tree by increasing an offset value.
+
+The idea is to divide the whole tree in CHUNKS of size of at least CHUNK_SIZE and transfer this unit of data in each request.
+
+COMPLETE_ME
+
+### 5) Continue regular blockchain execution
+At this stage, every requirement to have a synchronized node is fulfilled. The blockchain header is B.
 
 # Rationale
 
