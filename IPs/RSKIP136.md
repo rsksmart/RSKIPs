@@ -68,7 +68,7 @@ The idea is to divide the whole tree in CHUNKS of size of at least CHUNK_SIZE an
 
 If only nodes 1 to 4 fit in the CHUNK, hashes for nodes 5 and 10 are required to verify the tree up to the root hash.
 
-If the offset size request, which must be multiple of CHUNK_SIZE splits a node, it is also packed into the response.
+If a CHUNK splits a node, only part of it is sent as a response and it is not validated as part of that CHUNK. It will be validated with it's corresponding complementary hashes with the next CHUNK.
 
 <p align="center">
     <img src="./RSKIP136/chunks.jpg" height="150">
