@@ -60,7 +60,7 @@ The root hash must be requested first, this information will be the metadata we 
 
 Every node in the tree has the size information of their childrens. This allows a postorder traversal of the tree by increasing an offset value.
 
-The idea is to divide the whole tree in CHUNKS of size at around CHUNK_SIZE and transfer this unit of data in each request. Every CHUNK contains a variable amount of tree nodes and every node in the chunk must be fully serialized, it cannot be split. To verify CHUNKS by themselves, extra information in the form of hashes also have to be added to the packet. 
+The idea is to divide the whole tree in CHUNKS of size of at least CHUNK_SIZE and transfer this unit of data in each request. Every CHUNK contains a variable amount of tree nodes and every node in the chunk must be fully serialized, it cannot be split. To verify CHUNKS by themselves, extra information in the form of hashes also have to be added to the packet. 
 
 <p align="center">
     <img src="./RSKIP136/complementary-hashes.jpg" height="300">
@@ -68,10 +68,10 @@ The idea is to divide the whole tree in CHUNKS of size at around CHUNK_SIZE and 
 
 If only nodes 1 to 4 fit in the CHUNK, hashes for nodes 5 and 10 are required to verify the tree up to the root hash.
 
-If a node starting offset is not multiple of CHUNK_SIZE, it will be sent in the next CHUNK.
+If the offset size request, which must be multiple of CHUNK_SIZE splits a node, it is also packed into the response.
 
 <p align="center">
-    <img src="./RSKIP136/split-node.jpg" height="200">
+    <img src="./RSKIP136/chunks.jpg" height="150">
 </p>
 
 
@@ -86,7 +86,8 @@ Download old blocks body along with their receipts.
 Before downloading the state it's important to verify that we actually have the correct block. That's why old headers are required.
 Posterior headers further verify the B block and requires possible attackers to generate at least B_pos valid headers.
 
-The state transfer protocol allows to have a sequential snapshot file on disk and avoid redundant reads.
+The state transfer protocol was designed to allow having a sequential snapshot file on disk and avoid redundant reads.
+
 
 # **Copyright**
 
