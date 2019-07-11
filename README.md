@@ -125,6 +125,7 @@ RSK Improvement Proposals
 | 125 |[Create2](IPs/RSKIP125.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 131 |[Preventing CREATE2-after-SUICIDE in the same block](IPs/RSKIP131.md) | 2019 | SMS & SDL  | Sca,Usa  | Core | 1 | Adopted  |
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
+| ??? |[Bridge Receive Headers method gas cost](IPs/RSKIP-receiveheaders-gascost.md)| 11-JUL-19 | JD       | Fair      | Core     | 1 | Draft   |
 
 
 (*) Under evaluation to be implemented in the next reference client release
@@ -141,7 +142,7 @@ RSK Improvement Proposals
 | IO       | Ilan Olkies                  | ilan@iovlabs.org |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
 | JL       | Julian Len                   | julian@iovlabs.org |
-| JD       | Jose Dahlquist               | jose@rsk.co |
+| JD       | Jose Dahlquist               | jose@iovlabs.org |
 | LS       | Lisandro Sebrie              | lisandro@iovlabs.org |
 | MMa      | Matias Marquez               |  |
 | MM       | Martin Medina                | martin@iovlabs.org |
