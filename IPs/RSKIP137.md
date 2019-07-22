@@ -1,6 +1,6 @@
 # State sync
 
-|RSKIP          |136           |
+|RSKIP          |137           |
 | :------------ |:-------------|
 |**Title**      |State sync|
 |**Created**    |2019 |
@@ -30,7 +30,7 @@ C) Having B_pos blocks headers from B onwards which validate the proof of work f
 D) In order to execute blocks from B onwards the REMASC information (currently being uncles and header) from at least the last B_pre blocks is required.
 
 <p align="center">
-    <img src="./RSKIP136/timeline.jpg" height=125>
+    <img src="./RSKIP137/timeline.jpg" height=125>
 </p>
 
 The goal for this new algorithm, which we'll call STATE-SYNC, is to reach a synchronized blockchain at a B but without paying the cost of downloading and executing all the missing blocks.
@@ -63,6 +63,10 @@ At this stage, every requirement to have a synchronized node is fulfilled. The n
 
 ### 6) Download old blocks (optional)
 Download old blocks bodies along with their receipts.
+
+### **State at point B**
+When the program reaches this point, it will require new messages to download a piece of the state. For this purpose a new pair of messages are implemented: GetStateNode and ResponseStateNode. The first one takes the hash to request the state node to another client. The second one encodes all the information required to recreate it. With this information the program is able to request the next hashes in order to continue downloading and have all the information to recreate the whole state. A nice feature from the current state structure is the ability to validate the data on each request independently from the rest of the state. 
+
 
 # Rationale
 
