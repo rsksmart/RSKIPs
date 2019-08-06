@@ -110,7 +110,7 @@ RSK Improvement Proposals
 | 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
 | 99 |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
-| 106 |[Precompiled contract for BTO utility functions](IPs/RSKIP106.md) | 2019 | AM | Usa  | Core | 1 | Draft |
+| 106 |[Precompiled contract for HDWallet utility functions](IPs/RSKIP106.md) | 2019 | AM | Usa  | Core | 1 | Adopted |
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
 | 108 |[More Efficient Unitrie Key Mapping](IPs/RSKIP108.md) | 2019 | SDL & AL | Usa,Sca  | Core | 2 | Draft |
 | 109 |[Lower Storage Gas Costs for Shorter Keys](IPs/RSKIP109.md) | 2019 | SDL  | Usa,Sca  | Core | 2 | Draft |
