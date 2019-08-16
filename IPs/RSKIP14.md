@@ -27,7 +27,7 @@ The following is a list of the design goals behind RSK reward splitting strategy
 
 - The consensus protocols should reduce incentives from block withholding [[https://petertodd.org/2016/block-publication-incentives-for-miners](https://petertodd.org/2016/block-publication-incentives-for-miners)]
 
-- The consensus protocol should reduce centralization incentives derived from stale blocks. [[https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/](https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/)] and [Accelerating Bitcoin's Transaction Processing, Fast Money Grows on Trees, Not Chains, Sompolinsky, Zohar] 
+- The consensus protocol should reduce centralization incentives derived from stale blocks. [[https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/](https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/)] and [Accelerating Bitcoin's Transaction Processing, Fast Money Grows on Trees, Not Chains, Sompolinsky, Zohar](https://eprint.iacr.org/2013/881) 
 
 - The consensus protocol should reduce the probability of transaction reversal as much as possible.
 
@@ -35,9 +35,7 @@ The following is a list of the design goals behind RSK reward splitting strategy
 
  
 
-- The consensus protocol must be incentive compatible [ Incentive Compatibility of
-
-- Bitcoin Mining Pool Reward Functions, Schrijvers, Bonneau, Boneh, Roughgarden, available at [http://theory.stanford.edu/~tim/papers/bitcoin.pdf](http://theory.stanford.edu/~tim/papers/bitcoin.pdf) ]
+- The consensus protocol must be incentive compatible [ Incentive Compatibility of Bitcoin Mining Pool Reward Functions, Schrijvers, Bonneau, Boneh, Roughgarden, available at [http://theory.stanford.edu/~tim/papers/bitcoin.pdf](http://theory.stanford.edu/~tim/papers/bitcoin.pdf) ]
 
 - The consensus protocol should not allow profit from Camacho selfish-mining [DECOR+LAMI: A Scalable Blockchain Protocol, [https://scalingbitcoin.org/papers/DECOR-LAMI.pdf](https://scalingbitcoin.org/papers/DECOR-LAMI.pdf) ]
 
