@@ -1,26 +1,26 @@
-# Precompiled contract for BTO utility functions
+# Precompiled contract for HDWallet utility functions
 
 |RSKIP          |106 |
 | :------------ |:------------- |
-|**Title**      |Precompiled contract for BTO utility functions |
+|**Title**      |Precompiled contract for HDWallet utility functions |
 |**Created**    |01-FEB-19 |
 |**Author**     |AM |
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
-A new precompiled contract (i.e., native, hardwired onto the RSK consensus layer) is introduced. This contract contains a few complex BTO-related operations that help leverage some of the work BTO contracts need to repeatedly perform.
+A new precompiled contract (i.e., native, hardwired onto the RSK consensus layer) is introduced. This contract contains a few complex HDWallet-related operations that help leverage some of the work that smart contracts need to repeatedly perform.
 
 ## Motivation
 
-With the arising need of BTOs (Bitcoin Token Offerings) on top of the RSK network, a need for different BTO token and/or token-emitting contracts to perform certain complex BTO-related operations on a regular basis is in place. If written in solidity (or assembly WOLOG) and executed on the RVM, each of these functions would be expensive - and even more expensive to write and test every time. Furthermore, different implementations can lead to errors potentially protruding to loss of funds. A well-written, tested and precompiled function set that covers these operations will leverage the complexity on the BTO contracts' side while at the same time enforcing a certain level of security by implementing these as part of the RSK consensus.
+With the arising need of making ICOs on top of the RSK network, a need for different token and/or token-emitting contracts to perform certain complex operations on a regular basis is in place. If written in solidity (or assembly WOLOG) and executed on the RVM, each of these functions would be expensive - and even more expensive to write and test every time. Furthermore, different implementations can lead to errors potentially protruding to loss of funds. A well-written, tested and precompiled function set that covers these operations will leverage the complexity on the smart contracts' side while at the same time enforcing a certain level of security by implementing these as part of the RSK consensus.
 
 ## Specification
 
-A new precompiled contract is to be accessible at the `0x0000000000000000000000000000000000000009` address. It will implement the following functions (signatures and return values are as follows):
+A new precompiled contract is to be accessible at the `0x0000000000000000000000000000000001000009` address. It will make usage of `HDWallet utilities` to derive BTC addresses, and will implement the following functions (signatures and return values are as follows):
 
 - `toBase58Check(bytes, uint8) returns (string)`
 - `deriveExtendedPublicKey(string xpub, string path) returns (string)`
