@@ -125,7 +125,7 @@ RSK Improvement Proposals
 | 125 |[Create2](IPs/RSKIP125.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 131 |[Preventing CREATE2-after-SUICIDE in the same block](IPs/RSKIP131.md) | 2019 | SMS & SDL  | Sca,Usa  | Core | 1 | Adopted  |
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
-| 136 |[EXTCODEHASH opcode]()| |  | | | |   |
+| 136 |[EXTCODEHASH opcode](IPs/RSKIP136.md)| 04-SEP-19 | JL | Usa | Core | 2 | Draft |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
 
