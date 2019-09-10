@@ -1,6 +1,6 @@
 # Multi-signed transactions supporting enveloping and multi-key accounts
 
-|RSKIP          |           |
+|RSKIP          | 138 |
 | :------------ |:-------------|
 |**Title**      |Multi-signed transactions supporting enveloping and multi-key accounts|
 |**Created**    |2019 |
