@@ -128,7 +128,7 @@ RSK Improvement Proposals
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
-| -- |[Parallel Transaction Execution for Unitrie](IPs/RSKIP139.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Draft |
+| 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
