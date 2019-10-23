@@ -1,4 +1,3 @@
-#Parallel Transaction Execution for Unitrie
 
 |RSKIP          |144           |
 | :------------ |:-------------|
@@ -53,11 +52,14 @@ Always at the end of processing a transaction, the new reads/writes are copied t
 
 Special treatment may be needed for recursive deletes, as used in suicides. 
 
+## Transaction Censorship
 
+For a target (victim's) transaction tx0, an attacker could try to broadcast transactions tx1..txN with high gasPrice so that they are chosen first, and so that tx0 is discarded because it would build a loop in the access maps and require re-execution. If the default mining behavour is to discard the transaction, then this would allow censorship at low costs. If the transaction tx0 is postponed and re-executed in following blocks, then it also possible that the miner needs to re-execute it an unbounded number of times without succes, which impacts the miner's operation cost.
+Therefore we suggest than once every k blocks (i.e. k=5) a block must be serial (a "serial block"), and the miner cannot specify any parallelism in the serial block. This will enable all postponed transactions that could not be parallelized to compete and be included in serial blocks. An alternative is to pseudo-randomize the choice of the serial block (i.e depending on the previous block hash). Adding this uncertanity however doesn't seem to provide any benefit.
 
 ## DoS Security
 
-A user could build a transaction that transfers a tiny amount of RBTC to many contracts or executes EXTCODEHASH/EXTCODESIZE/BALANCE to prevent the partitioning algorithm to produce efficient partitions. However these opcodes have a high cost in gas. If this problem is still present, then the cost of these opcodes may need to be increased. 
+A user could build a transaction that transfers tiny amounts of RBTC to many contracts or executes EXTCODEHASH/EXTCODESIZE/BALANCE to prevent the partitioning algorithm to produce efficient partitions. However these opcodes have a high cost in gas. If this problem is still present, then the cost of these opcodes may need to be increased. 
 
 # Copyright
 
