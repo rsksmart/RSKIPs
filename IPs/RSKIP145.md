@@ -1,6 +1,6 @@
 # Struct  Transaction Format
 
-|RSKIP          |--           |
+|RSKIP          |145           |
 | :------------ |:-------------|
 |**Title**      |Struct Transaction Format |
 |**Created**    |FEB-2017 |
