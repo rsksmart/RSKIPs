@@ -46,6 +46,12 @@ The first argument represents the field receiver (0x02). The second argument rep
 
 Currently the flags fields is not used, but may be used by future RSKIPs.
 
+### Wire Format Transaction Validation
+
+The wire-format, which is also used in the block, must not have any additional field. All fields whose values equal their default values must be omitted. If not, then the block will be invalid. All fields 
+
+
+
 ### Signing
 
 What is actually signed in a transaction is not the PTI, nor the user transaction, but a new compound record with additional information, called the **fullRec**.  The fullRec contains all the fields in a RLP list in a fixed order (the order is given by the fieldIds). Empty fields have ids but no appended data.  
