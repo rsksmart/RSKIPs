@@ -128,6 +128,7 @@ RSK Improvement Proposals
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
+| 143 |[Segwit Compatibility](IPs/RSKIP143.md) | 25-OCT-19 | PGP       | Sca, Usa   | Core     | 2 | Draft   |
 | 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Draft |
 | 145 |[Strunct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Draft |
 
@@ -150,4 +151,5 @@ RSK Improvement Proposals
 | MMa      | Matias Marquez               |  |
 | MM       | Martin Medina                | martin@iovlabs.org |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
-| SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
+| SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org| 
+| PGP      | Pamela González Perilli      | pamela@iovlabs.org | 
