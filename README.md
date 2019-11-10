@@ -130,6 +130,7 @@ RSK Improvement Proposals
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
 | 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Draft |
 | 145 |[Strunct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Draft |
+| 147 |[Improved Asset transfers](IPs/RSKIP147.md)|  10-NOV-19 | SDL | Sca | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
