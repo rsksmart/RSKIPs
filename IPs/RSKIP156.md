@@ -12,16 +12,20 @@
 
 ## Abstract
 
-The purpose of the RSKIP is to document the change of the difficulty divisor for the calculation of the difficulty for the next block. The constant is changed from 1 over 50 to 1 over 400 in order to smooth the drop of difficulty in consecutive applications of this divisor to prevent selfish mining attacks.
+The purpose of the RSKIP is to document the change of the difficulty divisor for the calculation of the difficulty for the next block. The constant is changed from 1 over 50 to 1 over 400 in order to smooth the drop of difficulty in consecutive blocks in order to delay potential selfish mining attacks.
 
 ## Motivation
 
-The decision to reduce de slope of the drop in difficulty was made in orden to increment the window of attack to the SPV brige with Ethereum by the means of a classic selfish mining attack. This attack was posible by isolating the node and continously reducing the difficulty of the blocks, which could be done with a fraction of the hashing power with the old difficulty divisor. By doing this, you could form a correct chain with much less work than the original difficulty required and succesfully orchestrate the attack with a hashing power in the order of 10% of the total and up to 70 blocks to drive the difficulty to almost zero. With the new divisor, the attack proves to be much more complicated, and thus it means that a succesfull attack would need a whole mining pool of hashing power a more than 1400 correct blocks to achieve the same thing.
+The decision to reduce the slope of the drop in difficulty was made in order to increment the number of blocks necessary to drive the block difficulty to nearly zero. This is useful to delay a potential attack to the SPV bridge with Ethereum. This attack could be possible by isolating the node and continuously reducing the difficulty of the blocks by now mining in an isolated competition-less chain, which could be done with a fraction of the hashing power with the old difficulty divisor. 
+
+By doing this, you could form a correct chain with much less work than the original difficulty required and successfully orchestrate the attack. The hashing power necessary to do this would be a small fraction of the network instead of the 51%. With the new divisor, the attack proves to be much more complicated, and thus it means that a successful attack would need a almost half of the hashing power and more than 1400 correct blocks to achieve the same result (based on the research team calculations).
 
 ## Specification
 
-The implementation is simple. A new constant is defined so we differenciate the initial difficulty divisor from the new one on the class Constants. When calculating the new diffculty and asked for the divisor, a check for the RSKIP is donde, if the RSKIP is activated, then the new divisor is returned. 
+The implementation is simple. A new constant is defined so we differentiate the initial difficulty divisor from the new one. When calculating the new difficulty and asked for the divisor, a check for the RSKIP is done, if the RSKIP is activated, then the new divisor is returned. 
 
 ### Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+
