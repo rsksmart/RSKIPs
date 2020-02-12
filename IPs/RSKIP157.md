@@ -1,30 +1,30 @@
-# Web3 getBlock cumulativeDifficulty
+# Cumulative Difficulty in JSON-RPC block responses
 
 |RSKIP          |157           |
 | :------------ |:-------------|
-|**Title**      |Web3 getBlock cumulativeDifficulty|
+|**Title**      |Cumulative Difficulty in JSON-RPC block responses|
 |**Created**    |11-FEB-20 |
 |**Author**     |MP |
-|**Purpose**    |USa |
+|**Purpose**    |Usa |
 |**Layer**      |Node |
 |**Complexity** |1 |
 |**Status**     |Draft |
 
 ## Abstract
 
-The current RSKIP proposes a new field `cumulativeDifficulty` to be added to the response of existing Web3 Block querying methods. Such field consists in the sum of a Block's difficulty plus its uncles' difficulties.
+The current RSKIP proposes `cumulativeDifficulty` as a new field to be added in the response of existing JSON-RPC block methods. Such field consists in the sum of a Block's difficulty plus its uncles' difficulties.
 
 ## Motivation
 
 We define the `difficulty` as a magnitude indicating the effort required _for a single miner_ to mine a single block for it to be added to the blockchain. However, this single value does not represent the total effort put by _all miners_ in the network, since the block not only anchors to its parent, but to its uncles as well. We thus define the magnitude `cumulativeDifficulty`, which encompasses not only the block's difficulty, but its mined uncles' difficulty as well.
 
-Due to multiple needs such as forensics or statistics, it may sometimes be needed to make a reconstruction of the network hashrate evolution throughout a certain period of the blockchain, if not all. Since the hashrate must consider not only the mainchain block, but uncles as well, it must be computed using the above defined `cumulativeDifficulty` magnitude, since it entails the effort performed by every participant of the network and not only that of whomever achieved to mine the winning block.
+Due to multiple needs, such as forensics or statistics, it may sometimes be needed to make a reconstruction of the network hashrate evolution throughout a certain period of the blockchain, if not all. Many of the former mentioned needs require `cumulativeDifficulty` for its calculation because it reflects the effort performed by all the miners (mainchain winning block and uncles).
 
-Since the current Web3 standard does not offer a method to obtain the block and its uncles full information, performing this reconstruction involves multiple interactions with the node. Thus, we propose adding a `cumulativeDifficulty` field to the existing `eth_getBlockX` and `eth_getUncleX` responses. 
+JSON-RPC block methods do not provide the required information to calculate cumulativeDifficulty without incurring into multiple interactions (querying for a block and all its uncles). Thus, we propose adding a `cumulativeDifficulty` field to the existing `eth_getBlockX` and `eth_getUncleX` responses.
 
 ## Specification
 
-The field `cumulativeDifficulty` is to be added to the following Web3 methods:
+The field `cumulativeDifficulty` is to be added to the following JSON-RPC block methods:
 
 * `eth_getBlockByHash`
 * `eth_getBlockByNumber`
