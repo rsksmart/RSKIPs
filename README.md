@@ -133,6 +133,7 @@ RSK Improvement Proposals
 | 148 |[ERC1820 Pseudo-introspection Registry Contract](IPs/RSKIP148.md)|  6-NOV-19 | PMP | Usa | DApp | 1 | Adopted |
 | 149 |[Improved Asset transfers](IPs/RSKIP149.md)|  10-NOV-19 | SDL | Sca | Core | 2 | Draft |
 | 157 |[Cumulative Difficulty in JSON-RPC block responses](IPs/RSKIP157.md)|  11-FEB-20 | MP | Usa | Node | 1 | Accepted |
+| 159 |[Minimal Proxy Contract](IPs/RSKIP159.md)|  19-FEB-20 | PMP | Usa | DApp | 1 | Adopted |
 
 (*) Under evaluation to be implemented in the next reference client release
 
