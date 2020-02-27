@@ -27,7 +27,7 @@ The best practice is to use the same derivation BIP-0044 path for all wallets.
 Wallets implementing RSK support must use the following derivation path:
 
 * **Purpose: 44**, based on BIP-0043. Hardened derivation is used at this level.
-* **Coin type: 137** for RSK MainNet and 37310 for RSK TestNet, based on SLIP-0044. Hardened derivation is used at this level.
+* **Coin type: 137** for RSK MainNet, and 1 for RSK TestNet, based on SLIP-0044. Hardened derivation is used at this level.
 * **Account: 0**, as initial index. Hardened derivation is used at this level.
 * **Change: 0**, used for external chain. Public derivation is used at this level.
 * **Address index:** Addresses are numbered from index 0 in sequentially increasing manner. This number is used as child index in BIP32 derivation. Public derivation is used at this level.
@@ -37,9 +37,10 @@ Wallets implementing RSK support must use the following derivation path:
 |Network|Derivation path|
 |-|-|
 |RSK MainNet|m / 44' / 137' / 0' / 0 / N|
-|RSK TestNet|m / 44' / 37310' / 0' / 0 / N|
+|RSK TestNet|m / 44' / 1' / 0' / 0 / N|
 
 ## History
+
 [BIP-0032](https://www.github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) describes hierarchical deterministic wallets (or "HD Wallets"): wallets which can be shared partially or entirely with different systems, each with or without the ability to spend coins. The specification consists of two parts. In a first part, a system for deriving a tree of keypairs from a single seed is presented. The second part demonstrates how to build a wallet structure on top of such a tree.
 
 [BIP-0043](https://www.github.com/bitcoin/bips/blob/master/bip-0043.mediawiki) introduces a "Purpose Field" for use in deterministic wallets based on algorithm described in BIP-0032.
@@ -48,7 +49,7 @@ Wallets implementing RSK support must use the following derivation path:
 
 [SLIP-0044](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) specifies the Coin Type body described on BIP-0044.
 
-RSK MainNet becomes network 137. RSK TestNet becomes network 37310.
+RSK MainNet becomes network 137. RSK TestNet becomes network 1.
 
 # **Copyright**
 
