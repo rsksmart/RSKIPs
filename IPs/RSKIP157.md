@@ -12,15 +12,15 @@
 
 ## Abstract
 
-The current RSKIP proposes `cumulativeDifficulty` as a new field to be added in the response of existing JSON-RPC block methods. Such field consists in the sum of a Block's difficulty plus its uncles' difficulties.
+The current RSKIP proposes `cumulativeDifficulty` as a new field to be added in the responses of existing JSON-RPC block methods. The value of this field is the sum of a block's difficulty plus its uncles' difficulties.
 
 ## Motivation
 
-We define the `difficulty` as a magnitude indicating the effort required _for a single miner_ to mine a single block for it to be added to the blockchain. However, this single value does not represent the total effort put by _all miners_ in the network, since the block not only anchors to its parent, but to its uncles as well. We thus define the magnitude `cumulativeDifficulty`, which encompasses not only the block's difficulty, but its mined uncles' difficulty as well.
+We define the `difficulty` as a magnitude indicating the effort required _for a single miner_ to mine a single block for it to be added to the blockchain. However, this single value does not represent the total effort required by _all miners_ in the network, since the block not only anchors to its parent, but to its uncles as well. We thus define the magnitude `cumulativeDifficulty`, which encompasses not only the block's difficulty, but its mined uncles' difficulty as well.
 
-Due to multiple needs, such as forensics or statistics, it may sometimes be needed to make a reconstruction of the network hashrate evolution throughout a certain period of the blockchain, if not all. Many of the former mentioned needs require `cumulativeDifficulty` for its calculation because it reflects the effort performed by all the miners (mainchain winning block and uncles).
+Due to multiple needs, such as forensics or statistics, we may sometimes need to make a reconstruction of the network hashrate evolution throughout a certain period of the blockchain, if not all. Many of the former mentioned needs require `cumulativeDifficulty` for its calculation because it reflects the effort performed by all the miners (mainchain winning block and uncles).
 
-JSON-RPC block methods do not provide the required information to calculate cumulativeDifficulty without incurring into multiple interactions (querying for a block and all its uncles). Thus, we propose adding a `cumulativeDifficulty` field to the existing `eth_getBlockX` and `eth_getUncleX` responses.
+JSON-RPC block methods do not provide the required information to calculate `cumulativeDifficulty` without incurring multiple interactions (querying for a block and all its uncles). Thus, we propose adding a `cumulativeDifficulty` field to the existing `eth_getBlockX` and `eth_getUncleX` responses.
 
 ## Specification
 
