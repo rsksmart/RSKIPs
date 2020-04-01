@@ -4,7 +4,7 @@ RSK Improvement Proposals
 ## RSKIP status terms
 * **Draft** - an RSKIP that is open for consideration
 * **Accepted** - an RSKIP that is planned for immediate adoption in the reference client, i.e. expected to be included in the next reference client release.
-* **Adopted** - an RSKIP that has been adopted in a previous reference client relese.
+* **Adopted** - an RSKIP that has been adopted in a previous reference client release.
 * **Deferred** - an RSKIP that is not being considered for immediate adoption in the reference client. May be reconsidered in the future for a subsequent release of the reference client.
 * **Rejected** - an RSKIP that was rejected
 
@@ -12,7 +12,7 @@ RSK Improvement Proposals
 * **Sca** - an RSKIP that improves scalability
 * **Usa** - an RSKIP that improves usability
 * **Fair** - an RSKIP that has improves fairness
-* **Sec** - an RSKIP that that improves security
+* **Sec** - an RSKIP that improves security
 * **ST** - an RSKIP that proposes a standard track
 
 ## Layer
