@@ -4,7 +4,7 @@
 | :------------ |:-------------|
 |**Title**      |Network Upgrade: Papyrus |
 |**Created**    |27-SEP-2019 |
-|**Author**     |SDL, AE, JR, DLL, MM, JD, PP, JP |
+|**Author**     |AE |
 |**Purpose**    |Sca,Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
