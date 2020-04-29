@@ -21,7 +21,7 @@ This RSKIP specifies the changes included in the RSK network upgrade name Papyru
 	- RSK Mainnet block: 2,392,700
 	- RSK Testnet block: 863,000
 
-### Included RSKIPs
+## Included RSKIPs
 
 - RSKIP134: 2WP Locking Cap
 - RSKIP137: ECADD, ECMUL and PairingCheck precompiled contracts
