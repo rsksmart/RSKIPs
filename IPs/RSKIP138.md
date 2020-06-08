@@ -40,30 +40,21 @@ First, we define a transaction format 1 which is a simple extension to transacti
 9. s
 
 
-
 Each field begins with an RLP identifier that indicates if the item is an element or a list of elements.
 
 We propose a new format (1), which both add new fields and change the meaning of existing fields:
 
-1. Version
-
-2. Nonce
-
-3. GasPrice
-
-4. GasLimit
-
-5. ReceiveAddress
-
-6. Value
-
-7. Data
-
-8. ownerCount
-
-9. signatures
-
+1. multiPurpose = (version, ownerCount, nonceList)
+2. gasPrice
+3. gasLimit
+4. receiveAddress
+5. value
+6. data
+7. signatureList
+8. empty
+9. empty
    
+The objetive to use this format is to keep it compatible with most existent tools, and hardware wallets in particular. Hardware wallets will show the destination, fees (derived from gasPrice and gasCount) and possibly a hash of the data, but not the nonce, so we can use the nonce to pack additional fields.  
 
 Version is encoded as a list of a single element. For the new transaction format, the element is 1. Therefore the parser can detect if it is a transaction version 0 or a new kind by inspecting only the first element. If it's a list, it's the new type. If not, then it is the nonce of a transaction version 0.
 
@@ -73,9 +64,9 @@ The ownerCount field specifies how many signatures are needed to build a multi-k
 
 To derive the account address of a multi-key account, the first "ownerCount" public keys are concatenated and the first 20 bytes of the keccack hash of those public keys is the account address.  Multi-key accounts, when combined with enveloping, can help a group of users manage a payment channel without using RBTC, and purely using ERC-20 tokens, relying on an external network transaction relayer.
 
-Signatures contain a list of signatures or a single signature. If there are more than one signature, this is a multi-signed transaction.  The format for each element of the signatures list is an RLP list containing v, r and s for each signer. Each element in Signatures must have exactly 3 elements. 
+The filed signatureList can contain a list of signatures or a single signature. If there are more than one signature, this is a multi-signed transaction.  The format for each element of the signatures list is an RLP list containing v, r and s for each signer. Each element in Signatures must have exactly 3 elements. 
 
-Nonce can also be a list. The number of element in Nonces can be equal or one higher than the number specified in ownerCount. If the number of nonces is equal,  then there is no enveloping. If the number of nonces is one higher, then the last party to sign is the one paying the fees. 
+The filed nonceList can also be a list or a single element. The number of element in nonceList can be equal or one higher than the number specified in ownerCount. If the number of nonces is equal, then there is no enveloping. If the number of nonces is one higher, then the last party to sign is the one paying the fees. 
 
 ### LTCP Transaction Format
 
@@ -85,13 +76,27 @@ Only one field may be included (nonce or nonces) but not both. If ownerCount is 
 
 ### Signing the Transaction
 
-Signers do not sign exactly the same payload. Each signer signs the RLP of all the fields with the "signatures" field replaced by a tuple (chainId, signerIndex). The signerIndex is the index of this signer in the list of all signers. Note that all account owner signatures must be listed in a pre-defined order. The transaction will only be valid if each signature signs its correct position. This is to prevent that an attack where owner and enveloper signatures are exchanged by an attacker.
+Signers do not sign exactly the same payload. Each signer signs the RLP of all the fields with changes in the multiPurpose and singatureList fields. The signatureList field is replaced by the chainId, to mantain compatibility when signing. The signerIndex is added as the last element of the multiPurpose field.
+
+The following list shows how elements are packed for signing (changes in bold):
+
+1. multiPurpose = (version, ownerCount, nonceList, **signerIndex**)
+2. gasPrice
+3. gasLimit
+4. receiveAddress
+5. value
+6. data
+7. **chainId**
+8. empty
+9. empty
+
+The signerIndex is the index of this signer in the list of all signers, starting from zero. Note that all account owner signatures must be listed in a pre-defined order. The transaction will only be valid if each signature signs its correct position. This is to prevent that an attack where owner and enveloper signatures are exchanged by an attacker.
 
 ### Transaction Execution
 
-When the transaction is executed, all nonces must be checked. Any invalid nonce invalidates the transaction. Also all nonces must be incremented. If the transaction specifies an enveloper (by containing an additional nonce), then the transaction origin (msg.origin) will still point to the account address, as defined by the other signers public keys. However fees will be deducted from the last signer account. Also the gas reimbursement will be performed to this account.
+When the transaction is executed, all nonces must be checked. Any invalid nonce invalidates the transaction. Also all nonces must be incremented. If the transaction specifies an enveloper (by containing an additional nonce), then the transaction origin (msg.origin) will still point to the account address, as defined by the other signers public keys. However fees will be deducted from the last signer account (the sponsor). Also the gas reimbursement will be performed to the sponsor account.
 
-It would be beneficial to have an opcode or precompile contract to obtain the address of the enveloper, if there is one.
+It would be beneficial to have an opcode or precompile contract to obtain the address of the sponsor.
 
 # **Copyright**
 
