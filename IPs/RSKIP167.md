@@ -77,11 +77,13 @@ The precompile performs the following actions:
 
 13. Save the code into the account.
 
-      
+  ​    
 
 ## Execution of code inside an EOA
 
 The execution of CREATE inside the EOA would lead to the increment of the account nonce, and that may cancel external transactions with the skipped nonce. This is considered a violation of the mempool invariants. There are two solutions: use a different nonce queue for CREATE or just ban CREATE when executed in the context of an EOA. In this RSKIP for simplicity we opt for banning CREATE, since CREATE2 provides the same functionality without the need to share nonces.
+
+A similar problem occurs if the EOA transfers RBTC. That could collude with RBTCs that are paying transaction fees in transactions in the mempool. Therefore RBTC transfers will also be banned when running in the context of an EOA. A CALL/DELEGATECALL/SELFDESTRUCT or any future opcode that decrements the balance will fail. In the case of CALL, the failure will be equivalent of an immediate REVERT after the CALL. SELFDESTROY will remove the code, but do not transfer the balance to another account.
 
 ## Gas Cost
 
