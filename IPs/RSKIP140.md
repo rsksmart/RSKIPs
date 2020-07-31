@@ -8,7 +8,7 @@
 | **Purpose**    | Usa		                           |
 | **Layer**      | Core                                |
 | **Complexity** | 2                                   |
-| **Status**     | Draft                               |
+| **Status**     | Adopted                               |
 
 
 The following RSKIP is a copy of [EIP1052](https://eips.ethereum.org/EIPS/eip-1052)
