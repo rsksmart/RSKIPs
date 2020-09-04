@@ -41,7 +41,7 @@ If the call-like opcode is executed but does not really instantiate a call frame
 
 ## Backwards Compatibility 
 
-Appart from descived behaviour for call-like opcodes, this proposal stays fully backwards compatible.
+Appart from the described behaviour for call-like opcodes, this proposal stays fully backwards compatible.
 
 ## References
 
