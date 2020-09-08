@@ -21,13 +21,44 @@ Allowing users to lock funds to any address in RSK.
 ## Specification
 
 The BTC transaction sent to the federation must contain at most one output with value 0 and OP_RETURN op code followed by the following data:
-- Protocol version
+- Protocol version (2 bytes). Currently **1**
 - A valid RSK address (20 bytes)
-- A valid BTC refund address (optional)
+- [Optional] A valid BTC refund address in the following format:
+    - Address type (1 byte)
+        - 1 for P2PKH
+        - 2 for P2SH
+    - Hash needed to build refund address (20 bytes)
+        - For P2PKH type address: public key hash 
+        - For P2SH type address: script hash
+
+### Example output
+```
+{
+      "value": 0.00000000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "OP_RETURN 00010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "hex": "6a2b00010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "type": "nulldata"
+      }
+    }
+```
+Payload included: `00010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
+
+- First 2 bytes correspond to the version number: `0001`
+- Next 20 bytes indicate rsk destination address: `0e537aad84447a2c2a7590d5f2665ef5cf9b667a`
+- Next 1 byte indicating btc refund address type, in this case P2PKH: `01`
+- Finally 20 bytes indicating the public key hash that will be used to get the btc refund address: `4f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
+
+### Notes
+- Only one output with OP_RETURN op code is allowed in the pegin transaction. Transactions with more than one OP_RETURN outputs will be rejected.
+- No restriction is added to the maximum length in bytes of the transaction.
+- There is no limit to the amount of outputs the transaction can have, as long as there is no more than one with OP_RETURN op code.
+- The output with OP_RETURN does not have to be in any particular order among the other outputs.
 
 ## Rationale
 
-Discuss design decisions, community debates and possible attacks.
+[RSKIP41](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP41.md) includes optional fields with the purpose of executing a smart contract in RSK, in case the RSK destination address is a contract instead of an account. In this version of the protocol, the possibility of executing a smart contract from the pegin transaction is not contemplated. If the RSK destination address set in the payload is a contract wallet then the funds locked will be transferred to fund this contract, if the contract is not wallet then those funds will be lost.
 
 ## References
 
