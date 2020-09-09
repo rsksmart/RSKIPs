@@ -35,13 +35,74 @@ Considered call-like opcodes:
 
 Since most of the parts of mentioned EIP have already been implemented, this proposal only points to implement this described behaviour:
 
+
+> If the call-like opcode is executed but does not really instantiate a call frame (for example due to insufficient funds for a value transfer or if the called contract does not exist), the return data buffer is empty.
+
+Providing a possible scenario
+
 ```
-If the call-like opcode is executed but does not really instantiate a call frame (for example due to insufficient funds for a value transfer or if the called contract does not exist), the return data buffer is empty.
+    // Considering this contract invocation call at 0x471fd3ad3e9eeadeec4608b92d16ce6b500704cc
+    PUSH1 0x10
+    PUSH1 0x05
+    ADD
+    PUSH1 0x40
+    MSTORE
+    PUSH1 0x20
+    PUSH1 0x40
+    RETURN
+
+    // And this EVM execution
+    PUSH1 0x20                                          // return size is 32 bytes
+    PUSH1 0x40                                          // on free memory pointer
+    PUSH1 0x00                                          // no argument
+    PUSH1 0x00                                          // no argument size
+    PUSH20 0x471fd3ad3e9eeadeec4608b92d16ce6b500704cc   // suppose a valid contract
+    PUSH4 0x005B8D80                                    // with some gas
+    STATICCALL                                          // call it (call-like opcode)! internal buffer should be 0x15
+    PUSH1 0x20                                          // now do the same...
+    PUSH1 0x40                                          // on free memory pointer
+    PUSH1 0x00                                          // no argument
+    PUSH1 0x00                                          // no argument size
+    PUSH1 0x00                                          // but call a non-existent contract (this won't produce a new call frame)
+    PUSH4 0x005B8D80                                    // with some gas
+    STATICCALL                                          // call it (call-like opcode)! internal buffer should be 0x00 (RSKIP171 is enabled)
+```
+
+### Before activation block
+
+If you execute any call-like opcode, the internal state buffer will remain the same, even if that execution didn't produce any new call frame. 
+
+```
+    // Considering this contract invocation call at 0x471fd3ad3e9eeadeec4608b92d16ce6b500704cc
+    PUSH1 0x10
+    PUSH1 0x05
+    ADD
+    PUSH1 0x40
+    MSTORE
+    PUSH1 0x20
+    PUSH1 0x40
+    RETURN
+
+    // And this EVM execution
+    PUSH1 0x20                                          // return size is 32 bytes
+    PUSH1 0x40                                          // on free memory pointer
+    PUSH1 0x00                                          // no argument
+    PUSH1 0x00                                          // no argument size
+    PUSH20 0x471fd3ad3e9eeadeec4608b92d16ce6b500704cc   // suppose a valid contract
+    PUSH4 0x005B8D80                                    // with some gas
+    STATICCALL                                          // call it (call-like opcode)! internal buffer should be 0x15
+    PUSH1 0x20                                          // now do the same...
+    PUSH1 0x40                                          // on free memory pointer
+    PUSH1 0x00                                          // no argument
+    PUSH1 0x00                                          // no argument size
+    PUSH1 0x00                                          // but call a non-existent contract (this won't produce a new call frame)
+    PUSH4 0x005B8D80                                    // with some gas
+    STATICCALL                                          // call it (call-like opcode)! internal buffer should be 0x21 (RSKIP171 is disabled)
 ```
 
 ## Backwards Compatibility 
 
-Appart from the described behaviour for call-like opcodes, this proposal stays fully backwards compatible.
+Apart from the described behaviour for call-like opcodes, this proposal stays fully backwards compatible.
 
 ## References
 
