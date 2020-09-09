@@ -12,7 +12,7 @@
 
 ## Abstract
 
-The porpouse of this RSKIP is to be fully compatible with [EIP-211](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-211.md). `RETURNDATACOPY` and `RETURNDATASIZE` opcodes have already been implemented in previous RSKIPs, but still, there were some cases for call-like opcodes needed to be implemented.
+The purpose of this RSKIP is to be fully compatible with [EIP-211](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-211.md). `RETURNDATACOPY` and `RETURNDATASIZE` opcodes have already been implemented in previous RSKIPs, but still, there were some cases for call-like opcodes needed to be implemented.
 
 Now with this RSKIP we have a mechanism to allow returning arbitrary-length data inside the EVM ([EIP-211](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-211.md)).
 
@@ -33,7 +33,7 @@ Considered call-like opcodes:
 - `OP_STATICCALL`
 - Further call-like opcodes may be added in future RSKIPs
 
-Since most of the parts of mentioned EIP have already been implemented, this proporsal only points to implement this descrived behaviour:
+Since most of the parts of mentioned EIP have already been implemented, this proposal only points to implement this described behaviour:
 
 ```
 If the call-like opcode is executed but does not really instantiate a call frame (for example due to insufficient funds for a value transfer or if the called contract does not exist), the return data buffer is empty.
