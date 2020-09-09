@@ -2,7 +2,7 @@
 
 |RSKIP          |171           |
 | :------------ |:-------------|
-|**Title**      |Arbitrary-Length Data Return Mechanisim |
+|**Title**      |Clean EVM Internal Buffer in Call-like Opcodes |
 |**Created**    |02-09-2020 |
 |**Author**     |FJ |
 |**Purpose**    |USa |
