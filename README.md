@@ -138,6 +138,7 @@ RSK Improvement Proposals
 | 159 |[Minimal Proxy Contract](IPs/RSKIP159.md)|  19-FEB-20 | PMP | Usa | DApp | 1 | Adopted |
 | 167 |[Install Code Precompile](IPs/RSKIP167.md)|  07-JUL-20 | SDL | Usa | Core | 1 | Draft |
 | 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
+| 175 |[Fast Bridge](IPs/RSKIP175.md)| 15-SEP-20 | GM | Usa | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -150,6 +151,7 @@ RSK Improvement Proposals
 | MC       | Martín Coll                  | |
 | DM       | Diego Masini                 | dmasini@iovlabs.org |
 | DLL      | Diego López León             | |
+| GM       | Guido Medina                 | guido@iovlabs.org |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
 | JL       | Julian Len                   | julian@iovlabs.org |
