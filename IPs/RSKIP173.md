@@ -35,7 +35,7 @@ The proposal adds specific optimizations to deal with short codes (smaller or eq
 - `CHUNK_SIZE`: 64 (bytes)
 - `KEY_LENGTH`: 4 (bytes) starting from unitrie account key
 - `METADATA_KEY`: `0x081`
-- `NEWCODE_KEY`: `0x081`\<unit24>
+- `NEWCODE_KEY`: `0x081`\<uint24>
 - `OLDCODE_KEY`: `0x80`
 - `METADATA_VERSION`: 1
 - `HF_BLOCK_NUMBER`: to be defined
