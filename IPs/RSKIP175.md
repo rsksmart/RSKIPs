@@ -20,14 +20,15 @@ Allowing users to transfer BTC to RSK immediately, without waiting for usual peg
 ## Specification
 
 The system comprises one or more liquidity providers (LPs), listed in an onchain marketplace. Interactions with LPs are intermediated using a dApp or a website.
+This RSKIP specifies the requirements for consensus changes without limiting the actual implementation of the Liquidity Providers market.
 
 #### Liquidity Providers contract
 
-In order to interact with Bridge, the Liquidity Provider contract must have an API format with functions: 
+In order to interact with Bridge, the Liquidity Provider contract must have an API format with functions:
 
-        function transferStatus(bytes32[]) return uint external {
-            return status;
-        }
+    function transferStatus(bytes32) return uint external {
+        return status;
+    }
 
 Where status is an integer value:
 
@@ -38,9 +39,16 @@ Where status is an integer value:
 
 And a payable function:
 
-        function transferFunds(bytes32[]) external payable {
-            emit FundsReceived(msg.value);
-        }
+    function transferFunds(bytes32) external payable {
+        receiverAddress.transfer(msg.value);
+    }
+
+The Solidity interface for this contract must be:
+
+    interface ILiquidityBridgeContract {
+        transferStatus(bytes32) return uint;
+        transferFunds(bytes32) payable;
+    }
 
 
 #### Bridge
@@ -50,28 +58,49 @@ The bridge is the most affected by this project. It will include:
 
 #### registerBtcTransfer()
 
+**ABI Signature**
+
+        function registerBtcTransfer(bytes btcTxSerialized, int heigth, bytes pmtSerialized, bytes32 derivationArgumentsHash, bytes userRefundAddress, address LBCAddress, bytes LPBtcAddress)
+
 **Parameters**:
 - *Transaction* rskTx: RSK transaction
 - *byte[]* btcTxSerialized: Serialized Bitcoin transaction
 - *int* height: Block number where the transaction is present
 - *byte[]* pmtSerialized: Serialized partial merkle tree
-- *Sha256Hash* derivationArgumentsHash: A hash created from all the derivation arguments
+- *Sha256Hash* derivationArgumentsHash: A hash created from the derivation arguments
 - *Address* userRefundAddress: User BTC refund address
 - *RskAddress* LBCAddress: Liquidity Bridge Contract address
-- *Address* LPBtcAddress: Liquidity Provider BTC address
+- *Address* LPBtcAddress: Liquidity Provider BTC refund address
 
 **Flow**:
 
-- Verifies the transaction hash is part of the merkle tree, and that the transactions was not already processed
-- Verifies tx is sending funds to address derivated from Federation using the provided derivation arguments (creating a Hash256 from those arguments)
+- Performs the same validations the Bridge does in **registerBtcTransaction** to determine if the BTC transaction is legitimate (e.g.: txAlreadyProcessed, confirmations, PMT, etc)
+
+- Verifies tx is sending funds to address derivated from Federation using the provided derivation arguments and hashing them:
+
+	`Sha256Hash(derivationArgumentsHash, userRefundAddress, LBCAddress, LPBtcAddress)`
+
+- Verifies that the derivated address does not exist in BridgeStorage (no entry was created using  the Sha256Hash described above)
+
 - Verifies provided Liquidity Bridge Contract address actually belongs to a contract
 - Get status calling *transferStatus* method from Liquidity Bridge Contract:
   - If status obtained is **UNKNOWN**, **ALREADY_PROCESSED** or **FAILED_TO_PROCESS**, refund to user is made.
   - If status obtained is **OK**, will check if Locking Cap value is surpassed:
-    - If not surpassed, will transfer funds to Liquidity Bridge Contract
+    - If not surpassed:
+		- will transfer funds to Liquidity Bridge Contract
+		- will save UTXO to derived address
+		- will save UTXO in BridgeStorage (UTXO <-> Sha256Hash(Derivation Arguments))
+		- will mark tx as processed
+
 	- If surpassed, will refund Liquidity Provider
 
 
+#### Limitations
+- Transactions with depth bigger than 4320 will not be processed. That is enough depth to be able to search backwards one month worth of blocks.
+If given depth is bigger than the accepted limit, funds will be lost
+
+
+- If given transaction is invalid or provided address cannot be calculated from the given derivation arguments, funds will be lost
 #### Flow chart
 ![registerBtcTransfer() flow](RSKIP175/flow-chart-for-rskip.png)
 
@@ -101,6 +130,7 @@ This new custom redeem scrtipt will have this structure::
     scriptSig: OP_0 <signatures> <redeemScript>
     redeemScript: <derivationArgumentsHash> OP_DROP OP_M <publicKeys> OP_N OP_CHECKMULTISIG
 
+ This custom redeem script is executed in the same way to the standard one, allowing the same Federation members to sign the releases of these ad-hoc Federations.
 
 ### Copyright
 
