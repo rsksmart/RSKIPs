@@ -11,7 +11,7 @@
 
 ## Abstract
 
-This RSKIP allows a user to transfer BTC to RSK in a fast way, where a third party takes the risk to advance the payment in RBTC to the user. 
+This RSKIP allows a user to transfer BTC to RSK in a fast way, where a third party takes the risk to advance the payment in RBTC to the user.
 
 ## Motivation
 
@@ -71,8 +71,36 @@ The bridge is the most affected by this project. It will include:
     - If not surpassed, will transfer funds to Liquidity Bridge Contract
 	- If surpassed, will refund Liquidity Provider
 
+
 #### Flow chart
 ![registerBtcTransfer() flow](RSKIP175/flow-chart-for-rskip.png)
+
+
+### UTXOs Storage
+
+Two new entries will be created on Bridge storage when registerBtcTransfer() executes successfully in order to check if a UTXO was already processed.
+
+These entries will be a tuple with:
+
+**(UTXO, derivation arguments)**
+
+**(derivation arguments, UTXO)**
+
+The datetime will be saved too, as it is will be used for erasing old UTXOs.
+
+After 7 days of being registered, the entries on the Bridge storage that contains the relations **(UTXO <-> derivation arguments)** will be erased through **updateCollections** method. If any UTXO is found after that period of time, it will be migrated to the active Federation before erasing it.
+
+
+### Federation Address Derivation
+
+The address derivation process will be carried out by creating a custom redeem script that will make a push of a 32 bytes hash created from the provided derivation arguments. That data is then dropped.
+
+This new custom redeem scrtipt will have this structure::
+
+    scriptPubKey: OP_HASH160 <redeemScriptHash> OP_EQUAL
+    scriptSig: OP_0 <signatures> <redeemScript>
+    redeemScript: <derivationArgumentsHash> OP_DROP OP_M <publicKeys> OP_N OP_CHECKMULTISIG
+
 
 ### Copyright
 
