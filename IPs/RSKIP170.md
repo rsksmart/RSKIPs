@@ -12,16 +12,20 @@
 
 ## Abstract
 
-This RSKIP proposes a way for users to be able to lock funds from BTC, indicating the RSK address in which they want their RBTCs transferred to and a BTC refund address in case the peg-in can not be completed for some reason.
+This RSKIP proposes a way for users to transfer BTC to RSK, indicating the RSK address in which they want their RBTCs transferred to and a BTC refund address in case the peg-in can not be completed for some reason.
 
 ## Motivation
 
-Allowing users to lock funds to any address in RSK.
+Allowing users to lock funds to any address in RSK, EOA or contract.
 
 ## Specification
 
-The BTC transaction sent to the federation must contain at most one output with value 0 and OP_RETURN op code followed by the following data:
-- Protocol version (2 bytes). Currently **1**
+This RSKIP proposes an extension to the current peg-in workflow. By including an output with an OP_RETURN op code and certain payload in the transaction sent to the federation to perform the peg-in, the user can determine the RSK address where the RBTCs will be transferred to and a BTC refund address. 
+
+The BTC transaction sent to the federation must contain 
+ one output with value 0 and OP_RETURN op code followed by the following data:
+- `52534b54` as prefix indicating the output is for RSK. This values stands for `RSKT` (for RSK  transfer) in ascii and hex encoded. (4 bytes)
+- Protocol version in hexa (2 bytes). Currently **01**
 - A valid RSK address (20 bytes)
 - [Optional] A valid BTC refund address in the following format:
     - Address type (1 byte)
@@ -37,28 +41,40 @@ The BTC transaction sent to the federation must contain at most one output with 
       "value": 0.00000000,
       "n": 1,
       "scriptPubKey": {
-        "asm": "OP_RETURN 00010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
-        "hex": "6a2b00010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "asm": "OP_RETURN 52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "hex": "6a2b52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
         "type": "nulldata"
       }
     }
 ```
-Payload included: `00010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
+Payload included: `52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
 
-- First 2 bytes correspond to the version number: `0001`
+- First 4 bytes correspond to the prefix that indicates the output has peg-in instructions for RSK (`RSKT` in hexa): `52534b54` 
+- Next 2 bytes correspond to the version number in hexa: `0001`
 - Next 20 bytes indicate rsk destination address: `0e537aad84447a2c2a7590d5f2665ef5cf9b667a`
 - Next 1 byte indicating btc refund address type, in this case P2PKH: `01`
 - Finally 20 bytes indicating the public key hash that will be used to get the btc refund address: `4f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
 
+### New peg-in flow
+
+When a BTC transaction is sent to the Bridge by a federate node, the following steps take place:
+
+1. Blockchain validations as performed in the existing flow (e.g. amount of confirmations, PMT valid)
+2. Parse transaction to get RSK destination address and BTC refund address
+   1. If no OP_RETURN data is present, follow the current flow. Get tx sender to use as BTC refund address and derive RSK destination address from BTC public key.
+   2. If OP_RETURN data is present, get RSK destination address from the payload and the BTC refund address if present. In case there is no BTC refund address included in the payload, get the tx sender.
+
 ### Notes
-- Only one output with OP_RETURN op code is allowed in the pegin transaction. Transactions with more than one OP_RETURN outputs will be rejected.
+- There is no limit to the amount of outputs with OP_RETURN the peg-in transaction can have. But there can be only one with `RSKT` prefix indicating peg-in instructions. Transactions with more than one OP_RETURN outputs containing `RSKT` prefix will be rejected, following the existing protocol for refunds.
 - No restriction is added to the maximum length in bytes of the transaction.
-- There is no limit to the amount of outputs the transaction can have, as long as there is no more than one with OP_RETURN op code.
-- The output with OP_RETURN does not have to be in any particular order among the other outputs.
+- There is no limit to the amount of outputs the transaction can have, as long as there is no more than one with OP_RETURN op code containing `RSKT` prefix in its payload.
+- The output with OP_RETURN containing the peg-in instructions does not have to be in any particular order among the other outputs.
 
 ## Rationale
 
-[RSKIP41](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP41.md) includes optional fields with the purpose of executing a smart contract in RSK, in case the RSK destination address is a contract instead of an account. In this version of the protocol, the possibility of executing a smart contract from the pegin transaction is not contemplated. If the RSK destination address set in the payload is a contract wallet then the funds locked will be transferred to fund this contract, if the contract is not wallet then those funds will be lost.
+[RSKIP41](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP41.md) includes optional fields with the purpose of executing a smart contract in RSK, in case the RSK destination address is a contract instead of an account. In this version of the protocol, the possibility of executing a smart contract from the peg-in transaction is not contemplated. 
+
+If the RSK destination address set in the payload is a contract then the locked funds will be transferred to fund this contract. It is **not** required that the contract has a payable fallback function to receive the funds. In case the recipient contract has a payable fallback function with some implementation, the code will not be executed. Only the transfer will be made.
 
 ## References
 
