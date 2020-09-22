@@ -111,7 +111,7 @@ The CALL op code allows transaction senders to specify a gas limit for CALLs ('c
 
 
 # **Research Implementation**
-An [experimental implementation](https://github.com/optimalbrew/rskj/tree/mish) of a node with storage rent has developed and is being tested.
+An [experimental implementation](https://github.com/optimalbrew/rskj/tree/mish) of a node with storage rent has been developed.
 
 Example of a CREATE transaction with rent computation using the experimental node (on regtest)
 ```
@@ -151,7 +151,7 @@ Block tx fees: 61836     // rent passed to REMASC with normal execution gas
 
 
 # References
-1. SD.Lerner[Blockchain State Storage Rent](https://bitslog.com/2018/01/22/storage-rent-revised/) 
+1. S.D.Lerner [Blockchain State Storage Rent](https://bitslog.com/2018/01/22/storage-rent-revised/) 
 
 
 
