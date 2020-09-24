@@ -25,12 +25,12 @@ This RSKIP proposes an extension to the current peg-in workflow. By including an
 The BTC transaction sent to the federation must contain 
  one output with value 0 and OP_RETURN op code followed by the following data:
 - `52534b54` as prefix indicating the output is for RSK. This values stands for `RSKT` (for RSK  transfer) in ascii and hex encoded. (4 bytes)
-- Protocol version in hexa (2 bytes). Currently **01**
+- Protocol version in hexa (1 byte). Currently **01**
 - A valid RSK address (20 bytes)
 - [Optional] A valid BTC refund address in the following format:
     - Address type (1 byte)
-        - 1 for P2PKH
-        - 2 for P2SH
+        - 01 for P2PKH
+        - 02 for P2SH
     - Hash needed to build refund address (20 bytes)
         - For P2PKH type address: public key hash 
         - For P2SH type address: script hash
@@ -42,15 +42,15 @@ The BTC transaction sent to the federation must contain
       "n": 1,
       "scriptPubKey": {
         "asm": "OP_RETURN 52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
-        "hex": "6a2b52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "hex": "6a2b52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
         "type": "nulldata"
       }
     }
 ```
-Payload included: `52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
+Payload included: `52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
 
 - First 4 bytes correspond to the prefix that indicates the output has peg-in instructions for RSK (`RSKT` in hexa): `52534b54` 
-- Next 2 bytes correspond to the version number in hexa: `0001`
+- Next 1 byte that correspond to the version number in hexa: `01`
 - Next 20 bytes indicate rsk destination address: `0e537aad84447a2c2a7590d5f2665ef5cf9b667a`
 - Next 1 byte indicating btc refund address type, in this case P2PKH: `01`
 - Finally 20 bytes indicating the public key hash that will be used to get the btc refund address: `4f4c767a2d308eebb3f0f1247f9163c896e0b7d2`
