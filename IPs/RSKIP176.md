@@ -11,7 +11,7 @@
 
 ## Abstract
 
-This RSKIP allows a user to transfer BTC to RSK in a fast way, where a third party takes the risk to advance the payment in RBTC to the user.
+This RSKIP proposes a protocol change for the Bridge to provide a way for a contract to validate if a given BTC transaction sent funds to a derived Federation and to send those funds to the contract. This is part of a wider fast-bridge project that will allow a user to transfer BTC to RSK in a fast way, where a third party takes the risk to advance the payment in RBTC to the user.
 
 ## Motivation
 
@@ -19,24 +19,23 @@ Allowing users to transfer BTC to RSK immediately, without waiting for usual peg
 
 ## Specification
 
-The system comprises one or more liquidity providers (LPs), listed in an onchain marketplace. Interactions with LPs are intermediated using a dApp or a website.
-This RSKIP specifies the requirements for consensus changes without limiting the actual implementation of the Liquidity Providers market.
+The fast-bridge system connects users, Liquidity Providers (LP) and a certain Liquidity Bridge Contract (LBC).
+This RSKIP specifies the requirements for consensus changes without limiting the actual implementation of the fast-bridge system.
 
 #### Bridge
 
-The bridge is the most affected by this project. It will include:
-- Create **registerBtcTransfer**() method.
+The bridge needs to expose a new method called **registerBtcTransfer**().
 
 #### registerBtcTransfer()
 
 **ABI Signature**
 
-        function registerBtcTransfer(bytes btcTxSerialized, int heigth, bytes pmtSerialized, bytes32 derivationArgumentsHash, string userRefundBtcAddress, string LiquidityBridgeContractAddress, string LiquidityProviderBtcAddress, bool shouldTransferToContract)
+        function registerBtcTransfer(bytes btcTxSerialized, int heigth, bytes pmtSerialized, bytes32 derivationArgumentsHash, string userRefundBtcAddress, string LiquidityBridgeContractAddress, string LiquidityProviderBtcAddress, bool shouldTransferToContract) return int
 
 
 **Derivation Arguments**
 
-The derivation arguments are values used to closed the agreement between the Liquidity Provider and the user. Some of these parameters are the RSK address where funds will be received, the BTC refund address, the Liquidity Bridge Contract address, the value to transfer, de amount ob BTC blocks that the Liquidity Provider should wait before advancing funds, the Liquidity Provider BTC refund address, the Federation address, and some other values that are domain of the Liquidity Provider.
+The derivation arguments are values used to close the agreement between the Liquidity Provider and the user. Some of these parameters are the RSK address where funds will be received, the BTC refund address, the Liquidity Bridge Contract address, the value to transfer, the amount of BTC blocks that the Liquidity Provider should wait before advancing the funds, the Liquidity Provider BTC refund address, the derived Federation address, and some other values that are domain of the Liquidity Provider.
 
 
 **Parameters**:
@@ -52,7 +51,7 @@ The derivation arguments are values used to closed the agreement between the Liq
 
 **Flow**:
 
-- Bridge receives a call from Liquidity Bridge Contract and validates that the sender of that call is effectively the LBC address, that is received as parameter
+- Bridge receives a call from a contract (an alleged Liquidity Bridge Contract) and validates that the sender of that call is effectively the LBC address, that is received as parameter
 
 - Performs the same validations the Bridge does in **registerBtcTransaction** to determine if the BTC transaction is legitimate (e.g.: txAlreadyProcessed, confirmations, PMT, etc)
 
@@ -60,11 +59,11 @@ The derivation arguments are values used to closed the agreement between the Liq
 
 	`Sha256Hash(derivationArgumentsHash, userRefundAddress, LBCAddress, LPBtcAddress)`
 
-- Verifies that the derivated address does not exist in BridgeStorage (no entry was created using  the Sha256Hash described above)
+- Checks if the derivation hash was used already. If so, it will refund the user.
 
 - Verifies provided Liquidity Bridge Contract address actually belongs to a contract
 
-- Validates the shouldTransferToContract value received as parameter from Liquidity Bridge Contract:
+- Depending on the shouldTransferToContract value received as parameter from Liquidity Bridge Contract:
 
  - If status obtained is **true**, will check if Locking Cap value is surpassed:
     - If not surpassed:
@@ -72,6 +71,7 @@ The derivation arguments are values used to closed the agreement between the Liq
 		- will save UTXO to derived address
 		- will save UTXO in BridgeStorage (UTXO <-> Sha256Hash(Derivation Arguments))
 		- will mark tx as processed
+		- will store the UTXO for the Bridge to use, among any data concerning to the Bridge operation.
 
 	- If surpassed, will refund Liquidity Provider
 
@@ -96,21 +96,6 @@ If given depth is bigger than the accepted limit, funds will be lost
 
 #### Flow chart
 ![registerBtcTransfer() flow](RSKIP176/flow-chart-alternative.png)
-
-
-### UTXOs Storage
-
-Two new entries will be created on Bridge storage when registerBtcTransfer() executes successfully in order to check if a UTXO was already processed.
-
-These entries will be a tuple with:
-
-**(UTXO, derivation arguments)**
-
-**(derivation arguments, UTXO)**
-
-The datetime will be saved too, as it is will be used for erasing old UTXOs.
-
-After 7 days of being registered, the entries on the Bridge storage that contains the relations **(UTXO <-> derivation arguments)** will be erased through **updateCollections** method. If any UTXO is found after that period of time, it will be migrated to the active Federation before erasing it.
 
 
 ### Federation Address Derivation
