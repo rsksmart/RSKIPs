@@ -3,7 +3,7 @@
 |RSKIP          |Unassigned          |
 | :------------ |:-------------|
 |**Title**      |Implementing Storage Rent in RSK|
-|**Created**    |September 22, 2020 |
+|**Created**    |September 29, 2020 |
 |**Authors**     |Sergio Demian Lerner, Diego Masini, Shreemoy Mishra  |
 |**Purpose**    |Sca, Fair, Sec |
 |**Layer**      |Core |
@@ -27,7 +27,7 @@ Block gas limit does not apply to storage rent. Rent is an additional uncapped r
 
 
 # **Specification**
-The current RSKIP takes a minimalistic approach to storage rent. It represents a simplification of several prior RSKIPs including [RSKIP21](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP21.md), [RSKIP52](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP52.md), [RSKIP61](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP61.md) and [RSKIP113](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP113.md). See [1] for additional context about the motivation and potential impact of storage rent.
+The current RSKIP takes a minimalistic approach to storage rent. It represents a simplification of several prior RSKIPs including [RSKIP21](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP21.md), [RSKIP52](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP52.md), [RSKIP61](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP61.md) and [RSKIP113](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP113.md). See [[1](https://bitslog.com/2018/01/22/storage-rent-revised/)] for additional information on motivation, concept evolution and impact of storage rent.
 
 ## Rent computation and collection
 ### Granularity
@@ -111,7 +111,7 @@ The CALL op code allows transaction senders to specify a gas limit for CALLs ('c
 
 
 # **Research Implementation**
-An [experimental implementation](https://github.com/optimalbrew/rskj/tree/mish) of a node with storage rent has been developed.
+We have developed a [research implementation](https://github.com/rsksmart/rskj/tree/storageRent2020_RSKIP113) of a RSK(J) node with storage rent.
 
 Example of a CREATE transaction with rent computation using the experimental node (on regtest)
 ```
@@ -152,7 +152,6 @@ Block tx fees: 61836     // rent passed to REMASC with normal execution gas
 
 # References
 1. S.D.Lerner [Blockchain State Storage Rent](https://bitslog.com/2018/01/22/storage-rent-revised/) 
-
 
 
 # **Copyright**
