@@ -16,7 +16,7 @@ This RSKIP proposes a way for users to transfer BTC to RSK, indicating the RSK a
 
 ## Motivation
 
-Allowing users to lock funds to any address in RSK, EOA or contract.
+Allowing users to peg-in BTC to any address in RSK, EOA or contract.
 
 ## Specification
 
@@ -57,7 +57,7 @@ Payload included: `52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2
 
 ### New peg-in flow
 
-When a BTC transaction is sent to the Bridge by a federate node, the following steps take place:
+When a BTC transaction is sent to the Bridge, the following steps take place:
 
 1. Blockchain validations as performed in the existing flow (e.g. amount of confirmations, PMT valid)
 2. Parse transaction to get RSK destination address and BTC refund address
@@ -65,9 +65,9 @@ When a BTC transaction is sent to the Bridge by a federate node, the following s
    2. If OP_RETURN data is present, get RSK destination address from the payload and the BTC refund address if present. In case there is no BTC refund address included in the payload, get the tx sender.
 
 ### Notes
-- There is no limit to the amount of outputs with OP_RETURN the peg-in transaction can have. But there can be only one with `RSKT` prefix indicating peg-in instructions. Transactions with more than one OP_RETURN outputs containing `RSKT` prefix will be rejected, following the existing protocol for refunds.
 - No restriction is added to the maximum length in bytes of the transaction.
-- There is no limit to the amount of outputs the transaction can have, as long as there is no more than one with OP_RETURN op code containing `RSKT` prefix in its payload.
+- No restriction is added to the total amount of outputs the transaction can have.
+- There is no limit to the amount of outputs with OP_RETURN the peg-in transaction can have. But there can be only one with `RSKT` prefix indicating peg-in instructions. Transactions with more than one OP_RETURN outputs containing `RSKT` prefix will be rejected, following the existing protocol for refunds.
 - The output with OP_RETURN containing the peg-in instructions does not have to be in any particular order among the other outputs.
 
 ## Rationale
