@@ -1,6 +1,6 @@
 # Merged Mining Capabilities Extension
 
-|RSKIP          |UMM           |
+|RSKIP          |177           |
 | :------------ |:-------------|
 |**Title**      |Merged Mining Capabilities Extension |
 |**Created**    |APR-2020 |
