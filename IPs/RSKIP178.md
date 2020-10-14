@@ -1,7 +1,7 @@
 # External Confirmation Hashrate
 
 
-|RSKIP          | xxx |
+|RSKIP          | 178 |
 | :------------ |:-------------|
 |**Title**      |External Confirmation Hashrate|
 |**Created**    |SEP-2020 |
