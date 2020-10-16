@@ -140,8 +140,8 @@ if (coinbaseLength <= 64) return (mergeMined,false)
 transactionHash = SHA256(tail) starting from the midstate40 
 coinbaseTransactionHash = reverseBytes(transactionHash)
 
-if (validMerkleTree(merkleRoot,coinbaseTransactionHash)) return (mergeMined,false)
-return (mergeMined,false)
+if (not validMerkleTree(merkleRoot,coinbaseTransactionHash)) return (mergeMined,false)
+return (mergeMined,true)
 ```
 
 This logic of the *getMMInfo()* function is very similar to the existent in the *ProofOfWorkRule* in rskj and the *ProofOfWorkRule* must be changed to use this function.
