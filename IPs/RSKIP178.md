@@ -24,7 +24,7 @@ This RSKIP represents one of the changes to the RSK consensus that is required t
 
 ## Motivation
 
-The only contribution to the cryptoeconomic security of an independent proof-of-work chain without subsidy is the existence of high transaction fees. In the case of sidechain 1:1 pegged to a primary chain that is protected by merge-mining, there is a high strategic alignment between the primary chain miners and merge-miners, so the honest majority and the fact that attacks to the secondary chain often become attributable are the two main assurances for the security for the sidechain. Nevertheless, RSK went further, and deployed the Armadillo system to provide fork-awareness. This sub0system creates a time window to trigger an emergency response by the community, in case of long reorg attempts.  This addition increased the security of RSK even more. Nevertheless, Armadillo requires a separate communication channel and the existence of at least one honest node monitoring the Bitcoin network. The SFAMM protocol and security model captures the benefits of Armadillo, makes Armadillo decentralized, and formalizes the protocol algorithms, assumptions and guarantees. The SFAMM protocol is ideal for RSK as it focuses not only on the hashrate capability of the attacker but also on the processing time that will be required for a successful attack.
+The only contribution to the cryptoeconomic security of an independent proof-of-work chain without subsidy is the existence of high transaction fees. In the case of sidechain 1:1 pegged to a primary chain that is protected by merge-mining, there is a high strategic alignment between the primary chain miners and merge-miners, so the honest majority and the fact that attacks to the secondary chain often become attributable are the two main assurances for the security for the sidechain. Nevertheless, RSK went further, and deployed the Armadillo system to provide fork-awareness. This subsystem creates a time window to trigger an emergency response by the community, in case of long reorg attempts.  Nevertheless, Armadillo requires a separate communication channel and the existence of at least one honest node monitoring the Bitcoin network. The SFAMM protocol and security model captures the benefits of Armadillo, makes Armadillo decentralized, and formalizes the protocol algorithms, assumptions and guarantees. The SFAMM protocol is ideal for RSK as it focuses not only on the hashrate capability of the attacker but also on the processing time that will be required for a successful attack.
 
 This RSKIP proposes a consensus change that enables RSK nodes to:
 
@@ -63,7 +63,7 @@ And *uncles* is a list of RSK block headers. We define a **heavyblock** to be a 
 
 We extend the list uncles to include, after all RSK block headers, a number of heavyblock elements (defined later). To maintain semantic coherence, the *uncles* field is renamed *difficultyContributors*. The field *uncleCount* is renamed as *difficultyContribution*.
 
-*difficultyContributors* will be an RLP list two two elements: the first is the old *uncles* vector. The next is the new *confirmationHeavyblocks* array.
+*difficultyContributors* will be an RLP list two two elements: the first is the old *uncles* list. The next is the new *heavyblocks* list.
 
 ```
 difficultyContributors  = { uncles  , heavyblocks }
