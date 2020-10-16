@@ -61,12 +61,12 @@ blockHeader, transactions, uncles
 
 And *uncles* is a list of RSK block headers. We define a **heavyblock** to be a *mergeMiningProof* with certain properties that will be verified in consensus.
 
-We extend the list uncles to include, after all RSK block headers , any number of confirmation heavyblock elements, but not all of them, a subset called confirmation heavyblocks, as defined later. To maintain semantic coherence, the *uncles* field is renamed *difficultyContributors*. The field *uncleCount* is renamed as *difficultyContribution*.
+We extend the list uncles to include, after all RSK block headers, a number of heavyblock elements (defined later). To maintain semantic coherence, the *uncles* field is renamed *difficultyContributors*. The field *uncleCount* is renamed as *difficultyContribution*.
 
 *difficultyContributors* will be an RLP list two two elements: the first is the old *uncles* vector. The next is the new *confirmationHeavyblocks* array.
 
 ```
-difficultyContributors  = { uncles  , confirmationHeavyblocks }
+difficultyContributors  = { uncles  , heavyblocks }
 ```
 
 *difficultyContributors* will also be an RLP list of two elements: the first, called *immediateContribution*, represents the difficulty contributed by uncles. The second, called *delayedContribution*, represents the contribution made by confirmation heavyblocks.
@@ -77,7 +77,7 @@ difficultyContributors = { immediateContribution , delayedContribution }
 
 The maximum number of uncles referenced in *uncles* will be reduced from 10 to 6.
 
-The maximum number of confirmation heavyblocks referenced in *confirmationHeavyblocks* will be 2.
+The maximum number of heavyblocks referenced in *heavyblocks* will be 2.
 
 A Bitcoin block header contains these fields:
 
@@ -96,11 +96,20 @@ The Bits field is stored in a compact format. Let Bits be a byte array *{ E,Q1,Q
 
 ### Validation
 
-We'll define the function *isValidConfirmationHeavyblock()* to check the validity of confirmation heavyblocks. We'll also replace the function that checks the validity of the proof of work of normal RSK blocks with the function *isRSKBlockProofOfWork()*, because some of the RSK blocks can contain an anchor heavyblock.
+We'll define the function *getPoWInfo()* to check the validity of all kinds of blocks (mainchain, uncles and elements in the *heavyblocks* list). This means that the function that checks the validity of the proof of work of normal RSK blocks is changed to call getPoWInfo(). This is because some of the RSK blocks can be anchor heavyblocks.
 
-But before, we'll define an auxiliary function *getInfo()*:
+But before, we'll define an auxiliary function *getMMInfo()*:
 
-**function getInfo(mergeMiningFields)** **returns  (mergeMined,isMMValid)**
+**function getMMInfo()** 
+
+Arguments:
+
+* **mergeMiningFields**
+
+Returns:
+
+* boolean **mergeMined**
+* boolean **isMMValid**
 
 ```
 x = bitcoinMergedMiningCoinbaseTransaction of mergeMiningFields
@@ -135,11 +144,19 @@ if (validMerkleTree(merkleRoot,coinbaseTransactionHash)) return (mergeMined,fals
 return (mergeMined,false)
 ```
 
-This logic of the *getInfo()* function is very similar to the existent in the *ProofOfWorkRule* in rskj and the *ProofOfWorkRule* must be changed to use this function.
+This logic of the *getMMInfo()* function is very similar to the existent in the *ProofOfWorkRule* in rskj and the *ProofOfWorkRule* must be changed to use this function.
 
-If (isMMValid==true) and (mergeMined==true), then the input represents an **anchor heavyblock**. 
+If (isMMValid==true) and (mergeMined==true), then the input represents an **anchor heavyblock** (it can be an also an internal uncle, and external uncle, or a mainchain block). 
 
 If (isMMValid==true) and (mergeMined==false), then the input represents an **confirmation heavyblock**. 
+
+Anchor heavyblocks can be referenced by three distinct means:
+
+- in normal mainchain RSK block, using the mainchain block merge-mining proof
+- in an RSK uncle block header, using the uncle's merge-mining proof, representing a **internal uncle anchor heavyblock**. 
+- in the *heavyblocks* list, also representing an **external uncle anchor heavyblock**, but one that has been  extracted from the Bitcoin blockchain, and not from the RSK network.
+
+To identify **external uncle anchor heavyblocks** from the Bitcoin blockchain, the ARMADILLO data must be extended to include at least 14 bytes of the RSK parent block id, or 4 bytes of the Bitcoin block id associated with it. Until ARMADILLO is improved, this RSKIP proposes that the ARMADILLO tag as it is today is used to identify the uncle. This will extend the uncle reach to a depth of 64 at most, which facilitates "nothing-at-stake" double-spends for up to depth 64. By including just two bytes of the Bitcoin pow of the prior RSK block in the ARMADILLO data, the attack probability is reduced 2^16-fold. In other words, considering 50% of the hashrate merge-mining RSK, the attack opportunity will only occur spontaneusly once every 2.5 years.
 
 Note that the midstate of *SHA256Digest* class in rskj uses a different format that the one used in this description. We call our variable midstate40 to distinguish between them.
 
@@ -152,52 +169,91 @@ Also it is important to note that the above algorithm requires that for a block 
 
 The reason to require 169 bytes of tail is to prevent an attacker hiding the RSK tag by specifying a starting position after it.
 
-**function isValidConfirmationHeavyblock(mergeMiningProof) returns (isValid,difficultyContribution)**
+**function getPoWInfo()**
+
+Arguments:
+
+* **rskBlockHeader,**
+* **mergeMiningProof,**
+* boolean **fromHeavyblocksArray,**
+* boolean **mainchain,**
+* boolean **uncle**
+
+Returns:
+
+- boolean **isValid**
+- uint **immediateDifficultyContribution**
+- uint **delayedDifficultyContribution**
+- boolean **includeInBtcBlockReferences**
 
 ```
-if not BTCproofOfWorkValid(bitcoinMergedMiningHeader) return (false,0)
-compute btcDifficulty0 from bitcoinMergedMiningHeader
-if  (btcDifficulty0 < difficulty) return (false,0)
-(mergeMined,isMMValid) =getInfo(mergeMiningProof)
-if not isMMValid return (false,0)
-if mergeMined then return (false,0)
-isHBTimeValid = abs( bitcoinMergedMiningHeader.timeStamp - blockHeader.timeStamp) < 300
-if not isHBTimeValid return (false,0)
-if not previouslyIncluded(bitcoinMergedMiningHeader.parent) return (false,0)
-if previouslyIncluded(bitcoinMergedMiningHeader.getBlockHash()) return (false,0)
-difficultyContribution = C(RSKblockHeader,bitcoinMergedMiningHeader)
-return (true,difficultyContribution)
-```
+isValid = false
+immediateDifficultyContribution =0
+delayedDifficultyControbution =0
+includeInBtcBlockReferences = false
 
-In the shown pseudo-code *BTCproofOfWorkValid()* checks that the proof of work of the Bitcoin header matches the difficulty specified in the Bitcoin header. The algorithm computes the *btcDifficulty0* specified by Bitcoin header and checks that it is higher than the difficulty of the RSK block that includes it. The call to the function *getInfo()* checks that the *bitcoinMergedMiningMerkleProof* is correct in relation with the other two fields if the mergeMiningProof, according to the same consensus rules used to validate merge-mining.
+if not fromHeavyblocksArray
+	// all RSK blocks (uncles or mainchain) must have valid proof-of-work at the
+	// RSK block difficulty
+	if not rskProofOfWorkValid(rskBlockHeader,bitcoinMergedMiningHeader) then return
 
-**function isRSKBlockProofOfWork(mergeMiningProof) returns (isValid, difficultyContribution,include)**
+(mergeMined,isMMValid) =getMMInfo(mergeMiningProof)
+if not isMMValid return
 
-```
-if not RSKproofOfWorkValid(RSKblockHeader,bitcoinMergedMiningHeader) then result (false,0,false)
-if not BTCproofOfWorkValid(bitcoinMergedMiningHeader) return (false,0,false)
-(mergeMined,isMMValid) =getInfo(mergeMiningProof)
-if not isMMValid return (false,0,false)
-if not mergeMined then return (false,0,false)
-isHBTimeValid = abs( bitcoinMergedMiningHeader.timeStamp - blockHeader.timeStamp) < 300
-if not isHBTimeValid return (false,0,false)
-compute btcDifficulty0 from bitcoinMergedMiningHeader 
-isHBDifficultyValid=(btcDifficulty0 >= difficulty) 
-if isHBDifficultyValid 
-	// This is a valid anchor heavy block
-	difficultyContribution = A(RSKblockHeader,bitcoinMergedMiningHeader)
-	include = true
+isHBTimeValid = abs( bitcoinMergedMiningHeader.timeStamp - rskBlockHeader.timeStamp) < 300
+if not isHBTimeValid return
+
+btcDifficulty0 =getBtcDifficulty0(bitcoinMergedMiningHeader)
+isPotentialHeavyBlock=(btcDifficulty0 >= difficulty) 
+if  (isPotentialHeavyBlock) 
+	isHeavyblock = btcProofOfWorkValid(bitcoinMergedMiningHeader) return
 else
-	difficultyContribution = R(RSKblockHeader,bitcoinMergedMiningHeader)
-	include = false
-return (true,difficultyContribution,include)
+	isHeavyblock = false
+
+if not mergemined
+	// This can only be a confirmation heavyBlock
+	if (not fromHeavyblocksArray) return
+	if (not isHeavyblock) return
+	// We check that there is a btc parent registered
+	if btcBlockpreviouslyIncluded(bitcoinMergedMiningHeader.getBlockHash()) return
+	delayedDifficultyControbution = C(rskBlockHeader,bitcoinMergedMiningHeader)
+	includeInBtcBlockReferences = true
+	
+if not isHeavyblock and mergemined
+	if (fromHeavyblocksArray) return
+	// it is a normal block or uncle block
+	immediateDifficultyContribution = R(rskBlockHeader,bitcoinMergedMiningHeader)
+    if not previouslyIncluded(bitcoinMergedMiningHeader.parent) return
+    // uncles are already checked for previous inclusion, and uncle inclusion depth
+    // is shorter than SFAMM depth, so we don't need to check again.
+    // This check should not change anything, and it can be used as an assertion
+    if btcBlockpreviouslyIncluded(bitcoinMergedMiningHeader.getBlockHash()) return
+	
+if isHeavyblock and mergemined
+	// this is an:
+	// * internal uncle anchor heavyblock or
+	// * external uncle anchor heavyblock
+    // * mainchain anchor heavyblock
+    includeInBtcBlockReferences = true
+	if (fromHeavyblocksArray)
+		// external uncle anchor heavyblock
+		immediateDifficultyContribution = C(RSKblockHeader,bitcoinMergedMiningHeader)
+	else
+		// internal anchor heavyblock or uncle anchor heavyblock
+		immediateDifficultyContribution = A(rskBlockHeader,bitcoinMergedMiningHeader)
+else
+	// elements in fromHeavyblocksArray must be blocks solved at Bitcoin difficulty 
+	if fromHeavyblocksArray return
+	
+isValid = true
+return
 ```
 
-After processing an RSK block, if the isRSKBlockProofOfWork() method returns include==true, then this means it is an anchor heavyblock and therefore the associated Bitcoin block hash is must be included to the list of heavyblocks that can be referenced by *previouslyIncluded()*. Note that we don't need to check that an anchor heavyblock has already been included because have a parent, and can only be included in a certain position in the blockchain.
+In the shown pseudo-code *btcProofOfWorkValid()* checks that the proof of work of the Bitcoin header matches the difficulty specified in the Bitcoin header. The algorithm computes the *btcDifficulty0* specified by Bitcoin header and checks that it is higher than the difficulty of the RSK block that includes it. The call to the function *getMMInfo()* checks that the *bitcoinMergedMiningMerkleProof* is correct in relation with the other two fields if the mergeMiningProof, according to the same consensus rules used to validate merge-mining.
 
-The function *previouslyIncluded()* returns true if the bitcoin header with the hash given was included in the  *confirmationHeavyblocks* array or as a anchor heavyblock a in any of the previous 256 blocks. Note that references may form a DAG, and therefore an included heavyblock may have more than one child in the last 256 blocks. 
+Every merge-mining proof,  in mainchain, in the uncles list or in the heavyblocks list must be validated with the *getPoWInfo()* method. If the method returns isValid==false, then the block is invalid. If the method returns *iincludeInBtcBlockReferences*==true, then this means it is an anchor or confirmation heavyblock and therefore the associated Bitcoin block hash is must be included to the list *btcBlockReferences* that can be referenced by *btcBlockPreviouslyIncluded()*. 
 
-All heavyblocks in the *confirmationHeavyblocks* array must be valid according to isValidConfirmationHeavyblock().
+The function *btcBlockPreviouslyIncluded()* returns true if the bitcoin header with the hash given was included in the  *btcBlockReferences*  list. This array maintains a list of all included heavyblocks in the past 256 blocks. The array need not to be stored, as it can be recomputed each time from the heavyblocks, uncles and mainchain blocks in the past 256 blocks. Note that references may form a DAG, and therefore an included heavyblock may have more than one child in the last 256 blocks. 
 
 ### Cumulative Difficulty
 
@@ -235,7 +291,7 @@ The *delayedContribution* is applied to the cumulative difficulty 40 blocks late
 
 ### Computation of difficultyContribution
 
-To build this field, all contributions in the *difficultyContributors* field are multiplied by 1024, added together, and then divided by the RSK block *difficulty*. Therefore the *difficultyContribution* will be stored scaled by 1024. This guarantees a 0.1% precision for heavyblocks, without taking too much space. For Bitcoin blocks (whose difficulty is approximately 40 times the RSK difficulty), the precision is 0.0025%.  For Bitcoin Cash blocks, with difficulties between 1 and 2 times RSK's, the precision is 0.1%.
+To build the *immediateContribution* and *delayedContribution* fields, their real values are multiplied by 1024, added together, and then divided by the RSK block *difficulty*. Therefore the *difficultyContribution* fields will be stored scaled by 1024. This guarantees a 0.1% precision for heavyblocks, without taking too much space. For Bitcoin blocks (whose difficulty is approximately 40 times the RSK difficulty), the precision is 0.0025%.  For Bitcoin Cash blocks, with difficulties between 1 and 2 times RSK's, the precision is 0.1%.
 
 ### Sha256Digest Class Midstate
 
@@ -259,7 +315,7 @@ Sha256Digest mapping of midstate:
 
 ### Transaction Confirmation
 
-In Nakamoto consensus, a transaction is confirmed if there are N block confirmations after the transaction has been included. In the SFAMM model, we recommend that economic actors wait also N*v time, where v is the average RSK block interval (currently 30 seconds). 
+In Nakamoto consensus, a transaction is confirmed if there are *N* block confirmations after the transaction has been included. In the SFAMM model, we recommend that economic actors wait also *N\*v* time, where *v* is the average RSK block interval (currently 30 seconds). 
 
 ## Rationale
 
@@ -269,9 +325,9 @@ Several design choices have been taken. This section describes the most relevant
 
 Adding new fields to the RSK header increases the bandwidth consumption of light nodes. To avoid adding a new field to the RSK block header, the heavyblocks are packed together with uncles in the *difficultyContributors* field. This makes sense semantically as both uncles and heavyblocks have similar roles in the protocol: contribute to the cumulative difficulty of the block.  
 
-#### Limiting the number of confirmation Heavyblocks
+#### Limiting the number of heavyblocks
 
-There are two reasons for the maximum number of heavyblocks referenced in in *difficultyContributors* to higher than 1.
+There are two reasons to have more than one heavyblock referenced in the *difficultyContributors* field:
 
 1.  To accept heavyblocks from Bitcoin forks, in that case that more than one Bitcoin-like blocks are created in the same RSK block interval. However, this case would be rare. Most Bitcoin-forks have the same block average interval as Bitcoin, therefore the risk of many heavyblocks being queued is extremely low. 
 2. To accept transferring proof of work from Bitcoin to RSK in case RSK merge-mining is paused due to a network health problem. In that case, it's possible that confirmation heavyblocks accumulate during a certain period, and therefore they are enqueued to be added to RSK blocks, and RSK blocks needs to be able to process them as fast as possible. However, accepting old confirmation heavyblocks can also be a vector of attack, for example, if there is a certain Bitcoin fork that RSK miners are not aware of, and this fork is producing blocks, then selfish RSK fork may try to reference hundreds of past confirmation heavyblocks from this hypothetical fork, and reorganize the RSK blockchain. Therefore this RSKIP requires RSK block timestamps to be close to confirmation heavyblock timestamps also. 
@@ -283,11 +339,11 @@ While an average RSK block now transfers more difficulty to the blockchain than 
 The *delayedContribution* is applied to the cumulative difficulty after 60 blocks. This is to deter an attack and an accidental situation. If all difficulty contributions were immediate, then:
 
 * When a malicious miner sees a confirmation heavyblock in Bitcoin, it can create a block template having a parent block which is 10 blocks behind the best block, and, if he finds the next block first, it  immediately reverts 10 blocks of the blockchain, because the heavyblock contributes with a difficulty that is higher than 10 normal RSK blocks.
-* If the Bitcoin network creates a stale block, some of the miners may see it while some others may not. Then the malicious miner that sees the Bitcoin stale block but nobody else does, he has an advantage to to revert the RSK blockchain, and perform a double-spend attack. 
+* If the Bitcoin network creates a stale block, some of the miners may see it while some others may not. If  a malicious miner sees the Bitcoin stale that is a confirmation heavyblock block but nobody else does, he has an advantage to to revert the RSK blockchain, and perform a double-spend attack by referencing that heavyblock in his private chain. 
 
 By delaying the contribution the first problem is eliminated, because the honest fork will also reference the confirmation heavyblock before the malicious fork increases its difficulty.
 
-The second problem is mitigated because now the attacker needs to catch up with the honest chain by mining selfish blocks to realize the advantage. The advantage may be about 40 blocks (because of the contribution made by the stale block) but a 1-40 block disadvantage because he must revert confirmed transaction in order to double-spend. The higher the payment amount, the more blocks the victim will be waiting for confirmation. Simulations show that with a 60 block delay in difficulty transfer, the attacker would still require over 40% of RSK hashrate to attempt a double-spend that reverts 20 blocks.
+The second problem is mitigated because with the delay the attacker needs to catch up with the honest chain by mining selfish blocks to realize the advantage. The advantage may be about 40 blocks (because of the contribution made by the stale block) but the attacker also gets a 1 to 40 block disadvantage because he must revert a confirmed transaction in order to double-spend. The higher the payment amount, the more blocks the victim will be waiting for confirmation. Simulations show that with a 60 block delay in the difficulty transfer, the attacker would still require over 40% of RSK hashrate to attempt a double-spend that reverts 20 blocks.
 
 ## Backwards Compatibility
 
@@ -308,7 +364,10 @@ The rskj code would need to modified in at least the following places:
 
 ## Security Considerations
 
-TBA
+This RSKIP protects the RSK network from a large gamut of double-spend attacks by either increasing the their cost (reaching Bitcoin levels of cryptoeconomic security) or by forcing the attacker to be public about the attack during the whole payment confirmation interval, leaving a trace of anchor heavyblocks in Bitcoin blocks and reducing the amount of cumulative hashrate transferred to RSK.
+
+However, some variants of the double-spend attack, such as isolating a victim node,  still need additional changes to be prevented. These other changes, required by the SFAMM model, will be specified in other RSKIPs.
+
 # **Copyright**
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).,
