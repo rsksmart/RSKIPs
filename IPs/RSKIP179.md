@@ -1,10 +1,10 @@
 # BTC-RSK timestamp linking
 
 
-|RSKIP          | xx |
+|RSKIP          | 179 |
 | :------------ |:-------------|
 |**Title**      |BTC-RSK timestamp linking|
-|**Created**    |SEP-2020 |
+|**Created**    |OCT-2020 |
 |**Author**     |SDL |
 |**Purpose**    |Sec |
 |**Layer**      |Core |
