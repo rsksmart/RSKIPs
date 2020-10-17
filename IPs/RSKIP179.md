@@ -10,7 +10,7 @@
 |**Layer**      |Core |
 |**Complexity** |1 |
 |**Status**     |Draft |
-|**discussions-to**     | |
+|**discussions-to**     |https://research.rsk.dev/t/rskip-179-btc-rsk-timestamp-linking/44 |
 
 
 # **Abstract**
