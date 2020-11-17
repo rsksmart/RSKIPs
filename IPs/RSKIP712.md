@@ -1,7 +1,7 @@
 # RSK typed structured data hashing and signing
 
 
-|RSKIP          | 712 |
+|RSKIP          | 712  |
 | :------------ |:-------------|
 |**Title**      |RSK typed structured data hashing and signing|
 |**Created**    |02-NOV-2020 |
