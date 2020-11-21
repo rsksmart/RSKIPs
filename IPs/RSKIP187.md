@@ -38,6 +38,7 @@ This RSKIP specifies the changes included in the RSK network upgrade name Iris.
 - RSKIP 181: Add 2WP peg-in transactions reject events
 - RSKIP 185: Add 2WP peg-out transactions events and refund support
 - RSKIP 186: Preserve RSK PowPeg activation block height
+- RSKIP 188: Precompile for BLS12-381 curve operations
 
 ## Timeline
 
