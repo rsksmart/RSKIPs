@@ -1,12 +1,12 @@
 # getTransactionIndex Precompile method
 
 
-|RSKIP          | xxx |
+|RSKIP          | 192 |
 | :------------ |:-------------|
 |**Title**      |getTransactionIndex Precompile method|
 |**Created**    |NOV-2020 |
 |**Author**     |SDL |
-|**Purpose**    |Sec |
+|**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
 |**Status**     |Draft |
