@@ -20,8 +20,6 @@ The Strong Fork-aware Merge-mining (SFAMM) protocol proposes a new security mode
 This RSKIP represents one small change to the RSK consensus that is required to achieve security under the SFAMM model.  
 
 
-
-
 ## Motivation
 
 This RSKIP aims to prevent a merge-miner attacker from mining old RSK blocks with the current Bitcoin hashrate. The RSKIP proposes to prevent the Bitcoin block timestamp to be far away from the RSK timestamp. Since the Bitcoin timestamp is partially malleable for a minority miner, generally up to 1 hour in the past, the prevention only works for reversion attacks that span of large time scales of at least several hours.  
@@ -66,7 +64,11 @@ abs( bitcoinMergedMiningHeader.timestamp - rskBlockHeader.timestamp) < 300
 
 ## Rationale
 
-Miners update their timestamp at least once every minute, so 300 seconds (5 minutes) is more than enough for them to provide accurate timestamps. Since generally Bitcoin timestamps are chosen by the miners while the RSK timestamp is chosen by the mining pool server, we only require both timestamps to be close with a high error tolerance.
+We assume that economic nodes wait a number of blocks for confirmation when receiving a payment. The number of blocks can be fixed or depend on the amount of the payment, but it’s unrelated to the cumulative difficulty. There are two variants of the double-spend attack depending on the attack timing: an attack that starts after the victim confirms the transaction or an attack that starts before. The first is called Reversion-After-Confirmation (RAC), and the second Reversion-During-Confirmation (RDC). The distinction is of uttermost importance. RSK already has tools to detect and avoid RDC attacks. The Armadillo systems monitors the Bitcoin blockchain and alerts of parallel forks. Also nodes can monitor the total active hashrate and detect sudden reductions. The SFAMM consensus changes (not discussed in this RSKIP) provide also a new method to prevent RDC attacks. However, in a RAC attack, the attack starts after the attacker has already cashed out the first spend, and only the second (double) spend remains. To revert the blockchain after the cash out, the attacker needs to mine blocks with timestamps in the past or leave large time gaps between blocks. It's easy to penalize forks containing timestamp gaps, as SFAMM proposes, so that the cumulative work required by the attacker is much higher. The only option left to the attacker is to mine with past timestamps.
+
+RSK has access to a cryptoeconomic timestamping system, the timestamps of the Bitcoin blocks need to be approximately accurate for the blocks to by accepted by Bitcoin consensus, but RSK is not currently using this feature. In this RSKIP we propose forcing the RSK timestamp to match the Bitcoin timestamp with an error margin of 5 minutes. If the merge-miner wants to cheat, it must give up the profit from Bitcoin mining and create invalid Bitcoin blocks.
+
+Miners normally update their timestamp at least once every minute, so 5 minutes is a loose tolerance. Since generally Bitcoin timestamps are chosen by the miners while the RSK timestamp is chosen by the mining pool server, RSK shouldn't impose a lower tolerance.
 
 ## Backwards Compatibility
 
