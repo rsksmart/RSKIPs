@@ -14,7 +14,7 @@
 
 # **Abstract**
 
-This RSKIP specifies a change in the Powpeg federation migration process to generate an audit trail for the change in Powpeg addresses, embedded in Bitcoin transactions. The content of the first Bitcoin transaction that the Bridge commands when migrating the pegged funds from one federation to a following one is added a new OP_RETURN output with the pushed message "RSKMIG".
+This RSKIP specifies a change in the Powpeg federation migration process to generate an audit trail for the change in Powpeg addresses, embedded in Bitcoin transactions. An OP_RETURN output with the pushed message "RSKMIG" is added to the first Bitcoin transaction that the Bridge commands to sign when migrating the pegged funds to a new federation.
 
 ## Motivation
 
@@ -27,7 +27,7 @@ The first transaction of a federation migration process must have, as the last o
 
 ## Rationale
 
-There exists other alternatives to the proposed change, such as requiring that the old federation signs a different message containing only the new federation address. This results in a smaller chains in terms of space. However it requires changing the Powpeg node, the Btidge and PowHSM firmware, while this proposal only requires changing the Bridge code.
+There exists other alternatives to the proposed change, such as requiring that the old federation signs a different message containing only the new federation address. This results in a smaller chains in terms of space. However it requires changing the Powpeg node, the Bridge and PowHSM firmware, while this proposal only requires changing the Bridge code.
 
 ## Backwards Compatibility
 
@@ -43,7 +43,7 @@ TBA
 
 ## Security Considerations
 
-While a dumb wallet cannot validate if the last address of a given chain is actually the active address, the incentive to fool the wallet into using an old address is low, because to profit from it the attacker would need to be in control of the majority of private keys of such old federation address to steal the funds sent.
+While a dumb wallet cannot validate if the last address of a given chain is actually the active address, the incentive to fool the wallet into using an old address is low, because to steal funds the attacker would need to be in control of the majority of private keys of such old federation address.
 This RSKIP also gives an alternate method for Bitcoin wallets to obtain RSK federation address: scanning the Bitcoin blockchain looking for migration transactions. This ensures that the wallet has the last address without the need for scanning the RSK blockchain.
 
 # **Copyright**
