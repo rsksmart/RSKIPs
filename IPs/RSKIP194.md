@@ -1,7 +1,7 @@
 # Bloom filter compression
 
 
-|RSKIP          | xx |
+|RSKIP          | 194 |
 | :------------ |:-------------|
 |**Title**      |Bloom filter compression|
 |**Created**    |NOV-2020 |
