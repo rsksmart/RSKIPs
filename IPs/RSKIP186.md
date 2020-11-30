@@ -15,11 +15,11 @@
 When the Federation change voting process finishes, the Bridge emmits a `commit_federation` event.
 This event can be used to provide a blockchain proof of the Federation address when requested. Nowadays doing this would imply navigating the blockchain to determine when it was emmited, or constantly monitoring said events.
 
-This RSKIP proposes adding on chain information for easily fetch the block where the Federation was changed for the last time. With the block, a system could provide the proof that it belongs to the mainchain.
+This RSKIP proposes adding on-chain information to easily fetch the block where the Federation was changed for the last time. With the block, a system could provide proof that it belongs to the mainchain.
 
 ## Motivation
 
-When a user gets the Federation address they usually interact with a node/service and have to trust on this information. This exposes a risk where a man-in-the-middle kind of attack could lead users to send their funds to invalid address thus losing them.
+When a user gets the Federation address they usually interact with a node/service and have to trust this information. This exposes a risk where a man-in-the-middle kind of attack could lead users to send their funds to an invalid address thus losing them.
 
 ## Specification
 
