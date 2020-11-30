@@ -29,18 +29,17 @@ The Bridge will store two new values:
 - activeFederationCreationBlockHeight. (long)
   - Defaults to the existing Federation activation height 
 - nextFederationCreationBlockHeight. (long)
-  - Defaults to the existing Federation activation height
+  - Defaults to null.
 
 ### Commit Federation process changes
 
 When a new Federation is committed and the `commit_federation` event is triggered, the Bridge will store the block height in `nextFederationCreationBlockHeight`.
 
-When a new Federation activates, the Bridge will replace `activeFederationCreationBlockHeight` with the value in `nextFederationCreationBlockHeight`.
+### updateCollections method changes
 
+The updateCollections method is responsible for the supporting operations of the Bridge, as such, this method now will have to check if a new Federation became Active.
 
-This means that when the `commit_federation` event is emmited, the Bridge should store an additional value (e.g. `nextFederationCreationBlockHeight`) and when the new Federation becomes the active one, then it will update the definitive value. It is important not to replace the active value before the Federation actually changes (in Mainnet this happens after 18500 blocks).
-
-When this RSKIP gets implemented it should include an initial value with the last Federation change in each network.
+When a new Federation activates, the Bridge will replace `activeFederationCreationBlockHeight` with the value in `nextFederationCreationBlockHeight` and clear the value of `nextFederationCreationBlockHeight`.
 
 ### getActiveFederationCreationBlockHeight method
 
@@ -48,7 +47,11 @@ When this RSKIP gets implemented it should include an initial value with the las
 getActiveFederationCreationBlockHeight() returns uint256
 ```
 
-This method will return the value stored in `activeFederationCreationBlockHeight`.
+This method will return the Active Federation block height. To do this, it should:
+- check if there is a value for `nextFederationCreationBlockHeight`.
+  - If so, it should verify if the current block is higher than or equals to `nextFederationCreationBlockHeight` + `federationActivationAge` (Mainnet: 18500, Testnet: 60, Regtest: 10).
+    - If so, it should return `nextFederationCreationBlockHeight`.
+- Otherwise, it should return the value stored in `activeFederationCreationBlockHeight`.
 
 ## Rationale
 
