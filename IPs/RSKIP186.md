@@ -17,6 +17,8 @@ This event can be used to provide a blockchain proof of the Federation address w
 
 This RSKIP proposes adding on-chain information to easily fetch the block where the Federation was changed for the last time. With the block, a system could provide proof that it belongs to the mainchain.
 
+Additionally, once a Federation migration process finishes, the retiring Federation is removed. This RSKIP proposes to keep the last retiring Federation address in storage, to be used in case there are outstanding funds to migrate after the retiring age.
+
 ## Motivation
 
 When a user gets the Federation address they usually interact with a node/service and have to trust this information. This exposes a risk where a man-in-the-middle kind of attack could lead users to send their funds to an invalid address thus losing them.
@@ -25,21 +27,29 @@ When a user gets the Federation address they usually interact with a node/servic
 
 ### Storage changes
 
-The Bridge will store two new values:
+The Bridge will store three new values:
 - activeFederationCreationBlockHeight. (long)
   - Defaults to the existing Federation activation height 
 - nextFederationCreationBlockHeight. (long)
+  - Defaults to null.
+- lastRetiredFederationAddress. (btcAddress)
   - Defaults to null.
 
 ### Commit Federation process changes
 
 When a new Federation is committed and the `commit_federation` event is triggered, the Bridge will store the block height in `nextFederationCreationBlockHeight`.
 
+When the Federation is committed, after setting the retiring Federation as the previous one, Bridge will set `lastRetiredFederationAddress` using the retiring Federation as its value.
+
 ### updateCollections method changes
 
 The updateCollections method is responsible for the supporting operations of the Bridge, as such, this method now will have to check if a new Federation became Active.
 
 When a new Federation activates, the Bridge will replace `activeFederationCreationBlockHeight` with the value in `nextFederationCreationBlockHeight` and clear the value of `nextFederationCreationBlockHeight`.
+
+### registerBtcTransaction method changes
+
+During the peg-in process, the Bridge evaluates which kind of BTC transaction it is requested to register. To detect if it's a migration, it checks if the sender is the retiring Federation, and if the recipient is the active Federation. Add to this check that the sender could be the retiring Federation, or the last Retired Federation.
 
 ### getActiveFederationCreationBlockHeight method
 
