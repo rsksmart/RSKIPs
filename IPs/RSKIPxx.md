@@ -1,7 +1,7 @@
 # Minpeg, a miners' multisig in the peg
 
 
-|RSKIP          |  xxxx |
+|RSKIP          | 198 |
 | :------------ |:-------------|
 |**Title**      |Minpeg, a miners' multisig in the peg|
 |**Created**    |JAN-2021 |
@@ -55,7 +55,7 @@ In a recycle, all UTXO held by the bridge are moved into a new multisignature ad
 The script has the following format:
 
 ```
-<powpegN> <powHSM_pubkey1>  ... <powHSM_pubkeyN> <powpegM> OP_CHECKMULTISIG 
+<powpegN> <powHSM_pubkey1>  ... <powHSM_pubkeyN> <powpegM> OP_CHECKMULTISIGVERIFY 
 <minerPubkey1> OP_CHECKSIG
 OP_IF
   <attestation_weight1>
@@ -152,6 +152,12 @@ Let N be the number of miners elected. If N<5 then the miners' multisig is deact
 If the count of all blocks accumulated by the elected miners is below 4000 (10% of all hashrate), then the multisig is also deactivated.
 
 To select the Bitcoin public keys for the minpeg multisig, the bitcoinPubkey map is queried.
+
+## Bridge Interaction with miners
+
+The bridge must request and receive signatures from the miners in the same way it does with Powpeg pegnatories. The extension is TBD. It's important that minpeg member identities (RSK addresses) and pegnatories addresses do not overlap, to allow the detection of the signature source.
+
+
 
 ## Rationale
 
