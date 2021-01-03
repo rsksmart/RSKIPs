@@ -40,9 +40,7 @@ The defense-in-depth strategy adopted by the RSK community states that there sho
 
 ### Threat Model
 
-The new layer of defense added gives a chosen set of miners certain additional responsibilities and therefore powers, which brings up the question of if miners are trustworthy or not. However, a "dishonest miner" cannot easily hide.  RSK merge-mining is normally attributable, and a dishonest miner must stop adding identity information to blocks (or start using others' miners identities) much before the attack. 
-
-For example, a dumb attack attempt would be to try to perform a a double-spent attack to the bridge, while hiding the miner identities of the majority of RSK blocks (approximately 30% of Bitcoin blocks) for the ~16 hours required to cheat the bridge with a private fork. However the missing hashrate can generally be attributed to the large missing mining pool. Hiding the identity of a the majority of Bitcoin or RSK hashrate without this being noticed by the community seems to be really difficult.
+The new layer of defense added gives a chosen set of miners certain additional responsibilities and therefore powers, which brings up the question of miners' trust. However, the "dishonest miner" has very limited capabilities with the changes proposed in this RSKIP. First, because the minpeg multisig is an additional requirement of the Bitcoin peg-out script, the best attack miners can perform is full peg-out censorship. Full censorship can only be profited from through extortion, and that risk is mitigated with the addition of time-locked emergency multi-signature in the upcoming Iris network upgrade. Second, malicious miners cannot easily hide their actions. RSK merge-mining is normally attributable. To become surreptitious, a dishonest miner must stop adding identity information to blocks (or start using others' miners identities) much before the attack. Hiding the identity of a the majority of Bitcoin or RSK hashrate without this being noticed by the community seems to be difficult.
 
 
 
