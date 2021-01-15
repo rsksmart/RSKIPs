@@ -143,6 +143,7 @@ RSK Improvement Proposals
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Draft |
 | 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
 | 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
+| 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Draft |
 
 
 (*) Under evaluation to be implemented in the next reference client release
