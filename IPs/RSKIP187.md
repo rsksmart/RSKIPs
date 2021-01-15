@@ -39,10 +39,12 @@ This RSKIP specifies the changes included in the RSK network upgrade name Iris.
 - [RSKIP 185](https://github.com/rsksmart/RSKIPs/pull/185): Add 2WP peg-out transactions events and refund support
 - [RSKIP 186](https://github.com/rsksmart/RSKIPs/pull/186): Preserve RSK PowPeg activation block height
 - [RSKIP 188](https://github.com/rsksmart/RSKIPs/pull/188): Precompile for BLS12-381 curve operations
+- [RSKIP 191](https://github.com/rsksmart/RSKIPs/pull/191): Remove non Ethereum opcodes from virtual machine
+- [RSKIP 201](https://github.com/rsksmart/RSKIPs/pull/201): Time-locked Emergency Multisignature
 
 ## Timeline
 
-* 2020-12-20 deadline to accept proposals for Iris
+* Updated: * 2021-02-01 deadline to accept proposals for Iris
 
 ## Copyright
 
