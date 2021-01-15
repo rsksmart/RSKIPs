@@ -28,6 +28,8 @@ This RSKIP proposes to create a new `Environment` pre-compile contract to with a
 
 The method with signature `GetCallStackDepth() returns (uint32)` is added to a new pre-compiled contract named `Environment`, created at address `0x0000000000000000000000000000000001000011`. The call can fail is the call stack is full. The minimum returned value is 1, because the call to the precompile contract consumes one call stack position.
 
+The gas cost specific to this method call is 0, but the existing 700 gas for any contract call will be charged.
+
 
 ## Backwards Compatibility
 
