@@ -1,7 +1,7 @@
 # checkEnvironment Precompile method
 
 
-|RSKIP          | xxx |
+|RSKIP          | 208 |
 | :------------ |:-------------|
 |**Title**      |checkEnvironment Precompile method|
 |**Created**    |JAN-2021 |
