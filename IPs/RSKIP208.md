@@ -18,17 +18,17 @@ This RSKIP proposes to add a method `checkEnvironment()` to a new `Environment` 
 
 ## Motivation
 
-The motivation is the one described in [RSKIP203](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP203.md) plus we add the requirement that contracts that forward contracts do not become vulnerable if another counter of any kind is added to the environment.
+The motivation is the one described in [RSKIP203](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP203.md) plus we add the requirement that contracts that forward contracts calls do not become suddenly vulnerable if a network upgrade adds another hidden counter to the environment.
 
-This RSKIP proposes to create a new `Environment` pre-compile contract to with a method to check if the minimal environment requirements given as the `env` argument are satisfied. The argument contains a list of fields in RLP format. This RSKIP defines that the first argument of the list is the stack depth. The gas limit is left outside `env` because the caller must provide the value externally to `CALL`. The remaining arguments are undefined and are ignored. Users and relayers will negotiate a content for `env`. Smart contract do not need to interpret the content of `env`, and can simply pass it to the `checkEnvironment()` method.
+This RSKIP proposes to create a new `Environment` pre-compile contract with a method to check if the minimal environment requirements given as the `env` argument are satisfied. The argument contains a list of fields in RLP format. This RSKIP defines that the first argument of the list is the stack depth. The gas limit is left outside `env` because the caller must provide the value externally to `CALL`. The remaining fields are undefined and are ignored. It is expected that future network upgrades assume default values for missing fields. Users and relayers will negotiate a content for `env`. Smart contract do not need to interpret the content of `env`, and can simply pass it to the `checkEnvironment()` method.
 
 ## Specification
 
-The method with signature ` checkEnvironment(bytes env) returns (uint32)` is added to a new pre-compiled contract named `Environment`, created at address `0x0000000000000000000000000000000001000011`. The call returns 0 on success. On failure it returns the number of item in `env` that is not satisfied by the environment (1==first item). 
+The method with signature ` checkEnvironment(bytes env) returns (uint32)` is added to a new pre-compiled contract named `Environment`, created at address `0x0000000000000000000000000000000001000011`. The call returns 0 on success. On failure it returns the position of the item in `env` that is not satisfied by the environment (1==first item). 
 
 The argument `env` corresponds to a list of items, each coded in RLP. It is not an RLP list. 
 
-The first item is the minimum stack depth.
+The first item is the minimum stack depth. If the argument length is zero, the default value assumed for the stack depth item is 200.
 
 Additional arguments are ignored, even if they decode to invalid RLP data.
 
