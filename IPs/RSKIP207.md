@@ -13,7 +13,7 @@
 
 #  **Abstract**
 
-The time-locked emergency multisignature introduced in RSKIP201 requires a that Powpeg UTXOs are periodically spent in order to prevent the time-lock expiration. 
+The time-locked emergency multisignature introduced in RSKIP201 requires that Powpeg UTXOs are periodically spent in order to prevent the time-lock expiration. 
 
 This RSKIP proposes a mechanism for the Bridge to command this time-lock refresh in a way that maintains high-availability of funds for peg-out, and low risk of time-lock expiration.
 
@@ -25,15 +25,14 @@ The motivation for adding an time-locked emergency multisignature is presented i
 
 ## Specification
 
-The bridge contracts maintains a FIFO queue of UTXOs called **oldUTXOs** as a double-linked list, where Powpeg UTXOs are ordered by block height of inclusion in the Bitcoin blockchain. The Bridge maintains a **oldest** and **newest** pointers to the first and last elements. Every time updateCollections() is called a new procedure **checktimeLockExpiration()** is called before any other processing. In this procedure checks are performed in sequence:
+The bridge contract maintains a FIFO queue of UTXOs called **oldUTXOs** as a double-linked list, where Powpeg UTXOs are ordered by block height of inclusion in the Bitcoin blockchain. The Bridge maintains an **oldest** and **newest** pointers to the first and last elements. Every time updateCollections() is called a new procedure **checktimeLockExpiration()** is called before any other processing. In this procedure checks are performed in sequence:
 
 1. Check if composition voting phase should be cancelled.
 
-2. Checks if its not undergoing a membership change protocol and if a timestamp D has been reached.
+2. Check if its not undergoing a membership change protocol and if a timestamp D has been reached.
 
-   
 
-In check 1 if the Powpeg is undergoing a composition voting phase, and if this voting phase is taking more than 1 month then the composition change protocol is immediately cancelled and the check 2 will be performed. This ensures that the expiration check cannot be blocked by subsequent attempts to change the Powpeg composition.
+In check 1, if the Powpeg is undergoing a composition voting phase, and if this voting phase is taking more than 1 month then the composition change protocol is immediately cancelled and the check 2 will be performed. This ensures that the expiration check cannot be blocked by subsequent attempts to change the Powpeg composition.
 
 In check 2, if both conditions are true, it will scan the oldUTXOs list from older to newer and unlink a maximal set of elements S where the inclusion block height for each element is lower than (D-6 months). All the UTXOs in the set S will be spent packed in one or more transactions, and moved into a single output per transaction, belonging also to the Powpeg. The set S can be empty. The next expiration check deadline D will be postponed by adding 1 month to it.
 
@@ -59,7 +58,7 @@ TBD
 
 This RSKIP protects the RSK network from the expiration of the time-lock. If the time-lock expired without a real emergency event affecting the Powpeg devices, then the signatories of the emergency multisig will have full access to the pegged funds, bypassing the security of the Powpeg.
 
-It this RSKIP is not adopted, but the emergency multisignature is activated, it is still possible for users to extend the time-locks by performing several low-value peg-out operations until all UTXOs are consumed and recycled. While the community can force the refresh of UTXOs, the blockchain should not rely on this human-dependent behavior.
+If this RSKIP is not adopted, but the emergency multisignature is activated, it is still possible for users to extend the time-locks by performing several low-value peg-out operations until all UTXOs are consumed and recycled. While the community can force the refresh of UTXOs, the blockchain should not rely on this human-dependent behavior.
 
 # **Copyright**
 
