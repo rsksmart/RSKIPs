@@ -146,6 +146,8 @@ RSK Improvement Proposals
 | 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
 | 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 209 |[Stack-overflow removal](IPs/RSKIP203.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
+	
 
 
 (*) Under evaluation to be implemented in the next reference client release
