@@ -150,6 +150,7 @@ RSK Improvement Proposals
 | 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Draft |
 | 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 209 |[Stack-overflow removal](IPs/RSKIP203.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
 
 
 (*) Under evaluation to be implemented in the next reference client release
