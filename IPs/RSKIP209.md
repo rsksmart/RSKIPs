@@ -30,6 +30,7 @@ For this reason the EIP150 did not achieve consensus by the RSK community. This 
 Every  `CALL` locks 1/64 factor of the current available gas, like EIP150, but the locked gas is not immediately reimbursed when the CALL finishes, but at the end of transaction processing. Internally, the environment stores, for each stack depth, the amount of gas locked.  Assuming **lockedGasByDepth** is an array of integer values that are all initialized with zero, the pseudo-code is the following:
 
 ```
+consumeGas(standard_call_costs); // 700 + value-transfer cost, etc.
 callGas = min(top-of-stack item,availableGas)
 lockGas = availableGas/64;
 maxGasToPassCallee = availGas-lockGas
