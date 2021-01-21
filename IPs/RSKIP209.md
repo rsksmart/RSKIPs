@@ -27,16 +27,21 @@ For this reason the EIP150 did not achieve consensus by the RSK community. This 
 
 ## Specification
 
-Every  `CALL` locks 1/64 factor of the current available gas,like EIP150, but the locked gas is not immediately reimbursed when the CALL finishes, but at the end of transaction processing. Internally, the environment stores, for each stack depth, the amount of gas locked. On a `CALL`, 1/64 of the available gas is computed, and compared to the previous amount locked for the same stack height. If it's higher, the difference is additionally locked. If it's lower, no additional lock occurs. Assuming **lockedGasByDepth** is an array of integer values that are all initialized with zero, the pseudo-code is the following:
+Every  `CALL` locks 1/64 factor of the current available gas, like EIP150, but the locked gas is not immediately reimbursed when the CALL finishes, but at the end of transaction processing. Internally, the environment stores, for each stack depth, the amount of gas locked.  Assuming **lockedGasByDepth** is an array of integer values that are all initialized with zero, the pseudo-code is the following:
 
 ```
+callGas = min(top-of-stack item,availableGas)
 lockGas = availableGas/64;
-expectedLock = lockGas-lockedGasByDepth[currentCallDepth];
-if (expectedLock>0) {
-  consumeGas(expectedLock);
-  callReimbursement +=expectedLock;
-  lockedGasByDepth[currentCallDepth] = lockGas;
-} 
+maxGasToPassCallee = availGas-lockGas
+if (callGas>maxGasToPassCallee) {
+ 	forbiddenGas =callGas-maxGasToPassCallee
+ 	if (forbiddenGas>lockedGasByDepth[currentCallDepth]) {
+		expectedLock = forbiddenGas-lockedGasByDepth[currentCallDepth];
+  		consumeGas(expectedLock);
+  		callReimbursement +=expectedLock;
+  		lockedGasByDepth[currentCallDepth] = forbiddenGas; // can only increase
+	} 
+}
 ```
 
 The command consumeGas() reduces the available gas by the given amount and can rise an OOG exception. 
