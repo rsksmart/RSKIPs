@@ -142,12 +142,15 @@ RSK Improvement Proposals
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Draft |
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Draft |
 | 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
+| 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Draft |
 | 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
 | 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
+| 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
 | 209 |[Stack-overflow removal](IPs/RSKIP203.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
-	
 
 
 (*) Under evaluation to be implemented in the next reference client release
