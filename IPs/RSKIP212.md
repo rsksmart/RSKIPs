@@ -14,7 +14,7 @@
 
 # **Abstract**
 
-This RSKIP proposes the addition of a version field to transactions in such as way that transactions are as compatible as possible with existing hardware wallets, and requires minimum changes from software wallets.
+This RSKIP proposes the addition of a version field to transactions maintaining high compatibility with existent hardware wallets, and requiring minimum changes from software wallets.
 
 ## Motivation
 
