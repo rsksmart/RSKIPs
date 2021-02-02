@@ -53,7 +53,7 @@ The transaction format version 1 adds the new fields version embedded in the pos
 8. r
 9. s
 
-The field nonce is renamed multiPurpose, and it contains an RLP list of two values: version and nonce. Version is encoded as an integer. The only version value accepted is 1. Following RSKIPs can define additional versions. Transactions version 0 must use the previous format.  The RLP parser can detect if it is a transaction version 0 or version 1 by inspecting only the multiPurpose field (previously called nonce). If this element is a list (more precisely, starts with byte 0xc2), then the version is 1. If not, then it is the nonce, and the transaction version is 0.
+The field nonce is renamed multiPurpose, and it contains an RLP list of two values: version and nonce. Version is encoded as an integer. The only version value accepted is 1. The conding must be minimal (no zero padding). Following RSKIPs can define additional versions. Transactions version 0 must use the previous format.  The RLP parser can detect if it is a transaction version 0 or version 1 by inspecting only the multiPurpose field (previously called nonce). If this element is a list (more precisely, starts with byte 0xc2), then the version is 1. If not, then it is the nonce, and the transaction version is 0.
 
 When a transaction with version 1 is received, and it needs retransmission, it must be retransmitted in transaction format 1. A transaction version 0 is retransmitted a transaction format 0.
 
