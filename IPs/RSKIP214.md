@@ -12,7 +12,7 @@
 
 # **Abstract**
 
-This RSKIP proposes that data can be transmitted to contracts such that if the data if not used by contracts for some time, the data is disposed from the blockchain.
+This RSKIP proposes that data can be transmitted to contracts such that if the data if not used by contracts for some time, the data is disposed from the blockchain. This RSKIP is an improvement of [RSKIP28](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP28.md) in both the proposed method and description details.
 
 # **Motivation**
 
@@ -109,20 +109,26 @@ Ephemeral calldata only becomes part of the blockchain if it is retrieved by a c
 
 **Delayed**
 
-Ephemeral calldata is delayed one block. A smart-contract can only access the ephemeral calldata starting from the following block of ephemeral calldata inclusion. This reduces the stress to process the ephemeral data in the critical block propagation path from miner to miner. The ephmeral calldata can be sent after the propagation of the standard block data, so that ephemeral data transmission occurs in parallel of block validation at the destination node. Even if there is a risk that a miner creating a block does not provide the ephemeral calldata after the block, forcing the destination peer to backtrack, this is the same risk that a node undergoes when processing a block full of transactions in case the last transaction is invalid. 
+Ephemeral calldata is delayed one block. A smart-contract can only access the ephemeral calldata starting from the following block of ephemeral calldata inclusion. This reduces the stress to process the ephemeral data in the critical block propagation path from miner to miner. The ephemeral calldata can be sent after the propagation of the standard block data, so that ephemeral data transmission occurs in parallel of block validation at the destination node. Even if there is a risk that a miner creating a block does not provide the ephemeral calldata after the block, forcing the destination peer to backtrack, this is the same risk that a node undergoes when processing a block full of transactions in case the last transaction is invalid. 
 
 
 ## Ephemeral Calldata Use Cases
 
 Ephemeral calldata has many use cases. We describe two of them.
 
-**Optimistic Rollups**
+**Signatures in Optimistic Rollups**
 
 A Rollup is a blockchain scaling technique that moves transaction execution offchain, while keeping the transaction data onchain. The rollup operator performs periodic commitments on the transaction data and ledger state after the transactions were performed. 
 Operators pre-deposit security bonds that are slashed in case they misbehave by presenting transaction data that does not lead to the committed state. Generally users do not need to inspect the transaction data, and they can trust the commitment, as long as there are other systems (generally called watchtowers) that are checking the correctness of the commitments and can alert of fraud through **fraud proofs**. Fraud proofs can only be presented for a period after the operator commits to a state. A rollup transaction has two components: the description and the signature. The transaction description generally must be preserved for users to be able to reconstruct the rollup ledger state in case the operator fails (the exception is if the full ledger is checkpointed in the blockchain). However, after some time, there is no need to store the signatures anymore, because fraud profs for those transactions are not accepted.
 There are two types of optimistic rollups: those that post onchain an aggregated signature for all transactions (either a multi-signature or a batched signature) and those that post onchain one signature per transaction. In all cases of aggregation, the signature occupies a short space, and ephemeral data is not suitable for signatures. If there is no aggregation, then there is a huge benefit to send all the signatures as ephemeral calldata in a few transactions. Without aggregation signatures can represent from 50% to 85% of the transaction data depending on the compression and signature scheme used in practice.
+While signature aggregation benefits are evident, a fraud proof verification requires aggregating all public keys and signatures, which is generally  prohibittively expensive in terms of gas. Aggregating transactions in smaller sets is required.
 
-Suppose that all the ephemeral data is used to store BLS signatures of a rollup system. We assume the block has a 8M gas limit, and that 50% of the space is used to store ephemeral data. Therefore a block can store up to 500 kilobytes of ephemeral data, split into 5 transactions. The block can pack 15k signatures (assuming 32 bytes/signature). If the average block rate is 30 seconds, this implies the transaction procesing of the rollup can reach 500 tps. The remaining block space can be used to store the transaction data for a rollup.
+Suppose that all the ephemeral data is used to store BLS signatures of a rollup system. We assume the block has a 8M gas limit, and that 50% of the space is used to store rollup signatures and the other 50% to store the remaining rollup transaction data. Therefore a block can store up to 500 kilobytes of ephemeral data, split into 5 transactions. The block can pack 15k signatures (assuming 32 bytes/signature). If the average block rate is 30 seconds, this implies the transaction procesing of the rollup can reach 500 tps. The remaining block space can be used to store the transaction data for a rollup.
+
+**Optimistic Rollups with Checkpoints**
+
+A token balance entry in a rollup ledger generally comprises a public key and a unsigned big integer. This entry occupies less space than a token transaction, which requires origin, destination, amount, and signature. If every user that participates in a rollup protocol performs 2 transactions per month with each owned token, then the whole ledger state occupies less space than the sum of all transactions performed in the month. This means that after a month is over, the rollup operator could post the full ledger checkpoint at the last day of the month, and after the checkpoint has been fully posted and a dispute period has elapsed, the both the transactions and the previous ledger checkpoint could be disposed. Assuming posting a ledger checkpoint takes a month, a maximum of 3 months of transaction data need to be accessible at any point in time. Therefore all transaction data and ledger checkpoint can be ephemeral data (it can also be default data, as specified by [RSKIP70]( https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP70.md)). 
+Under the assumption of a 8M block, and a two month epoch, the 75% of the block can be used for rollup transactions (data and signatures), a scaling of reach 375 tps, but the transaction cost is reduced approximately 4X. To avoid reposting account states for accounts that are inactive, the inactive accounts can be moved to another persistent rollup ledger. The accounts that enter this ledger and transactions originated in accounts in this lerger are described in non-ephemeral calldata and have a higher cost to the user, but they avoid recurrent checkpoint payments.
 
 **Fair Multi-player Games**
 
@@ -139,6 +145,10 @@ When the number of participants taking part of a multi party protocol is high, t
 This use case is closely related to state channels. Clearly, if a participant does respond to offchain communications on time, the remaining participants can request to the unresponsive participant to post his actions as onchain data with an "data availability challenge", so they can  continue playing. The cryptocurrency network is used as a secure broadcast medium on-demand. However, a participant can falsely accuse another from being unresponsibe and challenge him to post the action data onchain. 
 The participant defending has no other option than to post the calldata, which is generally expensive in terms of gas.
 If action data is posted as ephemeral calldata, the fairness of the system is increased because responding to a data availability challenge becomes a lot cheaper. Allowing action data to be sent as ephemeral calldata is particularly useful when action data is large (increases the cost of posting the data) or the number of participants is high (increases the chances of broken communications). 
+
+## Alternatives to Ephemeral Calldata
+
+One alternative to this proposal is to make the whole blockchain ephemeral data, and automatically dispose blocks after one year of confirmation blocks (or a fixed number of blocks). The argument favoring this alternative proposal is that one year of cumulative work with more than 50% of Bitcoin merge-mining hashrate, while having Armadillo monitoring for parallel forks, its enough to make re-mining impossible. It also is simpler to implement. In fact, the security model of full ephemeral blocks is no different from a drivechain which is the target security model for the two-way-peg. The drivechain uses a long peg-out interval to assure malicious peg-out attempts are visible to the community.
 
 
 # **Copyright**
