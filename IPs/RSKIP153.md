@@ -5,7 +5,7 @@
 |**Title**      |Add BLAKE2 compression function `F` precompile |
 |**Created**    |19-11-2020 |
 |**Author**     |FJ |
-|**Purpose**    |USa |
+|**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Accepted |
@@ -18,17 +18,17 @@ Also this RSKIP will make RSK compatible with [EIP-152](https://github.com/ether
 
 ## Motivation
 
-Besides being a useful cryptographic hash function and SHA3 finalist, BLAKE2 allows for efficient verification of the Equihash PoW used in Zcash, making a BTC Relay - style SPV client possible on Ethereum. A single verification of an Equihash PoW verification requires 512 iterations of the hash function, making verification of Zcash block headers prohibitively expensive if a Solidity implementation of BLAKE2 is used.
+Besides being a useful cryptographic hash function and SHA3 finalist, BLAKE2 allows for efficient verification of the Equihash PoW used in Zcash, making a BTC Relay - style SPV client possible on RSK. A single verification of an Equihash PoW verification requires 512 iterations of the hash function, making verification of Zcash block headers prohibitively expensive if a Solidity implementation of BLAKE2 is used.
 
 BLAKE2b, the common 64-bit BLAKE2 variant, is highly optimized and faster than MD5 on modern processors.
 
-Interoperability with Zcash could enable contracts like trustless atomic swaps between the chains, which could provide a much needed aspect of privacy to the very public rsk blockchain.
+Interoperability with Zcash could enable contracts like trustless atomic swaps between the chains, which could provide a much needed aspect of privacy to the very public RSK blockchain.
 
 ## Specification
 
 This new precompiled contract should be enabled when `blockNumber >= irisHardfork`.
 
-The rest of the specification it's, described at [EIP-152](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-152.md).
+The rest of the specification is described in [EIP-152](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-152.md).
 
 ## References
 
