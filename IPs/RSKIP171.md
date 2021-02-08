@@ -8,7 +8,7 @@
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Accepted |
 
 ## Abstract
 
