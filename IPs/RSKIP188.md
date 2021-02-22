@@ -12,25 +12,7 @@
 
 ## Abstract
 
-In order to be compatible with EIP-2537, a set of precompiled contracts it's needed. This precompiles adds operation on `BLS12-381` curve, as a precompile, in a set necessary to efficiently perform operations such as:
-- BLS signature verification 
-- and perform SNARKs verifications.
-
-If `blockNumber >= iris` we introduce nine separate precompiles to perform the following operations:
-
-`BLS12_G1ADD` - to perform point addition on a curve defined over prime field
-`BLS12_G1MUL` - to perform point multiplication on a curve defined over prime field
-`BLS12_G1MULTIEXP` - to perform multiexponentiation on a curve defined over prime field
-`BLS12_G2ADD` - to perform point addition on a curve twist defined over quadratic extension of the base field
-`BLS12_G2MUL` - to perform point multiplication on a curve twist defined over quadratic extension of the base field
-`BLS12_G2MULTIEXP` - to perform multiexponentiation on a curve twist defined over quadratic extension of the base field
-`BLS12_PAIRING` - to perform a pairing operations between a set of pairs of (G1, G2) points
-`BLS12_MAP_FP_TO_G1` - maps base field element into the G1 point
-`BLS12_MAP_FP2_TO_G2` - maps extension field element into the G2 point
-
-Mapping functions are implemented according to IEFT specification version `v7`(!) using an simplified SWU method. It does NOT perform mapping of the byte string into field element that can be implemented in many different ways and can be efficiently performed in EVM, but only does field arithmetic to map field element into curve point. Such functionality is required for signature schemes.
-
-Multiexponentiation operation is included to efficiently aggregate public keys or individual signer’s signatures during BLS signature verification.
+In order to mantain Ethereum compatibility, we introducue a set of precompiled contracts. Enabling efficient operations on BLS12-381 curve, in a necessary set for BLS signature verifications and SNARKs verifications.
 
 ### Proposed addresses table
 
@@ -48,11 +30,27 @@ Multiexponentiation operation is included to efficiently aggregate public keys o
 
 ## Motivation
 
-Motivation of this precompile is to add a cryptographic primitive that allows to get 120+ bits of security for operations over pairing friendly curve compared to the existing BN254 precompile that only provides 80 bits of security.
+Motivation of this precompile:
+- Mantain compatibility between RSK and Ethereum
+- Add a cryptographic primitive that allows to get 120+ bits of security for operations over pairing friendly curve compared to the existing BN254 precompile that only provides 80 bits of security.
 
 ## Specification
 
-This set of precompiles should be enabled when `blockNumber >= iris`.
+If `blockNumber >= iris` we introduce nine separate precompiles to perform the following operations:
+
+`BLS12_G1ADD` - to perform point addition on a curve defined over prime field
+`BLS12_G1MUL` - to perform point multiplication on a curve defined over prime field
+`BLS12_G1MULTIEXP` - to perform multiexponentiation on a curve defined over prime field
+`BLS12_G2ADD` - to perform point addition on a curve twist defined over quadratic extension of the base field
+`BLS12_G2MUL` - to perform point multiplication on a curve twist defined over quadratic extension of the base field
+`BLS12_G2MULTIEXP` - to perform multiexponentiation on a curve twist defined over quadratic extension of the base field
+`BLS12_PAIRING` - to perform a pairing operations between a set of pairs of (G1, G2) points
+`BLS12_MAP_FP_TO_G1` - maps base field element into the G1 point
+`BLS12_MAP_FP2_TO_G2` - maps extension field element into the G2 point
+
+Mapping functions are implemented according to IEFT specification version `v7`(!) using an simplified SWU method. It does NOT perform mapping of the byte string into field element that can be implemented in many different ways and can be efficiently performed in EVM, but only does field arithmetic to map field element into curve point. Such functionality is required for signature schemes.
+
+Multiexponentiation operation is included to efficiently aggregate public keys or individual signer’s signatures during BLS signature verification.
 
 The rest of the specification it's described at [EIP-2537](https://eips.ethereum.org/EIPS/eip-2537)
 
