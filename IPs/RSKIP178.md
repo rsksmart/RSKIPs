@@ -15,22 +15,21 @@
 
 # **Abstract**
 
-The Strong Fork-aware Merge-mining (SFAMM) protocol proposes a new security model suited for a merge-mined blockchain. If the blockchain implements the SFAMM protocol, and if the assumptions of the model are satisfied, the model assures that large double-spend attacks are prevented, by making attacks visible, attributable, requiring at least 51% Bitcoin miners collusion and, more importantly, requiring a bounded time, where the bound depends on the attacker hashrate but it is known in advance. The bound parameter can be tuned so that in case of attack a community can coordinate actions, such as arranging to manually invalidate a block, or perform a hard-fork, over side channels (such as social networks and forums) in order to deter the attack. 
+The Inclusive Fork-aware Merge-mining (IFAMM) protocol proposes a new security model suited for a merge-mined blockchain. If the blockchain implements the IFAMM protocol, and if the assumptions of the model are satisfied, the model assures that large double-spend attacks are prevented, by making attacks visible, attributable, requiring at least 51% Bitcoin miners collusion and, more importantly, requiring a bounded time, where the bound depends on the attacker hashrate but it is known in advance. The bound parameter can be tuned so that in case of attack a community can coordinate actions, such as arranging to manually invalidate a block, or perform a hard-fork, over side channels (such as social networks and forums) in order to deter the attack. 
 
-This RSKIP represents one of the changes to the RSK consensus that is required to achieve security under the SFAMM model.  
-
-
+This RSKIP represents one of the changes to the RSK consensus that is required to achieve security under the IFAMM model.  
 
 
 ## Motivation
 
-The only contribution to the cryptoeconomic security of an independent proof-of-work chain without subsidy is the existence of high transaction fees. In the case of sidechain 1:1 pegged to a primary chain that is protected by merge-mining, there is a high strategic alignment between the primary chain miners and merge-miners, so the honest majority and the fact that attacks to the secondary chain often become attributable are the two main assurances for the security for the sidechain. Nevertheless, RSK went further, and deployed the Armadillo system to provide fork-awareness. This subsystem creates a time window to trigger an emergency response by the community, in case of long reorg attempts.  Nevertheless, Armadillo requires a separate communication channel and the existence of at least one honest node monitoring the Bitcoin network. The SFAMM protocol and security model captures the benefits of Armadillo, makes Armadillo decentralized, and formalizes the protocol algorithms, assumptions and guarantees. The SFAMM protocol is ideal for RSK as it focuses not only on the hashrate capability of the attacker but also on the processing time that will be required for a successful attack.
+The main contribution to the cryptoeconomic security of an independent proof-of-work chain without subsidy is the existence of high transaction fees. However, in the case of a Bitcoin sidechain that is protected by merge-mining such as RSK, there is a strategic incentive alignment between the Bitcoin miners and merge-miners that results in two additional assurances for the security of the side-chain. First, if the sidechain hashrate is high close to the primary chain hashrate, the honest majority property can be inherited. Second, as Bitcoin miners identify themselves in blocks, attacks to the secondary chain  become attributable either by direct identification of pools that take part of an attack or by the sudden removal of the malicious pools identification information in blocks. Nevertheless, RSK has gone further, and deployed the Armadillo system to provide fork-awareness. Armadillo creates a time window to trigger an emergency response by the community, in case of long reorg attempts. However, Armadillo requires a separate communication channel and the existence of at least one honest node monitoring the Bitcoin network for forks. 
+The IFAMM protocol (which this RSKIP is only a part of) rests on a security model that captures the benefits of Armadillo, but decentralizes it. The IFAMM protocol is ideal for RSK as it focuses not only on the hashrate capability of the attacker but also on the processing time that will be required for a successful attack.
 
 This RSKIP proposes a consensus change that enables RSK nodes to:
 
 - compute the active SHA256 hashrate and detect variations on the active hashrate that are compatible with an ongoing attack
 
-- Accumulate all the active SHA256 hashrate in the RSK blockchain, with independence of the amount of hashrate that is directly involved in merge-mining. This hashrate means more accumulated work, increasing the security against certain double-spend attacks. Also, the hashrate accumulated not only includes 100% of Bitcoin hashrate, but also hashrate from bitcoin forks.
+- Accumulate all the active SHA256 hashrate in the RSK blockchain, with independence of the amount of hashrate that is directly involved in merge-mining. This additional hashrate that confirms sidechain blocks increases the security double-spend attacks based on long blockchain reorganizations. Also, the hashrate accumulated may not only capture 100% of Bitcoin hashrate, but also capture hashrate from bitcoin forks.
 
   
 
@@ -61,7 +60,7 @@ blockHeader, transactions, uncles
 
 And *uncles* is a list of RSK block headers. We define a **heavyblock** to be a *mergeMiningProof* with certain properties that will be verified in consensus.
 
-We extend the list uncles to include, after all RSK block headers, a number of heavyblock elements (defined later). To maintain semantic coherence, the *uncles* field is renamed *difficultyContributors*. The field *uncleCount* is renamed as *difficultyContribution*.
+We extend the list of uncles to include, after all RSK block headers, a number of heavyblock elements (defined later). To maintain semantic coherence, the *uncles* field is renamed *difficultyContributors*. The field *uncleCount* is renamed as *difficultyContribution*.
 
 *difficultyContributors* will be an RLP list two two elements: the first is the old *uncles* list. The next is the new *heavyblocks* list.
 
@@ -96,9 +95,9 @@ The Bits field is stored in a compact format. Let Bits be a byte array *{ E,Q1,Q
 
 ### Validation
 
-We'll define the function *getPoWInfo()* to check the validity of all kinds of blocks (mainchain, uncles and elements in the *heavyblocks* list). This means that the function that checks the validity of the proof of work of normal RSK blocks is changed to call getPoWInfo(). This is because some of the RSK blocks can be anchor heavyblocks.
+We define the function *getPoWInfo()* to check the validity of all kinds of blocks (mainchain, uncles and elements in the *heavyblocks* list). This means that the function that checks the validity of the proof of work of normal RSK blocks is changed to call getPoWInfo(). This is because some of the RSK blocks can be anchor heavyblocks.
 
-But before, we'll define an auxiliary function *getMMInfo()*:
+First we define an auxiliary function *getMMInfo()*:
 
 **function getMMInfo()** 
 
@@ -160,7 +159,7 @@ To identify **external uncle anchor heavyblocks** from the Bitcoin blockchain, t
 
 Note that the midstate of *SHA256Digest* class in rskj uses a different format that the one used in this description. We call our variable midstate40 to distinguish between them.
 
-Also it is important to note that the above algorithm requires that for a block that doesn't have the merge-mining the tail size must be equal or grater than 169 bytes, but less than 233 bytes or the midstate is in fact the SHA256 initial state, while for a header that does have the merge mining tag, the tail size must be less than 169 bytes. This last check is the same as how the current check *ProofOfWorkRule* performs as:
+Also it is important to note that the above algorithm requires that for a block that doesn't have the merge-mining the tail size must be equal or greater than 169 bytes, but less than 233 bytes or the midstate is in fact the SHA256 initial state, while for a header that does have the merge mining tag, the tail size must be less than 169 bytes. This last check is the same as how the current check *ProofOfWorkRule* performs as:
 
 ```
 	remainingByteCount = tail.length - rskTagPosition - 41
@@ -225,7 +224,7 @@ if not isHeavyblock and mergemined
 	immediateDifficultyContribution = R(rskBlockHeader,bitcoinMergedMiningHeader)
     if not previouslyIncluded(bitcoinMergedMiningHeader.parent) return
     // uncles are already checked for previous inclusion, and uncle inclusion depth
-    // is shorter than SFAMM depth, so we don't need to check again.
+    // is shorter than IFAMM depth, so we don't need to check again.
     // This check should not change anything, and it can be used as an assertion
     if btcBlockpreviouslyIncluded(bitcoinMergedMiningHeader.getBlockHash()) return
 	
@@ -273,7 +272,7 @@ We propose the following functions:
 
 *C=btcDifficulty0*
 
-These formulas require using 256-bit arithmetic. This assignment overstates on average the RSK blockchain cumulative difficulty by at most 1/20 (the ratios of average block intervals between RSK and Bitcoin), which we consider too low to use the exact formulas.
+These formulas require the use of 256-bit arithmetic. This assignment overstates on average the RSK blockchain cumulative difficulty by at most 1/20 (the ratios of average block intervals between RSK and Bitcoin), which we consider thie error low enough to prefer the simplified formulas.
 
 The exact values are given by the following formulas:
 
@@ -315,7 +314,7 @@ Sha256Digest mapping of midstate:
 
 ### Transaction Confirmation
 
-In Nakamoto consensus, a transaction is confirmed if there are *N* block confirmations after the transaction has been included. In the SFAMM model, we recommend that economic actors wait also *N\*v* time, where *v* is the average RSK block interval (currently 30 seconds). 
+In Nakamoto consensus, a transaction is confirmed if there are *N* block confirmations after the transaction has been included. In the IFAMM model, we recommend that economic actors wait also *N\*v* time, where *v* is the average RSK block interval (currently 30 seconds). 
 
 ## Rationale
 
@@ -366,7 +365,7 @@ The rskj code would need to modified in at least the following places:
 
 This RSKIP protects the RSK network from a large gamut of double-spend attacks by either increasing the their cost (reaching Bitcoin levels of cryptoeconomic security) or by forcing the attacker to be public about the attack during the whole payment confirmation interval, leaving a trace of anchor heavyblocks in Bitcoin blocks and reducing the amount of cumulative hashrate transferred to RSK.
 
-However, some variants of the double-spend attack, such as isolating a victim node,  still need additional changes to be prevented. These other changes, required by the SFAMM model, will be specified in other RSKIPs.
+However, some variants of the double-spend attack, such as isolating a victim node,  still need additional changes to be prevented. These other changes, required by the IFAMM model, will be specified in other RSKIPs.
 
 # **Copyright**
 
