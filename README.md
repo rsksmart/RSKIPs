@@ -19,7 +19,7 @@ RSK Improvement Proposals
 * **Core** - Core, consensus related
 * **Node** - Related to node manager interfaces, such as RPC
 * **UI** - User Interface
-* **2nd** - Second layer protocols, such as off-chain payment channels
+* **2nd** - Second-layer protocols, such as off-chain payment channels
 * **Net** - Related to p2p networking
 * **DApp** - Dapp application interfaces
 
