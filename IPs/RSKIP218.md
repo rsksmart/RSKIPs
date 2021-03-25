@@ -1,6 +1,6 @@
 # Change RSK Fee Rewards Address
 
-|RSKIP          |217           |
+|RSKIP          |218           |
 | :------------ |:-------------|
 |**Title**      |Change RSK Fee Rewards Address |
 |**Created**    |25-03-2021 |
