@@ -167,6 +167,7 @@ RSK Improvement Proposals
 | 214 |[Ephemeral Calldata using Precompile](IPs/RSKIP214.md)|  29-JAN-21 | SDL | Sca | Core | 2 | Draft |
 | 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
 | 218 |[New Fee Rewards Address for the RSK Core Developers Fund](IPs/RSKIP218.md)|  25-MAR-21 | FJ | Usa | Core | 1 | Accepted |
+| 220 |[Obtain block or block header by hash or height in bridge methods](IPs/RSKIP220.md)|  26-MAR-21 | PGP | Sca | Core | 1 | Draft |
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Draft |
@@ -202,8 +203,8 @@ RSK Improvement Proposals
 | MMA      | Matias Marquez               |                        |
 | MP       | Martin Picco                 | mpicco@iovlabs.org     |
 | NPS      | Nicolas Perez Santoro        |                        |
+| PGP      | Pamela Gonzalez Perill       | pamela@iovlabs.org |
 | PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
-
