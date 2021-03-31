@@ -100,15 +100,15 @@ RSK Improvement Proposals
 | 64       | [Garbage Collector for State Pruning](IPs/RSKIP64.md) | 29-MAY-18 | SDL & MMa | Sca,Usa      | Core     | 2 | Draft   |
 | 65       | [MINGASPRICE Opcode](IPs/RSKIP64.md)                                             | 18-MAY-18 | JIO       | Sec      | CORE     | 1 | DRAFT   |
 | 70       | [Default TX Data](IPs/RSKIP70.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
-| 71 | [Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
-| 75       | [Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
-| 77 |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
-| 85 |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
-| 87       | [Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
-| 91 |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
-| 92 |[Merkle Proof serialization](IPs/RSKIP92.md) | 2018 | DLL & MC | Sca | Core | 2 | Adopted |
-| 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
-| 99 |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
+| 71  |[Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
+| 75  |[Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
+| 77  |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
+| 85  |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
+| 87  |[Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
+| 91  |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
+| 92  |[Merkle Proof serialization](IPs/RSKIP92.md) | 2018 | DLL & MC | Sca | Core | 2 | Adopted |
+| 95  |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
+| 99  |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
 | 106 |[Precompiled contract for HDWallet utility functions](IPs/RSKIP106.md) | 2019 | AM | Usa  | Core | 1 | Adopted |
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
@@ -128,6 +128,7 @@ RSK Improvement Proposals
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
+| 140 |[EXTCODEHASH opcode](IPs/RSKIP140.md)| 04-SEP-19 | JL | Usa | Core | 2 | Adopted |
 | 141 |[Network Upgrade: Papyrus](IPs/RSKIP141.md)| 27-SEP-19 | AE | Sca,Usa,Sec | Core | 2 | Accepted |
 | 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Draft |
 | 145 |[Struct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Draft |
@@ -136,7 +137,22 @@ RSK Improvement Proposals
 | 157 |[Cumulative Difficulty in JSON-RPC block responses](IPs/RSKIP157.md)|  11-FEB-20 | MP | Usa | Node | 1 | Accepted |
 | 159 |[Minimal Proxy Contract](IPs/RSKIP159.md)|  19-FEB-20 | PMP | Usa | DApp | 1 | Adopted |
 | 167 |[Install Code Precompile](IPs/RSKIP167.md)|  07-JUL-20 | SDL | Usa | Core | 1 | Draft |
-| 169 |[Rectify EXTCODEHASH implementation](IPs/RSKIP169.md)|  31-JUL-20 | NPS | Sca | Core | 2 | Draft |
+| 169 |[Rectify EXTCODEHASH implementation](IPs/RSKIP169.md)|  31-JUL-20 | NPS | Usa | Core | 2 | Draft |
+| 170 |[Peg-in to any address](IPs/RSKIP170.md)|  01-SEP-20 | MI | Usa | Core | 2 | Draft |
+| 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
+| 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Draft |
+| 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Draft |
+| 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
+| 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Draft |
+| 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
+| 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
+| 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 209 |[Stack-overflow removal](IPs/RSKIP209.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 212 |[HW-compatible Transaction Versioning System](IPs/RSKIP212.md)|  29-JAN-21 | SDL | Sca | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -154,10 +170,11 @@ RSK Improvement Proposals
 | JL       | Julian Len                   | julian@iovlabs.org |
 | JD       | Jose Dahlquist               | jose@rsk.co |
 | LS       | Lisandro Sebrie              | |
+| MI       | Marcos Irisarri              | marcos@iovlabs.org |
 | MMa      | Matias Marquez               | |
 | MM       | Martin Medina                | martin@iovlabs.org |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
 | MP       | Martin Picco                 | mpicco@iovlabs.org |
 | PMP      | Pedro Meulen Prete           | pedro@iovlabs.org |
-| NPS      | Nicolas Perez Santoro           |  |
+| NPS      | Nicolas Perez Santoro        |  |
