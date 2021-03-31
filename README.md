@@ -152,6 +152,7 @@ RSK Improvement Proposals
 | 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
 | 209 |[Stack-overflow removal](IPs/RSKIP209.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 212 | [HW-compatible Transaction Versioning System](IPs/RSKIP212.md) | 29-JAN-21     | SDL       | Sca      | Core   | 1 | Draft   |
+| 213 |[Simple Transaction Versioning System](IPs/RSKIP213.md)|  2-FEB-21 | SDL | Sca | Core | 1 | Draft |
 | 214 |[Ephemeral Calldata using Precompile](IPs/RSKIP214.md)|  29-JAN-21 | SDL | Sca | Core | 2 | Draft |
 | 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
 
