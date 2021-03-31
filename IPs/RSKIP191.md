@@ -15,7 +15,7 @@
 # **Abstract**
 
 This improvement removes opcodes `DUPN`, `SWAPN`, `TXINDEX`.
-They are not part of official Ethereum specification.
+
 
 
 
