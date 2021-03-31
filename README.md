@@ -19,8 +19,8 @@ RSK Improvement Proposals
 * **Core** - Core, consensus related
 * **Node** - Related to node manager interfaces, such as RPC
 * **UI** - User Interface
-* **2nd** - 2nd layer proteocols, such as off-chain payment channels
-* **Net** - related to p2p networking
+* **2nd** - Second-layer protocols, such as off-chain payment channels
+* **Net** - Related to p2p networking
 * **DApp** - Dapp application interfaces
 
 
@@ -151,29 +151,31 @@ RSK Improvement Proposals
 | 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
 | 209 |[Stack-overflow removal](IPs/RSKIP209.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
-| 212 |[HW-compatible Transaction Versioning System](IPs/RSKIP212.md)|  29-JAN-21 | SDL | Sca | Core | 1 | Draft |
+| 212 | [HW-compatible Transaction Versioning System](IPs/RSKIP212.md) | 29-JAN-21     | SDL       | Sca      | Core   | 1 | Draft   |
 | 213 |[Simple Transaction Versioning System](IPs/RSKIP213.md)|  2-FEB-21 | SDL | Sca | Core | 1 | Draft |
+| 214 |[Ephemeral Calldata using Precompile](IPs/RSKIP214.md)|  29-JAN-21 | SDL | Sca | Core | 2 | Draft |
+| 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
-| Initials | Full name                    | Email |
-| -------- | :----------------------------| :-----|
-| AE       | Adrian Eidelman              | adrian@iovlabs.org |
-| AL       | Angel Lopez                  | angel@iovlabs.org |
+| Initials | Full name                    | Email                  |
+| -------- | :----------------------------| :----------------------|
+| AE       | Adrian Eidelman              | adrian@iovlabs.org     |
+| AL       | Angel Lopez                  | angel@iovlabs.org      |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
-| MC       | Martín Coll                  | |
-| DM       | Diego Masini                 | dmasini@iovlabs.org |
-| DLL      | Diego López León             | |
-| IO       | Ilan Olkies                  | ilan@iovlabs.org |
-| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
-| JL       | Julian Len                   | julian@iovlabs.org |
-| JD       | Jose Dahlquist               | jose@rsk.co |
-| LS       | Lisandro Sebrie              | |
-| MI       | Marcos Irisarri              | marcos@iovlabs.org |
-| MMa      | Matias Marquez               | |
-| MM       | Martin Medina                | martin@iovlabs.org |
-| SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
+| MC       | Martín Coll                  |                        |
+| DM       | Diego Masini                 | dmasini@iovlabs.org    |
+| DLL      | Diego López León             |                        |
+| IO       | Ilan Olkies                  | ilan@iovlabs.org       |
+| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |
+| JL       | Julian Len                   | julian@iovlabs.org     |
+| JD       | Jose Dahlquist               | jose@rsk.co            |
+| LS       | Lisandro Sebrie              |                        |
+| MI       | Marcos Irisarri              | marcos@iovlabs.org     |
+| MMa      | Matias Marquez               |                        |
+| MM       | Martin Medina                | martin@iovlabs.org     |
+| SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
-| MP       | Martin Picco                 | mpicco@iovlabs.org |
-| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org |
+| MP       | Martin Picco                 | mpicco@iovlabs.org     |
+| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
