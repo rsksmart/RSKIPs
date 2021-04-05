@@ -12,7 +12,7 @@
 
 ## Abstract
 
-The present RSKIP introduces an extension of merged mining capabilities. The extension allows auxiliary data be hashed as part of the merged mining hash of the the RSK block. If this auxiliary data is the hash of a Merkle tree of other sidechain block hashes, then this change enables Universal Merge Mining capabilities to RSK.
+The present RSKIP introduces an extension of merged mining capabilities. The extension modifies the merge mining tag to allow auxiliary data be hashed  together with the RSK block hash. If this auxiliary data is the hash of a Merkle tree of other sidechain block hashes, then this change enables Universal Merge Mining capabilities for RSK.
 This RSKIP requires a change to the network consensus rules.
 
 ## Motivation
