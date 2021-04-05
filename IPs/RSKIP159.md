@@ -1,4 +1,4 @@
-# Bridge events data and formatting
+# Minimal Proxy Contract
 
 |RSKIP          |159           |
 | :------------ |:-------------|
