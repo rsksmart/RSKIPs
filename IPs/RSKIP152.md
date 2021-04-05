@@ -1,26 +1,26 @@
-# Title
+# CHAINID Opcode
 
 |RSKIP          |152           |
 | :------------ |:-------------|
 |**Title**      |CHAINID Opcode |
 |**Created**    |19-NOV-19 |
 |**Author**     |SMS |
-|**Purpose**    |Sca, Usa |
+|**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
 |**Status**     |Adopted |
 
 ## Abstract
 
-The purpose of this RSKIP is to describe the new opcode include in the next rskJ reslease: The CHAINID opcode.
+The purpose of this RSKIP is to describe the new opcode: CHAINID. This opcode returns the RSK chain identification number.
 
 ## Motivation
 
-In order to use the chain ID to prevent replay attacks between different chains. It would be a great benefit to have the same possibility inside smart contracts when handling signatures.
+This RSKIP proposes the addition of the CHAINID opcode to prevent replay attacks between different chains, specially for replay protection of ECDSA-signed messages in smart contracts.
 
 ## Specification
 
-Adds a new opcode CHAINID at 0x46, which uses 0 stack arguments. It pushes the current chain ID onto the stack. Chain ID is a 256-bit value. The operation costs G_base to execute. The values for the RSK blockchain are the following, according to https://chainid.network/:
+Adds a new opcode CHAINID at 0x46, which does not consume any input argument from the stack. It pushes the current chain ID onto the stack. Chain ID is a 256-bit value. The operation costs 2 gas to execute. The values for the RSK blockchain are the following, according to https://chainid.network/:
 	
 	- Mainnet: 30
 	- Testnet: 31
