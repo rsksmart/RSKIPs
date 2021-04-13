@@ -41,7 +41,24 @@ To improve the accuracy of the CPV, we propose that uncle blocks are counted in 
 
 # **Specification**
 
-The field CPV is renamed Commit-to-FamilyMember vector (CFV), and contains a reference to a previous mainchain block or uncle, linearly ordered.
+The new merge-mining tag format is the following:
+
+* PREFIX: 20-byte prefix of the hash-for-merge-mining
+* CPV: 7-byte Commit-to-Parents-Vector (CPV)
+* NU: 1-byte number of uncles in the last 32 blocks (NU)
+* VER_BN4: packed field
+* BN:  3-byte Block Number
+
+This is the same base format specified in [RSKIP223](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP223.md).
+
+The field VER_BN4 contains two nibbles. The hi nibble contains the tag version.
+The low nibble containst the highest 4 bits of the BN field.
+
+Tag version 0 represents the old tag format and is no longer valid after this RSKIP is activated. Version 1 is reserved for RSK223-only tags if that RSKIP is activated. This RSKIP mandates the use of version 2 for tags compliant with RSKIP224 but not with RSKIP223, and version 3 for tags compliant with RSKIP224 and RSKIP223.
+
+If the BN field overflows, it wraps around zero.
+
+For versions 2 and 3 of the tag, the field CPV is reintepreted as Commit-to-FamilyMember vector (CFV), and contains a reference to a previous mainchain block or uncle, linearly ordered.
 
 Let's assume that a block at height i starts with a family length f(i) and the block references U uncle blocks. Then the mainchain block is assigned the family member index f(i), and an uncle at position j (starting from j=0) takes the family member index f(i)+1+j. We set r(i+1)=r(i)+1+U.
 
