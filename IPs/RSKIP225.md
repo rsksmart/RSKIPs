@@ -1,7 +1,7 @@
 # Emergency Multisig public keys
 
 
-|RSKIP          | xxx |
+|RSKIP          | 225 |
 | :------------ |:-------------|
 |**Title**      |Emergency Multisig public keys|
 |**Created**    |APRIL-2021 |
