@@ -15,9 +15,13 @@ This RSKIP proposes increasing the `gasCost` for some trie read opcodes to bette
 
 ## Motivation
 
-Recent experiments [0] indicate that some EVM trie opcodes are *underpriced* relative to actual resource use. For example, the current state (unitrie) of the RSK network can be read from disk  at the rate of about 400 unitrie nodes per second.  Caching some nodes leads to a 10X increase in *lookup speed*  to about 3000 nodes/sec. Loading the *entire current state* of the RSK mainnet (in a single binary file) increases the lookup speed by 100X, relative to reading from disk, to around 35000 nodes/sec. The tradeoff is that the speedup consumes an additional 250MB in RAM.
+Executing transactions requires accessing (and modifying) the latest snapshot of *blockchain state*: this includes account balances, nonces, contract code, and contract storage. In RSK, state is stored using a single binary prefix tree called the *unitrie*. In the reference client imlementation (RSKJ), the unitrie is backed up on disk using a LevelDB key-value datastore. Only some portions of the unitrie are loaded on to RAM as needed to execute transactions.
 
-Suppose that `1 gas` is about `30 nanoseconds` of VM execution time  (hardware dependent, see Rationale section below). Even with the most favorable scenario of keeping the entire trie in memory (35K lookups/sec),  each lookup takes about 28600 nanoseconds. Thus, a trie node lookup has an *impilicit cost* of about 950 gas. However, the current cost of `BAL` is 400 gas. An `SLOAD` appears *severely underpriced* at 200 gas. Both of these codes are used quite frequently. Correcting underpriced operations to reflect their actual resource consumption improves security (from attacks), scalabity and fairness.
+Recent experiments [0] indicate that some EVM trie opcodes are *underpriced* relative to actual resource use. For example, the current state of the RSK network can be read from disk  at the rate of about 400 unitrie nodes per second.  Caching some nodes in memory leads to a 10X increase in *lookup speed*  to about 3000 nodes/sec. Loading the *entire current state* of the RSK mainnet (in a single binary file) increases the lookup speed by 100X, relative to reading from disk, to around 35000 nodes/sec. The tradeoff is that this requires an additional 250MB of RAM to store the entire state snapshot in memory.
+
+There is no unique way to link execution resource use and resource pricing (gas costs). So we have to approximate this relationship. Suppose that `1 gas` is about `30 nanoseconds` of VM execution time. Naturally, this is hardware dependent, see Rationale section below. Even with the most favorable scenario of keeping the entire trie in memory (35K lookups/sec),  each lookup takes nearly 28500 nanoseconds. Thus, a trie node lookup has an *impilicit cost* of about 950 gas (using 1 gas = 30 ns). However, the current cost of `BAL` is 400 gas while a `SLOAD` costs just 200 gas. Both of these codes are used quite frequently. Recall that reading from disk is much slower, about 400 nodes per second. That implies an implicit cost of 83000 gas for a lookup.
+
+Thus, depending on how much state is cached in RAM, the implict cost of an `SLOAD` (priced at 200 gas) can vary from 1000 gas to 83000 gas. Again, this is assuming a 1:30 ratio between gas and execution time in nanoseconds. Correcting underpriced operations to reflect their actual resource consumption improves security (from attacks), scalabity and fairness.
 
 ## Specification
 
@@ -36,16 +40,14 @@ It is not our goal to match Ethereum's gas structure. Indeed, the current gas sc
 
 ## Rationale
 
-Executing transactions requires accessing and modifying blockchain state. By "state" we mean the latest snapshot of account balances, nonces, contract code, and contract storage. In RSK, state is stored in the unitrie. In the reference client imlementation (RSKJ), the unitrie is backed up on disk using a LevelDB datastore. Only some parts of the unitrie are loaded on to RAM as needed to execute transactions.
-
 ### Gas and resource use
-Execution costs are measured in units of `gas` e.g.  `SLOAD` costs 200 gas. We can use experiments to *calibrate* gas for various operations in terms of some resource metric - such as execution time. As node software and network usage evolve over time, the gas schedule can be periodically updated using new measurements.
+We can use experiments to *calibrate* gas for various operations in terms of some resource metric - such as execution time. One way to track resource use is through `VMPerformanceTest` which is part of RSKJ reference implementation [1]. For example, running this test on an Amazon AWS EC2 `M5a.large` instance (with 2 vCPUs and 8GB RAM) provides an average ratio of about `50 ns  per gas`. This estimate changes to `1 gas = 30ns` on faster (but still "consumer grade") machines.
 
-One way to track resource use is through `VMPerformanceTest` which is part of RSKJ reference implementation [1]. For example, running this test on an Amazon AWS EC2 `M5a.large` instance (with 2 vCPUs and 8GB RAM) provides an average ratio of about `50 ns  per gas`. This estimate changes to `1 gas = 30ns` on faster (but still "consumer grade") machines.
+Another way to think about resource use is to take a ratio of `blockGasLimit` (currently 6.8M gas) to some maximum `maxBlockExecutionTime` (e.g. 500 milliseconds). This provides a ratio of around `1 gas = 75ns`.
 
-Another way to think about resource use is to take a ratio of `blockGasLimit` (currently 6.8M gas) to some maximum `maxBlockExecutionTime` (e.g. 500 milliseconds). This provides a ratio of around `1 gas = 75ns`. At present, RSK blocks are rarely full. But we can use Ethereum as a reference which currently has a block gas limit around 12.5M and block execution times are not seen as an impediment (except for DoS attacks). This suggests a far smaller ratio between gas and execution time than 1:30 used above. The smaller the ratio, the higher is the implicit cost of read operations. This proposal is somewhat conservative. Further increases in trie read costs may be needed in the future with increase in state size and disk IO overhead.
+As node software and network usage evolve over time, the gas schedule can be periodically updated using new measurements. Further increases in trie read costs may be needed in the future with increase in state size and disk IO overhead.
 
-## Backward Compatibility
+## Backwards Compatibility
 
 As already mentioned, this change needs a hard fork. In most cases, increasing the `gaslimit` is enough to account for repricing. RPC method to `estimate_gas` will provide reasonable guidance. However, increasing opcode costs can lead to some breaking changes.
 
