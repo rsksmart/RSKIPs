@@ -1,8 +1,8 @@
-# Change RSK Fee Rewards Address
+# New fee rewards address for the RSK Core Developers Fund
 
 |RSKIP          |218           |
 | :------------ |:-------------|
-|**Title**      |Change RSK Fee Rewards Address |
+|**Title**      |New fee rewards address for the RSK Core Developers Fund |
 |**Created**    |25-03-2021 |
 |**Author**     |FJ |
 |**Purpose**    |USA |
@@ -12,16 +12,14 @@
 
 ## Abstract
 
-To be completed...
-
-## Motivation
-
-To be completed...
+Set a new reward address for the RSK Core Developers Fund
 
 ## Specification
 
-When `blockNumber > iris_hardfork` use a new fee rewards address:
-- Old address: `0x14d3065c8Eb89895f4df12450EC6b130049F8034`
+REMASC precompiled contract should pay fees at a new address.
+
+When `blockNumber > iris_hardfork` update the fee rewards address:
+- Old address: `0x14d3065c8eb89895f4df12450ec6b130049f8034`
 - New address: `0xdcb12179ba4697350f66224c959bdd9c282818df`
 
 ## References
