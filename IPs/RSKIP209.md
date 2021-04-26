@@ -10,7 +10,7 @@
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Draft |
-|**discussions-to**     | |
+|**discussions-to**     |https://research.rsk.dev/t/rskip-209-stack-overflow-removal/147 |
 
 
 # **Abstract**
