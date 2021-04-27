@@ -3,16 +3,16 @@
 |RSKIP          |60           |
 | :------------ |:-------------|
 |**Title**      |Checksum Address Encoding |
-|**Created**    |25-JUN-2016 |
+|**Created**    |25-JUN-2018 |
 |**Author**     |JL,IO |
 |**Purpose**    |ST |
 |**Layer**      |Net |
 |**Complexity** |1 |
-|**Status**     |Draft* |
+|**Status**     |Adopted |
 
 # **Motivation**
 
-- Avoid typing confusion in adresses.
+- Avoid typing confusion in addresses.
 - Differentiate addresses of different networks.
 
 # **Abstract**
@@ -37,13 +37,21 @@ function toChecksumAddress(address, chainId = null) {
     return output
 }
 ```
+
 Adds the chain id as a prefix. Converts the address to hexadecimal. Calculates [keccak](https://csrc.nist.gov/csrc/media/publications/fips/202/final/documents/fips_202_draft.pdf) with the prefixed address. Prints `i` digit if it's a number, otherwise checks if `i` byte of the hash of the keccak. If it's grater than 8 prints uppercase, otherwise lowercase.
+
+
+- `chainId` unique values defined in [EIP-155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md).
+
+- This algorithm is compatible with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md). This can be achieved using `null prexix`.
 
 # **Implementation**
 
-`chainId` unique values defined in [EIP-155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md).
-
-This algorithm is compatible with [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md). This can be achieved using `chainId = null`.
+| Project | Languaje | Reference |
+| - | - | - |
+| [RSK Labs - rskjs-util](https://github.com/RSKSmart/rskjs-util) | JavaScript | [Code](https://github.com/rsksmart/rskjs-util/blob/5f284ee833ce8d958216804107d0bb90b3feb52e/index.js#L30) |
+| [Trezor - trezor-core](https://github.com/trezor/trezor-core) | Python | [Code](https://github.com/trezor/trezor-core/blob/270bf732121d004a4cd1ab129adaccf7346ff1db/src/apps/ethereum/get_address.py#L32) |
+| [Trezor - trezor-crypto](https://github.com/trezor/trezor-crypto) | C | [Code](https://github.com/trezor/trezor-crypto/blob/4153e662b60a0d83c1be15150f18483a37e9092c/address.c#L62) |
 
 # **Rationale**
  
@@ -82,3 +90,4 @@ Invalid with network id: 1234
 # **Copyright**
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+

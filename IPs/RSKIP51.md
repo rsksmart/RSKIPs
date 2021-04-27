@@ -36,7 +36,7 @@ The memory mapped register is better because it allows mode changes with low gas
 
 # **Specification**
 
-The COREG is a 32-byte wide register mapped at address 0x80...00. The register can be accessed by MSTORE, MLOAD and MLOAD8. Accesses with MSTORE/MLOAD should be aligned to the COREG starting offset. A mis-aligned read may rise a OOG exception. The exception is not guaranteed as in the future the COREG size may be extended.
+The COREG is a 32-byte wide register mapped at address 0x80...00. The register can be accessed by MSTORE, MLOAD and MLOAD8. Accesses with MSTORE/MLOAD should be aligned to the COREG starting offset. A mis-aligned MSTORE/MLOAD should rise an OOG exception. Code whould not be written assuming that a mis-aligned access rises an OOG because the COREG size may be extended in future hard-forks.
 
 The cost of an MLOAD, MLOAD8 or MSTORE access to the COREG is exactly 3.
 
