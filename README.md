@@ -125,6 +125,7 @@ RSK Improvement Proposals
 | 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Draft |
 | 125 |[Create2](IPs/RSKIP125.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 131 |[Preventing CREATE2-after-SUICIDE in the same block](IPs/RSKIP131.md) | 2019 | SMS & SDL  | Sca,Usa  | Core | 1 | Adopted  |
+| 132 |[Bridge ReceiveHeaders Gas Cost increase](IPs/RSKIP132.md) | 2019 | JD & SDL  | Fair  | Core | 1 | Adopted  |
 | 134 |[Locking cap](IPs/RSKIP134.md) | 2019 | JD       | Sec,Sca,Usa      | Core     | 2 | Draft   |
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
