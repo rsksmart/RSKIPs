@@ -1,8 +1,8 @@
-# Improve Bridge block block locator
+# Improve Bridge Bitcoin block locator
 
 |RSKIP          |89           |
 | :------------ |:-------------|
-|**Title**      |Improve Bridge block block locator|
+|**Title**      |Improve Bridge Bitcoin block locator|
 |**Created**    |JULY-2018 |
 |**Author**     |SDL |
 |**Purpose**    |Usa |
