@@ -9,6 +9,7 @@
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Draft |
+|**discussions-to**     |https://research.rsk.dev/t/rskip-223-cumulative-work-in-fork-detection-data/150|
 
 # **Abstract**
 
