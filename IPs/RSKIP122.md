@@ -1,4 +1,4 @@
-# Title
+# New method GetBtcTransactionConfirmations for Bridge contract
 
 |RSKIP          |122           |
 | :------------ |:-------------|
@@ -12,11 +12,11 @@
 
 ## Abstract
 
-A new method for the Bridge contract is introduced. This method provides a service to verify whether a given transaction belongs to a given block within the Bridge contract's Bitcoin blockchain.
+A new method for the Bridge contract is introduced. This method provides a service to verify whether a given transaction belongs to a given block within the Bridge contract's view of the Bitcoin blockchain.
 
 ## Motivation
 
-With the arising need of BTOs (Bitcoin Token Offerings) on top of the RSK network, the ability for RSK smart contracts to test whether a certain Bitcoin transaction has been mined (and how many blocks ago) becomes mandatory. Note that the possibility of ad-hoc implementations doesn't exist, since to this day there is no method (or group of methods) that enable a random smart contract to inspect the Bridge contract's Bitcoin block headers. When designing the implementation, the decision favored a simple unique method tailored at both verifying the inclusion of a given transaction in a given block (via an SPV proof) as well as the inclusion of the latter in the Bridge's Bitcoin blockchain, thus proving or disproving the mined status of any given Bitcoin transaction. As a corollary, the method also informs the number of confirmations for the block, enhancing the calling contract's decision making ability with somewhat of a more fine-grained control.
+With the arising need of BTOs (Bitcoin Token Offerings) on top of the RSK network, the ability for RSK smart contracts to test whether a certain Bitcoin transaction has been mined (and how many blocks ago) becomes mandatory. Note that the possibility of ad-hoc implementations doesn't exist, since to this day there is no method (or group of methods) that enable a smart contract to inspect the Bridge contract's Bitcoin block headers. When designing the implementation, the decision favored a simple unique method tailored at both verifying the inclusion of a given transaction in a given block (via an SPV proof) as well as the inclusion of the latter in the Bridge's Bitcoin blockchain, thus proving or disproving the mined status of any given Bitcoin transaction. As a corollary, the method also informs the number of confirmations for the block, enhancing the calling contract's decision making ability with  a more fine-grained control.
 
 ## Specification
 
