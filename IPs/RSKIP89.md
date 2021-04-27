@@ -1,8 +1,8 @@
-# Improve Bridge Bitcoin block locator
+# Add Bitcoin block query methods to the bridge contract
 
 |RSKIP          |89           |
 | :------------ |:-------------|
-|**Title**      |Improve Bridge Bitcoin block locator|
+|**Title**      |Add Bitcoin block query methods to the bridge contract|
 |**Created**    |JULY-2018 |
 |**Author**     |SDL |
 |**Purpose**    |Usa |
