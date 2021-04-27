@@ -9,6 +9,7 @@
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Draft |
+|**discussions-to**     |https://research.rsk.dev/t/rskip-224-include-uncles-in-cpv-in-fork-detection-data/149|
 
 # **Abstract**
 
