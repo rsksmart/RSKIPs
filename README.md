@@ -121,6 +121,7 @@ RSK Improvement Proposals
 | 116 |[Failure of SSTORE on Low-Gas Recursive CALLs](IPs/RSKIP116.md) | 2019 | SDL  | Sec,Sca,Usa  | Core | 1 | Draft |
 | 119 |[Precompiled contract for inspecting block headers](IPs/RSKIP119.md) | 2019 | DM  | Usa  | Core | 1 | Draft |
 | 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
+| 122 |[New method GetBtcTransactionConfirmations for Bridge contract](IPs/RSKIP122.md) | 2019 | SMS  | Usa  | Core | 2 | Draft |
 | 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Draft |
 | 125 |[Create2](IPs/RSKIP125.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 131 |[Preventing CREATE2-after-SUICIDE in the same block](IPs/RSKIP131.md) | 2019 | SMS & SDL  | Sca,Usa  | Core | 1 | Adopted  |
@@ -163,6 +164,8 @@ RSK Improvement Proposals
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Draft |
+
+
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
@@ -180,11 +183,13 @@ RSK Improvement Proposals
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | LS       | Lisandro Sebrie              |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
-| MMa      | Matias Marquez               |                        |
+| MMA      | Matias Marquez               |                        |
 | MM       | Martin Medina                | martin@iovlabs.org     |
+| MP       | Martin Picco                 | mpicco@iovlabs.org     |
 | NPS      | Nicolas Perez Santoro        |                        |
+| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
-| MP       | Martin Picco                 | mpicco@iovlabs.org     |
-| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
+
+
 
