@@ -54,7 +54,7 @@ Rent is computed and tracked at the granularity of individual *value-containing*
 
 A node's size (`nodeSize`) is computed as the node's value length plus 128 bytes for storage overhead. Therefore, `nodeSize` only approximates the actual space consumed, e.g. it doesn't take into account embedded nodes. One impact of the storage overhead is that the effective rent for storage cells (32 bytes maximum) is more than that for nodes containing contract code which can be thousands of bytes.
 
-Illustrative values of rent
+Illustrative **approximate** examples of rent
 - `(32+128)*15 ~ 2500 gas/year` for storage cell (32 bytes)
 -  `(2500+128)*15 ~ 40000 gas/year` for a contract of size 2500 bytes 
 
@@ -62,15 +62,13 @@ Illustrative values of rent
 
 The dependence on timestamps makes rent payments variable. These payments are capped, so that the rent for various nodes is spread across different transactions.
 
-|OpCode          | Fixed Cost | Rent Cap (max variable cost) |
-|:------------ |:-------------| :-------------|
-|`SLOAD`      | 800* gas (200 current) | 1600 gas |
-|`BAL`    | 700* gas (400 current)| 1400 gas |
-|`EXTCODEHASH`    | 700* gas (400 current)| 1400 gas|
-|`CALL*`     | 700 gas | 1400 gas|
-|`EXTCODE*`    | 700 gas| 1400 gas|
+| Node Type | Related OpCodes          | Fixed Cost for reading | Rent Cap (max variable cost) |
+|:------------ |:------------ |:-------------| :-------------|
+|Storage Cell | `SLOAD`      | 800* gas (200 current) | 1600 gas |
+| Account Info| `BAL`    | 700* gas (400 current)| 1400 gas |
+|Contract Code | `CALL*`, `EXTCODE*`  | 700 gas | 1400 gas|
 
-**Note**: * The fixed cost for `SLOAD`, `BAL` and `EXTCODEHASH` above are values proposed in RSKIP_repriceRead. The current values are in parentheses.
+**Note**: * The fixed cost for `SLOAD` and `BAL` are values proposed in RSKIP_repriceRead. Current values are in parentheses.
 
 **Minimum collection trigger:** To avoid tiny payments and reduce the number of trie IO operations, rent is collected only if the amount due for a trie node exceeds `rent_trigger = 200 gas` (about 1 month rent for a storage cell).
 
@@ -108,11 +106,15 @@ t_paid = 1600 // (160 * 1/2^21) = roundDown(2^21 *10) = 20,971,520 seconds (8 mo
 
 **Tracking and collection mechanics**
 
-When a transaction is executed, all Unitrie key/value pairs that are queried (e.g. via `CALL`,`SLOAD`, `SSTORE`,`EXTCODE*` etc) are stored in a cache. All *new* trie key/value pairs created by the transaction (new accounts, contracts, storage cells) are stored in a different cache.
+All trie nodes *accessed*, *modified* or *created* by a transaction are automatically checked and added to rent-tracking caches. Users cannot select or exclude individual rent payments. 
 
-This cache is passed down to any and all child calls, so that rent tracking does not kick in more than once for any node. After a transaction has been fully processed, both caches are iterated, and timestamps are updated.
+One way of implementing the system is to have three caches of value-containing nodes: 
 
-The computation and collection logic is fully automatic and part of transaction execution. All trie nodes *accessed*, *modified* or *created* by a transaction are automatically checked and added to rent-tracking caches. Users cannot select or exclude individual rent payments.
+1. a *set* of all trie nodes seen thus far during transaction execution
+2. a *map* of all trie nodes whose rent timestamps are to be updated along with their individual (updated) timestamps. Some of these nodes will also have updated values (e.g `SSTORE`).
+3. a *set* of newly created tries nodes. All of them will receive the timestamp of the current block.
+
+These caches are passed along to all child calls, so that rent tracking does not kick in more than once for any node irrespective of call depth. After a transaction has been fully processed, the caches are iterated and the updated values and timestamps are commited to the state trie.
 
 ### Gas counters and accounting
 
@@ -121,7 +123,7 @@ The `usedGas` counter should include both execution and rent gas consumption.
 - the `GAS` opcode must use `usedGas` (inclusive of rent) to provide a conservative estimate of how much gas is still available.
 - Similarly, the combined value must be reported for transaction receipts and block level gas consumption.
 
-However, a *separate gas counter* should be also be implemented for `usedRentGas`.
+However, a *separate gas counter*,  `usedRentGas`, should be also be implemented.
 
 - If a transaction ends because of a OOG exception or REVERT, then 25% of the storage rent gas used so far (`usedRentGas`)  is consumed as compensation for IO costs. The remaining 75% of the gas marked as `usedRentGas` is refunded. Rent timestamps are not updated.
 - a separate counter can also help implement `estimateGas` methods that report estimates with and without including estimated rent payments.
