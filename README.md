@@ -105,9 +105,11 @@ RSK Improvement Proposals
 | 77  |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
 | 85  |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
 | 87  |[Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
+| 89  |[Add Bitcoin block query methods to the bridge contract](IPs/RSKIP89.md)| JULY-18 | SDL | Usa      | Core     | 2 | Adopted   |
 | 91  |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
 | 92  |[Merkle Proof serialization](IPs/RSKIP92.md) | 2018 | DLL & MC | Sca | Core | 2 | Adopted |
 | 95  |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
+| 98  |[Deactivation of the federated fallback system for block production ](IPs/RSKIP98.md) | 2018 | SDL | Sca | Core | 1 | Adopted |
 | 99  |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
 | 106 |[Precompiled contract for HDWallet utility functions](IPs/RSKIP106.md) | 2019 | AM | Usa  | Core | 1 | Adopted |
@@ -125,6 +127,7 @@ RSK Improvement Proposals
 | 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Draft |
 | 125 |[Create2](IPs/RSKIP125.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 131 |[Preventing CREATE2-after-SUICIDE in the same block](IPs/RSKIP131.md) | 2019 | SMS & SDL  | Sca,Usa  | Core | 1 | Adopted  |
+| 132 |[Bridge ReceiveHeaders Gas Cost increase](IPs/RSKIP132.md) | 2019 | JD & SDL  | Fair  | Core | 1 | Adopted  |
 | 134 |[Locking cap](IPs/RSKIP134.md) | 2019 | JD       | Sec,Sca,Usa      | Core     | 2 | Draft   |
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
@@ -164,32 +167,34 @@ RSK Improvement Proposals
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Draft |
+| 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Draft |
+| 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Draft |
 
 
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
+
 | Initials | Full name                    | Email                  |
 | -------- | :----------------------------| :----------------------|
 | AE       | Adrian Eidelman              | adrian@iovlabs.org     |
 | AL       | Angel Lopez                  | angel@iovlabs.org      |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
-| MC       | Martín Coll                  |                        |
-| DM       | Diego Masini                 | dmasini@iovlabs.org    |
 | DLL      | Diego López León             |                        |
+| DM       | Diego Masini                 | dmasini@iovlabs.org    |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org       |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |
-| JL       | Julian Len                   | julian@iovlabs.org     |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
+| JL       | Julian Len                   | julian@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
+| MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
-| MMA      | Matias Marquez               |                        |
 | MM       | Martin Medina                | martin@iovlabs.org     |
+| MMA      | Matias Marquez               |                        |
 | MP       | Martin Picco                 | mpicco@iovlabs.org     |
 | NPS      | Nicolas Perez Santoro        |                        |
 | PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
+| SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
-
-
 
