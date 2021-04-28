@@ -163,7 +163,7 @@ Trie related
 
 ## Test Cases
 
-Incomplete
+Incomplete (tests have to be specified more clearly and additional tests to be added) 
 
 - trie tests, check timestamps, node versioning (serialization, trie hashes)
 - check rent computation with and without caps on variable costs
