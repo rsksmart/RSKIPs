@@ -1,6 +1,6 @@
 # Reprice Trie Read Opcodes
 
-|RSKIP          |pull_request_number_here           |
+|RSKIP          |pull_request_number 239        |
 | :------------ |:-------------|
 |**Title**      |Reprice Trie Read Opcodes |
 |**Created**    |20-APR-21 |
