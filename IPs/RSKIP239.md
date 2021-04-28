@@ -1,6 +1,6 @@
 # Reprice Trie Read Opcodes
 
-|RSKIP          |pull_request_number 239        |
+|RSKIP          |239        |
 | :------------ |:-------------|
 |**Title**      |Reprice Trie Read Opcodes |
 |**Created**    |20-APR-21 |
@@ -11,7 +11,7 @@
 |**Status**     |Draft|
 
 ## Abstract
-Recent experiments [0, 1] indicate that some EVM opcodes used to read blockchain state are relatively *underpriced*. `SLOAD` costs 200 gas. However, by one measure, the *implicit cost* of an `SLOAD` lies between 1000 gas (full state cache, no disk IO) and 80000 gas (no cache, pure disk IO). This RSKIP proposes a conservative re-pricing of these opcodes to better reflect their resource use.
+Recent experiments [0, 1] indicate that some EVM opcodes used to read from blockchain state trie are relatively *underpriced*. For instance, `SLOAD` costs 200 gas. However, by one measure, the *implicit cost* of an `SLOAD` lies between 1000 gas (full state cache, no disk IO) and 80000 gas (no cache, pure disk IO). This RSKIP proposes a conservative re-pricing of such opcodes to better reflect their resource use.
 
 ## Motivation
 
@@ -21,7 +21,7 @@ As indicated by recent experiments [0, 1] The current state of the RSK network c
 
 Suppose 1 gas is about 30 nanoseconds of VM execution time (see Rationale section below). Even with the most favorable scenario of keeping the entire trie in memory (35K lookups/sec),  each lookup takes nearly 28500 nanoseconds. Thus, a trie node lookup has an *implicit cost* of about 950 gas (using 1 gas = 30 ns). However, the current cost of `BAL` is 400 gas while a `SLOAD` costs just 200 gas. Both of these codes are used quite frequently. Recall that reading from disk is much slower, about 400 nodes per second. That implies an implicit cost of 83000 gas for a lookup.
 
-Thus, depending on how much state is cached in RAM, the implicit cost of an `SLOAD` (priced at 200 gas) can vary from 1000 gas to 83000 gas. Again, this is assuming a 1 gas :30ns, but our proposed changes are quite conservative. Correcting underpriced operations to reflect their actual resource consumption improves security (from attacks), scalability and fairness.
+Thus, depending on how much state is cached in RAM, the implicit cost of an `SLOAD` (priced at 200 gas) can vary from 1000 gas to 83000 gas. Again, this is assuming a ratio of 1 gas:30ns. Our proposed changes are quite conservative. Correcting underpriced operations to reflect their actual resource consumption improves security (from IO attacks), scalability and fairness.
 
 ## Specification
 
@@ -71,7 +71,7 @@ Should verify that the gascost of `SLOAD`, `BAL` and `EXTCODEHASH` are updated a
 
 [0] Sergio Demian Lerner, IOV Labs, reported April 2021.
 
-[1] Pablo Pedemonte, IOV Labs, "Stress Testing Rif Consensus Node’s World State", Available: [IOV Labs Blog](https://blog.rsk.co/noticia/stress-testing-ethereums-world-state/).
+[1] Pablo Pedemonte, IOV Labs, "Stress Testing RIF Consensus Node’s World State", Available: [IOV Labs Blog](https://blog.rsk.co/noticia/stress-testing-ethereums-world-state/).
 
 [2] [RSKJ VMPerformanceTest (on github)](https://github.com/rsksmart/rskj/blob/9a56ee28c8aae31c8bda1334e44124f83d135956/rskj-core/src/test/java/co/rsk/vm/VMPerformanceTest.java)
 
