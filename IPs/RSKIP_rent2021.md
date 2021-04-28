@@ -1,6 +1,6 @@
 # Implement Storage Rent in RSK
 
-|RSKIP          |pull_request_number_here           |
+|RSKIP          |pull_request_number 240           |
 | :------------ |:-------------|
 |**Title**      |Implement Storage Rent in RSK|
 |**Created**    |27-APR-21 |
