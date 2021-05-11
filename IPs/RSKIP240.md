@@ -70,7 +70,7 @@ The dependence on timestamps makes rent payments *variable*. These are **capped*
 
 Updating a node's rent timestamp requires a trie *put* operation, which can affect performance. To reduce the number of trie writes "driven by" timestamp updates, we require some minimum "collection thresholds" on the amount of rent that is due. This threshold is different for trie reads and trie writes.
 
-Rent *does not* depend directly on opcodes. The reference to some opcodes here is mostly for illustration. Some operations such as `CALL` may touch several trie nodes (accounts, code, storage). It is also common for the same trie node to be touched *multiple times* and in *different ways* within the same transaction (`SLOAD`, `STORE`). The amount of rent collected in a transaction should not depend on the order in which, or the number of times a trie node was accessed.
+Rent *does not* depend directly on opcodes. It depends on the type of node accessed. The reference to opcodes here is mostly for illustration. Some operations such as `CALL` can touch several trie nodes (accounts, code, storage). It is also common for the same trie node to be touched *multiple times*, in *different ways*, and at *different call depths* within the same transaction. Within a single call frame, the amount of rent collected in a transaction should not depend on the order in which or the number of times a trie node is accessed. Naturally, the order of access does matter at different call depths. 
 
 When a *pre-existing* value is updated in the trie, then the additional performance cost of updating its rent timestamp is low. Thus, the threshold for *trie-write* operations is set lower than those for trie-reads. To be clear, this only applies to updating *previously existing values* (e.g. balances, storage).  Contract code cannot be 'updated' and new nodes (of any type) get a timestamp for free when they are created.
 
@@ -79,7 +79,7 @@ When a *pre-existing* value is updated in the trie, then the additional performa
 |Account Balance|  400 gas (**700**\* )| 9000 gas (`CALL` with value) | 2500 gas |1000 gas |   5000 gas |
 |Contract Storage |  200 gas (**800**\*) | 5000 gas (`SSTORE`)  |2500 gas | 1000 gas |    5000 gas |
 |Contract Code Hash | 400 gas (**700**\*) (`EXTCODEHASH`) | N/A | 2500 gas| N/A |  5000 gas |
-|Contract Code| 700 gas (e.g. `CALL`, `EXTCODECOPY`) | N/A | 25,000 gas| N/A |  50,000 gas |
+|Contract Code| 700 gas (e.g. `CALL`, `EXTCODECOPY`) | N/A | 15,000 gas| N/A |  30,000 gas |
 
 **Note**: "N/A" is not applicable (code cannot be "updated"). Values with (*) are those proposed in [RSKIP239]((https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP239.md)), which reprices trie read costs (`BAL`, `SLOAD`, `EXTCODEHASH`). 
 
@@ -132,6 +132,8 @@ Rent is consumed from the same gas counter as usual, sourced initially from a tr
 Usually, when there is an *unhandled exception* at any call depth, TX stops and all state changes are reverted. Any gas used thus far is not refunded. This philosophy must be maintained for storage rent as well. If state changes are reverted at any call depth, due to an error, then all associated rent updates must also be reverted. Not doing so can introduce unintended side effects.
 
 However, if timestamps are not updated following a revert, then it seems unfair to consume all the rent "collected" for those updates. Therefore, a *separate* `usedRentGas` counter should be implemented to handle call reversions or exceptions. If a transaction ends because of a OOG exception or REVERT, then 25% of the storage rent gas used so far (`usedRentGas`)  is consumed as compensation for computation and IO costs. Recall that rent is also intended as a deterrence against DoS attacks, so we cannot refund all of the rent accounted for, even if timestamps remain unchanged.
+
+If an error at some call depth is handled in a way that transaction execution can proceed, then only the timestamp changes associated with the failed call (and its subcalls) need to be reverted. Again, 75% of gas used for rent in the failed call should be refunded to the caller.
 
 #### Dependencies
 The limits on variable costs in this proposal are based  on "re-priced" gascosts from a related proposal, RSKIP239. While these proposals can be adopted independently, we think it is beneficial to make the current proposal (RSKIP240) dependent on RSKIP239.
