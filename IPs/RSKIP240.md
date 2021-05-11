@@ -24,6 +24,8 @@ Storage rent introduces variable fees for trie access. These fees can help in th
 - reduce the risk of storage spam and gas arbitrage
 - encourage developers and product designers to treat state storage more judiciously - important for long term scalability, sustainability and fairness
 
+### Why introduce rent now
+
 RSK is a relatively young blockchain and the above factors are not really pressing issues at the moment. However, the RSK community is working towards massive growth and user adoption. If successful, then introducing new economic mechanisms (such as storage rent) later can become more challenging and potentially disruptive. For illustration, one can look at Ethereum's experience. Despite continuing support from several core developers and researchers, the Ethereum community has struggled to reach consensus on introducing rent. Their experience illustrates that introducing a new pricing system in a mature and popular blockchain can be extremely challenging. 
 
 Whenever practical, the RSK community tries to maintain compatibility with Ethereum. In the future, should the Ethereum community (or another public chain) come up with a clearly superior system for state size management, then we can always implement the same in RSK.
@@ -46,65 +48,72 @@ Node versioning is required for serialization of new trie nodes with rent timest
 
 ### Rent computation
 
+**Reference Time:** The timestamp of the current block (where the transaction is included) should be used as the reference time for calculating time deltas for rent computations.
+
+
 Rent is computed and tracked at the granularity of individual *value-containing* unitrie nodes. Rent accounting follows a *pay-after-use* model. The rent for a trie node depends on three factors:
 
 1. the node's size (in bytes) 
 2. the duration (in seconds) since rent was last paid (fully). 
 3. and the **rental rate** `R = 1/2^21 gas/byte/second` (approximately **15 gas per byte per year**)
 
-A node's size (`nodeSize`) is computed as the node's value length plus 128 bytes for storage overhead. Therefore, `nodeSize` only approximates the actual space consumed, e.g. it doesn't take into account embedded nodes. One impact of the storage overhead is that the effective rent for storage cells (32 bytes maximum) is more than that for nodes containing contract code which can be thousands of bytes.
+A node's size (`nodeSize`) is computed as the node's value length plus 128 bytes for storage overhead. Therefore, `nodeSize` only approximates the actual space consumed, e.g. it doesn't take into account embedded nodes.
 
 Illustrative **approximate** examples of rent
-- `(32+128)*15 ~ 2500 gas/year` for storage cell (32 bytes)
--  `(2500+128)*15 ~ 40000 gas/year` for a contract of size 2500 bytes 
+- `(10+128)*15 ~ 2100 gas/year` for an account with 10 bytes of data
+- `(32+128)*15 ~ 2500 gas/year` for a storage cell (32 bytes maximum)
+-  `(2500+128)*15 ~ 40000 gas/year` for a contract of size 2500 bytes (about the size of an ERC20 token contract)
 
-### Caps on rent fees
+### Rent Collection Thresholds and Caps
 
-The dependence on timestamps makes rent payments variable. These payments are capped, so that the rent for various nodes is spread across different transactions.
+The dependence on timestamps makes rent payments *variable*. These are **capped** on a *per-transaction* basis, so a trie node's rent payments get spread across different transactions and across users (transaction senders).
 
-| Node Type | Related OpCodes          | Fixed Cost for reading | Rent Cap (max variable cost) |
-|:------------ |:------------ |:-------------| :-------------|
-|Storage Cell | `SLOAD`      | 800* gas (200 current) | 1600 gas |
-| Account Info| `BAL`    | 700* gas (400 current)| 1400 gas |
-|Contract Code | `CALL*`, `EXTCODE*`  | 700 gas | 1400 gas|
+Updating a node's rent timestamp requires a trie *put* operation, which can affect performance. To reduce the number of trie writes "driven by" timestamp updates, we require some minimum "collection thresholds" on the amount of rent that is due. This threshold is different for trie reads and trie writes.
 
-**Note**: * The fixed cost for `SLOAD` and `BAL` are values proposed in RSKIP_repriceRead. Current values are in parentheses.
+Rent *does not* depend directly on opcodes. The reference to some opcodes here is mostly for illustration. Some operations such as `CALL` may touch several trie nodes (accounts, code, storage). It is also common for the same trie node to be touched *multiple times* and in *different ways* within the same transaction (`SLOAD`, `STORE`). The amount of rent collected in a transaction should not depend on the order in which, or the number of times a trie node was accessed.
 
-**Minimum collection trigger:** To avoid tiny payments and reduce the number of trie IO operations, rent is collected only if the amount due for a trie node exceeds `rent_trigger = 200 gas` (about 1 month rent for a storage cell).
+When a *pre-existing* value is updated in the trie, then the additional performance cost of updating its rent timestamp is low. Thus, the threshold for *trie-write* operations is set lower than those for trie-reads. To be clear, this only applies to updating *previously existing values* (e.g. balances, storage).  Contract code cannot be 'updated' and new nodes (of any type) get a timestamp for free when they are created.
 
-**Reference Time:** The timestamp of the current block (where the transaction is included) should be used as the reference time for calculating time deltas for rent computations.
+| State Data Type | Fixed Cost (reads) |  Fixed Cost (updates) | Rent Threshold (reads) | Rent Threshold (updates) | Rent Cap |
+|:------------ |:-------------|:-------------|:-------------|:-------------|:-------------|
+|Account Balance|  400 gas (**700**\* )| 9000 gas (`CALL` with value) | 2500 gas |1000 gas |   5000 gas |
+|Contract Storage |  200 gas (**800**\*) | 5000 gas (`SSTORE`)  |2500 gas | 1000 gas |    5000 gas |
+|Contract Code Hash | 400 gas (**700**\*) (`EXTCODEHASH`) | N/A | 2500 gas| N/A |  5000 gas |
+|Contract Code| 700 gas (e.g. `CALL`, `EXTCODECOPY`) | N/A | 25,000 gas| N/A |  50,000 gas |
 
-**New Nodes**: New nodes receive the timestamp of the block they are created in. No advanced rent is collected.
+**Note**: "N/A" is not applicable (code cannot be "updated"). Values with (*) are those proposed in [RSKIP239]((https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP239.md)), which reprices trie read costs (`BAL`, `SLOAD`, `EXTCODEHASH`). 
 
-**Updating rent time stamp**
+Updating the timestamp is more resource intensive for `EXTCODECOPY` (or `EXTCODESIZE`) than for `EXTCODEHASH`. This is because `EXTCODEHASH` does not require loading contract code. See the Rationale section for *additional remarks* about these values.
 
-Suppose a trie node has `nodesize = S bytes`. Let `lastRentPaidTime = ts_0` and let the current block's timestamp be `ts_now`. Recall the rental rate is `R gas/byte/sec`. Let the rent cap be `C`.
 
-Then the outstanding rent for this node is `rent_due = (S * R) * (ts_now - ts_0)`
 
-- if `rent_due` is less than the minimum collection trigger (200 gas), then no rent is collected and `lastRentPaidTime` remains unchanged.
-- if `rent_due` exceeds the collection trigger (200 gas) but is less than the rent cap `C`, then the outstanding amount is collected and `lastRentPaidTime` is set equal to the reference time (current block timestamp)
-- if `rent_due` exceeds the cap `C`, then only `C` is collected. In this case, the timestamp is advanced as follows (using "`//`" for **division with round down**)
-
-```
-t_paid = C//(S * R) // time paid for (rounded down)
-ts_new = ts_0 + t_paid // advance the timestamp
-```
-
-**Example:** Suppose a transaction uses the `SLOAD` opcode to read the value of a storage cell of size 32 bytes with an outstanding rent of 2500 gas (about 1 year of rent is due). Since this exceeds the rent cap for `SLOAD`, the sender will be charged the cap of 1600 gas for this trie node. The node's `lastRentPaidTime` will be advanced by 
-
-```
-C = 1600 gas, S = (128 + 32) = 160 bytes, R = 1/2^21 gas/byte/sec
-t_paid = 1600 // (160 * 1/2^21) = roundDown(2^21 *10) = 20,971,520 seconds (8 months approx)
-```
-
-**Rent for write Ops:** The above costs for trie *read* operations. However, rent tracking and collection can be implicitly triggered for write operations as well. This is because trie write operations such as `SSTORE` check for pre-existing values first. If a write operation creates a new trie node, then the node is assigned the timestamp of the current block. No rent is collected in advance.
+**New Nodes**: New nodes (of any type) receive the timestamp of the block they are created in. No advanced rent is collected. If needed (in future) advanced rent payment for new nodes can be incorporated into fixed costs.
 
 **Security and DoS:** To increase the costs of IO-DOS attacks, the maximum rent cap is charged for attempting to read data from nodes that do not exist in the trie.
 
 **Duration cap:** There is a limit on the amount of time for which rent is accrued. This is set at 3 years. If a node remains untouched for 3 years, then the amount of outstanding rent does not grow any further, it remains capped at that level. Letting rent accumulate forever seems unnecessarily punitive.
 
-**Tracking and collection mechanics**
+### Computing a node's rent time stamp
+
+Suppose a trie node has nodesize `Size` (bytes). Let its current timestamp be `lastRentPaidTime = t_0` (seconds) and let the current block's timestamp be `t_now` (seconds). Denote the rental rate by `Rent` (gas/byte/second). Denote the *relevant* (read or write) collection threshold for this node type by `Cutoff` (gas), and the rent limit  by `Cap` (gas).
+
+Then the *outstanding rent* for this node is `rent_due = (Size * Rent) * (t_now - t_0)`. The amount of rent to be collected (if any) depends on whether the data in the node is modified by the transaction or not. 
+
+- if `rent_due < Cutoff`, then no rent is collected and `lastRentPaidTime` remains unchanged.
+- if `rent_due > Cutoff` but `rent_due < Cap`, then the entire outstanding amount is collected and `lastRentPaidTime` is set equal to the current block's timestamp.
+- if `rent_due > Cap`, then only `Cap` is collected. In this case, the timestamp is advanced as follows (using "`//`" for **division with round down**)
+
+```
+/* If rent due exceeds `Cap`*/
+t_paid = Cap//(Size * Rent) /* time for which rent is paid (`//` is division with round down)*/
+t_new = t_0 + t_paid /* update the timestamp */
+```
+
+**Example 1.** Suppose a transaction uses the `SLOAD` opcode to read the value of a storage cell with outstanding rent of 1600 gas. If this cell is not modified by the transaction, then no rent is collected, since the amount due is less than the threshold for reads (2500 gas). However, if the same transaction *modifies* the value contained in the cell using `SSTORE`, then the minimum threshold for rent collection is 1000 gas. In this case, the full amount of rent due (1600) is collected  and the timestamp is updated to the current block's timestamp.
+
+**Example 2.** A contract with 5000 bytes of code has not been touched since it was deployed 2 years ago. The amount of rent due is approximately `(5000+128) * 15 * 2 = 15400`. The first user to call this contract will be charged the rent cap of 40,000 gas. This payment will *advance* the contract's rent timestamp by `40000/(15 *5128) = 0.52` years  i.e about 6 months. 
+
+### Tracking and collection mechanics
 
 All trie nodes *accessed*, *modified* or *created* by a transaction are automatically checked and added to rent-tracking caches. Users cannot select or exclude individual rent payments. 
 
@@ -116,27 +125,31 @@ One way of implementing the system is to have three caches of value-containing n
 
 These caches are passed along to all child calls, so that rent tracking does not kick in more than once for any node irrespective of call depth. After a transaction has been fully processed, the caches are iterated and the updated values and timestamps are commited to the state trie.
 
-### Gas counters and accounting
+### Gas counters and Error Handling
 
-The `usedGas` counter should include both execution and rent gas consumption.
+Rent is consumed from the same gas counter as usual, sourced initially from a transaction's `gaslimit` field. The `usedGas` tracker should include both execution and rent gas consumption.
 
-- the `GAS` opcode must use `usedGas` (inclusive of rent) to provide a conservative estimate of how much gas is still available.
-- Similarly, the combined value must be reported for transaction receipts and block level gas consumption.
+A *separate* `usedRentGas` counter should be implemented to handle transaction reversion or exceptions.
 
-However, a *separate gas counter*,  `usedRentGas`, should be also be implemented.
-
-- If a transaction ends because of a OOG exception or REVERT, then 25% of the storage rent gas used so far (`usedRentGas`)  is consumed as compensation for IO costs. The remaining 75% of the gas marked as `usedRentGas` is refunded. Rent timestamps are not updated.
+- If a transaction ends because of a OOG exception or REVERT, then 25% of the storage rent gas used so far (`usedRentGas`)  is consumed as compensation for computation and IO costs. The remaining 75% of the gas marked as `usedRentGas` is refunded. Rent timestamps are not updated.
 - a separate counter can also help implement `estimateGas` methods that report estimates with and without including estimated rent payments.
 
 Note that a distinction between `usedGas` (execution + rent) and `usedRentGas` may be useful for research. Nodes can do that internally. But it would be useful to have rent payments listed separately in transaction receipts. These issues are left for future research.
 
 #### Dependencies
-The limits on variable costs in this proposal are based  on "re-priced" gascosts from a related proposal, RSKIP_repriceRead. While these proposals can be adopted independently, we think it is beneficial to make the current proposal dependent on RSKIP_repriceRead. Should the community choose to implement only the current proposal, then the numerical limits presented here may have to be revised.
-
+The limits on variable costs in this proposal are based  on "re-priced" gascosts from a related proposal, RSKIP239. While these proposals can be adopted independently, we think it is beneficial to make the current proposal (RSKIP240) dependent on RSKIP239.
 
 ## Rationale
 
-The specification already provides much of the rationale. More information to be added here based on community feedback.
+The specification already explains much of the rationale. Here we include some additional details.
+
+### Rent triggers and caps
+
+The cost of writing a rent timestamp to the trie is an unavoidable accounting cost of implementing storage rent. Lacking data to perform an accurate cost-benefit analysis, we adopt a heuristic and conservative approach.
+
+The cost of *updating* a value in a storage cell is 5000 gas (`SSTORE`). Meanwhile, a *value-transferring* `CALL` costs 9000 gas, which apart from a call stipend of 2300 gas, must also cover the cost of *two* account updates (the caller's and callee's). Thus, for account nodes and storage cells, the cost or re-writing data to state trie is around 4000 or 5000 gas. The cost for writing contract code to the trie is much higher - about 200 gas *per byte* is charged for `CREATE`.
+
+However, larger thresholds decrease the frequency with which rent is collected, which lowers the informativeness of the rent timestamp. So, we propose a smaller value of 2500 gas for storage cells and account nodes. This value corresponds to their approximate annual rent. For the rental cap, we use 5000 gas, which is what the rent would be if an account or storage cell remains untouched for 2 years. For contract code, we set the threshold higher, at 15,000 gas with a cap of 30,000 gas. Trying to spread the storage rent for a contract across many users (for "fairness") would require too many trie updates.
 
 ## Backwards Compatibility
 
@@ -159,7 +172,6 @@ Trie related
 - RSKJ currently uses an *implicit* node version number `01` as part of `flags` (bit positions 6, 7). For serialization, these bit positions should be changed to version 2 i.e. `10` in `flags`. 
 - Can use `nodeVersion` 0 when reading nodes with `Orchid` serialization format using `fromMessageOrchid()`. This will not affect encoding or hashing for Orchid.
 - the trie `put(key, value)`  method has to be *generalized* to `put(key, value, lastRentPaidTime)` to incorporate  `lastRentPaidTime`. The default value `put(key, value, -1` can be used for puts that do not need a timestamp (e.g. version 1 nodes, transaction tires, receipts tries)
-
 
 ## Test Cases
 
