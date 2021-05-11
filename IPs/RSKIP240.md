@@ -43,7 +43,7 @@ This proposal requires a hard fork.
 This is a time stamp in unix seconds for each unitrie node. This is interpreted as the time until which rent has been "fully paid". This timestamp will typically lie *in the past* because rent is not paid in advance. The timestamp is moved forward with each rent payment, with the rate of advance depending on both the payment amount and the size of data stored in the node.
 
 - Add another field `nodeVersion` to the unitrie. 
-
+ for at the point a transaction execution stops
 Node versioning is required for serialization of new trie nodes with rent timestamps and older nodes without timestamps. We can use version number 0 for Orchid encoding, 1 for the current encoding (RSKIP107), and 2 for nodes with rent time stamp (current proposal). Note that the current implementation of RSKJ already uses implicit node version 1 in bit positions 6 and 7 of `flags` in Trie class. This will be changed to 2 (`10` in binary) for storage rent.
 
 ### Rent computation
@@ -123,18 +123,15 @@ One way of implementing the system is to have three caches of value-containing n
 2. a *map* of all trie nodes whose rent timestamps are to be updated along with their individual (updated) timestamps. Some of these nodes will also have updated values (e.g `SSTORE`).
 3. a *set* of newly created tries nodes. All of them will receive the timestamp of the current block.
 
-These caches are passed along to all child calls, so that rent tracking does not kick in more than once for any node irrespective of call depth. After a transaction has been fully processed, the caches are iterated and the updated values and timestamps are commited to the state trie.
+These caches are passed along to all child calls, so that rent tracking does not kick in more than once for any node irrespective of call depth. After a transaction has been fully processed, the caches are iterated and the updated values and timestamps are committed to the state trie.
 
 ### Gas counters and Error Handling
 
 Rent is consumed from the same gas counter as usual, sourced initially from a transaction's `gaslimit` field. The `usedGas` tracker should include both execution and rent gas consumption.
 
-A *separate* `usedRentGas` counter should be implemented to handle transaction reversion or exceptions.
+Usually, when there is an *unhandled exception* at any call depth, TX stops and all state changes are reverted. Any gas used thus far is not refunded. This philosophy must be maintained for storage rent as well. If state changes are reverted at any call depth, due to an error, then all associated rent updates must also be reverted. Not doing so can introduce unintended side effects.
 
-- If a transaction ends because of a OOG exception or REVERT, then 25% of the storage rent gas used so far (`usedRentGas`)  is consumed as compensation for computation and IO costs. The remaining 75% of the gas marked as `usedRentGas` is refunded. Rent timestamps are not updated.
-- a separate counter can also help implement `estimateGas` methods that report estimates with and without including estimated rent payments.
-
-Note that a distinction between `usedGas` (execution + rent) and `usedRentGas` may be useful for research. Nodes can do that internally. But it would be useful to have rent payments listed separately in transaction receipts. These issues are left for future research.
+However, if timestamps are not updated following a revert, then it seems unfair to consume all the rent "collected" for those updates. Therefore, a *separate* `usedRentGas` counter should be implemented to handle call reversions or exceptions. If a transaction ends because of a OOG exception or REVERT, then 25% of the storage rent gas used so far (`usedRentGas`)  is consumed as compensation for computation and IO costs. Recall that rent is also intended as a deterrence against DoS attacks, so we cannot refund all of the rent accounted for, even if timestamps remain unchanged.
 
 #### Dependencies
 The limits on variable costs in this proposal are based  on "re-priced" gascosts from a related proposal, RSKIP239. While these proposals can be adopted independently, we think it is beneficial to make the current proposal (RSKIP240) dependent on RSKIP239.
