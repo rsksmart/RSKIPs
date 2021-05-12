@@ -203,8 +203,11 @@ If you are interested in assuming ownership of a RSKIP, send a message asking to
 ## RSKIP Editors
 
 ` * Sergio Lerner (@sergioLerner) `
+
 ` * Julian Len (@julianlen)`
+
 ` * Diego Masini (@diegomasini)`
+
 ` * Shreemoy Mishra (@smishraIOV)`
 
 ## RSKIP Editor Responsibilities and Workflow
