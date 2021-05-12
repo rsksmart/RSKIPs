@@ -26,7 +26,7 @@ For RSK implementers, RSKIPs are a convenient way to track the progress and comp
 
 There are three types of RSKIP:
 
--	A **Standard Track RSKIP** describes any change that affects most or all RSK implementation. This can be a change to a network protocol, a change in block or transaction validity rules, or any change or addition that affects the interoperability of applications using RSK. Furthermore, Standards Track RSKIPs can be broken down into the following categories.
+-	A **Standards Track RSKIP** describes any change that affects most or all RSK implementation. This can be a change to a network protocol, a change in block or transaction validity rules, or any change or addition that affects the interoperability of applications using RSK. Furthermore, Standards Track RSKIPs can be broken down into the following categories.
 	* **CORE** - Consensus related
 	* **Node** - Related to node manager interfaces, such as RPC
 	* **Net** - Related to p2p networking
@@ -204,6 +204,8 @@ If you are interested in assuming ownership of a RSKIP, send a message asking to
 
 ` * Sergio Lerner (@sergioLerner) `
 ` * Julian Len (@julianlen)`
+` * Diego Masini (@diegomasini)`
+` * Shreemoy Mishra (@smishraIOV)`
 
 ## RSKIP Editor Responsibilities and Workflow
 
