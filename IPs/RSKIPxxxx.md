@@ -20,7 +20,9 @@ This RSKIP proposes the addition of a several methods to the bridge contract to 
 
 ## Motivation
 
-Currently the bitcoin fees (satoshis x byte) used to create peg-out transactions are established by a threshold of 2 out of 3 keys. The use of these keys require high security procedures. Bitcoin fees can vary rapidly,  and we can't expect the key holders to sign and send messages to the bridge to update fees several times a day. First, we wan't to either remove or increase the number of voters. Second, we don't want the voting keys to be in hot storage. This proposals does not tackle the core problem of computing the bitcoin fees in a decentralized way, but instead proposes a mechanism for users to bump the fees of a peg-out transaction that has already been generated, in case it gets stuck by fast rising fee prices. To achieve this goal, a several methods are added to the bridge. In two of these methods, the user must transfer RBTC to the bridge to be used as additional Bitcoin transaction fees. 
+Currently the bitcoin fees (satoshis x byte) used to create Bitcoin peg-out transactions are established by a threshold of 2 out of 3 keys. The use of these keys requires high security procedures. Bitcoin fees can vary rapidly over hours,  and we can't expect the key holders to sign and send messages to the bridge to update fees several times a day. We would like, if possible, to remove the need to vote. If this is not possible, then to increase the number of voters, to, for example, all pegnatories. However, the first idea is technically challenging, and the second, requires frequent fee update messages from all pegnatories. 
+
+This proposals does not tackle the core problem, but instead proposes a mechanism for users to bump the fees of a peg-out transaction that previously signed, in case it has stuck in the memory pool by fast rising transaction fee prices. To achieve this goal, several methods are added to the bridge. In two of these methods, the user must transfer RBTC to the bridge to be used as additional Bitcoin transaction fees. 
 
 
 
@@ -52,7 +54,7 @@ The gas consumed by any of these methods is SIG_BASE_COST+(length(tx)/32)/12. SI
 
 Let's *T* be the prior transaction. Let *T.fees* be the prior transaction fees. Let *T.output* be the amounts paid to users (peg outs). Let *T.change* be the amount returned to the Bridge contract as change. Let *T.input* the amount collected by *T* inputs. 
 
-The input selector algorithm is modified so that an attempt is made that inputs chosen can cover potentially at least twice the computed transaction fees.
+The input selector algorithm is modified so that a reasonable attempt is made to choose inputs that can cover potentially at least four times the computed transaction fees. 
 
 These methods create new release transactions, but the Bridge does not store store them in its storage. The new transaction hashes are not stored in *releasedTransactionIds*.
 
@@ -77,9 +79,23 @@ This method performs all checks and transaction changes similar to feeBump(). Th
 
 ## Rationale
 
+The following topics has been considered in this proposal.
+
+### More protections against DoS
+
 The high gas cost of these methods is to prevent users abusing of the powpeg resources to sign transaction. To prevent abuse even more Bridge could allow only fee bumps that add at least 30% more fees that the previous fees used. Therefore each attempt becomes more and more expensive. This can be done by storing the last fee used in *releasedTransactionIds*.
 
+### Sending txHash instead of tx
+
 Instead of passing the transaction as an argument, transactions that have been signed by the majority of powpeg members may be stored for 7 days in a new dictionary *signedTransactions* indexed by transaction hash. However, is seems that the complexity and storage cost of handling this additional collection is unnecessary and the used performing the fee bumping can re-send the transaction.
+
+### Mixing Dirty UTXOs
+
+The feeBumpWithInput() could be used to mix "dirty" UTXOs (for example, considered to come from illicit activity) into peg-out transactions. However, this feature cannot be reliably used to launder bitcoins, as the input added is fully paid to miners, and its value is supposed to be vey low. However, the Powpeg doesn't have (and since peg-ins are decentralized, it cannot have) any mean of avoiding the peg-ins with of illicit funds. Therefore feeBumpWithInput() cannot have a negative effect on the platform.
+
+### Input Selection Algorithm
+
+The input selection algorithm must do a reasonable effort to select inputs that allow 4X fee bumping. By reasonable we mean that the algorithm should still be linear, or the number of powpeg UTXOs, bounded. The algorithm should not add more inputs in order to satisfy this condition, as the cost in virtual bytes of a non-segwit input (~137 bytes) is higher than the cost of CPFP output (30 bytes). Adding more inputs only makes sense if they are all low valued, and they are using the peg-out transaction for input consolidation.
 
 ## Backwards Compatibility
 
