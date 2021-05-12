@@ -1,12 +1,12 @@
 # User-triggered peg-out tx fee-bumping
 
 
-|RSKIP          | xxx |
+|RSKIP          | 241 |
 | :------------ |:-------------|
 |**Title**      |User-triggered peg-out tx fee-bumping|
 |**Created**    |MAY-2021 |
 |**Author**     |SDL |
-|**Purpose**    |Sec |
+|**Purpose**    |Usa, Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Draft |
