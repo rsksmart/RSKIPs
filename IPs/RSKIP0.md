@@ -210,6 +210,8 @@ If you are interested in assuming ownership of a RSKIP, send a message asking to
 
 ` * Shreemoy Mishra (@smishraIOV)`
 
+` * Javier Alvarez Cid-Fuentes (@javicid)`
+
 ## RSKIP Editor Responsibilities and Workflow
 
 For each new RSKIP that comes in, an editor does the following:
