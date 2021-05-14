@@ -167,33 +167,35 @@ RSK Improvement Proposals
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Draft |
+| 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Draft |
+| 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Draft |
 | 242 |[Proxy code Incentive](IPs/RSKIP242.md)|  14-MAY-21 | SDL | Sca,Fair | Core | 1 | Draft |
 
 
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
+
 | Initials | Full name                    | Email                  |
 | -------- | :----------------------------| :----------------------|
 | AE       | Adrian Eidelman              | adrian@iovlabs.org     |
 | AL       | Angel Lopez                  | angel@iovlabs.org      |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
-| MC       | Martín Coll                  |                        |
-| DM       | Diego Masini                 | dmasini@iovlabs.org    |
 | DLL      | Diego López León             |                        |
+| DM       | Diego Masini                 | dmasini@iovlabs.org    |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org       |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |
-| JL       | Julian Len                   | julian@iovlabs.org     |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
+| JL       | Julian Len                   | julian@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
+| MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
-| MMA      | Matias Marquez               |                        |
 | MM       | Martin Medina                | martin@iovlabs.org     |
+| MMA      | Matias Marquez               |                        |
 | MP       | Martin Picco                 | mpicco@iovlabs.org     |
 | NPS      | Nicolas Perez Santoro        |                        |
 | PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
+| SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
-
-
 
