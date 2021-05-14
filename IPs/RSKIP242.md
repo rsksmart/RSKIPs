@@ -30,7 +30,7 @@ Second. the cost of installing the code (bytes returned by the contract initiali
 
 ```
 if (codeLength <= 44)
-   cost = codeLength*32;
+   cost = codeLength*30;
    else
    cost = (codeLength+128)*200
 ```
@@ -44,7 +44,7 @@ With the proposed changes, installing a long contract will cost slightly less th
 
 If the trie node data embedding threshold is changed in the future, this change should be reflected in the cost of contract creation.
 
-The cost of a single byte in the state (for example, in contract storage) is about  ~80 gas/byte, that cost includes ~40% of node size and indexing overhead. We choose the cost 32 because there is no overhead involved and we slightly subsidize the use of proxies because they reduce access time in calls.
+The cost of a single byte in the state (for example, in contract storage) is about  ~80 gas/byte, that cost includes ~40% of node size and indexing overhead. We choose the cost 30 because there is no overhead involved and we slightly subsidize the use of proxies because they reduce access time in calls.
 
 # Backwards Compatibility
 
