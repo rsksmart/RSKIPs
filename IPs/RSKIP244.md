@@ -13,7 +13,7 @@
 
 # **Abstract**
 
-This RSKIP proposes reduced the gas cost when creating short storage cells and removing storage reimbursements. Reimbursements can be maintained if this RSKIP is implemented jointly with RSKIPxxx.
+This RSKIP proposes reduced the gas cost when creating short storage cells and removing storage reimbursements. Reimbursements can be maintained if this RSKIP is implemented jointly with RSKIP243.
 
  
 
@@ -40,7 +40,7 @@ The *setResetCost* is defined as 15K if the cell value was previously zero, and 
 
 The fixed cost to `SSTORE` a zero-value is fixed at 3000. 
 
-Storage cleanup reimbursements are removed both for `SSTORE` and `SELFDESTRUCT`, unless this RSKIP is implemented together with RSKIPxxx, which is recommended.
+Storage cleanup reimbursements are removed both for `SSTORE` and `SELFDESTRUCT`, unless this RSKIP is implemented together with RSKIP243, which is recommended.
 
 
 # Rationale
@@ -53,7 +53,7 @@ It is common that contracts use a storage cell to create a semaphore to protect 
 
 **With refunds**
 
-If this RSKIP is combined with RSKIPxxx, the the cost of a 0-1 semaphore becomes 7502+3000-4502, resulting in 6000, 40% lower. 
+If this RSKIP is combined with RSKIP243, the the cost of a 0-1 semaphore becomes 7502+3000-4502, resulting in 6000, 40% lower. 
 
 **Without refunds**
 
