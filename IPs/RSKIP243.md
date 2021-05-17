@@ -17,7 +17,7 @@ This RSKIP proposes eliminating inter-block gas refunds and replace them with a 
 
 # **Motivation**
 
-The motivation for the removal of storage refunds can be found in [EIP3298]([https://eips.ethereum.org/EIPS/eip-3298). Essentially, gas refunds that span over blocks bring numerous problems. However, instead of removing storage gas reimbursements completely, we propose keeping them but only if the storage creation and removal occurs within a single transaction. By doing so do not harm common Solidity language constructions, such as reentrancy semaphores. This change keeps the platform fair because on refunds the trie is not impacted, and the I/O cost is avoided. 
+The motivation for the removal of storage refunds can be found in [EIP3298](https://eips.ethereum.org/EIPS/eip-3298). Essentially, gas refunds that span over blocks bring numerous problems. However, instead of removing storage gas reimbursements completely, we propose keeping them but only if the storage creation and removal occurs within a single transaction. By doing so do not harm common Solidity language constructions, such as reentrancy semaphores. This change keeps the platform fair because on refunds the trie is not impacted, and the I/O cost is avoided. 
 
 Also currently when a contract is destroyed, the reimbursed amount is constant. However, the variable cost related to the number of bytes installed can be as high as 4915200 gas. We propose to reimburse this amount, increasing platform fairness.
 
@@ -45,7 +45,8 @@ Several related topics are analyzed in separate sections.
 
 ### This proposal vs. [EIP2929](https://eips.ethereum.org/EIPS/eip-2929)
 
-This proposal does not overlap with EIP2929 and both proposals can be combined. This proposal aims to reduce the gap between storage allocation gas cost and storage allocation real cost. EIP2929 aims to reduce the gap between storage access gas cost and real access cost. However, state rent includes incentives in EIP2929 and extends beyond them to consider intra-block caches, while EIP2929 focuses only in inter-block caches. Therefore we suggest to combine this proposal with state rent, instead of EIP2929.
+This proposal does not overlap with EIP2929 and both proposals can be combined. Both proposals attempt to achieve a closer match between gas costs and actual resources consumed.
+This proposal refers to write operations, while EIP2929 refers to read operations. Even if both proposals use maps or sets to hold storage keys, these maps serve different purposes. EIP2929 aims to reduce the gap between storage access gas cost and actual access cost. This proposal, storage write gas cost and actual write cost. However, state rent encompass the incentives in EIP2929 and extends beyond them to consider intra-block caches, while EIP2929 focuses only in inter-block caches. Therefore we suggest to combine this proposal with state rent, instead of EIP2929.
 
 ### Rollbacks
 
