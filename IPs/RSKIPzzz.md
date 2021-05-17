@@ -1,13 +1,13 @@
 # Variable Storage Costs
 
-|RSKIP          |xxx           |
+|RSKIP          |244           |
 | :------------ |:-------------|
 |**Title**      |Variable Storage Costs|
 |**Created**    |16-MAY-2021 |
 |**Author**     |SDL |
 |**Purpose**    |Sca, Fair |
 |**Layer**      |Core |
-|**Complexity** |1 |
+|**Complexity** |2 |
 |**Status**     |Draft |
 |**discussions-to**     ||
 
