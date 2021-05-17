@@ -1,8 +1,8 @@
-# Intra-transaction Refunds
+# Intra-transaction Gas Refunds
 
-|RSKIP          |xxx           |
+|RSKIP          |243           |
 | :------------ |:-------------|
-|**Title**      |Intra-transaction Refunds|
+|**Title**      |Intra-transaction  Gas Refunds|
 |**Created**    |16-MAY-2021 |
 |**Author**     |SDL |
 |**Purpose**    |Sca, Fair |
@@ -13,7 +13,7 @@
 
 # **Abstract**
 
-This RSKIP proposes eliminating inter-block storage refunds but keep intra-transaction refunds. It also proposes to reimburse according to the paid cost, increasing platform fairness.
+This RSKIP proposes eliminating inter-block gas refunds and replace them with a 100% intra-transaction gas refunds. It also proposes to reimburse according to the paid cost, increasing platform fairness.
 
 # **Motivation**
 
@@ -21,16 +21,22 @@ The motivation for the removal of storage refunds can be found in [EIP3298]([htt
 
 Also currently when a contract is destroyed, the reimbursed amount is constant. However, the variable cost related to the number of bytes installed can be as high as 4915200 gas. We propose to reimburse this amount, increasing platform fairness.
 
+Because intra-transaction refunds cannot increase block processing time, the cap to 50% of the consumed gas is removed.
+
 
 # **Specification**
 
-Starting from an activation block (TBD) storage cleanup reimbursements are modified both for `SSTORE` and `SELFDESTRUCT`. Two data structures are created by the virtual machine when processing a transaction: a set *contracts_created\[contractAddress\]* (one for all contracts) and one map of sets *storage_cells_created\[contractAddress\]\[storageAddress\]*. Both are empty on creation.
+Starting from an activation block (TBD) storage cleanup reimbursements are modified both for `SSTORE` and `SELFDESTRUCT`. Refunds can only be collected in the same transaction they the gas is spent. 
+
+Two data structures are created by the virtual machine when processing a transaction: a set *contracts_created\[contractAddress\]* (one for all contracts) and one map of sets *storage_cells_created\[contractAddress\]\[storageAddress\]*. Both are empty on creation.
 
 If a contract is created, it is added to *contracts_created*. If a contract is destroyed, the contract address is looked up in *contracts_created*. If it exists, then 24K gas plus the refund of the variable cost required to install the code is refunded at the end of transaction processing. 
 
 If a storage cell is created (zero value before) its address is added to the set *storage_cells_created\[contractAddress\]*, where contractAddress is the current contract. If in the same transaction the same cell address is cleared (zero value afterward), a refund of (*creationCost* -3000) is added to the refund amount, and the storage cell address is removed from *storage_cells_created\[contractAddress\]*. *creationCost* may be the 20K established at RSK genesis, or a new cost established by other RSKIP. If *creationCost* is variable, then the reimbursement will also be variable to match *creationCost* .
 
 If a contract call revers, the changes on *contracts_created* and *storage_cells_created* are not reverted. This implies that clearing a storage cell may trigger a refund even if the cell was already cleared. 
+
+The cap of the refund to 50% of the transaction gas consumed is removed.
 
 
 # Rationale
