@@ -65,8 +65,6 @@ The RSKIP repository Editors change the RSKIPs status. Please publish all RSKIP-
 
 The RSKIP process begins with a new idea for RSK. It is highly recommended that a single RSKIP contain a single key proposal or new idea. The more focused the RSKIP, the more successful it tends to be. A change to one client doesn't require a RSKIP; a change that affects multiple clients, or defines a standard for multiple apps to use, does. The RSKIP editors reserve the right to reject RSKIP proposals if they appear too unfocused or too broad. When in doubt, split your RSKIP into several well-focused ones.
 
-### RSKIP Workflow
-
 Each RSKIP must have a champion -- someone who writes the RSKIP using the style and format described below, shepherds the discussions in the appropriate forums, and attempts to build community consensus around the idea. The RSKIP champion should first attempt to ascertain whether the idea is RSKIP-able.
 
 Vetting an idea publicly before going as far as writing a RSKIP is meant to save the potential author time. Asking the RSK community first if an idea is original, helps to prevent too much time being spent on something that is guaranteed to be rejected based on prior discussions. It also helps to make sure the idea applies to the entire community and not just the author. It is highly recommended to open a discussion thread on the [RSK Research and Innovation Forum]. Another appropriate public channel to gauge interest around your RSKIP could be on [the Issues section of this repository].
