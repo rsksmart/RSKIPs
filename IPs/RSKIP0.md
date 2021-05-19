@@ -77,9 +77,7 @@ If RSKIP editors approve, the issuer of the RSKIP must assign the PR number to t
 
 The RSKIP author may update the Draft as necessary in the git repository. Updates to drafts may also be submitted by the author as pull requests.
 
-Standards Track RSKIPs consist of three parts, a design document, implementation, and finally if warranted an update to the formal specification. The RSKIP should be reviewed and accepted before an implementation is begun, unless a reference implementation will aid people in studying the RSKIP. 
-
-Standards Track RSKIPs consist of three parts, a design document, implementation, and finally (if warranted) an update to the formal specification. The RSKIP should be reviewed and accepted before the implementation begins unless a reference implementation will aid people in studying the RSKIP.
+Standards Track RSKIPs consist of three parts, a design document, a reference implementation, and (if warranted) an update to the formal specification. The RSKIP should be reviewed and accepted before its integration begins, a reference implementation will aid people in studying the RSKIP.
 
 Standards Track RSKIPs must include an implementation -- in the form of code, a patch, or an URL to the same -- before it can be considered an Accepted or Pending Fork.
 
@@ -87,7 +85,9 @@ For a RSKIP to be "Accepted" it must meet certain minimum criteria. It must be a
 
 A RSKIP can also be assigned the status “Deferred”. The RSKIP's author or editor can assign the RSKIP this status when no progress is being made on it. Once a RSKIP is deferred, its editor can re-assign it to have “Draft” status. An RSKIP that is not being considered for immediate adoption in the reference client may be reconsidered in the future for a subsequent release of the reference client.
 
-An RSKIP can also be “Rejected”. Perhaps, after all, it was not a good idea. It is still important to have a record of this fact.
+A RSKIP Author(s) can withdrawn the proposed RSKIP. This state means finality and the RSKIP can no longer be resurrected using its number. If the idea is pursued at later date it is considered a new proposal.
+
+A RSKIP can also be “Rejected”. Perhaps, after all, it was not a good idea. It is still important to have a record of this fact.
 
 RSKIPs can also be superseded by a different RSKIP, rendering the original obsolete.
 
