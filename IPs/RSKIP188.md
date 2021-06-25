@@ -1,11 +1,11 @@
-# Title
+# Precompiled Contracts for BLS12-381 Curve Operations
 
 |RSKIP          | 188 |
 | :------------ |:-------------|
-|**Title**      |Precompile for BLS12-381 curve operations |
+|**Title**      |Precompiled Contracts for BLS12-381 Curve Operations |
 |**Created**    |20-11-2020 |
 |**Author**     |FJ |
-|**Purpose**    |USa |
+|**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Draft |
@@ -36,7 +36,7 @@ Motivation of this precompile:
 
 ## Specification
 
-If `blockNumber >= iris` we introduce nine separate precompiles to perform the following operations:
+If `blockNumber >= N` (to be defined) we introduce nine separate precompiles to perform the following operations:
 
 `BLS12_G1ADD` - to perform point addition on a curve defined over prime field
 `BLS12_G1MUL` - to perform point multiplication on a curve defined over prime field
