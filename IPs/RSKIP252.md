@@ -1,6 +1,6 @@
 # Transaction Gas Price Cap
 
-|RSKIP          |xxx           |
+|RSKIP          |252           |
 | :------------ |:-------------|
 |**Title**      |Transaction Gas Price Cap|
 |**Created**    |29-JUN-2021 |
