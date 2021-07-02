@@ -13,7 +13,7 @@
 
 # **Abstract**
 
-This RSKIP proposes the limit of the transaction gas price as a factor of the minimum gas price established in the block header. The objective is twofold: remove incentives for [fee sniping](https://bitcoinops.org/en/topics/fee-sniping/) and [fee-whale transactions](https://medium.com/r/?url=https%3A%2F%2Fwww.cs.umd.edu%2F~jkatz%2Fpapers%2Fwhale-txs.pdf), and to prevent users from accidentally draining their wallets with unintended high transaction fees.
+This RSKIP proposes the limit of the transaction gas price as a multiple of the minimum gas price established in the block header. The objective is twofold: remove incentives for [fee sniping](https://bitcoinops.org/en/topics/fee-sniping/) and [fee-whale transactions](https://medium.com/r/?url=https%3A%2F%2Fwww.cs.umd.edu%2F~jkatz%2Fpapers%2Fwhale-txs.pdf), and to prevent users from accidentally draining their wallets with unintended high transaction fees.
 
 # **Motivation**
 
@@ -39,7 +39,7 @@ If during network congestion, RSK transactions reach the highest gas price allow
 
 ## High-fee Transaction Propagation Limit Rule
 
-The rule that limits transaction propagation of high-fee transactions prevents that 51% of the miners decrease the minimum gas price and cancel a large number of transactions in the mempool. This could be performed as an attack or accidentally. In both cases large cancellations means network resources were wasted in the propagation of the cancelled transactions. With the introduced transaction propagation limit, high-fee transaction will still be able to be included in blocks with high probability, even when the minimum gas price is being decreased continuously.
+The rule that limits transaction propagation of high-fee transactions prevents that 51% of the miners decrease the minimum gas price and cancel a large number of transactions in the mempool. This could be performed as an attack or accidentally. In both cases large cancellations means network resources were wasted in the propagation of the cancelled transactions. With the introduced transaction propagation limit, high-fee transaction will still be able to be included in blocks with high probability, even when the minimum gas price is being decreased continuously. This limit is not a consensus rule and can be modified easily in a reference node software release.
 
 
 
