@@ -70,7 +70,7 @@ Note that because of the change in the input selector algorithm, the case that  
 
 If the input size is higher than 1000 bytes, then the call REVERTs.
 
-A new transaction *T'* is built having the inputs and outputs of *T*, but with an additional input appended, specified by newInput. The user is responsible to check that the input amount is enough to bump the fees.  The input given must already be signed.
+A new transaction *T'* is built having the inputs and outputs of *T*, but with an additional input appended, specified by newInput. The input given must already be signed.
 
 The bridge will validate that the input conforms to its expected format (the correct parsing of each field and that there is not additional data past the last field). However, the bridge will not inspect the content of each field, except for txin-script length, which must be inspected for parsing the script field.
 
