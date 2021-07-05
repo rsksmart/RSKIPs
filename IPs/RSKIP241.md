@@ -117,7 +117,7 @@ The input selection algorithm must do a reasonable effort to select inputs that 
 
 ### Parameter Choices
 
-This proposal is intended to be adopted concurrently with a proposal to perform peg-out batching at a maximum rate of one peg-out every 2 hours. By setting N=128, we enable a period of 10 days for transactions to be fee-bumped. This is more than enough for 
+This proposal is intended to be adopted concurrently with a proposal to perform peg-out batching at a maximum rate of one peg-out every 2 hours. By setting N=128, we enable a period of 10 days for transactions to be fee-bumped. 
 
 ## Backwards Compatibility
 
