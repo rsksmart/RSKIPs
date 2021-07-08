@@ -1,14 +1,14 @@
-# New fee rewards address for the RSK Core Developers Fund
+# New Fee Rewards Address for the RSK Core Developers Fund
 
 |RSKIP          |218           |
 | :------------ |:-------------|
-|**Title**      |New fee rewards address for the RSK Core Developers Fund |
+|**Title**      |New Fee Rewards Address for the RSK Core Developers Fund |
 |**Created**    |25-03-2021 |
 |**Author**     |FJ |
-|**Purpose**    |USA |
+|**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Accepted |
 
 ## Abstract
 
