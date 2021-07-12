@@ -18,7 +18,7 @@ This RSKIP specifies a new expected behavior for a precompiled contract call: an
 
 Provides a mechanisim to handle errors for precompiled calls by checking the returned state. Before Iris hardfork the transaction wasn't reverted and consumed all the remaining gas from the entire call.
 
-Suppose that there is a Contract A that, somewhere, calls a Precompiled contract B with invalid data, it's desirable to throw a kind "exception" that gives the chance to the caller (A) to handle and use it for it's own pouposes, instead of failing the entire execution.
+Suppose that there is a Contract A that, somewhere, calls a Precompiled contract B with invalid data (or something that produces an expected failure), it's desirable to throw a kind "exception" that gives the chance to the caller (A) to handle and use it for it's own pouposes, instead of failing the entire execution.
 
 ## Specification
 
