@@ -26,6 +26,8 @@ When `blockNumber >= IRIS_HF`, during a precompiled contract execution any expec
 1. Revert the execution state.
 2. Push a ZERO into the stack.
 
+Lately this zero state can be used by the caller to decide what to do whenever it reaches the expected failed state.
+
 Note: an expected failure should be considered by the precompiled itself, any other kind of runtime failures should still consume the entire provided gas.
 
 ### Posible Use Case 
