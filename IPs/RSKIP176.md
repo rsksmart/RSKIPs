@@ -25,7 +25,7 @@ Allowing users to transfer BTC to RSK immediately, without waiting for enforced 
 ## Specification
 
 The fast-bridge system connects users, Liquidity Providers (LP) and a certain Liquidity Bridge Contract (LBC).
-This RSKIP specifies thehe specification of consensus changes to achieve the main goal of the use case without limiting the actual implementation of the fast-bridge system.
+This RSKIP details the specification of consensus changes to achieve the main goal of the use case without limiting the actual implementation of the fast-bridge system.
 
 #### Bridge
 
@@ -78,7 +78,7 @@ The derivation arguments are values used to close the agreement between the Liqu
 		- will save Fast Bridge Federation P2SH - Derivation Arguments hash - Federation P2SH tuple in Bridge Storage
 		- will save Derivation Arguments and boolean value in Bridge Storage (to verify if given derivation arguments were already used)
 		- will mark tx as processed
-		- will store the UTXO for the Bridge to use, among any data concerning to the Bridge operation.
+		- will store the UTXO for the Bridge to use, among any data concerning to the Bridge operation. The UTXO is stored exactly as it is already done for regular peg-in UTXOs.
 
 	- If surpassed, the Bridge will refund Liquidity Provider
 
@@ -114,7 +114,7 @@ The derivation arguments are values used to close the agreement between the Liqu
 
 
 #### Limitations
-- Transactions with depth bigger than 4320 will not be processed. That is enough depth to be able to search backwards one month worth of blocks.
+- Bitcoin Transactions with depth higher than 4320 will not be processed. That is enough depth to be able to search backwards one month worth of blocks.
 If given depth is higher than the accepted limit, unclaimed funds will be lost.
 
 - If the given transaction is invalid or the provided address cannot be computed from the given derivation arguments, the transaction will be unable to claim the funds.
