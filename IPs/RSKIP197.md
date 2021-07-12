@@ -45,13 +45,14 @@ contract PrecompilesMultiCalls {
         // at some point will call the precompiles 
         for(uint i = 0; i < precompiles.length; i++) {
             uint256 retval;
+            address precAddr = precompiles[i];
 
             assembly {
                 // allocate output byte array
                 let res := mload(0x40)
 
                 // call precompile (STATICCALL returns success (1) or failure (0))
-                retval := staticcall(gas(), precompiles[i], input, inputLen, res, outLen)
+                retval := staticcall(gas(), precAddr, input, inputLen, res, outLen)
             }
 
             if(retval == 0) {
