@@ -23,27 +23,27 @@ Since powpeg nodes still need to send a group of headers to the Bridge, the curr
 
 To implement this change we suggest making the following modifications:
 
-New function:
-```
- reveive_header(bytes header) returns (int256 returnValue)
-```
+1. Create a new method in the bridge: 
+    ```
+    receive_header(bytes header) returns (int256 returnValue)
+    ```
 
-Make current `receive_headers` function private
+2. Make current `receive_headers` function private
 
 
-### receive_header validations
+### `receive_header` validations
 
-1) The size of the parameter received is verified. These limits also exist in receive_headers function. 
+1) Header has expected size. 
 2) Header is not previously saved in storage.
-3) Time between calls to receive_headers is too short.
-4) The previous block can not be found in storage. Block header received can not be connected with the previous one. 
-5) The depth of these block headers is too old. The height of the block is compared with the maxDepthBlockchainAccepted. This value is also saved as a contact for each network. 
+3) Time between calls to receive_header is larger than the minimum time between calls allowed. This value is configured for each network.
+4) Header previous block must be found in storage.
+5) Block depth of the received header is not above the maximum depth allowed. This value is configured for each network.
 
-Every time that a block header is accepted, the timestamp is saved in BridgeStoragedProvider to can be compared the next time that receive_header is call. 
+Every time that a block header is accepted, the timestamp is saved in storage to validate that no more calls are made to `receive_header` until the minimum configured time has elapsed.
 
-When the header was saved, the method returns 0. 
+When the header is successfully saved, the method returns the value `0`. 
  
-### receive_header return values
+### `receive_header` return values
 -  0  OK
 - -1  RECEIVE_HEADER_CALLED_TOO_SOON
 - -2  RECEIVE_HEADER_BLOCK_TOO_OLD
@@ -52,11 +52,11 @@ When the header was saved, the method returns 0.
 - -20 RECEIVE_HEADER_ERROR_SIZE_MISTMATCH
 - -99 RECEIVE_HEADER_UNEXPECTED_EXCEPTION
 
-### receive_headers changes
+### `receive_headers` changes
 
-After the activation of this RSKIP, `receive_headers` can be called only by powpeg node.
+After the activation of this RSKIP, `receive_headers` can be called only by powpeg nodes.
 
 
-### Copyright
+## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
