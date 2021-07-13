@@ -34,14 +34,15 @@ After this RSKIP activation, the minimum value accepted to perform a peg-in is *
 ### Reduce the minimum peg-out amount to half its current value
 
 After this RSKIP activation, the minimum value accepted to perform a peg-out is **0.004 RBTC**. If less than this amount is sent to the bridge address then those funds will be refunded to the user.
-Additionally, a calculation of the fees to be paid by the user is made. If after subtracting the fees, the amount to be received by the user is less than %80 of the total value trying to peg-out then the peg-out will not be completed and funds will be returned to the user.
+Additionally, a calculation of the fees to be paid by the user is made. If after subtracting the fees, the amount to be received by the user is less than the configured percentage of the total value trying to peg-out then the peg-out will not be completed and funds will be returned to the user.
+The percentage is established on each network independently. The suggested value is 80%.
  
 
 ## Rationale
 
 With the proposed changes the platform will become more accessible to users by reducing barriers to entry as well as barriers to exit.
 Making the minimum peg-out value **inclusive** will prevent many user errors and loss of funds that have occurred in the past.
-Finally, ensuring that the user will receive at least %80 of the peg-out value after paying transfer fees is especially important when performing peg-outs for values close to the minimum. If at a given point in time BTC tx fees are particularly high and the execution of the peg-out would imply that a big portion of the user funds goes into paying fees, it's best not the execute the peg-out and refund the user. Then the user can choose to either try to peg-out more funds at once or wait until BTC fees are lower to try again.
+Finally, ensuring that the user will receive at least a percentage of the peg-out value after paying transfer fees is especially important when performing peg-outs for values close to the minimum. If at a given point in time BTC transaction fees are particularly high and the execution of the peg-out would imply that a big portion of the user funds goes into paying fees, it's best not to execute the peg-out and refund the user. Then the user can choose to either try to peg-out more funds at once or wait until BTC fees are lower to try again.
 
 
 ## Copyright
