@@ -9,11 +9,12 @@
 |**Layer**      |Core |
 |**Complexity** |1 |
 |**Status**     |Draft |
+|**discussions-to**     |https://research.rsk.dev/t/rskip-139-precompile-to-get-transaction-refunds/148|
 
 
 # **Abstract**
 
-The GasStation Network (GSN) requires a first contract to bill a second contract for the gas consumed. The first contract can learn how much has the second contract consumed by calling GAS opcode before and after the second contract has executed. However, the first contract cannot learn how much gas the second contract execution has refunded. If it were known, the refunded gas could be deducted from the bill. Currently the second contract is overpaying gas. This RSKIP proposes the creation of a new native contract and method that returns the accumulated refund.
+RIF Enveloping, the Flyover protocol and The GasStation Network (GSN) require a first contract to bill a user for the gas consumed by a a call to a second contract. The first contract can learn how much has the second contract consumed by calling GAS opcode before and after the second contract has executed, and subtracting the returned values. However, the first contract cannot learn how much gas the second contract execution has refunded. If it were known, the refunded gas could be deducted from the bill. Currently the second contract is overpaying gas. This RSKIP proposes the creation of a new native contract and method that returns the accumulated refund.
 
 
 
