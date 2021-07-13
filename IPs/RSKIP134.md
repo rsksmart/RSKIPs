@@ -13,15 +13,15 @@
 ## Abstract
 
 RSK has a two-way peg system to lock funds in the Federation, using BTC, which are then released as RBTC in RSK through the Bridge native contract. This system was implemented using a whitelisting process that adds a nuisance to the usability of the network.
-
-This RSKIP defines a process to restrict the amount of funds locked in the Federation at any time. This new process enables fully decentralized peg-ins, and aims to replace the previous peg-in whitelisting requirement. 
+`
+This RSKIP defines a process to restrict the amount of funds locked in the Federation at any time. This new process enables fully decentralized peg-in, and aims to replace the previous peg-in whitelisting requirement. 
 
 ## Motivation
 
 RSK was created as a second layer on top of Bitcoin, bringing smart-contract capabilities to the Bitcoin ecosystem, increasing the overall value of Bitcoin.
-The gateway between BTC and RSK is the two-way peg. If the peg-ins process is burdersome, it add unnecesary friction.
+The gateway between BTC and RSK is the two-way peg. If the peg-ins process is burdersome, it adds unnecesary friction.
 
-The proposed changes are required to remove the whitelisting while reducing other risks.
+The proposed changes are required to remove the whitelisting requirement while reducing other risks.
 
 ## Specification
 
