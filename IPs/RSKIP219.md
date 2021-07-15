@@ -25,11 +25,11 @@ This RSKIP proposes 4 different changes to improve and facilitate users the use 
 1. Reduce the minimum peg-in amount to half its current value. From 0.01 BTC to 0.005 BTC.
 2. Reduce the minimum peg-out amount to half its current value. From 0.008 RBTC to 0.004 RBTC.
 3. Define the minimum percentage of the total release value that the user should receive after paying fees.
-4. Make minimum peg-out value inclusive (the amount to peg-out should greater than or **equal** minimum value)
+4. Make minimum peg-out value inclusive (the amount to peg-out should greater than or **equal to** minimum value)
 
 ### Reduce the minimum peg-in amount to half its current value
 
-After this RSKIP activation, the minimum value accepted to perform a peg-in is **0.05 BTC**. If less than this amount is sent to the federation address then those funds will be burnt.
+After this RSKIP activation, the minimum value accepted to perform a peg-in is **0.005 BTC**. If less than this amount is sent to the federation address then those funds will be burnt.
 
 ### Reduce the minimum peg-out amount to half its current value
 
