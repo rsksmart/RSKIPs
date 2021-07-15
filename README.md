@@ -150,6 +150,7 @@ RSK Improvement Proposals
 | 177 |[Universal Merged Mining Extension](IPs/RSKIP177.md)|  APR-2020 | SDL & MP | Usa | Node | 1 | Adopted |
 | 178 |[External Confirmation Hashrate](IPs/RSKIP178.md)|  2-SEP-20 | SDL | Sec | Core | 2 | Draft |
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Draft |
+| 180 |[Limit the RSK merged mining merkle proof](IPs/RSKIP180.md)|  15-JUL-21 | VK | Sec | Core | 1 | Draft |
 | 185 |[Peg-out refund and events](IPs/RSKIP185.md)|  19-NOV-20 | JD | Usa | Core | 1 | Draft |
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Draft |
 | 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
@@ -206,4 +207,5 @@ RSK Improvement Proposals
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
+| VK       | Volodymyr Kravets            | volodymyr@iovlabs.org  |
 
