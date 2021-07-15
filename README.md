@@ -139,11 +139,13 @@ RSK Improvement Proposals
 | 148 |[ERC1820 Pseudo-introspection Registry Contract](IPs/RSKIP148.md)|  6-NOV-19 | PMP | Usa | DApp | 1 | Adopted |
 | 149 |[Improved Asset transfers](IPs/RSKIP149.md)|  10-NOV-19 | SDL | Sca | Core | 2 | Draft |
 | 152 |[CHAINID Opcode](IPs/RSKIP152.md)|  19-NOV-19 | SMS | Sec | Core | 1 | Draft |
+| 153 |[Add BLAKE2 Compression Function `F` Precompile](IPs/RSKIP153.md)|  19-NOV-20 | FJ | Usa | Core | 2 | Accepted |
 | 157 |[Cumulative Difficulty in JSON-RPC block responses](IPs/RSKIP157.md)|  11-FEB-20 | MP | Usa | Node | 1 | Accepted |
 | 159 |[Minimal Proxy Contract](IPs/RSKIP159.md)|  19-FEB-20 | PMP | Usa | DApp | 1 | Adopted |
 | 167 |[Install Code Precompile](IPs/RSKIP167.md)|  07-JUL-20 | SDL | Usa | Core | 1 | Draft |
 | 169 |[Rectify EXTCODEHASH implementation](IPs/RSKIP169.md)|  31-JUL-20 | NPS | Usa | Core | 2 | Draft |
 | 170 |[Peg-in to any address](IPs/RSKIP170.md)|  01-SEP-20 | MI | Usa | Core | 2 | Draft |
+| 171 |[Clean EVM Internal Buffer in Call-like Opcodes](IPs/RSKIP171.md)|  02-SEP-20 | FJ | Usa | Core | 1 | Accepted |
 | 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
 | 176 |[Fast Bridge](IPs/RSKIP176.md)| 15-SEP-20 | GM | Usa | Core | 2 | Draft |
 | 177 |[Universal Merged Mining Extension](IPs/RSKIP177.md)|  APR-2020 | SDL & MP | Usa | Node | 1 | Adopted |
@@ -165,6 +167,7 @@ RSK Improvement Proposals
 | 213 |[Simple Transaction Versioning System](IPs/RSKIP213.md)|  2-FEB-21 | SDL | Sca | Core | 1 | Draft |
 | 214 |[Ephemeral Calldata using Precompile](IPs/RSKIP214.md)|  29-JAN-21 | SDL | Sca | Core | 2 | Draft |
 | 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
+| 218 |[New Fee Rewards Address for the RSK Core Developers Fund](IPs/RSKIP218.md)|  25-MAR-21 | FJ | Usa | Core | 1 | Accepted |
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Draft |
@@ -177,7 +180,6 @@ RSK Improvement Proposals
 | 252 |[Transaction Gas Price Cap](IPs/RSKIP252.md)|  29-JUN-21 | SDL | Sec,Fair | Core | 1 | Draft |
 
 
-
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
@@ -187,8 +189,9 @@ RSK Improvement Proposals
 | AE       | Adrian Eidelman              | adrian@iovlabs.org     |
 | AL       | Angel Lopez                  | angel@iovlabs.org      |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
-| DM       | Diego Masini                 | dmasini@iovlabs.org    |
 | DLL      | Diego López León             |                        |
+| DM       | Diego Masini                 | dmasini@iovlabs.org    |
+| FJ       | Federico Jinich              | federico@iovlabs.org    |
 | GM       | Guido Medina                 | guido@iovlabs.org |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org       |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |

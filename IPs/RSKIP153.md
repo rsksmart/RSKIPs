@@ -1,8 +1,8 @@
-# Add BLAKE2 compression function `F` precompile
+# Add BLAKE2 Compression Function `F` Precompile
 
 |RSKIP          |153           |
 | :------------ |:-------------|
-|**Title**      |Add BLAKE2 compression function `F` precompile |
+|**Title**      |Add BLAKE2 Compression Function `F` Precompile |
 |**Created**    |19-11-2020 |
 |**Author**     |FJ |
 |**Purpose**    |Usa |

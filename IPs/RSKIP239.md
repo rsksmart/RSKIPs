@@ -9,6 +9,7 @@
 |**Layer**      |Core|
 |**Complexity** |1|
 |**Status**     |Draft|
+|**Discussions-to** | https://research.rsk.dev/t/rskip-239-reprice-trie-reads/162  |
 
 ## Abstract
 Recent experiments [0, 1] indicate that some EVM opcodes used to read from blockchain state trie are relatively *underpriced*. For instance, `SLOAD` costs 200 gas. However, by one measure, the *implicit cost* of an `SLOAD` lies between 1000 gas (full state cache, no disk IO) and 80000 gas (no cache, pure disk IO). This RSKIP proposes a conservative re-pricing of such opcodes to better reflect their resource use.
