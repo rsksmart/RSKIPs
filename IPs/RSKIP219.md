@@ -35,7 +35,7 @@ After this RSKIP activation, the minimum value accepted to perform a peg-in is *
 
 After this RSKIP activation, the minimum value accepted to perform a peg-out is **0.004 RBTC**. If less than this amount is sent to the bridge address then those funds will be refunded to the user.
 Additionally, a calculation of the fees to be paid by the user is made. If after subtracting the fees, the amount to be received by the user is less than the configured percentage of the total value trying to peg-out then the peg-out will not be completed and funds will be returned to the user.
-The percentage is established on each network independently. The suggested value is 80%.
+The percentage can be established on each network independently. The current value for both testnet and mainnet  is **80%**.
  
 
 ## Rationale
