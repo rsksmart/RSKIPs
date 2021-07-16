@@ -19,8 +19,8 @@ RSK Improvement Proposals
 * **Core** - Core, consensus related
 * **Node** - Related to node manager interfaces, such as RPC
 * **UI** - User Interface
-* **2nd** - 2nd layer proteocols, such as off-chain payment channels
-* **Net** - related to p2p networking
+* **2nd** - Second-layer protocols, such as off-chain payment channels
+* **Net** - Related to p2p networking
 * **DApp** - Dapp application interfaces
 
 
@@ -100,15 +100,17 @@ RSK Improvement Proposals
 | 64       | [Garbage Collector for State Pruning](IPs/RSKIP64.md) | 29-MAY-18 | SDL & MMa | Sca,Usa      | Core     | 2 | Draft   |
 | 65       | [MINGASPRICE Opcode](IPs/RSKIP64.md)                                             | 18-MAY-18 | JIO       | Sec      | CORE     | 1 | DRAFT   |
 | 70       | [Default TX Data](IPs/RSKIP70.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
-| 71 | [Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
-| 75       | [Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
-| 77 |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
-| 85 |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
-| 87       | [Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
-| 91 |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
-| 92 |[Merkle Proof serialization](IPs/RSKIP92.md) | 2018 | DLL & MC | Sca | Core | 2 | Adopted |
-| 95 |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
-| 99 |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
+| 71  |[Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
+| 75  |[Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
+| 77  |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
+| 85  |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
+| 87  |[Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
+| 89  |[Add Bitcoin block query methods to the bridge contract](IPs/RSKIP89.md)| JULY-18 | SDL | Usa      | Core     | 2 | Adopted   |
+| 91  |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
+| 92  |[Merkle Proof serialization](IPs/RSKIP92.md) | 2018 | DLL & MC | Sca | Core | 2 | Adopted |
+| 95  |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
+| 98  |[Deactivation of the federated fallback system for block production ](IPs/RSKIP98.md) | 2018 | SDL | Sca | Core | 1 | Adopted |
+| 99  |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
 | 106 |[Precompiled contract for HDWallet utility functions](IPs/RSKIP106.md) | 2019 | AM | Usa  | Core | 1 | Adopted |
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
@@ -121,9 +123,11 @@ RSK Improvement Proposals
 | 116 |[Failure of SSTORE on Low-Gas Recursive CALLs](IPs/RSKIP116.md) | 2019 | SDL  | Sec,Sca,Usa  | Core | 1 | Draft |
 | 119 |[Precompiled contract for inspecting block headers](IPs/RSKIP119.md) | 2019 | DM  | Usa  | Core | 1 | Draft |
 | 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
+| 122 |[New method GetBtcTransactionConfirmations for Bridge contract](IPs/RSKIP122.md) | 2019 | SMS  | Usa  | Core | 2 | Draft |
 | 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Draft |
 | 125 |[Create2](IPs/RSKIP125.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 131 |[Preventing CREATE2-after-SUICIDE in the same block](IPs/RSKIP131.md) | 2019 | SMS & SDL  | Sca,Usa  | Core | 1 | Adopted  |
+| 132 |[Bridge ReceiveHeaders Gas Cost increase](IPs/RSKIP132.md) | 2019 | JD & SDL  | Fair  | Core | 1 | Adopted  |
 | 134 |[Locking cap](IPs/RSKIP134.md) | 2019 | JD       | Sec,Sca,Usa      | Core     | 2 | Draft   |
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
@@ -134,38 +138,74 @@ RSK Improvement Proposals
 | 145 |[Struct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Draft |
 | 148 |[ERC1820 Pseudo-introspection Registry Contract](IPs/RSKIP148.md)|  6-NOV-19 | PMP | Usa | DApp | 1 | Adopted |
 | 149 |[Improved Asset transfers](IPs/RSKIP149.md)|  10-NOV-19 | SDL | Sca | Core | 2 | Draft |
+| 152 |[CHAINID Opcode](IPs/RSKIP152.md)|  19-NOV-19 | SMS | Sec | Core | 1 | Draft |
+| 153 |[Add BLAKE2 Compression Function `F` Precompile](IPs/RSKIP153.md)|  19-NOV-20 | FJ | Usa | Core | 2 | Accepted |
 | 157 |[Cumulative Difficulty in JSON-RPC block responses](IPs/RSKIP157.md)|  11-FEB-20 | MP | Usa | Node | 1 | Accepted |
 | 159 |[Minimal Proxy Contract](IPs/RSKIP159.md)|  19-FEB-20 | PMP | Usa | DApp | 1 | Adopted |
 | 167 |[Install Code Precompile](IPs/RSKIP167.md)|  07-JUL-20 | SDL | Usa | Core | 1 | Draft |
+| 169 |[Rectify EXTCODEHASH implementation](IPs/RSKIP169.md)|  31-JUL-20 | NPS | Usa | Core | 2 | Draft |
 | 170 |[Peg-in to any address](IPs/RSKIP170.md)|  01-SEP-20 | MI | Usa | Core | 2 | Draft |
+| 171 |[Clean EVM Internal Buffer in Call-like Opcodes](IPs/RSKIP171.md)|  02-SEP-20 | FJ | Usa | Core | 1 | Accepted |
 | 172 |[Subroutines for EVM](IPs/RSKIP172.md)|  01-SEP-20 | AL | Usa | Core | 2 | Draft |
 | 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
+| 177 |[Universal Merged Mining Extension](IPs/RSKIP177.md)|  APR-2020 | SDL & MP | Usa | Node | 1 | Adopted |
+| 178 |[External Confirmation Hashrate](IPs/RSKIP178.md)|  2-SEP-20 | SDL | Sec | Core | 2 | Draft |
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Draft |
+| 185 |[Peg-out refund and events](IPs/RSKIP185.md)|  19-NOV-20 | JD | Usa | Core | 1 | Draft |
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Draft |
 | 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
+| 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Draft |
 | 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
+| 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
+| 197 |[Fix Precompile Calls Not Conforming With CALL Semantics](IPs/RSKIP197.md)|  15-DEC-20 | FJ | Usa | Core | 2 | Accepted |
+| 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 209 |[Stack-overflow removal](IPs/RSKIP209.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 212 | [HW-compatible Transaction Versioning System](IPs/RSKIP212.md) | 29-JAN-21     | SDL       | Sca      | Core   | 1 | Draft   |
+| 213 |[Simple Transaction Versioning System](IPs/RSKIP213.md)|  2-FEB-21 | SDL | Sca | Core | 1 | Draft |
+| 214 |[Ephemeral Calldata using Precompile](IPs/RSKIP214.md)|  29-JAN-21 | SDL | Sca | Core | 2 | Draft |
+| 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
+| 218 |[New Fee Rewards Address for the RSK Core Developers Fund](IPs/RSKIP218.md)|  25-MAR-21 | FJ | Usa | Core | 1 | Accepted |
+| 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
+| 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
+| 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Draft |
+| 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Draft |
+| 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Draft |
+| 241 |[User-triggered peg-out tx fee-bumping](IPs/RSKIP241.md)|  5-MAY-21 | SDL | Usa,Sec | Core | 2 | Draft |
+| 242 |[Proxy code Incentive](IPs/RSKIP242.md)|  14-MAY-21 | SDL | Sca,Fair | Core | 1 | Draft |
+| 243 |[Intra-transaction Gas Refunds](IPs/RSKIP243.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
+| 244 |[Variable Storage Costs](IPs/RSKIP244.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
+| 252 |[Transaction Gas Price Cap](IPs/RSKIP252.md)|  29-JUN-21 | SDL | Sec,Fair | Core | 1 | Draft |
 
 
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
-| Initials | Full name                    | Email |
-| -------- | :----------------------------| :-----|
-| AE       | Adrian Eidelman              | adrian@iovlabs.org |
-| AL       | Angel Lopez                  | angel@iovlabs.org |
+
+| Initials | Full name                    | Email                  |
+| -------- | :----------------------------| :----------------------|
+| AE       | Adrian Eidelman              | adrian@iovlabs.org     |
+| AL       | Angel Lopez                  | angel@iovlabs.org      |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
-| MC       | Martín Coll                  | |
-| DM       | Diego Masini                 | dmasini@iovlabs.org |
-| DLL      | Diego López León             | |
-| IO       | Ilan Olkies                  | ilan@iovlabs.org |
-| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org |
-| JL       | Julian Len                   | julian@iovlabs.org |
-| JD       | Jose Dahlquist               | jose@rsk.co |
-| LS       | Lisandro Sebrie              | |
-| MI       | Marcos Irisarri              | marcos@iovlabs.org |
-| MMa      | Matias Marquez               | |
-| MM       | Martin Medina                | martin@iovlabs.org |
-| SDL      | Sergio Demian Lerner         | sergio@iovlabs.org |
+| DLL      | Diego López León             |                        |
+| DM       | Diego Masini                 | dmasini@iovlabs.org    |
+| FJ       | Federico Jinich              | federico@iovlabs.org    |
+| IO       | Ilan Olkies                  | ilan@iovlabs.org       |
+| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |
+| JD       | Jose Dahlquist               | jose@rsk.co            |
+| JL       | Julian Len                   | julian@iovlabs.org     |
+| LS       | Lisandro Sebrie              |                        |
+| MC       | Martín Coll                  |                        |
+| MI       | Marcos Irisarri              | marcos@iovlabs.org     |
+| MM       | Martin Medina                | martin@iovlabs.org     |
+| MMA      | Matias Marquez               |                        |
+| MP       | Martin Picco                 | mpicco@iovlabs.org     |
+| NPS      | Nicolas Perez Santoro        |                        |
+| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
+| SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
+| SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
-| MP       | Martin Picco                 | mpicco@iovlabs.org |
-| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org |
+
