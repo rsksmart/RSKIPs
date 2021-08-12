@@ -15,7 +15,7 @@
 
 The time-locked emergency multisignature introduced in RSKIP201 requires that Powpeg UTXOs are periodically spent in order to prevent the time-lock expiration. 
 
-This RSKIP proposes a mechanism for the Bridge to perform the time-lock refresh of UTXOs that is simple and efficient if the Bridge has a mechanism to periodically consolidate the UTXOs to a small set.
+This RSKIP proposes a mechanism for the Bridge to refresh the time-locks of UTXOs. The proposed mechanism is simple and efficient if the Bridge already has a protocol to periodically consolidate the UTXOs into a small set.
 
 
 
