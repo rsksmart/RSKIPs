@@ -29,6 +29,7 @@ This RSKIP is a simplification of RSKIP207, which was written at a time where UT
 ## Specification
 
 Let B be the Bitcoin blockchain height as seen by the bridge. We define a UTXO that needs **refresh** to be one that is included in the Bitcoin blockchain at block height C where (B-C > P) where P is 26000 (a rounded average number of Bitcoin blocks produced over a 6 months period). 
+The Bridge stores for every Powpeg UTXO (and in the same data structure used to hold the UTXOs) the height in the Bitcoin blockchain where this UTXO was created.
 
 An expiration checkpoint is defined as a periodic event where UTXOs are scanned and those that are close to expire are refreshed. Every time updateCollections() is called, a new procedure **checktimeLockExpiration()** is called before any other processing takes place. This method performs the following actions:
 
