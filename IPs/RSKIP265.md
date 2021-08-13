@@ -1,7 +1,7 @@
 # Bridge UTXOs Selection, Consolidation and Batching
 
 
-|RSKIP          | XXX |
+|RSKIP          | 265 |
 | :------------ |:-------------|
 |**Title**      |Bridge UTXOs Selection, Consolidation and Batching|
 |**Created**    |AUG-2021 |
