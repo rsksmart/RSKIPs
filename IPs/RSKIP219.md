@@ -12,7 +12,7 @@
 
 ## Abstract
 
-This RSKIP proposes a reduction in the minimum amounts of BTC / RBTC required to perform peg-in and peg-out operations in RSK. In the case of peg-outs, the minimum value is calculated for each operation taking into consideration the current fee per kb value in the network. The idea is to ensure the amount paid in fees by the user represents only a small percentage of the total value that's being released.
+This RSKIP proposes a reduction in the minimum amounts of BTC / RBTC required to perform peg-in and peg-out operations in RSK. In the case of peg-outs, the minimum value is calculated for each operation taking into consideration the current fee per kb value in the network. The idea is to ensure the remainder after the fee is enough for the user to be able to operate in the network.
 
 ## Motivation
 
@@ -24,7 +24,7 @@ This RSKIP proposes 4 different changes to improve and facilitate users the use 
 
 1. Reduce the minimum peg-in amount to half its current value. From 0.01 BTC to 0.005 BTC.
 2. Reduce the minimum peg-out amount to half its current value. From 0.008 RBTC to 0.004 RBTC.
-3. Define the minimum percentage of the total release value that the user should receive after paying fees.
+3. Define the minimum value that the user should receive after paying release transaction fees.
 4. Make minimum peg-out value inclusive (the amount to peg-out should greater than or **equal to** minimum value)
 
 ### Reduce the minimum peg-in amount to half its current value
@@ -34,9 +34,8 @@ After this RSKIP activation, the minimum value accepted to perform a peg-in is *
 ### Reduce the minimum peg-out amount to half its current value
 
 After this RSKIP activation, the minimum value accepted to perform a peg-out is **0.004 RBTC**. If less than this amount is sent to the bridge address then those funds will be refunded to the user.
-Additionally, a calculation of the fees to be paid by the user is made. If after subtracting the fees, the amount to be received by the user is less than the configured percentage of the total value trying to peg-out then the peg-out will not be completed and funds will be returned to the user.
-The percentage can be established on each network independently. The current value for both testnet and mainnet  is **80%**.
- 
+Additionally, a calculation of the fees to be paid by the user is made. If after subtracting the fees, the amount to be received by the user is less than **%80** of the fee value then the peg-out will not be completed and funds will be returned to the user.
+
 
 ## Rationale
 
