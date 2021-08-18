@@ -78,6 +78,6 @@ The main downside of this approach is that if the primary PowHSM nodes fail due 
 
 Having considered these alternatives, we decided on a simple expansion of the emergency multisig to increase the number of signatures required as a way of improving redundancy and raising the cost of an attack.
 
-# **Copyright**
+# Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
