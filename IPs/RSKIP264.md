@@ -38,6 +38,7 @@ An expiration checkpoint is defined as a periodic event where UTXOs are scanned 
 3. Set the next expiration checkpoint block height H to be the current RSK height plus 40000 (rounded two weeks of RSK blocks). 
 4. Set the next expiration checkpoint datetime D to be the last RSK block timestamp plus 2 weeks.
 
+If this proposal is implemented together with RSKIP265, then the UTXO Mantainance Account (UMA) defined in that RSKIP should be used to pay for UTXO refresh transaction fees. If the UMA does not have enough balance to pay for the fees, then all the UMA balance will be consumed and the remaining fees will be consumed from the peg balance.  
 
 ### Peg-outs
 
