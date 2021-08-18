@@ -63,7 +63,7 @@ First, the bridge computes the amount Fi, which represents the cost in fees of  
 
 2. **Multi-input expensive attempt**: The Bridge continues using the sorted UTXOs, and starting from the highest amount it add inputs until the value is higher than the peg-out amount plus Fi*W+fo, where W=(1+the number of inputs already added).
 
-The single-input attempts will only be tried if peg-out is not in UTXO expansion mode.
+The single-input attempts will only be triggered if peg-out is not in UTXO expansion mode.
 
 ### UTXO Maintenance Account 
 
@@ -86,7 +86,7 @@ The choice to collect UMA fees for 30 inputs allows the Bridge to perform 7 cons
 ### Hysteresis
 
 The correction procedures kick-in when the number of UTXOs is far below or far above the desired number. This reduces the risks of oscillations that will increase the transaction fees consumed on average. On the other side, sorting 60 elements is only 4 times slower than sorting 30 elements, so there is no risks of a much higher CPU consumption. 
-The correction method based on consolidation on peg-ins will only be trigger if there is a stream of peg-ins but no peg-outs. Because in this case consolidation requires creating a new peg-out transaction, the process consumes 4 inputs to amortize the cost in fees. Since the other inputs consumed are chosen to be low valued, we don't expect peg-outs to be blocked after a stream of peg-ins.
+The correction method based on consolidation on peg-ins will only be triggered if there is a stream of peg-ins but no peg-outs. Because in this case consolidation requires creating a new peg-out transaction, the process consumes 4 inputs to amortize the cost in fees. Since the other inputs consumed are chosen to be low valued, we don't expect peg-outs to be blocked after a stream of peg-ins.
 
 ### Fee Estimation
 
