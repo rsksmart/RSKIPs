@@ -45,7 +45,7 @@ Every time after a peg-in transaction is registered by the Bridge, the Bridge wi
 
 * **Expansion**: If the number of UTXOs is lower than 30 and the peg-in amount is higher than 0.1 BTC, then the UTXO registered will be immediately consumed in a peg-out transaction that splits the input amount into two equally sized Powpeg outputs.
 
-* **Consolidation**: If the number of UTXOs is higher than 80, then the UTXO registered will be immediately consumed in a peg-out transaction with a single Powpeg output and 3 additional inputs. The additional inputs will chosen greedily to consume low amounts.
+* **Consolidation**: If the number of UTXOs is higher than 80, then then 4 UTXOs will be immediately consolidated in a peg-out-peg-in transaction with a single Powpeg output. The additional inputs will be chosen greedily to consume low amounts.
 
 Before a peg-out is to be built, the Bridge will count the number of UTXOs and perform the following actions:
 
@@ -64,6 +64,10 @@ First, the bridge computes the amount Fi, which represents the cost in fees of  
 2. **Multi-input expensive attempt**: The Bridge continues using the sorted UTXOs, and starting from the highest amount it add inputs until the value is higher than the peg-out amount plus Fi*W+fo, where W=(1+the number of inputs already added).
 
 The single-input attempts will only be tried if peg-out is not in UTXO expansion mode.
+
+### Important Note
+
+This RSKIP lacks the specification of the changes to these coin selection algorithms that should be made if RSKIP265 is implemented together with this RSKIP. RSKIP265 requires that the coin selection algorithm does some minimum effort to consume UTXOs whose emergency time-lock is close to expire, to avoid creating dedicated time-lock refresh transactions.
 
 
 ## Rationale
