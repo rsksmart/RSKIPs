@@ -43,15 +43,15 @@ The Bridge contract will wait T=3 hours to create a peg-out transaction. During 
 
 Every time after a peg-in transaction is registered by the Bridge, the Bridge will count the number of UTXOs and perform the following actions:
 
-* **Expansion**: If the number of UTXOs is lower than 30 and the peg-in amount is higher than 0.1 BTC, then the UTXO registered will be immediately consumed in a peg-out transaction that splits the input amount into two equally sized Powpeg outputs.
+* **Expansion**: If the number of UTXOs is lower than 30 and then peg-in amount is higher than 0.1 BTC, then the UTXO registered will be immediately consumed in a peg-out transaction that splits the input amount into two equally sized Powpeg outputs.
 
-* **Consolidation**: If the number of UTXOs is higher than 80, then then 4 UTXOs will be immediately consolidated in a peg-out-peg-in transaction with a single Powpeg output. The additional inputs will be chosen greedily to consume low amounts.
+* **Consolidation**: If the number of UTXOs is higher than 80, then then 4 UTXOs will be immediately consolidated in a peg-out-peg-in transaction with a single Powpeg output. The additional inputs will be chosen greedily to consume low amounts. The fee for this consolidation UTXO will be consumed from the consolidation account (defined in next section).
 
 Before a peg-out is to be built, the Bridge will count the number of UTXOs and perform the following actions:
 
-* **Consolidation**: If the number of UTXOs is higher than 60, the peg-out transaction will consume at least 2 inputs. The inputs will be chosen with the algorithm described in the next section, to add enough funds to pay the peg-out amount and fees, but not higher than that.
+* **Consolidation**: If the number of UTXOs is higher than 60, the peg-out transaction will consume at least 2 inputs. The inputs will be chosen with the algorithm described in the next section, to add enough funds to pay the peg-out amount and fees, but not higher than that. The additional cost will be charged to the current peg-out users.
 
-* **Expansion**: If the number of UTXOs is lower or equal to 30, and the change amount is higher than 1 BTC, the change amount will be split evenly between two outputs for the Powpeg.
+* **Expansion**: If the number of UTXOs is lower or equal to 30, and the change amount is higher than 1 BTC, the change amount will be split evenly between two outputs for the Powpeg. The additional cost will be charged to the current peg-out users.
 
 ### Coin selection Algorithm
 
@@ -65,6 +65,10 @@ First, the bridge computes the amount Fi, which represents the cost in fees of  
 
 The single-input attempts will only be tried if peg-out is not in UTXO expansion mode.
 
+### UTXO Maintenance Account 
+
+The Bridge contract will try to maintain a **UTXO Maintenance Account (UMA)** with a balance high enough to command some UTXO consolidations and other maintenance operations without the need to charge peg-in or peg-out users. This account will first be used to consolidate UTXOs after peg-ins, when consolidation could not occur in user-paid peg-outs. We define the threshold T to be the size of 30 Powpeg Bitcoin transaction inputs multiplied by the current Bitcoin fee/byte configured in the bridge. If the UMA balance is lower than T,  then peg-outs users will be charged 10% more, and the Bridge will move the collected extra fee to the UMA account. The UMA account amount will be stored in the bridge contract, and a new method `getUMABalance()` will be enabled to query its current balance. If RSKIP265 is merged together with this RSKIP, this account will also be used to pay for UTXO refresh required to avoid the emergency time-lock from expiring.
+
 ### Important Note
 
 This RSKIP lacks the specification of the changes to these coin selection algorithms that should be made if RSKIP265 is implemented together with this RSKIP. RSKIP265 requires that the coin selection algorithm does some minimum effort to consume UTXOs whose emergency time-lock is close to expire, to avoid creating dedicated time-lock refresh transactions.
@@ -75,7 +79,9 @@ This RSKIP lacks the specification of the changes to these coin selection algori
 ### Magic Numbers
 
 The peg out process lasts approximately 37 hours. The time of a peg-in is approximately 17 hours. Therefore the round-trip time of a change amount is 54 hours on average. We want to have 40% of the UTXOs available at all times to be able to efficiently choose inputs. Assuming a 50% waste in value moved on each peg-out, then the 60% of UTXOs in transit will equate to 90% of the peg balance in transit, which means that any peg-out of an amount lower than 10% of the pegged balance will be processed immediately, while higher amounts may need to wait up to 54 additional hours. 
-In 54 hours of round-trip time, we have a maximum of 18 slots to perform peg-outs. Assuming an average of 1.5 inputs are consumed per peg-out transaction, and one transaction per batched peg-out, we consume 27 UTXOs. Those 27 UTXOs must not represent more than 60% of the all UTXOs beeing rotated, so the minimum number of rotating peg-outs must be 45. 
+In 54 hours of round-trip time, we have a maximum of 18 slots to perform peg-outs. Assuming an average of 1.5 inputs are consumed per peg-out transaction, and one transaction per batched peg-out, we consume 27 UTXOs. Those 27 UTXOs must not represent more than 60% of the all UTXOs being rotated, so the minimum number of rotating peg-outs must be 45. 
+
+The choice to collect UMA fees for 30 inputs allows the Bridge to perform 7 consolidations when the UTXO set reaches 80 UTXO, removing 21UTXOs from UTXO set.  If the UMA is used to refresh emergency time-locks, then approximately 25% of the UTXO can be refreshed in the absence of peg-outs. If there are 50 UTXOs in the set with uniformly distributed expiration times, the current threshold allows to refresh UTXOs for 3 months without peg-outs. At current BTC/USD prices and with the current Powpeg multisig structure, the average balance of the UMA would be 500 USD. Note that if UTXO are very close to expiration, the Bridge should command the refresh of expiring UTXO even if that requires consuming BTCs from the peg balance, at the expense of "diluting" the value of the rBTC compared to BTC, although the dilution percentage would probably be negligible and won't affect the 1:1 parity. This mechanism should be specified in RSKIP265.
 
 ### Hysteresis
 
