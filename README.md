@@ -192,11 +192,12 @@ RSK Improvement Proposals
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
 | DLL      | Diego López León             |                        |
 | DM       | Diego Masini                 | dmasini@iovlabs.org    |
-| FJ       | Federico Jinich              | federico@iovlabs.org    |
+| FJ       | Federico Jinich              | federico@iovlabs.org   |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org       |
 | JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | JL       | Julian Len                   | julian@iovlabs.org     |
+| JL2      | John Light                   |                        |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
