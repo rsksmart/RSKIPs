@@ -35,7 +35,7 @@ The solution to uneven amount distribution is to rebalance amounts during consol
 
 We define a algorithms that implement heuristics that try to:
 
-* Keep the number of UTXOs between two bounds 
+* Keep the number of UTXOs between two bounds. 
 * Keep a Pareto distribution of amounts over the UTXOs.
 * Do not generate too many  UTXO consolidation or expansion transactions. 
 * Reduce the fees consumed by these transactions,  by increasing or decreasing the UTXO set size by at least 3 units simuntanously. 
@@ -65,7 +65,7 @@ Before a peg-out is to be built, the Bridge will count the number of UTXOs and p
 ### UTXO Maintenance Account 
 
 The Bridge contract will try to maintain a **UTXO Maintenance Account (UMA)** with a balance high enough to command some UTXO consolidations and other maintenance operations without the need to charge peg-in or peg-out users. This account will first be used to consolidate UTXOs after peg-ins, when consolidation could not occur in user-paid peg-outs. We define a threshold T(n) as the fee cost of a transactions consuming n Powpeg Bitcoin inputs. We compute T(n) as (n\*Fi+2\*Fo) (see definitions of Fi and Fo in the next section) 
-If the UMA balance is lower than T(20), then peg-outs users will be charged 10% more, and the Bridge will move the collected extra fee to the UMA account. If the balance is higher than T(40), then the peg-outs will be charged 10% less. 
+If the UMA balance is lower than T(30), then peg-outs users will be charged 10% more, and the Bridge will move the collected extra fee to the UMA account. If the balance is higher than T(60), then the peg-outs will be charged 10% less. 
 The UMA account amount will be stored in the bridge contract, and a new method `getUMABalance()` will be enabled to query its current balance. If RSKIP265 is merged together with this RSKIP, this account will also be used to pay for UTXO refresh required to avoid the emergency time-lock from expiring.
 
 ### Peg-out Fees
@@ -73,12 +73,16 @@ The UMA account amount will be stored in the bridge contract, and a new method `
 The peg-out fees will be fixed to let user known in advance how much they may need to pay for each peg out.
 The bridge computes two values: Fi and Fo. Fi represents the cost in fees of consuming a single Powpeg input, and Fo is the cost of one P2SH output.
 
-A new bridge method getPegOutFeesForNextEvent() will be added. 
-This method will return UMA_adjustFactor*{(Fi\*1.5+Fo)/B+Fo}, where B is the average number of inputs per peg-out transaction considering the last 24 events, except for the last event which is excluded.
+A new bridge method `getPegOutFeesForNextEvent()` will be added.
 
-When the peg-out events is triggered, all users waiting to peg-out will be immediately charged getPegOutFeesForNextEvent(). 
 
-UMA_adjustFactor is 1.1 if the UMA balance is higher than T(40), 0.9 if the UMA balance is lower than T(20) and 1 otherwise.
+This method will return UMA_adjustFactor*avgFee, where, avgFee is the average fee paid by each transaction in the the past 24 events, except for the last event which is excluded. To compute avgFee, when an peg-out event ends the Bridge will record the average fee per transaction that would have been required not to modify the UMA balance. The value for avgFee will be updated each time a peg-out event ends.
+
+At the RSKIP activation block, avgFee will be set to (Fi\*1.5+2*+Fo). The value of avgFee will bee updated once the first 24 peg-out events after activation have been executed.
+
+When the peg-out events is triggered, all users waiting to peg-out will be immediately charged `getPegOutFeesForNextEvent()`. 
+
+UMA_adjustFactor is 0.9 if the UMA balance is higher than T(60), 1.1 if the UMA balance is lower than T(30) and 1 otherwise.
 
 
 ### Peg-out Coin selection Algorithm
@@ -107,7 +111,7 @@ To select inputs for a peg-out transaction, the Bridge performs three steps:
 
 1. **Single-input greedy**: The Bridge will scan all UTXOs and try to find the UTXO with a value higher than the pegOutValue but with the lowest score. If the found UTXO has a score lower than 20, the corresponding UTXO is added as input to the peg-out transaction and the process stops here.
 
-2. **Lower Amounts, Multi-input expensive**: The Bridge will sort UTXOs by amount, and starting from the UTXO with the lowest amount closest to pegOutValue, it will scan the UTXOs from higher to lower amounts, adding UTXOs to the transaction until the total value added is higher than pegOutValue+Fi\*W or the input count reaches Q, where W is the number of inputs added over 1. If the value is covered with Q or less inputs, the process stops here. Q=4 i no input consolidation is required. If input consolidation is required, then Q=8.  
+2. **Lower Amounts, Multi-input expensive**: The Bridge will sort UTXOs by amount, and starting from the UTXO with the lowest amount closest to pegOutValue, it will scan the UTXOs from higher to lower amounts, adding UTXOs to the transaction until the total value added is higher than pegOutValue+Fi\*W or the input count reaches Q, where W is the number of inputs added over 1. If the value is covered with Q or less inputs, the process stops here. Q is set to 4 if no input consolidation is required. If input consolidation is required, then Q is 8.  
 
 2. **Higher Amounts, Multi-input expensive**: The Bridge continues using the sorted UTXOs, and going from the highest amount to the lowest amount, it add inputs until the value added is higher than pegOutValue+Fi\*W.
 
@@ -120,7 +124,7 @@ In all cases the fees for the transaction will be paid from the UMA. If the UMA 
 
 ## Rationale
 
-### Fixed vs variable peg-out fees.
+### Fixed vs variable peg-out fees
 
 Having variable peg-out fees, together with batching, degrades the user experience, as the user does not have an immediate good estimation of the fees that the peg-out will collect. This proposal allows peg-out fees to vary accorindg to a moving average that is updated on each peg-out event, but does not take into account the last event. Therefore the user should not expect fees to vary between querying the Bridge and performing the peg-out even if one peg-out event occurs in between. 
 
@@ -130,7 +134,11 @@ Having variable peg-out fees, together with batching, degrades the user experien
 The peg out process lasts approximately 37 hours. The time of a peg-in is approximately 17 hours. Therefore the round-trip time of a change amount is 54 hours on average. We want to have 40% of the UTXOs available at all times to be able to efficiently choose inputs. Assuming a 50% waste in value moved on each peg-out, then the 60% of UTXOs in transit will equate to 90% of the peg balance in transit, which means that any peg-out of an amount lower than 10% of the pegged balance will be processed immediately, while higher amounts may need to wait up to 54 additional hours. 
 In 54 hours of round-trip time, we have a maximum of 18 slots to perform peg-outs. Assuming an average of 1.5 inputs are consumed per peg-out transaction, and one transaction per batched peg-out, we consume 27 UTXOs. Those 27 UTXOs must not represent more than 60% of the all UTXOs being rotated, so the minimum number of rotating peg-outs must be 45. 
 
-The choice to collect UMA fees for 40 inputs allows the Bridge to perform 10 consolidations when the UTXO set reaches 80 UTXO, removing 30 UTXOs from UTXO set.  If the UMA is used to refresh emergency time-locks, then approximately 60% of the UTXO can be refreshed in the absence of peg-outs. If there are 60 UTXOs in the set with uniformly distributed expiration times, the current threshold allows to refresh UTXOs for 3 months without peg-outs. At current BTC/USD prices and with the current Powpeg multisig structure, the average balance of the UMA would be 600 USD. Note that if UTXO are very close to expiration, the Bridge should command the refresh of expiring UTXO even if that requires consuming BTCs from the peg balance, at the expense of "diluting" the value of the rBTC compared to BTC, although the dilution percentage would probably be negligible and won't affect the 1:1 parity. This mechanism should be specified in RSKIP265.
+The choice to collect UMA fees for 60 inputs allows the Bridge to perform 15 consolidations when the UTXO set reaches 80 UTXO, removing up to 45 UTXOs from UTXO set.  Assuming there are UTXO 60 in the Bridge, if the UMA is used to refresh emergency time-locks, then 100% of the UTXO will be able to be refreshed in the absence of peg-outs. Also if the UTXO expirations are uniformly distributed over the year, the current threshold allows all UTXOs for one year without peg-outs. The current threshold also allows to perform a full Powpeg migration. 
+
+At current BTC/USD prices and with the current Powpeg multisig structure, the average balance of the UMA would be 800 USD. 
+
+Note that if UTXO are very close to expiration, the Bridge commands the refresh of expiring UTXO even if that requires consuming BTCs from the peg balance, at the expense of "diluting" the value of the rBTC compared to BTC, although the dilution percentage would probably be negligible and won't affect the 1:1 parity. This mechanism is specified in RSKIP265.
 
 ### Hysteresis
 
@@ -139,7 +147,13 @@ The correction method based on consolidation on peg-ins will only be triggered i
 
 ### Fee Estimation
 
-We've not solved the problem of how users can estimate the peg-out transaction costs before the peg-out transaction is built. We assume that another RSKIP should describe how the Bridge can compute such an estimation for wallets to show in their UIs. It's also possible to provide a new version of the releaseBTC() method that supports an argument to indicate the maximum amount of fees that the user is willing to pay.
+We've solved the problem of how users can estimate the peg-out transaction costs before the peg-out transaction is built. Not Bridge computes the fees for wallets to show in their UIs. However, if two peg-out events occur after the query but before the peg-out command, the fees may have changed. 
+
+It's also possible to provide a new version of the releaseBTC() method that supports an argument to indicate the maximum amount of fees that the user is willing to pay, and abort otherwise.
+
+### UTXO Maintenance Account
+
+The UMA serves as a fee buffer to smooth peg-out fees and also to pay for Bitcoin fees in exceptional events, such as forced UTXO consolidations or Powpeg migrations. In the future, it can also serve to provide an automatic fee bumping mechanism. The fees would be bumped automatically after 20 hours if a peg-out transaction containing a change output has not been informed to the Bridge. 
 
 ### Simulations
 
@@ -149,15 +163,15 @@ We've not solved the problem of how users can estimate the peg-out transaction c
 
 This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients and Block explorers do not need to be updated. 
 
-## Implementation
+## Minimization of Value in Transit
 
-Moving additional value apart from the user selected peg-out amounts aways carry a certain risk that the change amounts cannot be quickly pegged-in due to the lack of transaction inclusion. This can happen during suddent mempool congestions. 
+Moving additional value apart from the user selected peg-out amounts always carry a certain risk that the change amounts cannot be quickly pegged-in due to the lack of transaction inclusion. This can happen during sudden mempool congestions. 
 To reduce this risks, the coin selection algorithm tries to minimize change, yet it behaves mostly greedy. If UTXO amounts are uniformly distributed, it should not consume more than the double of the peg-out amount. 
 The proposed coin selection algorithm does not try to find the optimum solution. Finding the best combination of UTXOs is probably as hard as solving the [Knapsack problem](https://en.wikipedia.org/wiki/Knapsack_problem).
 
 ## Security Considerations
 
-TBD
+This RSKIP resolves an existing, but not critical, platform vulnerability.
 
 
 # **Copyright**
