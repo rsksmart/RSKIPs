@@ -4,7 +4,7 @@
 | :------------ |:---------------------------------|
 |**Title**      | Expanding the emergency multisig |
 |**Created**    | AUG-2021                         |
-|**Author**     | JL2                              |
+|**Author**     | JL2, SDL                         |
 |**Purpose**    | Sec                              |
 |**Layer**      | Core                             |
 |**Complexity** | 2                                |
