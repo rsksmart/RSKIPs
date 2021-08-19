@@ -58,7 +58,7 @@ The emergency multi-signature is a 3-out-of-4 multisig.
 Following the requirements established in [RSKIP225-Emergency Multisig public keys](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP225.md), the signatories for the emergency multi-signature are listed below:
 
 - IOVlabs ([link to message](https://iovlabs.org/pow-peg-emergency-multisig.html))
-- MoneyOnChain
+- MoneyOnChain ([link to message](https://twitter.com/moneyonchainok/status/1428161275721302027?s=19))
 - Jameson Lopp ([link to message](https://keybase.pub/lopp/RSK-key.txt))
 - Adrian Eidelman ([link to message](https://keybase.pub/aeidelman/RSK-key.txt))
 
