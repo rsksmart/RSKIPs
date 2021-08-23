@@ -35,13 +35,13 @@ Before a peg-out is to be built, the Bridge will count the number of UTXOs and p
 * **Consolidation**: If the number of UTXOs is higher than B, the peg-out transaction will consume at least M inputs. The inputs will be chosen with the algorithm described in RSKIP265, which should add a low-value input. 
 * **Expansion**: If the number of UTXOs is lower or equal to C, and the change amount is higher than 1 BTC, then M change outputs will be added, split the change amount evenly between the (N+1) change outputs for the Powpeg. 
 
-If UTXO Management Account is activated ([RSKIP268](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP268.md)), then the additional cost of creating a peg-in-peg-out transaction or adding adding an input or an output to a peg-out transaction will be paid by the UMA, otherwise it will be charged to the current peg-in or peg-out users.
+If UTXO Management Account is activated ([RSKIP272](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md)), then the additional cost of creating a peg-in-peg-out transaction or adding adding an input or an output to a peg-out transaction will be paid by the UMA, otherwise it will be charged to the current peg-in or peg-out users.
 
-If peg-out batching is activated ([RSKIP267](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP267.md)) then the constants selected are A=80, B=60 and C=30. 
+If peg-out batching is activated ([RSKIP271](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md)) then the constants selected are A=80, B=60 and C=30. 
 
 If peg-out batching is not activated, then A=800, B=600 and C=300.
 
-If UMA is activated ([RSKIP268](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP268.md)) then M=3, N=3.
+If UMA is activated ([RSKIP272](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md)) then M=3, N=3.
 
 If UMA is not activated, them M=1, N=2.
 
