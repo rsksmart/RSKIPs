@@ -1,7 +1,7 @@
 # Bridge UTXO Management Account
 
 
-|RSKIP          | 2672 |
+|RSKIP          | 272 |
 | :------------ |:-------------|
 |**Title**      |Bridge UTXO Management Account|
 |**Created**    |AUG-2021 |
