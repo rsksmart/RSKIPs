@@ -34,7 +34,7 @@ This RSKIP specifies the changes included in the RSK network upgrade name Iris.
 - [RSKIP 185](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP185.md): Add 2WP peg-out transactions events and refund support
 - [RSKIP 186](https://github.com/rsksmart/RSKIPs/pull/186): Preserve RSK PowPeg activation block height
 - [RSKIP 191](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP191.md): Remove non Ethereum opcodes from virtual machine
-- [RSKIP 197](https://github.com/rsksmart/RSKIPs/pull/197): Error Handling for Precompiled Contracts
+- [RSKIP 197](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP197.md): Error Handling for Precompiled Contracts
 - [RSKIP 199](https://github.com/rsksmart/RSKIPs/pull/199): Bridge performance improvement
 - [RSKIP 200](https://github.com/rsksmart/RSKIPs/pull/200): ReceiveHeaders method limitations
 - [RSKIP 201](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP201.md): Time-locked Emergency Multisignature
