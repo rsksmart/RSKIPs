@@ -8,7 +8,7 @@
 |**Purpose**    |Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 ## Abstract
 
@@ -27,7 +27,7 @@ This RSKIP specifies the changes included in the RSK network upgrade name Iris.
 - [RSKIP 169](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP169.md): Rectify EXTCODEHASH implementation
 - [RSKIP 170](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP170.md): 2WP peg-in transactions to any address
 - [RSKIP 171](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP171.md): Arbitrary-length data return mechanism
-- RSKIP 174: Preserve balance in contract creation
+- [RSKIP 174](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP174.md): Preserve balance in contract creation
 - [RSKIP 176](https://github.com/rsksmart/RSKIPs/pull/176): Trustless fast BTC bridge
 - [RSKIP 179](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP179.md): BTC-RSK timestamp linking
 - [RSKIP 181](https://github.com/rsksmart/RSKIPs/pull/181): Add 2WP peg-in transactions reject events
