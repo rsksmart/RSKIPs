@@ -21,7 +21,7 @@ The current RSK bridge can suffer from a number of problems described in [RSKIP2
 
 ## Specification
 
-After receiving a peg-out request, and if now previous request is waiting in the queue, the Bridge contract will wait T=3 hours to create a peg-out transaction. During the waiting time, if more peg-out requests are received, they will be queued so that all of them can be batched in a single peg-out transaction. When the deadline is reached, a peg-out event will be triggered. Under normal usage, the Bridge would create no more than 8 peg-outs events a day. Under a rush hour of peg-outs, the Bridge may need to create more than one peg-out transaction simultaneously per peg-out event to reduce the transaction size, and input count. This peg-out splitting into transactions does not change from the current protocol.
+After receiving a peg-out request, and if no previous request is waiting in the queue, the Bridge contract will wait T=3 hours to create a peg-out transaction. During the waiting time, if more peg-out requests are received, they will be queued so that all of them can be batched in a single peg-out transaction. When the deadline is reached, a peg-out event will be triggered. Under normal usage, the Bridge would create no more than 8 peg-outs events a day. Under a rush hour of peg-outs, the Bridge may need to create more than one peg-out transaction simultaneously per peg-out event to reduce the transaction size, and input count. This peg-out splitting into transactions does not change from the current protocol.
 
 ### Peg-out Fees
 
