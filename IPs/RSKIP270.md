@@ -13,7 +13,7 @@
 
 #  **Abstract**
 
-One of the problems of the RSK bridge is that it doesn't have any means to prevent the proliferation and fragmentation of UTXOs. This can lead to a number of cost, usability, efficiency and security problems defined in [RSKIP265](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP265.md). This RSKIP is part of a series of RSKIPs that address these problems (RSKIP265 to RSKIP268). In particular, this RSKIP proposes a new protocol for the Bridge to shrink or expand the UTXOs to keep a UTXO set of a predefined size. This is done by splitting amounts (expansion) or joining amounts (consolidation). Lower bound and upper bound thresholds are used to avoid frequent UTXO management operations. 
+One of the problems of the RSK bridge is that it doesn't have any means to prevent the proliferation and fragmentation of UTXOs. This can lead to a number of cost, usability, efficiency and security problems defined in [RSKIP265](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP265.md). This RSKIP is part of a series of RSKIPs that address these problems (RSKIP265, and RSKIP270 to RSKIP273). In particular, this RSKIP proposes a new protocol for the Bridge to shrink or expand the UTXOs to keep the size of the UTXO set within a predetermined range. This is done by splitting amounts (expansion) or joining amounts (consolidation). Lower bound and upper bound thresholds are used to avoid frequent UTXO management operations. 
 
 ## Motivation
 
@@ -27,8 +27,7 @@ The solution to uneven amount distribution is to rebalance amounts during consol
 
 Every time after a peg-in transaction is registered by the Bridge, the Bridge will count the number of UTXOs and perform the following actions:
 
-* **Consolidation**: If the number of UTXOs is higher than A, then (M+1) UTXOs will be immediately consolidated in a peg-out/peg-in transaction with a single Powpeg output. The additional inputs will be chosen greedily to consume low amounts. The fee for this consolidation UTXO will be consumed from the consolidation account (defined in next section).
-
+* **Consolidation**: If the number of UTXOs is higher than A, then (M+1) UTXOs will be immediately consolidated in a peg-out/peg-in transaction with a single Powpeg output. The additional inputs will be chosen greedily to consume low amounts.
 
 Before a peg-out is to be built, the Bridge will count the number of UTXOs and perform the following actions:
 
