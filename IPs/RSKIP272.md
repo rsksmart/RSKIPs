@@ -21,7 +21,7 @@ The current RSK bridge can suffer from a number of problems described in [RSKIP2
 
 ## Specification
 
-The Bridge contract will try to maintain a **UTXO Maintenance Account (UMA)** with a balance high enough to pay for peg-outs, UTXO consolidations (if [RSKIP171](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md) is activated), time-lock refresh (if [RSKIP264](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP264.md) is activated) and other maintenance operations without the need to charge peg-in or peg-out users. 
+The Bridge contract will try to maintain a **UTXO Management Account (UMA)** with a balance high enough to pay for peg-outs, UTXO consolidations (if [RSKIP171](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md) is activated), time-lock refresh (if [RSKIP264](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP264.md) is activated) and other maintenance operations without the need to charge peg-in or peg-out users. 
 
 The bridge computes two values: Fi and Fo. Fi represents the cost in fees of consuming a single Powpeg input, and Fo is the cost of one P2SH output.
 
@@ -82,7 +82,7 @@ We've solved the problem of how users can estimate the peg-out transaction costs
 
 It's also possible to provide a new version of the releaseBTC() method that supports an argument to indicate the maximum amount of fees that the user is willing to pay, and abort otherwise.
 
-### UTXO Maintenance Account
+### UTXO Management Account
 
 The UMA serves as a fee buffer to smooth peg-out fees and also to pay for Bitcoin fees in exceptional events, such as forced UTXO consolidations or Powpeg migrations. In the future, it can also serve to provide an automatic fee bumping mechanism. The fees would be bumped automatically after 20 hours if a peg-out transaction containing a change output has not been informed to the Bridge. 
 
