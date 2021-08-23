@@ -65,6 +65,8 @@ The `getFeesForNextPegOutEvent()` fees are chosen to keep enough funds in the UM
 
 The lower and upper bounds are chosen according to RSKIP265.
 
+If there is no batching, then the number of UTXOs should be higher to avoid reaching the limit under normal operation. Assuming 450 UTXOs available, the peg can sustain a peg-out every 8 minutes continuously, which is a much higher rate that the current rate. While the values of B and C do not offer protection against a DoS attack, much higher values of B and C can lead to excessive CPU processing at peg-out time.
+
 If we analyze this RSKIP together with [RSKIP264](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP264.md), [RSKIP270](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP270.md) and [RSKIP271](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md), the choice of B and C enable to perform different UTXO management actions consuming the UMA balance, such as:
 
 * collect UMA fees for 60 inputs allows the Bridge to perform 15 consolidations when the UTXO set reaches 80 UTXO, removing up to 45 UTXOs from UTXO set.  
