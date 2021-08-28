@@ -78,7 +78,7 @@ At current BTC/USD prices and with the current Powpeg multisig structure, the av
 
 ### Fee Estimation
 
-We've solved the problem of how users can estimate the peg-out transaction costs before the peg-out transaction is built. Not Bridge computes the fees for wallets to show in their UIs. However, if two peg-out events occur after the query but before the peg-out command, the fees may have changed. 
+We've solved the problem of how users can estimate the peg-out transaction costs before the peg-out transaction is built. Now the Bridge computes the fees for wallets to show in their UIs. However, if two peg-out events occur after the query but before the peg-out command, the fees may have changed. 
 
 It's also possible to provide a new version of the releaseBTC() method that supports an argument to indicate the maximum amount of fees that the user is willing to pay, and abort otherwise.
 
