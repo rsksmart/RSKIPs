@@ -12,19 +12,19 @@
 
 ## Abstract
 
-RSK implements a Unitrie data structure to store all the relevant blockchain data, such as account states and storage values, this particular data structure enables an easy verification of each stored value, just by getting a merkle proof. Currently these proofs are only useful for blockchain nodes, but in order to allow verification of accounts outside the client, we need an additional function delivering us the required proof. 
+RSK implements a Unitrie data structure to store all the relevant blockchain state data, such as account balances and storage values. This data structure enables an easy verification of each stored value, using (also called Merkle proofs). Currently these proofs are only used inside blockchain nodes, but in order to allow verification of accounts outside the client, we need an additional method to deliver the proofs. 
 
-Combined with a stateRoot (from the blockheader) it enables offline verification of any account or storage-value. 
+Combined with a stateRoot (which can be obtained from the blockheader), a Merkle proof enables the offline verification of any account or storage-value. 
 
 ## Motivation
 
-Offering these function through the RPC-Interface would enable applications to store and send proofs to devices which are not directly connected to the p2p-network and still are able to verify the data. This could be used for mobile applications, which are currently only using a remote client.
+A method to provide Merkle proofs through the RPC-Interface would enable applications to store and send proofs to devices which are not directly connected to the p2p-network and still are able to verify the data. This could be used for mobile phones running lightweight nodes.
 
-Also it might be useful for L2 solutions.
+The method could also be useful for layer 2 solutions.
 
 ## Specification
 
-Returns the account and storage-values of the specified account including the Merkle-proof.
+The method eth_getProof() is added to the RPC interface. The method returns the account and storage-values of the specified account including the Merkle-proof.
 
 Params
 - address (UNFORMATTED)
