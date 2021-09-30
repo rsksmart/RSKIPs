@@ -28,7 +28,7 @@ Because intra-transaction refunds cannot increase block processing time, the cap
 Starting from an activation block (TBD) storage cleanup refunds are modified both for `SSTORE` and `SELFDESTRUCT`, and the cost of `SSTORE` is also simplified. Refunds can only be collected in the same transaction the gas is spent. 
 
 A map of sets *storage_cells_touched\[contractAddress\]\[storageAddress\]* is created in each call frame.
-The maps is  empty when call begins.
+The map is empty when each call begins.
 If a call reverts/OOG, the map is discarded.
 
 Each time `SSTORE` is called, its cell address is looked up in *storage_cells_touched* in the current call frame. If it exists, then the cost of `SSTORE` is 400. If it doesn't exists, then it is 20000. 
