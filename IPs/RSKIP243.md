@@ -40,7 +40,7 @@ For each cell, if its value is equal to their pre-execution value, then 19600 ga
 
 Also at the end of transaction processing, if a contract was selfdestructed and the contract did not exist prior to execution, then 24K gas (out of the 32K originally paid), plus 99% of the variable cost required to install the code (198 per byte), is refunded.
 
-The cap of the refund to 50% of the transaction gas consumed is removed. 
+The cap of the refund to 50% of the transaction gas consumed is removed.
 
 Note that if the same cell is overwritten in recursive calls, the `SSTORE` operation may be charged 20000 more than once. The refund will be applied only once. However the recursive overwrite of cells is a very uncommon pattern.
 
