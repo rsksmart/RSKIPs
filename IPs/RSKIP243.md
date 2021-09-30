@@ -19,7 +19,7 @@ This RSKIP proposes eliminating inter-block gas refunds and replace them with a 
 
 The motivation for the removal of storage refunds can be found in [EIP3298](https://eips.ethereum.org/EIPS/eip-3298). Essentially, gas refunds that span over blocks bring numerous problems. However, instead of removing storage gas reimbursements completely, we propose keeping them but only if the storage creation and removal occurs within a single transaction. By doing so we reduce the gas cost of common Solidity language constructions, such as reentrancy semaphores. This change improves the platform fairness because only performs refunds when the state trie is not impacted, and the I/O cost is avoided. 
 
-Currently, when a contract is destroyed, the reimbursed amount is constant. However, the variable cost related to the number of bytes installed can be very high. We propose to reimburse 99% of this amount, also increasing platform fairness.
+Currently, when a contract is destroyed, the reimbursed amount is constant. However, the variable cost related to the number of bytes installed can be very high. We propose to reimburse 99% of this amount, which also increases the platform fairness.
 
 Because intra-transaction refunds cannot increase block processing time, the cap to 50% of the consumed gas is removed.
 
