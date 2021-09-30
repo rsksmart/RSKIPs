@@ -38,7 +38,7 @@ When a call returns without reverting changes, the contents of *storage_cells_to
 At the end of transaction processing, all storage cells that exists in the top-level *storage_cells_touched* are scanned.
 For each cell, if its value is equal to their pre-execution value, then 19600 gas is refunded.
 
-Also at the end of transaction processing, if a contract was selfdestructed and the contract did not exists pre-execution, then 24K gas (out of the 32K originally paid) plus 99% the refund of the variable cost required to install the code (198 per byte) is refunded.
+Also at the end of transaction processing, if a contract was selfdestructed and the contract did not exist prior to execution, then 24K gas (out of the 32K originally paid), plus 99% of the variable cost required to install the code (198 per byte), is refunded.
 
 The cap of the refund to 50% of the transaction gas consumed is removed. 
 
