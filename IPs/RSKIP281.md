@@ -1,6 +1,6 @@
 # Rollup-optimized Ephemeral Calldata
 
-|RSKIP          |xxx           |
+|RSKIP          |281           |
 | :------------ |:-------------|
 |**Title**      |Rollup-optimized Ephemeral Calldata|
 |**Created**    |5-Oct-2021 |
