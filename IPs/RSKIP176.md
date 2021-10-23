@@ -1,7 +1,7 @@
-# Fast BTC Bridge
+# Programmable Peg-in Addresses for faster peg-ins
 |RSKIP          | 176 |
 | :------------ |:-------------|
-|**Title**      |Fast BTC Bridge |
+|**Title**      |Programmable Peg-in Addresses for faster peg-ins |
 |**Created**    |15-SEP-20 |
 |**Author**     |SDL, GM |
 |**Purpose**    |USA |
@@ -11,7 +11,7 @@
 
 ## Abstract
 
-This RSKIP proposes an RSK protocol change that enables to Bridge contract to receive funds using *Powpeg-derived* addresses, where each derived address has an execution script cryptographically linked into it. To trigger the script execution, a smart contract provides to the Bridge the BTC transaction and Merkle proof, together with proof that the derived address actually can be controlled by the Powpeg, and the Bridge contract redeems the funds according to the execution script. While at the consensus layer, the change protocol change affects only the Bridge contract, to make use of this feature, additional user-defined contracts that handle script execution must be deployed, and users must be aware of the new peg-in workflow.  One of the goals with this change, is the deployment of the Flyover protocol, which is a specific script execution engine that allows users to peg-in BTC to RSK in a fast way, where a third party advances the payment in RBTC to the user, while taking the bitcoin blockchain double-spend risk.
+This RSKIP proposes an RSK protocol change called **Programmable Peg-in Addresses (PPA)** (formerly known as "fast peg-in") that enables to Bridge contract to receive funds over *Powpeg-derived* addresses, where each derived address has a peg-in execution code cryptographically linked into it. To receive the RBTC of a PPA peg-in, a smart contract or EOA must provide to the Bridge the BTC transaction and Merkle proof, together with proof that the derived address is actually controlled by the Powpeg. If this proof is verified, the Bridge contract redeems the funds by executing the associated code. The code to be executed is succinctly specified as a contract method to be called, and the arguments to pass to the call. At the RSK consensus layer this protocol change only affects the Bridge contract. However, to make use of all features enabled by PPA, additional user-defined contracts that handle code execution must be deployed, and users and wallets must be aware of the new peg-in workflow.  One of the goals with this change is the deployment of the Flyover protocol, which is a specific peg-in execution engine that allows users to peg-in BTC to RSK in a fast way, where a third party advances the payment in RBTC to the user, while taking the bitcoin blockchain double-spend risk.
 
 ## Motivation
 
@@ -21,7 +21,7 @@ The RSK Bridge is slow. This is a security feature, not a bug. The bridge was de
 
 
 
-The **Powpeg Redeem Script** (PRS, also called federation redeem script), is the the script referenced by script hash inside the Powpeg P2SH peg-in address. It contains the Powpeg multisig and emergency multisig spending paths. A **derived Powpeg address** is built by combining a value called **Unique Peg-in Identification** (UPI) with the PRS. The UPI consist of exactly 32 bytes provided by the user that performs the peg-in. The UPI in turn is the hash of some **Internal Derivation Arguments** (IDAs). The UPI is built as the keccack256 hash digest of the IDAs, serialized in a custom format. While the IDAs can be freely chosen by the user creating the peg-in transaction, each IDA has a special function recognized by the Bridge contract.  One of the IDAs is itself a hash of **External Derivation Arguments** (EDAs). The EDAs are referenced by the **derivationArgumentsHash** function argument described in the next section. The EDAs are referenced by a hash digest because they are ignored by the Bridge. In the case of the Flyover protocol, both IDAs and EDAs represent an agreement signed between the Liquidity Provider and the user willing to perform the peg-in. The agreement contains the Terms of Service (ToS).
+The **Powpeg Redeem Script** (PRS, also called federation redeem script), is the the script referenced by script hash inside the Powpeg P2SH peg-in address. It contains the Powpeg multisig and emergency multisig spending paths. A **derived Powpeg address** is built by combining a value called **User Peg-in Identification** (UPI) with the PRS. The UPI consist of exactly 32 bytes provided by the user that performs the peg-in. The UPI in turn is the hash of some **Internal Derivation Arguments** (IDAs). The UPI is built as the keccack256 hash digest of the IDAs, serialized in a custom format. While the IDAs can be freely chosen by the user creating the peg-in transaction, each IDA has a special function recognized by the Bridge contract.  One of the IDAs is itself a hash of **External Derivation Arguments** (EDAs). The EDAs are referenced by the **derivationArgumentsHash** function argument described in the next section. The EDAs are referenced by a hash digest instead of explicitly because they are ignored by the Bridge. In the case of the Flyover protocol, both IDAs and EDAs represent an agreement signed between the Liquidity Provider and the user willing to perform the peg-in. The agreement contains the Terms of Service (ToS). Other protocols may use the EDAs for other purposes.
 
 #### Bridge
 
@@ -50,13 +50,13 @@ A new method called **registerFastBridgeBtcTransaction**() is added to the Bridg
 - *bytes* **liquidityProviderBtcAddress**: Binary encoding representing  the Liquidity Provider BTC refund address.
 - *bool* **shouldTransferToContract**: Status provided by the caller contract to know if should transfer value to the contract or not.
 
-To compute the UPI, the IDAs are serialized as a concatenation of derivationArgumentsHash (32 bytes), userRefundBtcAddress (21 bytes), liquidityProviderBtcAddress (21 bytes), liquidityBridgeContractAddress (20 bytes). Each argument occupies a fixed number of bytes shown in brackets. This is:
+To compute the UPI, the IDAs are serialized as a concatenation of derivationArgumentsHash (32 bytes), userRefundBtcAddress (21 bytes), liquidityProviderBtcAddress (21 bytes), liquidityBridgeContractAddress (20 bytes). Each argument occupies a fixed number of bytes shown in brackets. Formally, this is:
 
 `UPI = Keccak256(derivationArgumentsHash, userRefundBtcAddress, liquidityProviderBtcAddress , liquidityBridgeContractAddress)`
 
 The total number of bytes hashed is 94. Note that the concatenation order is different from the argument passing order.
 
-**Method Algorithm**:
+**Checks and Operations Performed by registerFastBridgeBtcTransaction**:
 
 - Compute **btcTxHash** as the Bitcoin hash of btcTxSerialized.
 
@@ -77,8 +77,8 @@ The total number of bytes hashed is 94. Note that the concatenation order is dif
  - If **true**, Bridge will check if Locking Cap value is surpassed:
     - If not surpassed:
       - transfers the totalAmount to the Liquidity Bridge Contract
-      - saves information related to the derivedPowpegAddress in the contract storage. The cell whose address is obtained by the getStorageKeyForfastBridgeFederationInformation(redeemScriptHash) method. The **redeemScriptHash** is the Bitcoin hash of the Powpeg Redeem Script associated with the derived Powpeg address. The data to be stored is the RLP encoding of UPI and [[Something-something-I-can't-understand]].
-      - Marks the tuple (btcTxHash, UPI) in Bridge storage to that it cannot be reused. To do so the Bridge computes an unique storage address using the function getStorageKeyForDerivationArgumentsHash(btcTxHash, UPI), and stores the byte value 1 in the storage cell at that address. This enables the preventing the same transaction to be processed twice for the same UPI. This storage cell is never erased.
+      - saves information related to the derivedPowpegAddress in the contract storage. The cell whose address is obtained by the **getStorageKeyForfastBridgeFederationInformation**(redeemScriptHash) method. The **redeemScriptHash** is the Bitcoin hash of the Powpeg P2SH Redeem Script associated with the derived Powpeg address (called **fastBridgeRedeemScriptHash**). The data to be stored is the RLP encoding of UPI and the Powpeg P2SH Redeem Script hash for the redeem script with the UPI removed (called **powpegRedeemScriptHash**). This last redeem script matches the standard generic Powpeg redeem script for any non-fast peg-in.
+      - Marks the tuple (btcTxHash, UPI) in Bridge storage to that it cannot be reused. To do so the Bridge computes an unique storage address using the function **getStorageKeyForDerivationArgumentsHash**(btcTxHash, UPI), and stores the byte value 1 in the storage cell at that address. This enables the preventing the same transaction to be processed twice for the same UPI. This storage cell is never erased.
       - marks tx as processed.
       - stores all the UTXOs from tx that pay to the derived Powpeg address. The UTXOs are stored exactly as it is already done for regular peg-in UTXOs.
 
