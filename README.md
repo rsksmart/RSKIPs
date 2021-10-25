@@ -185,7 +185,7 @@ RSK Improvement Proposals
 | 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
-
+| 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 

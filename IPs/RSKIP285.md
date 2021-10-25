@@ -1,6 +1,6 @@
 # Utility Methods to Make PPA safer
 
-|RSKIP          |xxx           |
+|RSKIP          |285           |
 | :------------ |:-------------|
 |**Title**      |Utility Methods to Make PPA safer |
 |**Created**    |25-OCT-21 |
@@ -20,7 +20,7 @@ Stated in the abstract section.
 
 ## Implementation
 
-Two new Bridge methods are added to the Bridge contract with signature:
+Three new methods are added to the Bridge contract:
 
 ```java
 function getP2SHRedeemScriptForPPA(uint256 UPI) public returns (bytes redeemScript);
@@ -31,7 +31,8 @@ This method returns the redeem script associated with the provided UPI (as defin
 ```java
 function getP2SHAddressForPPA(uint256 UPI) public returns (bytes21 address);
 ```
-This method returns a binary representation of the Bitcoin P2SH address (in 1-byte version/RIPEMD160 hash format) associated with the UPI. The caller can build the ASCII representation of the Bitcoin address from the binary representation.
+This method returns a binary representation of the Bitcoin P2SH address associated with the UPI. The representation consist of a 1-byte version followed by a RIPEMD160 hash. The caller can build the ASCII representation of the Bitcoin address from the binary representation.
+The call consumes 5500 gas.
 
 ```java
 function getP2SHRedeemScript() public returns (bytes redeemScript);
