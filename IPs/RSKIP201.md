@@ -51,8 +51,16 @@ The exact value for the time-lock is TBD, but it should correspond to one year e
 
 The scriptSig is modified to match the new scriptPub by introducing an OP_0 (push of the zero value) at the beginning.  This element is consumed by the OP_NOTIF opcode, selecting the first sentence of the conditional.
 
-The emergency multi-signature is a 2-out-of-3 multisig.
+The emergency multi-signature is a 3-out-of-4 multisig.
 
+## Signatories
+
+Following the requirements established in [RSKIP225-Emergency Multisig public keys](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP225.md), the signatories for the emergency multi-signature are listed below:
+
+- IOVlabs ([link to message](https://iovlabs.org/pow-peg-emergency-multisig.html))
+- MoneyOnChain ([link to message](https://twitter.com/moneyonchainok/status/1428161275721302027?s=19))
+- Jameson Lopp ([link to message](https://keybase.pub/lopp/RSK-key.txt))
+- Adrian Eidelman ([link to message](https://keybase.pub/aeidelman/RSK-key.txt))
 
 ## Rationale
 
