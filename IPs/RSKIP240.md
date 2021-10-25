@@ -43,7 +43,7 @@ This proposal requires a hard fork.
 This is a time stamp in unix seconds for each unitrie node. This is interpreted as the time until which rent has been "fully paid". This timestamp will typically lie *in the past* because rent is not collected in advance. The timestamp is moved forward with each rent payment, with the rate of advance depending on both the payment amount and the size of data stored in the node.
 
 - Add another field `nodeVersion` to the unitrie. 
- for at the point a transaction execution stops
+
 Node versioning is required for serialization of new trie nodes with rent timestamps and older nodes without timestamps. We can use version number 0 for Orchid encoding, 1 for the current encoding (RSKIP107), and 2 for nodes with rent time stamp (current proposal). Note that the current implementation of RSKJ already uses implicit node version 1 in bit positions 6 and 7 of `flags` in Trie class. This will be changed to 2 (`10` in binary) for storage rent.
 
 ### Rent computation
@@ -90,6 +90,8 @@ Updating the timestamp is more resource intensive for `EXTCODECOPY` (or `EXTCODE
 
 **New Nodes**: New nodes (of any type) receive the timestamp of the block they are created in. No advanced rent is collected. If needed (in future) advanced rent payment for new nodes can be incorporated into fixed costs.
 
+**Pre-existing Nodes:** nodes that exist in the trie before storage rent is activated will be treated as if they were created in the last 6 months prior to the activation of rent. This can be based by hardcoding a timestamp of a block mined approximately 6 months before the target activation block for storage rent (whenever that is).
+
 **Security and DoS:** To increase the costs of IO-DOS attacks, the maximum rent cap is charged for attempting to read data from nodes that do not exist in the trie.
 
 **Duration cap:** There is a limit on the amount of time for which rent is accrued. This is set at 3 years. If a node remains untouched for 3 years, then the amount of outstanding rent does not grow any further, it remains capped at that level. Letting rent accumulate forever seems unnecessarily punitive.
@@ -101,14 +103,15 @@ Suppose a trie node has nodesize `Size` (bytes). Let its current timestamp be `l
 Then the *outstanding rent* for this node is `rent_due = (Size * Rent) * (t_now - t_0)`. The amount of rent to be collected (if any) depends on whether the data in the node is modified by the transaction or not. 
 
 - if `rent_due < Cutoff`, then no rent is collected and `lastRentPaidTime` remains unchanged.
-- if `rent_due > Cutoff` but `rent_due < Cap`, then the entire outstanding amount is collected and `lastRentPaidTime` is set equal to the current block's timestamp.
+- if `rent_due > Cutoff` but `rent_due < Cap`, then the entire outstanding amount is collected and `lastRentPaidTime` is set equal to the **current block's** timestamp.
 - if `rent_due > Cap`, then only `Cap` is collected. In this case, the timestamp is advanced as follows 
 
-We use "`//`" to represent **division with round down**
+We use  **division with round down** (`Math.Floor` in pseudocode) to obtain integer values for rent.
 
 ```
 /* If rent due exceeds `Cap`*/
-t_paid = Cap//(Size * Rent)     /* time for which rent is paid (`//` is division with round down)*/
+
+t_paid = Math.Floor(Cap/(Size * Rent))     /* time for which rent is paid*/
 t_new = t_0 + t_paid        /* update the timestamp */
 ```
 
@@ -176,7 +179,7 @@ Trie related
 - Use `long` for `lastRentPaidTime` with a default value of -1 (minus one). This value can help distinguish missing timestamps (which will default to 0). Recall that the trie data structure is also used for other tries (transactions, receipts)  
 - RSKJ currently uses an *implicit* node version number `01` as part of `flags` (bit positions 6, 7). For serialization, these bit positions should be changed to version 2 i.e. `10` in `flags`. 
 - Can use `nodeVersion` 0 when reading nodes with `Orchid` serialization format using `fromMessageOrchid()`. This will not affect encoding or hashing for Orchid.
-- the trie `put(key, value)`  method has to be *generalized* to `put(key, value, lastRentPaidTime)` to incorporate  `lastRentPaidTime`. The default value `put(key, value, -1` can be used for puts that do not need a timestamp (e.g. version 1 nodes, transaction tires, receipts tries)
+- the trie `put(key, value)`  method has to be *generalized* to `put(key, value, lastRentPaidTime)` to incorporate  `lastRentPaidTime`. The default value `put(key, value, -1)` can be used for puts that do not need a timestamp (e.g. version 1 nodes, transaction tries, receipts tries)
 
 ## Test Cases
 
