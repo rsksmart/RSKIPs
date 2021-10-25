@@ -145,17 +145,17 @@ The redeemScriptHash hexadecimal string is always 64 bytes in length.
 
 ### Powpeg Address Derivation
 
-The Powpeg address derivation starts with the creation of a custom redeem script that pushes the UPI (a 32 bytes hash). That data pushed is immediately dropped using the OP_DROP opcode, so the pushed data does not alter the processing of the redeem script. 
+The Powpeg address derivation starts with the creation of a custom redeem script that pushes the UPI (a 32 bytes hash). That data pushed is immediately dropped from the stack using the OP_DROP opcode, so the pushed data does not alter the processing of the redeem script. 
 
-This new custom redeem script has the following format. Here we omit the emergency script path for clarity, but this part must be considered when computing the address. A following RSKIP will specify the addition to the Bridge contract of a method to retrieve a custom redeem script based on a given UPI. This will help users build the redeem script automatically.
+The redeem script for Powpeg-derived addresses is a modification of the standard Powpeg redeem script. In this section we show how to build such scripts, but we omit the emergency multisig script path for clarity.  The whole script must be considered when computing the address. A following RSKIP will specify the addition to the Bridge contract of a method to retrieve a custom redeem script based on a given UPI, as currently this process must be done by an ad-hoc library. The new custom redeem script has the following format:
 
-    scriptPubKey: OP_HASH160 <redeemScriptHash> OP_EQUAL
-    scriptSig: OP_0 <signatures> <redeemScript>
-    redeemScript: <derivationArgumentsHash> OP_DROP OP_M <publicKeys> OP_N OP_CHECKMULTISIG
+```
+scriptPubKey: OP_HASH160 <redeemScriptHash> OP_EQUAL
+scriptSig: OP_0 <signatures> <redeemScript>
+redeemScript: <derivationArgumentsHash> OP_DROP OP_M <publicKeys> OP_N OP_CHECKMULTISIG
+```
 
 This custom redeem script is executed in the same way to the standard script, allowing the same pegnatories to sign transactions consuming bitcoins from these ad-hoc addresses.
-
-
 
 
 ### Rationale
