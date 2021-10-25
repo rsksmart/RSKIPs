@@ -1,8 +1,8 @@
-# Methods to Query the Redeem Scripts
+# Utility Methods to Make PPA safer
 
 |RSKIP          |xxx           |
 | :------------ |:-------------|
-|**Title**      |Methods to Query the Redeem Scripts |
+|**Title**      |Utility Methods to Make PPA safer |
 |**Created**    |25-OCT-21 |
 |**Author**     |SDL |
 |**Purpose**    |Usa/Sec |
@@ -27,6 +27,11 @@ function getP2SHRedeemScriptForPPA(uint256 UPI) public returns (bytes redeemScri
 ```
 
 This method returns the redeem script associated with the provided UPI (as defined in RSKIP176), for the current active federation. The call consumes 5000 gas.
+
+```java
+function getP2SHAddressForPPA(uint256 UPI) public returns (bytes21 address);
+```
+This method returns a binary representation of the Bitcoin P2SH address (in 1-byte version/RIPEMD160 hash format) associated with the UPI. The caller can build the ASCII representation of the Bitcoin address from the binary representation.
 
 ```java
 function getP2SHRedeemScript() public returns (bytes redeemScript);
