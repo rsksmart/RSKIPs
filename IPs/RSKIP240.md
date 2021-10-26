@@ -9,7 +9,7 @@
 |**Layer**      |Core|
 |**Complexity** |2|
 |**Status**     |Draft|
-|**Discussions**|add link to https://research.rsk.dev/ |
+|**Discussions-to**|https://research.rsk.dev/t/rskip-240-implement-storage-rent-in-rsk/163 |
 
 ## Abstract
 Storage rent is a *variable fee* collected from transaction senders to offset the cost of *retrieving relevant information* from blockchain state to execute transactions. The fee is called "rent" because it depends on the *time duration* for which the relevant data are stored in the *unitrie*. Rent is computed for each value-containing unitrie node "touched by" a transaction. This includes nodes containing account information, contract code and storage cells. Transaction senders currently pay *fixed costs* in gas for trie access through opcodes like `SLOAD`, `BAL`, `CALL` etc. Rent is an additional *variable cost* with a *cap* or limit. A trie node's rent is computed using a *timestamp* of that node's previous rent payment. The general idea is that these variable costs will be negligible for nodes that are accessed frequently and thus are more likely to be cached. However, the longer a node remains *unused*, the more outstanding rent it accumulates, and the more it will cost (with some cap) to read. Such nodes are less likely to be cached in memory.
