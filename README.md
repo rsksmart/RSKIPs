@@ -153,6 +153,7 @@ RSK Improvement Proposals
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Adopted |
 | 181 |[Peg-in rejection events](IPs/RSKIP181.md)|  03-NOV-20 | JD | Usa | Core | 2 | Adopted |
 | 185 |[Peg-out refund and events](IPs/RSKIP185.md)|  19-NOV-20 | JD | Usa | Core | 1 | Adopted |
+| 186 |[Active Federation creation block height registration](IPs/RSKIP186.md)|  19-NOV-20 | JD | Sec | Core | 2 | Adopted |
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Adopted |
 | 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
 | 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Adopted |
@@ -186,7 +187,6 @@ RSK Improvement Proposals
 | 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
-
 
 (*) Under evaluation to be implemented in the next reference client release
 
