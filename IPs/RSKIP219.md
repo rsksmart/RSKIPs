@@ -8,19 +8,19 @@
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
-This RSKIP proposes a reduction in the minimum amounts of BTC / RBTC required to perform peg-in and peg-out operations in RSK. In the case of peg-outs, the minimum value is calculated for each operation taking into consideration the current fee per kb value in the network. The idea is to ensure the remainder after the fee is enough for the user to be able to operate in the network.
+This RSKIP proposes a reduction in the minimum amounts of BTC / RBTC accepted by RSK for peg-in and peg-out operations. In the case of peg-outs, the minimum value is computed for each peg-out operation taking into consideration the current fee per kb value configured in RSK. This proposal also ensures that after the fee is paid, the remainder is enough for the user to be able to operate in the network.
 
 ## Motivation
 
-With the increasing value of BTC in USD, the current minimum values to start using RSK (and to retire) tend to be rather high for the majority of users. As an example, the current price of BTC is around U$S30.000 and the minimum peg-in value is 0.01 BTC. At this price, a user would need to be willing to lock U$S300 just to start using the platform.
+With the increasing value of BTC in USD, the current minimum values to peg-in and peg-out are too high for the majority of users. As an example, the current price of BTC is around U$S30.000 and the minimum peg-in value is 0.01 BTC. At this price, a user needs to be willing to transfer U$S300 just to start using the platform.
 
 ## Specification
 
-This RSKIP proposes 4 different changes to improve and facilitate users the use of the RSK platform:
+This RSKIP proposes 4 different changes to improve the UX of the RSK platform:
 
 1. Reduce the minimum peg-in amount to half its current value. From 0.01 BTC to 0.005 BTC.
 2. Reduce the minimum peg-out amount to half its current value. From 0.008 RBTC to 0.004 RBTC.
@@ -29,7 +29,7 @@ This RSKIP proposes 4 different changes to improve and facilitate users the use 
 
 ### Reduce the minimum peg-in amount to half its current value
 
-After this RSKIP activation, the minimum value accepted to perform a peg-in is **0.005 BTC**. If less than this amount is sent to the federation address then those funds will be burnt.
+After this RSKIP activation, the minimum value accepted to perform a peg-in is **0.005 BTC**. If less than this amount is sent to the federation address then those funds will be ignored by RSK, and will be lost.
 
 ### Reduce the minimum peg-out amount to half its current value
 
