@@ -18,7 +18,7 @@ This RSKIP proposes the addition of a time-locked emergency multi-signature in t
 
 ## Motivation
 
-When RSK was launched in Jan 2018, each one of the functionaries of the RSK federation ran a node in a server computer to protect one of the multisig private keys. These keys were held in hot storage, because the peg-out process is automated. In March 2018, RSK began using HSMs, hardware security modules  exclusively dedicated to protect the private keys against external attackers.  In December 2021, RSK switched to a two-way-peg technology called Powpeg that is  even more secure. In the Powpeg each participant (called pegnatory), runs a RSK node connected to a special HSM called PowHSM. The PowHSM runs a part of the RSK consensus protocol which includes the validation of blocks linkage, cumulative proof-of-work, difficulty adjustments, consecutive block numbers and the best chain selection. This subset of validations is called *SPV mode*. The SPV mode validation performed by the PowHSM is enough to ensure with high confidence that it cannot be tricked into signing a peg-out transaction if the peg-out commands were not originated in the consensus of the RSK best chain, which has the highest proof-of-work. 
+When RSK was launched in Jan 2018, each one of the functionaries of the RSK federation ran a node in a server computer to protect one of the multisig private keys. These keys were held in hot storage, because the peg-out process is automated. In March 2018, RSK began using HSMs, hardware security modules  exclusively dedicated to protect the private keys against external attackers.  In December 2020, RSK switched to a two-way-peg technology called Powpeg that is  even more secure. In the Powpeg each participant (called pegnatory), runs a RSK node connected to a special HSM called PowHSM. The PowHSM runs a part of the RSK consensus protocol which includes the validation of blocks linkage, cumulative proof-of-work, difficulty adjustments, consecutive block numbers and the best chain selection. This subset of validations is called *SPV mode*. The SPV mode validation performed by the PowHSM is enough to ensure with high confidence that it cannot be tricked into signing a peg-out transaction if the peg-out commands were not originated in the consensus of the RSK best chain, which has the highest proof-of-work. 
 In a Powpeg, the pegnatories have almost no power over the bitcoins pegged. However, if the majority of pegnatories decide to (or are forced to) turn their PowHSM devices off, then the bitcoins will be locked forever. Also, if because of a hardware or firmware malfunction all the PowHSM devices get bricked simultaneously, there is no recourse to recover the funds in the peg. This RSKIP proposes that the scriptPub is modified to contain a subscript which represents a time-locked emergency multi-signature. The time-lock expires after one year of complete inactivity of the UTXOs, and the UTXOs need to be periodically renewed to automatically extend the time-lock.  The protocol to automatically renew the time-locks to avoid expiration is specified separately in RSKIP207.
 
 ## Specification
@@ -51,8 +51,16 @@ The exact value for the time-lock is TBD, but it should correspond to one year e
 
 The scriptSig is modified to match the new scriptPub by introducing an OP_0 (push of the zero value) at the beginning.  This element is consumed by the OP_NOTIF opcode, selecting the first sentence of the conditional.
 
-The emergency multi-signature is a 2-out-of-3 multisig.
+The emergency multi-signature is a 3-out-of-4 multisig.
 
+## Signatories
+
+Following the requirements established in [RSKIP225-Emergency Multisig public keys](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP225.md), the signatories for the emergency multi-signature are listed below:
+
+- IOVlabs ([link to message](https://iovlabs.org/pow-peg-emergency-multisig.html))
+- MoneyOnChain ([link to message](https://twitter.com/moneyonchainok/status/1428161275721302027?s=19))
+- Jameson Lopp ([link to message](https://keybase.pub/lopp/RSK-key.txt))
+- Adrian Eidelman ([link to message](https://keybase.pub/aeidelman/RSK-key.txt))
 
 ## Rationale
 
