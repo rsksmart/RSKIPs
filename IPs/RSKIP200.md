@@ -8,7 +8,7 @@
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
@@ -35,9 +35,9 @@ To implement this change we suggest making the following modifications:
 
 1) Header has expected size. 
 2) Header is not previously saved in storage.
-3) Time between calls to receiveHeader is larger than the minimum time between calls allowed. This value is configured for each network.
+3) Time between calls to receiveHeader is larger than the minimum time between calls allowed. This value can be configured for each network. Initially the value is 300 seconds for all networks.
 4) Header previous block must be found in storage.
-5) Block depth of the received header is not above the maximum depth allowed. This value is configured for each network.
+5) Block depth of the received header is not above the maximum depth allowed. This value can be configured for each network, but initially this is 25 blocks for all networks. 
 
 Every time that a block header is accepted, the timestamp is saved in storage to validate that no more calls are made to `receiveHeader` until the minimum configured time has elapsed.
 
