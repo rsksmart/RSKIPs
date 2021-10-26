@@ -12,7 +12,7 @@
 
 ## Abstract
 
-The Bridge contract stores information about the Bitcoin blockchain. This RSKIP proposes to implement new methods that enable contracts to extract information about the Bitcoin best chain and from its Bitcoin block headers. This opens the RSK Bridge as a decentralized cryptoeconomic Bitcoin blockchain oracle.
+The Bridge contract stores information about the Bitcoin blockchain. This RSKIP proposes to implement new methods that enable contracts to extract information about the Bitcoin best chain and retrieve its block headers. This introduces in RSK a decentralized cryptoeconomic (SPV) Bitcoin blockchain oracle for financial contracts, swaps, and other applications.
 
 Also this proposal enables certain use cases where RSK contracts need cryptoeconomic random values. The header of a Bitcoin block contains cryptoeconomic randomness in its proof-of-work hash. A contract can wait until a certain Bitcoin block (specified by height) is added to the Bridge, and then use the header hash as a seed to extract pseudo-random values.
 
