@@ -192,7 +192,7 @@ RSK Improvement Proposals
 | 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
-| TBD |[Adjust Testnet block minimum difficulty]()|  18-NOV-21 | AE | Usa | Core | 1 | Draft |
+| 290 |[Adjust Testnet block minimum difficulty](IPs/RSKIP290.md)|  18-NOV-21 | AE | Usa | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
