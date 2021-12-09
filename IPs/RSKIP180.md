@@ -3,7 +3,7 @@
 
 |RSKIP          | 180 |
 | :------------ |:-------------|
-|**Title**      |Limit the RSK merged mining merkle proof|
+|**Title**      |Limit the RSK merged mining merkle proof size|
 |**Created**    |15-JUL-2021 |
 |**Author**     |VK |
 |**Purpose**    |Sec |
