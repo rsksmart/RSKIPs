@@ -19,7 +19,7 @@ This check should happen during the block validation step.
 
 ## Motivation
 
-The RSKj merge mining is compatible with the bitcoin protocol. This is: a miner can mine both bitcoin and RSK simultaneously.
+RSK merge mining is compatible with the bitcoin protocol. This is: a miner can mine both bitcoin and RSK simultaneously.
 But they are not required to do so. They can mine RSK blocks with an invalid BTC header.
 
 In this case, the RSK merge mining merkle proof inclusion can be arbitrarily large. In particular, the merkle tree can have any height.
