@@ -21,19 +21,19 @@ This RSKIP specifies the changes included in the RSK network upgrade named Hop.
 	- RSK Mainnet block: TBD
 	- RSK Testnet block: TBD
 
-### Included EIPs
+### Included RSKIPs
 
 - TBD
 
-### Accepted EIPs
+### Accepted RSKIPs
 
 - TBD
 
-### Rejected EIPs
+### Rejected RSKIPs
 
 - TBD
 
-### Proposed EIPs
+### Proposed RSKIPs
 
 - [RSKIP-264](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP264.md): Simplified emergency time-locks refresh
 - RSKIP-271(https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md): Bridge peg-out batching
