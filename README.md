@@ -193,7 +193,7 @@ RSK Improvement Proposals
 | 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
 | 290 |[Adjust Testnet block minimum difficulty](IPs/RSKIP290.md)|  18-NOV-21 | AE | Usa | Core | 1 | Draft |
-| TBD |[Network Upgrade: Hop]|  14-DEC-21 | AE | Usa, Sec | Core | 2 | Draft |
+| 291 |[Network Upgrade: Hop](IPs/RSKIP291.md)|  14-DEC-21 | AE | Usa, Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
