@@ -36,7 +36,7 @@ This RSKIP specifies the changes included in the RSK network upgrade named Hop.
 ### Proposed RSKIPs
 
 - [RSKIP-264](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP264.md): Simplified emergency time-locks refresh
-- RSKIP-271(https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md): Bridge peg-out batching
+- [RSKIP-271](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md): Bridge peg-out batching
 
 
 ## Timeline
