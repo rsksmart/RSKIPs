@@ -148,7 +148,7 @@ RSK Improvement Proposals
 | 171 |[Clean EVM Internal Buffer in Call-like Opcodes](IPs/RSKIP171.md)|  02-SEP-20 | FJ | Usa | Core | 1 | Adopted |
 | 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
 | 174 |[Preserve balance in contract creation](IPs/RSKIP174.md)| 23-JUL-21 | VK | Usa/Fair | Core | 1 | Adopted |
-| 176 |[Programmable Peg-in Addresses for faster peg-ins](IPs/RSKIP176.md)| 15-SEP-20 | SDL,GM | Usa | Core | 2 | Draft |
+| 176 |[Programmable Peg-in Addresses for faster peg-ins](IPs/RSKIP176.md)| 15-SEP-20 | SDL,GM | Usa | Core | 2 | Adopted |
 | 177 |[Universal Merged Mining Extension](IPs/RSKIP177.md)|  APR-2020 | SDL & MP | Usa | Node | 1 | Adopted |
 | 178 |[External Confirmation Hashrate](IPs/RSKIP178.md)|  2-SEP-20 | SDL | Sec | Core | 2 | Draft |
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Adopted |
