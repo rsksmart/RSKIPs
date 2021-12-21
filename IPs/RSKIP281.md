@@ -376,58 +376,6 @@ If an incomplete block is detected during synchronization, then it is necessary 
 
 
 
-
-# Comparison of L2 Rollup Costs
-
-We'll analyze the case of a rollup that contains only payment transactions and transaction signatures can be aggregated (either with SNARKs or with BLS). We assume each compressed transaction record consumes only 10 bytes of calldata. 
-As currently the cost (in USD) of a transaction in RSK is 66 times lower than the cost in Ethereum, we'll take a middle ground between them, based on an expected future scenario in RSK. We'll assume a simple RSK payment transaction (consuming 21K gas) costs 1 USD. This is 4 times lower than the cost in Ethereum as of today. The cost of 1 unit of gas becomes 1/21K of a USD. We assume that the **ecdSize** is 30K bytes, and that the calldata contains no zeros (because they are priced differently). A rollup block is posted in every RSK block, the average block time is 30 seconds and the ECD contains approximately 3000 compressed transactions. The transaction volume achieved is 100 tps.
-
-Here we present the blockchain parameters assumed and the cost of sending the data as normal non-ephemeral calldata:
-
-- Calldata gas per block: 64\*30K=1.92M gas 
-- Calldata USD cost per block 1.92M/21K = 91.4 USD. 
-- Blocks/day: 2880
-- Blocks/month: 86400
-- Size of L2 transaction (compressed): 10 bytes
-- Number of transactions per L2 block: 3000
-- Space consumed by L2 transactions: 3000\*10 = 30K
-- Average block time: 30 seconds
-- L2 transaction volume: 100 tps
-- Calldata cost per month: 91.4 USD*86400= 7.89M USD
-
-Without considering constant overheads, this would imply a lower bound of 3 cents/transaction. We assume we use a **hasherContract** that performs a simple `Keccak` hash, at a cost of 6 gas per 32-byte word.
-
-Using ephemeral calldata with **keepByDefault**==true, the cost are as follows:
-
-* Initial ECD cost (at 8 gas/byte) = 11.4 USD
-* register cost (fixed 10K + variable 5625 gas) = 0.70 USD
-* DepositAmount (48 gas/byte) ~= 80 USD
-* `removeEphemeralData()` + `requestRemovalOfEphemeralData()` costs (fixed 40K gas) = ~= 1.9 USD.
-* Cost of ECD including registration/removal: 11.4+0.7+1.9=14 USD
-* Reimbursement = 80 USD
-* Cost per L2 transaction = (11.4+0.7+1.9)/3000 ~= 0.46 cents
-* ECD size/month: 30K\*86400 = 2.59G bytes
-* ECD data cost per month: 1.2M USD/month
-
-Therefore ECD reduces the cost of rollup transactions approximately 7.89M/1.2M = 6.57 times compared with using normal calldata. 
-
-Using **keepByDefault**==false we save the cost of removal.
-
-However, we must add the cost of the state diffs. To compute the cost of the diff, we must model the payment flows. We propose a very simplistic model in which we split the accounts into buyers and merchants. We assume 10% of the accounts are merchants and 90% are buyers. Each buyer performs 30 payments a month to a merchant (one per day). Therefore, for N accounts,  there are M=30\*0.9\*N payments/month. Each destination account receives M/(0.1\*N) payments, or 30\*0.9/0.1 = 270 payments/month. The number of accounts modified every month is N, but the number of transactions processed is M. Since each transaction must specify a sender and a receiver, the space consumed by a state diff as a ratio of the space consumed by transactions is N/(2*M) =  1/(2\*30\*0.9) = 1.8%. Therefore:
-
-- the state diff size is 1.8%\*2.59G bytes = 46.6M bytes
-- If costs/byte is 64 gas, then the cost in gas of non-ephemeral calldata is 2.98G gas.
-- The cost in USD of calldata/month is 2.98G gas/21000 = 142K USD.
-
-Therefore state diffs combined with ECD reduces the L2 transaction cost 7.89M/(1.2M+142K) = 5.88 times.
-
-This is an outstanding cost reduction.
-
-### Locked Funds
-
-Rollups will remove ECD once a new state diff is created, and this is not expected to occur often. For example, state diffs could be sent once a month. If KBD-ECD is used, this implies that most of the cost of ECD submission accumulates for a month, before it can be reimbursed. Assuming a rollup volume is 100 tx/sec, it will post 86 Megabytes/day or 2.6 Gigabytes/month, or 124.8G gas. Assuming 1 USD per simple transaction, the locked bitcoins represents 5.9M USD. This amount of locked bitcoins could serve as stake for validators.
-
-
 # Rationale
 
 We discuss several design topics in the following sections. The ephemeral data was designed to achieve three properties: Segregated, Conditionally-stored and Delayed.
