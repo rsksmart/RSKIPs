@@ -146,6 +146,7 @@ RSK Improvement Proposals
 | 169 |[Rectify EXTCODEHASH implementation](IPs/RSKIP169.md)|  31-JUL-20 | NPS | Usa | Core | 2 | Adopted |
 | 170 |[Peg-in to any address](IPs/RSKIP170.md)|  01-SEP-20 | MI | Usa | Core | 2 | Adopted |
 | 171 |[Clean EVM Internal Buffer in Call-like Opcodes](IPs/RSKIP171.md)|  02-SEP-20 | FJ | Usa | Core | 1 | Adopted |
+| 172 |[Subroutines for EVM](IPs/RSKIP172.md)|  01-SEP-20 | AL | Usa | Core | 2 | Draft |
 | 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
 | 174 |[Preserve balance in contract creation](IPs/RSKIP174.md)| 23-JUL-21 | VK | Usa/Fair | Core | 1 | Adopted |
 | 176 |[Programmable Peg-in Addresses for faster peg-ins](IPs/RSKIP176.md)| 15-SEP-20 | SDL,GM | Usa | Core | 2 | Adopted |
