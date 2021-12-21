@@ -152,6 +152,7 @@ RSK Improvement Proposals
 | 177 |[Universal Merged Mining Extension](IPs/RSKIP177.md)|  APR-2020 | SDL & MP | Usa | Node | 1 | Adopted |
 | 178 |[External Confirmation Hashrate](IPs/RSKIP178.md)|  2-SEP-20 | SDL | Sec | Core | 2 | Draft |
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Adopted |
+| 180 |[Limit the RSK merged mining merkle proof](IPs/RSKIP180.md)|  15-JUL-21 | VK | Sec | Core | 1 | Adopted |
 | 181 |[Peg-in rejection events](IPs/RSKIP181.md)|  03-NOV-20 | JD | Usa | Core | 2 | Adopted |
 | 185 |[Peg-out refund and events](IPs/RSKIP185.md)|  19-NOV-20 | JD | Usa | Core | 1 | Adopted |
 | 186 |[Active Federation creation block height registration](IPs/RSKIP186.md)|  19-NOV-20 | JD | Sec | Core | 2 | Adopted |
