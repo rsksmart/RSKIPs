@@ -1,3 +1,14 @@
+---
+rskip: 152
+title: CHAINID Opcode
+description: 
+status: Adopted
+purpose: Sec
+author: SMS (@sebastians)
+layer: Core
+complexity: 1
+created: 2019-11-19
+---
 # CHAINID Opcode
 
 |RSKIP          |152           |

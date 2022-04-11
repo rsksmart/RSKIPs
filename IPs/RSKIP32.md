@@ -1,3 +1,16 @@
+---
+rskip: 32
+title: Double-Hashed Addresses
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-01-10
+---
+
 # Double-Hashed Addresses
 
 |RSKIP          |32           |

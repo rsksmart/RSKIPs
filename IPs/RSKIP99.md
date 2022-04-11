@@ -1,3 +1,18 @@
+---
+rskip: 99
+title: Orchid Network Upgrade
+description: 
+status: Draft
+
+purpose: 
+- Sca
+- Usa
+- Sec
+author: AE (@adrian.eidelman)
+layer: Core
+complexity: 3
+created: 2018-08-31
+---
 # Orchid Network Upgrade
 
 |RSKIP          |99           |

@@ -1,3 +1,15 @@
+---
+rskip: 192
+title: getTransactionIndex Precompile method
+description: 
+status: Draft
+
+purpose: Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2020-11
+---
 # getTransactionIndex Precompile method
 
 

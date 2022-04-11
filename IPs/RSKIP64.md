@@ -1,3 +1,18 @@
+---
+rskip: 64
+title: Garbage Collector for State Pruning
+description: 
+status: Draft
+
+purpose: 
+- Sca
+- Usa
+author: SDL (@sergiodemianlerner), MMA
+layer: Core
+complexity: 2
+created: 2018
+---
+
 # Garbage Collector for State Pruning
 
 | RSKIP          | 64                                  |

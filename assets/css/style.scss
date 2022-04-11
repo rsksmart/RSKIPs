@@ -1,0 +1,164 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+
+@import 'minima';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  --text-color-primary: #424242;
+  --text-color-secondary: #2a7ae2;
+  --secondary-dark: #194d91;
+  --background-color: #fdfdfd;
+  --table-background: #304550;
+  --table-bg-alt: #f8f8f8;
+  --code-background: #efffee;
+  --code-highlight: #d0e5de;
+  --accent-color: #F26B29;
+  --btn-gradient: rgba(236,30,36,1), rgba(242,107,41,1);
+  --transition-delay: 1s;
+}
+
+body.darkmode{
+  --text-color-primary: white;
+  --text-color-secondary: rgb(99, 192, 245);
+  --background-color: #112329 ;
+  --table-background: #1bad8d;
+  --table-bg-alt: #1d3a43;
+  --code-background: #9fdfd1;
+  --code-highlight: #364842;
+  --accent-color: #1aad8d;
+  --btn-gradient: rgba(0,245,249,1), rgba(0,137,139,1);
+}
+
+
+.theme-toggle-button{
+  background-color: var(--accent-color);
+  background-image: linear-gradient(90deg, var(--btn-gradient));
+  color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  transition: var(--transition-delay);
+  transform: scale(1.1);  
+  position: absolute;
+  top: 30px;
+  right: 100px;
+  z-index: 1;
+}
+
+@media (max-width: 750px) {
+  .theme-toggle-button{
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .title{
+    width: 150px;
+  }
+}
+
+.theme-toggle-button2{
+  background-color: var(--accent-color);
+  background-image: linear-gradient(90deg, var(--btn-gradient));
+  color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: .5em 1em;
+  border: none;
+  outline: none;
+  transition: var(--transition-delay);
+  transform: scale(1);  
+  margin-bottom: .5em;
+}
+
+.theme-toggle-button .icon{
+  margin-right: .5em;
+}
+
+.theme-toggle-button:hover,
+.theme-toggle-button:focus {
+  transform: scale(1.1);
+}
+
+
+.site-header {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.page-content {
+  a.anchor-link {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-left: -22px;
+    &:hover {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='anchor-link-icon' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
+    }
+  }
+}
+
+main.page-content {
+  div.wrapper {
+    max-width: unset;
+  }
+}
+
+
+ @include media-query($on-palm) {
+     .purpose {
+      display: none;
+  }
+      .complexity {
+        display: none;
+    }
+      .layer {
+        display: none;
+    }
+    .created{
+      display: none;
+    }
+    .email{
+      display: none;
+    }
+ }
+
+
+ /* FOOTER */
+
+ footer{
+  border-top: var(--accent-color) solid 3px;
+ }
+
+ .footer_cont{
+   display: flex;
+   justify-content: center;
+   margin-top: 25px;
+   margin-bottom: 25px;
+ }
+
+ .footer_cont ul{
+  margin-top: 25px;
+}

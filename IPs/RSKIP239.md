@@ -1,3 +1,17 @@
+---
+rskip: 239
+title: Reprice Trie Read Opcodes 
+description: 
+status: Draft
+
+purpose:
+- Sca 
+- Sec
+author: SDL (@sergiodemianlerner), SM (@shreemoy)
+layer: Core
+complexity: 1
+created: 2021-04-20
+---
 # Reprice Trie Read Opcodes
 
 |RSKIP          |239        |

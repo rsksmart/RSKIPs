@@ -1,3 +1,18 @@
+---
+rskip: 27
+title: Highly Efficient Storage Rent
+description: 
+status: Draft
+
+purpose: 
+- Sca
+- Fair
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-12-29
+---
+
 # Highly Efficient Storage Rent
 
 |RSKIP          |27           |

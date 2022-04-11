@@ -1,3 +1,15 @@
+---
+rskip: 9
+title: Negotiated Minimum Gas Price
+description: 
+status: Adopted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-10-21
+---
+
 # Negotiated Minimum Gas Price
 
 |RSKIP          |09           |

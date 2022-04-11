@@ -1,3 +1,15 @@
+---
+rskip: 122
+title: New method GetBtcTransactionConfirmations for Bridge contract 
+description: 
+status: Draft
+
+purpose: Usa
+author: AM <amendelzon@iovlabs.org>
+layer: Core
+complexity: 2
+created: 2019-05-03
+---
 # New method GetBtcTransactionConfirmations for Bridge contract
 
 |RSKIP          |122           |

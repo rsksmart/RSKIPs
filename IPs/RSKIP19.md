@@ -1,3 +1,16 @@
+---
+rskip: 19
+title: RSK Address formats
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2016-11-24
+---
+
 # RSK Address formats
 
 |RSKIP          |19           |

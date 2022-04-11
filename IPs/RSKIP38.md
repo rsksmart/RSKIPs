@@ -1,3 +1,16 @@
+---
+rskip: 38
+title: Signature Compression
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-02-21
+---
+
 # Signature Compression
 
 |RSKIP          |38           |

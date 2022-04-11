@@ -1,3 +1,16 @@
+---
+rskip: 59
+title: Child Contracts
+description: 
+status: Rejected
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2016-06-11
+---
+
 # Child Contracts
 
 |RSKIP          |59           |

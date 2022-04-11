@@ -1,3 +1,15 @@
+---
+rskip: 120
+title: Shifting opcodes  
+description: 
+status: Draft
+
+purpose: Sca
+author: SMS (@sebastians)
+layer: Core
+complexity: 1
+created: 2019-04-23
+---
 # Shifting opcodes
 
 |RSKIP          |120           |

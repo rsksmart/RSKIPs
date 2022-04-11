@@ -1,3 +1,17 @@
+---
+rskip: 51
+title: Memory-Mapped configuration register 
+description: 
+status: Adopted
+
+purpose: Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2017-12-10
+---
+
+
 # Memory-Mapped configuration register
 
 |RSKIP          |51           |

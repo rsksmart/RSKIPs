@@ -1,0 +1,257 @@
+---
+
+---
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <title>Home | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Home | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="generator" content="Jekyll" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="canonical" href="http://localhost:4000/" />
+    <meta property="og:url" content="http://localhost:4000/" />
+    <meta property="og:site_name" content="RSK Improvement Proposals" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@" />
+    <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "http://localhost:4000",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  {%- include dark_mode.html -%}
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a>
+
+<nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+      </nav>
+    </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 id="rskips">RSKIPs</h1>
+<p>RSK Improvement Proposals</p>
+
+<h2 id="rskip-status-terms">RSKIP status terms</h2>
+<ul>
+  <li><strong>Draft</strong> - an RSKIP that is open for consideration</li>
+  <li><strong>Accepted</strong> - an RSKIP that is planned for immediate adoption in the reference client, i.e. expected to be included in the next reference client release.</li>
+  <li><strong>Adopted</strong> - an RSKIP that has been adopted in a previous reference client release.</li>
+  <li><strong>Deferred</strong> - an RSKIP that is not being considered for immediate adoption in the reference client. May be reconsidered in the future for a subsequent release of the reference client.</li>
+  <li><strong>Rejected</strong> - an RSKIP that was rejected</li>
+</ul>
+
+<h2 id="rskip-purpose-terms">RSKIP purpose terms</h2>
+<ul>
+  <li><strong>Sca</strong> - an RSKIP that improves scalability</li>
+  <li><strong>Usa</strong> - an RSKIP that improves usability</li>
+  <li><strong>Fair</strong> - an RSKIP that has improves fairness</li>
+  <li><strong>Sec</strong> - an RSKIP that improves security</li>
+  <li><strong>ST</strong> - an RSKIP that proposes a standard track</li>
+</ul>
+
+<h2 id="layer">Layer</h2>
+<ul>
+  <li><strong>Core</strong> - Core, consensus related</li>
+  <li><strong>Node</strong> - Related to node manager interfaces, such as RPC</li>
+  <li><strong>UI</strong> - User Interface</li>
+  <li><strong>2nd</strong> - Second-layer protocols, such as off-chain payment channels</li>
+  <li><strong>Net</strong> - Related to p2p networking</li>
+  <li><strong>DApp</strong> - Dapp application interfaces</li>
+</ul>
+
+<h2 id="implementation-complexity">Implementation Complexity</h2>
+<ul>
+  <li><strong>1</strong> - Minimal</li>
+  <li><strong>2</strong> - Medium</li>
+  <li><strong>3</strong> - High</li>
+</ul>
+
+<h1 id="index">Index</h1>
+
+{% include indextable.html rskips=site.pages %}
+
+<p>(*) Under evaluation to be implemented in the next reference client release</p>
+
+<h1 id="author-index">Author Index</h1>
+
+<table class="indextable" id="author_table">
+  <thead>
+    <tr>
+      <th>Initials</th>
+      <th>Profile</th>
+      <th class="email">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AE</td>
+      <td style="text-align: left"> <a href="https://research.rsk.dev/u/adrian.eidelman" target="_blank" rel="noopener">Adrian Eidelman</a></td>
+      <td style="text-align: left" class="email"> <a href="mailto:adrian@iovlabs.org">adrian@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>AL</td>
+      <td style="text-align: left">Angel Lopez</td>
+      <td style="text-align: left" class="email"><a href="mailto:angel@iovlabs.org">angel@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>AM</td>
+      <td style="text-align: left">Ariel Mendelzon</td>
+      <td style="text-align: left" class="email"><a href="mailto:amendelzon@iovlabs.org">amendelzon@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>DLL</td>
+      <td style="text-align: left">Diego López León</td>
+      <td style="text-align: left" class="email"></td>
+    </tr>
+    <tr>
+      <td>DM</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/diego" rel="noopener" target="_blank">Diego Masini</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:dmasini@iovlabs.org">dmasini@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>FJ</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/fedejinich" rel="noopener" target="_blank">Federico Jinich</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:federico@iovlabs.org">federico@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>GM</td>
+      <td style="text-align: left">Guido Medina</td>
+      <td style="text-align: left" class="email"><a href="mailto:guido@iovlabs.org">guido@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>IO</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/ilan" rel="noopener" target="_blank">Ilan Olkies</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:ilan@iovlabs.org">ilan@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>JIO</td>
+      <td style="text-align: left">Jose Ignacio Orlicki</td>
+      <td style="text-align: left" class="email"><a href="mailto:jorlicki@iovlabs.org">Jose Ignacio Orlicki</a></td>
+    </tr>
+    <tr>
+      <td>JD</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/josedahlquist" rel="noopener" target="_blank">Jose Dahlquist</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:jose@rsk.co">Jose Dahlquist</a></td>
+    </tr>
+    <tr>
+      <td>JL</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/julianlen"></a>Julian Len</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:julian@iovlabs.org">julian@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>LS</td>
+      <td style="text-align: left">Lisandro Sebrie</td>
+      <td style="text-align: left" class="email"></td>
+    </tr>
+    <tr>
+      <td>MC</td>
+      <td style="text-align: left">Martín Coll</td>
+      <td style="text-align: left" class="email"></td>
+    </tr>
+    <tr>
+      <td>MI</td>
+      <td style="text-align: left">Marcos Irisarri</td>
+      <td style="text-align: left" class="email"><a href="mailto:marcos@iovlabs.org">marcos@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>MM</td>
+      <td style="text-align: left">Martin Medina</td>
+      <td style="text-align: left" class="email"><a href="mailto:martin@iovlabs.org">martin@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>MMA</td>
+      <td style="text-align: left">Matias Marquez</td>
+      <td style="text-align: left" class="email"></td>
+    </tr>
+    <tr>
+      <td>MP</td>
+      <td style="text-align: left">Martin Picco</td>
+      <td style="text-align: left" class="email"><a href="mailto:mpicco@iovlabs.org">mpicco@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>NPS</td>
+      <td style="text-align: left">Nicolas Perez Santoro</td>
+      <td style="text-align: left" class="email"></td>
+    </tr>
+    <tr>
+      <td>PGP</td>
+      <td style="text-align: left">Pamela Gonzalez Perilli</td>
+      <td style="text-align: left" class="email"><a href="mailto:pamela@iovlabs.org">pamela@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>PMP</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/pmprete" rel="noopener" target="_blank">Pedro Meulen Prete</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:pedro@iovlabs.org">pedro@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>SDL</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/sergiodemianlerner">Sergio Demian Lerner</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:sergio@iovlabs.org">sergio@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>SM</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/shreemoy" rel="noopener" target="_blank">Shreemoy Mishra</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:shreemoy@iovlabs.org">shreemoy@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>SMS</td>
+      <td style="text-align: left"><a href="https://research.rsk.dev/u/sebastians">Sebastian Matias Sicardi</a></td>
+      <td style="text-align: left" class="email"><a href="mailto:sebastians@iovlabs.org">sebastians@iovlabs.org</a></td>
+    </tr>
+    <tr>
+      <td>VK</td>
+      <td style="text-align: left">Volodymyr Kravets</td>
+      <td style="text-align: left" class="email"><a href="mailto:volodymyr@iovlabs.org">Volodymyr Kravets</a></td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+
+
+  <footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer>
+
+
+    </main>
+    
+   
+
+    <script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

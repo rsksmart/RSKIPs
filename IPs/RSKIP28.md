@@ -1,3 +1,15 @@
+---
+rskip: 28
+title: Ephemeral Data
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2016-12-29
+---
+
 # Ephemeral Data
 
 |RSKIP          |28           |
@@ -62,7 +74,7 @@ Ephemeral only becomes part of the blockchain if it is loaded by a contract usin
 
 Ephemeral data can be optionally Delayed, by request of the transaction owner, meaning that a smart-contract can only access the data starting from the second block following the block of transaction inclusion. This lowers the cost of Ephemeral data propagation time, as the Ephemeral data can be transferred with less priority than the remaining (non-Ephemeral) parts of the block.  Even if there is a risk that a miner creating a block does not broadcast the Ephemeral data later, forcing the remaining miners to backtrack, this is the same risk accepted by miners that do verification-less mining for some seconds after receiving a block header.
 
-**Ephemeral Data and Scalability**
+**Ephemeral Data and scalability**
 
 Ephemeral data turns out to be a powerful scalability tool that enables several new use cases. For example, it enables using the cryptocurrency network as an encrypted transport for peer to peer messages, such as in the Bitmessage protocol.  Ephemeral data automatically forces nodes to temporarily store the messages in the network. After the ephemeral time, if the receiver has not checked its inbox, the message is automatically destroyed. The transaction doesn’t need to have destination, nor value. The full encrypted message (including real message destination address) can be hidden in encrypted Ephemeral data. This transaction, compressed by LTCP, could consume only  a few bytes before being disposed. While this hypothetical messaging system may not be a long term scalable and cheap peer-to-peer messaging solution, it’s indeed interesting and novel, and can have a use case for decentralized anonymous broadcast.
 

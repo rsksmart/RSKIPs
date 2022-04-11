@@ -1,3 +1,16 @@
+---
+rskip: 46
+title: Block Mining Fees Information Mechanism
+description: 
+status: Adopted
+
+purpose: Usa
+author: MM <martin@iovlabs.org>
+layer: Node
+complexity: 1
+created: 2017-10-04
+---
+
 # Block Mining Fees Information Mechanism
 
 |RSKIP          |46           |

@@ -1,3 +1,15 @@
+---
+rskip: 209
+title: Stack-overflow removal
+description: 
+status: Draft
+
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-01
+---
 # Stack-overflow removal
 
 

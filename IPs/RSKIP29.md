@@ -1,3 +1,16 @@
+---
+rskip: 29
+title: Change in Account creation cost to prevent Spam
+description: 
+status: Rejected
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2017-01-01
+---
+
 # Change in Account creation cost to prevent Spam
 
 |RSKIP          |29           |

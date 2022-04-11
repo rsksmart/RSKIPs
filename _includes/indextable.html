@@ -1,0 +1,43 @@
+
+<style type="text/css">
+  .rskiptable .title {
+    width: 67%;
+  }
+
+  .rskiptable .author {
+    width: 33%;
+  }
+
+  
+</style>
+  {% for status in site.data.statuses %}
+    {% assign rskips = include.rskips|where:"status",status|sort:"rskip" %}
+    {% assign count = rskips|size %}
+    {% if count > 0 %}
+      <h2 id="{{status|slugify}}">{{status}}</h2>
+      <table class="indextable">
+        <thead>
+          {% if status == "Last Call" %}
+            <tr>
+            <th class="ipnum">Nr</th><th class="date">Review ends</th><th class="title">Title</th><th class="author">Author</th> <th class="layer">Layer</th><th class="complexity">C</th></tr>
+          {% else %}
+            <tr><th class="ipnum">Nr</th><th class="title">Title</th><th class="created">Created</th><th class="author">Author</th><th class="purpose">Purpose</th><th class="layer">Layer</th><th class="complexity">C</th></tr>
+          {% endif %}
+        </thead>
+        {% for page in rskips %}
+          <tr>
+            <td class="ipnum"><a href="{{page.url|relative_url}}">{{page.rskip|xml_escape}}</a></td>
+            {% if status == "Last Call" and page.last-call-deadline != undefined %}
+              <td class="date">{{ page.last-call-deadline | xml_escape }}</td>
+            {% endif %}
+            <td class="title">{{page.title|xml_escape}}</td>
+            <td class="created">{{page.created|xml_escape}}</td>
+            <td class="author">{% include authorlist.html authors=page.author %}</td>
+            <td class="purpose">{% include categorylist.html categories=page.category %}</td>
+            <td class="layer">{{page.layer}}</td>
+            <td class="complexity">{{page.complexity}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endfor %}

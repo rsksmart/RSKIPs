@@ -1,3 +1,15 @@
+---
+rskip: 173
+title: Chunk-Based Code Merkleization using the Unitrie
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2020-09
+---
 # Chunk-Based Code Merkleization using the Unitrie
 
 

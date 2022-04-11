@@ -1,3 +1,15 @@
+---
+rskip: 95
+title: DELEGATECALL as an instruction set extension 
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2018
+---
 #  **DELEGATECALL as an instruction set extension**  
 
 | RSKIP          | 95                             |

@@ -1,3 +1,15 @@
+---
+rskip: 188
+title: Precompiled Contracts for BLS12-381 Curve Operations 
+description: 
+status: Draft
+purpose: Usa
+author: FJ (@fedejinich)
+layer: Core
+complexity: 2
+created: 2020-11-20
+---
+
 # Precompiled Contracts for BLS12-381 Curve Operations
 
 |RSKIP          | 188 |

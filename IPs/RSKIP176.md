@@ -1,3 +1,14 @@
+---
+rskip: 176
+title: Programmable Peg-in Addresses for faster peg-ins
+description: 
+status: Adopted
+purpose: Usa
+author: SDL (@sergiodemianlerner), GM <guido@iovlabs.org>
+layer: Core
+complexity: 2
+created: 2020-09-15
+---
 # Programmable Peg-in Addresses for faster peg-ins
 |RSKIP          | 176 |
 | :------------ |:-------------|

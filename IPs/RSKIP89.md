@@ -1,3 +1,15 @@
+---
+rskip: 89
+title: Add Bitcoin block query methods to the bridge contract
+description: 
+status: Adopted
+
+purpose: Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2018-07-
+---
 # Add Bitcoin block query methods to the bridge contract
 
 |RSKIP          |89           |

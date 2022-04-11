@@ -1,3 +1,16 @@
+---
+rskip: 31
+title: Hibernation Compression
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-01-01
+---
+
 # Hibernation Compression
 
 |RSKIP          |31           |
@@ -26,7 +39,7 @@ If later on a transaction sends value to the address of A (01000) the platform c
 
 However this does not happen in the following example:
 
-![image alt text](./RSKIP31/2MerkleTreeRSKIP31.png)
+![image alt text](./RSKIP31/2MerlkeTreeRSKIP31.png)
 
 In this example, in state (4b) a payment sent to the address 0001 must be allowed, because it does not correspond to any of the hibernated nodes. Therefore any payment to an address ending with 0xyz must be allowed, including re-payments to the addresses 0000 and 01111, which will create new fresh accounts. These accounts can again hibernate, adding more hibernation info to node C. To keep constant size hibernation information, the new hibernation hash would join two "copies" of the state of a single contract. Eg:  H(H(SB*) | H( H(SB) | H(SA)). This nested structure is overly complex and does not guarantee O(logN) co-hashes required for waking up a contract.
 

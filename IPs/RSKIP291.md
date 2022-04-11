@@ -1,3 +1,16 @@
+---
+rskip: 291
+title: Network Upgrade - Hop
+description: 
+status: Draft
+purpose: 
+- Usa
+- Sec
+author: AE (@adrian.eidelman)
+layer: Core
+complexity: 2
+created: 2021-12-14
+---
 # Network Upgrade: Hop
 
 |RSKIP          |291           |

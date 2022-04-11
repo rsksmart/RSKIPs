@@ -1,3 +1,15 @@
+---
+rskip: 110
+title: Fork Detection Data in RSKBLOCK tags 
+description: 
+status: Draft
+
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: 
+complexity: 2
+created: 2019
+---
 #  Fork Detection Data in RSKBLOCK tags
 
 | RSKIP          | 110                                  |

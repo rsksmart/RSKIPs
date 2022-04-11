@@ -1,3 +1,15 @@
+---
+rskip: 92
+title: Merkle Proof serialization
+description: 
+status: Adopted
+
+purpose: Sca
+author: DLL, MC
+layer: Core
+complexity: 2
+created: 2018-08-08
+---
 #  **Merkle Proof serialization**  
 
 | RSKIP          | 92                                           |

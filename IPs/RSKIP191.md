@@ -1,3 +1,15 @@
+---
+rskip: 191
+title: Remove opcodes incompatible with Ethereum
+description: 
+status: Draft
+
+purpose: Sec
+author: AL <angel@iovlabs.org>
+layer: Core
+complexity: 1
+created: 2020-11
+---
 # Remove opcodes incompatible with Ethereum
 
 

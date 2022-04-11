@@ -1,3 +1,14 @@
+---
+rskip: 169
+title: Rectify EXTCODEHASH implementation
+description: 
+status: Draft
+purpose: Sca
+author: NPS
+layer: Core
+complexity: 2
+created: 2020-07
+---
 # Rectify EXTCODEHASH implementation
 
 

@@ -1,3 +1,15 @@
+---
+rskip: 212
+title: HW-compatible Transaction Versioning System
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2021-01
+---
 # HW-compatible Transaction Versioning System
 
 

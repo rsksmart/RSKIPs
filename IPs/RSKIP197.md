@@ -1,3 +1,15 @@
+---
+rskip: 197
+title: Fix Precompile Calls Not Conforming With CALL Semantics
+description: 
+status: Accepted
+
+purpose: Usa
+author: FJ (@fedejinich)
+layer: Core
+complexity: 2
+created: 2020-12-15
+---
 # Fix Precompile Calls Not Conforming With CALL Semantics
 
 |RSKIP          |197           |
@@ -5,7 +17,7 @@
 |**Title**      | Fix Precompile Calls Not Conforming With CALL Semantics |
 |**Created**    |15-12-2020 |
 |**Author**     |FJ |
-|**Purpose**    |USa |
+|**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Accepted |

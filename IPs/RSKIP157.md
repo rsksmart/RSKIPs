@@ -1,3 +1,14 @@
+---
+rskip: 157
+title: Cumulative Difficulty in JSON-RPC block responses
+description: 
+status: Draft
+purpose: Usa
+author: MP <mpicco@iovlabs.org>
+layer: Node
+complexity: 1
+created: 2020-02-11
+---
 # Cumulative Difficulty in JSON-RPC block responses
 
 |RSKIP          |157           |

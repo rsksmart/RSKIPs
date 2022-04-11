@@ -1,0 +1,4 @@
+{% assign rskips=include.rskips|split:"," %}
+{% for ipnum in rskips %}
+  <a href="{{ipnum|strip|prepend:"rskip-" }}">{{ipnum|strip}}</a>{% if forloop.last == false %}, {% endif %}
+{% endfor %}

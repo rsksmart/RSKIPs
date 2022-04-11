@@ -1,3 +1,16 @@
+---
+rskip: 215
+title: Ephemeral Blockchain
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-02-03
+---
+
 # Ephemeral Blockchain 
 
 |RSKIP          |215           |

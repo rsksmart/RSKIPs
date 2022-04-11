@@ -1,3 +1,14 @@
+---
+rskip: 140
+title: EXTCODEHASH opcode 	
+description: 
+status: Adopted
+purpose: Usa
+author: 	JL (@julianlen)
+layer: Core
+complexity: 2
+created: 2019-09-04
+---
 # EXTCODEHASH opcode
 
 | RSKIP          | 140                                  |

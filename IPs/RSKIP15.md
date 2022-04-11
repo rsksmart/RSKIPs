@@ -1,3 +1,16 @@
+---
+rskip: 15
+title: Simplified Reward Manager Smart Contract (REMASC)
+description: 
+status: Adopted
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2016-11-15
+---
+
 # Simplified Reward Manager Smart Contract (REMASC)
 
 |RSKIP          |15           |

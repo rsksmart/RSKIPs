@@ -1,3 +1,14 @@
+---
+rskip: 281
+title: Rollup-optimized Ephemeral Calldata
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-10-05
+---
 # Rollup-optimized Ephemeral Calldata
 
 |RSKIP          |281           |

@@ -1,3 +1,16 @@
+---
+rskip: 36
+title: Transaction Encapsulation
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-02-02
+---
+
 # Transaction Encapsulation 
 
 |RSKIP          |36           |

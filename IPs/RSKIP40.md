@@ -1,3 +1,16 @@
+---
+rskip: 40
+title: Basic Bridge for two-way-peg to Bitcoin
+description: 
+status: Adopted
+
+purpose: Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-04-25
+---
+
 # Basic Bridge for two-way-peg to Bitcoin
 
 |RSKIP          |40           |

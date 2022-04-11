@@ -1,3 +1,16 @@
+---
+rskip: 20
+title: Survive and Ephemeral Memory Spaces
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-11-25
+---
+
 # Survive and Ephemeral Memory Spaces
 
 |RSKIP          |20           |

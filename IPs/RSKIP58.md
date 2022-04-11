@@ -1,3 +1,16 @@
+---
+rskip: 58
+title: Handling Bitcoin Forks
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-11-14
+---
+
 # Handling Bitcoin Forks
 
 |RSKIP          |58           |

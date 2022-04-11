@@ -1,3 +1,16 @@
+---
+rskip: 53
+title: LTCP 
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-02-
+---
+
 # LTCP
 
 |RSKIP          |53           |

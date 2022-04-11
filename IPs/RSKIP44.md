@@ -1,3 +1,16 @@
+---
+rskip: 44
+title: Remove the zero-byte discount in data
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2017-06-24
+---
+
 # Remove the zero-byte discount in data
 
 |RSKIP          |44           |

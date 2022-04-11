@@ -1,3 +1,17 @@
+---
+rskip: 42
+title: Remove world midstates from receiptsq
+description: 
+status: Adopted
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2017-06-22
+---
+
+
 # Remove world midstates from receipts
 
 |RSKIP          |42           |

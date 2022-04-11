@@ -1,3 +1,16 @@
+---
+rskip: 18
+title: Fast Hibernation Wakeup using Trie
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-09-28
+---
+
 # Fast Hibernation Wakeup using Trie
 
 |RSKIP          |18           |

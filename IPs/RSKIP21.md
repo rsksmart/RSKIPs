@@ -1,3 +1,16 @@
+---
+rskip: 21
+title: Efficient Persistent Storage Rent
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-12-02
+---
+
 # Efficient Persistent Storage Rent
 
 |RSKIP          |21           |
@@ -45,7 +58,8 @@ After the the payTime, the contract will hibernate either by external hibernatio
 
 The following diagram depicts these intervals:
 
-<img src="./RSKIP21/intervalDiagram_1RSKIP21.png">
+<img src="../RSKIP21/intervalDiagram_1RSKIP21.png">
+
 
 Then when a message or call at time t arrives to a contract X and needs to be processed,  the following procedure is executed.
 ```
@@ -72,18 +86,18 @@ or  ((d>=rentEndTimestamp) and (d<rentEndTimestamp+payTime))
 ```
 The cases considered by step 1 are depicted below. The light blue bar represents the amount of rent that is paid.
 
-<img src="./RSKIP21/case1aRSKIP21.png">
+<img src="../RSKIP21/case1aRSKIP21.png">
 
 
-<img src="./RSKIP21/case1bRSKIP21.png">
+<img src="../RSKIP21/case1bRSKIP21.png">
 
 The case considered by step 2 is depicted below. 
 
-<img src="./RSKIP21/case2RSKIP21.png">
+<img src="../RSKIP21/case2RSKIP21.png">
 
 The case considered by step 3 is depicted below. 
 
-<img src="./RSKIP21/case3RSKIP21.png">
+<img src="../RSKIP21/case3RSKIP21.png">
 
 
 In this last case, the storage rent is split into two amounts: the first amount corresponds to the interval painted in light blue and ending with the rentEndTimestamp that is added to the previous payment period, the second amount painted in yellow correspond to the interval that starts afterwards. 

@@ -1,3 +1,16 @@
+---
+rskip: 63
+title: Double Signing for Delayed Signature Aggregation
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2018-05-07
+---
+
 # Double Signing for Delayed Signature Aggregation
 
 |RSKIP          |63           |

@@ -1,3 +1,15 @@
+---
+rskip: 198
+title: Minpeg, a miners' multisig in the peg
+description: 
+status: Draft
+
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-01
+---
 # Minpeg, a miners' multisig in the peg
 
 

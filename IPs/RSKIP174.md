@@ -1,3 +1,17 @@
+---
+rskip: 174
+title: Preserve balance in contract creation
+description: 
+status: Adopted
+
+purpose: 
+- Usa
+- Fair
+author: VK <volodymyr@iovlabs.org>
+layer: Core
+complexity: 1
+created: 2021-07-23
+---
 # Preserve balance in contract creation
 
 |RSKIP          |174           |

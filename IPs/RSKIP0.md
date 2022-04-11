@@ -1,3 +1,15 @@
+---
+rskip: .1
+title: RSKIP Purpose and Guidelines
+description: A RSKIP is a design document providing information to the RSK community describing a new feature for RSK, its processes, or its environment.
+status: Draft
+purpose: Sec
+author: JL (@julianlen)
+layer: Misc
+complexity: 2
+created: 2021-04-15
+---
+
 # RSKIP Purpose and Guidelines
 
 |RSKIP          |0           |
@@ -103,6 +115,7 @@ The possible paths of the status of RSKIPs are as follows:
 
 Each RSKIP should have the following parts:
 
+
 -	Preamble -- RFC 822 style headers containing meta-data about the RSKIP, including the RSKIP number, a short descriptive title (limited to a maximum of 44 characters), the names, and optionally the contact info for each author, etc.
 <!-- -->
 
@@ -135,12 +148,12 @@ Each RSKIP should have the following parts:
 
 ## RSKIP Formats and Templates
 
-RSKIPs should be written in [markdown] format. Image files should be included in a subdirectory for that RSKIP.
+RSKIPs should be written in [markdown] format. Here is a [template](/IPs/RSKIP0_TEMPLATE) to follow. Image files should be included in a subdirectory for that RSKIP.
 
 
 ## RSKIP Header Preamble
 
-Each RSKIP must begin with an RFC 822 style header preamble. The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
+Each RSKIP must begin with an RFC 822 style header preamble, preceded and followed by three hyphens (---). This header is also termed “front matter” by Jekyll. The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
 
 ` * RSKIP: ` *RSKIP number* (determined by the RSKIP editor)
 	

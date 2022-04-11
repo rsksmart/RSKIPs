@@ -1,3 +1,17 @@
+---
+rskip: 265
+title: Bridge UTXOs Coin Selection
+description: 
+status: Draft
+
+purpose: 
+- Sec
+- Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-08
+---
 # Bridge UTXOs Coin Selection
 
 

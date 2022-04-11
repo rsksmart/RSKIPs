@@ -1,3 +1,17 @@
+---
+rskip: 123
+title: Multikey federation members 
+description: 
+status: Draft
+
+purpose: 
+- Sca
+- Sec
+author: AM <amendelzon@iovlabs.org>
+layer: Core
+complexity: 2
+created: 2019-05-28
+---
 # Multikey federation members
 
 |RSKIP          |123           |

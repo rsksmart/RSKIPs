@@ -1,3 +1,17 @@
+---
+rskip: 109
+title:  Lower Storage Gas Costs for Shorter Keys 
+description: 
+status: Draft
+
+purpose: 
+- Sca
+- Usa
+author: SDL (@sergiodemianlerner)
+layer: 
+complexity: 2
+created: 2019
+---
 #  Lower Storage Gas Costs for Shorter Keys
 
 | RSKIP          | 109                                      |

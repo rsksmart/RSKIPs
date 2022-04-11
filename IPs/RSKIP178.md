@@ -1,3 +1,15 @@
+---
+rskip: 178
+title: External Confirmation Hashrate
+description: 
+status: Draft
+
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2020-09
+---
 # External Confirmation Hashrate
 
 

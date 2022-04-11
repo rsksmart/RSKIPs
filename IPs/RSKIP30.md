@@ -1,3 +1,16 @@
+---
+rskip: 30
+title: Code Pagination
+description: 
+status: Draft
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-01-01
+---
+
 # Code Pagination
 
 |RSKIP          |30           |

@@ -1,3 +1,17 @@
+---
+rskip: 50
+title: Script Versions using HEADER pseudo-opcode
+description: 
+status: Adopted
+
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2017-12-07
+---
+
+
 # Script Versions using HEADER pseudo-opcode
 
 |RSKIP          |50           |
