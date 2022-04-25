@@ -3,11 +3,7 @@ rskip: 134
 title: Locking cap
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Usa
-- Sec
+purpose: Sca, Usa, Sec
 author: JD (@josedahlquist)
 layer: Core
 complexity: 2

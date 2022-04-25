@@ -3,7 +3,6 @@ rskip: 214
 title: Ephemeral Calldata using Precompile
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

@@ -3,7 +3,6 @@ rskip: 18
 title: Fast Hibernation Wakeup using Trie
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

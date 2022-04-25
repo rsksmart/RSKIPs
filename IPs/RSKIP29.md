@@ -3,7 +3,6 @@ rskip: 29
 title: Change in Account creation cost to prevent Spam
 description: 
 status: Rejected
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

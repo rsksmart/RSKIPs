@@ -3,10 +3,7 @@ rskip: 125
 title: Create2
 description: 
 status: Adopted
-
-purpose: 
-- Sca
-- Usa
+purpose: Sca, Usa
 author: SMS (@sebastians)
 layer: Core
 complexity: 1

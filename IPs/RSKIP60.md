@@ -3,7 +3,6 @@ rskip: 60
 title: Checksum Address Encoding 
 description: 
 status: Adopted
-
 purpose: ST
 author: JL (@julianlen), IO (@ilan)
 layer: Net

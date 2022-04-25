@@ -3,7 +3,6 @@ rskip: 177
 title: Universal Merged Mining Extension 
 description: 
 status: Adopted
-
 purpose: Sca
 author: SDL (@sergiodemianlerner), MP <mpicco@iovlabs.org>
 layer: Node

@@ -3,7 +3,6 @@ rskip: 215
 title: Ephemeral Blockchain
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

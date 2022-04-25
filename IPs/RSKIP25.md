@@ -3,7 +3,6 @@ rskip: 25
 title: Memory caches
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

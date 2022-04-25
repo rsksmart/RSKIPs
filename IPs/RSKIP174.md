@@ -3,10 +3,7 @@ rskip: 174
 title: Preserve balance in contract creation
 description: 
 status: Adopted
-
-purpose: 
-- Usa
-- Fair
+purpose: Usa, Fair
 author: VK <volodymyr@iovlabs.org>
 layer: Core
 complexity: 1

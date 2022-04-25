@@ -3,7 +3,6 @@ rskip: 21
 title: Efficient Persistent Storage Rent
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

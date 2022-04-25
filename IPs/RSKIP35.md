@@ -3,7 +3,6 @@ rskip: 35
 title: Managing BridgeMaster Federation Members
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

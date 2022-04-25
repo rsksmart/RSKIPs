@@ -3,7 +3,6 @@ rskip: 16
 title: Combined State Tree 
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

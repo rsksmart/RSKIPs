@@ -3,7 +3,6 @@ rskip: 31
 title: Hibernation Compression
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

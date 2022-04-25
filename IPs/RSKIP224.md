@@ -3,7 +3,6 @@ rskip: 224
 title: Include Uncles in CPV in Fork Detection Data
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

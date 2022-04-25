@@ -3,9 +3,7 @@ rskip: 272
 title: Bridge UTXO Management Account
 description: 
 status: Draft
-purpose: 
-- Sec
-- Usa
+purpose: Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 2

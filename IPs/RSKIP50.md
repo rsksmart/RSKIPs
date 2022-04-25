@@ -3,7 +3,6 @@ rskip: 50
 title: Script Versions using HEADER pseudo-opcode
 description: 
 status: Adopted
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

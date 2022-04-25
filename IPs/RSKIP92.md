@@ -3,7 +3,6 @@ rskip: 92
 title: Merkle Proof serialization
 description: 
 status: Adopted
-
 purpose: Sca
 author: DLL, MC
 layer: Core

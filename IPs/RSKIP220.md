@@ -3,7 +3,6 @@ rskip: 220
 title: Obtain Bitcoin Block information from bridge methods 
 description: 
 status: Adopted
-
 purpose: Usa
 author: PGP <pamela@iovlabs.org>, SDL (@sergiodemianlerner)
 layer: Core

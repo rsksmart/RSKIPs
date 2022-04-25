@@ -3,7 +3,6 @@ rskip: 52
 title: Cache Oriented Storage Rent
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

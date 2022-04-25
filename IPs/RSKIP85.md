@@ -3,7 +3,6 @@ rskip: 85
 title: Improvements to REMASC contract
 description: 
 status: Draft
-
 purpose: Sca
 author: LS
 layer: Core

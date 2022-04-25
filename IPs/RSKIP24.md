@@ -3,7 +3,6 @@ rskip: 24
 title: New Binary Trie
 description: 
 status: Adopted
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

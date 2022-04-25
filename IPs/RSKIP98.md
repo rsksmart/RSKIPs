@@ -3,7 +3,6 @@ rskip: 98
 title: Deactivation of the federated fallback system for block production 
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

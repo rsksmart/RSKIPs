@@ -3,7 +3,6 @@ rskip: 209
 title: Stack-overflow removal
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

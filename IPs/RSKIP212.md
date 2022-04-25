@@ -3,7 +3,6 @@ rskip: 212
 title: HW-compatible Transaction Versioning System
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

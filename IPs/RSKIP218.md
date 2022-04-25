@@ -3,7 +3,6 @@ rskip: 218
 title: New Fee Rewards Address for the RSK Core Developers Fund
 description: 
 status: Accepted
-
 purpose: Usa
 author: FJ (@fedejinich)
 layer: Core

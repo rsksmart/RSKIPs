@@ -3,7 +3,6 @@ rskip: 198
 title: Minpeg, a miners' multisig in the peg
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

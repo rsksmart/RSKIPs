@@ -3,10 +3,7 @@ rskip: 252
 title: Transaction Gas Price Cap
 description: 
 status: Draft
-
-purpose:
-- Sec
-- Fair
+purpose: Sec, Fair
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 1

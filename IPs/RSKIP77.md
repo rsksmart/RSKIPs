@@ -3,10 +3,7 @@ rskip: 77
 title: Smoother Difficulty adjustment
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Fair
+purpose: Sca, Fair
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 2

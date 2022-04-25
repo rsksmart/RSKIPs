@@ -3,7 +3,6 @@ rskip: 68
 title: Federation Notification System
 description: 
 status: Draft
-
 purpose: Sec
 author: JIO <jorlicki@iovlabs.org>, SDL (@sergiodemianlerner)
 layer: Net

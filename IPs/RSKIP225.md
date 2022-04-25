@@ -3,7 +3,6 @@ rskip: 225
 title: Emergency Multisig public keys
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

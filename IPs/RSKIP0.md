@@ -1,8 +1,8 @@
 ---
-rskip: .1
+rskip: 0
 title: RSKIP Purpose and Guidelines
 description: A RSKIP is a design document providing information to the RSK community describing a new feature for RSK, its processes, or its environment.
-status: Draft
+status: Purpose and Guidelines
 purpose: Sec
 author: JL (@julianlen)
 layer: Misc

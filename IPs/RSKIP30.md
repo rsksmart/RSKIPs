@@ -3,7 +3,6 @@ rskip: 30
 title: Code Pagination
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

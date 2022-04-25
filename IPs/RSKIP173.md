@@ -3,7 +3,6 @@ rskip: 173
 title: Chunk-Based Code Merkleization using the Unitrie
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

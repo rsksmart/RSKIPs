@@ -3,7 +3,6 @@ rskip: 17
 title: Simpler Persistent Storage Rent
 description: 
 status: Rejected
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

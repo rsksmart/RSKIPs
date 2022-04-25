@@ -3,10 +3,7 @@ rskip: 112
 title: Unitrie Node identifiers
 description: 
 status: Draft
-
-purpose: 
-- Sec
-- Sca
+purpose: Sec, Sca
 author: SDL (@sergiodemianlerner)
 layer: 
 complexity: 1

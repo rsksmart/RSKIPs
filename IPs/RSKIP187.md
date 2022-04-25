@@ -3,10 +3,7 @@ rskip: 187
 title: Network Upgrade - Iris 
 description: 
 status: Adopted
-
-purpose: 
-- Usa
-- Sec
+purpose: Usa, Sec
 author: AE (@adrian.eidelman)
 layer: Core
 complexity: 2

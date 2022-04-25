@@ -3,9 +3,7 @@ rskip: 271
 title: Bridge peg-out batching
 description: 
 status: Draft
-purpose: 
-- Sec
-- Usa
+purpose: Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 2

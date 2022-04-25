@@ -3,7 +3,6 @@ rskip: 110
 title: Fork Detection Data in RSKBLOCK tags 
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: 

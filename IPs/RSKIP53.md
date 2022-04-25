@@ -3,7 +3,6 @@ rskip: 53
 title: LTCP 
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

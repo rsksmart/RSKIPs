@@ -3,7 +3,6 @@ rskip: 48
 title: Informing average free gas per block
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

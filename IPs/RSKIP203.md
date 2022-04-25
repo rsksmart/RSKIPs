@@ -3,7 +3,6 @@ rskip: 203
 title: getCallStackDepth Precompile method
 description: 
 status: Draft
-
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core

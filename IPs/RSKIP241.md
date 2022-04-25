@@ -3,10 +3,7 @@ rskip: 241
 title: User-triggered peg-out tx fee-bumping
 description: 
 status: Draft
-
-purpose:
-- Usa
-- Sec
+purpose: Usa, Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 2

@@ -3,10 +3,7 @@ rskip: 123
 title: Multikey federation members 
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Sec
+purpose: Sca, Sec
 author: AM <amendelzon@iovlabs.org>
 layer: Core
 complexity: 2

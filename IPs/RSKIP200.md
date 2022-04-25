@@ -3,7 +3,6 @@ rskip: 200
 title: Receive headers limits
 description: 
 status: Adopted
-
 purpose: Sec
 author: PGP <pamela@iovlabs.org>, MI <marcos@iovlabs.org>
 layer: Core

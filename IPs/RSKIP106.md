@@ -3,7 +3,6 @@ rskip: 106
 title: Precompiled contract for HDWallet utility functions
 description: 
 status: Adopted
-
 purpose: Usa
 author: AM <amendelzon@iovlabs.org>
 layer: Core

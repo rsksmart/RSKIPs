@@ -3,7 +3,6 @@ rskip: 223
 title: Cumulative Work in Fork Detection Data
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

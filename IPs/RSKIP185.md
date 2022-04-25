@@ -3,7 +3,6 @@ rskip: 185
 title: Peg-out refund and events
 description: 
 status: Draft
-
 purpose: Usa
 author: JD (@josedahlquist)
 layer: Core

@@ -3,7 +3,6 @@ rskip: 191
 title: Remove opcodes incompatible with Ethereum
 description: 
 status: Draft
-
 purpose: Sec
 author: AL <angel@iovlabs.org>
 layer: Core

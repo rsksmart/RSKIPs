@@ -3,10 +3,7 @@ rskip: 27
 title: Highly Efficient Storage Rent
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Fair
+purpose: Sca, Fair
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 2

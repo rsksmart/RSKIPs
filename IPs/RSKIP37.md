@@ -3,10 +3,7 @@ rskip: 37
 title: Single Address Smart Wallets
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Usa
+purpose: Sca, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 3

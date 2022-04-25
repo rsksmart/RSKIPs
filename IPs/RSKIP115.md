@@ -3,7 +3,6 @@ rskip: 115
 title: Removal of Unused Headers from the Bridge Contract
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

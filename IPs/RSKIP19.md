@@ -3,7 +3,6 @@ rskip: 19
 title: RSK Address formats
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

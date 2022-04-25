@@ -3,7 +3,6 @@ rskip: 194
 title: Bloom filter compression
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

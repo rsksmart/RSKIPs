@@ -3,11 +3,7 @@ rskip: 99
 title: Orchid Network Upgrade
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Usa
-- Sec
+purpose: Sca, Usa, Sec
 author: AE (@adrian.eidelman)
 layer: Core
 complexity: 3

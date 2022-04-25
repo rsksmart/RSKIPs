@@ -3,7 +3,6 @@ rskip: 122
 title: New method GetBtcTransactionConfirmations for Bridge contract 
 description: 
 status: Draft
-
 purpose: Usa
 author: AM <amendelzon@iovlabs.org>
 layer: Core

@@ -3,7 +3,6 @@ rskip: 181
 title: Peg-in rejection events
 description: 
 status: Draft
-
 purpose: Usa
 author: JD (@josedahlquist)
 layer: Core

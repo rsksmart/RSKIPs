@@ -3,7 +3,6 @@ rskip: 87
 title: Whitelisting unlimited mode 
 description: 
 status: Adopted
-
 purpose: Usa
 author: JD (@josedahlquist)
 layer: Core

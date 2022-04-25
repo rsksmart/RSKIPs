@@ -1,14 +1,10 @@
-
 <style type="text/css">
   .rskiptable .title {
     width: 67%;
   }
-
   .rskiptable .author {
     width: 33%;
   }
-
-  
 </style>
   {% for status in site.data.statuses %}
     {% assign rskips = include.rskips|where:"status",status|sort:"rskip" %}
@@ -25,6 +21,20 @@
           {% endif %}
         </thead>
         {% for page in rskips %}
+        {% if status == "Purpose and Guidelines" %}
+        <tr>
+          <td class="ipnum"><a href="{{page.url|relative_url}}">{{page.rskip|xml_escape}}</a></td>
+          {% if status == "Last Call" and page.last-call-deadline != undefined %}
+            <td class="date">{{ page.last-call-deadline | xml_escape }}</td>
+          {% endif %}
+          <td class="title">{{page.title|xml_escape}}</td>
+          <td class="created">{{page.created|xml_escape}}</td>
+          <td class="author">{% include authorlist.html authors=page.author %}</td>
+          <td class="purpose">{% include categorylist.html purposes=page.purpose %}</td>
+          <td class="layer">{{page.layer}}</td>
+          <td class="complexity">{{page.complexity}}</td>
+        </tr>
+      {% else %}
           <tr>
             <td class="ipnum"><a href="{{page.url|relative_url}}">{{page.rskip|xml_escape}}</a></td>
             {% if status == "Last Call" and page.last-call-deadline != undefined %}
@@ -33,10 +43,11 @@
             <td class="title">{{page.title|xml_escape}}</td>
             <td class="created">{{page.created|xml_escape}}</td>
             <td class="author">{% include authorlist.html authors=page.author %}</td>
-            <td class="purpose">{% include categorylist.html categories=page.category %}</td>
+            <td class="purpose">{% include categorylist.html purposes=page.purpose %}</td>
             <td class="layer">{{page.layer}}</td>
             <td class="complexity">{{page.complexity}}</td>
           </tr>
+          {% endif %}
         {% endfor %}
       </table>
     {% endif %}

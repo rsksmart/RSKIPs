@@ -3,7 +3,6 @@ rskip: 132
 title: Bridge ReceiveHeaders Gas Cost increase
 description: 
 status: Adopted
-
 purpose: Fair
 author: JD (@josedahlquist), SDL (@sergiodemianlerner)
 layer: Core

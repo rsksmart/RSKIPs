@@ -3,7 +3,6 @@ rskip: 41
 title: Extended Bitcoin Bridge Transactions
 description: 
 status: Draft
-
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core

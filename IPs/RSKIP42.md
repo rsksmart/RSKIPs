@@ -3,7 +3,6 @@ rskip: 42
 title: Remove world midstates from receiptsq
 description: 
 status: Adopted
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

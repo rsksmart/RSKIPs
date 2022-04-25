@@ -3,7 +3,6 @@ rskip: 91
 title: STATIC_CALL opcode 
 description: 
 status: Adopted
-
 purpose: Usa
 author: AE (@adrian.eidelman)
 layer: Core

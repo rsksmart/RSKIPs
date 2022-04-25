@@ -3,10 +3,7 @@ rskip: 141
 title: Network Upgrade - Papyrus 	
 description: 
 status: Accepted
-purpose: 
-- Sca
-- Usa
-- Sec
+purpose: Sca, Usa, Sec
 author: AE (@adrian.eidelman)
 layer: Core
 complexity: 2

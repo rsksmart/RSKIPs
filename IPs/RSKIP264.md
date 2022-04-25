@@ -3,7 +3,6 @@ rskip: 264
 title: Simplified Emergency Time-locks Refresh
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

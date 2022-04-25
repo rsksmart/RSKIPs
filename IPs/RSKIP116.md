@@ -3,11 +3,7 @@ rskip: 116
 title: Failure of SSTORE on Log-Gas Recursive CALLs 
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Sec
-- Usa
+purpose: Sca, Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 1

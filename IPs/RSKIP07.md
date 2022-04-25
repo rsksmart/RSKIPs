@@ -3,7 +3,6 @@ rskip: 7
 title: Persistent Storage Rent Paid by Code
 description: This RSKIP describes an implementation of storage rent based on enabling the code to periodically perform an operation to deposit the rent before the due time.
 status: Rejected
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

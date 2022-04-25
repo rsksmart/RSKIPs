@@ -3,9 +3,7 @@ rskip: 285
 title: Utility Methods to Make PPA Safer
 description: 
 status: Draft
-purpose: 
-- Usa
-- Sec
+purpose: Usa, Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 1

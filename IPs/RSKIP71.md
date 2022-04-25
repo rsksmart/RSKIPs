@@ -3,7 +3,6 @@ rskip: 71
 title: Transfer 2300 gas units for code execution in external transactions
 description: 
 status: Draft
-
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core

@@ -3,9 +3,7 @@ rskip: 291
 title: Network Upgrade - Hop
 description: 
 status: Draft
-purpose: 
-- Usa
-- Sec
+purpose: Usa, Sec
 author: AE (@adrian.eidelman)
 layer: Core
 complexity: 2

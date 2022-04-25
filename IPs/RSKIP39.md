@@ -3,7 +3,6 @@ rskip: 39
 title: Multi-key Accounts
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

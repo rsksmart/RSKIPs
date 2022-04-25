@@ -3,7 +3,6 @@ rskip: 43
 title: Sequential Address format
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

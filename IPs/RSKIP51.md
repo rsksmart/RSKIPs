@@ -3,7 +3,6 @@ rskip: 51
 title: Memory-Mapped configuration register 
 description: 
 status: Adopted
-
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core

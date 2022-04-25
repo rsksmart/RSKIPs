@@ -3,7 +3,6 @@ rskip: 55
 title: Native On-Chain Probabilistic payments
 description: 
 status: Draft
-
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core

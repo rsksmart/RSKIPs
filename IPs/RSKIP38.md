@@ -3,7 +3,6 @@ rskip: 38
 title: Signature Compression
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

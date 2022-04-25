@@ -3,7 +3,6 @@ rskip: 58
 title: Handling Bitcoin Forks
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

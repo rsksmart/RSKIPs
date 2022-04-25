@@ -3,7 +3,6 @@ rskip: 75
 title: Native Off-Chain Probabilistic payments
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

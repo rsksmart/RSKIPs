@@ -3,7 +3,6 @@ rskip: 178
 title: External Confirmation Hashrate
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

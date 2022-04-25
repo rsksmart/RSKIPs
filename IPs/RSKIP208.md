@@ -3,7 +3,6 @@ rskip: 208
 title: checkEnvironment Precompile method
 description: 
 status: Draft
-
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core

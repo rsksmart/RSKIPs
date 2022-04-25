@@ -3,7 +3,6 @@ rskip: 120
 title: Shifting opcodes  
 description: 
 status: Draft
-
 purpose: Sca
 author: SMS (@sebastians)
 layer: Core

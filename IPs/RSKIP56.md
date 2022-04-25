@@ -3,7 +3,6 @@ rskip: 56
 title: Sporadic Verification-less mining
 description: 
 status: Draft
-
 purpose: Fair
 author: SDL (@sergiodemianlerner)
 layer: Core

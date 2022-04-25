@@ -3,7 +3,6 @@ rskip: 63
 title: Double Signing for Delayed Signature Aggregation
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

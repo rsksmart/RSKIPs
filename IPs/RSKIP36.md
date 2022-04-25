@@ -3,7 +3,6 @@ rskip: 36
 title: Transaction Encapsulation
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

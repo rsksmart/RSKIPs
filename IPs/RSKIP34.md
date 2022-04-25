@@ -3,7 +3,6 @@ rskip: 34
 title: Contract const DATA Sections
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

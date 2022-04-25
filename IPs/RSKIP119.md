@@ -3,7 +3,6 @@ rskip: 119
 title: Precompiled contract for inspecting block headers  
 description: 
 status: Draft
-
 purpose: Usa
 author: DM (@diego)
 layer: Core

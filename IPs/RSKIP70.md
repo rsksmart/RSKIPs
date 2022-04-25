@@ -3,7 +3,6 @@ rskip: 70
 title: Default TX Data
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

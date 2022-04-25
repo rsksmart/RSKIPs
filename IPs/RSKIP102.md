@@ -3,10 +3,7 @@ rskip: 102
 title: Efficient and Secure Fee Bumping
 description: 
 status: Draft
-
-purpose: 
-- Usa
-- Sec
+purpose: Usa, Sec
 author: SDL (@sergiodemianlerner)
 layer: 
 complexity: 2

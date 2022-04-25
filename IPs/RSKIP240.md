@@ -3,11 +3,7 @@ rskip: 240
 title: Implement Storage Rent in RSK
 description: 
 status: Draft
-
-purpose:
-- Sca 
-- Sec
-- Fair
+purpose: Sca, Sec, Fair
 author: SDL (@sergiodemianlerner), SM (@shreemoy), DM (@diego)
 layer: Core
 complexity: 2

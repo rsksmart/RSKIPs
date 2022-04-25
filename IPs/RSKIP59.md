@@ -3,7 +3,6 @@ rskip: 59
 title: Child Contracts
 description: 
 status: Rejected
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

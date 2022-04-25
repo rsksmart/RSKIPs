@@ -3,10 +3,7 @@ rskip: 239
 title: Reprice Trie Read Opcodes 
 description: 
 status: Draft
-
-purpose:
-- Sca 
-- Sec
+purpose: Sca, Sec
 author: SDL (@sergiodemianlerner), SM (@shreemoy)
 layer: Core
 complexity: 1

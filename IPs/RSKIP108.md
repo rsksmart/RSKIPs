@@ -3,10 +3,7 @@ rskip: 108
 title: More Efficient Unitrie Key Mapping
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Usa
+purpose: Sca, Usa
 author: SDL (@sergiodemianlerner), AL <angel@iovlabs.org>
 layer: 
 complexity: 2

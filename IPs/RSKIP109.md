@@ -3,10 +3,7 @@ rskip: 109
 title:  Lower Storage Gas Costs for Shorter Keys 
 description: 
 status: Draft
-
-purpose: 
-- Sca
-- Usa
+purpose: Sca, Usa
 author: SDL (@sergiodemianlerner)
 layer: 
 complexity: 2

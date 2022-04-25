@@ -3,7 +3,6 @@ rskip: 95
 title: DELEGATECALL as an instruction set extension 
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

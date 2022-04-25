@@ -3,10 +3,7 @@ rskip: 265
 title: Bridge UTXOs Coin Selection
 description: 
 status: Draft
-
-purpose: 
-- Sec
-- Usa
+purpose: Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 2

@@ -3,7 +3,6 @@ rskip: 201
 title: Time-locked Emergency Multisignature
 description: 
 status: Draft
-
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core

@@ -3,7 +3,6 @@ rskip: 47
 title: CALLNUM opcode
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

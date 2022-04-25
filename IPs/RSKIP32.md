@@ -3,7 +3,6 @@ rskip: 32
 title: Double-Hashed Addresses
 description: 
 status: Draft
-
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core

@@ -3,7 +3,6 @@ rskip: 57
 title: Derivation Path for Hierarchical Deterministic Wallets
 description: 
 status: Draft
-
 purpose: Usa
 author: IO (@ilan)
 layer: Net
