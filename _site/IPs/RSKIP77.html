@@ -3,7 +3,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
   <title>Smoother Difficulty adjustment | RSK Improvement Proposals</title>
     <meta
       property="og:title"
@@ -12,18 +12,18 @@
     <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
     <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
     <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-  
+
   <meta name="generator" content="Jekyll" />
   <meta property="og:locale" content="en_US" />
-  <link rel="canonical" href="http://localhost:4000/IPs/RSKIP77" />
-  <meta property="og:url" content="http://localhost:4000/IPs/RSKIP77" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP77" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP77" />
   <meta property="og:site_name" content="RSK Improvement Proposals" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@" />
   <script type="application/ld+json">
     {
       "@type": "WebSite",
-      "url": "http://localhost:4000",
+      "url": "https://ips.rsk.co",
       "name": "RSK Improvement Proposals",
       "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
       "@context": "https://schema.org"
@@ -122,7 +122,7 @@
 
 <p>The difficulty adjustment should be computed as the amount of accumulated work of all blocks (main and uncle blocks) created in a block interval (a number of main chain blocks) over the time interval (difference of timestamps between first and last block). The block interval is 32 blocks, to reduce variance but allow for adjustments in less than 5 minutes (for upward adjustments). The adjustment must be performed at every block, using 32-block overlapping windows. Because uncles can be included as late as 10 blocks after the sibling block, the block interval will consider all uncles references, no matter they compete to a sibling block in the current interval or in the previous interval. This introduces an error factor in the formula, but this can be tolerated to reduce the complexity of the algorithm and also to avoid computing the new difficulty over a window that is 10 blocks old. In the following diagram, two includes are included in the counting, even if the first uncle parent is outside the window of interest.</p>
 
-<p><img src="/IPs/RSKIP77/image2.png" alt="" /></p>
+<p><img src="RSKIP77\image2.png" alt="" /></p>
 
 <h1 id="copyright"><strong>Copyright</strong></h1>
 

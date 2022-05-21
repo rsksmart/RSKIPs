@@ -3,7 +3,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
   <title>Bridge peg-out batching | RSK Improvement Proposals</title>
     <meta
       property="og:title"
@@ -12,18 +12,18 @@
     <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
     <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
     <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-  
+
   <meta name="generator" content="Jekyll" />
   <meta property="og:locale" content="en_US" />
-  <link rel="canonical" href="http://localhost:4000/IPs/RSKIP271" />
-  <meta property="og:url" content="http://localhost:4000/IPs/RSKIP271" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP271" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP271" />
   <meta property="og:site_name" content="RSK Improvement Proposals" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@" />
   <script type="application/ld+json">
     {
       "@type": "WebSite",
-      "url": "http://localhost:4000",
+      "url": "https://ips.rsk.co",
       "name": "RSK Improvement Proposals",
       "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
       "@context": "https://schema.org"
@@ -122,11 +122,32 @@
 
 <p>After receiving a peg-out request, and if no previous request is waiting in the queue, the Bridge contract will wait T=3 hours to create a peg-out transaction. During the waiting time, if more peg-out requests are received, they will be queued so that all of them can be batched in a single peg-out transaction. When the deadline is reached, a peg-out event will be triggered. Under normal usage, the Bridge would create no more than 8 peg-outs events a day. Under a rush hour of peg-outs, the Bridge may need to create more than one peg-out transaction simultaneously per peg-out event to reduce the transaction size, and input count. This peg-out splitting into transactions does not change from the current protocol.</p>
 
-<h3 id="peg-out-fees">Peg-out Fees</h3>
+<h3 id="new-bridge-methods">New Bridge Methods</h3>
 
-<p>If <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md">RSKIP272</a> is not activated, then the peg-out fees will be distributed evenly between all peg-out requests as it is today, and no change is required.</p>
+<ul>
+  <li>
+    <h4 id="peg-out-fees">Peg-out Fees</h4>
+    <p>If <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md">RSKIP272</a> is not activated, then the peg-out fees will be distributed evenly between all peg-out requests as it is today, and no change is required.</p>
 
-<p>A new Bridge method <code class="language-plaintext highlighter-rouge">getEstimatedFeesForNextPegOutEvent()</code>is created so that users can estimate the peg-out fees. This method returns the fees of a peg-out transaction containing (N+2) outputs and 1.5 inputs, where N is the number of peg-outs requests waiting in the queue.  This method will be deprecated if RSKIP272 is activated.</p>
+    <p>A new Bridge method <code class="language-plaintext highlighter-rouge">getEstimatedFeesForNextPegOutEvent()</code>is created so that users can estimate the peg-out fees. This method returns the fees of a peg-out transaction containing (N+2) outputs and 2 inputs, where N is the number of peg-outs requests waiting in the queue. This method will be deprecated if RSKIP272 is activated.</p>
+  </li>
+  <li>
+    <h4 id="peg-out-requests-count">Peg-out Requests Count</h4>
+    <p>A new Bridge method <code class="language-plaintext highlighter-rouge">getQueuedPegoutsCount()</code> is created. This method returns the amount of peg-out requests waiting in the queue to be released in the next peg-out transaction.</p>
+  </li>
+  <li>
+    <h4 id="peg-out-transaction-creation-block-number">Peg-out Transaction Creation Block Number</h4>
+    <p>A new Bridge method <code class="language-plaintext highlighter-rouge">getNextPegoutCreationBlockNumber()</code> is created. This method returns the exact block number where the next peg-out transaction is expected to be created. This is calculated by adding the current block number (after a successful pegout) to a defined value of T=360 RSK blocks (~3 hours).</p>
+  </li>
+</ul>
+
+<h3 id="new-bridge-event-for-batched-peg-out-transaction">New Bridge Event For Batched Peg-out Transaction</h3>
+<p>A new event called <code class="language-plaintext highlighter-rouge">batch_pegout_created</code> is created for batched peg-out transaction.</p>
+
+<p>Signature: <code class="language-plaintext highlighter-rouge">batch_pegout_created(bytes32 indexed btcTx, bytes releaseRskTxHashes)</code></p>
+
+<h3 id="change-in-release_requested-event">Change in <code class="language-plaintext highlighter-rouge">release_requested</code> event</h3>
+<p>Currently the RSK transaction hash for each peg-out request is used to emit <code class="language-plaintext highlighter-rouge">release_requested</code> event. An update for processing peg-out requests in batch would now use the RSK transaction hash of the transaction that calls updateCollections(at the time the next peg-out height is reached and a batch peg-out transaction is created) to emit <code class="language-plaintext highlighter-rouge">release_requested</code> event.</p>
 
 <h2 id="rationale">Rationale</h2>
 

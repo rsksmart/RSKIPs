@@ -3,7 +3,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
   <title>Security | RSK Improvement Proposals</title>
     <meta
       property="og:title"
@@ -12,18 +12,18 @@
     <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
     <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
     <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-  
+
   <meta name="generator" content="Jekyll" />
   <meta property="og:locale" content="en_US" />
-  <link rel="canonical" href="http://localhost:4000/security" />
-  <meta property="og:url" content="http://localhost:4000/security" />
+  <link rel="canonical" href="https://ips.rsk.co/security" />
+  <meta property="og:url" content="https://ips.rsk.co/security" />
   <meta property="og:site_name" content="RSK Improvement Proposals" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@" />
   <script type="application/ld+json">
     {
       "@type": "WebSite",
-      "url": "http://localhost:4000",
+      "url": "https://ips.rsk.co",
       "name": "RSK Improvement Proposals",
       "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
       "@context": "https://schema.org"
@@ -77,340 +77,17 @@
   
   
   
-    <h2 id="draft">Draft</h2>
+    <h2 id="purpose-and-guidelines">Purpose and Guidelines</h2>
     <table class="rskiptable">
       <thead>
-        
           <tr><th class="ipnum">Nr</th><th class="title">Title</th><th class="author">Author</th><th class="layer">Layer</th><th class="complexity">C</th></tr>
-        
       </thead>
       
         <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP0">0.1</a></td>
-          
+          <td class="ipnum"><a href="/IPs/RSKIP0">0</a></td>
           <td class="title">RSKIP Purpose and Guidelines</td>
           <td class="author"><a href="/index/#author_table">JL</a></td>
           <td class="layer">Misc</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP65">65</a></td>
-          
-          <td class="title">MINGASPRICE Opcode</td>
-          <td class="author"><a href="/index/#author_table">JIO</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP68">68</a></td>
-          
-          <td class="title">Federation Notification System</td>
-          <td class="author"><a href="/index/#author_table">JIO</a>, <a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Net</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP99">99</a></td>
-          
-          <td class="title">Orchid Network Upgrade</td>
-          <td class="author"><a href="/index/#author_table">AE</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">3</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP102">102</a></td>
-          
-          <td class="title">Efficient and Secure Fee Bumping</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer"></td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP110">110</a></td>
-          
-          <td class="title">Fork Detection Data in RSKBLOCK tags</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer"></td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP112">112</a></td>
-          
-          <td class="title">Unitrie Node identifiers</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer"></td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP116">116</a></td>
-          
-          <td class="title">Failure of SSTORE on Log-Gas Recursive CALLs</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP123">123</a></td>
-          
-          <td class="title">Multikey federation members</td>
-          <td class="author"><a href="/index/#author_table">AM</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP134">134</a></td>
-          
-          <td class="title">Locking cap</td>
-          <td class="author"><a href="/index/#author_table">JD</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP178">178</a></td>
-          
-          <td class="title">External Confirmation Hashrate</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP179">179</a></td>
-          
-          <td class="title">BTC-RSK timestamp linking</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP180">180</a></td>
-          
-          <td class="title">Limit the RSK merged mining merkle proof size</td>
-          <td class="author"><a href="/index/#author_table">VK</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP186">186</a></td>
-          
-          <td class="title">Active Federation creation block height registration</td>
-          <td class="author"><a href="/index/#author_table">JD</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP190">190</a></td>
-          
-          <td class="title">Powpeg address change audit trail</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP191">191</a></td>
-          
-          <td class="title">Remove opcodes incompatible with Ethereum</td>
-          <td class="author"><a href="/index/#author_table">AL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP198">198</a></td>
-          
-          <td class="title">Minpeg, a miners' multisig in the peg</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP201">201</a></td>
-          
-          <td class="title">Time-locked Emergency Multisignature</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP207">207</a></td>
-          
-          <td class="title">Emergency Time-locks Refresh</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP209">209</a></td>
-          
-          <td class="title">Stack-overflow removal</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP223">223</a></td>
-          
-          <td class="title">Cumulative Work in Fork Detection Data</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP224">224</a></td>
-          
-          <td class="title">Include Uncles in CPV in Fork Detection Data</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP225">225</a></td>
-          
-          <td class="title">Emergency Multisig public keys</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP239">239</a></td>
-          
-          <td class="title">Reprice Trie Read Opcodes</td>
-          <td class="author"><a href="/index/#author_table">SDL</a>, <a href="/index/#author_table">SM</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP240">240</a></td>
-          
-          <td class="title">Implement Storage Rent in RSK</td>
-          <td class="author"><a href="/index/#author_table">SDL</a>, <a href="/index/#author_table">SM</a>, <a href="/index/#author_table">DM</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP241">241</a></td>
-          
-          <td class="title">User-triggered peg-out tx fee-bumping</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP252">252</a></td>
-          
-          <td class="title">Transaction Gas Price Cap</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP264">264</a></td>
-          
-          <td class="title">Simplified Emergency Time-locks Refresh</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP265">265</a></td>
-          
-          <td class="title">Bridge UTXOs Coin Selection</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP270">270</a></td>
-          
-          <td class="title">Bridge UTXO set size management</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP271">271</a></td>
-          
-          <td class="title">Bridge peg-out batching</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP272">272</a></td>
-          
-          <td class="title">Bridge UTXO Management Account</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP285">285</a></td>
-          
-          <td class="title">Utility Methods to Make PPA Safer</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">1</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP291">291</a></td>
-          
-          <td class="title">Network Upgrade - Hop</td>
-          <td class="author"><a href="/index/#author_table">AE</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-    </table>
-  
-
-  
-  
-  
-    <h2 id="accepted">Accepted</h2>
-    <table class="rskiptable">
-      <thead>
-        
-          <tr><th class="ipnum">Nr</th><th class="title">Title</th><th class="author">Author</th><th class="layer">Layer</th><th class="complexity">C</th></tr>
-        
-      </thead>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP141">141</a></td>
-          
-          <td class="title">Network Upgrade - Papyrus</td>
-          <td class="author"><a href="/index/#author_table">AE</a></td>
-          <td class="layer">Core</td>
           <td class="complexity">2</td>
         </tr>
       
@@ -423,23 +100,11 @@
     <h2 id="adopted">Adopted</h2>
     <table class="rskiptable">
       <thead>
-        
           <tr><th class="ipnum">Nr</th><th class="title">Title</th><th class="author">Author</th><th class="layer">Layer</th><th class="complexity">C</th></tr>
-        
       </thead>
       
         <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP33">33</a></td>
-          
-          <td class="title">CODEREPLACE opcode</td>
-          <td class="author"><a href="/index/#author_table">SDL</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
           <td class="ipnum"><a href="/IPs/RSKIP152">152</a></td>
-          
           <td class="title">CHAINID Opcode</td>
           <td class="author"><a href="/index/#author_table">SMS</a></td>
           <td class="layer">Core</td>
@@ -447,28 +112,161 @@
         </tr>
       
         <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP187">187</a></td>
-          
-          <td class="title">Network Upgrade - Iris</td>
-          <td class="author"><a href="/index/#author_table">AE</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
-          <td class="ipnum"><a href="/IPs/RSKIP199">199</a></td>
-          
-          <td class="title">registerBtcTransaction Is Public</td>
-          <td class="author"><a href="/index/#author_table">MI</a></td>
-          <td class="layer">Core</td>
-          <td class="complexity">2</td>
-        </tr>
-      
-        <tr>
           <td class="ipnum"><a href="/IPs/RSKIP200">200</a></td>
-          
           <td class="title">Receive headers limits</td>
           <td class="author"><a href="/index/#author_table">PGP</a>, <a href="/index/#author_table">MI</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+    </table>
+  
+
+  
+  
+  
+
+  
+  
+  
+    <h2 id="draft">Draft</h2>
+    <table class="rskiptable">
+      <thead>
+          <tr><th class="ipnum">Nr</th><th class="title">Title</th><th class="author">Author</th><th class="layer">Layer</th><th class="complexity">C</th></tr>
+      </thead>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP65">65</a></td>
+          <td class="title">MINGASPRICE Opcode</td>
+          <td class="author"><a href="/index/#author_table">JIO</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">1</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP68">68</a></td>
+          <td class="title">Federation Notification System</td>
+          <td class="author"><a href="/index/#author_table">JIO</a>, <a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Net</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP110">110</a></td>
+          <td class="title">Fork Detection Data in RSKBLOCK tags</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer"></td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP178">178</a></td>
+          <td class="title">External Confirmation Hashrate</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP179">179</a></td>
+          <td class="title">BTC-RSK timestamp linking</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">1</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP180">180</a></td>
+          <td class="title">Limit the RSK merged mining merkle proof size</td>
+          <td class="author"><a href="/index/#author_table">VK</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">1</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP186">186</a></td>
+          <td class="title">Active Federation creation block height registration</td>
+          <td class="author"><a href="/index/#author_table">JD</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">1</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP190">190</a></td>
+          <td class="title">Powpeg address change audit trail</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">1</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP191">191</a></td>
+          <td class="title">Remove opcodes incompatible with Ethereum</td>
+          <td class="author"><a href="/index/#author_table">AL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">1</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP198">198</a></td>
+          <td class="title">Minpeg, a miners' multisig in the peg</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP201">201</a></td>
+          <td class="title">Time-locked Emergency Multisignature</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP207">207</a></td>
+          <td class="title">Emergency Time-locks Refresh</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP209">209</a></td>
+          <td class="title">Stack-overflow removal</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP223">223</a></td>
+          <td class="title">Cumulative Work in Fork Detection Data</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP224">224</a></td>
+          <td class="title">Include Uncles in CPV in Fork Detection Data</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">2</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP225">225</a></td>
+          <td class="title">Emergency Multisig public keys</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
+          <td class="layer">Core</td>
+          <td class="complexity">1</td>
+        </tr>
+      
+        <tr>
+          <td class="ipnum"><a href="/IPs/RSKIP264">264</a></td>
+          <td class="title">Simplified Emergency Time-locks Refresh</td>
+          <td class="author"><a href="/index/#author_table">SDL</a></td>
           <td class="layer">Core</td>
           <td class="complexity">2</td>
         </tr>
