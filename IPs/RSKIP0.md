@@ -49,7 +49,6 @@ There are three types of RSKIP:
 - A **Process RSKIP** describes a process surrounding RSK or proposes a change to (or an event in) a process. Process RSKIPs are like Standards-Track RSKIPs but they apply to areas other than the RSK protocol itself. They may propose an implementation, but not to RSK's codebase; they often require community consensus. Unlike Informational RSKIPs, they are more than recommendations, and users are typically not free to ignore them. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in RSK development.
 
 
-
 ## RSKIP purpose terms
 
 Describes what aspects of RSK will improve
