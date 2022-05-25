@@ -1,3 +1,15 @@
+---
+rskip: 181
+title: Peg-in rejection events
+description: 
+status: Draft
+purpose: Usa
+author: JD (@josedahlquist)
+layer: Core
+complexity: 2
+created: 2020-11-03
+---
+
 # Peg-in rejection events
 
 |RSKIP          |181           |
@@ -5,7 +17,7 @@
 |**Title**      |Peg-in rejection events |
 |**Created**    |03-NOV-20 |
 |**Author**     |JD |
-|**Purpose**    |USa |
+|**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
 |**Status**     |Draft |

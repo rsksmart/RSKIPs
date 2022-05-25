@@ -1,3 +1,14 @@
+---
+rskip: 179
+title: BTC-RSK timestamp linking
+description: 
+status: Draft
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2020-10
+---
 # BTC-RSK timestamp linking
 
 

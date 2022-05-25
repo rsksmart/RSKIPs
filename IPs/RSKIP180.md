@@ -1,3 +1,15 @@
+---
+rskip: 180
+title: Limit the RSK merged mining merkle proof size
+description: 
+status: Draft
+purpose: Sec
+author: VK <volodymyr@iovlabs.org>
+layer: Core
+complexity: 1
+created: 2021-07-15
+---
+
 # Limit the RSK merged mining merkle proof
 
 

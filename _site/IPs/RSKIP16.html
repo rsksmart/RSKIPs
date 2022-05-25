@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Combined State Tree | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Combined State Tree | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP16" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP16" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Combined State Tree</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="combined-state-tree">Combined State Tree</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">16</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Combined State Tree</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">01-NOV-2016</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pre-git-revisions">Pre-git revisions</h2>
+
+<p>Date: 06-09-2016</p>
+
+<p>Revision: 3 (date 06-23-2017)</p>
+
+<p>Status: Draft</p>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>The state of the RSK blockchain is split into several data structures. The account trie, which stores account records (balances, nonces, code hashes), the contract storage tries, which stores memory cells, and the smart contract code. This separation brings several problems. The main problem is garbage collection: to prevent the state storage to grow without limit, old and unused parts of the state must be removed (e.g. one month old). However doing this over several synchronized databases without interruption a full node is a requires a complex and error-prone garbage collecting algorithm. Therefore it’s highly beneficial if all the information is held in a single trie. Therefore a mark-and-sweep algorithm can remove unused parts. This RSKIP proposes a new structure for the world-state trie (called <strong>Unitrie</strong>), combining accounts, contracts, code  and storage, and enabling many future improvements.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>The current RSK trie (inherited from Ethereum) has several problems, both in its design and in its implementation. The world-state consist of the state trie, plus the contract storage tries, plus the contracts codes. Each of these data structures must be  managed by an appropriate cache system that decides when to keep the data in memory, when to send it to SSD disk or even HDD disk. This multiplicity of caches of different kinds complicates the design of the platform node considerably. The same complexity occurs in garbage collection, the removal of unused parts of the state, and in state sync.
+The current state trie provides no space to store accounts controlled by a different signature algorithm (e.g. RSA) or a different address hash digest length (e.g. 32 bytes). Also the state does not provide a namespace to store other state information different from the accounts. For example, storing a Merkle Mountain Range (MMR) for past block commitments can help light clients synchronize faster by using compact SPV proofs.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>We merge the contract storage memory and account/contract memory into a single tree.</p>
+
+<p>Changes:</p>
+
+<ol>
+  <li>The trie key is prefixed by a single byte 0x00, which is a namespace identifier. It’s current value is zero.</li>
+  <li>For each account node, there is an optional Account sub-tree.  There are several fields in this tree. Each field is identified by a single byte fieldSelector. This byte is not “randomized” by a hash:
+    <ul>
+      <li>0x00: Storage cells</li>
+      <li>0x80: Code</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Storage Cell keys are also randomized by a hash function application.</p>
+
+<h2 id="trie-path-components">Trie Path Components</h2>
+
+<p>Each key in the trie is split into the four parts:</p>
+
+<ul>
+  <li>Account Type &amp; Namespace [1 byte, 1st bit is the namespace]</li>
+  <li>Account address [20 bytes]</li>
+  <li>Account fields Selector [1 byte, only in an account sub-tree]</li>
+  <li>Storage Address [32 bytes, only for contract storage cells]</li>
+</ul>
+
+<p>Account address and storage addresses are hashed with sha3 in the secure trie.</p>
+
+<p> </p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

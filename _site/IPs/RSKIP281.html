@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Rollup-optimized Ephemeral Calldata | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Rollup-optimized Ephemeral Calldata | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP281" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP281" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Rollup-optimized Ephemeral Calldata</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="rollup-optimized-ephemeral-calldata">Rollup-optimized Ephemeral Calldata</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">281</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Rollup-optimized Ephemeral Calldata</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">5-Oct-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>discussions-to</strong></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP proposes a way to send data to contracts (called ephemeral data) that enables the disposal of this data at a later block, without causing a fork of the blockchain. This RSKIP is an improvement over <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP214.md">RSKIP214</a> and <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP28.md">RSKIP28</a>, in three ways.  First, it adds the option for the use of contract-defined hash functions for the merkelization of the ephemeral data or for faster ZK proof processing. Second, it is optimized for large calldata payloads, which are used in rollup commits. Third, it provides maximum flexibility enabling both keep-by-default and remove-by-default semantics.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>A current trend for scaling blockchains, pioneered by Ethereum, is the creation of multiple rollups (called L2s) on top of the onchain layer (called L1). While there is an ongoing debate over if a single onchain layer (L1) should scale to support billion of user payments or this should be delegated to L2s such as rollups, rollups provide an scaling testbed that can be explored now, without incurring in high risks of modifying the L1. Rollups use mostly the L1 as a data availability layer, creating periodic commit transactions containing compressed transaction data that must persist while the L2 is active. The committed data enables onchain arbitration in case of disputes and also it enables users to reconstruct the L2 blockchain state in case the operators disappear or censor transactions. However, this transaction data could also be disposed if an L2 performed periodic full state commitments (or snapshots) on the L1. Even better, the snapshot could be compressed by specifying only the differences with the previous snapshot, what we call <em>state diffs</em>.</p>
+
+<p>While we don’t have accurate models of how L2 will be used in the coming years, most models of L2 usage assumes there will be a high transaction volume destined for simple token payments. If this is true, then fully describing state changes using the executed transactions requires much more space than fully describing the state using a state diff.  Simple payments have explicit source/destination/amount/token data and if two payments modify the same address balance (either source or destination), then at least one address and one balance field would be saved if the state change would be specified in terms of state data diff instead of in terms of a series of transactions. All transitive payments are compressed when performing a state diff.</p>
+
+<p>We’ll define some terms to characterize transactions. We call <em>data-dominated</em> transactions to transactions whose output state changes can be specified at a lower gas cost by giving the changes explicitly in textual form, than executing the transaction and collecting the resulting state changes . We’ll call <em>CPU-dominated</em> to the others. Simple payments are clearly data-dominated. A CPU-bound transaction would be one that performs many changes to the state programmatically, without any explicit key/value information indicated in the transaction calldata. For example, a transaction that executes a contract that sends 1 satoshi to 10000 sequential account addresses starting from a fixed address. 
+While we could use the CPU-bound and storage-bound definitions from <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP62.md">RSKIP62</a>, we think the definitions proposed here are easier to reason about. While we can’t assure that all L2s will be data-dominated, it is highly probably that at least certain L2s will focus on cheap token payments and will be data-dominated.</p>
+
+<h2 id="savings-in-data-dominated-l2s">Savings in Data-dominated L2s</h2>
+
+<p>A data-dominated L2s could expect a considerable reduction in transaction costs if the operator(s) could:</p>
+
+<ul>
+  <li>post periodic L2 blocks containing transactions at an average interval tT (i.e. tT=1 minute)</li>
+  <li>post periodic L2 state diffs at a different average interval tD (ie.e tD = 1 month) creating state checkpoints.</li>
+  <li>Remove all L2 blocks previously posted to the blockchain between two old state checkpoints, when the probability that the blockchain is reorganized to remove the checkpoints involved is negligible.</li>
+</ul>
+
+<p>This idea was analyzed in the past under the name “ephemeral calldata” in proposals <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP28.md">RSKIP28</a> and <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP214.md">RSKIP214</a>. In this RSKIP, we use the acronym ECD for ephemeral calldata for brevity.</p>
+
+<p>The main challenge of designing an efficient ECD scheme is making the cost of removing the old data from the blockchain much lower than the cost of the data overhead itself. A secondary challenge is designing and implementing a more complex blockchain synchronization protocol that is required to broadcast blocks with incomplete data.</p>
+
+<h2 id="keep-by-default-vs-remove-by-default">Keep-by-Default vs Remove-by-Default</h2>
+
+<p>There are two types of ECD: keep-by-default (KBD-ECD) and remove-by-default (RBD-ECD).  RSKIP214 proposes RBD-ECD. RBD-ECD has the benefit that the user posting the RBD-ECD pre-pays only for the cost of temporal storage plus the the cost of data removal, which must be lower than the cost of data persistence. In case ECD needs to be persisted forever, the user or contract that needs to persist the data pays for this cost. This avoids inter-block refunds, which in turn avoids temporary storage of gas that can lead to gastokens. However, RBD-ECD puts L2 at a higher risk that any malfunction or censorship of the transactions that commands the ECD to persist will lead to the data becoming unavailable. On the contrary, KBD-ECD protects L2 users by default.  Last, KBD-ECD can emulate RBD-ECD by adding some user contract method that enables anyone to trigger the ECD removal functionality by calling the method, and paying a small bounty for the user that performs this call.</p>
+
+<p>Because we think the two semantics are useful, this proposal enables both KBD-ECD and RBD-ECD.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>We split the specification in different sections covering transaction format, execution, removal workflow , querying methods and blockchain synchronization.</p>
+
+<h2 id="transaction-format-extension">Transaction Format Extension</h2>
+
+<p>A new type of transaction version 2 is defined. This can be done according to <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP145.md">RSKIP145</a>, <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP212.md">RSKIP212</a>, <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP213.md">RSKIP213</a> or another transaction versioning standard chosen by the community, such as Ethereum’s <a href="https://eips.ethereum.org/EIPS/eip-2718">EIP2718</a>.</p>
+
+<p>Let U be the tuple (<strong>ecdSize</strong>, <strong>hasherContractAddress</strong>, <strong>hasherCallGasConsumed</strong>, <strong>ecdStdHash</strong>, <strong>ecdHash</strong>,<strong>keepByDefault</strong>). If this proposal is implemented with RSKIP212 versioning, the calldata field is replaced by the RLP encoding of the RLP tuple (<strong>calldata</strong>,  <strong>U</strong> ). The calldata field is renamed <strong>calldataSummary</strong>. The double RLP encoding ensures  that the outer most encoding is still a single element and not a list, preserving hardware wallet compatibility. 
+If this proposal is implemented with RSKIP213 versioning, then a new field <strong>ecdInfo</strong> can be added to the transaction containing the tuple U or an empty value (if no ECD is present). 
+In case of RSKIP145 versioning, the fields in the tuple U are added separately, each one with a new field id.</p>
+
+<p>In case of EIP2718 versioning, a new transaction type is used and arguments can be added at the end of the existing transaction fields.</p>
+
+<p>Here we explain each the new fields that wallets must handle. Some of these fields are <strong>internal</strong>, which means that they are computed from some other fields.</p>
+
+<ul>
+  <li><strong>ecdSize</strong>: size of ecd.</li>
+  <li><strong>ecd</strong>: the calldata that can potentially be removed</li>
+  <li><strong>ecdStdHash</strong>: the Keccak hash of the ecd. This hash is only checked if the ECD is present.</li>
+  <li><strong>ecdHash</strong>: the hash digest of the hasher specified by hasherContractAddress, applied to the <strong>ecd</strong>.</li>
+  <li><strong>hasherContractAddress</strong>: the contract address of a hashing function. The value zero indicates no hasher contract will be used.</li>
+  <li><strong>hasherCallGasConsumed</strong>: the gas consumed when hasherContractAddress is called. Must be zero if the hasherContractAddress is zero.</li>
+  <li><strong>keepByDefault</strong>: if true (1) the ECD is kept by default, If false (0), it is removed by default.</li>
+</ul>
+
+<p>Only the <strong>ecd</strong> and <strong>hasherContractAddress</strong> fields are chosen freely by the user’s wallet, the other fields are derived from <strong>ecd</strong> and are computed by the wallet.</p>
+
+<p>The value <strong>ecdSize</strong> must match the size of the <strong>ecd</strong>, if not, the transaction is invalid.</p>
+
+<p>When a transaction is serialized for wire transmission, the transaction is wrapped in a RLP object containing two values. The first is the unwrapped transaction, and the second is the <strong>ecd</strong>, which can be null if absent.</p>
+
+<p>It is highly probable that nodes will store the <strong>ecd</strong> in a separate database, indexed by block hash and transaction index, to ease its removal.</p>
+
+<h2 id="computation-of--ecdhash">Computation of  ecdHash</h2>
+
+<p>The value <strong>ecdHash</strong> is computed by the wallet as <code class="language-plaintext highlighter-rouge">hasherCall(ecd)</code> where <code class="language-plaintext highlighter-rouge">hasherCall()</code> represents the off-chain call (using <code class="language-plaintext highlighter-rouge">STATICCALL</code>) to the <strong>hasherContract</strong> that resides at the <strong>hasherContractAddress</strong>. The call takes <strong>ecd</strong> as argument. The <code class="language-plaintext highlighter-rouge">hasherCall()</code> is given <strong>ecdSize</strong>*10 gas for execution. If it ends with <code class="language-plaintext highlighter-rouge">OOG</code> or if it executes<code class="language-plaintext highlighter-rouge">REVERT</code>, then the transaction is invalid. The gas consumed by this call must match exactly the value of the field <strong>hasherCallGasConsumed</strong>.</p>
+
+<p>The <strong>hasherContract</strong> must be have been created with <code class="language-plaintext highlighter-rouge">CREATE</code> opcode (or transaction with null destination). It cannot be a contract with changeable code (such as contracts created with <code class="language-plaintext highlighter-rouge">CREATE2</code> opcode). To achieve this, contracts store a flag indicating how they were created: this is specified a separate RSKIP to be defined.</p>
+
+<p>When called, <code class="language-plaintext highlighter-rouge">hasherCall</code> must return exactly 32 bytes. The <code class="language-plaintext highlighter-rouge">hasherCall</code> cannot read or store data on its storage, nor perform calls to other contracts with opcodes other than <code class="language-plaintext highlighter-rouge">STATICALL</code>. If <code class="language-plaintext highlighter-rouge">hasherCall</code> reverts, throws <code class="language-plaintext highlighter-rouge">OOG</code> or returns anything else, the transaction becomes invalid.</p>
+
+<p>Nodes must perform the corresponding <code class="language-plaintext highlighter-rouge">hasherCall</code> when they receive a mempool transaction with <strong>ecd</strong>, and verify the correct signature before broadcasting it again. Note that depending on how the <strong>hasherContract</strong> contract is</p>
+
+<p>The minimum size for <strong>ecd</strong> is 1024 bytes. If less data is specified, the transaction is processed as normal, but the <strong>ecd</strong> cannot be removed from the blockchain later.</p>
+
+<p>The initial cost of <strong>ecd</strong> is 8 gas per byte, eight times lower than the cost of calldata. This accounts for the cost of transaction data propagation. 
+The destination address of the transaction containing the ephemeral data becomes the ephemeral data owner (<strong>ecdOwner</strong>).</p>
+
+<h3 id="avoidance-of-ecd-malleability">Avoidance of ECD Malleability</h3>
+
+<p>Since the computation of the hash that identifies the ECD is specified by the user, it’s possible that the user chooses a hasher contract implementing a flawed hash function (i.e. non-cryptographic or simply a constant function). To avoid malleability, if the ECD of a transaction is included in a block, then the <strong>ecdStdHash</strong> must match the <code class="language-plaintext highlighter-rouge">Keccak</code> hash of the <strong>ecd</strong>.</p>
+
+<h2 id="ecd-registration">ECD Registration</h2>
+
+<p>A new precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> exists at address <code class="language-plaintext highlighter-rouge">0x00..0100001B</code>. The contract has several new methods related to handling ephemeral calldata.</p>
+
+<p>We define the SID as the <code class="language-plaintext highlighter-rouge">KECCAK</code> hash of the fixed 64-byte message of the sender and id fields concatenated. (“S” in SID stands for Sender).</p>
+
+<p>The <strong>ecdOwner</strong> can register the ephemeral data by calling the method: 
+<code class="language-plaintext highlighter-rouge">registerEphemeralCalldata(uint id) returns(uint32 err)</code></p>
+
+<p>The registration occurs only if this call does not revert. The id value can be chosen by the caller in any way.  As examples, it can be a sequential number incremented on every call or it can be the concatenation of the block and transaction number. the The, together with the sender, form the SID.</p>
+
+<p>The method succeeds if:</p>
+
+<ul>
+  <li>
+    <p>The transaction has ECD.</p>
+  </li>
+  <li>
+    <p>The sender is the <strong>ecdOwner</strong>.</p>
+  </li>
+  <li>
+    <p>The ECD has not been already registered successfully.</p>
+  </li>
+  <li>
+    <p>The SID does not already exists in the <code class="language-plaintext highlighter-rouge">epBySID</code> map.</p>
+  </li>
+  <li>
+    <p>The <strong>depositAmount</strong> is transferred with the call.</p>
+  </li>
+</ul>
+
+<p>On success:</p>
+
+<ul>
+  <li>
+    <p>A new entry in the the <code class="language-plaintext highlighter-rouge">epBySID</code> map is created.</p>
+  </li>
+  <li>
+    <p>An amount of 10K gas will be consumed (accounts for the storage of the entry).</p>
+  </li>
+  <li>
+    <p>If <strong>keepByDefault</strong>==false, then an additional amount of 20K gas will be consumed (accounts for later removal)</p>
+  </li>
+  <li>
+    <p>logs an event with the following signature:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">ecdRegistered(uint256 sid)</code></p>
+  </li>
+  <li>
+    <p>returns 0.</p>
+  </li>
+</ul>
+
+<p>On failure:</p>
+
+<ul>
+  <li>An amount of 800 gas is consumed</li>
+  <li>Returns 1 (if the transaction does not have ECD) , 2 (the sender is not the <strong>ecdOwner</strong>), 3 (if the ECD was previously registered), 4 (if the <code class="language-plaintext highlighter-rouge">epBySID</code> entry exists), 5 (if the <strong>depositAmount</strong> is not transferred).</li>
+</ul>
+
+<p>The method will succeed only once. If called more than once (with the same or a different id), it will fail with error code 3.</p>
+
+<p>If (<strong>keepByDefault</strong>==true), then a bitcoin amount <strong>depositAmount</strong> must be transferred to the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract with the <code class="language-plaintext highlighter-rouge">registerEphemeralCalldata()</code> call. The <strong>depositAmount</strong> is defined gasPrice*<code class="language-plaintext highlighter-rouge">getGasDeposit()</code>.  The auxiliary function <code class="language-plaintext highlighter-rouge">getGasDeposit()</code> is defined as (<strong>hasherCallGasConsumed</strong>+48<strong>*ecdSize</strong>).</p>
+
+<p>This amount is locked in the contract, and it is only reimbursed to the user if the user later removes the ephemeral data by calling <code class="language-plaintext highlighter-rouge">removeEphemeralData()</code>.</p>
+
+<p>If there is ECD in the transaction and the method <code class="language-plaintext highlighter-rouge">registerEphemeralCalldata()</code> is not called, the ECD is immediately erased and the block containing the transaction does not need to transfer the ECD.</p>
+
+<p>When <code class="language-plaintext highlighter-rouge">registerEphemeralCalldata()</code> succeeds, the following data is stored inside the map <code class="language-plaintext highlighter-rouge">epBySID</code> in the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract:</p>
+
+<ul>
+  <li>uint256 ecdHash</li>
+  <li>uint256 id passed as argument</li>
+  <li>uint32 blockNumber (the current block number)</li>
+  <li>uint32 transactionIndex (the current transaction index in the block)</li>
+  <li>address ecdOwner (also known as caller or sender)</li>
+  <li>uint256 amountDeposited (amount in bitcoins deposited)</li>
+  <li>uint32 hasherCallGasConsumed</li>
+  <li>uint32 removalRequestBlockNumber</li>
+  <li>uint32 removalRequestTransactionIndex</li>
+  <li>uint8 state (the current state of the ECD)</li>
+</ul>
+
+<p>The entry size is 137 bytes and it can be stored in a single Unitrie storage cell to reduce storage costs.</p>
+
+<p>The dictionary <code class="language-plaintext highlighter-rouge">epBySID</code> dictionary is indexed by SID.  Each entry contains the other fields. The state of a new entry is <em>removable</em> if keepByDefault is true, or <em>autoRemovable</em> if false.</p>
+
+<p>The fields <strong>removalRequestBlockNumber</strong> and <strong>removalRequestTransactionIndex</strong> will start as zero, and will be filled when the removal request is issued.</p>
+
+<p>The <strong>state</strong> can be one of four possibilities:</p>
+
+<ul>
+  <li>0: <em>unknown</em> (indicating the entry does not exists)</li>
+  <li>1: <em>autoRemovable</em> (indicating the ECD will be removed automatically if not queried)</li>
+  <li>2: <em>removable</em> (indicating the ECD is registered and can be removed if not too late)</li>
+  <li>3: <em>toBeRemoved</em> (indicating the a request to remove the ECD was received but it hasn’t been removed yet)</li>
+  <li>4: <em>permanent</em> (indicating the ECD will cannot be removed anymore)</li>
+</ul>
+
+<p>The ECD can be removed only if the state is <em>removable</em> and the deadline to remove it has not elapsed.</p>
+
+<h2 id="ecd-removal-request">ECD Removal Request</h2>
+
+<p>A contract can start the removal process of an ECD by calling a method <code class="language-plaintext highlighter-rouge">requestRemovalOfEphemeralData()</code> that exists in a precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> with the following ABI:</p>
+
+<p><code class="language-plaintext highlighter-rouge">function requestRemovalOfEphemeralData(uint32 id) returns (uint32 error);</code></p>
+
+<p>The contract method will build the SID based on the sender address and the id passed as argument.</p>
+
+<p>The method succeeds if:</p>
+
+<ul>
+  <li>There is an entry in <code class="language-plaintext highlighter-rouge">epBySID</code> for the SID key built with the sender and the id.</li>
+  <li>The state of the entry is <em>removable</em>.</li>
+  <li>The current block height is less than the block height where the SID was registered plus a constant M.</li>
+</ul>
+
+<p>On success:</p>
+
+<ul>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">epBySID</code> entry is updated: the state is set to <em>toBeRemoved</em>.</p>
+  </li>
+  <li>
+    <p>The fields <strong>removalRequestBlockNumber</strong> and <strong>removalRequestTransactionIndex</strong> are filled with the current block number and transaction index. This data will be used when the actual removal occurs.</p>
+  </li>
+  <li>
+    <p>An amount of gas equivalent to 10000 is consumed (this accounts for the storage changes).</p>
+  </li>
+  <li>
+    <p>logs an event with the following signature:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">ecdRemovalRequested(uint256 sid,uint32 blockNumber,uint32 transactionIndex)</code>
+where both arguments correspond to the block number and transaction index when the ECD was registered.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">requestRemovalOfEphemeralData()</code> returns 0</p>
+  </li>
+</ul>
+
+<p>The value M is defined as 180,000. Depending on the average number of uncles per block, an epoch can a last from 1 month to approximately 2 months.</p>
+
+<p>If data of the <strong>ecd</strong> is requested by the query method (see later), the state will be <em>permanent</em> and then the data cannot be removed.</p>
+
+<p>On failure:</p>
+
+<ul>
+  <li>The gas consumed is 800</li>
+  <li>The method returns 1 (if the entry was not found) or 2 (if the state was not <em>removable</em>) or 3 (if the block height was not within the required bounds)</li>
+</ul>
+
+<h2 id="ecd-removal">ECD Removal</h2>
+
+<p>Once a delay D=30000 blocks have elapsed since the ECD entry has been requested for removal, then the method <code class="language-plaintext highlighter-rouge">removeEphemeralData()</code> can be called. The method signature is the following:</p>
+
+<p><code class="language-plaintext highlighter-rouge">function removeEphemeralData(uint32 id) returns (uint32 error)</code></p>
+
+<p>The delay, which  corresponds to approximately 10 days, prevents blockchain reorganizations to cancel removal of ECDs. The method <code class="language-plaintext highlighter-rouge">removeEphemeralData()</code> actually removes the ECD from the blockchain. the SID is computed as before.</p>
+
+<p>The method succeeds if:</p>
+
+<ul>
+  <li>the entry specified by the SID exists</li>
+  <li>the state is <em>removable</em>.</li>
+</ul>
+
+<p>On success:</p>
+
+<ul>
+  <li>
+    <p>a gas of 30000, is consumed ( which accounts for the storage changes (10K) and changing the transaction record of an old block (20K)).</p>
+  </li>
+  <li>
+    <p>logs an event with the following signature:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">ecdRemoved(uint256 sid, uint32 removalRequestBlockNumber,uint32 removalRequestTransactionIndex)</code>. Here the arguments correspond to the block number and transaction index when the ECD removal was requested (<code class="language-plaintext highlighter-rouge">ecdRemovalRequested</code> event).</p>
+  </li>
+  <li>
+    <p>Transfers back to the caller the deposited BTCs (<strong>amountDeposited</strong> value). This transfer is made as a direct balance increase, not as a recursive call.</p>
+  </li>
+  <li>
+    <p>returns 0</p>
+  </li>
+</ul>
+
+<p>On failure:</p>
+
+<ul>
+  <li>the gas consumed is 800.</li>
+  <li>returns 1 (if the entry was not found) or 2 (if the state was not <em>removable</em>)</li>
+</ul>
+
+<h2 id="ecd-persistence-request">ECD Persistence Request</h2>
+
+<p>A contract persist an ECD by two methods: querying data from the ECD to be used in a contract or requesting the persistence of the data in the blockchain without actually using the data. Here we explain this second option. To persist the ecd, a contract can call the method <code class="language-plaintext highlighter-rouge">requestPersistenceOfEphemeralData()</code> that exists in a precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> with the following ABI:</p>
+
+<p><code class="language-plaintext highlighter-rouge">function requestPersistenceOfEphemeralData(uint32 id) returns (uint32 error);</code></p>
+
+<p>The SID is computed as before.</p>
+
+<p>The method succeeds if:</p>
+
+<ul>
+  <li>There is an entry in  <code class="language-plaintext highlighter-rouge">epBySID</code> with the SID key.</li>
+  <li>The state of the entry is <em>autoRemovable</em>.</li>
+  <li>The current block height is less than the block height where the SID was registered plus a constant M.</li>
+</ul>
+
+<p>On success:</p>
+
+<ul>
+  <li>
+    <p>sets the state of the ECD entry to <em>permanent</em>.</p>
+  </li>
+  <li>
+    <p>consumes the gas computed by <code class="language-plaintext highlighter-rouge">getGasDeposit()</code> (this accounts for the fact that the nodes will need to call the hasher each time the transaction is verified)</p>
+  </li>
+  <li>
+    <p>consumes 5K gas for the storage change (since 30K was pre-paid for the removal and removal was not performed, the storage change is subsidized by 5K)</p>
+  </li>
+  <li>
+    <p>Logs the event with the following signature:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">ecdPersisted(uint256 sid)</code>.</p>
+  </li>
+  <li>
+    <p>returns 0</p>
+  </li>
+</ul>
+
+<p>On failure it consumes only 800 gas, and returns 1 (if the entry was not found), 2 (if the state was not autoRemovable) or 3 (if the block height is higher than the required bound).</p>
+
+<h2 id="ephemeral-calldata-retrieval">Ephemeral Calldata Retrieval</h2>
+
+<p>Information regarding the ECD specified in the current transaction can be accessed with the following methods:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentEcdHash() returns (uint256 userHash)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentEcdStdHash() returns (uint256 stdHash)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentEcdSize() returns (uint32 size)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentHasherCallGasConsumed() returns (uint32 size)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentHasherContractAddress() returns (address addr)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentDepositAmount() returns(uint256 amount)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentTransactionIndex() returns(uint32 index)</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getCurrentBlockNumber() returns(uint32 number)</code></p>
+  </li>
+</ul>
+
+<p>More information about certain past ephemeral calldata can be retrieved by contracts by calling the methods:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">getEcdSize(uint256 sid) returns (uint32 size)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getEcd(uint256 sid, uint32 offset,uint32 maxSize) returns(bytes data)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getEcdHash(uint256 sid) returns (uint256 userHash)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getDepositAmount(uint256 sid) returns(uint256 amount)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getHasherContractAddress(uint256 sid) returns (address addr)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getTransactionIndex(address sender, uint256 id) returns(uint32 index)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getBlockNumber(uint256 sid) returns(uint32 number)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getEcdState(uint256 sid) returns(uint8 number)</code></li>
+</ul>
+
+<p>These methods are provided by the precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code>.</p>
+
+<p>Once <code class="language-plaintext highlighter-rouge">getEcd()</code> is called, the <strong>ecd</strong> cannot be removed anymore, and attempting to removed it returns an error code. Internally, the when is called the  <code class="language-plaintext highlighter-rouge">epBySID</code> map entry is marked by setting the state to  <em>permanent</em>. The initial gas cost of <code class="language-plaintext highlighter-rouge">GetEcd()</code> is 5000. If the state of the ECD was <em>autoRemovable</em>, then the gas computed by <code class="language-plaintext highlighter-rouge">getGasDeposit()</code> is also consumed.</p>
+
+<p><code class="language-plaintext highlighter-rouge">GetEcd()</code> will fail if called specifying a SID successfully registered in the same block.</p>
+
+<p>The gas cost of all the remaining query methods (i.e. <code class="language-plaintext highlighter-rouge">GetEcdSize()</code> and <code class="language-plaintext highlighter-rouge">GetEcdHash()</code>) is 1000 each.</p>
+
+<p>If the ECD is registered at block at height X, then the entry data will be available to be retrieved in the block range [X+1..X+M+1]. The node can store the ephemeral data longer, but at height greater than (X+M+1) it becomes unavailable to smart contracts. If the ECD was not sent, or not registered, or if it became unavailable, then:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GetEcdSize()</code> returns zero</li>
+  <li><code class="language-plaintext highlighter-rouge">GetEcd()</code> fills the return buffer with zeros up to maxSize</li>
+  <li><code class="language-plaintext highlighter-rouge">GetEcdHash()</code> fills 32 bytes of the return buffer with zeros</li>
+  <li><code class="language-plaintext highlighter-rouge">getDepositAmount()</code> returns zero</li>
+  <li><code class="language-plaintext highlighter-rouge">getHasherContractAddress()</code> return zero</li>
+  <li><code class="language-plaintext highlighter-rouge">getTransactionIndex()</code> return zero</li>
+  <li><code class="language-plaintext highlighter-rouge">getBlockNumber()</code> returns zero</li>
+</ul>
+
+<h1 id="blockchain-synchronization">Blockchain Synchronization</h1>
+
+<p>A transaction with an non-zero ecdSize is called <em>mutable</em>. A block that has at least one mutable transaction is called <em>mutable block</em>.  If it has no mutable transactions it is <em>immutable</em>. If a block is mutable and has all its ephemeral data or if it is immutable, it is called <em>complete</em>. We <em>ECD inclusion rule</em> to the consensus rule that governs if ephemeral data must be present or not in a block for the block to be accepted. The rule will be defined shortly. Any definition on a block that affected by the ECD inclusion rule will make the block state depend on future blocks, and therefore this state could change. We call <em>core consensus rules</em> to the set all consensus rules except the ECD inclusion rule.  Core consensus rules do not depend on future blocks. A block that with mutable transactions that breaks the ECD inclusion rule is called <em>deficient</em>. A block that satisfies the core consensus rules is called <em>adequate</em>. A block that is adequate and respects the ECD inclusion rule is called <em>valid</em>. If not, it is <em>invalid</em>. Note that the validity of a  block could change if future blocks are reorganized. A valid block that has (M+D) valid block confirmations is called <em>sealed</em>.</p>
+
+<p>To synchronize the blockchain, nodes keep three block pointers that specify block heights. The <em>tipBlock</em> , <em>shrinkableBlock</em> and <em>sealedBlock</em>.  All blocks with height equal or lower than the sealedBlock are sealed. All blocks with height equal or lower than shrinkableBlock are valid, but could have their ephemeral data removed (but would still be valid).</p>
+
+<p>The pointers satisfy sealedBlock &lt;= shrinkableBlock &lt;= tipBlock. The tipBlock points to the last adequate block received. All blocks in the local blockchain are adequate.</p>
+
+<p>Let the block B be the child of the shrinkableBlock. The state of B can change according to the following algorithm:</p>
+
+<ul>
+  <li>
+    <p>if the next block (height i) is complete, then the block B is sealed and shrinkableBlock advances.</p>
+  </li>
+  <li>
+    <p>if all blocks j (i&lt;j&lt;=i+M) exists in the blockchain and they are either sealed or complete:</p>
+    <ul>
+      <li>For each transaction T in the block i that had ECD but it was removed:
+        <ul>
+          <li>if an event <code class="language-plaintext highlighter-rouge">ecdRegistered(sid)</code> is not present in its receipt, skip this transaction.</li>
+          <li>if (T.keepByDefault==true), then
+            <ul>
+              <li>if any block j (i&lt;j&lt;=i+M) do not contain the event <code class="language-plaintext highlighter-rouge">ecdRemovalRequested(uint256 sid,..)</code> generated by the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract , then the block is deficient.</li>
+            </ul>
+          </li>
+          <li>if (T.keepByDefault==false),
+            <ul>
+              <li>if any block j (i&lt;j&lt;=i+M) contain the the event <code class="language-plaintext highlighter-rouge">ecdPersisted(uint256 sid)</code>generated by the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract, then then the block is deficient.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>If the block is not deficient, then shrinkableBlock can advance.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The algorithm that governs the sealedBlock pointer is the following:</p>
+
+<ul>
+  <li>If (i+M &lt;= shrinkableBlock) then increment sealedBlock</li>
+  <li>if  (i+M &lt;= tipBlock)  and blocks (i..i+M] are complete, then increment sealedBlock</li>
+</ul>
+
+<p>The algorithm that governs the tipBlock pointer is the following:</p>
+
+<ul>
+  <li>When a new block arrives, if it is adequate, add it to the blockchain and make tipBlock point to it.</li>
+  <li>If the new block emits an event <code class="language-plaintext highlighter-rouge">ecdRemoved(sid, removalRequestBlockNumber,removalRequestTransactionIndex)</code>, then query the contract to find the corresponding mutable transaction T (by block number and transaction index). Then remove the ECD of this transaction from the blockchain. The height of the block containing T should be higher than the sealedBlock pointer but lower or equal to the shrinkableBlock pointer.</li>
+</ul>
+
+<p>When a node is fully synchronized, the latest M blocks of the blockchain will be complete, and the tipBlock and shrinkableBlock pointers will match and point to the same block. The pointer sealedBlock will point to a block M blocks behind.</p>
+
+<p>If an incomplete block is detected during synchronization, then it is necessary either reorganize the chain or look for the missing data from a another source peer. The node can first try to find the missing data, and if that’s not possible, find a peer having an alternate fork. However, to avoid selecting the wrong fork because of transient network problems, it is recommended that nodes only switch to a new fork if this fork has higher cumulative work. While no better fork is found, the node should pause, try connecting with new  peers. and wait.</p>
+
+<h1 id="rationale">Rationale</h1>
+
+<p>We discuss several design topics in the following sections. The ephemeral data was designed to achieve three properties: Segregated, Conditionally-stored and Delayed.</p>
+
+<h3 id="segregation"><strong>Segregation</strong></h3>
+
+<p>Ephemeral calldata is not directly hashed along with the other transaction data to be signed, only the user-defined hash digest of the Ephemeral calldata is. Therefore  ephemeral calldata can be disposed, and only the hash digest,  the data size, and the hashing cost remains in the blockchain. This pattern is sometimes used for witness data in blockchains.</p>
+
+<h3 id="conditional-storage"><strong>Conditional Storage</strong></h3>
+
+<p>Ephemeral calldata only becomes part of the blockchain if it is retrieved by a contract using the query methods. Contracts can If it is not used before a deadline, the data is removed from the blockchain. Full nodes can be optimized to store ephemeral calldata in efficient databases that enable removal without re-packing.</p>
+
+<h3 id="access-delay"><strong>Access Delay</strong></h3>
+
+<p>Ephemeral calldata cannot be accessed in the same block it is transmitted, but it is delayed one block. A smart-contract can only access the ephemeral calldata starting from the following block of ephemeral calldata inclusion. This reduces the stress to process the ephemeral data in the critical block propagation path from miner to miner. The ephemeral calldata can be sent after the propagation of the standard block data, so that ephemeral data transmission occurs in parallel of block validation at the destination node. A miner can compute the resulting state of a received block before the ECD has been received. Even if there is a risk that a miner creating a block does not provide the ephemeral calldata after the block, forcing the destination peer to backtrack, this is the same risk that a node undergoes when processing a block full of transactions in case the last transaction is invalid.</p>
+
+<h3 id="user-defined-hash-function">User-defined Hash Function</h3>
+
+<p>The goal of enabling a user-specified hash function is two-fold:</p>
+
+<ul>
+  <li>If the hasher computes a Merkle-tree of the ECD and returns its root, it enables selective disputes that require proving that a certain element in the <strong>ecd</strong>.</li>
+  <li>If the ecd is used as L2 transaction data for a a ZK-rollup, then the rollup designer may choose to implement a SNARK-friendly hashing function, so that the ZK proofs can be created with much lower resources.</li>
+</ul>
+
+<h1 id="backwards-compatibility">Backwards Compatibility</h1>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.</p>
+
+<h1 id="test-cases">Test Cases</h1>
+
+<p>TBD</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>No new practical denial of service or resource abuse risks have been identified related to this change. However, we identify a number of potential theoretical problems.</p>
+
+<h3 id="weird-blocks">Weird Blocks</h3>
+
+<p>If an ECD is removed, it’s possible that the <strong>ecdSize</strong> and <strong>ecdHash</strong> contain invalid values, that never matched the <strong>ecdStdHash</strong>. Let define a transaction T to be <em>weird</em> if it can switch from invalid to valid state after M confirmations when the ECD is removed. Weird transactions violate some a common assumption in blockchain protocols, but it does not seem to cause problems in practice. Let define a <em>weird block</em> as a block containing weird transactions. Since weird block would be flagged as invalid (and this flag may persist) it is possible for an attacker to attempt to split the network by creating a weird block with M confirmations. First, the weird block alone is sent to half of the miners, and they reject it. Then the weird block but without the ECDs, along with M confirmations is sent to the other half. This other half will accept the fork. This attack is impractical since creating M consecutive blocks for a minority miner is infeasible.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

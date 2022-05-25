@@ -1,3 +1,14 @@
+---
+rskip: 43
+title: Sequential Address format
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-06-23
+---
 
 # Sequential Address format
 

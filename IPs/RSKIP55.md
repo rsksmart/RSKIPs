@@ -1,3 +1,15 @@
+---
+rskip: 55
+title: Native On-Chain Probabilistic payments
+description: 
+status: Draft
+purpose: Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-03-11
+---
+
 # Native On-Chain Probabilistic payments
 
 |RSKIP          |55           |

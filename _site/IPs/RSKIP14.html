@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Reward Manager Smart Contract (REMASC) | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Reward Manager Smart Contract (REMASC) | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP14" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP14" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Reward Manager Smart Contract (REMASC)</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="reward-manager-smart-contract-remasc">Reward Manager Smart Contract (REMASC)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">14</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Reward Manager Smart Contract (REMASC)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">06-SEP-2016</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Rejected</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>RSK will be the first blockchain based on proof-of-work consensus that has no subsidy. Also RSK will be the fastest existent PoW blockchain. All network parameters and protocols that we design to allow these goals must be supported by a miners rewards structure that incentivizes the honest planned behaviour. Therefore the main design parameter that can provide such guarantees is how the transaction fees are split between miners. At the same time, RSK wants to maintain the other usual design goals, such as preventing excessive centralization. Such stringent requirements ask for novel solutions, and is has become clear that due to the numerous possible attack vectors, such solution will not be a simple one.  However, the solution must fit into the smart contract framework easily, without interfering or preventing the achievement of other platform goals, such as allowing nodes to easily download the blockchain state from the worstate trie, without additional state data.. Therefore this RSKIP proposes that the reward splitting algorithm is coded into a smart contract, which will be called REMASC (Reward Manager Smart Contract). By doing this, all extra state will be part of the REMASC persistent storage.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>The following is a list of the design goals behind RSK reward splitting strategy and consensus protocol:</p>
+
+<ul>
+  <li>
+    <p>The blockchain consensus is driven by SHA256D merge-mined proof-of-work</p>
+  </li>
+  <li>
+    <p>The desired average block interval is 10 seconds.</p>
+  </li>
+  <li>
+    <p>The consensus protocol should not include new incentives for mining centralization.</p>
+  </li>
+  <li>
+    <p>The consensus protocols should reduce incentives from block withholding [<a href="https://petertodd.org/2016/block-publication-incentives-for-miners">https://petertodd.org/2016/block-publication-incentives-for-miners</a>]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should reduce centralization incentives derived from stale blocks. [<a href="https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/">https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/</a>] and <a href="https://eprint.iacr.org/2013/881">Accelerating Bitcoin’s Transaction Processing, Fast Money Grows on Trees, Not Chains, Sompolinsky, Zohar</a></p>
+  </li>
+  <li>
+    <p>The consensus protocol should reduce the probability of transaction reversal as much as possible.</p>
+  </li>
+  <li>
+    <p>Therefore, the consensus protocol should not allow profit from selfish-mining [Majority is not Enough: Bitcoin Mining is Vulnerable, Eyal, Gun Sirer, avilable at <a href="https://arxiv.org/pdf/1311.0243v5.pdf">https://arxiv.org/pdf/1311.0243v5.pdf</a>]</p>
+  </li>
+  <li>
+    <p>The consensus protocol must be incentive compatible [ Incentive Compatibility of Bitcoin Mining Pool Reward Functions, Schrijvers, Bonneau, Boneh, Roughgarden, available at <a href="http://theory.stanford.edu/~tim/papers/bitcoin.pdf">http://theory.stanford.edu/~tim/papers/bitcoin.pdf</a> ]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should not allow profit from Camacho selfish-mining [DECOR+LAMI: A Scalable Blockchain Protocol, <a href="https://scalingbitcoin.org/papers/DECOR-LAMI.pdf">https://scalingbitcoin.org/papers/DECOR-LAMI.pdf</a> ]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should not allow profit from Uncle mining. [<a href="https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/">https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/</a> ]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should prevent instabilities from no-subsidy mining [On the Instability of Bitcoin Without the Block Reward, Carlsten,Kalodner,Weinberg, Narayanan, available at <a href="http://randomwalker.info/publications/mining_CCS.pdf">http://randomwalker.info/publications/mining_CCS.pdf</a> ]</p>
+  </li>
+  <li>
+    <p>It should allow for mining blocks without executing validating parent block transaction (for validation-less mining up to certain depth)</p>
+  </li>
+  <li>
+    <p>The mining rewards should not be paid to miners until a certain maturity period (in terms of blocks) has elapsed. This time-delayed rewards adds more pressure for miners not to attack the network, and rewards held by the platform act as a security bond.</p>
+  </li>
+  <li>
+    <p>The penalization for not including a competing uncle should be higher than the loss for sharing the reward. This considering the cost of bribing subsequent miners not to include the uncle.</p>
+  </li>
+  <li>
+    <p>The consensus protocol should be protected from starvation</p>
+  </li>
+</ul>
+
+<p>This RSKIP proposes a protocol and an implementation that tries to satisfy the design goals.</p>
+
+<p>The core protocol extends <a href="https://bitslog.wordpress.com/2014/05/07/decor-2/">DECOR+</a>.</p>
+
+<p>The fees collected by any block are not paid directly to the miner of the block, but they are transferred to a native smart contract called REMAC. The transfer is done automatically, and corresponds to an emulated simple transaction transaction that carries all of the block’s transaction fees as value.</p>
+
+<h1 id="rationale"><strong>Rationale</strong></h1>
+
+<p>The strategy proposed here is a variation of <a href="https://bitslog.wordpress.com/2014/05/07/decor-2/">DECOR+</a>. In a nutshell, the strategy is to share the block reward between all miners that have solved a block of the same height, and also with subsequent miners. To help the explanation we’ll first assume for a moment that all block fees are almost equal so each miner receives almost the same net payment for a block (there is no difficulty adjustment, nor subsidy, only a never ending transaction backlog). We’ll also simplify the explanation by limiting ourselves to a conflict between two miners, and we’ll later show this is the most common case. Whenever two miners (Alice and Bob) mine two competing blocks (a block conflict) the following happens:</p>
+
+<ul>
+  <li>
+    <p>If one block has a reward higher than two times the other block reward, both miners decide to mine on top of the on one with highest reward</p>
+  </li>
+  <li>
+    <p>Else, miners decide to mine on top of the block with the lowest hash.</p>
+  </li>
+</ul>
+
+<p>This will be the conflict block selection rule. For miners to be able to compare competing blocks, all conflicting blocks headers that are not too old (no more than 10 steps back of the chain tip) are forwarded by the network. If a miner Carol (which could be also Alice or Bob) solves a following block, she can decide to include in her block a reference to the uncle block header that was left out of the main chain, can collect an extra prize when the coinbase of the conflicting block matures . The prices and rewards are computed according to the following steps:</p>
+
+<ul>
+  <li>
+    <p>For every block there is a pre-existent Reward balance (RB).</p>
+  </li>
+  <li>
+    <p>Also there is always a Burned Balance (BB).</p>
+  </li>
+  <li>
+    <p>All the fees paid in a block are accumulated into the RB.</p>
+  </li>
+  <li>
+    <p>10% of the RB is extracted as the Full Block Reward (FBR).</p>
+  </li>
+  <li>
+    <p>If the conflicting block and sibling headers do not obey the selection rule a <strong>punishment fee</strong> of 10% is subtracted from the FBR. The punishment fee is burned by transferring it to the BB. If there are no siblings other than the main one, there is no punishment fee.</p>
+  </li>
+  <li>
+    <p>A 10% of the remaining FBR is the <strong>publisher’s fee</strong>, and it is shared in equal parts between the miners that include sibling headers. If there are not sibling headers other than the main one, there is no publishers fee.</p>
+  </li>
+  <li>
+    <p>The remaining FBR is the <strong>reward share</strong> and it is split in equal parts between the miners that solved the all the sibling blocks (including the miner of the block in the chain and the miner that solved the uncle headers).</p>
+  </li>
+</ul>
+
+<p>The rewards are handled by a the REMASC smart-contract. The balance of the REMASC contract must always be (BB+RB).</p>
+
+<p><strong>Changes to the Block header</strong></p>
+
+<p>The stateRoot field is removed, instead the following fields is added:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>stateRootCommitment =SHA3( parentHash</td>
+      <td>stateRoot</td>
+      <td>gparentStateRoot )</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Block headers have a new <strong>empty</strong> boolean  field. If empty is true, then the follow conditions must be valid for the block to be valid:</p>
+
+<ul>
+  <li>
+    <p>block must not have any transactions.</p>
+  </li>
+  <li>
+    <p>stateRoot value in stateRootCommitment must be zero (especial value)</p>
+  </li>
+  <li>
+    <p>Must not reference any uncle.</p>
+  </li>
+</ul>
+
+<p>This implies that a miner can perform validation-less mining by setting the empty flag to true, and the stateRoot to zero, if they know the gparentStateRoot value. gparentStateRoot value corresponds to the stateRoot hash of the grand-parent block. Because no stateRoot value is visible in blocks, can only be known if it computed. A miner cannot discover the gparentStateRoot value when receiving a competing block, since it will be masked by the commitment.</p>
+
+<p>A miner can mine an empty block that is child of an empty parent. The stateRoot will be empty, and the gparentStateRoot will still hold a distinct value. However, a grand-child of an empty block is forbidden, because it won’t have a new unique gparentStateRoot to refer to.</p>
+
+<p><img src="../RSKIP14/BlockChainRSKIP14.png" /></p>
+
+<p>The fact that empty blocks cannot reference uncles means that miners of empty blocks not only earn less because of missing transaction fees, but also may earn less because of missing uncle references.</p>
+
+<p>The field <strong>height</strong> is added to the block header. This is the block number,</p>
+
+<p>The REMASC contract is not executed in empty blocks. In the first non-empty block after a row of empty blocks the REMASC will scan backwards the blockchain in order to collect the miner addresses. To easily allow this, a new opcode is added <strong>BLOCKINFO</strong>. This opcode receives in the stack a block number and a bit-mask and pushes back the following information depending on which bits of the mask are enabled:</p>
+
+<ol>
+  <li>
+    <p>block hash (bit 0)</p>
+  </li>
+  <li>
+    <p>empty flag</p>
+  </li>
+  <li>
+    <p>coinbase address</p>
+  </li>
+  <li>
+    <p>stateRoot</p>
+  </li>
+  <li>
+    <p>txTrieRoot</p>
+  </li>
+  <li>
+    <p>receiptTrieRoot.</p>
+  </li>
+  <li>
+    <p>logsBloom</p>
+  </li>
+  <li>
+    <p>difficulty</p>
+  </li>
+  <li>
+    <p>timestamp</p>
+  </li>
+  <li>
+    <p>gasLimit</p>
+  </li>
+  <li>
+    <p>gasUsed</p>
+  </li>
+  <li>
+    <p>paidFees</p>
+  </li>
+  <li>
+    <p>extraData</p>
+  </li>
+  <li>
+    <p>nonce</p>
+  </li>
+  <li>
+    <p>height</p>
+  </li>
+</ol>
+
+<p>If the block number pushed is older than 256 blocks, BLOCKINFO halts with out-of-gas exception.</p>
+
+<p>The new opcode <strong>UNCLECOUNT</strong> is added. This opcode returns the number of uncles included in this block.</p>
+
+<p>The new opcode <strong>UNCLEINFO</strong> is added. This opcode receives a bit-mask and returns the same information as BLOCKINFO. It does not however allow to return data from an old uncle, only the ones in the current block.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>REMASC pseudo-code</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">public</span> <span class="kd">class</span>  <span class="nc">REMASC</span> <span class="o">{</span>
+
+<span class="kd">private</span> <span class="nc">Class</span> <span class="nc">Uncle</span> <span class="o">{</span>
+
+<span class="nc">Blockheader</span> <span class="n">hdr</span><span class="o">;</span>
+
+<span class="nc">Address</span> <span class="n">minerCoinbase</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="nf">Uncle</span><span class="o">(</span><span class="nc">BlockHeader</span> <span class="n">ahdr</span><span class="o">,</span> <span class="nc">Addres</span> <span class="n">aminerCoinbase</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="n">hdr</span> <span class="o">=</span> <span class="n">ahdr</span><span class="o">;</span>
+
+  <span class="n">minerCoinbase</span> <span class="o">=</span> <span class="n">aminerCoinbase</span><span class="o">;</span>
+
+<span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="n">uint</span> <span class="n">bb</span><span class="o">;</span>
+
+<span class="n">uint</span> <span class="n">rb</span><span class="o">;</span>
+
+<span class="nc">Dictionary</span><span class="o">&lt;</span><span class="n">uint</span><span class="o">,</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Uncle</span><span class="o">&gt;&gt;</span> <span class="n">allUncles</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">processBlock</span><span class="o">()</span> <span class="o">{</span>
+
+  <span class="n">payMatureBlock</span><span class="o">(</span><span class="n">maturityBlocks</span><span class="o">);</span>
+
+  <span class="k">if</span> <span class="o">(</span><span class="n">getBlockHeader</span><span class="o">(</span><span class="no">BLOCKNUBER</span><span class="o">-</span><span class="mi">1</span><span class="o">).</span><span class="na">empty</span><span class="o">)</span> <span class="c1">// was unpaid, pay </span>
+
+     <span class="n">payMatureBlock</span><span class="o">(</span><span class="n">maturityBlocks</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+
+  <span class="k">if</span> <span class="o">(</span><span class="n">getBlockHeader</span><span class="o">(</span><span class="no">BLOCKNUBER</span><span class="o">-</span><span class="mi">2</span><span class="o">).</span><span class="na">empty</span><span class="o">)</span> <span class="c1">// was unpaid, pay </span>
+
+     <span class="n">payMatureBlock</span><span class="o">(</span><span class="n">maturityBlocks</span><span class="o">+</span><span class="mi">2</span><span class="o">);</span>
+
+  <span class="nc">BlockHeader</span> <span class="n">h</span> <span class="o">=</span> <span class="n">getBlockHeader</span><span class="o">(</span><span class="no">BLOCKNUMBER</span><span class="o">)</span>
+
+  <span class="c1">// now collect uncle rewards</span>
+
+  <span class="nc">List</span> <span class="o">&lt;</span><span class="nc">BlockHeader</span><span class="o">&gt;</span> <span class="n">uncleHeaders</span> <span class="o">=</span> <span class="n">getCurrentBlockUncles</span><span class="o">();</span>
+
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">u</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">u</span><span class="o">&lt;</span><span class="n">uncleHeaders</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">u</span><span class="o">++)</span> <span class="o">{</span>
+
+  <span class="nc">BlockHeader</span> <span class="n">uh</span> <span class="o">=</span>  <span class="n">uncleHeaders</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+
+  <span class="c1">// save the miner who included this uncle </span>
+
+  <span class="n">allUncles</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">uh</span><span class="o">.</span><span class="na">height</span><span class="o">,</span><span class="k">new</span> <span class="nc">Uncle</span><span class="o">(</span><span class="n">uh</span><span class="o">,</span><span class="n">h</span><span class="o">.</span><span class="na">coinBase</span><span class="o">))</span>
+
+  <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="kt">void</span> <span class="nf">payMatureBlock</span><span class="o">(</span><span class="n">uint</span> <span class="n">amaturityBlocks</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="c1">// pay the matured block</span>
+
+  <span class="n">uint</span> <span class="n">matured</span> <span class="o">=</span> <span class="no">BLOCKNUMBER</span><span class="o">-</span><span class="n">amaturityBlocks</span><span class="o">;</span>
+
+  <span class="c1">//if the previous block is an empty block, look at th</span>
+
+  <span class="n">uint</span> <span class="n">fbr</span> <span class="o">=</span> <span class="n">fullBlockReward</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">matured</span><span class="o">)</span>
+
+  <span class="nc">BlockHeader</span> <span class="n">h</span> <span class="o">=</span> <span class="n">getBlockHeader</span><span class="o">(</span><span class="n">matured</span><span class="o">)</span>
+
+  <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Uncle</span><span class="o">&gt;</span> <span class="n">uncles</span> <span class="o">=</span><span class="n">allUncles</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">matured</span><span class="o">);</span>
+
+  <span class="k">if</span> <span class="o">(</span><span class="n">uncles</span><span class="o">.</span><span class="na">size</span><span class="o">()&gt;</span><span class="mi">0</span><span class="o">)</span> 
+
+    <span class="n">payUncles</span><span class="o">(</span><span class="n">h</span><span class="o">,</span><span class="n">uncles</span><span class="o">,</span><span class="n">fbr</span><span class="o">);</span>
+
+  <span class="k">else</span>
+
+    <span class="nf">paySoleMiner</span><span class="o">(</span><span class="n">h</span><span class="o">,</span><span class="n">fbr</span><span class="o">);</span>
+
+  <span class="n">uncles</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">matured</span><span class="o">);</span>
+
+<span class="o">}</span>
+
+<span class="kt">void</span> <span class="nf">paySoleMiner</span><span class="o">(</span><span class="nc">BlockHeader</span> <span class="n">h</span><span class="o">,</span><span class="n">uint</span> <span class="n">fbr</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="nc">Send</span><span class="o">(</span><span class="n">h</span><span class="o">.</span><span class="na">coinbase</span><span class="o">,</span><span class="n">fbr</span><span class="o">)</span>
+
+<span class="o">}</span>
+
+<span class="kt">void</span> <span class="nf">payUncles</span><span class="o">(</span><span class="nc">BlockHeader</span> <span class="n">h</span><span class="o">,</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Uncle</span><span class="o">&gt;</span> <span class="n">uncles</span><span class="o">,</span> <span class="n">uint</span> <span class="n">fbr</span><span class="o">)</span> <span class="o">{</span>
+
+     
+
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">u</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">u</span><span class="o">&lt;</span><span class="n">uncles</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">u</span><span class="o">++)</span> <span class="o">{</span>
+
+    <span class="nc">Uncle</span> <span class="n">uh</span> <span class="o">=</span> <span class="n">uncles</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">uh</span><span class="o">.</span><span class="na">hdr</span><span class="o">.</span><span class="na">paidFees</span><span class="o">&gt;</span><span class="mi">2</span><span class="err">$</span><span class="o">*</span><span class="n">$h</span><span class="o">.</span><span class="na">paidFees</span><span class="o">)</span> <span class="o">{</span>
+
+       <span class="c1">// broken selection rule, apply punishment</span>
+
+       <span class="n">uint</span> <span class="n">punishment</span> <span class="o">=</span> <span class="n">fbr</span> <span class="o">/</span><span class="mi">10</span><span class="o">;</span>
+
+    <span class="n">fbr</span> <span class="o">-=</span><span class="n">punishment</span><span class="o">;</span>
+
+    <span class="n">bb</span>  <span class="o">+=</span><span class="n">punishment</span><span class="o">;</span>
+
+       <span class="k">break</span><span class="o">;</span>
+
+    <span class="o">}</span> 
+
+  <span class="o">}</span>
+
+  <span class="n">uint</span> <span class="n">publishersFee</span> <span class="o">=</span> <span class="n">fbr</span> <span class="o">/</span> <span class="mi">10</span><span class="o">;</span>
+
+  <span class="n">fbr</span> <span class="o">-=</span><span class="n">publishersFee</span><span class="o">;</span>
+
+  <span class="n">uint</span> <span class="n">publishersFeeShare</span> <span class="o">=</span> <span class="n">publishersFee</span> <span class="o">/</span><span class="n">uncles</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+
+  <span class="c1">// burn surplus</span>
+
+  <span class="n">bb</span> <span class="o">+=</span> <span class="n">publishersFee</span><span class="o">-</span><span class="n">publishersFee</span> <span class="err">$</span><span class="o">*</span><span class="n">$uncles</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
+
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">u</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">u</span><span class="o">&lt;</span><span class="n">uncles</span><span class="o">.</span><span class="na">size</span><span class="o">();</span><span class="n">u</span><span class="o">++)</span> <span class="o">{</span>
+
+    <span class="nc">Uncle</span> <span class="n">uh</span> <span class="o">=</span> <span class="n">uncles</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+
+    <span class="nc">Send</span><span class="o">(</span><span class="n">uh</span><span class="o">.</span><span class="na">minerCoinbase</span><span class="o">,</span><span class="n">publishersFeeShare</span><span class="o">);</span>
+
+  <span class="o">}</span>
+
+  <span class="c1">// now pay the mainchain miner</span>
+
+  <span class="nc">Send</span><span class="o">(</span><span class="n">h</span><span class="o">.</span><span class="na">coinbase</span><span class="o">,</span><span class="n">fbr</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="security"><strong>Security</strong></h1>
+
+<p>The Bitcoin backbone (BB) analysis shows that the common prefix property hold when f = 1 (complete desynchronicity)  assuming the adversary controls less than about 29% of the hashing power if there is a deterministic tie-breaking rule, such as the one proposed by DECOR+. This means that RSK blockchain with a 10 seconds average block interval is not susceptible to a common-prefix attack.</p>
+
+<p>The chain-quality property is generally attacked by the following selfish-mining attack described in BB paper: Initially, the adversary works on the same chain as every honest party. However, whenever it finds a solution it keeps it private and keeps on extending a private chain. Whenever an honest party finds a solution, the (rushing) adversary releases one block from the private chain; if the private chain is depleted the adversary returns to the public chain. This maximizes the adversarial blocks in the blockchain. This attack is fully irrational and aims to prevent honest miners from adding transactions to the ledger, opposed to the selfish-mining attack of Eyal/Gun Sirer. However, this attack is also based on the fact that rushing has a benefit and the miners will chose the adversary blocks because of blockchain uses the first seen rule as tie-breaking. In RSK, because of DECOR+ selection rule, the attacker can generally force the network to accept his blocks spending a higher amount in transaction fees. Therefore it seems that the in RSK chain-quality attack is stronger at the expense of higher cost to the attacker.  If he can spend epsilon additional fees than the honest blocks, he can control the tie-breaking rule. One solution is to use a lexicographic tie-breaking rule except when one block has more than double the fees of the other, in that case the block with higher fees is chosen. This ensures that most of the time there is a conflict miners will not be earning as much as they could. However, because the synthetic block fees will be only a small percentage of the block real fees, they won’t be losing more than, say, 10% of the fees. However, if a block is mined with uncommon high fees (such as 10 times more), the the fee-rule prevails, so there is no incentive to choose another.</p>
+
+<p>Now the attacker has to double the average fees to be chosen. For each of his blocks, on average he pays approximate the double than what he collects, but as his blocks always have uncles, he collects even half of that, so he’s throwing away approximately ¾ of the average block fees (not counting the fees that comes back in term of synthetic subsidy).</p>
+
+<p>Another attack to chain-quality would be if the attacker always tries to extend a competing chain instead of the preferred one. If there is no competing fork, he creates one. All these attacks increase the power of the attacker as the fraction of the attacker hash rate approaches 50%.</p>
+
+<p>Another way to prevent chain-quality attack is by forcing miners to include transactions by making the transaction pool on-chain, and accepting all transactions from uncle blocks to the pool. For instance, one can split transaction processing in transaction publication and transaction execution. Publication only implies that nodes can refer to the published transaction by its hash. This requires, however, that the full contents of uncle blocks are included in each block.</p>
+
+<p>It would be interesting to be able to prove a transaction is not a double-spend, without showing it in full, so only the transactions in uncles that are not in the main chain are included to the on-chain memory pool. One way to achieve this is by including in the block header a new field Spends, which is a hash of p(i)=Hash(source-account(i),nonce(i)) for all transactions i. Therefore the uncle only has to include Spend, and all the transactions in Spend which are not double-spends. Those transactions can be referred in future blocks by transaction id, without the need to be fully specified. There are many additional problems, such as how to limit the amount of elements in Spend, to prevent denial of service attacks.</p>
+
+<h2 id="new-opcodes">New opcodes</h2>
+
+<p>BLOCKINFO</p>
+
+<p>UNCLECOUNT</p>
+
+<p>UNCLEINFO</p>
+
+<h2 id="samples">Samples</h2>
+
+<p>Discarded</p>
+
+<ul>
+  <li>The full block reward of a conflicting block must pay a <strong>forward pressure fee</strong>. This is variable and depends a difficulty adjustments occurring before the coinbase matures. If not such event occurs, this fee set to zero (more on this later). The forward pressure fee is burned.</li>
+</ul>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

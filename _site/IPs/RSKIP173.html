@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Chunk-Based Code Merkleization using the Unitrie | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Chunk-Based Code Merkleization using the Unitrie | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP173" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP173" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Chunk-Based Code Merkleization using the Unitrie</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="chunk-based-code-merkleization-using-the-unitrie">Chunk-Based Code Merkleization using the Unitrie</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">173</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Chunk-Based Code Merkleization using the Unitrie</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">SEP-2020</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>Code merkleization and storage rent are considered as the main levers for decreasing block witness sizes in stateless or partial-stateless RSK roadmaps. Here we specify a fixed-sized chunk approach to code merkleization, outline how the transition of existing contracts to this model would look like, and pose some questions to be considered. This RSKIP is inspired EIP-2926, but makes use of the Unitrie to facilitate the upgrade. However there is a major difference with EIP-2926: this EIP mandates a specific format for code storage in the Unitrie to simplify deployment but it <strong>may affect negatively code retrieval time</strong>, therefore it may require larger chunks and more research on the performance implications.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Bytecode would be the main contributor to block witness size for a stateless RSK client. By breaking contract code into chunks and committing to those chunks in a Merkle tree, stateless clients would only need the chunks that were touched during a given transaction to execute it. By using the Unitrie to store the chunks, we simplify considerably the stateless client wire protocol and stateless execution logic.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>What follows is structured to have three sections:</p>
+
+<ol>
+  <li>How a given contract code is split into chunks and then merkleized</li>
+  <li>How to merkleize all existing contract codes during a hardfork</li>
+  <li>What EVM changes are required to account for the new way of representing code</li>
+</ol>
+
+<p>The proposal adds specific optimizations to deal with short codes (smaller or equal to 64 bytes) to maintain high encoding efficiency. These codes are used for proxy contracts.</p>
+
+<h3 id="constants">Constants</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">CHUNK_SIZE</code>: 64 (bytes)</li>
+  <li><code class="language-plaintext highlighter-rouge">KEY_LENGTH</code>: 4 (bytes) starting from unitrie account key</li>
+  <li><code class="language-plaintext highlighter-rouge">METADATA_KEY</code>: <code class="language-plaintext highlighter-rouge">0x081</code></li>
+  <li><code class="language-plaintext highlighter-rouge">NEWCODE_KEY</code>: <code class="language-plaintext highlighter-rouge">0x081</code>&lt;unit24&gt;</li>
+  <li><code class="language-plaintext highlighter-rouge">OLDCODE_KEY</code>: <code class="language-plaintext highlighter-rouge">0x80</code></li>
+  <li><code class="language-plaintext highlighter-rouge">METADATA_VERSION</code>: 1</li>
+  <li><code class="language-plaintext highlighter-rouge">HF_BLOCK_NUMBER</code>: to be defined</li>
+</ul>
+
+<h3 id="code-merkleization">Code merkleization</h3>
+
+<p>The procedure for merkleizing a contract affects all contracts whose size is equal or larger than 64 bytes. The procedure starts with splitting the code into chunks. To do this assume a function that takes the bytecode as input and returns a list of chunks as output, where each chunk is a tuple <code class="language-plaintext highlighter-rouge">(startOffset, firstInstructionOffset, codeChunk)</code>. <em>Note that <code class="language-plaintext highlighter-rouge">startOffset</code> corresponds to the absolute program counter, and <code class="language-plaintext highlighter-rouge">firstInstructionOffset</code> is the offset within the chunk to the first instruction, as opposed to data.</em> This function runs in two passes:</p>
+
+<ul>
+  <li>
+    <p><strong>First Pass</strong>: Divide the bytecode evenly into <code class="language-plaintext highlighter-rouge">CHUNK_SIZE</code> parts. The last part is allowed to be shorter. For each chunk, create the tuple, leaving <code class="language-plaintext highlighter-rouge">firstInstructionOffset</code> as <code class="language-plaintext highlighter-rouge">0</code>, and add the tuple to an array of <code class="language-plaintext highlighter-rouge">chunks</code>. Also set <code class="language-plaintext highlighter-rouge">chunkCount</code> to the total number of chunks.</p>
+  </li>
+  <li>
+    <p><strong>Second Pass</strong>: Scan the bytecode for instructions with immediates or multi-byte instructions (currently only <code class="language-plaintext highlighter-rouge">PUSHN</code>, opcodes <code class="language-plaintext highlighter-rouge">0x60 .. 0x7f</code>). Let <code class="language-plaintext highlighter-rouge">PC</code> be the current opcode position and <code class="language-plaintext highlighter-rouge">N</code> the number of immediate bytes following, where <code class="language-plaintext highlighter-rouge">N &gt; 0</code>. Then:</p>
+
+    <ul>
+      <li><strong>If</strong> <code class="language-plaintext highlighter-rouge">(PC + N) % CHUNK_SIZE &gt; PC % CHUNK_SIZE</code> (i.e. instruction does not cross chunk boundary), <strong>continue</strong> to next instruction.</li>
+      <li><strong>Else</strong>, compute the index of the chunk after the current instruction: <code class="language-plaintext highlighter-rouge">chunkIdx = Math.floor((PC + N + 1) / CHUNK_SIZE)</code>.
+        <ul>
+          <li><strong>If</strong> <code class="language-plaintext highlighter-rouge">chunkIdx + 1 &gt;= chunkCount</code> then <strong>break</strong> the loop. This is to handle the following case: in a malformed bytecode, or the “data section” at the end of a Solidity contract, there could be a byte <em>resembeling</em> an instruction whose immediates exceed bytecode length.</li>
+          <li><strong>Else</strong>, assuming <code class="language-plaintext highlighter-rouge">nextChunk = chunks[chunkIdx]</code>, assign <code class="language-plaintext highlighter-rouge">(PC + N + 1) - nextChunk.startOffset</code> to <code class="language-plaintext highlighter-rouge">nextChunk.firstInstructionOffset</code>.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">firstInstructionOffset</code> fields allows safe jumpdest analysis when a client doesn’t have all the chunks, e.g. a stateless clients receiving block witnesses.</p>
+
+<p>To build a sub-Unitrie we iterate <code class="language-plaintext highlighter-rouge">chunks</code> and process each entry, <code class="language-plaintext highlighter-rouge">C</code>, as follows:</p>
+
+<ul>
+  <li>Let <code class="language-plaintext highlighter-rouge">k</code> be <code class="language-plaintext highlighter-rouge">0x81 chunkIdx</code> where the chunk index is stored in big-endian extended with zero padding on the left to reach <code class="language-plaintext highlighter-rouge">KEY_LENGTH</code>. This prevents the code trie from having data in inner nodes. Note that the code trie is not vulnerable to grinding attacks, and therefore the key is not hashed as in the account or storage trie.</li>
+  <li>Let <code class="language-plaintext highlighter-rouge">v</code> be <code class="language-plaintext highlighter-rouge">RLP([firstInstructionOffset, C.code])</code>.</li>
+  <li>Insert <code class="language-plaintext highlighter-rouge">(k, v)</code> into the <code class="language-plaintext highlighter-rouge">codeTrie</code>.</li>
+</ul>
+
+<p>We further insert a metadata leaf into <code class="language-plaintext highlighter-rouge">codeTrie</code>, with the key being <code class="language-plaintext highlighter-rouge">METADATA_KEY</code> and value being <code class="language-plaintext highlighter-rouge">RLP([METADATA_VERSION, codeHash, codeLength])</code>. Since the serialized data occupies less than 64 byes, it should fit into a single trie node. This metadata is added mostly to facilitate a cheaper implementation of <code class="language-plaintext highlighter-rouge">EXTCODESIZE</code> and <code class="language-plaintext highlighter-rouge">EXTCODEHASH</code>. It includes a version to allow for differentiating between bytecode types (e.g. <a href="https://eips.ethereum.org/EIPS/eip-615">EVM1.5/EIP-615</a>, <a href="https://eips.ethereum.org/EIPS/eip-2315">EIP-2315</a>, etc.) or code merkleization schemes (or merkleization settings, such as larger <code class="language-plaintext highlighter-rouge">CHUNK_SIZE</code>) in the future.</p>
+
+<p>The root of this <code class="language-plaintext highlighter-rouge">codeTrie</code> computed it is inserted in the a trie containing only the <code class="language-plaintext highlighter-rouge">METADATA_KEY</code>. Because the <code class="language-plaintext highlighter-rouge">METADATA_KEY</code> is a prefix of the <code class="language-plaintext highlighter-rouge">NEWCODE_KEY</code>, then metadata node becomes the root of the <code class="language-plaintext highlighter-rouge">codeTrie</code>. For each accounts with code larger or equal to 64 bytes, its <code class="language-plaintext highlighter-rouge">codeTrie</code> is inserted into the  account trie and the <code class="language-plaintext highlighter-rouge">OLDCODE_KEY</code> is removed. For accounts with empty code (including Externally-owned-Accounts aka EoAs) there will be no <code class="language-plaintext highlighter-rouge">codeTrie</code>.</p>
+
+<h3 id="updating-existing-code-transition-process">Updating existing code (transition process)</h3>
+
+<p>The transition process involves reading all contracts in the state and apply the above procedure to them. Intuitively the process should take longer than the time between two blocks (but in the order of minutes). We recommend clients to pre-process the changes before the EIP is activated, by populating the state database with the new trie before the hard-forking block occurs, but not too far before so that the garbage collection does not remove the new <code class="language-plaintext highlighter-rouge">codeTrie</code> nodes in the Unitrie. Alternatively nodes can temporarily disconnect garbage collection and reactivate it some time after the hard fork.</p>
+
+<h3 id="unitrie-changes">Unitrie Changes</h3>
+
+<p>Minimum unitrie node payload that is not offloaded from the trie node is incremented from 32 bytes to 64 bytes to reduce the overhead of code merkelization and so allow efficient storage of contract proxys.</p>
+
+<h3 id="execution-of-calls">Execution of Calls</h3>
+
+<p>The new procedure retrieve the code of a contract when there is no code cache is the following:</p>
+
+<ol>
+  <li>The node with <code class="language-plaintext highlighter-rouge">OLDCODE_KEY</code> of the account sub-trie is searched.</li>
+  <li>If the node exists, then the code is extracted from this node and procedure continues as before.</li>
+  <li>If the node does not exists, then the node with <code class="language-plaintext highlighter-rouge">NEWCODE_KEY</code> and all its children are retrieved, assembling the full code.</li>
+</ol>
+
+<h3 id="opcode-and-gas-cost-changes">Opcode and gas cost changes</h3>
+
+<p>The gas cost analysis in this section assumes a specific new way of storing the code split in chunks within the unitrie. Stateful nodes could also store the full bytecode as well as its hash and size in the database to speed up loading contracts, but this results in doubling the space consumption for code. If nodes do not cache full code, then the gas scheme would have to be modified to charge per chunk accessed or conservatively charge for traversing the whole code trie. We believe that with storage rent and intelligent in-memory caches the cost to load the code by traversing the <code class="language-plaintext highlighter-rouge">codeTrie</code> could be reduced so that no DoS attacks are possible. This hypothesis must be tested.</p>
+
+<p>Another option is to load chunks on demand while code is executing. This could benefit large contracts and, it would reduce the cost of cost execution by storage rent. Research is needed to evaluate the performance of on-demand loading under these conditions.</p>
+
+<h4 id="contract-creation-cost">Contract creation cost</h4>
+
+<p>Contract creation –– whether it is initiated via <code class="language-plaintext highlighter-rouge">CREATE</code>, <code class="language-plaintext highlighter-rouge">CREATE2</code>, or an external transaction –– will execute an <em>initcode</em>, and the bytes returned by that initcode is what becomes the account code stored in the state. As of now there is a charge of 200 gas per byte of that code stored. This is lower than SSTORE costs (20K gas per 64 bytes [key/value] which results in 312 gas/byte) but considering the overhead of trie nodes in SSTORE, both code byte and SSTORE byte costs seem similar. The code byte cost will not vary much because of the additional hashing required. If the trie hashes are lazily updated, then the hashed data cost is two times the code length. The added cost represents 12 gas units per 32 bytes, or less than a unit of gas per byte.</p>
+
+<p>We do add a new fixed charge for <code class="language-plaintext highlighter-rouge">COST_OF_METADATA</code>, which equals to a fixed cost of 5000 gas, whenever the code size is larger than 64 bytes.</p>
+
+<p>Preliminary cost comparison (note these values are <em>not</em> informed by benchmarks):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Pre-EIP</th>
+      <th>Post-EIP</th>
+      <th>Increase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>50 bytes</td>
+      <td>10000</td>
+      <td>10000</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <td>100 bytes</td>
+      <td>20000</td>
+      <td>25000</td>
+      <td>25%</td>
+    </tr>
+    <tr>
+      <td>24576 bytes</td>
+      <td>4915200</td>
+      <td>4920200</td>
+      <td>0.1%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="call-callcode-delegatecall-staticcall-extcodesize-extcodehash-and-extcodecopy">CALL, CALLCODE, DELEGATECALL, STATICCALL, EXTCODESIZE, EXTCODEHASH, and EXTCODECOPY</h4>
+
+<p>We expect no gas cost change. Clients may need to perform two lookups instead of one for codes longer than 64 bytes (one for <code class="language-plaintext highlighter-rouge">OLDCODE_KEY</code> and one for <code class="language-plaintext highlighter-rouge">NEWCODE_KEY</code>). However, because of proximity of keys and the fact that only one of the nodes will be present, the trie traversal algorithm dos not need to fetch more trie nodes from storage.</p>
+
+<h4 id="codecopy-and-codesize">CODECOPY and CODESIZE</h4>
+
+<p>There should be no change to <code class="language-plaintext highlighter-rouge">CODECOPY</code> and <code class="language-plaintext highlighter-rouge">CODESIZE</code>, because the code is already in memory, and the loading cost is paid by the transaction/call which initiated it.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<p>More information on the different design options can be found in EIP-2926.</p>
+
+<h3 id="rationale-behind-chunk-size">Rationale behind chunk size</h3>
+
+<p>The current recommended chunk size of 64 bytes has been selected based on a few observations. Smaller chunks are more efficient (i.e. have higher <a href="https://ethresear.ch/t/some-quick-numbers-on-code-merkelization/7260/3">chunk utilization</a>), but incur a larger hash overhead (i.e. number of hashes as part of the proof) due to a higher trie depth. Larger chunks are less efficient, but incur less hash overhead. We plan to run a larger experiment comparing various chunk sizes to arrive at a final recommendation.</p>
+
+<h3 id="the-keys-in-the-code-trie-and-key_length">The keys in the code trie (and <code class="language-plaintext highlighter-rouge">KEY_LENGTH</code>)</h3>
+
+<p>Even though the current bytecode limit is <code class="language-plaintext highlighter-rouge">0x6000</code> (as per <a href="https://eips.ethereum.org/EIPS/eip-170">EIP-170</a>), we have decided to have a hard cap of <code class="language-plaintext highlighter-rouge">2^30-1</code> (influenced by <a href="https://eips.ethereum.org/EIPS/eip-1985">EIP-1985</a>), which makes the proposal compatible with proposals increasing, or “lifting” the code size limit.</p>
+
+<h3 id="index-based-keys-in-the-code-trie">Index-based keys in the code trie</h3>
+
+<p>This RSKIP differs from EIP-2926 because we use the chunk index in the codeTrie instead of the chunk offset. This simpler and lowers tree building costs. By using indices as keys the structure of the trie is known only given the number of chunks, which is given in the metadata node, which is always part of a trie path.</p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>From the perspective of contracts, the design aims to be transparent, with the exception of changes in gas costs. Outside of the interface presented for contracts, this proposal introduces minor changes to the way contract code is stored, and does not need a substantial modification of the RSK state. However it can only be introduced via a hard fork.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+
+<p>TBD</p>
+
+<p>Show the <code class="language-plaintext highlighter-rouge">codeRoot</code> for the following cases:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">code=''</code></li>
+  <li><code class="language-plaintext highlighter-rouge">code='PUSH1(0) DUP1 REVERT'</code></li>
+  <li><code class="language-plaintext highlighter-rouge">code='PUSH32(-1)'</code> (data passing through a chunk boundary)</li>
+</ol>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>TBA</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>TBA</p>
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.,</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

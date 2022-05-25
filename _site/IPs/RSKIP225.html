@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Emergency Multisig public keys | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Emergency Multisig public keys | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP225" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP225" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Emergency Multisig public keys</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="emergency-multisig-public-keys">Emergency Multisig public keys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">225</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Emergency Multisig public keys</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">APRIL-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>discussions-to</strong></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This document proposes that the signatories of the <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP201.md">Emergency Multisig</a> must publish their public keys in xpub format (BIP32) in one or more websites or social media platforms that are known to be managed by the signatory.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>In the Iris network upgrade, a time-locked emergency multi signature will be activated. This will take effect immediately for all new peg-ins and change addresses created in peg-outs.
+Members of the RSK community must propose signatory candidates to hold one of the emergency backup keys. Also the community must finally selected a subset from the candidates, based on reputation, technical capabilities and incentive alignment with Bitcoin and RSK. However, after the decision is made, the community must also be able to:</p>
+
+<ul>
+  <li>known for sure if the candidate accepts the responsibility</li>
+  <li>authenticate that the public keys that will be embedded into the RSK reference code belong to the actual signatories selected.</li>
+</ul>
+
+<h2 id="specification">Specification</h2>
+
+<p>Each elected signatory must derive a public key from an existing or new seed. The derivation path should be hardened to avoid cross-path vulnerabilities. The recommended path is m/45’. The signatory must have a seed backup or the private key should exportable from the hardware wallet protecting it. 
+An emergency is defined as the expiration of the emergency multisignature time-lock that protects the funds in the RSK powpeg. This RSKIP does not describe how an emergency will be detected by or notified to the community, nor the exact procedure for recovery. Each participating signatory will freely and independently attest and judge the emergency situation, and coordinate with the community for the retrieval and transfer of funds. No monetary compensation to signatories is expected for this task.</p>
+
+<p>The most probably outcome in case of emergency is that the signatory private key, together with remaining multisignature public keys, will be entered in an open source tool for the execution of a multi-party protocol for the creation of a Bitcoin transaction to transfer the locked funds to a new RSK secure powpeg address. A candidate tool is an Electrum wallet.</p>
+
+<p>A signatory must publish in at least one social media platforms or website controlled by signatory the following message:</p>
+
+<p>“My emergency multisig xpub for RSK is <xpub>" (without quotes)</xpub></p>
+
+<p>xpub must be an xpub string in ASCII as specified in BIP32.</p>
+
+<p>In case this is published in the signatory website, the message text or a downloadable file must be accessible by browser navigation.</p>
+
+<p>Optionally, the signatory may use a pre-established method that associates owned social media accounts with public signature keys, such as keybase. The method used for proving the association of the RSK xpub with identity must be disclosed to the community.</p>
+
+<p>From time to time the signatories may be requested to provide a proof of possession of the private key associated with the published public key as a signature of the following ASCII message:</p>
+
+<p>“I have access to the RSK emergency multisig private key at Bitcoin block <blockhash>", where blockhash is a recent hash of a Bitcoin block, preferiably not older than one week and not earlier than one day.</blockhash></p>
+
+<p>The message must be wrapped in the Bitcoin signing format:
+“\x18Bitcoin Signed Message:\n” + compactSizeEncoding( len(message) ) <message></message></p>
+
+<p>The request will be announced with at least one month in advance. The request may be initially solicited by the RSK community but may later be generated autonomously by the RSK consensus. The requests should not be more frequent than once per year. The response would be published.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+
+<p>This is an example of a valid message to be published by a signatory:</p>
+
+<p>“My emergency multisig xpub for RSK is xpub661MyMwAqRbcF2GDHT2QfBsuqvL8DhJHYpW8jDjGr5kq8VueYfACVBRbPhmbwVzf29Q2xXv4t1GtUs3uiNY7EiPgPbndmCQiYMJ1YQQMF2P”</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>While PKI infrastructure could provide stronger guarantee of ownership of the public key, no such widespread infrastructure exists. Therefore we do not mandate the use of any specific PKI.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.,</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

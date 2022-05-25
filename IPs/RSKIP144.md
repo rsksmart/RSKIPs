@@ -1,4 +1,14 @@
-
+---
+rskip: 144
+title: Parallel Transaction Execution for Unitrie	
+description: 
+status: 
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2019-10-23
+---
 |RSKIP          |144           |
 | :------------ |:-------------|
 |**Title**      |Parallel Transaction Execution for Unitrie |

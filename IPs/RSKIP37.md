@@ -1,3 +1,15 @@
+---
+rskip: 37
+title: Single Address Smart Wallets
+description: 
+status: Draft
+purpose: Sca, Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-02-18
+---
+
 # Single Address Smart Wallets
 
 |RSKIP          |37           |

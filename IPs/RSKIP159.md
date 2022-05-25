@@ -1,3 +1,14 @@
+---
+rskip: 159
+title: Minimal Proxy Contract
+description: 
+status: Adopted
+purpose: Usa
+author: PMP (@pmprete)
+layer: DApp
+complexity: 1
+created: 2020-02-11
+---
 # Minimal Proxy Contract
 
 |RSKIP          |159           |

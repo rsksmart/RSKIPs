@@ -1,3 +1,14 @@
+---
+rskip: 241
+title: User-triggered peg-out tx fee-bumping
+description: 
+status: Draft
+purpose: Usa, Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-05
+---
 # User-triggered peg-out tx fee-bumping
 
 

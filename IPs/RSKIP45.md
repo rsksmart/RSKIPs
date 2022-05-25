@@ -1,3 +1,15 @@
+---
+rskip: 45
+title: New Event Tree and Extended LOG
+description: 
+status: Adopted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-06-26
+---
+
 # New Event Tree and Extended LOG
 
 |RSKIP          |45           |

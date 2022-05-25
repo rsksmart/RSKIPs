@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Simplified Emergency Time-locks Refresh | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Simplified Emergency Time-locks Refresh | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP264" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP264" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Simplified Emergency Time-locks Refresh</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="simplified-emergency-time-locks-refresh">Simplified Emergency Time-locks Refresh</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">264</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Simplified Emergency Time-locks Refresh</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">AUG-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>The time-locked emergency multisignature introduced in RSKIP201 requires that Powpeg UTXOs are periodically spent in order to prevent the time-lock expiration.</p>
+
+<p>This RSKIP proposes a mechanism for the Bridge to refresh the time-locks of UTXOs. The proposed mechanism is simple and efficient if the Bridge already has a protocol to periodically consolidate the UTXOs into a small set.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The motivation for adding an time-locked emergency multisignature is presented in <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP201.md">RSKIP201</a>.</p>
+
+<p>This RSKIP is a simplification of RSKIP207, which was written at a time where UTXO consolidation was not seen as an improvement that should be prioritized.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>Let B be the Bitcoin blockchain height as seen by the bridge. We define a UTXO that needs <strong>refresh</strong> to be one that is included in the Bitcoin blockchain at block height C where (B-C &gt; P) where P is 26000 (a rounded average number of Bitcoin blocks produced over a 6 months period). 
+The Bridge stores for every Powpeg UTXO (and in the same data structure used to hold the UTXOs) the height in the Bitcoin blockchain where this UTXO was created.</p>
+
+<p>An expiration checkpoint is defined as a periodic event where UTXOs are scanned and those that are close to expire are refreshed. Every time updateCollections() is called, a new procedure <strong>checktimeLockExpiration()</strong> is called before any other processing takes place. This method performs the following actions:</p>
+
+<ol>
+  <li>Let H be a storage variable containing an expiration checkpoint expressed as an RSK block height. Let D be a storage variable containing an expiration checkpoint expressed as a timestamp. Let B be the block height of the tip of the Bitcoin blockchain as seen by the bridge. If the current RSK block height is higher than H or the last RSK block timestamp is higher than D, then continue, else exit the checktimeLockExpiration() method.</li>
+  <li>Scan the powpeg UTXOs and select a maximal subset of elements S that need refresh. All the UTXOs in the set S will be transferred to the current active powpeg address, packed in one or more transactions an one or more UTXOs following the UTXO consolidation strategy. The set S can be empty, in which case nothing is done.</li>
+  <li>Set the next expiration checkpoint block height H to be the current RSK height plus 40000 (rounded two weeks of RSK blocks).</li>
+  <li>Set the next expiration checkpoint datetime D to be the last RSK block timestamp plus 2 weeks.</li>
+</ol>
+
+<p>If this proposal is implemented together with RSKIP265, then the UTXO Mantainance Account (UMA) defined in that RSKIP should be used to pay for UTXO refresh transaction fees. If the UMA does not have enough balance to pay for the fees, then all the UMA balance will be consumed and the remaining fees will be consumed from the peg balance.</p>
+
+<h3 id="peg-outs">Peg-outs</h3>
+
+<p>The algorithm that chooses UTXOs for creating peg-outs should prioritize UTXOs that need refresh, to avoid the consumption of UTXOs only for the time lock refresh.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<h3 id="data-structures">Data structures</h3>
+
+<p>Since we assume the UTXOs are consolidated in a short list (i.e. no more than 40 elements), we don’t optimize for fast access, or fast removal of elements. We assume we can periodically load the list of UXTOs, scan them, remove those that need refresh, and write back the list of the remaining elements to storage.</p>
+
+<h3 id="bitcoin-fees-cost-efficiency">Bitcoin fees cost-efficiency</h3>
+
+<p>The proposed method does not check for UTXO expiration in each call to updateCollections() to prevent the generation of a constant stream of independent refresh transactions consuming high transaction fees, and reducing the UTXO availability, when there is no rush to refresh UTXOs that are far from expiring.</p>
+
+<p>The checkpoints work as a batching mechanism. If a different daily batching mechanism is implemented, then the checkpoints may no longer be necessary. However, peg refresh may still generate a stream of unnecessary re-peg transactions if there are no other transactions to batch with. It is undesired that transactions stay long in a batching queue because they consume UTXOs and therefore the peg-out process could become blocked.</p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients and Block explorers do not need to be updated.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>TBD</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>This RSKIP protects the RSK network from the expiration of the time-lock by two methods: block count and date. Each method prevent a different attack where miners tweak the block timestamps to delay the check and force an expiration. If the time-lock expired without a real emergency event affecting the Powpeg devices, then the signatories of the emergency multisig will have full access to the pegged funds, bypassing the security of the Powpeg.</p>
+
+<p>If this RSKIP is not adopted, but the emergency multisignature is activated, it is still possible for users to extend the time-locks by performing several low-value peg-out operations until all UTXOs are consumed and recycled. While the community can force the refresh of UTXOs, the blockchain should not rely on this human-dependent behavior.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

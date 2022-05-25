@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Signature Compression | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Signature Compression | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP38" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP38" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Signature Compression</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="signature-compression">Signature Compression</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">38</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Signature Compression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">21-FEB-2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>In this document we present a signature aggregation trick (SAT), a simple way to increase the scalability of a payment network 42%.</p>
+
+<p><strong>This RSKIP is superseded by the Lumino Transaction Compression Protocol [LTCP]</strong></p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>Increasing the transactions in a per second with a function that is sub-linear with the amount of resources consumed by the network is hard. Most real improvements must pay a cost: changing the underlying security assumptions. This is the case of the Twin network, the Lumino network, and the Lightning network. However there are several tricks that can increase the tps while maintaining the same security assumptions. For example <a href="https://bitcointalk.org/index.php?topic=281848.0">CoinJoin</a> transaction cut-through and <a href="https://scalingbitcoin.org/papers/mimblewimble.pdf">MimbleWimble</a> can reduce the amount of data that is stored in the blockchain and the number of signatures that are verified. Some other minor techniques, like Schorr signature aggregation, provide small savings. SAT is a simple trick that can achieve a 40% increase in blockchain space and historic blockchain verification.</p>
+
+<p>The most common Bitcoin transaction uses only P2SH. On average, a P2SH Bitcoin transaction having 2 inputs and 2 outputs consumes 340 bytes, 128 of which are digital signatures (38%), and other 64 bytes are public keys (totaling 57%). Segwit nodes are able to remove the digital signatures and public keys from historic storage, but the cost is that the possibility to serve other users with full block data for verification is lost.</p>
+
+<p>SAT proposes that users are able to provide shorter signature information by aggregating all signatures into a single signature of a hash of all the transaction data that was previously signed in the selected set of transactions. Two forms of aggregation is possible: if all inputs were signed by the same key, then a single scriptSig prefix and a single signature using the the same key can be used. In case they were signed using different keys, then the key that results from the addition of all private keys can be used to sign all hashed transaction data.</p>
+
+<p>In case of RSK or Ethereum, it is simpler. A RSK transaction is about 100 bytes in length, which 64 bytes corresponds to the signature. However RSK uses ECDSA key recovery to recover the public key from the signature, so if the signature is removed, the transaction cannot be associated with a source account. To apply the SAT trick, transactions must  contain the source address, which is 20 bytes in length. Therefore the saving is actually only 42 bytes over 100 bytes, or 42%.</p>
+
+<p>To sync with a blockchain using this trick, N blocks ahead must be fetched until all transactions in a block can be verified.</p>
+
+<p>The SAT trick has the obvious drawback that trades scalability for privacy, as the re-use of Bitcoin addresses reduces the privacy of users.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>A new optional field is added to transactions: “sender”. Sender specifies the source address. When specified, after the signature recovery is performed, the resulting address is compared with “sender”. On a mismatch, the transaction invalidates the block.</p>
+
+<p>A new payload of a normal transaction SAT. A SAT payload has:</p>
+
+<ul>
+  <li>
+    <p>A list of transaction ids. Each transaction must have the “sender” field.</p>
+  </li>
+  <li>
+    <p>A signature of a root hash of a Merkle tree built on the transaction id list.</p>
+  </li>
+  <li>
+    <p>This information is piggybacked to a normal transaction.</p>
+  </li>
+</ul>
+
+<p>This transaction should be included in a block before the maturity time of the transactions referenced. The effect of this transaction is that is removes the signatures of all referenced transactions.</p>
+
+<p>The cost of this transaction has a special discount: 14000 gas for each transaction referenced. With this discount, the throughput of the network  is increased almost 3X. However the cost cannot be negative, since no miner would be willing to include it. Therefore the transactions with SAT payload should be gas consuming. E.g. A transaction consuming 300K gas can clear 20 signatures. This will create a market were SAT payload is sold/bought so that users can decrease the cost of their high gas consuming transactions. But also open the door to problems of overloaded blocks that consume much more resources than the gas limit. Also user can add SAT payload because of altruism.</p>
+
+<p>An alternative is that the SAT payload reduces the fees to those miners that originally included the referenced transactions (this is done before the maturity of the blocks that included them). Therefore a miner is incentivized to include the SAT payload if he was not itself the same miner that mined many of the previously cleaned transactions. The REMASC prevents some incentives from censoring SAT, since fees are smoothed. However this alternative has many problems that arise from competing incentives for miners.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

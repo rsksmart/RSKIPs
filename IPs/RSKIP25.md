@@ -1,3 +1,15 @@
+---
+rskip: 25
+title: Memory caches
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-12-27
+---
+
 # Memory caches
 
 |RSKIP          |25           |

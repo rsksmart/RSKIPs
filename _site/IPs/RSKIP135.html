@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Managing BridgeMaster Federation Members | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Managing BridgeMaster Federation Members | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP135" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP135" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Managing BridgeMaster Federation Members</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="managing-bridgemaster-federation-members">Managing BridgeMaster Federation Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">135</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Managing BridgeMaster Federation Members</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">25-NOV-2016</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This document describes the procedure to add or remove bridge federators, and the procedure which federators can use to change their private keys. This document does not address the “extended” federation, which provides other services.</p>
+
+<h1 id="discussion">Discussion</h1>
+
+<p>As changing the federation is an expensive process, the system must allow to apply several changes to a federation.</p>
+
+<p>The design is based on the following ideas:</p>
+
+<ul>
+  <li>
+    <p>The resign process is unilateral. Nobody else needs to approve that a federator resigns.</p>
+  </li>
+  <li>
+    <p>The security critical operations are so simple that a simple confirmation message can be displayed in a hardware wallet display. For example: to add a federator, the display can show the message “Are you sure to add the federator X with public key hash ZZZ”. Then the manager of the federation can check that the displayed hash corresponds to a hash displayed on the (maybe insecure) PC screen, together with the (maybe insecure) smart-phone.</p>
+  </li>
+  <li>
+    <p>Also the hardware token could itself to check the validity of public keys by accessing a PKI infrastructure.</p>
+  </li>
+</ul>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>BridgeMaster Federators are the federators that are involved in the multi-signature of the Bitcoin bridge. From now on, “federators” is limited to this kind of federators members.</p>
+
+<p>One of the drawbacks of current design is that the bridge contract stores the public keys of the federators. In the future, and via hard-forks, the federators may control other bridge systems.</p>
+
+<p>Therefore is good practice to re-factor the BridgeMaster into at least three contracts.</p>
+
+<ul>
+  <li>
+    <p>BridgeFedFront</p>
+  </li>
+  <li>
+    <p>BridgeFed (one or more active)</p>
+  </li>
+  <li>
+    <p>BridgeMaster</p>
+  </li>
+</ul>
+
+<p>All services provided by these contracts must respect the ABI interface.</p>
+
+<p>The following diagram shows how different contracts interact.</p>
+
+<h2 id="all-signatures-must-sign-also-the-federation-id-to-prevent-replay-attacks-for-example-to-add-a-federator-the-message-that-it-signed-is--newfedid--add--pubkey--name-">All signatures must sign also the federation id to prevent replay attacks. For example, to add a federator, the message that it signed is: &lt; NewFedID | ADD | PubKey | name &gt;</h2>
+
+<h2 id="bridgefedfront">BridgeFedFront</h2>
+
+<p>The BridgeFedFront contract will provide the following services:</p>
+
+<p><strong>1. getCurrentFederation() → bridgeFed :BridgeFed</strong></p>
+
+<p>Get the federation that is active and recommended now to send funds to.</p>
+
+<p><strong>2. getActiveFederations() → array of BridgeFed</strong></p>
+
+<p>Returns the list of federations that can still receive funds, but funds may be moving to the current fed.</p>
+
+<p><strong>3. getNewFederation() → bridgeFed :BridgeFed</strong></p>
+
+<p>The first time called by a member, it creates a new Fed clone of the current fed into a new BridgeFed contract. This is a candidate federation. The second time it’s called by a member it returns the latest newly created Fed that is still inactive. Once the new fed is activated, any call to getNewFederation() will result in the creation of yet another fed.</p>
+
+<h2 id="bridgefed">BridgeFed</h2>
+
+<p>Each federator is represented by an id.</p>
+
+<p>**1 .getMemberCount() → uint count **</p>
+
+<p>Returns the number of active federators in this federation.</p>
+
+<p><strong>2. getMemberPubKeys() → array of public keys</strong></p>
+
+<p>Returns an array of all the public keys of this federation.</p>
+
+<p><strong>3. getMemberPubKey(uint id) → PublicKey</strong></p>
+
+<p>Returns a public key of a specific member</p>
+
+<p><strong>4. getMemberName(uint id) → String</strong></p>
+
+<p>Returns the member name by id.</p>
+
+<p><strong>5. getMemberId(PublicKey key) → uid</strong></p>
+
+<p>Return the public key of a single member of the federation, by mid.</p>
+
+<p><strong>6. getPrevFederation() → BridgeFed</strong></p>
+
+<p>Returns the contract that controls the federation that gave birth to this federation.</p>
+
+<p><strong>7. voteAddMember(PublicKey newPubKey, String memberName, Signature NewPubKey, Signature prevFedMemberSig)</strong></p>
+
+<p>A previous federation member can vote to add a new member to this federation. Internally, for each (newPubKey,memberName<strong>)</strong> indicated, a vote is recorded in the associated poll. Every time a new member votes, the poll vote count is increased. If a poll vote count surpass the voteThreshold (50% of voters), then member is added to the FedBridge (getMemberCount() and getMemberPubKeys() will inform of the new member). There can be two active polls with the same newPubKey but different memberName fields. This is to prevent the first voter to set the memberName to his choice. So it’s acceptable that there are two active polls. However, only ONE of them can be added, the other represents a mistake or an attack, and there can’t be two federators with the same public key. There can be two members with the same memberName but different public keys. This is acceptable.</p>
+
+<p><strong>8. voteRemoveMember(PublicKey aPubKey,Signature prevFedMemberSig)</strong></p>
+
+<p>A previous federation member can vote to remove a new member of this federation. Internally, for each newPubKey indicated, a remove vote is recorded in the associated poll. Every time a new member votes, the poll vote count is increased. If a poll vote count surpass the voteThreshold (50% of voters), then the member is removed from the FedBridge (getMemberCount() and getMemberPubKeys() will inform of the new member). It must be noted that a member can be added and then removed, or vice-versa. Even multiple times. If the member changes his public key using changeMemberPubKey()</p>
+
+<p><strong>9. voteInvalidate(Signature prevFedMemberSig)</strong></p>
+
+<p>This method can be used to invalidate a federation before it goes into effect. To invalidate a new federation, the majority of the previous federation members must vote using this method.</p>
+
+<p><strong>10. voteAccept(Signature newFedMemberSig)</strong></p>
+
+<p>The new federation will be automatically accepted N hours after the last time a new federation member was added or removed. However, the new federation members can choose to accelerate the acceptance process by voting to accept this federation. Every time voteAccept, is called, the majority threshold is checked (against the current set of members).</p>
+
+<p><strong>11. changeMemberPubKey(PublicKey newPubKey, Signature NewPubKey, Signature oldKeySig) → boolean success</strong></p>
+
+<p>This method allows a member to change its own public key. This change only occurs when the federation is activated, and only if the federation has not been removed. This call does not require voting. The new public key enters into action when this federation is in effect. All votes are still cast using the old key. The new public key cannot be duplicated.</p>
+
+<p><strong>12. resign(Signature sig) → boolean success</strong></p>
+
+<p>This allows a member to resign to the federation. All but the last member can resign. If the last member tries to resign, the function returns false. The resign method almost purely informative. It does not affect how the new federation votes are cast. If a resign call is received in a parent federation after a new child federation is created, it does not affect the child vote.</p>
+
+<p><strong>13.  getBlockCountToActivation() → uint</strong></p>
+
+<p>This function returns the number of blocks that must pass until this federation is automatically activated. When a federation has already been activated, it returns 0.</p>
+
+<p>When a federation is activated, it will notify the BridgeFedFront contract. The BridgeFedFront contract will notify the BridgeMaster Contract.The BridgeMaster contract will start the process of migrating funds, and when the process is over it will call the method disposeFed(f) on the federation that has no more access to funds, nor it is allowed to receive more funds.</p>
+
+<p><strong>14. GetFedAddress() → String</strong></p>
+
+<p>This method is only available when this federation is activated. Returns the Bitcoin address (format to be determined) of this federation</p>
+
+<p><strong>15. SetFedAddress(addr String)</strong></p>
+
+<p>This method can be called only by the BridgeMaster contract to set the Bitcoin address for this federation, after the federation is activated. Once the value is set, it cannot be changed anymore.</p>
+
+<h2 id="bridgemaster">BridgeMaster</h2>
+
+<p>The BridgeMaster will hold a pointer to the BridgeFedFront contract.</p>
+
+<p>The BridgeMaster will keep active any federation that still has funds associated, but will try to move any UTXO to the latest active federation. Once a new active federation appears, the BridgeMaster will accept payments to old federations for a period of M hours (configurable). Afterwards, any received bitcoins will not be accepted and those amounts will be locked forever. Once an old federation has no more UTXOs associated and the M hours period has elapsed, it will be removed from BridgeFedFront and the BridgeMaster will dispose all information related to it.</p>
+
+<p><strong>Moving the Funds to the new Federation</strong></p>
+
+<p>Funds are moved immediately after the new federation is activated.</p>
+
+<p>In the future there will be two types of federation transitions. Emergency transitions, where all funds are moved at once, and normal transitions, where for a lapse funds are moved only when generating new change addresses and after the lapse is over the remaining funds are moved all at once.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

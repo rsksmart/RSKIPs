@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Simplified Reward Manager Smart Contract (REMASC) | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Simplified Reward Manager Smart Contract (REMASC) | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP15" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP15" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Simplified Reward Manager Smart Contract (REMASC)</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="simplified-reward-manager-smart-contract-remasc">Simplified Reward Manager Smart Contract (REMASC)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">15</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Simplified Reward Manager Smart Contract (REMASC)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">15-NOV-2016</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Adopted</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>RSK will be the first blockchain based on proof-of-work consensus that has no subsidy. Also RSK will be the fastest existent PoW blockchain. All network parameters and protocols in RSK blockchain must create an incentive structure that incentivizes the honest behaviour of all participants. The main design decision that provides such guarantee is how the transaction fees are split between miners. At the same time, RSK wants to maintain the other usual design goals, such as preventing excessive centralization. Such stringent requirements ask for novel solutions, and it has become clear that due to the numerous possible attack vectors, such solution will not be a simple one.  However, the solution must fit into the smart contract framework easily, without interfering or preventing the achievement of other platform goals, such as allowing nodes to easily download the blockchain state from the worldstate trie, without additional state data. Therefore this RSKIP proposes that the reward splitting algorithm is coded into a smart contract, which will be called REMASC (Reward Manager Smart Contract). By doing this, all extra state will be part of the REMASC persistent storage. The REMASC contract can be a native one.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>The following is a list of the design goals behind RSK reward splitting strategy and consensus protocol:</p>
+
+<ol>
+  <li>
+    <p>The blockchain consensus is driven by SHA256D merge-mined proof-of-work</p>
+  </li>
+  <li>
+    <p>The desired average block interval is 10 seconds.</p>
+  </li>
+  <li>
+    <p>The consensus protocol should not include new incentives for mining centralization.</p>
+  </li>
+  <li>
+    <p>The consensus protocols should reduce incentives from block withholding [<a href="https://petertodd.org/2016/block-publication-incentives-for-miners">https://petertodd.org/2016/block-publication-incentives-for-miners</a>]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should reduce centralization incentives derived from stale blocks. [<a href="https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/">https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/</a>] and [Accelerating Bitcoin’s Transaction Processing, Fast Money Grows on Trees, Not Chains, Sompolinsky, Zohar]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should reduce the probability of transaction reversal as much as possible.</p>
+  </li>
+  <li>
+    <p>Therefore, the consensus protocol should not allow profit from selfish-mining [Majority is not Enough: Bitcoin Mining is Vulnerable, Eyal, Gun Sirer, avilable at <a href="https://arxiv.org/pdf/1311.0243v5.pdf">https://arxiv.org/pdf/1311.0243v5.pdf</a>]</p>
+  </li>
+  <li>
+    <p>The consensus protocol must be incentive compatible [ Incentive Compatibility of Bitcoin Mining Pool Reward Functions, Schrijvers, Bonneau, Boneh, Roughgarden, available at <a href="http://theory.stanford.edu/~tim/papers/bitcoin.pdf">http://theory.stanford.edu/~tim/papers/bitcoin.pdf</a> ]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should not allow profit from Camacho selfish-mining [DECOR+LAMI: A Scalable Blockchain Protocol, <a href="https://scalingbitcoin.org/papers/DECOR-LAMI.pdf">https://scalingbitcoin.org/papers/DECOR-LAMI.pdf</a> ]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should not allow profit from Uncle mining. [<a href="https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/">https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/</a> ]</p>
+  </li>
+  <li>
+    <p>The consensus protocol should prevent instabilities from no-subsidy mining [On the Instability of Bitcoin Without the Block Reward, Carlsten,Kalodner,Weinberg, Narayanan, available at <a href="http://randomwalker.info/publications/mining_CCS.pdf">http://randomwalker.info/publications/mining_CCS.pdf</a> ]</p>
+  </li>
+  <li>
+    <p>It should allow for mining blocks without executing validating parent block transaction (for validation-less mining up to certain depth)</p>
+  </li>
+  <li>
+    <p>The mining rewards should not be paid to miners until a certain maturity period (in terms of blocks) has elapsed. This time-delayed rewards adds more pressure for miners not to attack the network, and rewards held by the platform act as a security bond.</p>
+  </li>
+  <li>
+    <p>The penalization for not including a competing uncle should be higher than the loss for sharing the reward. This considering the cost of bribing subsequent miners not to include the uncle.</p>
+  </li>
+  <li>
+    <p>The REMASC should pay 20% of the miner earnings to RSK</p>
+  </li>
+  <li>
+    <p>RSK should use a contract with key multi-key security, key-rotation, rate-limit, and vault functionality (rollback keys).</p>
+  </li>
+  <li>
+    <p>The consensus should be prevented from chain-quality attacks [The Bitcoin Backbone Protocol: Analysis and Applications, Garay, Kiayias, <a href="https://eprint.iacr.org/2014/765.pdf">https://eprint.iacr.org/2014/765.pdf</a> ]</p>
+  </li>
+  <li>
+    <p>The REMASC contract should avoid selfish withholding a sibling block. The scenario is: A rogue miner mines a block A. Before publishing it, the miner realizes there is a sibling block B for A. According to  DECOR+ selection rule, A should be the mainchain block. The miner withholds A and lets the network mine a block C on top of B. Later on the miner mines a block X and includes A as uncle. The rogue miner gets an unfair benefit: i) It has a 100% chance of receiving the publisher fee for publishing A. ii) Makes sure the miner of C is penalized for not following DECOR+ selection rule.</p>
+  </li>
+</ol>
+
+<h2 id="solution">Solution</h2>
+
+<p>This RSKIP proposes a protocol and an implementation that tries to satisfy the design goals.</p>
+
+<p>The fees collected by any block are not paid directly to the miner of the block, but they are transferred to a native smart contract called REMASC. The transfer is done automatically, and corresponds to an emulated simple transaction that carries all of the block’s transaction fees as value.</p>
+
+<p>The strategy proposed here is a variation of DECOR+. In a nutshell, the strategy is to share the block reward between all miners that have solved a block of the same height, and also with subsequent miners. To help the explanation we’ll first assume for a moment that all block fees are almost equal so each miner receives almost the same net payment for a block (there is no difficulty adjustment, nor subsidy, only a never ending transaction backlog). We’ll also simplify the explanation by limiting ourselves to a conflict between two miners, and we’ll later show this is the most common case. Whenever two miners (Alice and Bob) mine two competing blocks (a block conflict) the following happens:</p>
+
+<ul>
+  <li>
+    <p>If one block has a reward higher than two times the other block reward, both miners decide to mine on top of the one with highest reward</p>
+  </li>
+  <li>
+    <p>Else, miners decide to mine on top of the block with the lowest hash.</p>
+  </li>
+  <li>
+    <p>No matter the reward value of the block, if one block has more uncles than the other, both miners should mine on top of the one with the highest number of uncles.</p>
+  </li>
+</ul>
+
+<p>This will be the conflict block selection rule. For miners to be able to compare competing blocks, all conflicting blocks headers that are not too old (no more than 10 steps back of the chain tip) are forwarded by the network. If a miner Carol (which could be also Alice or Bob) solves a following block, she can decide to include in her block a reference to the uncle block header that was left out of the main chain, can collect an extra prize when the coinbase of the conflicting block matures.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>Several modifications are required:</p>
+
+<ul>
+  <li>
+    <p>DECOR+ sticky parent selection rule</p>
+  </li>
+  <li>
+    <p>Chain Comparison Rule</p>
+  </li>
+  <li>
+    <p>REMASC smart-contract</p>
+  </li>
+  <li>
+    <p>block header changes</p>
+  </li>
+  <li>
+    <p>Difficulty adjustment</p>
+  </li>
+  <li>
+    <p>Fast header-only or compact block propagation</p>
+  </li>
+</ul>
+
+<h2 id="changes-to-the-block-header">Changes to the Block header</h2>
+
+<p>Block headers have a new <strong>empty</strong> boolean field. If empty is true, then the follow conditions must be valid for the block to be valid:</p>
+
+<ul>
+  <li>
+    <p>block must not have any transactions.</p>
+  </li>
+  <li>
+    <p>stateRoot value in must be zero (especial value)</p>
+  </li>
+  <li>
+    <p>Must not reference any uncle.</p>
+  </li>
+  <li>
+    <p>the paidFees must be zero</p>
+  </li>
+</ul>
+
+<p>This implies that a miner can perform validation-less mining by setting the empty flag to true, and the stateRoot to zero, if they know the gparentStateRoot value. gparentStateRoot value corresponds to the stateRoot hash of the grand-parent block. Because no stateRoot value is visible in blocks, can only be known if it computed. A miner cannot discover the gparentStateRoot value when receiving a competing block, since it will be masked by the commitment.</p>
+
+<p>A miner can’t mine a empty block that is child of an empty parent. Empty blocks can be uncles or be on the mainchain.</p>
+
+<p><img src="/IPs/RSKIP15/blockchainsRSKIP15.png" alt="image alt text" /></p>
+
+<h2 id="the-remasc-contract-is-never-executed-on-empty-blocks"><strong>The REMASC contract is never executed on empty blocks.</strong></h2>
+
+<h2 id="chain-comparison-rule">Chain Comparison Rule</h2>
+
+<p>To prevent the Camacho attack, we’ll add the sticky rule to the DECOR+GHOST chain selection rule.</p>
+
+<ul>
+  <li>
+    <p>If both competing chains have the different GHOST weight, to heaviest becomes the best chain</p>
+  </li>
+  <li>
+    <p>If both competing chains have the same GHOST weight, the one obeying the DECOR+ selection rule following the last branch block is chosen.</p>
+  </li>
+</ul>
+
+<p>The following example illustrates how the node chooses A2 instead of B2, even if B2 was received first and both have the same GHOST weight, because A1 obeyed the DECOR+ selection rule while B1 did not.</p>
+
+<p><img src="/IPs/RSKIP15/txRSKIP15.png" alt="image alt text" /></p>
+
+<h2 id="remasc-contract">REMASC contract</h2>
+
+<p>The prices and rewards are computed according to the following steps:</p>
+
+<ul>
+  <li>
+    <p>For every block there is a pre-existent Reward balance (RB).</p>
+  </li>
+  <li>
+    <p>Also there is always a Burned Balance (BB).</p>
+  </li>
+  <li>
+    <p>All the fees paid in a block are accumulated into the RB.</p>
+  </li>
+  <li>
+    <p>10% of the RB is extracted as the Full Block Reward (FBR).</p>
+  </li>
+  <li>
+    <p>20% of the FBR is paid to RSK.</p>
+  </li>
+  <li>
+    <p>A 10% of the remaining FBR is the <strong>publisher’s fee</strong>, and it is shared in equal parts between the miners that include sibling headers. If there are not sibling headers other than the main one, there is no publishers fee.</p>
+  </li>
+  <li>
+    <p>If the conflicting block and sibling headers do not obey the selection rule a <strong>punishment fee</strong> of 10% is subtracted from the FBR. The punishment fee is burned by transferring it to the BB. If there are no siblings other than the main one, there is no punishment fee.</p>
+  </li>
+  <li>
+    <p>The remaining FBR is the <strong>reward share</strong> and it is split in equal parts between the miners that solved the all the sibling blocks (including the miner of the block in the mainchain and the miners that solved the sibling headers).</p>
+  </li>
+  <li>
+    <p>The mainchain miner is paid the reward share</p>
+  </li>
+  <li>
+    <p>Sibling blocks receive an extra punishment in case of late inclusion as uncle. If the sibling block is not included as uncle by the son of its sibling, a punishment of 5% per late block is applied. The punishment is burned by transferring it to the BB.</p>
+  </li>
+  <li>
+    <p>Wherever fees are shared and division has a remainder, the remainder is burned by transferring it to the BB.</p>
+  </li>
+  <li>
+    <p>If a hacker/fool sends a tx/call to REMASC, tx fee should be charged but no change to state or balances should be made.</p>
+  </li>
+</ul>
+
+<p>The rewards are handled by a the REMASC smart-contract. The balance of the REMASC contract must always be (BB+RB).</p>
+
+<p><strong>Pseudocode</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BigInteger rewardBalance = 0;
+BigInteger burnedBalance = 0;
+Boolean brokenSelectionRule = false;
+
+
+void processMinersFees() {
+   long processingBlockNumber = executionBlock.getNumber() - MATURITY;
+   BlockHeader processingBlockHeader = Retrieve processingBlockNumber from blockstore; 
+
+   // Adds current block fees to accumulated rewardBalance
+   rewardBalance = rewardBalance + processingBlockHeader.getPaidFees();
+   
+   BigInteger  fullBlockReward = rewardBalance / SYNTHETIC_SPAN;
+   rewardBalance = rewardBalance - fullBlockReward;
+
+   // Pay RSK labs cut
+   BigInteger payToRskLabs = fullBlockReward / RSK_LABS_DIVISOR;
+   transfer(remascConstants.getRskLabsAddress(), payToRskLabs);
+   fullBlockReward = fullBlockReward - payToRskLabs;
+
+   List&lt;Sibling&gt; siblings = getSiblingsForHeight(processingBlockNumber);
+
+   if (siblings is not empty) {
+       // Block has siblings, reward distribution is more complex
+       payWithSiblings(processingBlockHeader, fullBlockReward, siblings);
+       brokenSelectionRule = isBrokenSelectionRule(processingBlockHeader, siblings);
+   } else {
+       // Block has no siblings, reward distribution is simpler
+       if (brokenSelectionRule) {
+           // broken selection rule, apply punishment, ie burn part of the reward.
+           BigInteger punishment = fullBlockReward / PUNISHMENT_DIVISOR;
+           fullBlockReward = fullBlockReward - punishment;
+           burnedBalance += punishment;;
+       }
+       transfer(processingBlockHeader.coinbase, fullBlockReward);
+       brokenSelectionRule = false;
+   }
+}
+
+
+
+/**
+* Pay the mainchain block miner, its siblings miners and the publisher miners
+*/
+private void payWithSiblings(BlockHeader processingBlockHeader, BigInteger fullBlockReward, List&lt;Sibling&gt; siblings) {
+   // Pay to publishers
+   BigInteger publishersReward = fullBlockReward / PUBLISHER_DIVISOR;
+   fullBlockReward = fullBlockReward - publishersReward;
+   BigInteger individualPublisherReward = publishersReward / siblings.size;
+   // burn surplus
+   burnedBalance += publishersReward % siblings.size;
+   for (Sibling sibling : siblings) {
+       transfer(sibling.includedBlockCoinbase, individualPublisherReward);
+   }
+
+   // Pay to siblings miners
+   BigInteger individualMinerRewardSiblings = fullBlockReward / (siblings.size() + 1);
+   // burn surplus
+   BigInteger minersSurplus = fullBlockReward % (siblings.size() + 1);
+   burnedBalance += minersSurplus;
+
+   if (brokenSelectionRule) {
+       BigInteger punishment = individualMinerRewardSiblings / PUNISHMENT_DIVISOR;
+       individualMinerRewardSiblings -= punishment;
+       burnedBalance += punishment * (siblings.size() + 1)       
+   }
+
+   for (Sibling sibling : siblings) {
+       long processingBlockNumber = executionBlock.getNumber() - MATURITY;
+       long numberOfBlocksLate = sibling.getIncludedHeight() - processingBlockNumber - 1;
+       BigInteger lateInclusionPunishment = individualMinerRewardSiblings * numberOfBlocksLate / PER_LATE_BLOCK_PUNISHMENT_DIVISOR;
+       transfer(sibling.coinbase, individualMinerRewardSiblings - lateInclusionPunishment);
+       burnedBalance += lateInclusionPunishment;
+   }
+
+   // Pay to main chain block miner
+   transfer(processingBlockHeader.coinbase, individualMinerRewardSiblings);
+}
+
+boolean isBrokenSelectionRule(BlockHeader processingBlockHeader, List&lt;Sibling&gt; siblings) {
+   // Find out if main chain block selection rule was broken
+   boolean brokenSelectionRule = false;
+   for (Sibling sibling : siblings) {
+       if (sibling.getPaidFees() &gt; 2 * processingBlockHeader.getPaidFees()) {
+           // sibling pays significant more fees than block in the main chain
+           brokenSelectionRule = true;
+           break;
+       }
+   }
+   if (!brokenSelectionRule) {
+       for (Sibling sibling : siblings) {
+           if (sibling.getHash() &lt; processingBlockHeader.getHash()) {
+               // sibling has lower hash than block in the main chain
+               brokenSelectionRule = true;
+               break;
+           }
+       }
+   }
+
+   return brokenSelectionRule;
+}
+
+
+class Sibling {
+   // Hash of the sibling block
+   byte[] hash;
+   // Coinbase address of the sibling block
+   byte[] coinbase;
+   // Fees paid by the sibling block
+   long paidFees;
+   // Coinbase address of the block that included the sibling block as uncle
+   byte[] includedBlockCoinbase;
+   // Height of the block that included the sibling block as uncle
+   long includedHeight;
+}
+</code></pre></div></div>
+
+<h2 id="remasc-tx">REMASC Tx</h2>
+
+<p>Each RSK Block should include a transaction (Tx) to invoke the REMASC contract. That Tx should always be the last of the block. If included in any other place the block becomes invalid.</p>
+
+<p>The Tx value, gas limit and gas price must be 0. Tx data and signature must be null.</p>
+
+<p>We also evaluated using an implicit tx, but we discarded that option. Here are the pros/cons</p>
+
+<p>Implicit</p>
+
+<ul>
+  <li>
+    <p>Less network traffic - don’t send redundant information</p>
+  </li>
+  <li>
+    <p>No need to validate the REMASC tx is present in every block</p>
+  </li>
+  <li>
+    <p>We have to decide if a transaction receipt is generated and if the tx is used to calculate the tx trie root.</p>
+  </li>
+  <li>
+    <p>It breaks lots of compatibility unit tests (json based) that assume empty blocks</p>
+  </li>
+</ul>
+
+<p>Explicit</p>
+
+<ul>
+  <li>
+    <p>Simpler to program</p>
+  </li>
+  <li>
+    <p>Simpler to understand</p>
+  </li>
+  <li>
+    <p>Simpler to debug</p>
+  </li>
+  <li>
+    <p>No need to update tools: eg. blockchain explorer</p>
+  </li>
+</ul>
+
+<h2 id="difficulty-adjustment">Difficulty adjustment</h2>
+
+<p>The difficulty adjustment should be computed as the amount of accumulated work of all blocks (main and uncle blocks) created in a block interval (a number of main chain blocks) over the time interval (difference of timestamps between first and last block). The block interval could be 64 blocks, to reduce variance but allow for adjustments in less than 10 minutes (for upward adjustments). The adjustment could be performed at overlapping windows or 32 blocks. Because uncles can be included as late as 10 blocks after the sibling block, the block interval will consider all uncles references, no matter they compete to a sibling block in the current interval or in the previous interval. This introduces an error factor in the formula, but this can be tolerated to reduce the complexity of the algorithm and also to avoid computing the new difficulty over a window that is 10 blocks old.</p>
+
+<p>In the following diagram, two includes are included in the counting, even if the first uncle parent is outside the window of interest.</p>
+
+<p><img src="/IPs/RSKIP15/blockintervalRSKIP15.png" alt="image alt text" /></p>
+
+<p>(explain what problems arise when uncles are not considered in difficulty adjustments)</p>
+
+<p>Also adjustments will be limited to 8x increase and 1/8x decrease.</p>
+
+<h2 id="security">Security</h2>
+
+<p>We discuss here how the proposed solution meets the design goals.</p>
+
+<p><strong>a. The blockchain consensus is driven by SHA256D merge-mined proof-of-work</strong></p>
+
+<p><strong>b. The desired average block interval is 10 seconds.</strong></p>
+
+<p>These two goals are simply meet by design.</p>
+
+<p><strong>c. The consensus protocol should not include new incentives for mining centralization.</strong></p>
+
+<p>Mining centralization incentives can be created by economic incentives. The most important incentives to increase self rewards are:</p>
+
+<p><strong>c1- Reducing self stale rate</strong></p>
+
+<p>A stale block receives normally half of a block reward, while a non-stale can receive a full block reward or less depending on the average number of stale blocks. Also, because of compact block propagation, miners updating their workers every new block should generate a low number of stale blocks. Miners updating their workers every 30 seconds or more will receive a lower reward, but that will be expected and accepted by them.</p>
+
+<p><strong>c2- Force other miners to create uncles.</strong></p>
+
+<p>Forcing other honest miners to create uncles does reduce the honest miners revenue in the same amount as the attacker’s revenue, because rewards are shared. Winning a block competition does not give any monetary advantage, therefore this attack is not profitable.</p>
+
+<p><strong>c3- Prevent other miners uncle blocks from being referenced</strong></p>
+
+<p>To prevent other uncle blocks from being referenced, an attacker must avoid inclusion of the uncle in his own blocks and bribe the remaining miners not to include the include. Since the uncle inclusion window is 10 blocks in depth, any miner having at least 10% of the network hashing power can include his own uncles, unless the remaining miners attack the honest miners and censor all his blocks. Censoring requires 51% of the miners engaged in an attack and therefore is out of the scope of this analysis.</p>
+
+<p>A way to prevent Alice blocks from being referenced is by bribing subsequent miners not to reference Alice block. Because the pay for inclusion of the  uncle is 10% of a full block reward, Mallory would need to pay 10% to every subsequent miner (excluding himself). Assuming Mallory has 50% of the hashing power, he would need to bribe the remaining 50%, and that will cost Mallory at least 5*10% = 50% of a full block reward. However that is exactly Alice revenue for the uncle, so Mallory net revenue is zero. If Mallory hashing power is less than 50%, then his is losing money. The same analysis can be done if Alice has several, not one, uncles. Mallory would need to bribe the remaining miners to exclude each of the uncles separately. If the stale rate is high (e.g. 2 per block) so Alice does not receive 50% for each uncle but 33%. In that case the publisher fee is still 10% (it is deducted before the miners share) therefore the bribe cannot be reduced and the attack is clearly not profitable.</p>
+
+<p><strong>c4- Mine uncles to increase the block rate</strong></p>
+
+<p>Because the new difficulty adjustment algorithm takes uncles into account, mining uncles cannot be used to increase the block rate.</p>
+
+<p><strong>c5- Delaying the inclusion of uncles to increase the block rate</strong></p>
+
+<p>A miners could try to delay the inclusion of some uncles close to the deadline of the retarget interval (e.g. in the last 9 blocks). The effect would be that the block rate would become 9/64=14% faster. If there is enough transactions in the backlog this means that all miners collectively could earn 14% more. However the loss of not including the uncles is 9*10%=90% of a full block reward, so miners should include them in the next interval, which will re-adjust the block difficulty cancelling the previous adjustment, so the net effect in zero.</p>
+
+<p><strong>d-The consensus protocols should reduce incentives from block withholding</strong> [<a href="https://petertodd.org/2016/block-publication-incentives-for-miners">https://petertodd.org/2016/block-publication-incentives-for-miners</a>]</p>
+
+<p><strong>e-The consensus protocol should reduce centralization incentives derived from stale blocks.</strong> [<a href="https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/">https://blog.ethereum.org/2014/07/11/toward-a-12-second-block-time/</a>] and</p>
+
+<p>[Accelerating Bitcoin’s Transaction Processing, Fast Money Grows on Trees, Not Chains, Sompolinsky, Zohar]</p>
+
+<p>All these issues have already been addressed in item c.</p>
+
+<p><strong>f-The consensus protocol should reduce the probability of transaction reversal as much as possible</strong></p>
+
+<p>Simulations show that using a deterministic block tie-breaking selection rule instead of the first seen rule increases the probability of a 1-block reversal. However, it decreases the probability of a 2-block reversal because it eliminates the block withholding incentives. Therefore DECOR+ strategy is better is nodes wait at least 2 confirmations.</p>
+
+<p>**g-The consensus protocol should not allow profit from selfish-mining [Majority is not **</p>
+
+<p><strong>Enough: Bitcoin Mining is Vulnerable, Eyal, Grun Sirer, avilable at</strong> <strong><a href="https://arxiv.org/pdf/1311.0243v5.pdf">https://arxiv.org/pdf/1311.0243v5.pdf</a>]</strong></p>
+
+<p><strong>f- The consensus protocol must be incentive compatible [ Incentive Compatibility of</strong></p>
+
+<p><strong>Bitcoin Mining Pool Reward Functions, Schrijvers, Bonneau, Boneh, Roughgarden, available at **<a href="http://theory.stanford.edu/~tim/papers/bitcoin.pdf">http://theory.stanford.edu/~tim/papers/bitcoin.pdf</a></strong> ]**</p>
+
+<p>Already discussed in c.</p>
+
+<p><strong>h- The consensus protocol should not allow profit from Camacho selfish-mining [DECOR+LAMI: A Scalable Blockchain Protocol,</strong> <strong><a href="https://scalingbitcoin.org/papers/DECOR-LAMI.pdf">https://scalingbitcoin.org/papers/DECOR-LAMI.pdf</a>]</strong></p>
+
+<p>This was solved by the sticky rule in block selection.</p>
+
+<p><strong>h- The consensus protocol should not allow profit from Uncle mining. [</strong> <strong><a href="https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/">https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/</a>]</strong></p>
+
+<p>Uncle mining can only be profitable if rewards are created from thin air for uncles and if the difficulty adjustment algorithm does not take uncles into account. Both things are not true in RSK.</p>
+
+<p><strong>i-The consensus protocol should prevent instabilities from no-subsidy mining [On the Instability of Bitcoin Without the Block Reward, Carlsten,Kalodner,Weinberg, Narayanan, available at</strong> <strong><a href="http://randomwalker.info/publications/mining_CCS.pdf">http://randomwalker.info/publications/mining_CCS.pdf</a> ]</strong></p>
+
+<p>To prevent instabilities from no-subsidy mining RSK has a synthetic subsidy. The subsidy</p>
+
+<p>It should allow for mining blocks without executing validating parent block transaction (for validation-less mining up to certain depth). If there are empty blocks, the subsidy will start decreasing at a rate of 10% every block. After 20 empty blocks, the subsidy will be around 12% of a full block reward, competing with the average 10% earned by transaction fees. This means that our network will become unstable if there is no transaction for 20 blocks, or about 3 minutes. A transaction backlog would prevent this, and also the probability of 20 empty blocks be created in a short interval is very low. Also 3 minutes is enough time for miners to adjust the minimum gas price to allow more transactions from the pool to enter blocks.</p>
+
+<p><strong>j- The mining rewards should not be paid to miners until a certain maturity period (in terms of blocks) has elapsed.</strong></p>
+
+<p>Currently the platform has a 6000 block maturity period, or about 16 hours, and no pre-deposit bond. We could prepare the REMASC to require a pre-deposit, or extend the maturity period.</p>
+
+<p><strong>k- The penalization for not including a competing uncle should be higher than the loss for sharing the reward. This considering the cost of bribing subsequent miners not to include the uncle.</strong></p>
+
+<p>Already discussed in c.</p>
+
+<p>l -The REMASC should pay 20% of the miner earnings to RSK</p>
+
+<p>Done by design of the REMASC.</p>
+
+<p><strong>m-RSK should use a contract with key multi-key security, key-rotation, rate-limit, and vault functionality (rollback keys).</strong></p>
+
+<p>Should be controlled by an external well audit contract. RSK account rotation could be implemented in the REMASC to prevent a bug in the RSK wallet contract from preventing RSK from receiving any payment.</p>
+
+<p><strong>n- The consensus should be prevented from chain-quality attacks [The Bitcoin Backbone Protocol: Analysis and Applications, Garay, Kiayias,</strong> <strong><a href="https://eprint.iacr.org/2014/765.pdf">https://eprint.iacr.org/2014/765.pdf</a>]</strong></p>
+
+<p>The Bitcoin backbone analysis shows that the common prefix property hold when f = 1 (complete de-synchronicity)  assuming the adversary controls less than about 29% of the hashing power if there is a deterministic tie-breaking rule, such as the one proposed by DECOR+. This means that RSK blockchain with a 10 seconds average block interval is not susceptible to a common-prefix attack.</p>
+
+<p>The chain-quality property is generally attacked by the following selfish-mining attack described in the same paper: Initially, the adversary works on the same chain as every honest party. However, whenever it finds a solution it keeps it private and keeps on extending a private chain. Whenever an honest party finds a solution, the (rushing) adversary releases one block from the private chain; if the private chain is depleted the adversary returns to the public chain. This maximizes the adversarial blocks in the blockchain. This attack is fully irrational (losses money) and aims to prevent honest miners from adding transactions to the ledger, opposed to the selfish-mining attack of Eyal/Gun Sirer. However, this attack is also based on the fact that rushing has a benefit and the miners will chose the adversary blocks because of blockchain uses the first seen rule as tie-breaking. In RSK, because of DECOR+ selection rule, the attacker can generally force the network to accept his blocks spending a higher amount in transaction fees. Therefore it seems that the in RSK chain-quality attack is stronger at the expense of higher cost to the attacker.  If he can spend epsilon additional fees than the honest blocks, he can control the tie-breaking rule. However it has a high cost: all blocks rewards must be shared. The solution chosen is to use a lexicographic tie-breaking rule except when one block has more than double the fees of the other, in that case the block with higher fees is chosen. This means that most of the time there is a conflict miners will not be earning as much as they could, and the adversary has 50-50 chance of success and no gain in rushing.</p>
+
+<h1 id="copyright">Copyright</h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Precompiled contract for HDWallet utility functions | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Precompiled contract for HDWallet utility functions | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP106" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP106" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Precompiled contract for HDWallet utility functions</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="precompiled-contract-for-hdwallet-utility-functions">Precompiled contract for HDWallet utility functions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">106</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Precompiled contract for HDWallet utility functions</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">01-FEB-19</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">AM</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Usa</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Adopted</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="abstract">Abstract</h2>
+
+<p>A new precompiled contract (i.e., native, hardwired onto the RSK consensus layer) is introduced. This contract contains a few complex HDWallet-related operations that help leverage some of the work that smart contracts need to repeatedly perform.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>With the arising need of making ICOs on top of the RSK network, a need for different token and/or token-emitting contracts to perform certain complex operations on a regular basis is in place. If written in solidity (or assembly WOLOG) and executed on the RVM, each of these functions would be expensive - and even more expensive to write and test every time. Furthermore, different implementations can lead to errors potentially protruding to loss of funds. A well-written, tested and precompiled function set that covers these operations will leverage the complexity on the smart contracts’ side while at the same time enforcing a certain level of security by implementing these as part of the RSK consensus.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>A new precompiled contract is to be accessible at the <code class="language-plaintext highlighter-rouge">0x0000000000000000000000000000000001000009</code> address. It will make usage of <code class="language-plaintext highlighter-rouge">HDWallet utilities</code> to derive BTC addresses, and will implement the following functions (signatures and return values are as follows):</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">toBase58Check(bytes, uint8) returns (string)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">deriveExtendedPublicKey(string xpub, string path) returns (string)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">extractPublicKeyFromExtendedPublicKey(string xpub) returns (bytes)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">getMultisigScriptHash(uint8 minimumSignatures, bytes[]) returns (bytes)</code></li>
+</ul>
+
+<h2 id="error-handling">Error handling</h2>
+
+<p>In case of error, each of these methods behaves as if a solidity <code class="language-plaintext highlighter-rouge">assert</code> statement was being used. That is, contract state is reverted and all the gas is consumed.</p>
+
+<h3 id="tobase58check">toBase58Check</h3>
+
+<p>The method <code class="language-plaintext highlighter-rouge">toBase58Check(bytes hash, uint8 version) returns (string)</code> takes as input a 20-byte hash and a version (see ref #2 for possible version values) and returns a base58Check encoded string of the concatenation of <code class="language-plaintext highlighter-rouge">version</code> and <code class="language-plaintext highlighter-rouge">hash</code>.</p>
+
+<h4 id="validations">Validations</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">hash</code> must be exactly 20 bytes long.</li>
+</ul>
+
+<h4 id="gas-cost">Gas cost</h4>
+
+<p>This method has a fixed cost of 8,000 gas units. On top of that, normal transaction gas costs apply.</p>
+
+<h4 id="sample-usage">Sample usage</h4>
+
+<p>Given a public key, we want to generate a Bitcoin P2PKH address for testnet. We have the compressed key (for uncompressed keys, compression would be needed first) <code class="language-plaintext highlighter-rouge">02e6930d0659a24df1cc0061203d7845ca2e0c6b96bc1ad16e44c1cef24be92de8</code>. Its <code class="language-plaintext highlighter-rouge">hash160</code> is the result of applying <code class="language-plaintext highlighter-rouge">ripemd160(sha256(bytes))</code> to it. That yields <code class="language-plaintext highlighter-rouge">0d3bf5f30dda7584645546079318e97f0e1d044f</code>, which is the <code class="language-plaintext highlighter-rouge">hash</code> parameter we need for our function. For testnet, we use version <code class="language-plaintext highlighter-rouge">111</code>. Therefore, we would have that:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>toBase58Check('0x0d3bf5f30dda7584645546079318e97f0e1d044f', 111) =&gt; 'mgivuh9jErcGdRr81cJ3A7YfgbJV7WNyZV'
+</code></pre></div></div>
+
+<h3 id="deriveextendedpublickey">deriveExtendedPublicKey</h3>
+
+<p>The method <code class="language-plaintext highlighter-rouge">deriveExtendedPublicKey(string xpub, string path) returns (string)</code> takes as input an extended public key encoded in base58Check (as described in ref #4), an HD derivation path - a string of the form</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>S ::= n | n/S
+</code></pre></div></div>
+
+<p>with <code class="language-plaintext highlighter-rouge">n</code> an unsigned integer - also as described in #4 - and produces a base58Check encoded string corresponding to the extended public key obtained by deriving the given extended public key with the given path.</p>
+
+<h4 id="validations-1">Validations</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xpub</code> must be a valid base58check-encoded extended public key (either for mainnet or testnet).</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code> must be a valid path according to the BNF definition given above.</li>
+</ul>
+
+<h4 id="gas-cost-1">Gas cost</h4>
+
+<p>This method has a fixed cost of 55,000 gas units. On top of that, normal transaction gas costs apply.</p>
+
+<h4 id="sample-usage-1">Sample usage</h4>
+
+<p>Given the base58Check-encoded extended public key <code class="language-plaintext highlighter-rouge">tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r</code>, and the derivation path <code class="language-plaintext highlighter-rouge">2/3/4</code>, we would have that:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deriveExtendedPublicKey('tpubD6NzVbkrYhZ4YHQqwWz3Tm1ESZ9AidobeyLG4mEezB6hN8gFFWrcjczyF77Lw3HEs6Rjd2R11BEJ8Y9ptfxx9DFknkdujp58mFMx9H5dc1r', '2/3/4') =&gt; 'tpubDCGMkPKredy7oh6zw8f4ExWFdTgQCrAHToF1ytny3gbVy9GkUNK2Nqh7NbKbh8dkd5VtjUiLJPkbEkeg29NVHwxYwzHJFt9SazGLZrrU4Y4'
+</code></pre></div></div>
+
+<h3 id="extractpublickeyfromextendedpublickey">extractPublicKeyFromExtendedPublicKey</h3>
+
+<p>The method <code class="language-plaintext highlighter-rouge">extractPublicKeyFromExtendedPublicKey(string xpub) returns (bytes)</code> takes as input an extended public key encoded in base58Check (as described in ref #4) and returns a byte array corresponding to the compressed public key of the given extended public key.</p>
+
+<h4 id="validations-2">Validations</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xpub</code> must be a valid base58check-encoded extended public key (either for mainnet or testnet).</li>
+</ul>
+
+<h4 id="gas-cost-2">Gas cost</h4>
+
+<p>This method has a fixed cost of 6,800 gas units. On top of that, normal transaction gas costs apply.</p>
+
+<h4 id="sample-usage-2">Sample usage</h4>
+
+<p>Given the base58Check-encoded extended public key <code class="language-plaintext highlighter-rouge">tpubDCwK6XsmwUx641qZ6Uyb2pcZXMCoFcyNBFZLbxwJT4iwgmUhY9DsW9FgaFUNE5s1KtM1upxpDuCvx1TbAqQMLMGFF5b1F6KpRpuHcLwcp4k</code> we would have that:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>extractPublicKeyFromExtendedPublicKey('tpubDCwK6XsmwUx641qZ6Uyb2pcZXMCoFcyNBFZLbxwJT4iwgmUhY9DsW9FgaFUNE5s1KtM1upxpDuCvx1TbAqQMLMGFF5b1F6KpRpuHcLwcp4k') =&gt; '0x0360a7239100410a4f6019778fce803c6b168a9b1922a0eafbdff11e866070d9f8'
+</code></pre></div></div>
+
+<h3 id="getmultisigscripthash">getMultisigScriptHash</h3>
+
+<p>The method <code class="language-plaintext highlighter-rouge">getMultisigScriptHash(uint8 minimumSignatures, bytes[] publicKeys) returns (bytes)</code> takes as input a minimum required number of signatures and an array of (either compressed or uncompressed) secp256k1 public keys and returns the 20-byte hash (i.e., output of <code class="language-plaintext highlighter-rouge">hash160</code>) of the Bitcoin N-of-M multisig scriptPub corresponding to the given arguments. It is important to notice that the compressed version of the given public keys will be used to generate the script. Therefore, public key compression will not make a difference in the function output.</p>
+
+<h4 id="validations-3">Validations</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">minimumSignatures</code> must be greater than zero and lower or equal to the number of public keys.</li>
+  <li><code class="language-plaintext highlighter-rouge">publicKeys</code> must be at least 1 and at most 15 (see ref #3 for details on the restriction).</li>
+  <li>Each of the elements of <code class="language-plaintext highlighter-rouge">publicKeys</code> must be either of size 33 (compressed) or size 65 (uncompressed).</li>
+</ul>
+
+<h4 id="gas-cost-3">Gas cost</h4>
+
+<p>This method has a base cost of 13,500 gas units for the minimum number of keys (2). Then, per additional key an extra cost of 500 gas units is charged. So, for example, for 5 keys we would have a base cost of 13,500 plus the additional cost on the 3 extra keys: 1,500. That would result in a total of 15,000 gas units. On top of that, normal transaction gas costs apply.</p>
+
+<h4 id="sample-usage-3">Sample usage</h4>
+
+<p>Given the following public keys:</p>
+
+<ul>
+  <li>02276a07b202503d39a43896300224fb649818d1486b0eefde6c9cd7cf1e32eed8</li>
+  <li>0363e3de0d55459387f221dcda80f9283e303a08bcfeb9cf32875a43fefc7ecb1f</li>
+  <li>03173019874589385b0295b839bb70e5d3c33178c110bacd872e245b656b3e8f43</li>
+</ul>
+
+<p>and <em>two</em> minimum required signatures, we would have that:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getMultisigScriptHash(2, ['0x02276a07b202503d39a43896300224fb649818d1486b0eefde6c9cd7cf1e32eed8', '0x0363e3de0d55459387f221dcda80f9283e303a08bcfeb9cf32875a43fefc7ecb1f', '0x03173019874589385b0295b839bb70e5d3c33178c110bacd872e245b656b3e8f43']) =&gt; '0xafa22d52922aa6657417c55b6cebdf708b594576'
+</code></pre></div></div>
+
+<p><em>Note</em>: The public keys used here are compressed, but might as well be uncompressed. The output should be exactly the same since the function handles the conversion.</p>
+
+<h2 id="references">References</h2>
+
+<p>[1] Technical background of version 1 Bitcoin addresses
+https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses#How_to_create_Bitcoin_Address</p>
+
+<p>[2] Base58Check encoding
+https://en.bitcoin.it/wiki/Base58Check_encoding</p>
+
+<p>[3] Bitcoin Improvement Proposal #16 (BIP16)
+https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki</p>
+
+<p>[4] Bitcoin Improvement Proposal #32 (BIP32)
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki</p>
+
+<h3 id="copyright">Copyright</h3>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

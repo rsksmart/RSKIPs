@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Smaller Unitrie Nodes for Higher Scalability | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Smaller Unitrie Nodes for Higher Scalability | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP107" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP107" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Smaller Unitrie Nodes for Higher Scalability</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="smaller-unitrie-nodes-for-higher-scalability"><strong>Smaller Unitrie Nodes for Higher Scalability</strong></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">–</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Smaller Unitrie Nodes for Higher Scalability</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">2019</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract">Abstract</h1>
+
+<p>A RSK trie node consumes 6 bytes, plus the hash digest of the parent node referencing the node, and the key/value database overhead to store the node. This is approximately 80 bytes.  This RSKIP shows how to decrease the overhead for small leaf account nodes from 266% to 7%, with minimal changes, that can be applied concurrently with the Unitrie change.</p>
+
+<h1 id="motivation">Motivation</h1>
+
+<p>A node in RSK storage consumes:</p>
+
+<ul>
+  <li><strong>ARITY</strong>, 1 byte: indicates the tree arity (always 2)</li>
+  <li><strong>flags</strong>, 1 byte: indicates the type of node (secure and hasLongValue bits)</li>
+  <li><strong>bits</strong>: 2 bytes: child presence bitmask
+    <ul>
+      <li>bit 0: left node present</li>
+      <li>bit 1: right node present</li>
+    </ul>
+  </li>
+  <li><strong>lshared</strong>, int16 (2 bytes): length of shared prefix in bits</li>
+  <li><strong>encodedSharedPath</strong>, variable: shared prefix  (if lshared&gt;0)</li>
+  <li><strong>leftNodeHash</strong>, 32 bytes: left node hash (if node exists)</li>
+  <li><strong>rightNodeHash</strong>, 32 bytes: right node hash (if right node exists)</li>
+  <li><strong>valueHash</strong>, 32 bytes: Hash digest of value stored (if hasLongVal)</li>
+  <li><strong>value</strong>, variable: stored value (!hasLongVal)</li>
+</ul>
+
+<p>The overhead of a leaf node is 6 bytes, plus the hash digest of the parent node referencing the node, and the key/value database overhead to store the node. This is approximately 80 bytes.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>The new node format is as follows:</p>
+
+<ul>
+  <li>flags, 1 byte: indicates the type of node
+    <ul>
+      <li><strong>NodeVersion</strong>: 2 bits indicate serialization version (bits 6,7). Currently 01 (bit 6=1).</li>
+      <li><strong>hasLongValue</strong>: 1 bit indicate if value length &gt; 32 bytes (bit 5)</li>
+      <li><strong>sharedPrefixPresent</strong>: 1 bit indicates if there is any prefix (bit 4)</li>
+      <li><strong>nodePresent</strong>: 2 bits indicate left/right embedded node (bit 2 = left, bit 3 = right)</li>
+      <li><strong>nodeIsEmbedded</strong>: 2 bits indicate left/right node presence (bit 0 = left, bit 1=right)</li>
+    </ul>
+  </li>
+  <li>
+    <p>if sharedPrefixPresent&gt;0</p>
+
+    <ul>
+      <li><strong>lsharedCompressed</strong>, uint (0-3 bytes): length of shared prefix, in compressed form.</li>
+    </ul>
+  </li>
+  <li>
+    <p>if lshared&gt;0</p>
+
+    <ul>
+      <li><strong>encodedSharedPath</strong>, variable: shared prefix</li>
+    </ul>
+  </li>
+  <li>if nodePresent[0]
+    <ul>
+      <li>if  !nodeIsEmbedded[0]:
+        <ul>
+          <li><strong>leftNodeHash</strong>, 32 bytes: left node hash</li>
+        </ul>
+      </li>
+      <li>if nodeIsEmbedded[0]:
+        <ul>
+          <li><strong>leftNodeSize</strong>, uint8, 1 byte</li>
+          <li><strong>leftNodeEncoded</strong>, up to 40 bytes: left node encoded</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>if nodePresent[1]:
+    <ul>
+      <li>if  !nodeIsEmbedded[1]:
+        <ul>
+          <li><strong>rightNodeHash</strong>, 32 bytes: right node hash</li>
+        </ul>
+      </li>
+      <li>if  nodeIsEmbedded[1]:
+        <ul>
+          <li><strong>rightNodeSize</strong>, uint8, 1 byte</li>
+          <li><strong>rightNodeEncoded</strong>, up to 40 bytes: right node encoded</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>if hasLongVal:
+    <ul>
+      <li><strong>valueHash</strong>, 32 bytes: Hash digest of value stored</li>
+      <li><strong>valueLength</strong>, uint24 (3 bytes): size of the value contained (if lvalue&gt;0 and hasLongVal)</li>
+    </ul>
+  </li>
+  <li>
+    <p>if the left and right nodes are not present:</p>
+
+    <ul>
+      <li><strong>treeSize</strong>, 0-9 bytes: the size of the tree, variable length integer</li>
+    </ul>
+  </li>
+  <li>if !hasLongVal:
+    <ul>
+      <li><strong>value</strong>, variable-size extends up to the bounds of the node buffer: stored value</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The overhead for a small leaf node is 2 bytes (flags and 1-byte of prefix length)</p>
+
+<p>Because an Unitrie account having 1 RBTC-wei occupies 3 bytes. Assuming a 27-byte shared prefix, the space consumed without node overhead  is 30 bytes. Therefore we’ve reduced the overhead of small accounts from 266% (80/30) to 7% (2/30).</p>
+
+<p>The value treeSize enables sharding the state tree between nodes and requesting pieces in parallel from different nodes by specifying and offset and size of the requested chunk, while still being able to validate each piece independently, without the need to collect all pieces first.</p>
+
+<p><strong>Shared Prefix Size Compression</strong></p>
+
+<p>Let lshared be the actual length of the prefix. The lsharedCompressed expands to lshared as follows:</p>
+
+<ul>
+  <li>range 0..31: lshared = lsharedCompressed  + 1</li>
+  <li>range 32..254: lshared = lsharedCompressed + 128</li>
+  <li>255: use from 1 to 9 additional bytes (following) to a Bitcoin VarInt</li>
+</ul>
+
+<p>The small range (0..31) is left for top nodes that create only the branching structure of the trie.  Also it’s used for receipts and transactions, where the index is a sequential number.  The second range (32..254) is used for almost all terminal nodes. In the extreme case a sufficiently long prefix collision appears, the third option (2 additional bytes) is used.</p>
+
+<p><strong>Variable length integer</strong></p>
+
+<p>Integer can be encoded depending on the represented value to save space. Longer numbers are encoded in little endian.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Storage length</th>
+      <th>Format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt; 0xFD</td>
+      <td>1</td>
+      <td>uint8_t</td>
+    </tr>
+    <tr>
+      <td>&lt;= 0xFFFF</td>
+      <td>3</td>
+      <td>0xFD followed by the length as uint16_t</td>
+    </tr>
+    <tr>
+      <td>&lt;= 0xFFFF FFFF</td>
+      <td>5</td>
+      <td>0xFE followed by the length as uint32_t</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>9</td>
+      <td>0xFF followed by the length as uint64_t</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Recursive Embedding</strong></p>
+
+<p>While it’s possible in a generic trie that one node has an embedded node which in turn has another node embedded, this will be highly rare in the Unitrie for RSK. It can could happen for a group of four short storage cell, if RSKIP108 is implemented. However, to reduce traversal complexity, we limit that embedded nodes must be terminal (they cannot contain child nodes, even if small).</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

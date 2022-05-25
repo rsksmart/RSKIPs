@@ -1,3 +1,14 @@
+---
+rskip: 11
+title: TXINDEX Opcode
+description: 
+status: Adopted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2016-08-07
+---
 # TXINDEX Opcode
 
 |RSKIP          |11           |

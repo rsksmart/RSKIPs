@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Parallel Transaction Execution for Unitrie | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Parallel Transaction Execution for Unitrie | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP144" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP144" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Parallel Transaction Execution for Unitrie</h1>
+  </header>
+
+  <div class="post-content">
+    <table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">144</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Parallel Transaction Execution for Unitrie</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">23-OCT-2019</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP describes how miners partition transactions into disjoint sets and how full nodes should process transactions in order to be safely parallelized.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>RSK processes transactions from blocks one by one, in the specified order. This is because the final state after processing two transactions when applied in different order may differ. However most transactions do not use the same keys of the state and therefore they could be parallelized without interference.</p>
+
+<p>There are several obstacles to parallelization. [RSKIP02] and [RSKIP04] explore different methods that worked prior the implementation of the Unitrie.</p>
+
+<p>This RSKIP propose using a runtime method to partition the transaction set into threads similar to RSKIP04 but tailored for the Unitrie. Miners are forced to serialize transaction execution and at the same time discover runtime key-access overlaps. Once all transactions have been processed and the partition is created, an index is created holding the first transaction number for each thread (the “partition” field).  ull nodes can use this index to split the transaction set and parallelize execution.</p>
+
+<h1 id="specification">Specification</h1>
+
+<p>A new field partitionEnds is added to the block header. partitionEnds contains an array of integers, indicating at what offset each partition ends. For example if partitionEnds is [2,4] then the first partition contains the transaction at offsets [0,1,2] and the second at offsets [3,4]. Values in partitionEnds must be ascending. If the block has no transactions, then partitionEnds must be empty. The maximum number of threads the miner can specify is 16.</p>
+
+<p>Full nodes must use the partitionEnds field to split the transaction set and parallelize execution. During execution, when a state key is read, it is marked with the thread index in a per-thread readMap. When a key is written, the key is marked in a per-partition writeMap map. When all transactions of a certain thread have been processed, the writeMap is scanned. For every entry, the new value is compared with the previous value (before the partition transactions were executed).  If it didn’t change, then the entry is removed from the writeMap. When all threads have finished processing, the readMaps and writeMaps are “merged”. This requires efficient maps that enable traversing the keys in ascending lexicographic order. If a key belongs to a writeMap and a readMap of another thread, then the block is considered invalid. If a key belongs to a writeMap and a writeMap of another thread, then the block is also considered invalid. Recursive deletes must be correctly and efficiently handled. Miners are incentivized to produce a valid and efficient partition because by doing so their blocks spread faster over the network. It’s also possible in the future to use a per-thread gas limit, instead of a global gas limit.</p>
+
+<p>When a miner executes transactions to create an (unsolved) block, the miner must execute the transactions serially and decide which thread the transaction belongs to. For each thread the miner creates, it maintains the last world state (i.e. as a cache of changes) and a per-thread read/write map (readMap/writeMap).</p>
+
+<p>Also the miner maintains a global writeMap/readMap that maps a key to the thread that wrote it or last thread that read it (optionally it could map to all threads that read it). This is maintained for efficiency purposes, as it can be dynamically built from the per-thread maps.</p>
+
+<p>The new transaction is run to be included in the template block assuming it runs on a new thread (initial block state), and a new per-thread readMap/writeMap is built. After it is executed, the transaction writeMap is scanned for changes (as described before) and keys may be removed accordingly. Then the transaction read/write maps are compared with the global read/write maps. If the transaction does not read any globally written key, nor writes a globally read key, then this transaction is assigned to a new thread, if available, and the global maps are updated to include the new thread reads and writes. Otherwise, the transaction is assigned to one of the previous threads. If the transaction reads a key that has been written, then it is assigned to the thread that wrote it (as specified in the global writeMap) into the first place of the threads queue, therefore it will not affect the outcome of the remaining transactions of the thread. If it writes a key that is already read, it should be assigned to one of the threads that read it (i.e. the last). In that case, it must be assigned as the last element of the thread queue, so it cannot change the outcome of the previous transaction. If there are more than one thread that has read the aforementioned key, the thread can be selected by some efficiency criteria by the miner (i.e. the threads with lower gas consumption up to that point). Both criteria are satisfied and for equal or distinct keys (read maps requires the transaction to be assigned to one threads but write maps requires it to be assigned to a different one), then all threads must be joined by the following procedure :</p>
+
+<ul>
+  <li>When joining the threads, all the “read key” threads transactions must go first, then the new transaction and finally all the “write key” threads transactions. By doing so the inserted transaction cannot change the outcome of any other one.</li>
+</ul>
+
+<p>There can be the case of the existence of a loop. If there is no loop the maps and final thread states can be simply efficiently joined.</p>
+
+<p>Let’s analyze a case of a loop:</p>
+
+<ul>
+  <li>Thread 1: Tx1=(R0,W1)</li>
+  <li>Thread 2: Tx2=(R0,W2)</li>
+  <li>Thread 3: Tx3=(R1 R2, W0)</li>
+</ul>
+
+<p>(Rn means read key n, and Wn means writes key n)</p>
+
+<p>When Tx3 is executed in a separate thread, it becomes incompatible with any serialization of the threads. In this case the miner can opt to remove the transaction from the block or try to assigned it to a preexistent thread (always as the last thread). If it opts to force an assignment then the previous execution (in a separate thread) is completely discarded, and the transaction is re-executed in the context of the selected thread last state, and the thread readMap/writeMap is updated accordingly.  It will be the case that the new context changes the thread read/write maps. Therefore the criteria to join threads must be re-checked and more threads may need to be re-executed on that same thread.  To prevent this cascade effect, is is recommended that the transaction is excluded from the block. The sender may want to increase the failed transaction gasPrice so that the transaction is picked first next time, and it is not forever blocked.</p>
+
+<p>Always at the end of processing a transaction, the new reads/writes are copied to the global write/reads maps for efficiency.  This procedure repeats until there is no more gas left to consume or there are no more valid transactions to add.</p>
+
+<p>Special treatment may be needed for recursive deletes, as used in suicides.</p>
+
+<h2 id="transaction-censorship">Transaction Censorship</h2>
+
+<p>For a target (victim’s) transaction tx0, an attacker could try to broadcast transactions tx1..txN with high gasPrice so that they are chosen first, and so that tx0 is discarded because it would build a loop in the access maps and require re-execution. If the default mining behavour is to discard the transaction, then this would allow censorship at low costs. If the transaction tx0 is postponed and re-executed in following blocks, then it also possible that the miner needs to re-execute it an unbounded number of times without succes, which impacts the miner’s operation cost.
+Therefore we suggest than once every k blocks (i.e. k=5) a block must be serial (a “serial block”), and the miner cannot specify any parallelism in the serial block. This will enable all postponed transactions that could not be parallelized to compete and be included in serial blocks. An alternative is to pseudo-randomize the choice of the serial block (i.e depending on the previous block hash). Adding this uncertanity however doesn’t seem to provide any benefit.</p>
+
+<h2 id="dos-security">DoS Security</h2>
+
+<p>A user could build a transaction that transfers tiny amounts of RBTC to many contracts or executes EXTCODEHASH/EXTCODESIZE/BALANCE to prevent the partitioning algorithm to produce efficient partitions. However these opcodes have a high cost in gas. If this problem is still present, then the cost of these opcodes may need to be increased. </p>
+
+<h1 id="copyright">Copyright</h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

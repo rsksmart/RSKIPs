@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>User-triggered peg-out tx fee-bumping | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="User-triggered peg-out tx fee-bumping | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP241" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP241" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">User-triggered peg-out tx fee-bumping</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="user-triggered-peg-out-tx-fee-bumping">User-triggered peg-out tx fee-bumping</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">241</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">User-triggered peg-out tx fee-bumping</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">MAY-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Usa, Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>discussions-to</strong></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP proposes the addition of a several methods to the bridge contract to force previously signed transaction to be rebuilt with higher Bitcoin transaction fees, and be re-signed by pegnatories.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Currently the bitcoin fees (satoshis x byte) used to create Bitcoin peg-out transactions are established by a threshold of 2 out of 3 keys. The use of these keys requires high security procedures. Bitcoin fees can vary rapidly over hours,  and we can’t expect the key holders to sign and send messages to the bridge to update fees several times a day. We would like, if possible, to remove the need to vote. If this is not possible, then to increase the number of voters, to, for example, all pegnatories. However, the first idea is technically challenging, and the second, requires frequent fee update messages from all pegnatories.</p>
+
+<p>This proposals does not tackle the core problem, but instead proposes a mechanism for users to bump the fees of a previously signed peg-out transaction that is stuck in the memory pool by the fast rising transaction fee prices. To achieve this goal, several methods are added to the bridge. In two of these methods, the user must transfer RBTC to the bridge to be used as additional Bitcoin transaction fees.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>A collection of the last N transaction ids of previously released transactions is stored in a new collection <em>releasedTransactionIds</em> in the Bridge contract storage. The list is managed as a FIFO queue. When a new hash needs to be added, the oldest hash is removed. This proposal assumes peg-out transactions will be batched and will not be issued faster than one every two hours. However, this proposal does not specify how batching is performed. With this rate-limiting assumption, we set a conservative value of N=128.</p>
+
+<p>Three methods are added to the bridge contract. These are:</p>
+
+<pre><code class="language-Solidity">function feeBump(byte[] tx) public payable; 
+function feeBumpWithInput(byte[] tx,byte[] newInput) public payable;
+function feeBumpWithCPFP(byte[] tx,uint pot) public payable;
+</code></pre>
+
+<p>The value  <em>txHash</em> is computed as the standard Bitcoin hash of a transaction <em>tx</em>.</p>
+
+<p>The bridge contract performs one check for all methods: If the transaction identified by <em>txHash</em> is not present in <em>releasedTransactionIds</em>, REVERT.</p>
+
+<p>The gas consumed by any of these methods is SIG_BASE_COST+(length(tx)/32)/12. SIG_BASE_COST is set to (<em>pegnatoryCount</em>+1)/2*40k (TBD). The base cost covers the cost of pegnatories to send new signatures. The variable cost coverts the SHA256 hashing of the transaction. For example, if there are 13 pegnatories the base cost is 280k.</p>
+
+<p>”/” is the integer division.</p>
+
+<p>Let <em>T</em> be the prior transaction. Let <em>T.fees</em> be the prior transaction fees. Let <em>T.output</em> be the amounts paid to users (peg outs). Let <em>T.change</em> be the amount returned to the Bridge contract as change. Let <em>T.input</em> the amount collected by <em>T</em> inputs.</p>
+
+<p>These methods create new peg-out transactions and will require pegnatories to sign them as usual. However, the new transaction hashes are not stored in <em>releasedTransactionIds</em>. The fee bumping methods will still identify transactions to fee-bump with their original ids.</p>
+
+<h3 id="changes-in-creation-of-peg-outs">Changes in Creation of Peg-outs</h3>
+
+<p>When creating a new peg-out transaction, a reasonable attempt will be made to choose inputs that can cover potentially at least 10 times the computed transaction fees. This will allow a 10x fee increase without adding inputs. This change is not fully specified in this proposal, and requires a change in the the transaction input selector algorithm.</p>
+
+<h3 id="method-feebump">Method feeBump()</h3>
+
+<p>Let <em>callValue</em> the RBTC value received in the method call .</p>
+
+<p>The <em>feeToAdd</em> is defined to be equal to <em>callValue</em>.</p>
+
+<ul>
+  <li>If <em>feeToAdd</em> &lt;= <em>T.change</em>, then then a new transaction <em>T’</em> is built with the same inputs, the same outputs, but with <em>T’.change = T.change-feeToAdd</em>. This moves fees from the change output to the transaction fee. If <em>T’.change</em> is below the dust limit, the output is removed.</li>
+  <li>Otherwise, REVERT</li>
+</ul>
+
+<p>Note that because of the change in the input selector algorithm, the case that  <em>feeToAdd</em> &lt;= <em>T.change</em> will be the most common. This method allows to bump a transaction in most cases, but not all.</p>
+
+<h3 id="method-feebumpwithinput">Method feeBumpWithInput()</h3>
+
+<p>If the input size is higher than 1000 bytes, then the call REVERTs.</p>
+
+<p>A new transaction <em>T’</em> is built having the inputs and outputs of <em>T</em>, but with an additional input appended, specified by newInput. The input given must already be signed.</p>
+
+<p>The bridge will validate that the input conforms to its expected format (the correct parsing of each field and that there is not additional data past the last field). However, the bridge will not inspect the content of each field, except for txin-script length, which must be inspected for parsing the script field.</p>
+
+<p>The full amount of the added input will be consumed to pay fees.</p>
+
+<p>The user is responsible to check that the input with amount is enough to bump the fees. This is not checked by the Bridge.</p>
+
+<h3 id="method-feebumpwithcpfp">Method feeBumpWithCPFP()</h3>
+
+<p>If <em>pot</em> &gt; <em>callValue</em>, and REVERT. The call value is split between a pot for CPFP and an additional fee for the miner.</p>
+
+<p>The <em>feeToAdd</em> is defined as <em>callValue</em> - <em>pot</em>.</p>
+
+<p>If <em>feeToAdd</em> &gt; 0 then the following check is performed (similar to method feeBump(), but with a different fee value):</p>
+
+<ul>
+  <li>If <em>feeToAdd</em> &lt;= <em>T.change</em>, then then a new transaction <em>T’</em> is built with the same inputs, the same outputs, but with <em>T’.change = T.change-feeToAdd</em>. This moves fees from the change output to the transaction fee. If <em>T’.change</em> is below the dust limit, the output is removed.</li>
+  <li>Otherwise, REVERT</li>
+</ul>
+
+<p>Then the new transaction <em>T’</em> is built as T with an additional additional appended output containing a transfer of <em>pot</em>  bitcoins paying to the address 1CPFPxxxSv1jWf6wCyihRWhKyYFkKX3bnf. The private key for this address is 5KFhJj5HeGh81EuzuRWo6SigTN5cQnFSTmeSHsWuwG7AN5pze9C. If <em>feeToAdd</em> == 0, the fee per byte of <em>T’</em> will be lower than the fee per byte of <em>T</em>.</p>
+
+<h2 id="storage">Storage</h2>
+
+<p>The collection <em>releasedTransactionIds</em>  is stored in the Bridge contract storage serialized in a single cell with key <code class="language-plaintext highlighter-rouge">DataWord.fromString("releasedTransactionIds")</code> (10 zero bytes followed by the ASCII string “releasedTransactionIds”). The maximum space consumed by this cell is N*32.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<p>The following topics have been considered in this proposal.</p>
+
+<h3 id="more-protections-against-dos">More protections against DoS</h3>
+
+<p>The high gas cost of these methods is to prevent users abusing of the powpeg resources to sign transactions. To prevent abuse even more, the Bridge could allow only fee bumps adding at least 30% more fees compared to the previous fees used. Therefore, each attempt to create a new peg-out transaction becomes exponentially more expensive. This can be done by storing the last fee used in <em>releasedTransactionIds</em>.</p>
+
+<h3 id="sending-txhash-instead-of-tx">Sending txHash instead of tx</h3>
+
+<p>An alternative design is to pass as argument the transaction hash instead of the transaction itself, reducing the call data cost. The bridge would need to store every signed transactions for M days in a new dictionary (i.e. <em>signedTransactions</em>) indexed by transaction hash. However, it seems that this design is more complex and it involves a higher state storage cost related to handling this additional collection. We believe this is unnecessary as fee-bumping would be infrequent, and the user performing the fee bumping can re-send the transaction.</p>
+
+<h3 id="mixing-dirty-utxos">Mixing Dirty UTXOs</h3>
+
+<p>The feeBumpWithInput() could be used to mix “dirty” UTXOs (for example, considered to come from illicit activity) into peg-out transactions. However, this feature cannot be reliably used to launder bitcoins, as the input added is fully paid to miners, and its value is supposed to be vey low. However, the Powpeg doesn’t have (and since peg-ins are decentralized, it cannot have) any means of avoiding the peg-ins with of illicit funds. Therefore feeBumpWithInput() cannot have a negative effect on the platform.</p>
+
+<h3 id="input-selection-algorithm">Input Selection Algorithm</h3>
+
+<p>The input selection algorithm must do a reasonable effort to select inputs that allow 10x fee bumping. By reasonable we mean that the algorithm should still be linear, or the number of powpeg UTXOs, bounded. The algorithm should not add more inputs in order to satisfy this condition, as the cost in virtual bytes of a non-segwit input (~137 bytes) is higher than the cost of CPFP output (30 bytes). Adding more inputs only makes sense if they are all low valued, and they are using the peg-out transaction for input consolidation.</p>
+
+<h3 id="parameter-choices">Parameter Choices</h3>
+
+<p>This proposal is intended to be adopted concurrently with a proposal to perform peg-out batching at a maximum rate of one peg-out every 2 hours. By setting N=128, we enable a period of 10 days for transactions to be fee-bumped.</p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients and Block explorers do not need to be updated.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+
+<p>TBD</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<ul>
+  <li>
+    <p>The method used to create the new transaction forces it to be always a double-spend of the prior one, therefore this method cannot be used to perform two peg-outs at the price of one.</p>
+  </li>
+  <li>This proposal avoids merging new Bridge inputs when creating a fee bumping transaction. The reason is that the bridge does not know which one of the transactions (<em>T</em> or <em>T’</em>) will be finally included in the Bitcoin blockchain, and therefore all inputs must be marked as consumed. To unmark the unused inputs the Bridge would need to receive notification of the transaction <em>T</em> or <em>T’</em> when it is included in the Bitcoin blockchain, and this functionality is not part of the Bridge. But more importantly, an attacker may be able to force the bridge to create hundreds of variations  of the fee bumping transaction, locking all inputs and rendering the Bridge useless for many blocks.</li>
+  <li>FeeBumpWithInput cannot consume the input partially for fees because the Bridge doesn’t know the input amount of the input given. To be sure of the input amount, the transaction would need to be segwit, because in segwit transactions the input amount is signed.</li>
+  <li>It could possible for an attacker to block a honest user from consuming a CPFPxxx output in a peg-out transaction by broadcasting a transaction that also consumes the CPFPxxx output, but contains other features or orphan inputs that makes it non-mineable. The rules that govern CPFP in the Bitcoin node must be carefully analyzed to disregard this potential attack.</li>
+</ul>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.,</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

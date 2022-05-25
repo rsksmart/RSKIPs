@@ -1,3 +1,15 @@
+---
+rskip: 131
+title: Preventing CREATE2-after-SUICIDE in the same block
+description: 
+status: Draft
+purpose: Sca, Usa
+author: SMS (@sebastians), SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2019-06-10
+---
+
 # Preventing CREATE2-after-SUICIDE in the same block
 
 |RSKIP          |131           |

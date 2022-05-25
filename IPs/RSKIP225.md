@@ -1,3 +1,14 @@
+---
+rskip: 225
+title: Emergency Multisig public keys
+description: 
+status: Draft
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2021-04
+---
 # Emergency Multisig public keys
 
 

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Informing average free gas per block | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Informing average free gas per block | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP48" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP48" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Informing average free gas per block</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="informing-average-free-gas-per-block">Informing average free gas per block</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">48</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Informing average free gas per block</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">28-NOV-2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This document describes a new method provided by the REMASC contract to inform users of the gas availability in the last block intervals. To optimize queries, the REMASC will maintain the average free gas per block at powers of 2, until 8192.</p>
+
+<h1 id="discussion"><strong>Discussion</strong></h1>
+
+<p>Pseudocode for each new block B.</p>
+
+<ol>
+  <li>
+    <p>prev = B.gasLimit-B.gasUsed</p>
+  </li>
+  <li>
+    <p>w = 0</p>
+  </li>
+  <li>
+    <p>while (w&lt;=13)</p>
+
+    <ol>
+      <li>
+        <p>b0[w] = b1[w]</p>
+      </li>
+      <li>
+        <p>b1[w] = prev</p>
+      </li>
+      <li>
+        <p>prev = (b0[w] + b1[w]) /2</p>
+      </li>
+      <li>
+        <p>valueAtLevel[w] = prev</p>
+      </li>
+      <li>
+        <p>if (blockNumber &amp; (1«w) ==0) break</p>
+      </li>
+      <li>
+        <p>w++</p>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p>This is a multi-level averaging filter. The properties of this filter MUST be carefully studied. Each value feeded into a filter of level N is an average of level (N-1) therefore the values come pre-smoothed. The only drawback is that the system updates the filter at level N once every 2^N blocks, which means that the data is always delayed.</p>
+
+<p>For a level of 8192 (approximately one update every day), the value is delayed on average half a day.</p>
+
+<p>One thing one can do is to combine values at different levels at different times, when the blocknumber is not an exact multiple of 2^N.</p>
+
+<p>Eg</p>
+
+<p>Average at blocknumber 8192+100 is</p>
+
+<p>( Block[8192+100].valueAtLevel[log2(8192)] +</p>
+
+<p>Block[8192].valueAtLevel[log2(64)]+</p>
+
+<p>Block[8192+64].valueAtLevel[log2(32)]+</p>
+
+<p>Block[8192+96].valueAtLevel[log2(4)] ) / 4</p>
+
+<p>This computation gives more weight to the last samples. To get a better weight, this is suggested:</p>
+
+<p>( Block[8192+100].valueAtLevel[log2(8192)] *8192+</p>
+
+<p>Block[8192].valueAtLevel[log2(64)] * 64+</p>
+
+<p>Block[8192+64].valueAtLevel[log2(32)] *32+</p>
+
+<p>Block[8192+96].valueAtLevel[log2(4)] * 4) / (8192+64+32+4)</p>
+
+<p>This gives an estimation of the last(8192+64+32+4) blocks.</p>
+
+<p>To obtain an estimation of an exact number of blocks, the bit decomposition of the blocknumber is required.</p>
+
+<p>E.g. At point 8292:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(4 block average at blocknum 104  ) *4 +
+</code></pre></div></div>
+
+<p>(8 block average at blocknum 112 ) * 8 +</p>
+
+<p>(16 block average at blocknum 128 )* 16+</p>
+
+<p>(128 block average at blocknum 256) * 128+</p>
+
+<p>(256 block average at blocknum 512)*256+</p>
+
+<p>(512 block average at blocknum 1024)*512+</p>
+
+<p>(1024 block average at blocknum 2048)*1024+</p>
+
+<p>(2048 block average at blocknum 4096)*2048+</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(4096 block average at blocknum 8192 )*4096+
+
+ ( 64 block average at blocknum (8192+64) ) *64+
+
+ ( 32 block average at blocknum (8192+96) ) *32+
+
+ ( 4 block average at blocknum (8192+96+4) )* 4
+</code></pre></div></div>
+
+<p>(4+8+16+128+256+512+1024+2048+4096+64+32+4)=8192</p>
+
+<p>Addition way is:</p>
+
+<ul>
+  <li>
+    <p>Let H be the high limit</p>
+  </li>
+  <li>
+    <p>Let L be the low limit</p>
+  </li>
+  <li>
+    <p>Let a = trunc(log2(H-L))</p>
+  </li>
+  <li>
+    <p>Let p = 2^a</p>
+  </li>
+  <li>
+    <p>Let Ldif = (a-L)</p>
+  </li>
+  <li>
+    <p>Let Ldec = accum_averages(L..a)
+bit decomposition and accumulation of averages of Ldif in the range L..a</p>
+  </li>
+  <li>
+    <p>Let Hdif = (H-2*a)</p>
+  </li>
+  <li>
+    <p>Let Hdec = accum_averages(a..H)
+bit decomposition and accumulation of averages of Hdif in the range a..H</p>
+  </li>
+  <li>
+    <p>Total = a<em>accum_averages(a..2</em>a)+ Hdec<em>Hdif + Ldec</em>Ldif</p>
+  </li>
+</ul>
+
+<p>Subtraction way is:</p>
+
+<ul>
+  <li>
+    <p>Let H be the high limit</p>
+  </li>
+  <li>
+    <p>Let L be the low limit</p>
+  </li>
+  <li>
+    <p>Let a = ceil(log2(H-L))</p>
+  </li>
+  <li>
+    <p>Let p = 2^a</p>
+  </li>
+  <li>
+    <p>Let Ldif = (L-a)</p>
+  </li>
+  <li>
+    <p>Let Ldec = accum_averages(a..L)</p>
+  </li>
+  <li>
+    <p>Let Hdif = (H-2*a)</p>
+  </li>
+  <li>
+    <p>Let Hdec = accum_averages(L..H)</p>
+  </li>
+  <li>
+    <p>Total = a<em>accum_averages(2</em>a)+ Hdec<em>Hdif - Ldec</em>Ldif</p>
+  </li>
+</ul>
+
+<p>The idea is that one can compute the averages from the lower limit to a higher power of two or to a lower power of two. If it’s higher, we add. If it’s lower we subtract.</p>
+
+<p>The advantage of adding is that it uses a largest power (a) smaller than when subtracting. But the actual addition cost depends on the bit decompositions: if (L-a) has low hamming distance, then addition is better. If (a-L) has low hamming distance, then subtraction is better.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<h2 id="references">References:</h2>
+
+<p><a href="https://github.com/raiden-network/raiden/issues/383">https://github.com/raiden-network/raiden/issues/383</a></p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

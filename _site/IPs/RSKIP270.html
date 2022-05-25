@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Bridge UTXO set size management | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Bridge UTXO set size management | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP270" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP270" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Bridge UTXO set size management</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="bridge-utxo-set-size-management">Bridge UTXO set size management</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">xxx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Bridge UTXO set size management</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">AUG-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec, Usa</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>One of the problems of the RSK bridge is that it doesn’t have any means to prevent the proliferation and fragmentation of UTXOs. This can lead to a number of cost, usability, efficiency and security problems defined in <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP265.md">RSKIP265</a>. This RSKIP is part of a series of RSKIPs that address these problems (RSKIP265, and RSKIP270 to RSKIP273). In particular, this RSKIP proposes a new protocol for the Bridge to shrink or expand the UTXOs to keep the size of the UTXO set within a predetermined range. This is done by splitting amounts (expansion) or joining amounts (consolidation). Lower bound and upper bound thresholds are used to avoid frequent UTXO management operations.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The current RSK bridge can suffer from a number of problems described in RSKIP265. In this RSKIP we’re mostly concerned with UTXO proliferation,  UTXO fragmentation and  UTXO uneven amount distributions.
+The solution to UTXO proliferation/fragmentation is periodic, user-triggered or peg-in/peg-out triggered consolidations.
+The solution to uneven amount distribution is to rebalance amounts during consolidations.</p>
+
+<h2 id="specification">Specification</h2>
+
+<h3 id="utxo-consolidationexpansion">UTXO Consolidation/Expansion</h3>
+
+<p>Every time after a peg-in transaction is registered by the Bridge, the Bridge will count the number of UTXOs and perform the following actions:</p>
+
+<ul>
+  <li><strong>Consolidation</strong>: If the number of UTXOs is higher than A, then (M+1) UTXOs will be immediately consolidated in a peg-out/peg-in transaction with a single Powpeg output. The additional inputs will be chosen greedily to consume low amounts.</li>
+</ul>
+
+<p>Before a peg-out is to be built, the Bridge will count the number of UTXOs and perform the following actions:</p>
+
+<ul>
+  <li><strong>Consolidation</strong>: If the number of UTXOs is higher than B, the peg-out transaction will consume at least M inputs. The inputs will be chosen with the algorithm described in RSKIP265, which should add a low-value input.</li>
+  <li><strong>Expansion</strong>: If the number of UTXOs is lower or equal to C, and the change amount is higher than 1 BTC, then M change outputs will be added, split the change amount evenly between the (N+1) change outputs for the Powpeg.</li>
+</ul>
+
+<p>If UTXO Management Account is activated (<a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md">RSKIP272</a>), then the additional cost of creating a peg-in-peg-out transaction or adding adding an input or an output to a peg-out transaction will be paid by the UMA, otherwise it will be charged to the current peg-in or peg-out users.</p>
+
+<p>If peg-out batching is activated (<a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md">RSKIP271</a>) then the constants selected are A=80, B=60 and C=30.</p>
+
+<p>If peg-out batching is not activated, then A=800, B=600 and C=300.</p>
+
+<p>If UMA is activated (<a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md">RSKIP272</a>) then M=3, N=3.</p>
+
+<p>If UMA is not activated, them M=1, N=2.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<p>We define an algorithm that tries to:</p>
+
+<ul>
+  <li>Keep the number of UTXOs between two bounds.</li>
+  <li>Do not generate too many  UTXO consolidation or expansion transactions.</li>
+</ul>
+
+<h3 id="magic-numbers">Magic Numbers</h3>
+
+<p>If peg-out batching is not activated, then having a low number of UTXOs allows a DoS attack to be performed on the Bridge, by consuming all UTXOs quickly. Therefore A, B and C, are 10 higher than with batching.</p>
+
+<p>If UMA is activated, then the UMA can pay for the high cost of consolidation, and therefore M and N can be set to much higher values. If UMA is not activated, then the consolidation must be done is lower UTXOs because each input added almost doubles the cost of the peg-out transaction.</p>
+
+<h3 id="hysteresis">Hysteresis</h3>
+
+<p>The correction procedures kick-in when the number of UTXOs is far below or far above the desired number. This reduces the risks of oscillations that will increase the transaction fees consumed on average.</p>
+
+<p>The correction method based on consolidation on peg-ins will only be triggered if there is a stream of peg-ins but no peg-outs. Because in this case consolidation requires creating a new peg-out transaction, the process consumes N+1 inputs to amortize the cost in fees. Since the other inputs consumed are chosen to be low valued, we don’t expect peg-outs to be blocked after a stream of peg-ins.</p>
+
+<h3 id="simulations">Simulations</h3>
+
+<p><u>The algorithms and thresholds presented here need to be validated by simulations before the RSK community can approve this RSKIP. This section will show the simulation results. This RSKIP will be updated with improved algorithms and thresholds after simulations are completed.</u></p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients and Block explorers do not need to be updated.</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>This RSKIP resolves an existing, but not critical, platform vulnerability.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

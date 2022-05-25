@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Minimal Proxy Contract | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Minimal Proxy Contract | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP159" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP159" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Minimal Proxy Contract</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="minimal-proxy-contract">Minimal Proxy Contract</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">159</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Minimal Proxy Contract</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">19-FEB-20</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">PMP</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Usa</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">DApp</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Adopted</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following RSKIP is a copy of <a href="https://eips.ethereum.org/EIPS/eip-1167">EIP1167</a></p>
+
+<h2 id="abstract">Abstract</h2>
+<p>This RSKIP proposes a way to simply and cheaply clone contract functionality in an immutable way, this standard specifies a minimal bytecode implementation that delegates all calls to a known, fixed address.</p>
+
+<h2 id="motivation">Motivation</h2>
+<p>By standardizing on a known minimal bytecode redirect implementation, this standard allows users and third party tools (e.g. Etherscan) to (a) simply discover that a contract will always redirect in a known manner and (b) depend on the behavior of the code at the destination contract as the behavior of the redirecting contract.  Specifically, tooling can interrogate the bytecode at a redirecting address to determine the location of the code that will run - and can depend on representations about that code (verified source, third-party audits, etc).  This implementation forwards all calls and 100% of the gas to the implementation contract and then relays the return value back to the caller.  In the case where the implementation reverts, the revert is passed back along with the payload data (for revert with message).
+This standard supports use-cases wherein it is desirable to clone exact contract functionality with a minimum of side effects (e.g. memory slot stomping) and with low gas cost deployment of duplicate proxies.</p>
+
+<h2 id="specification">Specification</h2>
+<p>The exact bytecode of the standard clone contract is this: <code class="language-plaintext highlighter-rouge">363d3d373d3d3d363d73bebebebebebebebebebebebebebebebebebebebe5af43d82803e903d91602b57fd5bf3</code> wherein the bytes at indices 10 - 29 (inclusive) are replaced with the 20 byte address of the master functionality contract.</p>
+
+<p>A reference implementation of this can be found at the <a href="https://github.com/optionality/clone-factory">optionality/clone-factory</a> github repo.</p>
+
+<h2 id="rationale">Rationale</h2>
+<p>The goals of this effort have been the following:</p>
+<ul>
+  <li>inexpensive deployment (low gas to deploy clones)</li>
+  <li>support clone initialization in creation transaction (through factory contract model)</li>
+  <li>simple clone bytecode to encourage directly bytecode interrogation (see CloneProbe.sol in the clone-factory project)</li>
+  <li>dependable, locked-down behavior - this is not designed to handle upgradability, nor should it as the representation we are seeking is stronger.</li>
+  <li>small operational overhead - adds a single call cost to each call</li>
+  <li>handles error return bubbling for revert messages</li>
+</ul>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+<p>There are no backwards compatibility issues.  There may be some systems that are using earlier versions of the proxy contract bytecode.  They will not be compliant with this standard.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+<p>Test cases include:</p>
+<ul>
+  <li>invocation with no arguments</li>
+  <li>invocation with arguments</li>
+  <li>invocation with fixed length return values</li>
+  <li>invocation with variable length return values</li>
+  <li>invocation with revert (confirming reverted payload is transferred)</li>
+</ul>
+
+<p>Tests for these cases are included in the reference implementation project.</p>
+
+<h2 id="implementation">Implementation</h2>
+<p>Deployment bytecode is not included in this specification.  One approach is defined in the proxy-contract reference implementation.</p>
+
+<h3 id="standard-proxy">Standard Proxy</h3>
+<p>The disassembly of the standard deployed proxy contract code (from r2 and edited to include stack visualization)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|           0x00000000      36             calldatasize          cds
+|           0x00000001      3d             returndatasize        0 cds
+|           0x00000002      3d             returndatasize        0 0 cds
+|           0x00000003      37             calldatacopy          
+|           0x00000004      3d             returndatasize        0
+|           0x00000005      3d             returndatasize        0 0 
+|           0x00000006      3d             returndatasize        0 0 0
+|           0x00000007      36             calldatasize          cds 0 0 0
+|           0x00000008      3d             returndatasize        0 cds 0 0 0
+|           0x00000009      73bebebebebe.  push20 0xbebebebe     0xbebe 0 cds 0 0 0
+|           0x0000001e      5a             gas                   gas 0xbebe 0 cds 0 0 0
+|           0x0000001f      f4             delegatecall          suc 0
+|           0x00000020      3d             returndatasize        rds suc 0
+|           0x00000021      82             dup3                  0 rds suc 0
+|           0x00000022      80             dup1                  0 0 rds suc 0
+|           0x00000023      3e             returndatacopy        suc 0
+|           0x00000024      90             swap1                 0 suc
+|           0x00000025      3d             returndatasize        rds 0 suc
+|           0x00000026      91             swap2                 suc 0 rds
+|           0x00000027      602b           push1 0x2b            0x2b suc 0 rds
+|       ,=&lt; 0x00000029      57             jumpi                 0 rds
+|       |   0x0000002a      fd             revert
+|       `-&gt; 0x0000002b      5b             jumpdest              0 rds
+\           0x0000002c      f3             return
+
+</code></pre></div></div>
+
+<p>NOTE: as an effort to reduce gas costs as much as possible, the above bytecode depends on EIP-211 specification that <code class="language-plaintext highlighter-rouge">returndatasize</code> returns zero prior to any calls within the call-frame. <code class="language-plaintext highlighter-rouge">returndatasize</code> uses 1 less gas than <code class="language-plaintext highlighter-rouge">dup*</code>.</p>
+
+<h3 id="vanity-address-optimization">Vanity Address Optimization</h3>
+<p>Proxy deployment can be further optimized by installing the master contract at a vanity contract deployment address with leading zero-bytes.  By generating a master contract vanity address that includes Z leading 0 bytes in its address, you can shorten the proxy bytecode by replacing the <code class="language-plaintext highlighter-rouge">push20</code> opcode with <code class="language-plaintext highlighter-rouge">pushN</code> (where N is 20 - Z) followed by the N non-zero address bytes.  The revert jump address is decremented by Z in this case.  Here is an example where Z = 4:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|           0x00000000      36             calldatasize          cds
+|           0x00000001      3d             returndatasize        0 cds
+|           0x00000002      3d             returndatasize        0 0 cds
+|           0x00000003      37             calldatacopy          
+|           0x00000004      3d             returndatasize        0
+|           0x00000005      3d             returndatasize        0 0 
+|           0x00000006      3d             returndatasize        0 0 0
+|           0x00000007      36             calldatasize          cds 0 0 0
+|           0x00000008      3d             returndatasize        0 cds 0 0 0
+|           0x00000009      6fbebebebebe.  push16 0xbebebebe     0xbebe 0 cds 0 0 0
+|           0x0000001a      5a             gas                   gas 0xbebe 0 cds 0 0 0
+|           0x0000001b      f4             delegatecall          suc 0
+|           0x0000001c      3d             returndatasize        rds suc 0
+|           0x0000001d      82             dup3                  0 rds suc 0
+|           0x0000001e      80             dup1                  0 0 rds suc 0
+|           0x0000001f      3e             returndatacopy        suc 0
+|           0x00000020      90             swap1                 0 suc
+|           0x00000021      3d             returndatasize        rds 0 suc
+|           0x00000022      91             swap2                 suc 0 rds
+|           0x00000023      6027           push1 0x27            0x27 suc 0 rds
+|       ,=&lt; 0x00000025      57             jumpi                 0 rds
+|       |   0x00000026      fd             revert
+|       `-&gt; 0x00000027      5b             jumpdest              0 rds
+\           0x00000028      f3             return
+</code></pre></div></div>
+<p>This saves 4 bytes of proxy contract size (savings on each deployment) and has zero impact on runtime gas costs.</p>
+
+<h2 id="contractprobe-contract">ContractProbe contract</h2>
+<p>Using the implementation reference <a href="https://github.com/optionality/clone-factory/blob/master/contracts/ContractProbe.sol">optionality/clone-factory/contracts/ContractProbe.sol</a> deployed contract d’apps, wallets, or other contracts can detect if an address contains a clone and to what address it redirects to.  This contract is deployed at the following addresses:</p>
+<ul>
+  <li>Rsk Testnet: <a href="https://explorer.testnet.rsk.co/address/0x922c23cfbd8a9ea9f3dcca7538113d05e0804ec3">0x922c23cfbd8a9ea9f3dcca7538113d05e0804ec3</a></li>
+  <li>Rsk Mainnet: <a href="https://explorer.rsk.co/address/0x62cf760bfd2642599dc873ffb233921f0567548e">0x62cf760bfd2642599dc873ffb233921f0567548e</a></li>
+</ul>
+
+<h2 id="copyright">Copyright</h2>
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

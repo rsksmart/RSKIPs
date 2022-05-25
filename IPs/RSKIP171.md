@@ -1,3 +1,14 @@
+---
+rskip: 171
+title: Clean EVM Internal Buffer in Call-like Opcodes
+description: 
+status: Accepted
+purpose: Usa
+author: FJ (@fedejinich)
+layer: Core
+complexity: 1
+created: 2020-02-09
+---
 # Clean EVM Internal Buffer in Call-like Opcodes
 
 |RSKIP          |171           |

@@ -1,3 +1,14 @@
+---
+rskip: 70
+title: Default TX Data
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-11-25
+---
 # Default TX Data
 
 |RSKIP          |70           |

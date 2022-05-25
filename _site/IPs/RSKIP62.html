@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Compressed block propagation using state trie update batch | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Compressed block propagation using state trie update batch | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP62" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP62" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Compressed block propagation using state trie update batch</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="compressed-block-propagation-using-state-trie-update-batch-coblo">Compressed block propagation using state trie update batch (COBLO)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">62</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Compressed block propagation using state trie update batch (COBLO)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">07-MAY-2018</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>Stateful turing complete blockchains poses a limitation that is not present in UTXO based blockchains: one transaction state can affect the following transaction pre-state, and therefore transactions cannot be pre-executed during the transaction propagation phase. Also the block  contact (e.g. timestamp, number, coinbase) can also affect how a transaction is executed. Therefore transaction execution is directly obstructing the critical path during block propagation. The longer the times it takes for a block to propagate, the higher the uncle rate, the lower the blockchain efficiency and fairness. There are two kinds to solutions to this problem: even/odd sharding and headers-first propagation. Even-odd sharing consist of splitting the blockchain state into two, one state that is updated on even blocks and another that is updated on odd blocks. Therefore miners can mine child blocks even if the parent block has not been executed. The drawback is that a queue-based communication mechanism between shards must be devised.  The standard headers-first solution does not work in RSK/Ethereum because the state trie needs to be updated with the parent block execution results, even if an empty block is mined. In this RSK we present a modification of this headers-first technique that allow miners to start mining a child block before the parent block has been fully verified, based on forwarding the batch of state modifications along the header of the block.</p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>There are two kinds to solutions to this problem: even/odd sharding and headers-first propagation. Even-odd sharing consist of splitting the blockchain state into two, one state that is updated on even blocks and another that is updated on odd blocks. Therefore miners can mine child blocks even if the parent block has not been executed. The drawback is that a queue-based communication mechanism between shards must be devised.  The standard headers-first solution does not work in RSK/Ethereum because the state trie needs to be updated with the parent block execution results, even if an empty block is mined. In this RSK we present a modification of this headers-first technique that allow miners to start mining a child block before the parent block has been fully verified, based on forwarding the batch of state modifications along the header of the block.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>A compressed block (COBLO) format is defined. The new object has the following fields:</p>
+
+<ol>
+  <li>blockHeader: A block header (including uncles’s headers and Bitcoin SPV proof)</li>
+  <li>compressedTransactionIds</li>
+  <li>changeBatch (see below)</li>
+</ol>
+
+<p>The compressesTransactionIds is a list of elements of type CompressedTransactionId. A CompressedTransactionId is a 10-byte prefix (80 bits) of a 256-bit transaction id.</p>
+
+<p>The changeBatch field is used to specify the changes that transactions apply to the world state. The changeBatch field is a list of elements of type Change. A Change identifies the list of changes a transaction performs on the state trie. A Change is a tuple (transactionIndex, transactionChanges). The transactionIndex is the index of the transaction in the block that is being described. If a transaction index is not present in the changeBatch list, then that transaction must be executed in order to detect the changes.</p>
+
+<p>This allows the miner to compress the block by characterizing transactions in CPU-bound and Storage-bound.  CPU-bound transactions are transactions that consume a higher amount of gas in computation than in modifying the storage. Storage-bound transactions are the opposite. The exact threshold is chosen by the miner. The miner will add to the changeBatch all CPU-bound transactions.</p>
+
+<p>The transactionChanges is a list of elements of type TransactionChange. TransactionChange is a tuple (account,internalChanges,storageChanges). The account is the address of the account (or contract) that this transaction is changing (or being created).  internalChanges is a list of elements of type InternalChange. An InternalChange is a tuple (internalKey,value) where internalKey has a the following meaning:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>internalKey</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Nonce</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Balance</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Code</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>lastChangeDate (for storage rent). See RSKIP61.</td>
+    </tr>
+    <tr>
+      <td>other</td>
+      <td>reserved for future improvements</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>storageChanges is a list of elements of type StorageChange. a StorageChange is a tuple (key,value) where key is the address of a cell in contract storage, and value represents the value to be stored. If the value is empty, then the cell has been removed. Keys are subject to the key-compression scheme defined below</p>
+
+<h2 id="keyvalue-compression-scheme">Key/Value Compression Scheme</h2>
+
+<p>All keys and values can be compressed (internalKey is excluded). The compression algorithm is a variant of run-length encoding.If first byte is zero, a normal data is read, starting from the second byte.</p>
+
+<p>If first byte is non-zero, then the three most significant bits are special, and they represent different compression options. These three bits are masked-out when values are extracted.</p>
+
+<p>Most significant bits table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Bits</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">000</td>
+      <td>the blob is interpreted as (dummyByte,valueData). The resulting data is given by the valueData field.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">001</td>
+      <td>the blob is interpreted as (dataLength, dataOffset,), each a 16-bit unsigned word (totaling 4 bytes). The value is taken from the “data” field of the transaction at the specified offset and length. If the provided values are invalid, then the block header is invalid. This type of compression is useful to specify that a certain contract will store the code that is specified by a contract creation transaction.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">010</td>
+      <td>the blob is interpreted as (dummyByte, account, storage-address, valueOffset, valueLength) where account is 20 bytes in length, storage-address is 32-byte in length, and valueOffset/valueLength are 16-bit unsigned. This extracts from the state of a contract a part of the storage. Because RSK allows storage values to be larger than 32 bytes, this compression method allows to extract any number of bytes at any offset. This can be used when a contract creates another contract, extracting the code from storage. This will only work for a new CREATE3 opcode that allows to specify where the code is taken directly by specifying the storage address, offset and length, eliminating the need to “search” for a match.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">011</td>
+      <td>the blob is interpreted as (dummyByte) and the value copied is the receiver’s address of the transaction.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">100</td>
+      <td>the blog is interpreted as (dataByte) and the resulting data is dataByte (with the most-significant bit cleared). This allows encoding of values from 0 to 31.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">1xx</td>
+      <td>For xx != 00, is reserved for future use. Block headers should be discarded if they contain such encodings.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It’s important to note that if the node that receives the compressed header does not have a copy of a transaction specified by a compressedTransactionId, it doesn’t need to immediately ask for it to a peer. It can forward the compressed block</p>
+
+<h2 id="propagation-of-coblos">Propagation of COBLOs</h2>
+
+<p>A new network message used to propagate COBLOs is created. When a non-miner full node receives a COBLO, it performs the following actions:</p>
+
+<ol>
+  <li>Connects it to its parent. If the parent is missing, the COBLO is discarded.</li>
+  <li>Verifies its PoW against the difficulty. If the PoW is invalid, the COBLO is discarded.</li>
+  <li>Verifies all block header fields that doesn’t need transaction execution.</li>
+  <li>It checks if all the transactions specified in the compressedTransactionIds are in the memory pool. If not, it fetches the missing transactions from the peer that sent the COBLO.</li>
+  <li>Reconstruct the transaction trie from the compressed ids and compare it with the block header trie root.</li>
+  <li>If the transaction does not verify, the node fetches from the sending peer the list of transactions ids of the COBLO (the full ids, not the compressed ids). Then the transaction trie is re-built.
+    <ol>
+      <li>
+        <ol>
+          <li>If the new trie is still different from the trie root specified in the block header, the block is discarded (the sending peer may be banned)</li>
+          <li>If the new trie matches the root, then it means that there is a transaction id collision. In that case it replaces the compressed id with a full id or the compressedTransactionIds field, and keeps processing the COBLO as normal.</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>If any transaction is missing, the peer ask the sending node to provide it. If the transaction is not provided, the processing of the COBLO is aborted.</li>
+  <li>The node forwards the COBLO to its peers (if some transaction ids are expanded, then the COBLO forwarded will be the one with the expanded ids)</li>
+  <li>The COBLO is executed normally from start to finish, and this time the trie state is verified against all values derived from execution, and not from the updateBatch. If this execution leads to the result that the COBLO is invalid, or if some transactions in the COBLO could not be fetched from peers, the COBLO is removed from the blockchain.</li>
+</ol>
+
+<h2 id="how-miners-process-coblos">How Miners process COBLOs</h2>
+
+<p>When a miner receives a COBLO, after step 4 and before step 5, the miner adds it to its local best branch by performing the changes specified by the changeBatch and executing the transactions not specified in the changeBatch. In case this COBLO is the new tip of the best chain, it starts mining a child of the COBLO. Even if the transactions in the COBLO are unknown, the miner can build a child block whose transactions ids do not match any of the prefixes specified in the compressedTransactionIds list.</p>
+
+<p>While mining the child block, the steps following 4 continue to be executed. If this execution leads to the result that the COBLO is invalid, or if some transactions in the COBLO could not be fetched from peers, the COBLO is removed from the blockchain and mining is stopped and restarted from the previous state.</p>
+
+<h2 id="attacks">Attacks</h2>
+
+<p>Because the transaction ids are compressed, an attacker may try to create two transaction with colliding compressed ids. The attacker can then send one of them to the miners (or mine it privately) while distributing the other, in order to prevent a COBLO from being forwarded. The attack is detected when the node cannot reconstruct the transaction trie, and the correct transaction will be requested from the sending peer. Afterward a disambiguating COBLO will be broadcasted. Therefore the attack can only delay the propagation of the COBLO a single hop.</p>
+
+<p>An attacker may try to mine a block and forward its COBLO without disclosing some of the transactions. In this case, in the first hop a peer will ask for the missing transactions and will not keep forwarding it, nullifying any flooding attack.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

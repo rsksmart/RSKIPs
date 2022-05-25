@@ -1,3 +1,14 @@
+---
+rskip: 252
+title: Transaction Gas Price Cap
+description: 
+status: Draft
+purpose: Sec, Fair
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2021-06-29
+---
 # Transaction Gas Price Cap
 
 |RSKIP          |252           |

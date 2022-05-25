@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Multi-signed transactions supporting enveloping and multi-key accounts | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Multi-signed transactions supporting enveloping and multi-key accounts | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP138" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP138" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Multi-signed transactions supporting enveloping and multi-key accounts</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="multi-signed-transactions-supporting-enveloping-and-multi-key-accounts">Multi-signed transactions supporting enveloping and multi-key accounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">138</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Multi-signed transactions supporting enveloping and multi-key accounts</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">2019</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>One of the features that can help the blockchain technology reach mass adoption is transaction enveloping. Enveloping allows a third party to pay for the gas of a transaction, while the transaction still originates from the same account that does not possess RBTC. Implementing this feature efficiently in terms of gas requires modifications to the layer 1. Basically we can build a transaction we more that one signer, and specify which of the signers will pay for the fees. Multi-signed accounts also open the possibility to compress with LTCP settlement transactions sent to payment channels. Instead of n transactions (one for each of the participant), a single transactions with n signatures can be built, reducing the network resource consumption.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>This RSKIP describes a new transaction format to support multi-signed and multi-key transactions.</p>
+
+<p>Currently the transaction contains the following fields, stored using RLP:</p>
+
+<ol>
+  <li>nonce</li>
+  <li>gasPrice</li>
+  <li>gasLimit</li>
+  <li>eeceiveAddress</li>
+  <li>value</li>
+  <li>data</li>
+  <li>v</li>
+  <li>r</li>
+  <li>s</li>
+</ol>
+
+<p>Each field begins with an RLP identifier that indicates if the item is an element or a list of elements.</p>
+
+<h3 id="transaction-format-1">Transaction Format 1</h3>
+
+<p>We propose a new format (1), which both add new fields and change the meaning of existing fields:</p>
+
+<ol>
+  <li>multiPurpose = (version, ownerCount, nonceList)</li>
+  <li>gasPrice</li>
+  <li>gasLimit</li>
+  <li>receiveAddress</li>
+  <li>value</li>
+  <li>data</li>
+  <li>signatureList</li>
+  <li>empty</li>
+  <li>empty</li>
+</ol>
+
+<p>The objetive to use this format is to keep it compatible with most existent tools, and hardware wallets in particular. Hardware wallets will show the destination, fees (derived from gasPrice and gasCount) and possibly a hash of the data, but not the nonce, so we can use the nonce to pack additional fields.</p>
+
+<p>Version is encoded as a list of a single element. For the new transaction format, the element is 1. Therefore the parser can detect if it is a transaction version 0 or a new kind by inspecting only the first element. If it’s a list, it’s the new type. If not, then it is the nonce of a transaction version 0.</p>
+
+<p>If version is 1, then Nonce is a list of elements.</p>
+
+<p>The ownerCount field specifies how many signatures are needed to build a multi-key account. If ownerCount is 1, then it’s a single key account. This has the same intent as RSKIP39, but here we propose a more restricted version that does not support multi-key smart-contracts.</p>
+
+<p>To derive the account address of a multi-key account, the first “ownerCount” public keys are concatenated and the first 20 bytes of the keccack hash of those public keys is the account address.  Multi-key accounts, when combined with enveloping, can help a group of users manage a payment channel without using RBTC, and purely using ERC-20 tokens, relying on an external network transaction relayer.</p>
+
+<p>The field signatureList is a list of signatures. If there are more than one signature, this is a multi-signed transaction.  The format for each element of the signatures list is an RLP list containing v, r and s for each signer. Each element in Signatures must have exactly 3 elements.</p>
+
+<p><strong>Multiple Nonce Queues</strong></p>
+
+<p>The field nonceList is a list of nonces. The number of element in nonceList can be equal to or one unit higher than the number specified in ownerCount. If the number of nonces is equal, then there is no enveloping. If the number of nonces is one higher, then the last party to sign is the one paying the fees. We adopt a similar approach to CallWithSigner proposal and we’ll enable a multiple queues for nonces. This let a user dispatch several meta-transactions in parallel.</p>
+
+<p>A nonce can be a single element, which means that the standard queue is used, or it can be a pair (queueID, nonce) which opens a new queue. Queues are stored in a mapping (queueID –&gt; nonce) in a specific tree that hangs from the Account node on the Unitrie.</p>
+
+<p><strong>MemPool management with Multiple Nonce Queues</strong></p>
+
+<p>When a large number of transactions from the same sender are issued in parallel using different queues, different nodes may store a different subset of transactions in their memory pool, depending on the order of arrival. It’s important that all nodes share a policy of transaction replacement and eviction to avoid deadlocks. For example, let’s assume that a node stores in the mempool up to 15 transactions originated from the same account. Alice sends 32 transactions, 16 from the main queue, and the other 16 in separate queues. A  peer A may store the 16 transactions for the main queue, while a peer B may store the 16 transactions using the other queues. Since both have reached the transaction limit, non of them will accept more transactions from Alice, until one of them is confirmed or one of them is replaced. Now Alice wants to speed up the inclusion of a transaction T in the last queue, so she tries to bump its fees, and a prepares a new version T’. She sends it to peers A and B. Since peer B is not storing T, it discards T’ too. If peer A si surrounded by peers having a mempool similar to B, then the transaction T’ won’t propagate over that path also. If node B is surrounded by nodes having a mempool similar to node A, then Alice won’t be able to replace any of her transactions.</p>
+
+<p>Therefore nodes should set a fee bumping policy where a new transaction T’ can replace any other transaction Q that is a tail in a any queue provided that the gasPrice in T is higher than the gasPrice in Q. If the transaction limit has been reached, then Q is evicted and T stays. This ensures that the overall fees that Alice is willing to pay always increases.</p>
+
+<h3 id="signing-the-transaction">Signing the Transaction</h3>
+
+<p>Signers do not sign exactly the same payload. Each signer signs the RLP of all the fields with changes in the multiPurpose, gasPrice and singatureList fields. If there is an enveloper, then the gasPrice field is signed only by the enveloper, and not by the rest. This allows for the enveloper to bump the transaction fees to increase the chances it is included in a block. If there is no enveloper, than all signatories sign the gasPrice field as normal. The signatureList field is replaced by the chainId, to maintain compatibility when signing. The signerIndex is added as the last element of the multiPurpose field.</p>
+
+<p>The following list shows how elements are packed for signing (changes in bold):</p>
+
+<ol>
+  <li>multiPurpose = (version, ownerCount, nonceList, <strong>signerIndex</strong>)</li>
+  <li>gasPrice or empty</li>
+  <li>gasLimit</li>
+  <li>receiveAddress</li>
+  <li>value</li>
+  <li>data</li>
+  <li><strong>chainId</strong></li>
+  <li>empty</li>
+  <li>empty</li>
+</ol>
+
+<p>The signerIndex is the index of this signer in the list of all signers, starting from zero. Note that all account owner signatures must be listed in a pre-defined order. The transaction will only be valid if each signature signs its correct position. This is to prevent that an attack where owner and enveloper signatures are exchanged by an attacker.</p>
+
+<h3 id="transaction-execution">Transaction Execution</h3>
+
+<p>When the transaction is executed, all nonces must be checked. If a new nonce queue  is used, then the first valid nonce is zero. Any invalid nonce invalidates the transaction. All nonces associated with the transaction must be incremented. If the transaction specifies an enveloper (by containing one nonce more than the onwerCount), then the transaction origin (msg.origin) will still point to the account address, as defined by the other signers public keys. However fees will be deducted from the last signer account (the sponsor). Also the gas reimbursement will be performed to the sponsor account.</p>
+
+<p>It would be beneficial to have an opcode or precompile contract to obtain the address of the sponsor.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.,</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

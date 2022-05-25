@@ -1,3 +1,14 @@
+---
+rskip: 148
+title: ERC1820 Pseudo-introspection Registry Contract
+description: 
+status: Adopted
+purpose: Usa
+author: PMP (@pmprete)
+layer: DApp
+complexity: 1
+created: 2019-11-06
+---
 # Bridge events data and formatting
 
 |RSKIP          |148           |

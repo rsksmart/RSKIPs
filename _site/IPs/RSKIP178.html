@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>External Confirmation Hashrate | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="External Confirmation Hashrate | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP178" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP178" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">External Confirmation Hashrate</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="external-confirmation-hashrate">External Confirmation Hashrate</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">178</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">External Confirmation Hashrate</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">SEP-2020</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>discussions-to</strong></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>The Inclusive Fork-aware Merge-mining (IFAMM) protocol proposes a new security model suited for a merge-mined blockchain. If the blockchain implements the IFAMM protocol, and if the assumptions of the model are satisfied, the model assures that large double-spend attacks are prevented, by making attacks visible, attributable, requiring at least 51% Bitcoin miners collusion and, more importantly, requiring a bounded time, where the bound depends on the attacker hashrate but it is known in advance. The bound parameter can be tuned so that in case of attack a community can coordinate actions, such as arranging to manually invalidate a block, or perform a hard-fork, over side channels (such as social networks and forums) in order to deter the attack.</p>
+
+<p>This RSKIP represents one of the changes to the RSK consensus that is required to achieve security under the IFAMM model.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The main contribution to the cryptoeconomic security of an independent proof-of-work chain without subsidy is the existence of high transaction fees. However, in the case of a Bitcoin sidechain that is protected by merge-mining such as RSK, there is a strategic incentive alignment between the Bitcoin miners and merge-miners that results in two additional assurances for the security of the side-chain. First, if the sidechain hashrate is high close to the primary chain hashrate, the honest majority property can be inherited. Second, as Bitcoin miners identify themselves in blocks, attacks to the secondary chain  become attributable either by direct identification of pools that take part of an attack or by the sudden removal of the malicious pools identification information in blocks. Nevertheless, RSK has gone further, and deployed the Armadillo system to provide fork-awareness. Armadillo creates a time window to trigger an emergency response by the community, in case of long reorg attempts. However, Armadillo requires a separate communication channel and the existence of at least one honest node monitoring the Bitcoin network for forks. 
+The IFAMM protocol (which this RSKIP is only a part of) rests on a security model that captures the benefits of Armadillo, but decentralizes it. The IFAMM protocol is ideal for RSK as it focuses not only on the hashrate capability of the attacker but also on the processing time that will be required for a successful attack.</p>
+
+<p>This RSKIP proposes a consensus change that enables RSK nodes to:</p>
+
+<ul>
+  <li>
+    <p>compute the active SHA256 hashrate and detect variations on the active hashrate that are compatible with an ongoing attack</p>
+  </li>
+  <li>
+    <p>Accumulate all the active SHA256 hashrate in the RSK blockchain, with independence of the amount of hashrate that is directly involved in merge-mining. This additional hashrate that confirms sidechain blocks increases the security double-spend attacks based on long blockchain reorganizations. Also, the hashrate accumulated may not only capture 100% of Bitcoin hashrate, but also capture hashrate from bitcoin forks.</p>
+  </li>
+</ul>
+
+<h2 id="specification">Specification</h2>
+
+<p>The RSK block header is a list of the following elements:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>parentHash, unclesHash, coinbase,stateRoot, txTrieRoot, receiptTrieRoot, logsBloom, difficulty, number, gasLimit, gasUsed, timestamp, extraData, paidFees, minimumGasPrice, uncleCount, ummRoot [, mergeMiningFields ] 
+</code></pre></div></div>
+
+<p>The <em>mergeMiningFields</em> are the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bitcoinMergedMiningHeader,
+bitcoinMergedMiningMerkleProof,
+bitcoinMergedMiningCoinbaseTransaction
+</code></pre></div></div>
+
+<p>We define a <strong>mergeMiningProof</strong> to be a list containing the <em>mergeMiningFields</em>.</p>
+
+<p>The block in encoded as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blockHeader, transactions, uncles
+</code></pre></div></div>
+
+<p>And <em>uncles</em> is a list of RSK block headers. We define a <strong>heavyblock</strong> to be a <em>mergeMiningProof</em> with certain properties that will be verified in consensus.</p>
+
+<p>We extend the list of uncles to include, after all RSK block headers, a number of heavyblock elements (defined later). To maintain semantic coherence, the <em>uncles</em> field is renamed <em>difficultyContributors</em>. The field <em>uncleCount</em> is renamed as <em>difficultyContribution</em>.</p>
+
+<p><em>difficultyContributors</em> will be an RLP list two two elements: the first is the old <em>uncles</em> list. The next is the new <em>heavyblocks</em> list.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>difficultyContributors  = { uncles  , heavyblocks }
+</code></pre></div></div>
+
+<p><em>difficultyContributors</em> will also be an RLP list of two elements: the first, called <em>immediateContribution</em>, represents the difficulty contributed by uncles. The second, called <em>delayedContribution</em>, represents the contribution made by confirmation heavyblocks.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>difficultyContributors = { immediateContribution , delayedContribution }
+</code></pre></div></div>
+
+<p>The maximum number of uncles referenced in <em>uncles</em> will be reduced from 10 to 6.</p>
+
+<p>The maximum number of heavyblocks referenced in <em>heavyblocks</em> will be 2.</p>
+
+<p>A Bitcoin block header contains these fields:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Purpose</th>
+      <th>Size (Bytes)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Version</td>
+      <td>Block version number</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>hashPrevBlock</td>
+      <td>256-bit hash of the previous block header</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>hashMerkleRoot</td>
+      <td>256-bit hash based on all of the transactions in the block</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>Time</td>
+      <td>Current <a href="https://en.bitcoin.it/wiki/Block_timestamp">block timestamp</a> as seconds since 1970-01-01T00:00 UTC</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Bits</td>
+      <td>Current <a href="https://en.bitcoin.it/wiki/Target">target</a> in compact format</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Nonce</td>
+      <td>32-bit number</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We define how to convert the Bits field into a target difficulty that can be compared with the RSK block difficulty.</p>
+
+<p>The Bits field is stored in a compact format. Let Bits be a byte array <em>{ E,Q1,Q2,Q3 }</em>. Let M be the integer value <em>(Q1 « 16 + Q2 « 8 + Q3)</em> (that is the <em>Q</em> array interpreted in big-endian). The Bitcoin target is computed as <em>M*2^(8(E-3))</em>. We define the <em>btcDifficulty0 = 2^256 / target</em>. Note that the <em>btcDifficulty0</em> is <em>2^32</em> times higher than the Bitcoin block difficulty.</p>
+
+<h3 id="validation">Validation</h3>
+
+<p>We define the function <em>getPoWInfo()</em> to check the validity of all kinds of blocks (mainchain, uncles and elements in the <em>heavyblocks</em> list). This means that the function that checks the validity of the proof of work of normal RSK blocks is changed to call getPoWInfo(). This is because some of the RSK blocks can be anchor heavyblocks.</p>
+
+<p>First we define an auxiliary function <em>getMMInfo()</em>:</p>
+
+<p><strong>function getMMInfo()</strong></p>
+
+<p>Arguments:</p>
+
+<ul>
+  <li><strong>mergeMiningFields</strong></li>
+</ul>
+
+<p>Returns:</p>
+
+<ul>
+  <li>boolean <strong>mergeMined</strong></li>
+  <li>boolean <strong>isMMValid</strong></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = bitcoinMergedMiningCoinbaseTransaction of mergeMiningFields
+
+midstate40 = fist 40 bytes of x
+tail = the remaining bytes of x skipping the first 40 bytes
+
+lastTag = last Index Of "RSKBLOCK:" in tail
+byteCount = bigEndianToInt64(extract 4 bytes of midstate40 starting at offset 8)
+mergeMined = (lastTag&gt;=0)
+
+if (not mergeMined) then
+    if ((tail.length&gt;=169) and (tail.length&lt;233)) or (byteCount==0)
+		return (false,false)
+	else
+		return (false,true)
+else	
+	expected = "RSKBLOCK:"+ RSKHashForMergedMining
+	rskTagPosition = last Index Of expected in tail
+	if (rskTagPosition == -1)  return (true,false)
+	if (rskTagPosition &gt;= 64)  return (true,false)
+	if (rskTagPosition !=lastTag) return (true,false)
+	if (tail.length - rskTagPosition &gt; 169) return (true,false)
+
+coinbaseLength = tail.length + byteCount;
+if (coinbaseLength &lt;= 64) return (mergeMined,false)
+
+transactionHash = SHA256(tail) starting from the midstate40 
+coinbaseTransactionHash = reverseBytes(transactionHash)
+
+if (not validMerkleTree(merkleRoot,coinbaseTransactionHash)) return (mergeMined,false)
+return (mergeMined,true)
+</code></pre></div></div>
+
+<p>This logic of the <em>getMMInfo()</em> function is very similar to the existent in the <em>ProofOfWorkRule</em> in rskj and the <em>ProofOfWorkRule</em> must be changed to use this function.</p>
+
+<p>If (isMMValid==true) and (mergeMined==true), then the input represents an <strong>anchor heavyblock</strong> (it can be an also an internal uncle, and external uncle, or a mainchain block).</p>
+
+<p>If (isMMValid==true) and (mergeMined==false), then the input represents an <strong>confirmation heavyblock</strong>.</p>
+
+<p>Anchor heavyblocks can be referenced by three distinct means:</p>
+
+<ul>
+  <li>in normal mainchain RSK block, using the mainchain block merge-mining proof</li>
+  <li>in an RSK uncle block header, using the uncle’s merge-mining proof, representing a <strong>internal uncle anchor heavyblock</strong>.</li>
+  <li>in the <em>heavyblocks</em> list, also representing an <strong>external uncle anchor heavyblock</strong>, but one that has been  extracted from the Bitcoin blockchain, and not from the RSK network.</li>
+</ul>
+
+<p>To identify <strong>external uncle anchor heavyblocks</strong> from the Bitcoin blockchain, the ARMADILLO data must be extended to include at least 14 bytes of the RSK parent block id, or 4 bytes of the Bitcoin block id associated with it. Until ARMADILLO is improved, this RSKIP proposes that the ARMADILLO tag as it is today is used to identify the uncle. This will extend the uncle reach to a depth of 64 at most, which facilitates “nothing-at-stake” double-spends for up to depth 64. By including just two bytes of the Bitcoin pow of the prior RSK block in the ARMADILLO data, the attack probability is reduced 2^16-fold. In other words, considering 50% of the hashrate merge-mining RSK, the attack opportunity will only occur spontaneusly once every 2.5 years.</p>
+
+<p>Note that the midstate of <em>SHA256Digest</em> class in rskj uses a different format that the one used in this description. We call our variable midstate40 to distinguish between them.</p>
+
+<p>Also it is important to note that the above algorithm requires that for a block that doesn’t have the merge-mining the tail size must be equal or greater than 169 bytes, but less than 233 bytes or the midstate is in fact the SHA256 initial state, while for a header that does have the merge mining tag, the tail size must be less than 169 bytes. This last check is the same as how the current check <em>ProofOfWorkRule</em> performs as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	remainingByteCount = tail.length - rskTagPosition - 41
+	if (remainingByteCount &gt; 128) return (true,false)
+</code></pre></div></div>
+
+<p>The reason to require 169 bytes of tail is to prevent an attacker hiding the RSK tag by specifying a starting position after it.</p>
+
+<p><strong>function getPoWInfo()</strong></p>
+
+<p>Arguments:</p>
+
+<ul>
+  <li><strong>rskBlockHeader,</strong></li>
+  <li><strong>mergeMiningProof,</strong></li>
+  <li>boolean <strong>fromHeavyblocksArray,</strong></li>
+  <li>boolean <strong>mainchain,</strong></li>
+  <li>boolean <strong>uncle</strong></li>
+</ul>
+
+<p>Returns:</p>
+
+<ul>
+  <li>boolean <strong>isValid</strong></li>
+  <li>uint <strong>immediateDifficultyContribution</strong></li>
+  <li>uint <strong>delayedDifficultyContribution</strong></li>
+  <li>boolean <strong>includeInBtcBlockReferences</strong></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>isValid = false
+immediateDifficultyContribution =0
+delayedDifficultyControbution =0
+includeInBtcBlockReferences = false
+
+if not fromHeavyblocksArray
+	// all RSK blocks (uncles or mainchain) must have valid proof-of-work at the
+	// RSK block difficulty
+	if not rskProofOfWorkValid(rskBlockHeader,bitcoinMergedMiningHeader) then return
+
+(mergeMined,isMMValid) =getMMInfo(mergeMiningProof)
+if not isMMValid return
+
+isHBTimeValid = abs( bitcoinMergedMiningHeader.timeStamp - rskBlockHeader.timeStamp) &lt; 300
+if not isHBTimeValid return
+
+btcDifficulty0 =getBtcDifficulty0(bitcoinMergedMiningHeader)
+isPotentialHeavyBlock=(btcDifficulty0 &gt;= difficulty) 
+if  (isPotentialHeavyBlock) 
+	isHeavyblock = btcProofOfWorkValid(bitcoinMergedMiningHeader) return
+else
+	isHeavyblock = false
+
+if not mergemined
+	// This can only be a confirmation heavyBlock
+	if (not fromHeavyblocksArray) return
+	if (not isHeavyblock) return
+	// We check that there is a btc parent registered
+	if btcBlockpreviouslyIncluded(bitcoinMergedMiningHeader.getBlockHash()) return
+	delayedDifficultyControbution = C(rskBlockHeader,bitcoinMergedMiningHeader)
+	includeInBtcBlockReferences = true
+	
+if not isHeavyblock and mergemined
+	if (fromHeavyblocksArray) return
+	// it is a normal block or uncle block
+	immediateDifficultyContribution = R(rskBlockHeader,bitcoinMergedMiningHeader)
+    if not previouslyIncluded(bitcoinMergedMiningHeader.parent) return
+    // uncles are already checked for previous inclusion, and uncle inclusion depth
+    // is shorter than IFAMM depth, so we don't need to check again.
+    // This check should not change anything, and it can be used as an assertion
+    if btcBlockpreviouslyIncluded(bitcoinMergedMiningHeader.getBlockHash()) return
+	
+if isHeavyblock and mergemined
+	// this is an:
+	// * internal uncle anchor heavyblock or
+	// * external uncle anchor heavyblock
+    // * mainchain anchor heavyblock
+    includeInBtcBlockReferences = true
+	if (fromHeavyblocksArray)
+		// external uncle anchor heavyblock
+		immediateDifficultyContribution = C(RSKblockHeader,bitcoinMergedMiningHeader)
+	else
+		// internal anchor heavyblock or uncle anchor heavyblock
+		immediateDifficultyContribution = A(rskBlockHeader,bitcoinMergedMiningHeader)
+else
+	// elements in fromHeavyblocksArray must be blocks solved at Bitcoin difficulty 
+	if fromHeavyblocksArray return
+	
+isValid = true
+return
+</code></pre></div></div>
+
+<p>In the shown pseudo-code <em>btcProofOfWorkValid()</em> checks that the proof of work of the Bitcoin header matches the difficulty specified in the Bitcoin header. The algorithm computes the <em>btcDifficulty0</em> specified by Bitcoin header and checks that it is higher than the difficulty of the RSK block that includes it. The call to the function <em>getMMInfo()</em> checks that the <em>bitcoinMergedMiningMerkleProof</em> is correct in relation with the other two fields if the mergeMiningProof, according to the same consensus rules used to validate merge-mining.</p>
+
+<p>Every merge-mining proof,  in mainchain, in the uncles list or in the heavyblocks list must be validated with the <em>getPoWInfo()</em> method. If the method returns isValid==false, then the block is invalid. If the method returns <em>iincludeInBtcBlockReferences</em>==true, then this means it is an anchor or confirmation heavyblock and therefore the associated Bitcoin block hash is must be included to the list <em>btcBlockReferences</em> that can be referenced by <em>btcBlockPreviouslyIncluded()</em>.</p>
+
+<p>The function <em>btcBlockPreviouslyIncluded()</em> returns true if the bitcoin header with the hash given was included in the  <em>btcBlockReferences</em>  list. This array maintains a list of all included heavyblocks in the past 256 blocks. The array need not to be stored, as it can be recomputed each time from the heavyblocks, uncles and mainchain blocks in the past 256 blocks. Note that references may form a DAG, and therefore an included heavyblock may have more than one child in the last 256 blocks.</p>
+
+<h3 id="cumulative-difficulty">Cumulative Difficulty</h3>
+
+<p>Let’s call <em>A</em> to the difficulty contributed by anchor heavyblocks to the chain cumulative difficulty.</p>
+
+<p>Let’s call <em>R</em> to the difficulty contributed by normal RSK blocks whose Bitcoin header difficulty has not reached the <em>btcDifficulty0</em>.</p>
+
+<p>Let’s call <em>C</em> to the difficulty  contributed by confirmation heavyblocks to the chain cumulative difficulty.</p>
+
+<p>A, R, C are functions of the current RSK block header and the Bitcoin block header being referenced by the merge-mining fields.</p>
+
+<p>We propose the following functions:</p>
+
+<p><em>A=btcDifficulty0/2</em></p>
+
+<p><em>R=difficulty/2</em></p>
+
+<p><em>C=btcDifficulty0</em></p>
+
+<p>These formulas require the use of 256-bit arithmetic. This assignment overstates on average the RSK blockchain cumulative difficulty by at most 1/20 (the ratios of average block intervals between RSK and Bitcoin), which we consider thie error low enough to prefer the simplified formulas.</p>
+
+<p>The exact values are given by the following formulas:</p>
+
+<p><em>q = btcDifficulty0/difficulty</em>
+<em>R = difficulty*q/(2*q-1)</em>
+<em>A = btcDifficulty0*q/(2*q-1)</em></p>
+
+<p><em>C=btcDifficulty0</em></p>
+
+<p>These formulas may require up to 512-bit arithmetic.</p>
+
+<p>Note that R and C contribute to de <em>immediateContribution</em> field, but A contributes to the <em>delayedContribution</em> field. The difficulty contributions is not directly applied to the cumulative difficulty: the values are compressed to the <em>difficultyContribution</em> field (which may result in certain loss of precision), and only this amount is contributed back to the cumulative difficulty. This makes the cumulative difficulty easily computed from the <em>difficultyContribution</em> and <em>difficulty</em> fields.</p>
+
+<p>The <em>delayedContribution</em> is applied to the cumulative difficulty 40 blocks later.</p>
+
+<h3 id="computation-of-difficultycontribution">Computation of difficultyContribution</h3>
+
+<p>To build the <em>immediateContribution</em> and <em>delayedContribution</em> fields, their real values are multiplied by 1024, added together, and then divided by the RSK block <em>difficulty</em>. Therefore the <em>difficultyContribution</em> fields will be stored scaled by 1024. This guarantees a 0.1% precision for heavyblocks, without taking too much space. For Bitcoin blocks (whose difficulty is approximately 40 times the RSK difficulty), the precision is 0.0025%.  For Bitcoin Cash blocks, with difficulties between 1 and 2 times RSK’s, the precision is 0.1%.</p>
+
+<h3 id="sha256digest-class-midstate">Sha256Digest Class Midstate</h3>
+
+<p>The <em>Sha256Digest</em> midstate is 52 bytes in length. To initialize to work for RSK merge-mining it requires that the first 8 bytes and the last 4 bytes are set to zero. This is because <em>Sha256Digest</em> midstate enables starting from any point in the stream, while the RSK protocol requires the starting point matches a 64-byte boundary.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sha256Digest mapping of midstate:
+0: xBuf (4-bytes array) zeroed by RSK (buffer used to process sub-word data)
+4: xBufOff (int32) zeroed by RSK (offset of the xBuf that is filled)
+8: byteCount (int64) &lt;--- midstate40 starts here
+16: H1 (uint64)
+20: H2 (uint64)
+24: H3 (uint64)
+28: H4 (uint64)
+32: H5 (uint64)
+36: H6 (uint64)
+40: H7 (uint64)
+44: H8 (uint64) &lt;--- midstate40 ends after this field
+48: xOff (int32) zeroed by RSK (number of words (mod 64) following the misdtsate that have not been updated into the hash)
+</code></pre></div></div>
+
+<h3 id="transaction-confirmation">Transaction Confirmation</h3>
+
+<p>In Nakamoto consensus, a transaction is confirmed if there are <em>N</em> block confirmations after the transaction has been included. In the IFAMM model, we recommend that economic actors wait also <em>N*v</em> time, where <em>v</em> is the average RSK block interval (currently 30 seconds).</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<p>Several design choices have been taken. This section describes the most relevant.</p>
+
+<h4 id="changing-the-block-header">Changing the Block Header</h4>
+
+<p>Adding new fields to the RSK header increases the bandwidth consumption of light nodes. To avoid adding a new field to the RSK block header, the heavyblocks are packed together with uncles in the <em>difficultyContributors</em> field. This makes sense semantically as both uncles and heavyblocks have similar roles in the protocol: contribute to the cumulative difficulty of the block.</p>
+
+<h4 id="limiting-the-number-of-heavyblocks">Limiting the number of heavyblocks</h4>
+
+<p>There are two reasons to have more than one heavyblock referenced in the <em>difficultyContributors</em> field:</p>
+
+<ol>
+  <li>To accept heavyblocks from Bitcoin forks, in that case that more than one Bitcoin-like blocks are created in the same RSK block interval. However, this case would be rare. Most Bitcoin-forks have the same block average interval as Bitcoin, therefore the risk of many heavyblocks being queued is extremely low.</li>
+  <li>To accept transferring proof of work from Bitcoin to RSK in case RSK merge-mining is paused due to a network health problem. In that case, it’s possible that confirmation heavyblocks accumulate during a certain period, and therefore they are enqueued to be added to RSK blocks, and RSK blocks needs to be able to process them as fast as possible. However, accepting old confirmation heavyblocks can also be a vector of attack, for example, if there is a certain Bitcoin fork that RSK miners are not aware of, and this fork is producing blocks, then selfish RSK fork may try to reference hundreds of past confirmation heavyblocks from this hypothetical fork, and reorganize the RSK blockchain. Therefore this RSKIP requires RSK block timestamps to be close to confirmation heavyblock timestamps also.</li>
+</ol>
+
+<p>While an average RSK block now transfers more difficulty to the blockchain than a Bitcoin Cash block, this is due to the existence of uncle blocks. Although the current RSK hashrate is 23 times higher than Bitcoin Cash, the actual difficulty of an RSK block is slightly lower than a Bitcoin Cash block. Therefore RSK could reference Bitcoin Cash heavyblocks.</p>
+
+<h4 id="delaying-the-difficulty-contribution-of-confirmation-heavyblocks">Delaying the difficulty contribution of confirmation heavyblocks</h4>
+
+<p>The <em>delayedContribution</em> is applied to the cumulative difficulty after 60 blocks. This is to deter an attack and an accidental situation. If all difficulty contributions were immediate, then:</p>
+
+<ul>
+  <li>When a malicious miner sees a confirmation heavyblock in Bitcoin, it can create a block template having a parent block which is 10 blocks behind the best block, and, if he finds the next block first, it  immediately reverts 10 blocks of the blockchain, because the heavyblock contributes with a difficulty that is higher than 10 normal RSK blocks.</li>
+  <li>If the Bitcoin network creates a stale block, some of the miners may see it while some others may not. If  a malicious miner sees the Bitcoin stale that is a confirmation heavyblock block but nobody else does, he has an advantage to to revert the RSK blockchain, and perform a double-spend attack by referencing that heavyblock in his private chain.</li>
+</ul>
+
+<p>By delaying the contribution the first problem is eliminated, because the honest fork will also reference the confirmation heavyblock before the malicious fork increases its difficulty.</p>
+
+<p>The second problem is mitigated because with the delay the attacker needs to catch up with the honest chain by mining selfish blocks to realize the advantage. The advantage may be about 40 blocks (because of the contribution made by the stale block) but the attacker also gets a 1 to 40 block disadvantage because he must revert a confirmed transaction in order to double-spend. The higher the payment amount, the more blocks the victim will be waiting for confirmation. Simulations show that with a 60 block delay in the difficulty transfer, the attacker would still require over 40% of RSK hashrate to attempt a double-spend that reverts 20 blocks.</p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients and Block explorers should also be updated.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+
+<p>TBD</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The rskj code would need to modified in at least the following places:</p>
+
+<ul>
+  <li>co/rsk/core/DifficultyCalculator.java* must be modified. <em>getBlockDifficulty()</em> now receives the <em>difficultyContribution</em> field.</li>
+  <li><em>co/rsk/core/bc/SelectionRule.java</em> must be modified. <em>isBrokenSelectionRule()</em> currently considers uncle counts, and it should consider the <em>difficultyContribution</em>.</li>
+  <li><em>co/rsk/remasc/Sibling.java</em> must be modified in the same way as <em>SelectionRule.java</em>.</li>
+  <li>co/rsk/mine/ForkDetectionDataCalculator.java must be modified. Armadillo 2 does not need this value. Therefore if Armadillo 2 is implemented prior this RSKIP, the number of uncles will no longer be present or validated for Armadillo, as Armadillo 2 will contain the full cumulative difficulty packed into the same space. If this RSKIP is implemented before Armadillo 2, then the uncle count can still be validated, although it will not provide any benefit for Armadillo fork detection module.</li>
+</ul>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>This RSKIP protects the RSK network from a large gamut of double-spend attacks by either increasing the their cost (reaching Bitcoin levels of cryptoeconomic security) or by forcing the attacker to be public about the attack during the whole payment confirmation interval, leaving a trace of anchor heavyblocks in Bitcoin blocks and reducing the amount of cumulative hashrate transferred to RSK.</p>
+
+<p>However, some variants of the double-spend attack, such as isolating a victim node,  still need additional changes to be prevented. These other changes, required by the IFAMM model, will be specified in other RSKIPs.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.,</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

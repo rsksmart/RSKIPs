@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Reprice Trie Read Opcodes | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Reprice Trie Read Opcodes | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP239" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP239" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Reprice Trie Read Opcodes</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="reprice-trie-read-opcodes">Reprice Trie Read Opcodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">239</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Reprice Trie Read Opcodes</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">20-APR-21</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL, SM</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca, Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Discussions-to</strong></td>
+      <td style="text-align: left">https://research.rsk.dev/t/rskip-239-reprice-trie-reads/162</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="abstract">Abstract</h2>
+<p>Recent experiments [0, 1] indicate that some EVM opcodes used to read from blockchain state trie are relatively <em>underpriced</em>. For instance, <code class="language-plaintext highlighter-rouge">SLOAD</code> costs 200 gas. However, by one measure, the <em>implicit cost</em> of an <code class="language-plaintext highlighter-rouge">SLOAD</code> lies between 1000 gas (full state cache, no disk IO) and 80000 gas (no cache, pure disk IO). This RSKIP proposes a conservative re-pricing of such opcodes to better reflect their resource use.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Executing transactions requires accessing the latest snapshot of <em>blockchain state</em> – this includes account balances, nonces, contract code, and contract storage. In RSK, state is stored using the <em>unitrie</em>. In the reference client implementation (<a href="https://github.com/rsksmart/rskj">RSKJ</a>), the unitrie is backed up on disk using a LevelDB key-value datastore. Only some portions of the unitrie are loaded on to RAM as needed to execute transactions.</p>
+
+<p>As indicated by recent experiments [0, 1] The current state of the RSK network can be read from disk at the rate of about 400 unitrie nodes per second.  Caching some nodes in memory leads to a 10X increase in <em>lookup speed</em>  to about 3000 nodes/sec. Loading the <em>entire current state</em> of the RSK mainnet increases the lookup speed by 100X, relative to reading from disk, to around 35000 nodes/sec. The tradeoff is that this requires an additional 250MB of RAM to store the entire state snapshot in memory.</p>
+
+<p>Suppose 1 gas is about 30 nanoseconds of VM execution time (see Rationale section below). Even with the most favorable scenario of keeping the entire trie in memory (35K lookups/sec),  each lookup takes nearly 28500 nanoseconds. Thus, a trie node lookup has an <em>implicit cost</em> of about 950 gas (using 1 gas = 30 ns). However, the current cost of <code class="language-plaintext highlighter-rouge">BAL</code> is 400 gas while a <code class="language-plaintext highlighter-rouge">SLOAD</code> costs just 200 gas. Both of these codes are used quite frequently. Recall that reading from disk is much slower, about 400 nodes per second. That implies an implicit cost of 83000 gas for a lookup.</p>
+
+<p>Thus, depending on how much state is cached in RAM, the implicit cost of an <code class="language-plaintext highlighter-rouge">SLOAD</code> (priced at 200 gas) can vary from 1000 gas to 83000 gas. Again, this is assuming a ratio of 1 gas:30ns. Our proposed changes are quite conservative. Correcting underpriced operations to reflect their actual resource consumption improves security (from IO attacks), scalability and fairness.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>This proposal requires a hard fork and needs to be a part of a future network upgrade - activation block height to be determined.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">OpCode</th>
+      <th style="text-align: left">Current cost</th>
+      <th style="text-align: left">New Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">SLOAD (0x04)</code></td>
+      <td style="text-align: left">200 gas</td>
+      <td style="text-align: left">800 gas</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">BAL (0x31)</code></td>
+      <td style="text-align: left">400 gas</td>
+      <td style="text-align: left">700 gas</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">EXTCODEHASH (0x3F</code>)</td>
+      <td style="text-align: left">400 gas</td>
+      <td style="text-align: left">700 gas</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The revised gas cost structure will resemble that of Ethereum post Istanbul, see <a href="https://eips.ethereum.org/EIPS/eip-1884">EIP-1884</a> [3]. RSK strives to maintain (reasonable) compatibility with EVM opcodes. One component of EIP-1884, the <code class="language-plaintext highlighter-rouge">SELF-BALANCE</code> opcode, has already been implemented in RSK. However, it is not our goal to match Ethereum’s gas schedule. Indeed, the current gas schedule in Ethereum has evolved even further away from RSK’s post EIP-2929. Rather, we propose these changes because they make sense for RSK at this point, given recent research and as the RSK community plans for the next network upgrade.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<h3 id="gas-and-resource-use">Gas and resource use</h3>
+<p>There is no unique way to quantify the relationship between resource usage (computation, memory, bandwidth, energy) and resource pricing (gas cost). We have to use some proxy to approximate this relationship.</p>
+
+<p>We can use experiments to <em>calibrate</em> gas for various operations in terms of some simple resource metric - such as execution time. One way to track resource use is through <code class="language-plaintext highlighter-rouge">VMPerformanceTest</code> which is part of RSKJ reference implementation [2]. For example, running this test on an Amazon AWS EC2 <code class="language-plaintext highlighter-rouge">M5a.large</code> instance (with 2 vCPUs and 8GB RAM) provides an average ratio of about <code class="language-plaintext highlighter-rouge">50 ns per gas</code>. This estimate changes to <code class="language-plaintext highlighter-rouge">1 gas = 30 ns</code> on faster (but still “consumer grade”) machines.</p>
+
+<p>Another way to think about resource use is to take a ratio of <code class="language-plaintext highlighter-rouge">blockGasLimit</code> (currently 6.8M gas) with some maximum <code class="language-plaintext highlighter-rouge">maxBlockExecutionTime</code> (e.g. 300 milliseconds). This provides a ratio of around <code class="language-plaintext highlighter-rouge">1 gas = 45ns</code>. Since blocks are executed twice when connecting them, we can think of the ratio as being closer to 1:20 instead.</p>
+
+<p>As node software and network usage evolve over time, the gas schedule can be periodically updated using new measurements. Further increases in trie read costs may be needed in the future with increase in state size and disk IO overhead.</p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>As already mentioned, this change needs a hard fork. In most cases, increasing the <code class="language-plaintext highlighter-rouge">gaslimit</code> is enough to account for repricing. RPC method to <code class="language-plaintext highlighter-rouge">estimate_gas</code> will provide reasonable guidance. However, increasing opcode costs can lead to some breaking changes.</p>
+
+<p><em>Value-transferring</em> <code class="language-plaintext highlighter-rouge">CALL</code>s cost 9000 gas. From this 9000, an amount 2300 gas is subtracted as a <em>call stipend</em> and passed to the <em>receiving</em> contract. Solidity automatically adds the stipend as a gaslimit for the internal CALL.</p>
+
+<p>The call stipend is not high enough to modify state e.g. no <code class="language-plaintext highlighter-rouge">SSTORE</code>. This helps avoid re-entrancy type attacks. The stipend is intended to cover the cost for logging the value transfer. This RSKIP does not change any logging costs and most transfers should not be impacted. However, if the receiving contract performs <em>three or more</em>  <code class="language-plaintext highlighter-rouge">BAL</code> or <code class="language-plaintext highlighter-rouge">SLOAD</code> operations as part of logging, then such CALLs will fail.</p>
+
+<p>Similarly, contracts that make CALLs to external contacts with specific gas limits can also fail. Such patterns have been discouraged for quite some time now, at least since EIP-150, which increased awareness that gas costs can change  and developers should not make their execution logic rely on the gas schedule.</p>
+
+<p>We think such breaks will be rare in RSK. We also note that the Ethereum community has deliberated and implemented potentially breaking changes multiple times (EIP-150, EIP-1884, EIP-2929 [4]).</p>
+
+<h2 id="implementations">Implementations</h2>
+
+<p>None.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+
+<p>Should verify that the gascost of <code class="language-plaintext highlighter-rouge">SLOAD</code>, <code class="language-plaintext highlighter-rouge">BAL</code> and <code class="language-plaintext highlighter-rouge">EXTCODEHASH</code> are updated as proposed at the correct activation block height (to be determined)</p>
+
+<h2 id="references">References</h2>
+
+<p>[0] Sergio Demian Lerner, IOV Labs, reported April 2021.</p>
+
+<p>[1] Pablo Pedemonte, IOV Labs, “Stress Testing RIF Consensus Node’s World State”, Available: <a href="https://blog.rsk.co/noticia/stress-testing-ethereums-world-state/">IOV Labs Blog</a>.</p>
+
+<p>[2] <a href="https://github.com/rsksmart/rskj/blob/9a56ee28c8aae31c8bda1334e44124f83d135956/rskj-core/src/test/java/co/rsk/vm/VMPerformanceTest.java">RSKJ VMPerformanceTest (on github)</a></p>
+
+<p>[3] Martin Holst Swende, “EIP-1884: Repricing for trie-size-dependent opcodes,” Ethereum Improvement Proposals, no. 1884, March 2019. https://eips.ethereum.org/EIPS/eip-1884.</p>
+
+<p>[4] Martin Holst Swende, “Analysing the effects of EIP-2929”, <a href="https://github.com/holiman/eip2929-stats">Available on github</a></p>
+
+<h3 id="copyright">Copyright</h3>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

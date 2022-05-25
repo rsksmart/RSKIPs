@@ -1,3 +1,15 @@
+---
+rskip: 240
+title: Implement Storage Rent in RSK
+description: 
+status: Draft
+purpose: Sca, Sec, Fair
+author: SDL (@sergiodemianlerner), SM (@shreemoy), DM (@diego)
+layer: Core
+complexity: 2
+discussions-to: https://research.rsk.dev/t/rskip-240-implement-storage-rent-in-rsk/163
+created: 2021-04-27
+---
 # Implement Storage Rent in RSK
 
 |RSKIP          |240           |

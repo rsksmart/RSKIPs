@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Hibernation Compression | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Hibernation Compression | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP31" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP31" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Hibernation Compression</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="hibernation-compression">Hibernation Compression</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">31</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Hibernation Compression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">01-JAN-2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>Hibernation compression is a method where two hibernated siblings in the state trie are merged into a single hibernated parent. Trie siblings differing in the last bit can be easily compressed because no other contract address is involved. However two siblings that only share a short prefix, but not a long tail allow many addresses to be created in between. Therefore an hibernated mid-node cannot prevent new childs to be created. This RSKIP proposes using a new Trie to allow such compressions, bases on creation date (temporal association) and not based on address association.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>The following figure shows how two child contracts are hibernated, and how compression can be carried on.</p>
+
+<p>In (1) there are two child contracts (A and B) whose addresses differ in a single last bit. C is the parent of the child nodes in the trie. In (2) B is hibernated. All the state of B (identified by SB) is hashed, and the hash is stored in the node. In (3) A is hibernated. Afterwards (and automatically) A and B nodes are removed from the trie, and their state hashes is compacted in C by a hash of both hashes.</p>
+
+<p><img src="/IPs/RSKIP31/1MerkleTreeRSKIP31.png" alt="image alt text" /></p>
+
+<p>If later on a transaction sends value to the address of A (01000) the platform can block such transfer because, when traversing the trie, is finds the node C which hash an hibernated state, meaning that both of each children have hibernated.</p>
+
+<p>However this does not happen in the following example:</p>
+
+<p><img src="/IPs/RSKIP31/2MerlkeTreeRSKIP31.png" alt="image alt text" /></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>In this example, in state (4b) a payment sent to the address 0001 must be allowed, because it does not correspond to any of the hibernated nodes. Therefore any payment to an address ending with 0xyz must be allowed, including re-payments to the addresses 0000 and 01111, which will create new fresh accounts. These accounts can again hibernate, adding more hibernation info to node C. To keep constant size hibernation information, the new hibernation hash would join two “copies” of the state of a single contract. Eg:  H(H(SB*)</td>
+      <td>H( H(SB)</td>
+      <td>H(SA)). This nested structure is overly complex and does not guarantee O(logN) co-hashes required for waking up a contract.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Therefore compression does not work well.</p>
+
+<p>One can achieve compression by associating accounts by co-temporal creation. A new tree <strong>atree</strong> is created. This is a standard Merkle tree. If depth of the tree is 30, then the tree can hold 2^30 account creations, and no more. When a transaction is processed, all new addresses created in such transaction are stored in T(i).alist. After all transactions have been processed, all T(i).lists are merged into an account-ordered map <strong>amap</strong>. Then all addresses are moved (in address order) from amap to atree, where the key in atree is the account creation number. This is an ever-increasing number. The atree as an immutability property: leaf nodes can be only added at the end, while intermediate nodes can be hibernated and de-hibenated, but no new nodes can be inserted.</p>
+
+<p>The following figure shows how it is achieved. Figure  (1c) shows an initial state of the tree. There are thee accoutns stored: A, B and C, each having a completely different address.  In (2c) a new account D is added to the tree. It is the fouth account added, and the creation index determines the position on the tree. In (3c) tha account A is hibernated (missing information is replaced by a hash digest, marked as an asterisk. In figure (4c) the account B is hibernated, which causes nodes 00 and 01 to be removed, and their states are re-hashed into their parent node 0x. No new account can be created as child of this parent node.</p>
+
+<p><img src="3MTreesRSKIP31.png" alt="image alt text" /></p>
+
+<p><strong>Pros and Cons</strong></p>
+
+<p>Having a data structure that maps every account created to an unique number has some benefits, such as allowing to specify the account index number instead of the account hash as a destination, saving bytes in the transaction. A similar approach the same can be accomplished by using a transaction hash prefix as destination, and by forcing the creation of a new account to provide a pre-image of the real address.</p>
+
+<p>Procedure to create an address: Build a keypair. Take the public key PubKey. Let Ht = H(PubKey), let Ha = H(Ht). Transactions to pre-existent addresses specify Ha, while transactions that create new addresses must specify Ht.</p>
+
+<p>Therefore to find a prefix collision an attacker needs to test many addresses until it finds one.</p>
+
+<p>There are several drawbacks: an account with the same prefix can be created just before a user-transaction is included. In that case the transaction should be invalidated to prevent mistakes. Also it requires a new address format specifying Ht, and let wallets decide which to use.</p>
+
+<p>In case of the account tree solution, once an account is deeply buried in the tree, and there have been many block confirmations, there is no way the index-address can be mistaken, unless the blockchain is deeply reorganized. Also one can make the platform replace account-index in free transactions with their hash address counterparts, and maintain the standard hash addresses for use in contracts.</p>
+
+<p>Maintaining this new data structure would require modifying the state tree at the end of block processing: this prevents bottlenecks from parallel transaction execution. A native smart-contract may access the list of newly created accounts and populate the binary tree with the new addresses. The same smart-contract could handle hibernations and wake-ups.</p>
+
+<h3 id="new-wakeup-arguments">New WAKEUP arguments</h3>
+
+<p>Arguments: contract_address spv_path_address spv_path_length code_address code_size trie_address trie_size</p>
+
+<p>Returns: error_code</p>
+
+<p>The spv_path consist of tuples (key-part, left-commitment, right-commitment). The key-part consist of a tuple (byte[], bit-length) that represents a part (either prefix or in-between) of the full key. The spv path may include nodes that have already been woken up. These nodes are automatically skipped.</p>
+
+<p>The left-commitment and right-commitment fields consist of (hash-of-disposed-node, block-height-of-disposal).</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

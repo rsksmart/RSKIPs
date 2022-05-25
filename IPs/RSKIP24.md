@@ -1,3 +1,15 @@
+---
+rskip: 24
+title: New Binary Trie
+description: 
+status: Adopted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2016-12-23
+---
+
 # New Binary Trie
 
 |RSKIP          |24           |

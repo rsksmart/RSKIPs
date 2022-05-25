@@ -1,3 +1,14 @@
+---
+rskip: 185
+title: Peg-out refund and events
+description: 
+status: Draft
+purpose: Usa
+author: JD (@josedahlquist)
+layer: Core
+complexity: 1
+created: 2020-11-19
+---
 # Peg-out refund and events
 
 |RSKIP          |185           |

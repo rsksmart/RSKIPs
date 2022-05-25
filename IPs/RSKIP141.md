@@ -1,3 +1,14 @@
+---
+rskip: 141
+title: Network Upgrade - Papyrus 	
+description: 
+status: Accepted
+purpose: Sca, Usa, Sec
+author: AE (@adrian.eidelman)
+layer: Core
+complexity: 2
+created: 2019-09-27
+---
 # Network Upgrade: Papyrus
 
 |RSKIP          |141           |

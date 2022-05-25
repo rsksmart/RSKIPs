@@ -1,3 +1,15 @@
+---
+rskip: 61
+title: Cache Oriented Storage Rent (collect at EOT version) 
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2018-05-03
+---
+
 # Cache Oriented Storage Rent (collect at EOT version)
 
 |RSKIP          |61           |

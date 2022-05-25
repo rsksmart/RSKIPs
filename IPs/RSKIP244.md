@@ -1,3 +1,14 @@
+---
+rskip: 244
+title: Variable Storage Costs
+description: 
+status: Draft
+purpose: Sca, Fair
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-05-16
+---
 # Variable Storage Costs
 
 |RSKIP          |244           |

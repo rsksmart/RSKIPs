@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Parallel Execution using runtime contract dependencies | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Parallel Execution using runtime contract dependencies | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP04" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP04" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Parallel Execution using runtime contract dependencies</h1>
+  </header>
+
+  <div class="post-content">
+    <p>#Parallel Execution using runtime contract dependencies</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">04</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Parallel Execution using runtime contract dependencies</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">22-JUN-2016</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Accepted</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP describes how miners partition transactions into disjoint sets and how full nodes should process transactions in order to be safely parallelized.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>RSK processes transactions from blocks one by one, in the specified order. This is because the final state after processing two transactions when applied in different order may differ. However most transactions do not use the same Accounts/Contracts and therefore they could be parallelized without interference.</p>
+
+<p>There are several obstacles to parallelization. <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP02.md">RSKIP02</a> allows contracts to specify dynamic dependencies. Therefore it is possible to partition the transactions into disjoint sets. However creating and/or updating such dependency graphs is expensive. Call loops in the dependency graphs also make dependency exploring more error-prone. The algorithm that creates or updates the dependency graph can therefore be target of DoS attacks.</p>
+
+<p>Another problem of using static dependencies is that the partition has to be made taking into account all possible execution paths and all possible calls, where in reality only few external contracts may be called for a transaction. Therefore this reduces the parallelization.</p>
+
+<p>This RSKIP propose using a runtime method to partition the transaction set. Miners are forced to serialize transaction execution and at the same time discover runtime overlaps. Once all transactions have been processed and the partition is created, an index is created holding the first transaction number for each subset (partition field).  The hash of the partition field is stored in the block header. Full nodes can use this index to split the transaction set and parallelize execution. During execution, each called contract is marked with the index of the subset. If at any moment a contract is to be marked twice with different indexes, the block is considered invalid. To prevent miners from not correctly specifying the partition, if during the transaction processing a node finds that a transaction in the same partition subset does not overlap with a contract from the subset, the block is considered invalid.</p>
+
+<h2 id="word-states-in-receipts">Word states in receipts</h2>
+
+<p>As every transaction subset starts with the same world state, it is not immediately possible to deduct the final world state from the last world states stored in the last transaction receipts of each subset. Therefore an SPV wallet cannot easily receive proof that the final world state is invalid. There are two possible remedies: try to solve the problem, or rethink the original design choice of including the final world state in receipts.</p>
+
+<p>To solve the problem, instead of storing the final world state, receipts should store the hash of the cache tree that stores the differences between states. A proof that the final differences can be merged into the final state would consist of: Branches of the original state tree, all the difference branches, branches of the final state tree. This proof could be rather large.</p>
+
+<p>Another option is to remove the final world states from transaction receipts <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP42.md">RSKIP42</a>. Intermediate world states were included to receipts to be able to pinpoint a fraud transaction and prove it is fraudulent by sending a short message that requires low CPU processing to verify. It turns out that neither of these design requirements is met by the current RSK design. Detecting an invalid final world state may require an enormous amount of original state data and final state merkle branches. For example, if a contract queries the balance of several other contracts, all the merkle branches corresponding to such queries must be included in the proof. as a block can hold a single transaction consuming all gas, the CPU consumption for a proof could be as high as the block gas limit. Therefore, an attacker willing to produce fraud blocks can force a node to essentially do almost a complete block validation. Removing the final states also have the benefit that the intermediate merkle hashes need not to be immediately computed, and can be computed at the end of transaction processing. Removing final world states from receipts reduce the complexity of fraud proofs considerably by turning a fraud proof into a block, plus an indicator that it is fraudulent.</p>
+
+<p>It is however desirable that the final world state is included in the header to allow nodes to check that the VM executions have yield the correct state, and to prevent a consensus problem to be detected only when the next block comes.</p>
+
+<h1 id="specification">Specification</h1>
+
+<p>A new field partitionEnds is added to the block header. partitionEnds contains an array of integers, indicating at what offset each partition ends. For example if partitionEnds is [ 2,4] then the first partition contains the transaction at offsets [0,1,2] and the second at offsets [3,4]. Values in partitionEnds must be ascending. If the block has no transactions, then partitionEnds must be empty.</p>
+
+<p>When a miner executes transactions to create an (unsolved) block, the miner does the following:</p>
+
+<p><strong>Definitions:</strong></p>
+
+<p>A Partition (class) contains:</p>
+
+<ol>
+  <li>
+    <p>list :  a lists of transactions</p>
+  </li>
+  <li>
+    <p>touchedContracts: an empty contract list (pointers to actual contract objects)</p>
+  </li>
+  <li>
+    <p>Order: an integer that specifies the order</p>
+  </li>
+</ol>
+
+<p><strong>Algorithm:</strong></p>
+
+<ol>
+  <li>
+    <p>All contracts hold a “partition” object reference, initially set to nil. Also all contracts have a boolean flag “ReadOnly” initially set to true.</p>
+  </li>
+  <li>
+    <p>Let partitions be a list of Partition objects. Let suicided be a list of contracts.</p>
+  </li>
+  <li>
+    <p>Repeat until there are no more transactions</p>
+
+    <ol>
+      <li>
+        <p>Append a new Partition to partitions. Let currentPartition be the last appended partition. Let currentPartition.order be a monotonically increasing number.</p>
+      </li>
+      <li>
+        <p>Let conflictPartitions be an empty set of Partition object references.</p>
+      </li>
+      <li>
+        <p>Take the next available transaction.</p>
+      </li>
+      <li>
+        <p>Execute the transaction. For every CALL or CALLCODE to dst_contract executed:</p>
+
+        <ol>
+          <li>
+            <p>If dst_contract does not exist and it’s not in the suicides list, proceed as normal and skip further checks.</p>
+          </li>
+          <li>
+            <p>If dst_contract is in the suicides list, add dst_contract.partition to conflictPartitions list, and proceed as normal skipping further checks.</p>
+          </li>
+          <li>
+            <p>If call is type CALLCODE (not CALL) skip further checks.</p>
+          </li>
+          <li>
+            <p>If dst_contract writes to persistent centralized memory, clear the ReadOnly flag.</p>
+          </li>
+          <li>
+            <p>If dst_contract  suicides, clear the ReadOnly flag and add dst_contract to the suicides list.</p>
+          </li>
+          <li>
+            <p>If dst_contract  writes to distributed memory (RSKIP01) do:</p>
+
+            <ol>
+              <li>
+                <p>Read the destination dmem_contract.partition</p>
+              </li>
+              <li>
+                <p>if dmem_contract.partition is nil, set it to currentPartition and add the contract to currentPartition.touchedContracts.</p>
+              </li>
+              <li>
+                <p>If dmem_contract.partition is different from currentPartition and not nil, add dmem_contract.partition contract to conflictPartitions list.</p>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <p>When the CALL returns, if dst_contract.partition is nil and ReadOnly is false, set it to currentPartition and add dst_contract to currentPartition.touchedContracts.</p>
+          </li>
+          <li>
+            <p>If dst_contract.partition is different from currentPartition and not nil, add dst_contract.partition contract to conflictPartitions list.</p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p>If conflictPartitions is not empty:</p>
+
+        <ol>
+          <li>
+            <p>Sort the partitions in conflictPartitions by partition order.</p>
+          </li>
+          <li>
+            <p>Let targetPartition be the first partition in conflictPartitions.</p>
+          </li>
+          <li>
+            <p>For every partition p (in ascending sequence) in conflictPartitions  do</p>
+
+            <ol>
+              <li>Execute Merge(p, targetPartition)</li>
+            </ol>
+          </li>
+          <li>
+            <p>For every other partition p execute Merge(p,targetPartition)</p>
+          </li>
+          <li>
+            <p>Remove the last element from partitions</p>
+          </li>
+          <li>
+            <p>Set currentPartition to targetPartition</p>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p>Insert current transaction in currentPartition.list</p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>Let c = 0</p>
+  </li>
+  <li>
+    <p>For every partition p in partitions</p>
+
+    <ol>
+      <li>
+        <p>if p.list is not empty then</p>
+
+        <ol>
+          <li>
+            <p>append p.list to block.list</p>
+          </li>
+          <li>
+            <p>append block.list.size to block.partitionEnds</p>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p><strong>Subroutines:</strong></p>
+
+<p>Merge(fromPartition,toPartition)</p>
+
+<ol>
+  <li>
+    <p>If fromPartition==toPartition then return</p>
+  </li>
+  <li>
+    <p>Mark every contract c in fromPartition.touchedContracts with c.partition = toPartition.</p>
+  </li>
+  <li>
+    <p>Append every contract in fromPartition.touchedContracts into toPartition.touchedContracts</p>
+  </li>
+  <li>
+    <p>Append every transaction in fromPartition.list into toPartition.list preserving order.</p>
+  </li>
+</ol>
+
+<p>The worst case of this algorithm is when each partition goes through a waterfall of marges.</p>
+
+<p>This example shows the contracts touched by each transaction, and the partitions created (a subset in the left means it was created from a merge operation later).</p>
+
+<p>0: [ 0 ] [ 0 1 2  3 4 5]</p>
+
+<p>1: [ 1 ] [ 1 2  3 4 5] []</p>
+
+<p>2: [ 2 ] [ 2  3 4 5] []</p>
+
+<p>3: [ 3 ] [ 3 4 5] []</p>
+
+<p>4: [ 4 ] [ 4 5 ] []</p>
+
+<p>5: [ 4 5 ] []</p>
+
+<p>6: [ 3 4 ]</p>
+
+<p>7: [ 2 3 ]</p>
+
+<p>8: [ 1 2]</p>
+
+<p>9: [ 0 1]</p>
+
+<p>The complexity is O(N^2).</p>
+
+<h2 id="other-vm-modifications">Other VM Modifications</h2>
+
+<p>In RSK contracts are created and can be immediately used by following transactions. Also contracts can execute other contracts during initialization. This brings problems, such as in this example:</p>
+
+<p>T0: Calls contract A</p>
+
+<p>T1: Creates contract A</p>
+
+<p>T2: Calls contract A</p>
+
+<p>The call to contract A will fail and it’s not affected by T1. T2 will be associated with the partition of T1 correctly.</p>
+
+<p>Now if T0 and T1 are executed in parallel, it’s possible that T1 is executed first, so that T0 now calls an existing contract A instead of failing.</p>
+
+<p>Therefore parallel executions should not share a single state tree, but should cache state modifications (contract creations and removals) in a  per-partition cache. After all partitions have been executed, the caches should be merged into the state tree preserving the order.</p>
+
+<p>A different thing happens with suicides. In RSK suicides are made effective at the end of the contract processing. Let’s see an example:</p>
+
+<p>T0: Calls contract A</p>
+
+<p>T1: Calls contract A, then A suicides.</p>
+
+<p>T2: Calls contract A</p>
+
+<p>When T2 is executed, contract A no longer exists, so T2 cannot be merged with the partition having T0 and T1. There two are possible solutions: either the VM is modified such that suicides only take effect when all transactions have been processed, or we modify the partitioning code so that suicided contracts are added to a suicided list. Each time a suicided contract is called, although the effect of suicide call remains intact, the transaction is merged into the partition of the suicided contract. Full nodes must also maintain a suicides list to detect invalid partitions due to suicide interactions.</p>
+
+<h2 id="dos-security">DoS Security</h2>
+
+<p>A user could build a transaction that calls almost all contracts to prevent partitioning. However calling contract has an expensive gas cost. If not, then calling cost should be adjusted to prevent this attack.</p>
+
+<h2 id="interaction-with-rskip01">Interaction with RSKIP01</h2>
+
+<p>RSKIP01 defines distributed storage with the aim of reducing contract/wallet dependencies in centralized contracts and allow execution parallelism. To provide this parallelism for contracts the partitioning algorithm allow overlaps on contracts that do not write to persistent memory. A  “ReadOnly” flag is used to detect when a contract perform persistent centralized memory writes. Calls to contracts that are ReadOnly can be commuted as there are no side-effects.</p>
+
+<p>Writes to decentralized memory are treated similar to contract calls. Consider the following example:</p>
+
+<p>T0: Message to contract A “Transfer X USD from account A to account B”.</p>
+
+<p>T1: Message to contract A “Transfer X USD from account D to account E”.</p>
+
+<p>If A does not use centralized memory for the method “Transfer”, then the touched contracts during T0 execution are only A and B, while the touches contracts for T1 are only D and E. Therefore T0 and T1 can be safely parallelized.</p>
+
+<h1 id="copyright">Copyright</h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

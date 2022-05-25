@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Extended Bitcoin Bridge Transactions | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Extended Bitcoin Bridge Transactions | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP41" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP41" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Extended Bitcoin Bridge Transactions</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="extended-bitcoin-bridge-transactions">Extended Bitcoin Bridge Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">41</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Extended Bitcoin Bridge Transactions</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">25-APR-2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Usa</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP proposes different ways funds can be sent to RSK from Bitcoin, and how a Bitcoin transaction can remotely execute a method in an RSK contract.</p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>The FTWP (see <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP40.md">RSKIP40</a>) functionality can be extended by the use of an EET (Extended Exit Transaction) to create a new contract, and execute code. The code will receive payments in SBTC and will be able to perform whatever action is needed, and then send back funds to a Bitcoin address by commanding the Bridge.</p>
+
+<h2 id="eet-transactions">EET Transactions</h2>
+
+<p>The easiest way to redeem SBTC in the Rootstock blockchain is by creating an EET transaction. An EET transaction has the following properties:</p>
+
+<ul>
+  <li>
+    <p>It has only two outputs</p>
+  </li>
+  <li>
+    <p>The first output represents the amount of BTC to transfer to the Rootstock blockchain [the Amount field]. The output address must be the Federators Exit Address.</p>
+  </li>
+  <li>
+    <p>The second output only specifies data. The amount must be zero, and the scriptPub must contain an OP_RETURN opcode and OP_PUSHDATA1 opcode, specifying the size of the data following, followed by payload bytes. The payload contains the following fields, RLP encoded:</p>
+
+    <ul>
+      <li>
+        <p>EET version (currently 0)</p>
+      </li>
+      <li>
+        <p>The destination address in Rootstock (20 bytes) [DestinationAddress field]</p>
+      </li>
+      <li>
+        <p>The redeem fee for automatic redeem (RegisterBtcLock message). This can be zero to indicate no automatic redeem is necessary [ RskRedeemFee field]</p>
+      </li>
+      <li>
+        <p>Optional if the destination address is a contract:</p>
+
+        <ul>
+          <li>
+            <p>(0, The maximum gasPrice to pay (1 to 8 bytes)) [gasPrice field]</p>
+          </li>
+          <li>
+            <p>(1, The maximum amount of gas to consume (1 to 8 bytes)) [gasAmount field]</p>
+          </li>
+          <li>
+            <p>(2, A Rootstock refund address, to transfer unused fees, if any (20 bytes) [ RskRefundAddress field]</p>
+          </li>
+          <li>
+            <p>(3, hold time in blocks) [HoldBlocks field]</p>
+          </li>
+          <li>
+            <p>(4, A Bitcoin refund address, to transfer the remaining if no execution occurred, if any (20 bytes)) [ BtcRefundAddress field]</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>The payload size must not exceed 80 bytes (including RLP bytes). If at the time the EET transaction is redeemed in the Rootstock blockchain the network gasPrice is over the specified gasPrice, the transaction will be held for HoldBlock blocks, waiting for manual triggering. No gasPrice re-check will be performed. If HoldBlocks is zero, the transaction will not be held.</p>
+
+<p>If no manual triggering occurs and if a RskRefundAddress is defined, all the funds will be transferred to the RskRefundAddress in Rootstock.</p>
+
+<p>If no manual triggering occurs and no RskRefundAddress is defined, and a BtcRefundAddress is defined, then all the funds will be transferred back from RSK to Bitcoin. Note that any fees required to release BTC funds will be deducted from the Amount field. If the remaining is zero, no refund will take place.</p>
+
+<p>If the transaction is executed automatically then the unused fees (gasAmount*gasPrice) will be transferred to the  RskRefundAddress (after deducting the standard transfer fee).</p>
+
+<p>If the transaction is manually triggered, the all pre-specified fees (gasAmount*gasPrice) will be transferred to the RskRefundAddress ((after deducting the standard transfer fee).</p>
+
+<h2 id="pxt-transactions">PXT Transactions</h2>
+
+<p>A Proxy Transaction (PXT) is a Bitcoin transaction that moves bitcoins to a Bitcoin address which represents a Rootstock address. Without the need for the Federation, a user can create a proxy Bitcoin address that maps to a Rootstock address. This is done by creating a script with the following format: OP_PUSH <RskAddress> (or payload of EET) OP_DROP <Federation script=""> and then hashing it (UserScriptHash). The funds must be sent to a P2SH address of this UserScriptHash.</Federation></RskAddress></p>
+
+<h2 id="sak-same-account-key-transaction">SAK (Same Account Key) Transaction</h2>
+
+<p>Send the funds to the Federation address. The funds are transferred in RSK to the account related to the same public key specified in the scriptSig of the first input of the transaction.</p>
+
+<h2 id="opk-owned-private-key-transactions">OPK (Owned-Private-Key) Transactions</h2>
+
+<p>Similar to SAK but the user has to redeem the money in Rootstock using the private key of the first input of the transaction. This is done by signing a redeem message “RskRedeem address”, with the private key related to the first input and sending this message to the Bridge using the method ReleaseRTS(address, signature). This will be useful over a SAK only when we implement other Public Key architectures (we support now only ECDSA secp256k1)</p>
+
+<p>The first input must be a P2PKH or P2SH and the script must be a standard P2PKH script.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

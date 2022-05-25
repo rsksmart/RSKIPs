@@ -1,0 +1,31 @@
+<style type="text/css">
+  .rskiptable .title {
+    width: 67%;
+  }
+  .rskiptable .author {
+    width: 33%;
+  }
+</style>
+  {% for status in site.data.statuses %}
+    {% assign rskips = include.rskips|where:"status",status|sort:"rskip" %}
+    {% assign count = rskips|size %}
+    {% if count > 0 %}
+      <h2 id="{{status|slugify}}">{{status}}</h2>
+      <table class="indextable">
+        <thead>
+            <tr><th class="ipnum">Nr</th><th class="title">Title</th><th class="created">Created</th><th class="author">Author</th><th class="purpose">Purpose</th><th class="layer">Layer</th><th class="complexity">C</th></tr>
+        </thead>
+        {% for page in rskips %}
+        <tr>
+          <td class="ipnum"><a href="{{page.url|relative_url}}">{{page.rskip|xml_escape}}</a></td>
+          <td class="title">{{page.title|xml_escape}}</td>
+          <td class="created">{{page.created|xml_escape}}</td>
+          <td class="author">{% include authorlist.html authors=page.author %}</td>
+          <td class="purpose">{% include categorylist.html purposes=page.purpose %}</td>
+          <td class="layer">{{page.layer}}</td>
+          <td class="complexity">{{page.complexity}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endfor %}

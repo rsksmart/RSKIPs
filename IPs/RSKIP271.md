@@ -1,3 +1,14 @@
+---
+rskip: 271
+title: Bridge peg-out batching
+description: 
+status: Draft
+purpose: Sec, Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-08
+---
 # Bridge peg-out Batching 
 
 

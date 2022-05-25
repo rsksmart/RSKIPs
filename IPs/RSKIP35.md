@@ -1,3 +1,15 @@
+---
+rskip: 35
+title: Managing BridgeMaster Federation Members
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-02-02
+---
+
 # Managing BridgeMaster Federation Members
 
 |RSKIP          |35           |

@@ -1,3 +1,14 @@
+---
+rskip: 200
+title: Receive headers limits
+description: 
+status: Adopted
+purpose: Sec
+author: PGP <pamela@iovlabs.org>, MI <marcos@iovlabs.org>
+layer: Core
+complexity: 2
+created: 2021-01-08
+---
 # Receive headers limits
 
 |RSKIP          |200           |

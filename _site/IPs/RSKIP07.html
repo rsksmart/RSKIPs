@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Persistent Storage Rent Paid by Code | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Persistent Storage Rent Paid by Code | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP07" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP07" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Persistent Storage Rent Paid by Code</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="persistent-storage-rent-paid-by-code">Persistent Storage Rent Paid by Code</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">07</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Persistent Storage Rent Paid by Code</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">11-JUN-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Rejected</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP describes an implementation of storage rent based on enabling the code to periodically perform an operation to deposit the rent before the due time.
+Motivation
+One of the problems of the RSK platform is that memory can be acquired at a low cost and never released, forcing all remaining nodes to store the information forever.
+In principle, users should pay a storage rent (e.g. bitcoins/month) for consuming persistent storage. However it is not clear who should pay for this rent. Many contracts are examples of crowd-contracts: programs that are fueled and used by the crowd, therefore they can consume a lot of memory, but no single user is in position of carrying the burden of the rent.
+A well designed crowd-contract should add a revenue method for paying for the memory rent of persistent storage. For example, each operation should be accompanied by a payment in bitcoins, and payments should be collected by the contract. However, such revenue collecting method must be defined at day 0, and at that stage it will be unclear if the revenue model can sustain the memory rent. The simplest case is that every user pays rent independently for the memory it consumes. For example, a DNS-like contract will attach an account balance to every name registered, and users would be free to send money to the registered name account.
+When the time comes to pay the rent, the contract would see which names have enough balance, remove the names that cannot pay for the rent, subtract a fixed amount from each name balance, and pay the rent using LIFE_EXTEND-like opcode  (see <a href="https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP08.md">RSKIP08</a>).</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>See discussion <a href="https://github.com/rsksmart/RSKIPs/issues/78">here</a></p>
+
+<p>Every contract has two new fields:  rentPreDeposit and shrinkKillOrHibernationBounty (SKHBounty for short). rentPreDeposit field hold a value in gas, while SKHBounty values in bitcoins.</p>
+
+<p>A Contract can be of one of three types: immortal, mortal and ephemeral. Mortal and ephemeral contracts must pay a rent.</p>
+
+<p>The rent payment algorithm is as follow:
+-Let t be the current date.
+-Let d be the date of the last message sent to a contract.
+-Let s be the amount of memory consumed by persistent memory
+-Let z be the amount of memory consumed by cells marked with the  “survive” flag.</p>
+
+<p>Then when a message at time t is to be processed,  the contract must pay rent for r = s*rentCost/(t-d) gas. The amount of gas is subtracted from rentPreDeposit and it is paid to all the miners using a smooth function.</p>
+
+<p>The maximum amount of gas that can be stored in rentPreDeposit is s*rentCost/(6 month). This means that a contract cannot invest in gas for a longer period than 6 months.</p>
+
+<p>At any time the contract can make a pre deposit in gas using the opcode DEPOSIT_RENT <gasAmount>.</gasAmount></p>
+
+<p>The rent is automatically deposited when new persistent memory cell is requested with the SSTORE opcode. The cost d to execute the SSTORE opcode is split in the following way:</p>
+<ul>
+  <li>x = (a+b+c)</li>
+  <li>“a” is automatically pre-deposited for rent,</li>
+  <li>“b” is payed to the miner (persistCost)
+-“c” is also pre-deposited for contract removal bounty, but in bitcoin at the minimum gas price designated by miners.</li>
+  <li>c = b</li>
+</ul>
+
+<p>Because requesting new cells of persistent memory add to the bounty accumulator, it may be the case that the bounty becomes too high that miners may have an incentive to prevent sending messages to the contract so the contract becomes a debtor and the bounty can be collected. This must be solved. To prevent this, one can force the bounty to be spent on rent, but that requires using a reference gasPrice, that we don’t have..</p>
+
+<p>Another problem is that if the bounty becomes too high (because the gasPrice was high and was then lowered) a contract owner can hibernate a contract to collect the bounty and then wake it up, providing a lower bitcoin bounty.</p>
+
+<p>It seems there is no escape to gas/btc arbitration.</p>
+
+<p>Another problem is that if blocks are not saturated of gas use, then miners may use the gas left to pay rents for contracts (and offer this a service). The fact is that RSK has a minimal gasPrice and we are planning to forward 50% of the fees collected in a block to the next blocks partially prevents this since the miner will be having a 50% discount on the minimum price, but not zero cost.</p>
+
+<p>When r &gt; rentPreDeposit the contract has become a debtor. When a contract is a debtor, anyone can attempt to kill, shrink or hibernate the contract and collect a contract removal bounty or the shrink bounty by executing a HIBERNATE, SHRINK or KILL opcode. When a HIBERNATE/SHRINK/KILL opcode is executed, the sender can specify an address to receive back a bounty. If hibernated, the preDepositRent and bounty will become zero, and all the bounty will be paid. If shrunk, the bounty will be paid in the proportion of removed cells over the total number of cells (removed cells are the cells not marked to survive)</p>
+
+<p>Generally the contract will include a method such that:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public PayMyRent(int amount)
+{
+ DEPOSIT_RENT(this,amount)
+}
+</code></pre></div></div>
+
+<p>Mortal and Ephemeral contracts have different rent costs. Ephemeral contracts pay a little less, but if rent is consumed, the contract is destroyed (and the contract bitcoins vanish).
+The cost of hibernation does not depend on the size of the memory, since this RSKIP will be implemented on top of the new Trie structure (persistent memory below account address on the Trie). Therefore the root hash of the memory subtree need not be computed.</p>
+
+<p>When the contract is hibernated, both the code, memory and balance are hashed and only a single hash digest is stored in the contract address. While the contract is hibernated it cannot receive nor send payments or messages except a special WAKEUP message. The user can awake the contract by sending the WAKEUP message containing the full code and persistent data. If the code and data does not fit into a message then the user needs to create a proxy contract that composes the code/data in chunks, append the chunks, and sends the contract a wakeup WAKEUP message using the WAKEUP opcode. The WAKEUP opcode has several arguments arguments: the code, the code size, the data, the data size, the contract address and the initial pre-deposit for the rent and pre-deposit for the bounty. WAKEUP returns an error code if the contract could not be woken up: the code 2 means that the code was invalid, 3 means that the data was invalid, and 4 means that the rent is too low for paying the re-hibernation cost.</p>
+
+<h2 id="immortal-contracts">Immortal contracts</h2>
+
+<p>Contracts can also become immortal by calling IMMORTALIZE and paying 10 years<em>rentCost</em>s where s is the current memory consumed. The bitcoin bounty is paid back and moved to the contract normal balance. Immortal contracts may offer long term storage service to other contracts, and how this affects the market should be analyzed. Memory requested by immortal contracts pay a special immortalizeCost gas cost per SSTORE, but do not require a bitcoin bounty.</p>
+
+<h2 id="security">Security</h2>
+
+<p>This design only is secure if:</p>
+
+<ol>
+  <li>
+    <p>There is always a reasonable minGasPrice. No contract can pay lower than this price. This is to protect a miner from buying eternal memory at no cost.</p>
+  </li>
+  <li>
+    <p>Some fees percentage should be burned to prevent miners forming a coalition to buy eternal memory at low cost (however they could collude to put the minGasPrice low enough, so burning does not apply).</p>
+  </li>
+</ol>
+
+<p>To prevent services that offer memory to avoid rent, the cost of memory should not be higher than the cost of transferring it from one contract to another.
+New opcodes
+Let m be the amount of memory persisted by the contract in 32 byte words.</p>
+
+<h3 id="hibernate">HIBERNATE</h3>
+
+<p>Arguments: &lt;address&gt; &lt;bounty-pay-address&gt;</p>
+
+<p>GasCost: provided by the caller (not taken from the hibernation deposit)</p>
+
+<h3 id="kill">KILL</h3>
+<p>Arguments: &lt;address&gt; &lt;bounty-pay-address&gt;</p>
+
+<p>GasCost: provided by the caller (not taken from the hibernation deposit)</p>
+
+<h3 id="shrink">SHRINK</h3>
+<p>Arguments: &lt;address&gt; &lt;bounty-pay-address&gt;</p>
+
+<p>GasCost: provided by the caller (not taken from the hibernation deposit)</p>
+
+<h3 id="wakeup">WAKEUP</h3>
+
+<p>Arguments: &lt;contract_address&gt; &lt;code_address&gt; &lt;code_size&gt; &lt;trie_address&gt; &lt;trie_size&gt;</p>
+
+<p>Value: equal or higher to m*f+c
+Value accepted: 6 month of rent.
+Returns: error_code</p>
+
+<h3 id="set_mortality">SET_MORTALITY</h3>
+
+<p>Arguments: &lt;mortaity_kind&gt;</p>
+
+<p>GasCost:
+if switching to immortal from mortal/ephemeral: m<em>immortalizeCost
+	if switching to ephemeral/mortal from immortal: -m</em>immortalizeCost/2 (refund in gas)</p>
+
+<p>Possible mortality_kind values:</p>
+<ol>
+  <li>Ephemeral</li>
+  <li>Mortal</li>
+  <li>Immortal</li>
+</ol>
+
+<p>Changes the contract mortality type</p>
+
+<h3 id="deposit_rent">DEPOSIT_RENT</h3>
+
+<p>Arguments: &lt;address&gt;</p>
+
+<p>Value: amount to deposit. It must be equal or higher than m<em>f
+Value accepted: m</em>f</p>
+
+<p>If the rent overflows the maximum accepted rent (6 months), the remaining is not deposited.</p>
+
+<h3 id="set_flags">SET_FLAGS</h3>
+
+<p>new-bit ForbidExternalRentPayments (default 0 = false)</p>
+
+<h2 id="performance">Performance</h2>
+
+<p>If the survive flag is implemented as a bit attached to a cell, the shrink opcode would need to iterate over all memory cells and detect which are marked to survive. To make this process constant time, the memory will be split in two subspaces as two account subtrees in the trie: the survive subspace and the perish subspace. The bit 255 of the keys will be used to decide which subtree the key belongs. If the contract code wishes to mark a cell to survive flag, the cell must be moved from the perish subspace to the survive subspace by setting the bit 255 of the key, and vive-versa. This means that the actual hash security of the trie is 1 bit less. When looking up a cell, the contract must first search the surviving subtree and if not found it must search it in the other subtree. This must be done by masking the bit 255 and setting the bit 255.The contract must make sure a key will never be present in both subtrees. Removing a key requires trying removing the key in the first subtree, and if not found re-trying in the opposite subtree. The contract designer must decide to use or not the two available subspaces, and can ignore them. In that case the author can decide to place all keys in the survive or perish subspaces.</p>
+
+<h2 id="sample-use-cases">Sample Use Cases</h2>
+
+<h3 id="user-asset-contract">User-asset contract</h3>
+
+<p>A contract ASSET maintains a local ledger in (a,v) pairs, such that “a“ is the address of the asset owner and “v“ is the asset value owned. When a receives an asset for the first time, a transfer() method is called, and a new memory cell is created in the survive subspace. The user will periodically (once every 6 months) call a method payRent() of the ASSET contract. The method will check if the address is in the survive subspace, and if not, it will move the address there, and pay a deposit corresponding to the cost of 6 months of storage.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public payRent()
+{
+ address a = msg.sender;
+ address bit255 = (1&lt;&lt;255);
+ a &amp;=~bit255; // perish subspace
+ if (accountTrie[a]!=0) {
+     balance = accountTrie[a];
+     accountTrie[a] = 0;
+     a |= bit255;
+    accountTrie[a] = balance
+    Amount amount = memoryCost;
+    DEPOSIT_RENT(this,amount)
+ }
+}
+</code></pre></div></div>
+
+<h2 id="user-asset-contract-using-child-contracts">User-asset contract using child contracts</h2>
+
+<p>This is a case where child contracts are used to increase the parallelization factor. The ASSET contract will not store anything in its own persistent memory, but still needs to pay the cost of maintaining the ASSET contract alive.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Each child contract will be created with the address HASH ( parent-address</td>
+      <td>user-address ). Each child contract could have the following method:</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public payRent()
+{
+   if (gas&lt;rentGas) thow;
+   DEPOSIT_RENT(this,rentGas*5) // pays for code + data
+   DEPOSIT_RENT(parent,rentGas) // overpays for some constant code/data
+}
+</code></pre></div></div>
+
+<p>Another option is that the parent contract implements the following method :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public payRent() {
+  address a = msg.sender;
+  address childContract = SHA3( this.address , a);
+  DEPOSIT_RENT(childContract,rentGas);
+  DEPOSIT_RENT(this,rentGas);
+}
+</code></pre></div></div>
+
+<h2 id="long-term-effects">Long term effects</h2>
+
+<p>We assume a contract is not hibernated, and the normal workings are the following:</p>
+
+<ul>
+  <li>Each minute a new record is created</li>
+  <li>75% of the record owners pay the rent every 6 months.</li>
+  <li>gasPrice is stable</li>
+</ul>
+
+<p>Just after 6 months, the contracts has 260K records. The total amount of gas paid is 260K *x. Let’s assume x=a+b+b, and  a=b=c
+The deposit is 260K *x/3. The bounty is 260K/3.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

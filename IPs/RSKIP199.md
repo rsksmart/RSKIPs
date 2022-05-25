@@ -1,3 +1,14 @@
+---
+rskip: 199
+title: registerBtcTransaction Is Public 
+description: 
+status: Adopted
+purpose: Sca, Usa, Sec
+author: MI <marcos@iovlabs.org>
+layer: Core
+complexity: 2
+created: 2021-01-07
+---
 # registerBtcTransaction Is Public
 
 |RSKIP          |199           |

@@ -1,3 +1,15 @@
+---
+rskip: 6
+title: Block Size Limit 
+description: This RSKIP defines changes in consensus to limit the block size. This prevents possible DoS vectors of attack.
+status: Adopted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2016-06-22
+---
+
 # Block Size Limit
 
 |RSKIP          |6           |

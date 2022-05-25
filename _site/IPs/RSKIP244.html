@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Variable Storage Costs | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Variable Storage Costs | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP244" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP244" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Variable Storage Costs</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="variable-storage-costs">Variable Storage Costs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">244</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Variable Storage Costs</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">16-MAY-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca, Fair</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>discussions-to</strong></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP proposes reduced the gas cost when creating short storage cells and removing storage reimbursements. Reimbursements can be maintained if this RSKIP is implemented jointly with RSKIP243.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>Currently the cost of creation of a new storage cell is 20k gas. However a cell with short key and value occupies on storage 13% of a cell with 256-bit key and values. The main reason is because storage cells of 44 bytes or less are embedded in parent trie nodes, instead of requiring an independent trie node. This RSKIP proposes that the cost of storage is variable depending on its size, and cells that can be embedded in parent nodes pay 50% lower initial cost.  At the same time, this RSKIP removes the storage reimbursements when storage is created in a separate transaction. These reimbursements have shown to be problematic when used for gas arbitration (gastokens).</p>
+
+<p>The motivation for the discount for short cells is Financial inclusion, which requires the ERC20 contracts to store millions of ledger records for stable coins.  The RSK platform already optimizes storage of trie nodes whose size is lower than 44 bytes. An ERC20 balance record in storage generally requires less than 44 bytes in the trie node (20 bytes of address and 12 bytes of balance, with 12 bytes of node/key overhead). However, Solidity hashes the key with Keccak and this prevents using the shorted key. By using operation for direct storage access, such as sstore()/sload(), it’s possible to take advantage of the optimization without colliding with other storage field variables.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>Starting from an activation block (TBD), the cost of SSTORE a non-zero value is computed as follows:</p>
+
+<pre><code class="language-Solidity">totalSize = address.size + data.size;
+If (totalSize  &lt;= 32 )
+   creationCost = setResetCost/2+totalSize*30;
+else
+   creationCost = setResetCost+totalSize*30;
+</code></pre>
+
+<p>The <em>setResetCost</em> is defined as 15K if the cell value was previously zero, and 7500 if the cell value was non-zero.</p>
+
+<p>The fixed cost to <code class="language-plaintext highlighter-rouge">SSTORE</code> a zero-value is fixed at 3000.</p>
+
+<p>Storage cleanup reimbursements are removed both for <code class="language-plaintext highlighter-rouge">SSTORE</code> and <code class="language-plaintext highlighter-rouge">SELFDESTRUCT</code>, unless this RSKIP is implemented together with RSKIP243, which is recommended.</p>
+
+<h1 id="rationale">Rationale</h1>
+
+<p>Several related topics are analyzed in separate sections.</p>
+
+<h3 id="reentrance-protections">Reentrance protections</h3>
+
+<p>It is common that contracts use a storage cell to create a semaphore to protect contracts from unexpected reentrancy. Using a semaphore, the current cost of such method is 20000 for the increment, then 5000 for the decrement, with a refund of 15000 (if possible), resulting in 10000 net gas cost. Using a 1-2 semaphore, the current cost is 5000 for increment and 5000 for decrement, also resulting in 10K net gas cost.</p>
+
+<p><strong>With refunds</strong></p>
+
+<p>If this RSKIP is combined with RSKIP243, the the cost of a 0-1 semaphore becomes 7502+3000-4502, resulting in 6000, 40% lower.</p>
+
+<p><strong>Without refunds</strong></p>
+
+<p>Even if we removed storage refunds completely, with the scheme proposed here, the cost of a 0-1 semaphore is 7502+3000, resulting in 10002. Therefore the cost of semaphores is almost equal than before. A 1-2 semaphore will cost 3752+3752=7504, which is represents a 25% cost reduction. In the future, state rent will provide a cost decrease for 0-1 semaphores afterwards and will level both methods.</p>
+
+<h3 id="witness-size">Witness size</h3>
+
+<p>While the possibility to create a state-less client for RSK has not been analyzed in-depth, any discount on SSTORE or SLOAD operations increases the potential witness size. The changes proposed in this RSKIP lower the SSTORE cost, but has little effect on witness data, since SSTORE is much more expensive than SLOAD.</p>
+
+<h3 id="shared-key-paths">Shared Key paths</h3>
+
+<p>The actual space used by a trie node does not directly depend on the key size, because if multiple storage cells share a large part of their keys, only one copy is stored in a shared key path, however taking into account the trie structure would require inspecting it at the time of SSTORE, which would be expensive.</p>
+
+<h3 id="storage-cleaning-reimbursement-removal">Storage cleaning reimbursement removal</h3>
+
+<p>While these changes could be made compatible with storage reimbursements, by reimbursing 50% of the amount paid for storage, storage reimbursements are removed by this proposal. Instead, we propose that in the future each contract keeps a counter of the number of storage cells contained, or the platform uses the node size field, to add a variable cost to all SSTORE and SLOAD operations depending on the tree size. Contracts would be incentivized to be programmed to remove unused cells to make all other operations cheaper.</p>
+
+<h3 id="optimized-erc20-contracts">Optimized ERC20 contracts</h3>
+
+<p>It’s possible to use this cost change to reduce gas costs of transfer operations in ERC20 contracts. However, the man benefit is when transferring tokens to addresses that do not contain any tokens. Transferring tokens between existing addresses will not be significantly affected.</p>
+
+<p>Solidity mappings cannot take advantage of the incentive for using short storage cells. This is because Solidity always expands the key of a mapping to a uint256 by applying a hash function. The Solidity documentation: (https://docs.soliditylang.org/en/latest/internals/layout_in_storage.html) states:</p>
+
+<blockquote>
+  <p>The value corresponding to a mapping key k is located at keccak256(h(k) . p) where “.” is concatenation and h is a function that is applied to the key depending on its type:  (note: p is considered a uint256)</p>
+
+  <ul>
+    <li>
+      <p>For value types, h pads the value to 32 bytes in the same way as when storing the value in memory.</p>
+    </li>
+    <li>
+      <p>For strings and byte arrays, <code class="language-plaintext highlighter-rouge">h</code> computes the <code class="language-plaintext highlighter-rouge">keccak256</code> hash of the unpadded data.</p>
+    </li>
+  </ul>
+
+  <p>If the value is again a non-elementary type, the positions are found by adding an offset of keccak256(k . p).</p>
+</blockquote>
+
+<p>Solidity uses Keccak256(..) for storage keys because it uses adjacent cells when the value in the mapping occupies more than 32 bytes. It can’t use simply (k. p), because an attacker could choose the key k=(u+1) for a pre-existing key u, in order to store a certain value overlapping the next 32 bytes of the data stored at key u. 
+But because ERC20 contract store uint256 balances (one cell),  the balance mapping doesn’t need this protection as long as the address space does not collide with the address space of a Solidity native contract field.
+Instead of using Solidity mappings, the program can use SSTORE/SLOAD with a user-defined key mapping such as: <code class="language-plaintext highlighter-rouge">&lt;addr20&gt; 0xff</code>. This mapping does not collide with Solidity mappings because Solidity mapping storage keys are always the hash digest of 64 bytes of data, and the proposed pre-image is only 21 bytes in length. However, it can collide with a field variable at slot 0xff if addr20 is all zeros. The reason is that the EVM always expands the keys to 256 bits RSK, filling the MSBs with zero. For such as contract field to exists the programmer must define 255 contract fields, which is uncommon. We could avoid potential problem this by adding a non-zero byte before addr20 like this: <code class="language-plaintext highlighter-rouge">0xff &lt;addr20&gt; 0xff</code>. If we ditch the trailing 0xff, then it can’t collide also. So a final proposal is simply: <code class="language-plaintext highlighter-rouge">0xff addr20</code>.</p>
+
+<p>By using the proposed scheme to store an ERC20 balance the platform saves:</p>
+
+<ul>
+  <li>32 bytes for the trie node hash</li>
+  <li>11 bytes of storage cell key</li>
+  <li>2 bytes of a node flags and path length</li>
+  <li>At least 32 bytes of LevelDB overhead</li>
+</ul>
+
+<p>The total saving is 32+11+2+32=77 bytes. When stored embedded in a node the space used by a storage cell is: 20 bytes (key) + 12 bytes (value) + 10 bytes (hashed key prefix) + 2 bytes (node flags and path length) = 44 bytes. When not embedded the space required is 44 + 77 = 121 bytes.
+Therefore, the cost for using small nodes for balances can be as low as 36% of the current cost.</p>
+
+<p>To conclude, the storage cost of an ERC20 token transfer is approximately 10K gas (with pre-existing non-zero balances). With this proposal, an optimized ERC20 contract would cost 9420 gas. However, if storage rent is implemented, rent could reduced more than 50%, providing a great benefit for the financial inclusion use case. When transferring to addresses without previous balance, the current scheme costs 25K, while the proposed scheme costs only ~13K gas.</p>
+
+<h3 id="space-consumed-by-storage-cells">Space consumed by storage cells</h3>
+
+<p>The maximum cost of a storage cell is reached when the key and the data are both 32 bytes, and the node size becomes 64+10+2+32=108 bytes. The smallest possible trie node for a storage cell corresponds to a value of 0x01 at address 0x00. This cell would consume 14 bytes. Therefore the mimimum possible cost of a storage cell corresponds to 13% of the maximum cost.</p>
+
+<h1 id="backwards-compatibility">Backwards Compatibility</h1>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.</p>
+
+<h1 id="test-cases">Test Cases</h1>
+
+<p>TBD</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>No new denial of service or resource abuse risks have been identified related to this change.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

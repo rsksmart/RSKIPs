@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>BTC-RSK timestamp linking | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="BTC-RSK timestamp linking | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP179" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP179" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">BTC-RSK timestamp linking</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="btc-rsk-timestamp-linking">BTC-RSK timestamp linking</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">179</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">BTC-RSK timestamp linking</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">OCT-2020</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>discussions-to</strong></td>
+      <td style="text-align: left">https://research.rsk.dev/t/rskip-179-btc-rsk-timestamp-linking/44</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>The Strong Fork-aware Merge-mining (SFAMM) protocol proposes a new security model suited for a merge-mined blockchain. If the blockchain implements the SFAMM protocol, and if the assumptions of the model are satisfied, the model assures that large double-spend attacks are prevented, by making attacks visible, attributable, requiring at least 51% Bitcoin miners collusion and, more importantly, requiring a bounded time, where the bound depends on the attacker hashrate but it is known in advance.</p>
+
+<p>This RSKIP represents one small change to the RSK consensus that is required to achieve security under the SFAMM model.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>This RSKIP aims to prevent a merge-miner attacker from mining old RSK blocks with the current Bitcoin hashrate. The RSKIP proposes to prevent the Bitcoin block timestamp to be far away from the RSK timestamp. Since the Bitcoin timestamp is partially malleable for a minority miner, generally up to 1 hour in the past, the prevention only works for reversion attacks that span of large time scales of at least several hours.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>The RSK block header is a list of the following elements:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>parentHash, unclesHash, coinbase,stateRoot, txTrieRoot, receiptTrieRoot, logsBloom, difficulty, number, gasLimit, gasUsed, timestamp, extraData, paidFees, minimumGasPrice, uncleCount, ummRoot [, mergeMiningFields ] 
+</code></pre></div></div>
+
+<p>The <em>mergeMiningFields</em> are the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bitcoinMergedMiningHeader,
+bitcoinMergedMiningMerkleProof,
+bitcoinMergedMiningCoinbaseTransaction
+</code></pre></div></div>
+
+<p>A Bitcoin block header contains these fields:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Purpose</th>
+      <th>Size (Bytes)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>version</td>
+      <td>Block version number</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>hashPrevBlock</td>
+      <td>256-bit hash of the previous block header</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>hashMerkleRoot</td>
+      <td>256-bit hash based on all of the transactions in the block</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>timestamp</td>
+      <td>Current <a href="https://en.bitcoin.it/wiki/Block_timestamp">block timestamp</a> as seconds since 1970-01-01T00:00 UTC</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>bits</td>
+      <td>Current <a href="https://en.bitcoin.it/wiki/Target">target</a> in compact format</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>nonce</td>
+      <td>32-bit number</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="validation">Validation</h3>
+
+<p>Every block in the mainchain, and every uncle block referenced must verify the following rule:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abs( bitcoinMergedMiningHeader.timestamp - rskBlockHeader.timestamp) &lt; 300
+</code></pre></div></div>
+
+<p><em>Abs()</em> function returns the absolute value. Values are expressed in seconds.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<p>We assume that economic nodes wait a number of blocks for confirmation when receiving a payment. The number of blocks can be fixed or depend on the amount of the payment, but it’s unrelated to the cumulative difficulty. There are two variants of the double-spend attack depending on the attack timing: an attack that starts after the victim confirms the transaction or an attack that starts before. The first is called Reversion-After-Confirmation (RAC), and the second Reversion-During-Confirmation (RDC). The distinction is of uttermost importance. RSK already has tools to detect and avoid RDC attacks. The Armadillo systems monitors the Bitcoin blockchain and alerts of parallel forks. Also nodes can monitor the total active hashrate and detect sudden reductions. The SFAMM consensus changes (not discussed in this RSKIP) provide also a new method to prevent RDC attacks. However, in a RAC attack, the attack starts after the attacker has already cashed out the first spend, and only the second (double) spend remains. To revert the blockchain after the cash out, the attacker needs to mine blocks with timestamps in the past or leave large time gaps between blocks. It’s easy to penalize forks containing timestamp gaps, as SFAMM proposes, so that the cumulative work required by the attacker is much higher. The only option left to the attacker is to mine with past timestamps.</p>
+
+<p>RSK has access to a cryptoeconomic timestamping system, the timestamps of the Bitcoin blocks need to be approximately accurate for the blocks to by accepted by Bitcoin consensus, but RSK is not currently using this feature. In this RSKIP we propose forcing the RSK timestamp to match the Bitcoin timestamp with an error margin of 5 minutes. If the merge-miner wants to cheat, it must give up the profit from Bitcoin mining and create invalid Bitcoin blocks.</p>
+
+<p>Miners normally update their timestamp at least once every minute, so 5 minutes is a loose tolerance. Since generally Bitcoin timestamps are chosen by the miners while the RSK timestamp is chosen by the mining pool server, RSK shouldn’t impose a lower tolerance.</p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients and Block explorers do not need to be updated.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+
+<ol>
+  <li>
+    <p>bitcoinMergedMiningHeader.timestamp = 1300 and rskBlockHeader.timestamp = 1000
+Fails validation</p>
+  </li>
+  <li>bitcoinMergedMiningHeader.timestamp = 1300 and rskBlockHeader.timestamp = 1001
+Passes validation</li>
+  <li>bitcoinMergedMiningHeader.timestamp = 1001 and rskBlockHeader.timestamp = 1300
+Passes validation</li>
+</ol>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The rskj code would need to modified to add this rule. This rule can be added as a separate class or modifying the <em>BlockTimeStampValidationRule</em> class.</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>This RSKIP protects the RSK network from reduced set of double-spend attacks forcing the attacker to mine a private fork before the victim of a transaction has been confirmed for the first time, and only if the victim waits a number of confirmation blocks higher 120.</p>
+
+<p>Other variants of the double-spend attack still need additional changes to be prevented. These other changes, required by the SFAMM model, will be specified in other RSKIPs.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.,</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

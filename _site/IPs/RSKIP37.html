@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Single Address Smart Wallets | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Single Address Smart Wallets | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP37" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP37" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Single Address Smart Wallets</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="single-address-smart-wallets">Single Address Smart Wallets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">37</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Single Address Smart Wallets</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">18-FEB-2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca/Usa</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>This RSKIP tries to address several problems with the current contract wallet designs. Currently smart wallets need to maintain two accounts. One is a simple account (no code) what is used to consume the gas required to perform operations on the smart wallet. The second is the smart wallet (a contract) that holds of most user funds.</p>
+
+<p>This complicates smart wallet design.</p>
+
+<p>Also this prevents Lumino (Lightning network) off-chain channels to be created when one of the parties has a multi-signature wallet.</p>
+
+<p>To achieve true financial inclusion within the next 10 years we need to allow high transaction volumes, and having the LTCP protocol be the settlement layer for the Lumino network seems the optimal way to achieve it.</p>
+
+<p>Last, the current design does not allow signature algorithm agility.</p>
+
+<p>Therefore this RSKIP must consider three different use cases into a single proposal.</p>
+
+<p>Three different proposals are evaluated and discussed.  This RSKIP  proposes to add a new type of code to accounts/contracts, the SigVerCode.</p>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<p>This RSKIP tries to address the following problems with an unified solution.</p>
+
+<ol>
+  <li>
+    <p>Currently smart wallets need to maintain two accounts. One is a simple account (no code) what is used to consume the gas required to perform operations on the smart wallet. The second is the smart wallet (a contract) that holds of most user funds. This complicates smart wallet design.</p>
+  </li>
+  <li>
+    <p>In Lumino, a payment channel is a smart contract controlled by two parties. Each party could be identified by a ECDSA private key or by an address. If it is identified by a ECDSA private key, then channels are limited to the ECDSA signature standard and do not support that one of the parties controls its funds by a 2 of 3 multi-signature wallet. If the channel is controlled by two contract addresses (and msg.sender is used to authenticate them) then a channel settlement or top-up message cannot be compact and self-contained, because it requires the approval from two other contracts. If the message comes from one of the addresses, then the other party signature must be provided in the data payload. A good wallet design should allow a payment channel to be created by two parties where each party is identified by an address, and together they can create a single message, signed by both, that goes directly to the channel contract (both the origin and the destination of the messages will be the channel contract). This allows signatures to be easily compressed by LTCP.</p>
+  </li>
+  <li>
+    <p>Cryptographic algorithm agility. The weakest cryptographic construction in RSK is the ECDSA signature scheme. Giving the option to users to use other signatures schemes can help the network tolerate the weaken of ECDSA, without the need for costly hard-forks.</p>
+  </li>
+  <li>
+    <p>One interesting feature to have is on-the-fly contract addresses. These are addresses that can be created off-line, but are not related to an ECDSA-controlled account, but to a contract-controlled account. Basically the address should be the hash of the contract information (code, memory), so that an user can submit this information at a later time to “de-hibernate” the address, and make it fully operable. This requires that the signature-verification code and the execution code be contained into a single address.</p>
+  </li>
+</ol>
+
+<h1 id="discussion-on-problem-3">Discussion on Problem 3</h1>
+
+<p>The current design and implementation of Bitcoin/RSK/Ethereum relies on ECDSA, and more specifically the secp256k1 curve, as the only signature algorithm that enables and protect payments. The ECDSA secp256k1 signature scheme is a Certicom standard and it’s currently considered secure, but nevertheless it may become insecure in the future. Past cases of weakness discovered in cryptographic algorithms show that generally standard cryptographic schemes do not become suddenly completely insecure: there is generally a window of time to adopt a new standard before a catastrophic failure is found. If this happens to RSK, there will be probably some time to upgrade and hard fork the network. To prevent a hard-fork there are two possible solutions to this problem:</p>
+
+<ol>
+  <li>
+    <p>Launch RSK allowing a second signature standard for transactions as a “backup”, such as RSA, or a quantum resistant one, such as Merkle-Winternitz. An algorithm prefix should be added to the public keys.</p>
+  </li>
+  <li>
+    <p>Allow any signature system to be used to protect RSK accounts. Because RSK already has a Turing complete language, alternate signature schemes could be specified by the user.</p>
+  </li>
+</ol>
+
+<p>Allowing this is a bit tricky, but fits nicely in the current design. There are two additional possibilities: re-use the contract code to allow signature verification using the existent code in an account, or add a new account code special for signature verification. The second approach, which has many benefits over the “code reuse” approach, is explained below. There is also a third option.</p>
+
+<p>Now we present three different methods to achieve user programmable signature schemes.</p>
+
+<p><strong>SigVerCode proposal</strong></p>
+
+<p>A new field “SigVerCode” is added to RSK accounts. When SigVerCode is not empty, if an external transaction is sent to the contract and the transaction has a signature field, then the signature is NOT verified by the standard ECDSA engine. The signature value is made available to be accessed by the contract SigVerCode, which is executed. Also a fixed pre-defined amount of GAS (SIGN-VERIFY-GAS) is given FOR FREE for the contract execution. The GAS is paid by the miner. The amount SIGN-VERIFY-GAS should be roughly equivalent to the time it takes to verify an ECDSA signature (or a bit more, such as 2 times more). If not all the GAS is used, the unused GAS is returned to the miner. The script SigVerCode script should return a single Boolean value, which indicates the correctness of the signature.The SIGN-VERIFY-GAS restriction prevents network spamming, allowing nodes to verify user signatures without the risk of denial of service attacks.</p>
+
+<p>The transaction (r, s,v) values are re-interpreted.</p>
+
+<ul>
+  <li>
+    <p><strong>nonce</strong></p>
+  </li>
+  <li>
+    <p><strong>gasprice</strong></p>
+  </li>
+  <li>
+    <p><strong>startgas</strong></p>
+  </li>
+  <li>
+    <p><strong>to</strong></p>
+  </li>
+  <li>
+    <p><strong>value</strong></p>
+  </li>
+  <li>
+    <p><strong>data</strong></p>
+  </li>
+  <li>
+    <p><strong>v</strong>: <strong>Rlp-List of:</strong></p>
+
+    <ul>
+      <li>
+        <p><strong>Transaction format version</strong></p>
+      </li>
+      <li>
+        <p><strong>max signature length (Maximum 2^20-1) [optional, default is 80]</strong></p>
+      </li>
+      <li>
+        <p><strong>number of ephemeral data elements [optional, default is zero]</strong></p>
+      </li>
+      <li>
+        <p><strong>optional sender address. [optional]</strong></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>r: signature data</strong></p>
+  </li>
+  <li>
+    <p><strong>s: Rlp-list of ephemeral data elements [optional]</strong></p>
+  </li>
+</ul>
+
+<p>The signature must cover all the fields except r and s. The signature covers a merkle root of the merkle tree of all ephemeral data elements. The fee per byte applies also to all fields,  except for ephemeral data. The fee per ephemeral byte applies to ephemeral items.</p>
+
+<p>Also value, gasprice and  startgas can be coded in a compact integer floating point representation with a variable number of bytes for mantissa and 5 bits of base-10 exponent.</p>
+
+<p>A sample SigVerCode pseudo-code would be:</p>
+
+<p>pubkey = contract.storage[“pubkey”]</p>
+
+<p>signature = Transaction.signature</p>
+
+<p>txHash = Transaction.hash</p>
+
+<p>if (not VerifySignature(pubkey,signature,txHash))</p>
+
+<p>return False</p>
+
+<p>else</p>
+
+<p>return True</p>
+
+<p>Other uses for SigVerCode:</p>
+
+<p>•   SigVerCode could check the destination and prevent some destination to be used (filters)</p>
+
+<p>•    SigVerCode could limit the amount of money extracted.</p>
+
+<p>•    SigVerCode could check for other signatures such as multi-sig.</p>
+
+<p>However, the SigVerCode would be unable to modify or event read the persistent storage (SLOAD/SSTORE), also SigVerCode would have no access to any other contract (e.g., EXTCODESIZE, CODECOPY, CALL). This restriction allows the miner to collect all valid transactions and then add them one by one to the block. If SigVerCode allows modification of the persistent state, then SigVerCode transactions would need to be re-analyzed over and over, leading to a possible DoS attack vector to miners.</p>
+
+<p>So basically when a transaction is executed from a sender to a receiver, both code in the sender (SigVerCode) and the receiver (code) are executed. Another advantage of SigVerCode over multi-sig contracts is that SigVerCode allows the wallet application to easily support multi-signatures or any complex access procedure.</p>
+
+<p>In this proposal requires a new field “sender” on each transaction that uses SigVerCode.</p>
+
+<p>The following table shows the interaction between the sender and receiver fields and the normal code and wallet code.</p>
+
+<table>
+  <tr>
+    <td></td>
+    <td>SigVerCode empty</td>
+    <td>SigVerCode non-empty</td>
+  </tr>
+  <tr>
+    <td>Code empty</td>
+    <td>ECDSA Account
+sender field is empty
+receiver field is set</td>
+    <td>UserSig account
+sender is account address
+receiver is set</td>
+  </tr>
+  <tr>
+    <td>Code non-empty</td>
+    <td>Contract
+receiver is contract address
+sender field is empty</td>
+    <td>UserSig Contract account
+sender is contract
+if receiver field is empty the receiver is set to sender
+If receiver is set, then message is sent to receiver </td>
+  </tr>
+</table>
+
+<p><strong>CodeReuse Proposal</strong></p>
+
+<p>Transactions have as destination the contract that will pay the fees. The normal code is executed for SIGN-VERIFY-GAS units of gas. If the code executes the (new) ACCEPT opcode before OOG exception, the transaction is accepted. If it does not, the transaction is halted and considered invalid. If the persistent storage is modified or read (by SLOAD/SSTORE) or other contract is accessed before ACCEPT, the transaction is also considered invalid. The block containing the transaction is also considered invalid.</p>
+
+<p>Mixing signature checking and normal contract code has the disadvantage that it obfuscates the signature scheme used.</p>
+
+<p><strong>Static Contracts Proposal</strong></p>
+
+<p>Another way to achieve the same effect is to split the wallet into two contracts, where one of them codes the signature verification (Code=SigVerCode) part and the other obeys the orders of the first (Code=Wallet). This way there is no need to introduce a new SigVerCode field.</p>
+
+<p>The transaction will originate in the SigVer contract, and will also have the same contract as destination. A special flay “receiver-pays” in transactions will change the way the transaction is processed. Two more fields need to be created “maxTxLenght” and “signatureData”.</p>
+
+<p>When a node receives a transaction marked with  “receiver-pays”, it first executes the destination contract. This contract can access the hash of the transaction <em>msg.ID</em> and the signatureData as the data field (msg.sigData).. The SigVer contract evaluates the signature and forwards the message to the wallet contract using the CALL opcode.</p>
+
+<p>Because SigVerCode must run with several restrictions, such as that no persistent memory cell can be written, no context inspection.</p>
+
+<p>Therefore we Mark SigVerCode contracts as “static”. A static contract can only call other static contract. This prevents users calling non-static contracts by mistake, and blocking access to wallets.</p>
+
+<p><strong>Comparison</strong></p>
+
+<p>In any of the three proposals, signature data could be segregated in a field similar to the “s” field, and accessed using new opcodes (e.g. SIGLOAD). This allows to dispose the signature data (as segregated witness) and reduce the blockchain storage on some nodes</p>
+
+<p>This proposal uses an empty “s” field to mark that the origin of the transaction is the external world (origin=0). The receiver field semantics is unchanged.</p>
+
+<table>
+  <tr>
+    <td></td>
+    <td>On-the-fly contract addresses</td>
+    <td>hard-fork difficulty
+(from 1 to 10) </td>
+    <td>Allow better native compression through LTCP</td>
+    <td>Obscures real destination in external tx</td>
+  </tr>
+  <tr>
+    <td>SigVerCode</td>
+    <td>Yes</td>
+    <td>5</td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>CodeReuse</td>
+    <td>Yes</td>
+    <td>3</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>Static Contracts</td>
+    <td>No</td>
+    <td>1</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

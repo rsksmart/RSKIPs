@@ -1,3 +1,15 @@
+---
+rskip: 0
+title: RSKIP Purpose and Guidelines
+description: A RSKIP is a design document providing information to the RSK community describing a new feature for RSK, its processes, or its environment.
+status: Purpose and Guidelines
+purpose: Sec
+author: JL (@julianlen)
+layer: Misc
+complexity: 2
+created: 2021-04-15
+---
+
 # RSKIP Purpose and Guidelines
 
 |RSKIP          |0           |
@@ -35,7 +47,6 @@ There are three types of RSKIP:
 	* **DApp** - Dapp application interfaces
 - An **Informational RSKIP** describes an RSK design issue, or provides general guidelines or information to the RSK community, but does not propose a new feature. Informational RSKIPs do not necessarily represent an RSK community consensus or recommendation, so users and implementers are free to ignore Informational RSKIPs or follow their advice.
 - A **Process RSKIP** describes a process surrounding RSK or proposes a change to (or an event in) a process. Process RSKIPs are like Standards-Track RSKIPs but they apply to areas other than the RSK protocol itself. They may propose an implementation, but not to RSK's codebase; they often require community consensus. Unlike Informational RSKIPs, they are more than recommendations, and users are typically not free to ignore them. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in RSK development.
-
 
 
 ## RSKIP purpose terms
@@ -103,6 +114,7 @@ The possible paths of the status of RSKIPs are as follows:
 
 Each RSKIP should have the following parts:
 
+
 -	Preamble -- RFC 822 style headers containing meta-data about the RSKIP, including the RSKIP number, a short descriptive title (limited to a maximum of 44 characters), the names, and optionally the contact info for each author, etc.
 <!-- -->
 
@@ -135,12 +147,12 @@ Each RSKIP should have the following parts:
 
 ## RSKIP Formats and Templates
 
-RSKIPs should be written in [markdown] format. Image files should be included in a subdirectory for that RSKIP.
+RSKIPs should be written in [markdown] format. Here is a [template](/IPs/RSKIP0_TEMPLATE) to follow. Image files should be included in a subdirectory for that RSKIP.
 
 
 ## RSKIP Header Preamble
 
-Each RSKIP must begin with an RFC 822 style header preamble. The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
+Each RSKIP must begin with an RFC 822 style header preamble, preceded and followed by three hyphens (---). This header is also termed “front matter” by Jekyll. The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
 
 ` * RSKIP: ` *RSKIP number* (determined by the RSKIP editor)
 	

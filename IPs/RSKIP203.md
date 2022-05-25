@@ -1,3 +1,14 @@
+---
+rskip: 203
+title: getCallStackDepth Precompile method
+description: 
+status: Draft
+purpose: Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2021-01
+---
 # getCallStackDepth Precompile method
 
 

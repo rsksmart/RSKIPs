@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Checksum Address Encoding | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Checksum Address Encoding | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP60" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP60" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Checksum Address Encoding</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="checksum-address-encoding">Checksum Address Encoding</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Checksum Address Encoding</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">25-JUN-2018</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">JL,IO</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">ST</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Net</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Adopted</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="motivation"><strong>Motivation</strong></h1>
+
+<ul>
+  <li>Avoid typing confusion in addresses.</li>
+  <li>Differentiate addresses of different networks.</li>
+</ul>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>Addresses can be validated using an injective function that makes capital letters redundant.
+RSKIP-0060 <strong>describes an address checksum mechanism</strong> that can be implemented in any network based on <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md">EIP-55</a>.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+<p>In Javascript:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">toChecksumAddress</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">chainId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">strip_address</span> <span class="o">=</span> <span class="nx">stripHexPrefix</span><span class="p">(</span><span class="nx">address</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="kd">const</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="nx">chainId</span> <span class="o">!=</span> <span class="kc">null</span> <span class="p">?</span> <span class="p">(</span><span class="nx">chainId</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">0x</span><span class="dl">'</span><span class="p">)</span> <span class="p">:</span> <span class="dl">''</span>
+    <span class="kd">const</span> <span class="nx">keccak_hash</span> <span class="o">=</span> <span class="nx">keccak</span><span class="p">(</span><span class="nx">prefix</span> <span class="o">+</span> <span class="nx">strip_address</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="dl">'</span><span class="s1">hex</span><span class="dl">'</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0x</span><span class="dl">'</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">strip_address</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="nx">output</span> <span class="o">+=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">keccak_hash</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">8</span> <span class="p">?</span>
+            <span class="nx">strip_address</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="p">:</span>
+            <span class="nx">strip_address</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="nx">output</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Adds the chain id as a prefix. Converts the address to hexadecimal. Calculates <a href="https://csrc.nist.gov/csrc/media/publications/fips/202/final/documents/fips_202_draft.pdf">keccak</a> with the prefixed address. Prints <code class="language-plaintext highlighter-rouge">i</code> digit if it’s a number, otherwise checks if <code class="language-plaintext highlighter-rouge">i</code> byte of the hash of the keccak. If it’s grater than 8 prints uppercase, otherwise lowercase.</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">chainId</code> unique values defined in <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md">EIP-155</a>.</p>
+  </li>
+  <li>
+    <p>This algorithm is compatible with <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md">EIP-55</a>. This can be achieved using <code class="language-plaintext highlighter-rouge">null prexix</code>.</p>
+  </li>
+</ul>
+
+<h1 id="implementation"><strong>Implementation</strong></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Languaje</th>
+      <th>Reference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/RSKSmart/rskjs-util">RSK Labs - rskjs-util</a></td>
+      <td>JavaScript</td>
+      <td><a href="https://github.com/rsksmart/rskjs-util/blob/5f284ee833ce8d958216804107d0bb90b3feb52e/index.js#L30">Code</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/trezor/trezor-core">Trezor - trezor-core</a></td>
+      <td>Python</td>
+      <td><a href="https://github.com/trezor/trezor-core/blob/270bf732121d004a4cd1ab129adaccf7346ff1db/src/apps/ethereum/get_address.py#L32">Code</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/trezor/trezor-crypto">Trezor - trezor-crypto</a></td>
+      <td>C</td>
+      <td><a href="https://github.com/trezor/trezor-crypto/blob/4153e662b60a0d83c1be15150f18483a37e9092c/address.c#L62">Code</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="rationale"><strong>Rationale</strong></h1>
+
+<p>Benefit:</p>
+<ul>
+  <li>Allows implementation in any network. Can distinguish between testnets and mainnets.</li>
+  <li>Backwards compatiblity with many hex parsers that accept mixed case, allowing it to be easily introduced over time.</li>
+  <li>Compatibility with <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md">EIP-55</a> checksum implementation.</li>
+</ul>
+
+<h1 id="test-cases"><strong>Test cases</strong></h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Valid with network id: 30
+    0x5aaEB6053f3e94c9b9a09f33669435E7ef1bEAeD
+    0xFb6916095cA1Df60bb79ce92cE3EA74c37c5d359
+    0xDBF03B407c01E7CD3cBea99509D93F8Dddc8C6FB
+    0xD1220A0Cf47c7B9BE7a2e6ba89F429762E7B9adB
+
+Valid with network id: 31
+    0x5aAeb6053F3e94c9b9A09F33669435E7EF1BEaEd
+    0xFb6916095CA1dF60bb79CE92ce3Ea74C37c5D359
+    0xdbF03B407C01E7cd3cbEa99509D93f8dDDc8C6fB
+    0xd1220a0CF47c7B9Be7A2E6Ba89f429762E7b9adB
+
+Valid with network id: None
+    0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed
+    0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359
+    0xdbF03B407c01E7cD3CBea99509d93f8DDDC8C6FB
+    0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb
+
+Invalid with network id: 1234
+    0x5aaeb6053F3E94C9B9A09f33669435E7Ef1BeAed
+    0xfb6916095ca1df60bb79Ce92ce3ea74c37c5d359
+    0xDBF03B407C01E7CD3CBEA99509D93f8DDDC8C6FB
+    0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb
+</code></pre></div></div>
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

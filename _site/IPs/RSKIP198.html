@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Minpeg, a miners&#39; multisig in the peg | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Minpeg, a miners&#39; multisig in the peg | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP198" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP198" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Minpeg, a miners&#39; multisig in the peg</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="minpeg-a-miners-multisig-in-the-peg">Minpeg, a miners’ multisig in the peg</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">198</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Minpeg, a miners’ multisig in the peg</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">JAN-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>discussions-to</strong></td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>In this RSKIP we propose a new layer of security for the RSK Powpeg that engages the active miners in a multi-signature scheme that represents a new requirement for validity of peg-out transactions. The new group and system will be called <strong>minpeg</strong>. There is a key difference between a federation and a minpeg. A federation group is generally static or it has a built-in mechanism to add or remove new members through voting. The minpeg group is a dynamically chosen set of top miners from the set of active miners, and members come and go automatically as they increase or decrease their participation on the RSK hashrate. Internally, the multisignature is renewed at periodic intervals, according to the miners’ contributed hashrate on them. Also, the federated model is characterized by full identification of its members by real-world names (either individual or legal).  In contrast, minpeg  participants do not need to reveal their real-world identities.</p>
+
+<p>This RSKIP achieves some of the capabilities of a “discrete” drivechain, in the sense that miners attest for the correctness of peg-outs. By “discrete” we emphasize that the hashrate measurements is taken at discrete intervals rather and continuously for every block. However this RSKIP does not provide to the peg a forced long peg-out delay, which is a key property of the drivechain proposals. A forced-delay could be achieved in the future with the addition of covenants to Bitcoin scripts.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The current security of the Powpeg against invalid peg-outs relies on the assumption that:</p>
+
+<p>(the majority of the RSK hashrate is honest <strong>OR</strong> the majority of the Powpeg functionaries are honest)</p>
+
+<p><strong>AND</strong> the PowHSM manufacturer is honest <strong>AND</strong> the PowHSM is tamper-proof.</p>
+
+<p>Assuming of the honesty of the HSM manufacturer and lack of vulnerabilities in the device is Powpeg’s strongest assumption. There are several ways in which the PowHSM manufacturer can cheat or the PowHSM can fail:</p>
+
+<ol>
+  <li>The PowHSM can leak the private key to manufacturer in a covert channel over Bitcoin transaction signatures.</li>
+  <li>The manufacturer can hide a backdoor to extract the private key with the collusion of Powpeg functionaries.</li>
+  <li>The manufacturer can add a surreptitious method to selectively skip certain code paths, such as the proof-of-work validation.</li>
+  <li>The manufacturer, or any malicious party, may posses knowledge of a side-channel (i.e. a power glitch timing) that can be used to force the PowHSM to perform invalid execution branches, skipping proof-ok-work validation.</li>
+</ol>
+
+<p>This RSKIP attempts to protect RSK from all these potential vectors of attack.</p>
+
+<p>The defense-in-depth strategy adopted by the RSK community states that there should be no single point of failure. While the probability of the described attacks is very low, the defense-in-depth strategy demands that an additional protection layer exists. This new layer should keep the system secure even in case the HSM manufacturer is compromised. This RSKIP proposes such new layer of protection.</p>
+
+<h3 id="threat-model">Threat Model</h3>
+
+<p>The new layer of defense added gives a chosen set of miners certain additional responsibilities and therefore powers, which brings up the question of miners’ trust. However, the “dishonest miner” has very limited capabilities with the changes proposed in this RSKIP. First, because the minpeg multisig is an additional requirement of the Bitcoin peg-out script, the best attack miners can perform is full peg-out censorship. Full censorship can only be profited from through extortion, and that risk is mitigated with the addition of time-locked emergency multi-signature in the upcoming Iris network upgrade. Second, malicious miners cannot easily hide their actions. RSK merge-mining is normally attributable. To become surreptitious, a dishonest miner must stop adding identity information to blocks (or start using others’ miners identities) much before the attack. Hiding the identity of a the majority of Bitcoin or RSK hashrate without this being noticed by the community seems to be difficult.</p>
+
+<h2 id="specification">Specification</h2>
+
+<p>Every E=40000 blocks, which roughly corresponds to 15 days at the current block rate, the bridge triggers a <strong>funds recycle protocol</strong> or simply a <strong>recycle</strong>.
+In a recycle, all UTXO held by the bridge are moved into a new multisignature address. The minpeg system becomes active immediately after the first recycle occurs. The new multisignature address scriptPub has three two: the first which enforces the PowHSM multisignature and the second which enforces a miner’s hashrate-weighted multisignature.</p>
+
+<p>The script has the following format:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;powpegN&gt; &lt;powHSM_pubkey1&gt;  ... &lt;powHSM_pubkeyN&gt; &lt;powpegM&gt; OP_CHECKMULTISIGVERIFY 
+&lt;minerPubkey1&gt; OP_CHECKSIG
+OP_IF
+  &lt;attestation_weight1&gt;
+OP_ELSE
+  0
+OP_ENDIF
+
+OP_SWAP
+&lt;miner_pubkey2&gt; OP_CHECKSIG
+OP_IF
+  &lt;attestation_weight2&gt;
+  OP_ADD
+OP_ENDIF
+
+OP_SWAP
+&lt;miner_pubkey...&gt; OP_CHECKSIG
+OP_IF
+  &lt;attestation_weight...&gt;
+  OP_ADD
+OP_ENDIF
+
+OP_SWAP
+&lt;miner_pubkeyN&gt; OP_CHECKSIG
+OP_IF
+  &lt;attestation_weightN&gt;
+  OP_ADD
+OP_ENDIF
+
+&lt;half_of_total_attestation_weight_plus_one&gt;
+OP_GREATERTHAN
+</code></pre></div></div>
+
+<p>The powHSM_pubkey(i) public keys correspond to a multisignature managed by PowHSMs.</p>
+
+<p>The miner_pubkey(j) public keys correspond to a multisignature managed by the 20 top active miners. Each elected miner potentially contributes with attestation_weight(j). The weighted multisignature is accepted if the weight surpasses half of the total weight plus one.</p>
+
+<p>Miners have the option to participate in the miners’ multisig or not. From the set of miners that decide to participate, the bridge contract elect a number N of miners to be part of the miners’ multisig basing the decision on the amount of mainchain hashrate contributed on each day. The value N is bounded by 20. The exact algorithm used for the election is described in a following section.</p>
+
+<p>To identify miners, the coinbase address specified in the RSK block header is used. Miners should re-use this address to accumulate weight. All elected miners are paid 12% of the miners’ treasury account instead of the 10% that is the currently payment (relatively, they are be paid 20% more). This additional revenue, called Liveness Compensation (or LC), is paid only if miners collaborate on signing peg-out transactions during a period of 40000 blocks, called an “epoch”.
+The LC is accumulated from the moment the epoch starts to the last block of the epoch. On the first block of the following epoch, the well-behaved multisig miners that are paid the LC. A miner is well-behaved if it responded to each multisig signature request with a valid signature on any of the following 1000 blocks after the request.</p>
+
+<p>To participate on the automatic election, miners must advertise themselves. An advertisement consist of specifying a bitcoin public key to be used in the multisig. Candidates should advertise only once, and any block submitted prior the advisement will not be counted towards the candidate. 
+Advertisements are stored in the the extraData field. To make room for this new field, the extraData field is repurposed to store structured data.</p>
+
+<h3 id="new-extradata-format">New extraData Format</h3>
+
+<p>The extraData becomes an RLP list, where each element is an RLP pair. Each pair consists of a one-byte field identification number (FIN), and a length-limited payload.</p>
+
+<p>The following FINs are defined:</p>
+
+<ol>
+  <li>Node version</li>
+  <li>Bitcoin Public key advertisement (BPKA)</li>
+  <li>minerElectionAddress</li>
+  <li>extraData2</li>
+</ol>
+
+<p>The node version payload is ASCII data from 1 byte to 16 bytes. Only bytes in the range [32..126] are accepted. The extraData2 payload is a blob of at most 32 bytes in size.</p>
+
+<p>The field minerElectionAddress is an optional RSK address that identifies the miner. If this field is not present, the identification is the coinbase address. If this field is present, it takes precedence over the coinbase address. Splitting the election and the coinbase address enables the use of contract-based wallets for receiving block rewards. From now on, we’ll refer to the identity address to the coinbase/election address, whichever was selected by the miner.</p>
+
+<p>The use of any other FIN number (or an empty/null FIN field) invalidates the block.</p>
+
+<p>The BPKA payload consist of:</p>
+
+<ul>
+  <li>The Bitcoin ECDSA public key (BPK) in raw format (64 bytes of binary data).</li>
+  <li>An ECDSA signature of the Bitcoin pubkey (BKPS), signed by the public key that is associated with the miner identity (65 bytes).</li>
+</ul>
+
+<p>These additional block validity rules are added:</p>
+
+<ul>
+  <li>The payload length must be exactly 125 bytes</li>
+  <li>The public key format must be valid</li>
+  <li>The signature must be valid</li>
+  <li>The BPKA occurs only in the first window of an epoch (see next section for the definition of “window”).</li>
+  <li>The miner identity address has not submitted any prior BPKA.</li>
+  <li>The miner identity address cannot be all zeros.</li>
+</ul>
+
+<p>The Bridge contract will keep a dictionary <strong>bitcoinPubkey</strong> containing the first and only association of each identity address with the Bitcoin public key, to be used in the following epoch. In the last block of an epoch the dictionary is cleared.</p>
+
+<h3 id="election-algorithm--data-structures">Election Algorithm &amp; Data Structures</h3>
+
+<p>The bridge contract maintains a dictionary-like data structure which associate identity addresses with number of blocks submitted in the current 2500-block <strong>window</strong>. There are 16 windows in an epoch. The first window starts with the beginning of an epoch.</p>
+
+<p>While the final format of these dictionaries is TBD, we propose that two data structures are used: blockCount and bpk. Both data structures are stored in a separate contract at address TBD to allow fast clean up by contract destruction.</p>
+
+<h4 id="blockcount">blockCount</h4>
+
+<p>The blockCount is a dictionary that is indexed by identity address. Each entry contains a pointer to a previous entry and a following entry, forming a linked list sorted by number of blocks submitted. The entry format is (prevAddress,bcount,nextAddress). The fields <strong>prevAddress</strong> and <strong>nextAddress</strong> form the linked list, and each one is 20 bytes in length. The <strong>bcount</strong> field is an uint32. For the embedded linked list, the first entry has prevAddress equal to zero. The last entry has nextAddress equal to zero. The storage fields <strong>firstEntry</strong> and <strong>lastEntry</strong> are used as pointers to the first and last identity addresses in the linked list. Only mainchain blocks are counted. Every time a mainchain block is processed, the entry in blockCount matching the block identity address is accessed, its count is incremented, and the count is compared with the count of the entry pointed by the prevAddress field. If the count is greater than its predecessor, the two entries are swapped and the process continues with the previous entry. The process may continue up to the first entry similar to a bubble sort. While in the worst case the number of switches ascend to 2500, the worse case can only occur if all miners are malicious. We expect entry switching costs to be low so the worst case does not delay block processing.</p>
+
+<h4 id="pre-elections-and-final-election">Pre-elections and final Election</h4>
+
+<p>At the last block of every window, a number of miners are pre-elected. These are the miners starting from the first entry of the linked-list that have submitted at least 25 blocks each (1%). The pre-election is limited to the top 20 miners. The 20 miners pre-elected are stored in a dictionary names <strong>topRank</strong>. The topRank is a dictionary similar to blockCount (indexed by identity addresses and containing the same type of entries). In the last block of the first window of an epoch, the topRank is first filled. In every other last blocks of a window,  the pre-elected miners in blockCount are intersected and counts accumulated with the top ranking. The process of accumulation is the following: entries in blockCount are iterated starting from firstEntry. For each entry, its identity address is looked-up in the topRank dictionary. If not present, the entry is discarded. If present, the new count is added to the previous count in the topRank entry, and the topRank entry is “bubbled up” if necessary to maintain the sorting order.
+In the last block of the last window of the epoch, the first (at most) 20 miners in the topRank are elected for the multisig starting in the next epoch. To select the weights, the block counts in topRank are added in a <strong>totalCount</strong>, and each miner’s weight becomes the fraction of its block count over the total, multiplied by 256 and rounded down. Therefore the weight threshold for script acceptance is always 129.</p>
+
+<p>Let N be the number of miners elected. If N&lt;5 then the miners’ multisig is deactivated for that epoch.
+If the count of all blocks accumulated by the elected miners is below 4000 (10% of all hashrate), then the multisig is also deactivated.</p>
+
+<p>To select the Bitcoin public keys for the minpeg multisig, the bitcoinPubkey map is queried.</p>
+
+<h2 id="bridge-interaction-with-miners">Bridge Interaction with miners</h2>
+
+<p>The bridge must request and receive signatures from the miners in the same way it does with Powpeg pegnatories. The extension is TBD. It’s important that minpeg member identities (RSK addresses) and pegnatories addresses do not overlap, to allow the detection of the signature source.</p>
+
+<h2 id="rationale">Rationale</h2>
+
+<p>Here we discuss the rationale for the different parameters chosen in this RSKIP.</p>
+
+<h3 id="windows">Windows</h3>
+
+<p>The 2500-block windows ensure that the miners finally elected are regularly mining over the whole epoch. The objective is to prevent selecting miners that frequently go offline.</p>
+
+<h3 id="thresholds">Thresholds</h3>
+
+<p>The election establishes a minimum of 25 blocks blocks mined per window for the miner to be eligible, which represents 1% of the total hashrate. This prevents the following attack. Suppose that large miners do not want to participate in the multisig. Then attackers could try to hire or hijack some portion of the hashrate specifically to control the majority of the miner’s keys. However, the amount of hashrate offered for rent in bitcoin is below 1%. By establishing a minimum hashrate of 1% to be eligible for the minpeg, we prevent hashrate renting.</p>
+
+<p>The threshold of at least 7 miners participating in the multisig prevents a low number of miners to censor peg-outs and coerce Powpeg members or any other economic actor.</p>
+
+<h3 id="entry-swapping-dos-attack">Entry Swapping DoS Attack</h3>
+
+<p>At mentioned before, it’s possible for miners to collude to force a high number of swaps between entries performed by the Bridge contract. Switching from bubble sort heap sort can solve this potential problem. The worst case for bubble sort is if half of the elements have counts of 3, and half have counts of 1, and the last element has it count incremented. In this case, the number of swaps is 625.</p>
+
+<h3 id="powpeg-node-multisig">Powpeg node Multisig</h3>
+
+<p>It’s possible to add to the peg scriptPub a third multisig controlled by the Powpeg nodes, instead of by the PowHSMs. Doing so prevents HSM manufacturer’s attack colluding with a Powpeg member and 51% of the miners.  The fact that the Powpeg node already has the functionality of signing simplifies implementation. The addition of this multisig is TBD.</p>
+
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+
+<p>This change is a hard-fork and therefore all full nodes must be updated.</p>
+
+<h2 id="test-cases">Test Cases</h2>
+
+<p>TBD</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>TBD</p>
+
+<h2 id="security-considerations">Security Considerations</h2>
+
+<p>No new security issue was identified related to this RSKIP. The addition of a new weighted multisignature implies that a new group can potential censor peg-outs. An time-locked emergency multisig should be used to prevent extortion.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.,</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Federation Notification System | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Federation Notification System | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP68" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP68" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Federation Notification System</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="federation-notification-system">Federation Notification System</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">68</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Federation Notification System</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">05-MAY-18</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL, JIO, DAM</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Net</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft*</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract">Abstract</h1>
+
+<p>In this RSKIP we propose a mechanism to allow members of the Federation periodically notify hashes of blocks at different heights from their best chains. This mechanism is intended to minimize the impact of potential attacks from Bitcoin miners to the RSK network. These notifications are merely informative the final decision on how to act upon a discrepancy between the Federation nodes and the local node receiving the notifications relies on the local node.</p>
+
+<h1 id="motivation">Motivation</h1>
+
+<p>Due to the relative small hashing power the RSK network has in comparison with Bitcoin there is a chance of potential attacks from Bitcoin merge-miners to the RSK network.</p>
+
+<p>Possible attacks include:</p>
+
+<ul>
+  <li>Fork attacks: attempt to force RSK nodes to accept (or work in the case of miners) on a fork of the current best chain for a long period of time.</li>
+  <li>Eclipse attacks: attempt to isolate RSK nodes from the network.</li>
+</ul>
+
+<p>To minimize the impact of the first type of attack there should be a secondary source from where nodes can check the status of the best chain. We propose the Federation nodes as such source of information. They communicate its view of the best chain through notifications. These notifications would be broadcasted periodically to the entire network. The notifications should include hashes of blocks at different heights from the best chains of Federation members.</p>
+
+<p>The information received in the Federation notifications will allow nodes to verify if their best chains diverge from the one reported by the Federation members and chose what actions (if any) to take in such case.</p>
+
+<p>For the second type of attack the absence of Federation messages could be used as evidence to the nodes that they might be victims of a potential Eclipse attack.</p>
+
+<p>Additionally federation anomalous behavior can be detected with this mechanism, in particular nodes will be able to detect when federation members are frozen, meaning, no new blocks are processed by the federation members. This allows us to distinguish between a potential eclipse attack and federators not processing new blocks, for instances, as a result of a bug in federators code or a network problem.</p>
+
+<h1 id="specification">Specification</h1>
+
+<p>We propose the introduction of a new message type, the FederationNotification. Members of the Federation will periodically broadcast these notifications to the network. The notifications will carry a list a confirmations from the federation best chain. A confirmation is just a pair of block number and block hash. The first confirmation in the list will correspond to a block near the tip of the best chain (e.g. ten blocks bellow the tip), additional confirmations in the list will correspond to blocks deeper in best chain (e.g. 20 blocks for the second confirmation, 40 blocks for the third confirmation and so on). Confirmations are intended to allow nodes to verify if they are following the Federation’s best chain or if they diverge from it. Nodes would be able to choose which level of verification to perform, meaning which of the provided confirmations to use.</p>
+
+<p>The following list shows all the fields included in the FederationNotification:</p>
+
+<ul>
+  <li>source: Address of the Federation member that originated the notification.</li>
+  <li>confirmations: a list of pairs (best chain blockNumber and blockHash), for each verification level.</li>
+  <li>timeToLive: How long this notification will be valid.</li>
+  <li>timestamp: When this notification was generated.</li>
+  <li>signature: A signature of all the above fields generated using the private key of the Federation member that originated the notification.</li>
+</ul>
+
+<p>It is worth to mention that the delivery of these notifications should not flood the network with messages. One approach to fulfill this requirement could be: when a member of the federation receives a new block and a configurable timer expires a new FederationNotification will be broadcasted to the network.</p>
+
+<p>To detect frozen federation members the notifications should also be sent when no block is received by the federation members and a configurable timer expires.</p>
+
+<p>Nodes should also count with a mechanism to prevent an attacker to attempt flooding the network with Federation Notifications.</p>
+
+<p>Upon receiving a Federation notification, nodes should check if it is not an expired notification and if it wasn’t received previously. Then, nodes should verify the notification origin, generate any alerts if needed and propagate the message to its peers. Nodes should also update the last time they received a notification from the Federation. This value will be used to detect potential Eclipse attacks.</p>
+
+<p>The following fragment of Java code reflects the behavior described:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Validates the received FederationNotification, if valid forwards the
+ * notification to the activePeers collection and generates ForkAttackAlerts if
+ * a fork attack is detected.
+ *
+ * @throws ConfigurationException
+ */</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nc">FederationNotificationProcessingResult</span> <span class="nf">processFederationNotification</span><span class="o">(</span>
+        <span class="nd">@Nonnull</span> <span class="kd">final</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">Channel</span><span class="o">&gt;</span> <span class="n">activePeers</span><span class="o">,</span> <span class="nd">@Nonnull</span> <span class="kd">final</span> <span class="nc">FederationNotification</span> <span class="n">notification</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="nc">ConfigurationException</span> <span class="o">{</span>
+    <span class="kt">long</span> <span class="n">timeBetweenNotifications</span> <span class="o">=</span> <span class="nc">Duration</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="n">lastNotificationReceivedTime</span><span class="o">,</span> <span class="nc">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">()).</span><span class="na">getSeconds</span><span class="o">();</span>
+
+    <span class="c1">// Avoid flood attacks</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">lastNotificationReceivedTime</span> <span class="o">!=</span> <span class="kc">null</span>
+            <span class="o">&amp;&amp;</span> <span class="n">timeBetweenNotifications</span> <span class="o">&lt;</span> <span class="n">config</span><span class="o">.</span><span class="na">maxSecondsBetweenNotifications</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="s">"Federation notification received too fast. Skipping it to avoid flood attacks."</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">FederationNotificationProcessingResult</span><span class="o">.</span><span class="na">NOTIFICATION_RECEIVED_TOO_FAST</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Reject expired notifications</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">notification</span><span class="o">.</span><span class="na">isExpired</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="s">"Federation notification has expired."</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">FederationNotificationProcessingResult</span><span class="o">.</span><span class="na">NOTIFICATION_EXPIRED</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Reject already received notifications</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">receivedFederationNotifications</span><span class="o">.</span><span class="na">containsNotification</span><span class="o">(</span><span class="n">notification</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Federation notification already processed."</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">FederationNotificationProcessingResult</span><span class="o">.</span><span class="na">NOTIFICATION_ALREADY_PROCESSED</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Only accept notifications from valid federation members</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">verifyFederationNotificationSignature</span><span class="o">(</span><span class="n">notification</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="s">"Federation notification signature does not verify."</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">FederationNotificationProcessingResult</span><span class="o">.</span><span class="na">NOTIFICATION_SIGNATURE_DOES_NOT_VERIFY</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Cache notification to keep track of already received notifications</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">receivedFederationNotifications</span><span class="o">.</span><span class="na">addNotification</span><span class="o">(</span><span class="n">notification</span><span class="o">);</span>
+
+    <span class="c1">// Compare confirmations contained in the notification with local best</span>
+    <span class="c1">// chain to generate alerts (if needed)</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">generateAlertIfNeeded</span><span class="o">(</span><span class="n">notification</span><span class="o">);</span>
+
+    <span class="c1">// Propagate federation notification to peers</span>
+    <span class="n">broadcastFederationNotification</span><span class="o">(</span><span class="n">activePeers</span><span class="o">,</span> <span class="n">notification</span><span class="o">);</span>
+
+    <span class="c1">// Update timestamp of last notification received to later check if</span>
+    <span class="c1">// communications with federation are still alive</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">lastNotificationReceivedTime</span> <span class="o">=</span> <span class="nc">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Federation notification processed successfully."</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">FederationNotificationProcessingResult</span><span class="o">.</span><span class="na">NOTIFICATION_PROCESSED_SUCCESSFULLY</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To detect potential Eclipse attacks we just need to track the delta in time between Federation Notifications. If this delta exceeds a configurable threshold then we assume the node might be under an Eclipse attack. The following fragment of Java code shows how this behavior can be implemented:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Checks the time of the last FederationNotification received does not exceed a
+ * configurable delta. If so, a FederationEclipsedAlert is generated and the panic
+ * status of the processor is set to FEDERATION_ECLIPSED. This alert indicates that
+ * that either the node was isolated from the federation by an attacker or the
+ * federation nodes are offline.
+ */</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkIfFederationWasEclipsed</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// Maybe someone is eclipsing the Federation for this node or the federation nodes are offline.</span>
+    <span class="nc">Duration</span> <span class="n">duration</span> <span class="o">=</span> <span class="nc">Duration</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="n">lastNotificationReceivedTime</span><span class="o">,</span> <span class="nc">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
+    <span class="kt">int</span> <span class="n">maxSilenceSecs</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="na">getFederationMaxSilenceTimeSecs</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">federationNotificationsEnabled</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">duration</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">duration</span><span class="o">.</span><span class="na">getSeconds</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">maxSilenceSecs</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">FederationAlert</span> <span class="n">alert</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FederationEclipsedAlert</span><span class="o">(</span><span class="n">duration</span><span class="o">.</span><span class="na">getSeconds</span><span class="o">());</span>
+        <span class="n">addFederationAlert</span><span class="o">(</span><span class="n">alert</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">shouldFederationNotificationsTriggerPanic</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">setPanicStatus</span><span class="o">(</span><span class="nc">PanicStatus</span><span class="o">.</span><span class="na">FederationEclipsedPanic</span><span class="o">(</span><span class="n">getBestBlockNumber</span><span class="o">()));</span>
+            <span class="n">logger</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span>
+                    <span class="s">"Federation alert generated. Panic status is {}. No Federation Notifications received for {} seconds"</span><span class="o">,</span>
+                    <span class="n">getPanicStatus</span><span class="o">(),</span> <span class="n">duration</span><span class="o">.</span><span class="na">getSeconds</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">shouldFederationNotificationsTriggerPanic</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">setPanicStatus</span><span class="o">(</span><span class="nc">PanicStatus</span><span class="o">.</span><span class="na">NoPanic</span><span class="o">(</span><span class="n">getBestBlockNumber</span><span class="o">()));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To detect frozen federation members nodes can use the isFederationFrozen() method of the FederationNotification:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">notification</span><span class="o">.</span><span class="na">isFederationFrozen</span><span class="o">())</span> <span class="o">{</span>
+    <span class="nc">FederationAlert</span> <span class="n">alert</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FederationFrozenAlert</span><span class="o">(</span><span class="n">notification</span><span class="o">.</span><span class="na">getSource</span><span class="o">(),</span> <span class="n">c</span><span class="o">.</span><span class="na">getBlockHash</span><span class="o">(),</span> <span class="n">c</span><span class="o">.</span><span class="na">getBlockNumber</span><span class="o">());</span>
+    <span class="n">addFederationAlert</span><span class="o">(</span><span class="n">alert</span><span class="o">);</span>
+
+    <span class="kt">long</span> <span class="n">panicSinceBlock</span> <span class="o">=</span> <span class="n">getBestBlockNumber</span><span class="o">();</span>
+    <span class="n">setPanicStatus</span><span class="o">(</span><span class="nc">PanicStatus</span><span class="o">.</span><span class="na">FederationFrozenPanic</span><span class="o">(</span><span class="n">panicSinceBlock</span><span class="o">));</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="s">"Federation alert generated. Panic status is {}"</span><span class="o">,</span> <span class="n">getPanicStatus</span><span class="o">());</span>
+
+    <span class="k">return</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Generated alerts will remain active until the processing a new Federation Notification clears the alert reason. In the case of a potential Eclipse attack this means receiving a non-expired Federaton Notification. In the case of a fork attack this means discarding the fork and receiving a Federation Notification which confirmations that match the current best chain of the node. In the case of a frozen federation member this means receiving a Federation Notification whose isFederationFrozen() method returns false.</p>
+
+<p>When triggering an alert the node will also transition to a panic status. The panic status contains the reason of the panic and the block number when the panic started. Panic status remains active following the same rules as Alerts. So far a node in a panic status will not stop working, but additional logic can be added to the node to forbid certain actions when in panic state.</p>
+
+<p>Both, current panic status and a list with the latest alerts can be queried using the Javascript API.</p>
+
+<h2 id="copyright">Copyright</h2>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

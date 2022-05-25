@@ -1,3 +1,15 @@
+---
+rskip: 8
+title: Verification-less mining
+description: This RSKIP describes an implementation of storage rent based on enabling the code to periodically perform an operation to deposit the rent before the due time.
+status: Draft
+purpose: Fair
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-09-29
+---
+
 # Verification-less mining
 
 |RSKIP          |08           |

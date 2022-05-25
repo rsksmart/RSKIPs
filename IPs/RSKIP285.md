@@ -1,3 +1,15 @@
+---
+rskip: 285
+title: Utility Methods to Make PPA Safer
+description: 
+status: Draft
+purpose: Usa, Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2021-10-25
+---
+
 # Utility Methods to Make PPA Safer
 
 |RSKIP          |285           |

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Transaction Encapsulation | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Transaction Encapsulation | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP36" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP36" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Transaction Encapsulation</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="transaction-encapsulation">Transaction Encapsulation</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">36</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Transaction Encapsulation</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">02-FEB-2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>To achieve true financial inclusion within the next 10 years we need to allow users to hold their funds in a local/fiat cryptocurrency. Storing smart bitcoins with the intent of using them to pay for fees involves several problems:</p>
+
+<ul>
+  <li>
+    <p>Bitcoin involves a price volatility risk</p>
+  </li>
+  <li>
+    <p>Using bitcoins requires a complex mental process to understand the platform inner workings and carry monetary conversions</p>
+  </li>
+  <li>
+    <p>Monetary conversions require time, both from the user and internally.</p>
+  </li>
+  <li>
+    <p>The ownership of bitcoins may not be viewed positively by the masses.</p>
+  </li>
+</ul>
+
+<p>Therefore a solution is required to allow users to pay transaction fees in fiat currencies.</p>
+
+<p>Note that this problem only arises when the user wallet is a simple account. When the user wallet is a smart contract, then the smart contract can (and should!) be made such that the payment is encapsulated in a message (not an external transaction), and the message is signed. A smart contract wallet should never authenticate the user using msg.sender or msg.origin. When the user wallet is a smart contract, the user can send the signed payload to a third party where the user has a minimum fiat account balance, and this third party would encapsulate the payload and send it to the wallet smart contract. The cost of tunneling every payment through a smart wallet is 700 gas for the additional CALL, plus the execution of code that deserializes and interprets the payload, which should be another 700 gas, totalling 1400 gas, which is less than 10% of the external transaction cost. This RSKIP defines the EXECUTE opcode, to allow account-based transfers to be executed by third parties which pay for the transaction fees.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>See discussion <a href="https://github.com/rsksmart/RSKIPs/issues/82">here</a></p>
+
+<h2 id="a-new-opcode-execute-is-added">A new opcode EXECUTE is added.</h2>
+
+<p>Arguments: <transactionData> <maxgas></maxgas></transactionData></p>
+
+<p>Returns:</p>
+
+<p>This method works like a CALL, but no arguments can be sent or received.</p>
+
+<p>If the fields gasCount and gasPrice in transactionData must be set to zero.</p>
+
+<p>To prevent a transaction that was created for external execution to be executed as EXECUTE by a malicious party (which may make more difficult the detection of such transaction by the user wallet), transactions internally executed must have the gascount/gasprice set to zero.</p>
+
+<p>The cost of EXECUTE is 4000. If the encapsulated transaction transfers value, an additional cost of 2300 is added.</p>
+
+<p><strong>Important note:</strong> It would be much better to modify solc compiler to allow the simulation of an external message. This is done by allowing the input arguments to be loaded from another source. Each contract would have an implicit method: _call(byte[] ABIpayload)</p>
+
+<h1 id="appendix-a">Appendix A</h1>
+
+<p>pragma solidity ^0.4.6;</p>
+
+<p>contract Token {</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// total amount of tokens
+
+uint256 public totalSupply;
+
+function balanceOf(address _owner) constant returns (uint256 balance);
+
+function transfer(address _to, uint256 _value) returns (bool success);
+
+function transferFrom(address _from, address _to, uint256 _value) returns (bool success);
+
+function approve(address _spender, uint256 _value) returns (bool success);
+
+function allowance(address _owner, address _spender) constant returns (uint256 remaining);
+
+event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+</code></pre></div></div>
+
+<p>}</p>
+
+<p>contract StandardToken is Token {</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>address public creator;
+
+
+function doNothing() {        
+}
+
+
+
+function transfer(address _to, uint256 _value) returns (bool success) {
+
+    //if (balances[msg.sender] &gt;= _value &amp;&amp; balances[_to] + _value &gt; balances[_to]) {
+    if (balances[msg.sender] &gt;= _value &amp;&amp; _value &gt; 0) {
+        balances[msg.sender] -= _value;
+        balances[_to] += _value;
+        Transfer(msg.sender, _to, _value);
+        return true;
+    } else { return false; }
+}
+
+function transfer2(address _to, uint256 _value,address _to2, uint256 _value2) returns (bool success) {
+    if (!transfer(_to,_value))
+        return false;
+    return transfer(_to2,_value2);
+}
+
+function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
+
+    if (balances[_from] &gt;= _value &amp;&amp; allowed[_from][msg.sender] &gt;= _value &amp;&amp; _value &gt; 0) {
+        balances[_to] += _value;
+        balances[_from] -= _value;
+        allowed[_from][msg.sender] -= _value;
+        Transfer(_from, _to, _value);
+        return true;
+    } else { return false; }
+}
+
+function balanceOf(address _owner) constant returns (uint256 balance) {
+    return balances[_owner];
+}
+
+function approve(address _spender, uint256 _value) returns (bool success) {
+    allowed[msg.sender][_spender] = _value;
+    Approval(msg.sender, _spender, _value);
+    return true;
+}
+
+function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
+  return allowed[_owner][_spender];
+}   
+
+function StandardToken() {
+    balances[msg.sender] = 1000;
+    creator = msg.sender;
+    totalSupply = 1000;                        // Update total supply
+}
+
+mapping (address =&gt; uint256) balances;
+mapping (address =&gt; mapping (address =&gt; uint256)) allowed; }
+</code></pre></div></div>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>

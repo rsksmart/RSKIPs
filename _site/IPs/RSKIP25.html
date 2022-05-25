@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Memory caches | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="Memory caches | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP25" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP25" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Memory caches</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="memory-caches">Memory caches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">25</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">Memory caches</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">27-DIC-2016</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">SDL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sca</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Core</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Draft</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pre-git-revisions">Pre-git revisions</h2>
+
+<p>Date: 25/NOV/2016</p>
+
+<p>Revision date: 01/JAN/2017</p>
+
+<p>Revision: 3</p>
+
+<p>Status: Draft</p>
+
+<h1 id="abstract"><strong>Abstract</strong></h1>
+
+<p>Storage rent has shown to be impractical, since most rent payments are microtransactions. This RSKIP defines another incentive structure for reducing the state size: the use of a hierarchy of caches.
+Motivation</p>
+
+<p>The blockchain should try to keep the state limited in size to allow fast transaction processing. Limiting via storage rent is expensive. We can move contracts that are not frequently used to a second layer cache, and increase the cost of accessing such cache. This allows us to decrease considerably the cost to access accounts/contracts in RAM (e.g. 40 gas), use a low limit of calling an account/contract in SSD (400 gas) and a higher cost for calling an account/contract in HDD (4000 gas).</p>
+
+<p>The main problem is how to move data efficiently from one cache to the other. One way to do this is by tagging each node of the tree with the timestamp of the last access. Every N blocks, a process scans all the tree nodes in memory and sends to SSD the unused ones.  Every 10*N a process scans all the nodes in in SSD and sends to HDD the unused ones.
+A better approach would be to target certain amount of RAM, and scan nodes when half of the target RAM has been filled. This would work like a garbage collector, that is executed only when needed.</p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>How much would a  garbage collection process take?</p>
+
+<p>Suppose that the RAM limit chosen is 1 GB, then clearly scanning 1 GB of data and writing 1 GB of data to disk should not take more than a few seconds.
+Suppose that the SSD limit is 128 GB. Then scanning through 128 GB can take several minutes. A data structure could be maintained to keep ordered the accounts accessed, from oldest to newest. A priority queue will work, having logN access, add and removal times.
+However one problem may be that even if some data is accessed less frequently, if it is a big chunk of data, maybe the best strategy would be to keep it in SSD?
+I think the best would be just to have two levels: RAM and SDD,</p>
+
+<h3 id="proposed-solution-1">Proposed Solution 1</h3>
+
+<p>A number of trie nodes are stored in memory. For the nodes that are not stored, a dummy node is stored, which only contains the hash of the data that should be there, and the last access time. Whenever a node is brought to memory, the lastAccessTime field of that node and all parent nodes are updated. Also the totalRAMConsumed global variable is updated, adding the amount corresponding to the loaded node. If at the end of the processing of a block the totalRAMConsumed is upper than half of the maximum value, then the garbage collector is run.
+The garbage collectors scans all terminal nodes in memory, and creates a table (node-ptr,size,lastAcceddTime). Then the table is sorted from oldest access time to newest, and nodes are removed from the tree starting from the oldest until the amount of memory used is less than a quarter of the totalRAMConsumed. During the removal process, if a node has two children that have been removed, then the parent node also is.</p>
+
+<p>New gas costs. Since contract storage are leaf nodes, no account can be removed if all the storage addresses have been removed. Accessing a node in RAM will cost 40 units of gas, while accessing a node in SSD will cost 400 units.</p>
+
+<p>This solution is complex and requires a lot of housekeeping. A better approach is letting the user decide.</p>
+
+<h3 id="proposed-solution-2">Proposed Solution 2</h3>
+
+<p>Contracts specify if they wish to be stored in RAM and eventually SSD, or only in SSD. To be stored in RAM, they have to pay a high fixed cost (or recurrent cost in case storage rent is used). A contract can switch from RAM to SSD and vice-verse at any time, if programmed to do so. This is the solution chosen for this RSKIP.</p>
+
+<h1 id="specification"><strong>Specification</strong></h1>
+
+<p>A contract (in full) can be stored in RAM or in SSD. When a contract is stored in RAM, the CALL cost is reduced 5 times to 140 (instead of 700) and the SLOAD/SSTORE costs are also reduced by 5 (400 for a 2K SSTORE cost). To move a contract to RAM, a new opcode is used SETSTORAGE. The only argument for this opcode is the destination: 0 is SSD, 1 is RAM. If the argument is equal to the current storage state, nothing happens, and the opcode costs 10 gas.  If the movement is from SSD to RAM, it has a proportional to the size of the contract, but with a very low multiplier. If  the movement is from SSD to RAM, the cost is proportional as specified:</p>
+<ul>
+  <li>700  base cost (to bring code to RAM, plus additional page cost if paging is used)</li>
+  <li>the equivalent of reading each storage cell by SLOAD.</li>
+</ul>
+
+<p>The recurrent cost is also adjusted by a 5x multiplier. 
+The reduction in cost for SSTOREs is based on the assumption that this system caches RAM data and only writes it to SSD every N blocks (e.g. N=60, but a minimum of N=5 is assumed). This means that the cost of storage writes is amortized.  If a full node is turned off, or the application exits abnormally, then the full node can always reconstruct the state by re-executing up to N past blocks.</p>
+
+<h1 id="copyright"><strong>Copyright</strong></h1>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>
