@@ -1,75 +1,4 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Rollup-optimized Ephemeral Calldata | RSK Improvement Proposals</title>
-    <meta
-      property="og:title"
-      content="Rollup-optimized Ephemeral Calldata | RSK Improvement Proposals"
-    />
-    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-
-  <meta name="generator" content="Jekyll" />
-  <meta property="og:locale" content="en_US" />
-  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP281" />
-  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP281" />
-  <meta property="og:site_name" content="RSK Improvement Proposals" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@" />
-  <script type="application/ld+json">
-    {
-      "@type": "WebSite",
-      "url": "https://ips.rsk.co",
-      "name": "RSK Improvement Proposals",
-      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
-      "@context": "https://schema.org"
-    }
-  </script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
-      <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
-</head>
-<body><header class="site-header" role="banner">
-  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
-    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
-    </svg>
-  </button>
-
-
-<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
-
-        <div class="trigger"><a class="page-link underline" href="/all">All</a><a class="page-link underline" href="/scalability">Scalability</a><a class="page-link underline" href="/security">Security</a><a class="page-link underline" href="/usability">Usability</a><a class="page-link underline" href="/fairness">Fairness</a><a class="page-link underline" href="/standardtrack">Standard Track</a></div>
-
-
-
-
-
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post">
-
-  <header class="post-header">
-    <h1 class="post-title">Rollup-optimized Ephemeral Calldata</h1>
-  </header>
-
-  <div class="post-content">
-    <h1 id="rollup-optimized-ephemeral-calldata">Rollup-optimized Ephemeral Calldata</h1>
+<h1 id="rollup-optimized-ephemeral-calldata">Rollup-optimized Ephemeral Calldata</h1>
 
 <table>
   <thead>
@@ -183,13 +112,13 @@ In case of RSKIP145 versioning, the fields in the tuple U are added separately, 
 
 <h2 id="computation-of--ecdhash">Computation of  ecdHash</h2>
 
-<p>The value <strong>ecdHash</strong> is computed by the wallet as <code class="language-plaintext highlighter-rouge">hasherCall(ecd)</code> where <code class="language-plaintext highlighter-rouge">hasherCall()</code> represents the off-chain call (using <code class="language-plaintext highlighter-rouge">STATICCALL</code>) to the <strong>hasherContract</strong> that resides at the <strong>hasherContractAddress</strong>. The call takes <strong>ecd</strong> as argument. The <code class="language-plaintext highlighter-rouge">hasherCall()</code> is given <strong>ecdSize</strong>*10 gas for execution. If it ends with <code class="language-plaintext highlighter-rouge">OOG</code> or if it executes<code class="language-plaintext highlighter-rouge">REVERT</code>, then the transaction is invalid. The gas consumed by this call must match exactly the value of the field <strong>hasherCallGasConsumed</strong>.</p>
+<p>The value <strong>ecdHash</strong> is computed by the wallet as <code class="highlighter-rouge">hasherCall(ecd)</code> where <code class="highlighter-rouge">hasherCall()</code> represents the off-chain call (using <code class="highlighter-rouge">STATICCALL</code>) to the <strong>hasherContract</strong> that resides at the <strong>hasherContractAddress</strong>. The call takes <strong>ecd</strong> as argument. The <code class="highlighter-rouge">hasherCall()</code> is given <strong>ecdSize</strong>*10 gas for execution. If it ends with <code class="highlighter-rouge">OOG</code> or if it executes<code class="highlighter-rouge">REVERT</code>, then the transaction is invalid. The gas consumed by this call must match exactly the value of the field <strong>hasherCallGasConsumed</strong>.</p>
 
-<p>The <strong>hasherContract</strong> must be have been created with <code class="language-plaintext highlighter-rouge">CREATE</code> opcode (or transaction with null destination). It cannot be a contract with changeable code (such as contracts created with <code class="language-plaintext highlighter-rouge">CREATE2</code> opcode). To achieve this, contracts store a flag indicating how they were created: this is specified a separate RSKIP to be defined.</p>
+<p>The <strong>hasherContract</strong> must be have been created with <code class="highlighter-rouge">CREATE</code> opcode (or transaction with null destination). It cannot be a contract with changeable code (such as contracts created with <code class="highlighter-rouge">CREATE2</code> opcode). To achieve this, contracts store a flag indicating how they were created: this is specified a separate RSKIP to be defined.</p>
 
-<p>When called, <code class="language-plaintext highlighter-rouge">hasherCall</code> must return exactly 32 bytes. The <code class="language-plaintext highlighter-rouge">hasherCall</code> cannot read or store data on its storage, nor perform calls to other contracts with opcodes other than <code class="language-plaintext highlighter-rouge">STATICALL</code>. If <code class="language-plaintext highlighter-rouge">hasherCall</code> reverts, throws <code class="language-plaintext highlighter-rouge">OOG</code> or returns anything else, the transaction becomes invalid.</p>
+<p>When called, <code class="highlighter-rouge">hasherCall</code> must return exactly 32 bytes. The <code class="highlighter-rouge">hasherCall</code> cannot read or store data on its storage, nor perform calls to other contracts with opcodes other than <code class="highlighter-rouge">STATICALL</code>. If <code class="highlighter-rouge">hasherCall</code> reverts, throws <code class="highlighter-rouge">OOG</code> or returns anything else, the transaction becomes invalid.</p>
 
-<p>Nodes must perform the corresponding <code class="language-plaintext highlighter-rouge">hasherCall</code> when they receive a mempool transaction with <strong>ecd</strong>, and verify the correct signature before broadcasting it again. Note that depending on how the <strong>hasherContract</strong> contract is</p>
+<p>Nodes must perform the corresponding <code class="highlighter-rouge">hasherCall</code> when they receive a mempool transaction with <strong>ecd</strong>, and verify the correct signature before broadcasting it again. Note that depending on how the <strong>hasherContract</strong> contract is</p>
 
 <p>The minimum size for <strong>ecd</strong> is 1024 bytes. If less data is specified, the transaction is processed as normal, but the <strong>ecd</strong> cannot be removed from the blockchain later.</p>
 
@@ -198,16 +127,16 @@ The destination address of the transaction containing the ephemeral data becomes
 
 <h3 id="avoidance-of-ecd-malleability">Avoidance of ECD Malleability</h3>
 
-<p>Since the computation of the hash that identifies the ECD is specified by the user, it’s possible that the user chooses a hasher contract implementing a flawed hash function (i.e. non-cryptographic or simply a constant function). To avoid malleability, if the ECD of a transaction is included in a block, then the <strong>ecdStdHash</strong> must match the <code class="language-plaintext highlighter-rouge">Keccak</code> hash of the <strong>ecd</strong>.</p>
+<p>Since the computation of the hash that identifies the ECD is specified by the user, it’s possible that the user chooses a hasher contract implementing a flawed hash function (i.e. non-cryptographic or simply a constant function). To avoid malleability, if the ECD of a transaction is included in a block, then the <strong>ecdStdHash</strong> must match the <code class="highlighter-rouge">Keccak</code> hash of the <strong>ecd</strong>.</p>
 
 <h2 id="ecd-registration">ECD Registration</h2>
 
-<p>A new precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> exists at address <code class="language-plaintext highlighter-rouge">0x00..0100001B</code>. The contract has several new methods related to handling ephemeral calldata.</p>
+<p>A new precompiled contract <code class="highlighter-rouge">EphemeralDataManager</code> exists at address <code class="highlighter-rouge">0x00..0100001B</code>. The contract has several new methods related to handling ephemeral calldata.</p>
 
-<p>We define the SID as the <code class="language-plaintext highlighter-rouge">KECCAK</code> hash of the fixed 64-byte message of the sender and id fields concatenated. (“S” in SID stands for Sender).</p>
+<p>We define the SID as the <code class="highlighter-rouge">KECCAK</code> hash of the fixed 64-byte message of the sender and id fields concatenated. (“S” in SID stands for Sender).</p>
 
 <p>The <strong>ecdOwner</strong> can register the ephemeral data by calling the method: 
-<code class="language-plaintext highlighter-rouge">registerEphemeralCalldata(uint id) returns(uint32 err)</code></p>
+<code class="highlighter-rouge">registerEphemeralCalldata(uint id) returns(uint32 err)</code></p>
 
 <p>The registration occurs only if this call does not revert. The id value can be chosen by the caller in any way.  As examples, it can be a sequential number incremented on every call or it can be the concatenation of the block and transaction number. the The, together with the sender, form the SID.</p>
 
@@ -224,7 +153,7 @@ The destination address of the transaction containing the ephemeral data becomes
     <p>The ECD has not been already registered successfully.</p>
   </li>
   <li>
-    <p>The SID does not already exists in the <code class="language-plaintext highlighter-rouge">epBySID</code> map.</p>
+    <p>The SID does not already exists in the <code class="highlighter-rouge">epBySID</code> map.</p>
   </li>
   <li>
     <p>The <strong>depositAmount</strong> is transferred with the call.</p>
@@ -235,7 +164,7 @@ The destination address of the transaction containing the ephemeral data becomes
 
 <ul>
   <li>
-    <p>A new entry in the the <code class="language-plaintext highlighter-rouge">epBySID</code> map is created.</p>
+    <p>A new entry in the the <code class="highlighter-rouge">epBySID</code> map is created.</p>
   </li>
   <li>
     <p>An amount of 10K gas will be consumed (accounts for the storage of the entry).</p>
@@ -246,7 +175,7 @@ The destination address of the transaction containing the ephemeral data becomes
   <li>
     <p>logs an event with the following signature:</p>
 
-    <p><code class="language-plaintext highlighter-rouge">ecdRegistered(uint256 sid)</code></p>
+    <p><code class="highlighter-rouge">ecdRegistered(uint256 sid)</code></p>
   </li>
   <li>
     <p>returns 0.</p>
@@ -257,18 +186,18 @@ The destination address of the transaction containing the ephemeral data becomes
 
 <ul>
   <li>An amount of 800 gas is consumed</li>
-  <li>Returns 1 (if the transaction does not have ECD) , 2 (the sender is not the <strong>ecdOwner</strong>), 3 (if the ECD was previously registered), 4 (if the <code class="language-plaintext highlighter-rouge">epBySID</code> entry exists), 5 (if the <strong>depositAmount</strong> is not transferred).</li>
+  <li>Returns 1 (if the transaction does not have ECD) , 2 (the sender is not the <strong>ecdOwner</strong>), 3 (if the ECD was previously registered), 4 (if the <code class="highlighter-rouge">epBySID</code> entry exists), 5 (if the <strong>depositAmount</strong> is not transferred).</li>
 </ul>
 
 <p>The method will succeed only once. If called more than once (with the same or a different id), it will fail with error code 3.</p>
 
-<p>If (<strong>keepByDefault</strong>==true), then a bitcoin amount <strong>depositAmount</strong> must be transferred to the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract with the <code class="language-plaintext highlighter-rouge">registerEphemeralCalldata()</code> call. The <strong>depositAmount</strong> is defined gasPrice*<code class="language-plaintext highlighter-rouge">getGasDeposit()</code>.  The auxiliary function <code class="language-plaintext highlighter-rouge">getGasDeposit()</code> is defined as (<strong>hasherCallGasConsumed</strong>+48<strong>*ecdSize</strong>).</p>
+<p>If (<strong>keepByDefault</strong>==true), then a bitcoin amount <strong>depositAmount</strong> must be transferred to the <code class="highlighter-rouge">EphemeralDataManager</code> contract with the <code class="highlighter-rouge">registerEphemeralCalldata()</code> call. The <strong>depositAmount</strong> is defined gasPrice*<code class="highlighter-rouge">getGasDeposit()</code>.  The auxiliary function <code class="highlighter-rouge">getGasDeposit()</code> is defined as (<strong>hasherCallGasConsumed</strong>+48<strong>*ecdSize</strong>).</p>
 
-<p>This amount is locked in the contract, and it is only reimbursed to the user if the user later removes the ephemeral data by calling <code class="language-plaintext highlighter-rouge">removeEphemeralData()</code>.</p>
+<p>This amount is locked in the contract, and it is only reimbursed to the user if the user later removes the ephemeral data by calling <code class="highlighter-rouge">removeEphemeralData()</code>.</p>
 
-<p>If there is ECD in the transaction and the method <code class="language-plaintext highlighter-rouge">registerEphemeralCalldata()</code> is not called, the ECD is immediately erased and the block containing the transaction does not need to transfer the ECD.</p>
+<p>If there is ECD in the transaction and the method <code class="highlighter-rouge">registerEphemeralCalldata()</code> is not called, the ECD is immediately erased and the block containing the transaction does not need to transfer the ECD.</p>
 
-<p>When <code class="language-plaintext highlighter-rouge">registerEphemeralCalldata()</code> succeeds, the following data is stored inside the map <code class="language-plaintext highlighter-rouge">epBySID</code> in the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract:</p>
+<p>When <code class="highlighter-rouge">registerEphemeralCalldata()</code> succeeds, the following data is stored inside the map <code class="highlighter-rouge">epBySID</code> in the <code class="highlighter-rouge">EphemeralDataManager</code> contract:</p>
 
 <ul>
   <li>uint256 ecdHash</li>
@@ -285,7 +214,7 @@ The destination address of the transaction containing the ephemeral data becomes
 
 <p>The entry size is 137 bytes and it can be stored in a single Unitrie storage cell to reduce storage costs.</p>
 
-<p>The dictionary <code class="language-plaintext highlighter-rouge">epBySID</code> dictionary is indexed by SID.  Each entry contains the other fields. The state of a new entry is <em>removable</em> if keepByDefault is true, or <em>autoRemovable</em> if false.</p>
+<p>The dictionary <code class="highlighter-rouge">epBySID</code> dictionary is indexed by SID.  Each entry contains the other fields. The state of a new entry is <em>removable</em> if keepByDefault is true, or <em>autoRemovable</em> if false.</p>
 
 <p>The fields <strong>removalRequestBlockNumber</strong> and <strong>removalRequestTransactionIndex</strong> will start as zero, and will be filled when the removal request is issued.</p>
 
@@ -303,16 +232,16 @@ The destination address of the transaction containing the ephemeral data becomes
 
 <h2 id="ecd-removal-request">ECD Removal Request</h2>
 
-<p>A contract can start the removal process of an ECD by calling a method <code class="language-plaintext highlighter-rouge">requestRemovalOfEphemeralData()</code> that exists in a precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> with the following ABI:</p>
+<p>A contract can start the removal process of an ECD by calling a method <code class="highlighter-rouge">requestRemovalOfEphemeralData()</code> that exists in a precompiled contract <code class="highlighter-rouge">EphemeralDataManager</code> with the following ABI:</p>
 
-<p><code class="language-plaintext highlighter-rouge">function requestRemovalOfEphemeralData(uint32 id) returns (uint32 error);</code></p>
+<p><code class="highlighter-rouge">function requestRemovalOfEphemeralData(uint32 id) returns (uint32 error);</code></p>
 
 <p>The contract method will build the SID based on the sender address and the id passed as argument.</p>
 
 <p>The method succeeds if:</p>
 
 <ul>
-  <li>There is an entry in <code class="language-plaintext highlighter-rouge">epBySID</code> for the SID key built with the sender and the id.</li>
+  <li>There is an entry in <code class="highlighter-rouge">epBySID</code> for the SID key built with the sender and the id.</li>
   <li>The state of the entry is <em>removable</em>.</li>
   <li>The current block height is less than the block height where the SID was registered plus a constant M.</li>
 </ul>
@@ -321,7 +250,7 @@ The destination address of the transaction containing the ephemeral data becomes
 
 <ul>
   <li>
-    <p>The <code class="language-plaintext highlighter-rouge">epBySID</code> entry is updated: the state is set to <em>toBeRemoved</em>.</p>
+    <p>The <code class="highlighter-rouge">epBySID</code> entry is updated: the state is set to <em>toBeRemoved</em>.</p>
   </li>
   <li>
     <p>The fields <strong>removalRequestBlockNumber</strong> and <strong>removalRequestTransactionIndex</strong> are filled with the current block number and transaction index. This data will be used when the actual removal occurs.</p>
@@ -332,11 +261,11 @@ The destination address of the transaction containing the ephemeral data becomes
   <li>
     <p>logs an event with the following signature:</p>
 
-    <p><code class="language-plaintext highlighter-rouge">ecdRemovalRequested(uint256 sid,uint32 blockNumber,uint32 transactionIndex)</code>
+    <p><code class="highlighter-rouge">ecdRemovalRequested(uint256 sid,uint32 blockNumber,uint32 transactionIndex)</code>
 where both arguments correspond to the block number and transaction index when the ECD was registered.</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">requestRemovalOfEphemeralData()</code> returns 0</p>
+    <p><code class="highlighter-rouge">requestRemovalOfEphemeralData()</code> returns 0</p>
   </li>
 </ul>
 
@@ -353,11 +282,11 @@ where both arguments correspond to the block number and transaction index when t
 
 <h2 id="ecd-removal">ECD Removal</h2>
 
-<p>Once a delay D=30000 blocks have elapsed since the ECD entry has been requested for removal, then the method <code class="language-plaintext highlighter-rouge">removeEphemeralData()</code> can be called. The method signature is the following:</p>
+<p>Once a delay D=30000 blocks have elapsed since the ECD entry has been requested for removal, then the method <code class="highlighter-rouge">removeEphemeralData()</code> can be called. The method signature is the following:</p>
 
-<p><code class="language-plaintext highlighter-rouge">function removeEphemeralData(uint32 id) returns (uint32 error)</code></p>
+<p><code class="highlighter-rouge">function removeEphemeralData(uint32 id) returns (uint32 error)</code></p>
 
-<p>The delay, which  corresponds to approximately 10 days, prevents blockchain reorganizations to cancel removal of ECDs. The method <code class="language-plaintext highlighter-rouge">removeEphemeralData()</code> actually removes the ECD from the blockchain. the SID is computed as before.</p>
+<p>The delay, which  corresponds to approximately 10 days, prevents blockchain reorganizations to cancel removal of ECDs. The method <code class="highlighter-rouge">removeEphemeralData()</code> actually removes the ECD from the blockchain. the SID is computed as before.</p>
 
 <p>The method succeeds if:</p>
 
@@ -375,7 +304,7 @@ where both arguments correspond to the block number and transaction index when t
   <li>
     <p>logs an event with the following signature:</p>
 
-    <p><code class="language-plaintext highlighter-rouge">ecdRemoved(uint256 sid, uint32 removalRequestBlockNumber,uint32 removalRequestTransactionIndex)</code>. Here the arguments correspond to the block number and transaction index when the ECD removal was requested (<code class="language-plaintext highlighter-rouge">ecdRemovalRequested</code> event).</p>
+    <p><code class="highlighter-rouge">ecdRemoved(uint256 sid, uint32 removalRequestBlockNumber,uint32 removalRequestTransactionIndex)</code>. Here the arguments correspond to the block number and transaction index when the ECD removal was requested (<code class="highlighter-rouge">ecdRemovalRequested</code> event).</p>
   </li>
   <li>
     <p>Transfers back to the caller the deposited BTCs (<strong>amountDeposited</strong> value). This transfer is made as a direct balance increase, not as a recursive call.</p>
@@ -394,16 +323,16 @@ where both arguments correspond to the block number and transaction index when t
 
 <h2 id="ecd-persistence-request">ECD Persistence Request</h2>
 
-<p>A contract persist an ECD by two methods: querying data from the ECD to be used in a contract or requesting the persistence of the data in the blockchain without actually using the data. Here we explain this second option. To persist the ecd, a contract can call the method <code class="language-plaintext highlighter-rouge">requestPersistenceOfEphemeralData()</code> that exists in a precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> with the following ABI:</p>
+<p>A contract persist an ECD by two methods: querying data from the ECD to be used in a contract or requesting the persistence of the data in the blockchain without actually using the data. Here we explain this second option. To persist the ecd, a contract can call the method <code class="highlighter-rouge">requestPersistenceOfEphemeralData()</code> that exists in a precompiled contract <code class="highlighter-rouge">EphemeralDataManager</code> with the following ABI:</p>
 
-<p><code class="language-plaintext highlighter-rouge">function requestPersistenceOfEphemeralData(uint32 id) returns (uint32 error);</code></p>
+<p><code class="highlighter-rouge">function requestPersistenceOfEphemeralData(uint32 id) returns (uint32 error);</code></p>
 
 <p>The SID is computed as before.</p>
 
 <p>The method succeeds if:</p>
 
 <ul>
-  <li>There is an entry in  <code class="language-plaintext highlighter-rouge">epBySID</code> with the SID key.</li>
+  <li>There is an entry in  <code class="highlighter-rouge">epBySID</code> with the SID key.</li>
   <li>The state of the entry is <em>autoRemovable</em>.</li>
   <li>The current block height is less than the block height where the SID was registered plus a constant M.</li>
 </ul>
@@ -415,7 +344,7 @@ where both arguments correspond to the block number and transaction index when t
     <p>sets the state of the ECD entry to <em>permanent</em>.</p>
   </li>
   <li>
-    <p>consumes the gas computed by <code class="language-plaintext highlighter-rouge">getGasDeposit()</code> (this accounts for the fact that the nodes will need to call the hasher each time the transaction is verified)</p>
+    <p>consumes the gas computed by <code class="highlighter-rouge">getGasDeposit()</code> (this accounts for the fact that the nodes will need to call the hasher each time the transaction is verified)</p>
   </li>
   <li>
     <p>consumes 5K gas for the storage change (since 30K was pre-paid for the removal and removal was not performed, the storage change is subsidized by 5K)</p>
@@ -423,7 +352,7 @@ where both arguments correspond to the block number and transaction index when t
   <li>
     <p>Logs the event with the following signature:</p>
 
-    <p><code class="language-plaintext highlighter-rouge">ecdPersisted(uint256 sid)</code>.</p>
+    <p><code class="highlighter-rouge">ecdPersisted(uint256 sid)</code>.</p>
   </li>
   <li>
     <p>returns 0</p>
@@ -438,62 +367,62 @@ where both arguments correspond to the block number and transaction index when t
 
 <ul>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentEcdHash() returns (uint256 userHash)</code></p>
+    <p><code class="highlighter-rouge">getCurrentEcdHash() returns (uint256 userHash)</code></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentEcdStdHash() returns (uint256 stdHash)</code></p>
+    <p><code class="highlighter-rouge">getCurrentEcdStdHash() returns (uint256 stdHash)</code></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentEcdSize() returns (uint32 size)</code></p>
+    <p><code class="highlighter-rouge">getCurrentEcdSize() returns (uint32 size)</code></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentHasherCallGasConsumed() returns (uint32 size)</code></p>
+    <p><code class="highlighter-rouge">getCurrentHasherCallGasConsumed() returns (uint32 size)</code></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentHasherContractAddress() returns (address addr)</code></p>
+    <p><code class="highlighter-rouge">getCurrentHasherContractAddress() returns (address addr)</code></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentDepositAmount() returns(uint256 amount)</code></p>
+    <p><code class="highlighter-rouge">getCurrentDepositAmount() returns(uint256 amount)</code></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentTransactionIndex() returns(uint32 index)</code></p>
+    <p><code class="highlighter-rouge">getCurrentTransactionIndex() returns(uint32 index)</code></p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">getCurrentBlockNumber() returns(uint32 number)</code></p>
+    <p><code class="highlighter-rouge">getCurrentBlockNumber() returns(uint32 number)</code></p>
   </li>
 </ul>
 
 <p>More information about certain past ephemeral calldata can be retrieved by contracts by calling the methods:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">getEcdSize(uint256 sid) returns (uint32 size)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getEcd(uint256 sid, uint32 offset,uint32 maxSize) returns(bytes data)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getEcdHash(uint256 sid) returns (uint256 userHash)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getDepositAmount(uint256 sid) returns(uint256 amount)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getHasherContractAddress(uint256 sid) returns (address addr)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getTransactionIndex(address sender, uint256 id) returns(uint32 index)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getBlockNumber(uint256 sid) returns(uint32 number)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">getEcdState(uint256 sid) returns(uint8 number)</code></li>
+  <li><code class="highlighter-rouge">getEcdSize(uint256 sid) returns (uint32 size)</code></li>
+  <li><code class="highlighter-rouge">getEcd(uint256 sid, uint32 offset,uint32 maxSize) returns(bytes data)</code></li>
+  <li><code class="highlighter-rouge">getEcdHash(uint256 sid) returns (uint256 userHash)</code></li>
+  <li><code class="highlighter-rouge">getDepositAmount(uint256 sid) returns(uint256 amount)</code></li>
+  <li><code class="highlighter-rouge">getHasherContractAddress(uint256 sid) returns (address addr)</code></li>
+  <li><code class="highlighter-rouge">getTransactionIndex(address sender, uint256 id) returns(uint32 index)</code></li>
+  <li><code class="highlighter-rouge">getBlockNumber(uint256 sid) returns(uint32 number)</code></li>
+  <li><code class="highlighter-rouge">getEcdState(uint256 sid) returns(uint8 number)</code></li>
 </ul>
 
-<p>These methods are provided by the precompiled contract <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code>.</p>
+<p>These methods are provided by the precompiled contract <code class="highlighter-rouge">EphemeralDataManager</code>.</p>
 
-<p>Once <code class="language-plaintext highlighter-rouge">getEcd()</code> is called, the <strong>ecd</strong> cannot be removed anymore, and attempting to removed it returns an error code. Internally, the when is called the  <code class="language-plaintext highlighter-rouge">epBySID</code> map entry is marked by setting the state to  <em>permanent</em>. The initial gas cost of <code class="language-plaintext highlighter-rouge">GetEcd()</code> is 5000. If the state of the ECD was <em>autoRemovable</em>, then the gas computed by <code class="language-plaintext highlighter-rouge">getGasDeposit()</code> is also consumed.</p>
+<p>Once <code class="highlighter-rouge">getEcd()</code> is called, the <strong>ecd</strong> cannot be removed anymore, and attempting to removed it returns an error code. Internally, the when is called the  <code class="highlighter-rouge">epBySID</code> map entry is marked by setting the state to  <em>permanent</em>. The initial gas cost of <code class="highlighter-rouge">GetEcd()</code> is 5000. If the state of the ECD was <em>autoRemovable</em>, then the gas computed by <code class="highlighter-rouge">getGasDeposit()</code> is also consumed.</p>
 
-<p><code class="language-plaintext highlighter-rouge">GetEcd()</code> will fail if called specifying a SID successfully registered in the same block.</p>
+<p><code class="highlighter-rouge">GetEcd()</code> will fail if called specifying a SID successfully registered in the same block.</p>
 
-<p>The gas cost of all the remaining query methods (i.e. <code class="language-plaintext highlighter-rouge">GetEcdSize()</code> and <code class="language-plaintext highlighter-rouge">GetEcdHash()</code>) is 1000 each.</p>
+<p>The gas cost of all the remaining query methods (i.e. <code class="highlighter-rouge">GetEcdSize()</code> and <code class="highlighter-rouge">GetEcdHash()</code>) is 1000 each.</p>
 
 <p>If the ECD is registered at block at height X, then the entry data will be available to be retrieved in the block range [X+1..X+M+1]. The node can store the ephemeral data longer, but at height greater than (X+M+1) it becomes unavailable to smart contracts. If the ECD was not sent, or not registered, or if it became unavailable, then:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">GetEcdSize()</code> returns zero</li>
-  <li><code class="language-plaintext highlighter-rouge">GetEcd()</code> fills the return buffer with zeros up to maxSize</li>
-  <li><code class="language-plaintext highlighter-rouge">GetEcdHash()</code> fills 32 bytes of the return buffer with zeros</li>
-  <li><code class="language-plaintext highlighter-rouge">getDepositAmount()</code> returns zero</li>
-  <li><code class="language-plaintext highlighter-rouge">getHasherContractAddress()</code> return zero</li>
-  <li><code class="language-plaintext highlighter-rouge">getTransactionIndex()</code> return zero</li>
-  <li><code class="language-plaintext highlighter-rouge">getBlockNumber()</code> returns zero</li>
+  <li><code class="highlighter-rouge">GetEcdSize()</code> returns zero</li>
+  <li><code class="highlighter-rouge">GetEcd()</code> fills the return buffer with zeros up to maxSize</li>
+  <li><code class="highlighter-rouge">GetEcdHash()</code> fills 32 bytes of the return buffer with zeros</li>
+  <li><code class="highlighter-rouge">getDepositAmount()</code> returns zero</li>
+  <li><code class="highlighter-rouge">getHasherContractAddress()</code> return zero</li>
+  <li><code class="highlighter-rouge">getTransactionIndex()</code> return zero</li>
+  <li><code class="highlighter-rouge">getBlockNumber()</code> returns zero</li>
 </ul>
 
 <h1 id="blockchain-synchronization">Blockchain Synchronization</h1>
@@ -515,15 +444,15 @@ where both arguments correspond to the block number and transaction index when t
     <ul>
       <li>For each transaction T in the block i that had ECD but it was removed:
         <ul>
-          <li>if an event <code class="language-plaintext highlighter-rouge">ecdRegistered(sid)</code> is not present in its receipt, skip this transaction.</li>
+          <li>if an event <code class="highlighter-rouge">ecdRegistered(sid)</code> is not present in its receipt, skip this transaction.</li>
           <li>if (T.keepByDefault==true), then
             <ul>
-              <li>if any block j (i&lt;j&lt;=i+M) do not contain the event <code class="language-plaintext highlighter-rouge">ecdRemovalRequested(uint256 sid,..)</code> generated by the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract , then the block is deficient.</li>
+              <li>if any block j (i&lt;j&lt;=i+M) do not contain the event <code class="highlighter-rouge">ecdRemovalRequested(uint256 sid,..)</code> generated by the <code class="highlighter-rouge">EphemeralDataManager</code> contract , then the block is deficient.</li>
             </ul>
           </li>
           <li>if (T.keepByDefault==false),
             <ul>
-              <li>if any block j (i&lt;j&lt;=i+M) contain the the event <code class="language-plaintext highlighter-rouge">ecdPersisted(uint256 sid)</code>generated by the <code class="language-plaintext highlighter-rouge">EphemeralDataManager</code> contract, then then the block is deficient.</li>
+              <li>if any block j (i&lt;j&lt;=i+M) contain the the event <code class="highlighter-rouge">ecdPersisted(uint256 sid)</code>generated by the <code class="highlighter-rouge">EphemeralDataManager</code> contract, then then the block is deficient.</li>
             </ul>
           </li>
         </ul>
@@ -544,7 +473,7 @@ where both arguments correspond to the block number and transaction index when t
 
 <ul>
   <li>When a new block arrives, if it is adequate, add it to the blockchain and make tipBlock point to it.</li>
-  <li>If the new block emits an event <code class="language-plaintext highlighter-rouge">ecdRemoved(sid, removalRequestBlockNumber,removalRequestTransactionIndex)</code>, then query the contract to find the corresponding mutable transaction T (by block number and transaction index). Then remove the ECD of this transaction from the blockchain. The height of the block containing T should be higher than the sealedBlock pointer but lower or equal to the shrinkableBlock pointer.</li>
+  <li>If the new block emits an event <code class="highlighter-rouge">ecdRemoved(sid, removalRequestBlockNumber,removalRequestTransactionIndex)</code>, then query the contract to find the corresponding mutable transaction T (by block number and transaction index). Then remove the ECD of this transaction from the blockchain. The height of the block containing T should be higher than the sealedBlock pointer but lower or equal to the shrinkableBlock pointer.</li>
 </ul>
 
 <p>When a node is fully synchronized, the latest M blocks of the blockchain will be complete, and the tipBlock and shrinkableBlock pointers will match and point to the same block. The pointer sealedBlock will point to a block M blocks behind.</p>
@@ -595,20 +524,3 @@ where both arguments correspond to the block number and transaction index when t
 <h1 id="copyright"><strong>Copyright</strong></h1>
 
 <p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
-
-  </div>
-
-</article>
-
-      </div>
-    </main><footer>
-    <div class="footer_cont">
-        <div class="footer_box">
-            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
-        </div>
-    </div>
-</footer><script src="../assets/js/dark_mode.js"></script>
-    <script src="../../assets/js/dark_mode.js"></script>
-  </body>
-
-</html>
