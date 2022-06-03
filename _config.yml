@@ -19,7 +19,11 @@ description: >-
   platform, including core protocol specifications, client APIs, and contract
   standards.
 url: "https://ips.rsk.co"
-github_username:  rsksmart
+github_username: rsksmart
+
+### Site metadata ###
+repository: rsksmart/RSKIPs
+
 
 header_pages:
  - all.html
