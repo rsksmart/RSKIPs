@@ -1,5 +1,5 @@
 name: Build and deploy Jekyll site to prod environment
-​
+
 on:
   pull_request:
     branches:
