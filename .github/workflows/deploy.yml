@@ -1,7 +1,7 @@
 name: Build and deploy Jekyll site to prod environment
 
 on:
-  pull_request:
+  push:
     branches:
       #- 'master'
       - 'website-launch'
@@ -30,7 +30,7 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
-          
+
       - name: "Deploy to AWS S3"
         run: aws s3 sync ./_site/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read --delete --cache-control max-age=604800
 
