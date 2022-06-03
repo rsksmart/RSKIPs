@@ -218,6 +218,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   eip_validator (>= 0.8.2)
