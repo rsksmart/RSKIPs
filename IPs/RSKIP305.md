@@ -1,5 +1,5 @@
 ---
-rskip:
+rskip: 305
 title: Segwit for our Peg
 description: This RSKIP introduces Segwit (Bitcoin Soft Fork 2017) for use in RSK Pegs and what are its benefits.
 status: Draft
@@ -12,7 +12,7 @@ created: 2022-06-01
 
 # Segwit for our Peg
 
-|RSKIP          |          |
+|RSKIP          | 305        |
 | :------------ |:-------------|
 |**Title**      |Segwit for our Peg |
 |**Created**    |01-JUN-2022 |
