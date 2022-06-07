@@ -34,7 +34,6 @@ header_pages:
 
 
 # Build settings
-baseurl: ""
 highlighter: rouge
 markdown: kramdown
 theme: minima
