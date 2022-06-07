@@ -21,6 +21,9 @@ description: >-
 url: "https://ips.rsk.co"
 github_username:  rsksmart
 
+### Site metadata ###
+repository: rsksmart/RSKIPs
+
 header_pages:
  - all.html
  - scalability.html
