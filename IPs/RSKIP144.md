@@ -9,17 +9,21 @@
 |**Complexity** |3 |
 |**Status**     | |
 
-# **Abstract**
+# Abstract
 
-This RSKIP describes how miners partition transactions into disjoint sets and how full nodes should process transactions in order to be safely parallelized. 
+This RSKIP describes how miners partition transactions into disjoint sets in order to be safely parallelized, and how full nodes should process transactions.
 
-# **Motivation**
+# Motivation
 
-RSK processes transactions from blocks one by one, in the specified order. This is because the final state after processing two transactions when applied in different order may differ. However most transactions do not use the same keys of the state and therefore they could be parallelized without interference.
+Parallelizing the execution of transactions allows increasing the block gas limit without increasing the block execution time, and improves the scalability of RSK by increasing the transaction throughput.
 
-There are several obstacles to parallelization. [RSKIP02] and [RSKIP04] explore different methods that worked prior the implementation of the Unitrie. 
+Now, RSK nodes process transactions from blocks one by one, in the specified order. This is because the final state after processing two transactions when applied in different order may differ. However most transactions do not use the same keys of the state and therefore they could be parallelized without interference.
 
-This RSKIP proposes using a runtime method to partition the transaction set into threads similar to RSKIP04 but tailored for the Unitrie. Miners are forced to serialize transaction execution and at the same time discover runtime key-access overlaps. Once all transactions have been processed and the partition is created, an index is created holding the last transaction number for each thread (the "partition" field). Full nodes can use this index to split the transaction set and parallelize execution.
+There are several obstacles to parallelization. [RSKIP02](RSKIP02) and [RSKIP04](RSKIP04) explore different methods that worked prior the implementation of the Unitrie. This RSKIP proposes using a runtime method to partition the transaction set into threads similar to RSKIP04 but tailored for the Unitrie.
+
+Miners are forced to serialize transaction execution to create blocks. At the same time they execute the transactions, they discover runtime key-access overlaps between transactions and build an execution plan that is included in the block header. For a simpler overlap detection and to prevent DoS attack described below, an additional part is added including all the transactions that could not be parallelized, that is executed after the execution of the parallel parts is completed. Once all transactions have been processed, the partition is created along with a schedule that determines which transactions belong in each part.
+
+Full nodes can use this schedule to split the transaction set and parallelize execution.
 
 # Specification
 
