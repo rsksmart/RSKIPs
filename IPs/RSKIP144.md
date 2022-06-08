@@ -47,9 +47,9 @@ Values in `partitionsEnd` must be greater than 0 and in ascending order. An empt
 
 The new consensus mechanism allows to reject blocks that, when executed in parallel, can result in different outputs.
 
-For simplicity, three types of links between transactions are identified:
-- The two transactions are from the same sender account
-- The two transactions write the same storage key
+For simplicity, three types of connections between transactions are identified:
+- Both transactions are from the same sender account
+- Both transactions write the same storage key
 - One transaction reads a key that the other transaction writes
 
 Any pair of transactions with any of these characteristics are required to be in the same _parallel partition_ to avoid non-deterministic results, or one needs to be executed in the _sequential partition_
@@ -78,26 +78,24 @@ The _sequential partition_ does not need any new validation.
 
 # Suggested miner implementation
 
-When a miner executes transactions to create an (unsolved) block, the miner must execute the transactions serially and decide which partition the transaction belongs to. The block gas limit is replaced by a per-partition gas limit. We say that a transaction is *connected* to another transaction if:
+When a miner executes transactions to create an (unsolved) block, the miner must execute the transactions serially and decide which partition the transaction belongs to. The block gas limit is replaced by a per-partition gas limit.
 
-1. Both transactions are from the same sender account
-2. Both transactions write the same storage key
-3. One transaction reads the same storage key that the other transaction writes
-
-A transaction is connected to a partition if it is connected to any transaction in that partition. The miner maintains a writeMap and a readMap that store which partition/s write or read each storage key. The miner then executes transactions from the pool and keeps track of which storage keys the transaction reads and writes. After executing the transaction, the miner compares the transaction read and written keys with the readMap and writeMap. The following scenarios are possible:
+Following the connection types between transactions described above, a transaction is connected to a _parallel partition_ if it is connected to any transaction in that partition. The miner maintains a `writeMap` and a `readMap` that store which partition/s write or read each storage key. The miner then executes transactions from the pool and keeps track of which storage keys the transaction reads and writes. After executing the transaction, the miner compares the transaction read and written keys with the `readMap` and `writeMap`. The following scenarios are possible:
 
 1. The transaction is not connected to any existing partition:
-    1. The miner assigns the transaction to an empty parallel partition
-    2. If no empty partition exists, the miner assigns the transaction to the less full parallel partition
-    3. If all parallel partitions are full, the miner assigns the transaction to the sequential partition 
-2. The transaction is connected to one parallel partition:
-    1. The miner assigns the transaction to the parallel partition
-    2. If the parallel partition is full, the miner assigns the transaction to the sequential partition 
-3. The transaction is connected to more than one parallel partitions:
-    1. The miner assigns the transaction to the sequential partition
+    1. The miner assigns the transaction to an empty _parallel partition_
+    2. If no empty partition exists, the miner assigns the transaction to the less full _parallel partition_
+    3. If all _parallel partitions_ are full, the miner assigns the transaction to the _sequential partition_
+2. The transaction is connected to one _parallel partition_:
+    1. The miner assigns the transaction to the _parallel partition_
+    2. If the _parallel partition_ is full, the miner assigns the transaction to the _sequential partition_
+3. The transaction is connected to more than one _parallel partitions_:
+    1. The miner assigns the transaction to the _sequential partition_
     2. Alternatively, the miner might merge the connected partitions and assign the transaction there
 
-To prevent DoS attacks, miners only execute a transaction if it fits in the sequential set. In this way, miners are guaranteed to include the transaction in the block regardless of the read and written storage keys. After assigning a transaction to a partition, the miner updates the readMap and writeMap accordingly. When no more transactions can be included in the block, the miner executes the block in parallel to produce the final state.
+After assigning a transaction to a partition, the miner updates the `readMap` and `writeMap` accordingly. When no more transactions can be included in the block, the miner executes the block in parallel to produce the final state.
+
+To prevent DoS attacks, miners only execute a transaction if it fits in the sequential set. In this way, miners are guaranteed to include the transaction in the block regardless of the read and written storage keys.
 
 # Copyright
 
