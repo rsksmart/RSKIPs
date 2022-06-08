@@ -29,7 +29,10 @@ Full nodes can use this schedule to split the transaction set and parallelize ex
 
 Transactions in a block are divided into `N+1` partitions, where the first `N` partitions are executed in parallel and the last partition is executed after the others. We refer to the first `N` partitions as the _parallel partitions_ and to the last partition as the _sequential partition_.
 
-![schedule](./RSKIP144/schedule.png)
+<p align="middle">
+  <img src="./RSKIP144/schedule.png" alt="Schedule" /><br />
+  <em>Block with 3+1 partitions. The 3 partitions are run in parallel, and after completition of all, the 4th partition is run.</em>
+</p>
 
 ## New block header field
 
