@@ -27,11 +27,54 @@ Full nodes can use this schedule to split the transaction set and parallelize ex
 
 # Specification
 
-The idea is that transactions in a block are divided into ``N`` partitions, where the first ``N-1`` partitions are executed in parallel and the last partition is executed after the others. We refer to the first ``N-1`` partitions as the parallel partitions and to the last partition as the sequential partition.
+Transactions in a block are divided into `N+1` partitions, where the first `N` partitions are executed in parallel and the last partition is executed after the others. We refer to the first `N` partitions as the _parallel partitions_ and to the last partition as the _sequential partition_.
 
-A new field ``partitionEnds`` is added to the block header. This field consists of an array of shorts that indicates at which position in the transaction list each partition ends. For example, in a block with 10 transactions, ``partitionEnds = [3, 6]`` indicates that the first partition contains transactions 0, 1 and 2; the second partition contains transactions 3, 4 and 5; and the last partition contains transactions 6 to 9. Values in ``partitionEnds`` must be greater than 0 and in ascending order. An empty ``partitionEnds`` indicates that all transactions go in the sequential partition, and the REMASC transaction is always the last transaction of the sequential partition. The maximum number of parallel partitions that the miner can specify is equal to the minimum number of cores required to run the RSK node.
+**IMAGE ?**
 
-During execution, when a storage key is read, it is marked with the thread index in a per-partition readMap. When a key is written, the key is marked in a per-partition writeMap map. When all transactions of a certain partition have been processed, the writeMap is scanned. When all parallel partitions have finished processing, the readMaps and writeMaps are "merged". This requires efficient maps that enable traversing the keys in ascending lexicographic order. If a key belongs to a writeMap and a readMap of another partition, then the block is considered invalid. If a key belongs to a writeMap and a writeMap of another partition, then the block is also considered invalid. Recursive deletes must be correctly and efficiently handled. Miners are incentivized to produce a valid and efficient partition because by doing so their blocks spread faster over the network.
+## New block header field
+
+A new field `partitionEnds` is added to the block header. It determines how transactions are partitioned in a block.
+
+This field consists of an array of short unsigned integers that indicates at which position in the transaction list each partition ends. For example, in a block with 10 transactions, `partitionEnds = [3, 6]` indicates that the first _parallel partition_ contains transactions 0, 1 and 2; the second _parallel partition_ contains transactions 3, 4 and 5; and the _sequential partition_ contains transactions 6 to 9.
+
+The REMASC transaction must be included as the last transaction of the sequential partition.
+
+An empty `partitionEnds` indicates that all transactions go in the _sequential partition_.
+
+Values in `partitionsEnd` must be greater than 0 and in ascending order. An empty `partitionEnds` indicates that all transactions go in the sequential partition. The maximum number of parallel partitions that the miner can specify is equal to the minimum number of cores required to run the RSK node, this maximum is called  `maxTransactionExecutionThreads`.
+
+## New block validation consensus
+
+The new consensus mechanism allows to reject blocks that, when executed in parallel, can result in different outputs.
+
+For simplicity, three types of links between transactions are identified:
+- The two transactions are from the same sender account
+- The two transactions write the same storage key
+- One transaction reads a key that the other transaction writes
+
+Any pair of transactions with any of these characteristics are required to be in the same _parallel partition_ to avoid non-deterministic results, or one needs to be executed in the _sequential partition_
+
+This cases should not be considered invalid since they don't affect the output of the parallel execution:
+- Adding 0 balance
+- Writing a key and setting back the initial value in the same transaction
+- Creating a key and erasing it in the same transaction
+
+### Block validation algorithm
+
+A `readMap` and a `writeMap` is created per _parallel partition_. During execution of each partition,
+- when a storage key is read, it is marked in the `readMap`,
+- when a key is written, the key is marked in the `writeMap` map.
+
+??? When all transactions of a certain partition have been processed, the writeMap is scanned.
+
+When all parallel partitions have finished processing, the `readMap`s and `writeMap`s are. This requires efficient maps that enable traversing the keys in ascending lexicographic order.
+- If a key belongs to a `writeMap` and a `readMap` of another _parallel partition_, then the block is considered invalid. - If a key belongs to a `writeMap` and a `writeMap` of another _parallel partition_, then the block is also considered invalid.
+
+The _sequential partition_ does not need any new validation.
+
+??? Recursive deletes must be correctly and efficiently handled.
+
+??? Miners are incentivized to produce a valid and efficient partition because by doing so their blocks spread faster over the network.
 
 # Suggested miner implementation
 
