@@ -65,7 +65,7 @@ This cases should not be considered invalid since they don't affect the output o
 
 A `readMap` and a `writeMap` is created per _parallel partition_. During execution of each partition,
 - when a storage key is read, it is marked in the `readMap`,
-- when a key is written, the key is marked in the `writeMap` map.
+- when a key is written, the key is marked in the `writeMap`.
 
 When all parallel partitions have finished processing, the `readMap`s and `writeMap`s are scanned to find connections between transactions of different threads. This requires efficient maps that enable traversing the keys in ascending lexicographic order.
 - If a key belongs to a `writeMap` and a `readMap` of another _parallel partition_, then the block is considered invalid.
