@@ -56,7 +56,9 @@ For simplicity, three types of connections between transactions are identified:
 
 Any pair of transactions with any of these characteristics are required to be in the same _parallel partition_ to avoid non-deterministic results, or one needs to be executed in the _sequential partition_
 
-Adding 0 balance should not be considered as writing a key since it doesn't affect the output of the parallel execution.
+This cases should not be considered as writing a key, since they doesn't affect the output of the parallel execution:
+- Adding 0 balance
+- Write a key with the value that was already set
 
 ### Block validation algorithm
 
