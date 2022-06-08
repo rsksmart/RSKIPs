@@ -58,7 +58,7 @@ For simplicity, three types of connections between transactions are identified:
 
 > Transactions that are from the same sender account are considered connected because they modify the nonce
 
-Any pair of transactions with any of these characteristics are required to be in the same _parallel partition_ to avoid non-deterministic results, or one needs to be executed in the _sequential partition_
+Any pair of transactions with any of these characteristics cannot be in different parallel partitions.
 
 This cases should not be considered as writing a key, since they doesn't affect the output of the parallel execution:
 - Adding 0 balance
