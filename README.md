@@ -206,28 +206,28 @@ RSK Improvement Proposals
 | Initials | Full name                    | Email                  |
 | -------- | :----------------------------| :----------------------|
 | AE       | Adrian Eidelman              | adrian@iovlabs.org     |
-| AL       | Angel Lopez                  | angel@iovlabs.org      |
+| AL       | Angel Lopez                  |                        |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
 | DLL      | Diego López León             |                        |
 | DM       | Diego Masini                 | dmasini@iovlabs.org    |
 | FJ       | Federico Jinich              | federico@iovlabs.org    |
-| GM       | Guido Medina                 | guido@iovlabs.org |
+| GM       | Guido Medina                 |                        |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org       |
-| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |
+| JIO      | Jose Ignacio Orlicki         |                        |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | JL       | Julian Len                   | julian@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
-| MM       | Martin Medina                | martin@iovlabs.org     |
+| MM       | Martin Medina                |                        |
 | MMA      | Matias Marquez               |                        |
-| MP       | Martin Picco                 | mpicco@iovlabs.org     |
+| MP       | Martin Picco                 |                        |
 | NPS      | Nicolas Perez Santoro        |                        |
-| PGP      | Pamela Gonzalez Perilli      | pamela@iovlabs.org     |
-| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
+| PGP      | Pamela Gonzalez Perilli      |                        |
+| PMP      | Pedro Meulen Prete           |                        |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
-| SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
+| SMS      | Sebastian Matias Sicardi     |                        |
 | VK       | Volodymyr Kravets            | volodymyr@iovlabs.org  |
 
 ## Build locally
