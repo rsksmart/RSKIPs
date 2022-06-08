@@ -35,13 +35,15 @@ Transactions in a block are divided into `N+1` partitions, where the first `N` p
 
 A new field `partitionEnds` is added to the block header. It determines how transactions are partitioned in a block.
 
+A new constant `maxTransactionExecutionThreads` is specified. It determines the minimum number of cores required to run the RSK node. Initially, `maxTransactionExecutionThreads = 4`
+
 This field consists of an array of short unsigned integers that indicates at which position in the transaction list each partition ends. For example, in a block with 10 transactions, `partitionEnds = [3, 6]` indicates that the first _parallel partition_ contains transactions 0, 1 and 2; the second _parallel partition_ contains transactions 3, 4 and 5; and the _sequential partition_ contains transactions 6 to 9.
 
-The REMASC transaction must be included as the last transaction of the sequential partition.
+- Values in `partitionsEnd` must be greater than 0 and in ascending order.
+- An empty `partitionEnds` indicates that all transactions go in the _sequential partition_.
+- The maximum number of parallel partitions that the miner can specify is equal to `maxTransactionExecutionThreads`.
+- The REMASC transaction must be included as the last transaction of the sequential partition.
 
-An empty `partitionEnds` indicates that all transactions go in the _sequential partition_.
-
-Values in `partitionsEnd` must be greater than 0 and in ascending order. The maximum number of parallel partitions that the miner can specify is equal to the minimum number of cores required to run the RSK node.
 
 ## New block validation consensus
 
