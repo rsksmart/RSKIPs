@@ -41,7 +41,7 @@ The REMASC transaction must be included as the last transaction of the sequentia
 
 An empty `partitionEnds` indicates that all transactions go in the _sequential partition_.
 
-Values in `partitionsEnd` must be greater than 0 and in ascending order. An empty `partitionEnds` indicates that all transactions go in the sequential partition. The maximum number of parallel partitions that the miner can specify is equal to the minimum number of cores required to run the RSK node, this maximum is called  `maxTransactionExecutionThreads`.
+Values in `partitionsEnd` must be greater than 0 and in ascending order. The maximum number of parallel partitions that the miner can specify is equal to the minimum number of cores required to run the RSK node, this maximum is called  `maxTransactionExecutionThreads`.
 
 ## New block validation consensus
 
