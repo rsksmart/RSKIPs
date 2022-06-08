@@ -29,7 +29,7 @@ Full nodes can use this schedule to split the transaction set and parallelize ex
 
 Transactions in a block are divided into `N+1` partitions, where the first `N` partitions are executed in parallel and the last partition is executed after the others. We refer to the first `N` partitions as the _parallel partitions_ and to the last partition as the _sequential partition_.
 
-**IMAGE ?**
+![schedule](./RSKIP144/schedule.png)
 
 ## New block header field
 
@@ -65,16 +65,11 @@ A `readMap` and a `writeMap` is created per _parallel partition_. During executi
 - when a storage key is read, it is marked in the `readMap`,
 - when a key is written, the key is marked in the `writeMap` map.
 
-??? When all transactions of a certain partition have been processed, the writeMap is scanned.
-
-When all parallel partitions have finished processing, the `readMap`s and `writeMap`s are. This requires efficient maps that enable traversing the keys in ascending lexicographic order.
-- If a key belongs to a `writeMap` and a `readMap` of another _parallel partition_, then the block is considered invalid. - If a key belongs to a `writeMap` and a `writeMap` of another _parallel partition_, then the block is also considered invalid.
+When all parallel partitions have finished processing, the `readMap`s and `writeMap`s are scanned to find connections between transactions of different threads. This requires efficient maps that enable traversing the keys in ascending lexicographic order.
+- If a key belongs to a `writeMap` and a `readMap` of another _parallel partition_, then the block is considered invalid.
+- If a key belongs to a `writeMap` and a `writeMap` of another _parallel partition_, then the block is also considered invalid.
 
 The _sequential partition_ does not need any new validation.
-
-??? Recursive deletes must be correctly and efficiently handled.
-
-??? Miners are incentivized to produce a valid and efficient partition because by doing so their blocks spread faster over the network.
 
 # Suggested miner implementation
 
