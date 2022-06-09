@@ -52,15 +52,15 @@ This field consists of an array of short unsigned integers that indicates at whi
 
 It must be ensured that blocks that have transactions that are executed in parallel always produce the same output. Therefore, when a block is executed in parallel, nodes must verify the resulting world state is deterministic.
 
-For simplicity, three types of connections between transactions are identified:
+For simplicity, two transactions are defined as _connected_ if:
 - Both transactions write the same storage key
 - One transaction reads a key that the other transaction writes
 
-Any pair of transactions with any of these characteristics cannot be in different parallel partitions. If so, the block must be rejected.
+Any pair of transactions that are _connected_ cannot be in different parallel partitions. If so, the block must be rejected.
 
-> Transactions that are from the same sender account are considered connected because they modify the nonce
+> Transactions that are from the same sender account are considered _connected_ because they modify the nonce.
 
-> Recursive deletes must be correctly and efficiently handled. If a transaction deletes a contract using `SELFDESTRUCT` and another transaction is reading or writing a key of that contract, those two transactions must be considered connected.
+> Recursive deletes must be correctly and efficiently handled. If a transaction deletes a contract using `SELFDESTRUCT` and another transaction is reading or writing a key of that contract, those two transactions must be considered _connected_.
 
 This cases should not be considered as writing a key, since they doesn't affect the output of the parallel execution:
 - Adding 0 balance
