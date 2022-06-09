@@ -50,15 +50,15 @@ This field consists of an array of short unsigned integers that indicates at whi
 
 ## New block validation consensus
 
-The new consensus mechanism allows to reject blocks that, when executed in parallel, can result in different outputs.
+It must be ensured that blocks that have transactions that are executed in parallel always produce the same output. Therefore, when a block is executed in parallel, nodes must verify the resulting world state is deterministic.
 
 For simplicity, three types of connections between transactions are identified:
 - Both transactions write the same storage key
 - One transaction reads a key that the other transaction writes
 
-> Transactions that are from the same sender account are considered connected because they modify the nonce
+Any pair of transactions with any of these characteristics cannot be in different parallel partitions. If so, the block must be rejected.
 
-Any pair of transactions with any of these characteristics cannot be in different parallel partitions.
+> Transactions that are from the same sender account are considered connected because they modify the nonce
 
 This cases should not be considered as writing a key, since they doesn't affect the output of the parallel execution:
 - Adding 0 balance
