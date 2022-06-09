@@ -60,6 +60,8 @@ Any pair of transactions with any of these characteristics cannot be in differen
 
 > Transactions that are from the same sender account are considered connected because they modify the nonce
 
+> Recursive deletes must be correctly and efficiently handled. If a transaction deletes a contract using `SELFDESTRUCT` and another transaction is reading or writing a key of that contract, those two transactions must be considered connected.
+
 This cases should not be considered as writing a key, since they doesn't affect the output of the parallel execution:
 - Adding 0 balance
 - Write a key with the value that was already set
