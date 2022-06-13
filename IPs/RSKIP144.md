@@ -44,7 +44,7 @@ The gas used in each sublist must be treated similar to the how the gas limit wa
 
 > As a result, the cumulative gas than can be used per block is `N * parallelSublistGasLimit + sequentialSublistGasLimit`.
 
-> In consequence, the transaction gas limit can be as maximum `min{ parallelSublistGasLimit, sequentialSublistGasLimit }`
+> In consequence, the transaction gas limit can be as maximum `max{ parallelSublistGasLimit, sequentialSublistGasLimit }`
 
 ## New block header field
 
