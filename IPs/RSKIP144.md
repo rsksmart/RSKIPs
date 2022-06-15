@@ -34,6 +34,18 @@ Transactions in a block are divided into `N+1` sublists, where the first `N` sub
   <em>Block with 3+1 sublists. The 3 sublists are run in parallel, and after completion of all, the 4th sublist is run.</em>
 </p>
 
+## New block gas limits
+
+Each sublist has its own gas limit value. The block `gasLimit` constant is replaced for two new constants:
+- `parallelSublistGasLimit = 3.400.000` is the gas limit for each _parallel sublists_
+- `sequentialSublistGasLimit = 3.400.000` is the gas limit for the _sequential sublist_
+
+The gas used in each sublist must be treated similar to the how the gas limit was treated. The sum of the gas limit of all the transactions in a sublist cannot exceed the sublist's gas limit.
+
+> As a result, the cumulative gas than can be used per block is `N * parallelSublistGasLimit + sequentialSublistGasLimit`.
+
+> In consequence, the transaction gas limit can be as maximum `max{ parallelSublistGasLimit, sequentialSublistGasLimit }`
+
 ## New block header field
 
 A new field `txExecutionSublistsEdges` is added to the block header. It determines how transactions are partitioned in a block. This field consists of an array of short unsigned integers that indicates at which position in the transaction list each sublist ends.
