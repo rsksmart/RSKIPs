@@ -21,7 +21,6 @@ description: >-
 url: "https://ips.rsk.co"
 github_username:  rsksmart
 repository: rsksmart/rskips
-baseurl: https://ips.rsk.co/
 
 header_pages:
  - all.html
