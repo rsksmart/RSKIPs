@@ -20,7 +20,7 @@ description: >-
   standards.
 url: "https://ips.rsk.co"
 github_username:  rsksmart
-repository: https://github.com/rsksmart/rskips
+repository: rsksmart/rskips
 
 header_pages:
  - all.html
