@@ -21,7 +21,6 @@ description: >-
 url: "https://ips.rsk.co"
 github_username:  rsksmart
 repository: rsksmart/rskips
-baseurl: https://ips.rsk.co/
 
 header_pages:
  - all.html
@@ -43,8 +42,6 @@ kramdown:
   # This is to ensure more determistic behaviour
   auto_id_stripping: true
   syntax_highlighter: rouge
-
-permalink: /:slug
 
 defaults:
   -
