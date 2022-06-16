@@ -43,8 +43,6 @@ kramdown:
   auto_id_stripping: true
   syntax_highlighter: rouge
 
-permalink: /:slug
-
 defaults:
   -
     scope:
