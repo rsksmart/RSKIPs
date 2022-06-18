@@ -39,9 +39,9 @@ This RSKIP specifies the changes included in the RSK network upgrade named Hop.
 ### Accepted RSKIPs
 
 - [RSKIP-271](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md): Bridge peg-out batching
-- [RSKIP-284](https://github.com/rsksmart/RSKIPs/pull/284): Flyover protocol enhancements part 1
+- [RSKIP-284](https://github.com/rsksmart/RSKIPs/pull/284): New deserialization method for Flyover refund addresses
 - [RSKIP-290](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP290.md): Adjust block minimum difficulty on Testnet
-- [RSKIP-293](https://github.com/rsksmart/RSKIPs/pull/293): Flyover protocol enhancements part 2
+- [RSKIP-293](https://github.com/rsksmart/RSKIPs/pull/293): Add method `getActivePowpegRedeemScript` to the Bridge contract and perform additional Flyover peg-in validations
 - [RSKIP-294](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP294.md): Limit the number of inputs to include in a migration transaction
 - [RSKIP-297](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP297.md): Increase max timestamp difference between btc and rsk blocks for Testnet
 
