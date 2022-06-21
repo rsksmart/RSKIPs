@@ -5,10 +5,10 @@
 |**Title**      |New deserialization method for Flyover refund addresses |
 |**Created**    |19-OCT-21 |
 |**Author**     |JD |
-|**Purpose**    |USa, Sec|
+|**Purpose**    |Usa, Sec|
 |**Layer**      |Core |
 |**Complexity** |1|
-|**Status**     |Draft|
+|**Status**     |Accepted|
 
 ## Abstract
 
