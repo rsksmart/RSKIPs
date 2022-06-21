@@ -5,10 +5,10 @@
 |**Title**      |Add method `getActivePowpegRedeemScript` to the Bridge contract and perform additional Flyover peg-in validations |
 |**Created**    |18-JAN-22 |
 |**Author**     |JD |
-|**Purpose**    |USa,Sec |
+|**Purpose**    |Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Accepted |
 
 ## Abstract
 
