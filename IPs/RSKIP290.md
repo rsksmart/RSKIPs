@@ -2,7 +2,7 @@
 rskip: 290
 title: Adjust Testnet block minimum difficulty
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: AE (@adrian.eidelman)
 layer: Core
@@ -19,7 +19,7 @@ created: 2021-11-18
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 # **Abstract**
 
