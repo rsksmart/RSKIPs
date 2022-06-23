@@ -49,7 +49,7 @@ function getActivePowpegRedeemScript() returns (bytes)
 
 #### Definition
 
-This new method is a public method that will return the redeems cript of the active POWpeg. This could be a regular multisig redeem script, or it could be an ERP redeem script (See RSKIP201).
+This new method is a public method that will return the redeem script of the active POWpeg. This could be a regular multisig redeem script, or it could be an ERP redeem script (See RSKIP201).
 
 The method should take the active POWpeg information from the storage and serialize the redeem script to send it as a response to this method.
 
