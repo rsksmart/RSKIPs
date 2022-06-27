@@ -10,11 +10,11 @@ complexity: 2
 created: 2022-06-01
 ---
 
-# Segwit for our Peg
+# Peg efficiency improvement (Segwit)
 
 |RSKIP          | 305        |
 | :------------ |:-------------|
-|**Title**      |Segwit for our Peg |
+|**Title**      |Peg efficiency improvement (Segwit) |
 |**Created**    |01-JUN-2022 |
 |**Author**     |Patricio Gallardo, Ramsès Fernàndez-València, Nicolás Vescovo|
 |**Purpose**    |Sca Usa Sec |

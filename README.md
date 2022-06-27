@@ -197,7 +197,7 @@ RSK Improvement Proposals
 | 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Draft |
 | 290 |[Adjust Testnet block minimum difficulty](IPs/RSKIP290.md)|  18-NOV-21 | AE | Usa | Core | 1 | Draft |
 | 291 |[Network Upgrade: Hop](IPs/RSKIP291.md)|  14-DEC-21 | AE | Usa, Sec | Core | 2 | Draft |
-| 305 |[Segwit for our Peg](IPs/RSKIP305.md)|  01-JUN-22 | NV | Sca, Usa, Sec | Core | 2 | Draft |
+| 305 |[Peg efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -223,13 +223,15 @@ RSK Improvement Proposals
 | MMA      | Matias Marquez               |                        |
 | MP       | Martin Picco                 | mpicco@iovlabs.org     |
 | NPS      | Nicolas Perez Santoro        |                        |
+| NV       | Nicolás Vescovo              | nicolas.vescovo@iovlabs.org |
+| PDG      | Patricio Diego Gallardo      | patricio@iovlabs.org   |
 | PGP      | Pamela Gonzalez Perilli      | pamela@iovlabs.org     |
 | PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
+| RFV      | Ramses Fernandez-Valencia    | ramses@iovlabs.org     |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
 | VK       | Volodymyr Kravets            | volodymyr@iovlabs.org  |
-| NV       | Nicolás Vescovo              | nicolas.vescovo@iovlabs.org |
 
 ## Build locally
 
