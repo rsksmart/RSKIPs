@@ -1,3 +1,14 @@
+---
+rskip: 712
+title: RSK typed structured data hashing and signing
+description: 
+status: Draft
+purpose: ST
+author: JL (@julianlen)
+layer: UI
+complexity: 2
+created: 2020-11-02
+---
 # RSK typed structured data hashing and signing
 
 

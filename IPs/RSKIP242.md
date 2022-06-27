@@ -1,3 +1,14 @@
+---
+rskip: 242
+title: Proxy code Incentive
+description: 
+status: Draft
+purpose: Sca, Fair
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2021-05-15
+---
 # Proxy Code Incentive
 
 |RSKIP          |242           |

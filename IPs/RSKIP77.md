@@ -1,3 +1,14 @@
+---
+rskip: 77
+title: Smoother Difficulty adjustment
+description: 
+status: Draft
+purpose: Sca, Fair
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016
+---
 #  **Smoother Difficulty adjustment**  
 
 | RSKIP          | 77                             |

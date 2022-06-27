@@ -1,3 +1,14 @@
+---
+rskip: 145
+title: Struct Transaction Format
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-02-
+---
 # Struct  Transaction Format
 
 |RSKIP          |145           |

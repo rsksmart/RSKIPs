@@ -1,3 +1,14 @@
+---
+rskip: 119
+title: Precompiled contract for inspecting block headers  
+description: 
+status: Draft
+purpose: Usa
+author: DM (@diego)
+layer: Core
+complexity: 1
+created: 2019-04-01
+---
 # Precompiled contract for inspecting block headers
 
 |RSKIP          |119 |

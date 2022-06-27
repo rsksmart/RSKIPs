@@ -1,11 +1,21 @@
-# Title
+---
+rskip: pull_request_number_here
+title: Title
+created: DD-MMM-YY
+author: INITIALS
+purpose: Sca,Usa,Fair,Sec or ST
+layer: Core,Node,UI,2nd,Net or DApp 
+complexity: 1, 2 or 3
+status: Draft,Accepted,Adopted,Deferred or Rejected
+description: 
+---
 
 |RSKIP          |pull_request_number_here           |
 | :------------ |:-------------|
 |**Title**      |Title |
 |**Created**    |DD-MMM-YY |
 |**Author**     |INITIALS |
-|**Purpose**    |Sca,USa,Fair,Sec or ST |
+|**Purpose**    |Sca,Usa,Fair,Sec or ST |
 |**Layer**      |Core,Node,UI,2nd,Net or DApp |
 |**Complexity** |1, 2 or 3 |
 |**Status**     |Draft,Accepted,Adopted,Deferred or Rejected |

@@ -1,3 +1,14 @@
+---
+rskip: 138
+title: Multi-signed transactions supporting enveloping and multi-key accounts
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2019
+---
 # Multi-signed transactions supporting enveloping and multi-key accounts
 
 |RSKIP          | 138 |

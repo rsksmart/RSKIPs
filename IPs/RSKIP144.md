@@ -8,7 +8,6 @@ author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 3
 created: 23-OCT-2019
----
 
 # Abstract
 

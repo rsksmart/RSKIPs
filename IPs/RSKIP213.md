@@ -1,3 +1,14 @@
+---
+rskip: 213
+title: Simple Transaction Versioning System
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2021-02
+---
 # Simple Transaction Versioning System
 
 

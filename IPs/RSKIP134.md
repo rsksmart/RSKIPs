@@ -1,3 +1,14 @@
+---
+rskip: 134
+title: Locking cap
+description: 
+status: Draft
+purpose: Sca, Usa, Sec
+author: JD (@josedahlquist)
+layer: Core
+complexity: 2
+created: 2019-07-11
+---
 # Locking cap
 
 |RSKIP          |134           |

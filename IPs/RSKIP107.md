@@ -1,3 +1,14 @@
+---
+rskip: 107
+title: Smaller Unitrie Nodes for Higher Scalability
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2019
+---
 #  **Smaller Unitrie Nodes for Higher Scalability**  
 
 | RSKIP          | --                                           |

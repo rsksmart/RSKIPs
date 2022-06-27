@@ -1,3 +1,14 @@
+---
+rskip: 172
+title: Simple Subroutines for the EVM
+description: 
+status: Draft
+purpose: ST
+author: AL
+layer: Core
+complexity: 2
+created: 2020/09/
+---
 # Simple Subroutines for the EVM
 
 

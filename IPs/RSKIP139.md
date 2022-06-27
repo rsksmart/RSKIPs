@@ -1,3 +1,14 @@
+---
+rskip: 139
+title: Precompile to get transaction refunds
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2019
+---
 # Precompile to get transaction refunds
 
 |RSKIP          | 139 |

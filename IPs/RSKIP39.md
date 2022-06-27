@@ -1,3 +1,15 @@
+---
+rskip: 39
+title: Multi-key Accounts
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-02-25
+---
+
 # Multi-key Accounts
 
 |RSKIP          |39           |

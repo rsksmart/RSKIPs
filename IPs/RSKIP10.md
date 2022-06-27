@@ -1,3 +1,15 @@
+---
+rskip: 10
+title: Transactions never invalidate blocks 
+description: 
+status: Accepted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-10-21
+---
+
 # Transactions never invalidate blocks
 
 |RSKIP          |10           |

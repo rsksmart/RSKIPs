@@ -1,3 +1,14 @@
+---
+rskip: 207
+title: Emergency Time-locks Refresh
+description: 
+status: Draft
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-01
+---
 # Emergency Time-locks Refresh
 
 

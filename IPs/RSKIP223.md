@@ -1,3 +1,14 @@
+---
+rskip: 223
+title: Cumulative Work in Fork Detection Data
+description: 
+status: Draft
+purpose: Sec
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2021-03-31
+---
 # Cumulative Work in Fork Detection Data
 
 |RSKIP          |223           |

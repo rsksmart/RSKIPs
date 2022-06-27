@@ -1,3 +1,15 @@
+---
+rskip: 12
+title: Contract Sleep 
+description: 
+status: Rejected
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2016-08-06
+---
+
 # Contract Sleep
 
 |RSKIP          |12           |

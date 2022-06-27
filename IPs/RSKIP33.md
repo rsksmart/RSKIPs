@@ -1,3 +1,15 @@
+---
+rskip: 33
+title: CODEREPLACE opcode
+description: 
+status: Adopted
+purpose: Sec, Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-01-17
+---
+
 # CODEREPLACE opcode
 
 |RSKIP          |33           |

@@ -1,3 +1,14 @@
+---
+rskip: 98
+title: Deactivation of the federated fallback system for block production 
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2018-07-
+---
 # Deactivation of the federated fallback system for block production 
 
 |RSKIP          |98           |

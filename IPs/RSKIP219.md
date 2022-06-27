@@ -1,3 +1,15 @@
+---
+rskip: 219
+title: New minimum values for peg-in and peg-outs
+description: 
+status: Adopted
+purpose: Usa
+author: MI <marcos@iovlabs.org>
+layer: Core
+complexity: 1
+created: 2021-07-12
+---
+
 # New minimum values for peg-in and peg-outs
 
 |RSKIP          |219           |

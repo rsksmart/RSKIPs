@@ -1,3 +1,15 @@
+---
+rskip: 47
+title: CALLNUM opcode
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2017-10-18
+---
+
 # CALLNUM opcode
 
 |RSKIP          |47           |

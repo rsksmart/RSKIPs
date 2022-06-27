@@ -1,3 +1,15 @@
+---
+rskip: 48
+title: Informing average free gas per block
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2017-11-28
+---
+
 # Informing average free gas per block
 
 |RSKIP          |48           |
