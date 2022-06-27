@@ -42,7 +42,7 @@ In Segwit v0, the Block Size concept is replaced by Block Weight. Block Size is 
 
 ## Rationale
 
-We first analyze two other protocols Frost and MuSig2 (part of Segwit v1: BIPs 340, 341, and 342). Although some advantage is obtained in relation to performance, this is not enough to counteract the greater difficulty of implementation that they need. This is why we consider that implementing Segwit v0 is the best option in the medium/short term.
+We first analyze two other protocols Frost and MuSig2 (part of Segwit v1: [BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki), [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki), and [BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki)). Although some advantage is obtained in relation to performance, this is not enough to counteract the greater difficulty of implementation that they need. This is why we consider that implementing Segwit v0 is the best option in the medium/short term.
 After doing a deep and detailed analysis of these protocols involved we summarized in a table a comparison between the different protocols in terms of complexity, fee costs and robustness.
 
 | Topics            | FROST      | Musig2    | Segwit    |P2SH (current)  |
@@ -69,7 +69,7 @@ At the time of writing, the Bridge contract works with a Federation, which is an
 
 ### Create a new Federation type
 
-In order to replace the current federation representation, a new federation type is going to be created by incrementing in one the value of the version type and save a new slot in the federation storage. For more information refer to this detailed description on how a federation upgrade should be managed.
+In order to replace the current federation representation, a new federation type is going to be created by incrementing in one the value of the version type and save a new slot in the federation storage. For more information refer to [this detailed description](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP123.md#storage-upgrade) on how a federation upgrade should be managed.
 
 Although the schema and content of this slot is not to be changed more than the version number, it will serve to indicate how the federation multisig redeem script should be regenerated.
 
@@ -124,7 +124,7 @@ During migration, both mechanisms (legacy and Segwit compatible) will be working
 All the funds (outputs) will be transferred from the current address to the new Segwit compatible address before mentioned (New Address section).
 
 But once the migration is completed, only Segwit compatible will be the accepted address and the unique mechanism to support the peg outs.
-The migration process description can be found here (RSKIP186).
+The migration process description can be [found here (RSKIP186)](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP186.md).
 
 
 
@@ -156,3 +156,7 @@ While segregated witness data will contain the redeeming data (signatures, flags
 
 This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.
 
+
+### Copyright
+
+Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
