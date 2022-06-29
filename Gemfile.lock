@@ -230,6 +230,7 @@ DEPENDENCIES
   github-pages
   html-proofer (>= 3.3.1)
   jekyll-feed (~> 0.11)
+  jekyll-github-metadata
   jekyll-theme-hacker (~> 0.1.1)
   minima (~> 2.0)
   tzinfo-data
