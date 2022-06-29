@@ -2,10 +2,10 @@
 {%- for author in authors -%}
   {%- if author contains "<" -%}
     {%- assign authorparts=author|split:"<" -%}
-    <a href="/index/#author_table">{{authorparts[0]|strip}}</a>
+    <a href="/#{{authorparts[0]|strip}}">{{authorparts[0]|strip}}</a>
   {%- elsif author contains "(@" -%}
     {%- assign authorparts=author|split:"(@" -%}
-    <a href="/index/#author_table">{{authorparts[0]|strip}}</a>
+    <a href="/#{{authorparts[0]|strip}}">{{authorparts[0]|strip}}</a>
   {%- else -%}
     {{author}}
   {%- endif -%}
