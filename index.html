@@ -21,6 +21,16 @@
     <meta property="og:site_name" content="RSK Improvement Proposals" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@" />
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
     <script type="application/ld+json">
     {
       "@type": "WebSite",
@@ -29,6 +39,15 @@
       "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
       "@context": "https://schema.org"
     }
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XT0RMBXMZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XT0RMBXMZM');
   </script>
   <link rel="stylesheet" href="/assets/css/style.css" /><link type="application/atom+xml" rel="alternate" href="https://ips.rsk.co/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
         <!-- Google Fonts -->
@@ -93,13 +112,13 @@
   <li><strong>3</strong> - High</li>
 </ul>
 
-<h1 id="index">Index</h1>
+<h2 id="index">Index</h2>
 
 {% include indextable.html rskips=site.pages %}
 
 <p>(*) Under evaluation to be implemented in the next reference client release</p>
 
-<h1 id="author-index">Author Index</h1>
+<h2 id="author-index">Author Index</h2>
 
 <table class="indextable" id="author_table">
   <thead>
@@ -252,6 +271,9 @@
 
     <script src="../assets/js/dark_mode.js"></script>
     <script src="../../assets/js/dark_mode.js"></script>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2784460.js"></script>
+    <!-- End of HubSpot Embed Code -->
   </body>
 
 </html>
