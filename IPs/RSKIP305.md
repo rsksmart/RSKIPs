@@ -73,8 +73,8 @@ In order to replace the current federation representation, a new federation type
 
 Although the schema and content of this slot is not to be changed more than the version number, it will serve to indicate how the federation multisig redeem script should be regenerated.
 
-Currently the script is as follow:
-* `<currentScript>`:
+Currently the redeem script is as follow:
+* `<redeemScript>`:
 ```
 OP_NOTIF 
 	OP_PUSHNUM_M
@@ -95,43 +95,44 @@ OP_ENDIF
 OP_CHECKMULTISIG
 ```
 
-* With the new version, it will be replaced by:
+To receive funds we calculate the `<scriptPubKey>`:
+
 ```
-HASH-160 <scriptHash> EQUAL
+HASH160 <redeemScriptHash> EQUAL
 ```
-- Where `<scriptHash>` is pre computed as follows: 
+
+* Where `<redeemScriptHash>` is pre computed as follows: 
+
 ```
-HASH-160 ( SHA-256 ( <currentScript> ) )
+hash160(sha256(<redeemScript>))
+
 ```
+
+* With the **new version** a `<zero>` is added to the `<redeemScriptHash>` : 
+
+```
+hash160(<zero> sha256(<redeemScript>))
+```
+
 
 ### New Address
 
 Also, this new federation type will have a new way of calculating the address, and this is how Segwit compatible addresses are computed:
 
 ```
-Base-58 ( “05” + HASH-160 ( SHA-256 ( <redeemScript> ) ) )
+Base-58 ( “05” + hash160 ( sha256 ( <segwitScript> ) ) )
 ```
 Where:
-- `<redeemScript>` is represented by: `“OP_0 <scriptHash>”`
-- `<scriptHash>` by pre computing: `SHA-256 ( <currentScript> )`
+- `<segwitScript>` is represented by: `“OP_0 <redeemScriptHash>”`
+- `<redeemScriptHash>` by pre computing: `sha256 ( <redeemScript> )`
 - and finally “05” is the *P2SH version byte*
-
-
-
-### Migration to the new federation
-
-During migration, both mechanisms (legacy and Segwit compatible) will be working at the same time. Legacy would be for the federation leaving and Segwit compatible for the incoming federation. 
-All the funds (outputs) will be transferred from the current address to the new Segwit compatible address before mentioned (New Address section).
-
-But once the migration is completed, only Segwit compatible will be the accepted address and the unique mechanism to support the peg outs.
-The migration process description can be [found here (RSKIP186)](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP186.md).
 
 
 
 ### Spend output - Peg out
 
 With this new implementation comes a new way of spending the output. Although it does not change much, it changes: the *transaction id computation*, the *scriptSig* field and the *segregated witness data*.
-We can descrive each of the changes as follow:
+We can describe each of the changes as follow:
 
 * **Transaction id computation**
 
@@ -143,12 +144,42 @@ As a result, transaction IDs cannot be modified depending on witness data modifi
 
 It will cointain the following content: 
 ```
-    0 <scriptHash>
+    <zero> <sha256(redeemScript)>
 ```
 
 * **Segregated witness data**
 
-While segregated witness data will contain the redeeming data (signatures, flags, etc) and the actual redeem script (mentioned before as `<currentScript>`)   
+While segregated witness data will contain the redeeming data (signatures and flag for activating ERP) and the actual redeem script (mentioned before as `<redeemScript>`)   
+
+Example:
+```
+<zero> <Sig1> <Sig2>...<SigN> <FlagERP> <redeemScript>
+```
+
+### Summary
+Putting it all together, the following is a list of the most important fields with their new values:
+
+* witness:      
+```
+<zero> <Sig1> <Sig2>...<SigN> <FlagERP> <redeemScript>
+```
+* scriptSig:    
+```
+<zero> <sha256(redeemScript)>
+````
+* scriptPubKey: 
+```
+HASH160 hash160(<zero> sha256(<redeemScript>)) EQUAL
+````
+
+### Migration to the new federation
+
+During migration, both mechanisms (legacy and Segwit compatible) will be working at the same time. Legacy would be for the federation leaving and Segwit compatible for the incoming federation. 
+All the funds (outputs) will be transferred from the current address to the new Segwit compatible address before mentioned (New Address section).
+
+But once the migration is completed, only Segwit compatible will be the accepted address and the unique mechanism to support the peg outs.
+The migration process description can be [found here (RSKIP186)](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP186.md).
+
 
 
 
