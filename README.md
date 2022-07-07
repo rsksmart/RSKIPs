@@ -203,7 +203,7 @@ RSK Improvement Proposals
 | 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Accepted |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
-
+| 326 |[Change btcDestinationAddress format in release_request_received event](IPs/RSKIP326.md)|  21-JUNE-22 | KI | Usa | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -222,6 +222,7 @@ RSK Improvement Proposals
 | JIO      | Jose Ignacio Orlicki         |                        |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | JL       | Julian Len                   | julian@iovlabs.org     |
+| KI       | Kelvin Isievwore             | kelvin@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
