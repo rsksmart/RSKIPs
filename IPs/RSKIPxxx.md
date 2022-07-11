@@ -1,6 +1,6 @@
 ---
 rskip: xxx
-title: Simple Parallelizable Sempahore
+title: Simple Parallelizable Semaphore
 description: 
 status: Draft
 purpose: Sca
@@ -9,11 +9,11 @@ layer: Core
 complexity: 2
 created: 2022-07-11
 ---
-# Simple Parallelizable Sempahore
+# Simple Parallelizable Semaphore
 
 |RSKIP          |xxx           |
 | :------------ |:-------------|
-|**Title**      |Simple Parallelizable Sempahore|
+|**Title**      |Simple Parallelizable Semaphore|
 |**Created**    |11-JUL-2022 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
