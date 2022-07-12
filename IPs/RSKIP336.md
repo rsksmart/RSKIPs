@@ -34,7 +34,7 @@ Therefore this proposal aims to protect future contracts, rather than to protect
 
 # **Specification**
 
-Starting from an activation block (TBD) a new precompiled contract `Semaphore` is created at address 0x01000011. when `Semaphore` is called, if the caller address is present more than once in the stack, the contract behaves as if the first instruction had been a REVERT, therefore the CALL returns 0. Otherwise, it executes no code and returns 1. The gas cost of the contract execution is set to 500, which is consumed independently of the call result.
+Starting from an activation block (TBD) a new precompiled contract `Semaphore` is created at address 0x01000011. When `Semaphore` is called, if the caller address is present more than once in the stack, the contract behaves as if the first instruction had been a REVERT, therefore the CALL returns 0. Otherwise, it executes no code and returns 1. The gas cost of the contract execution is set to 500, which is consumed independently of the call result.
 
 # Rationale
 
