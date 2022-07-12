@@ -1,3 +1,16 @@
+---
+rskip: 68
+title: Federation Notification System
+description: 
+status: Draft
+purpose: Sec
+author: JIO <jorlicki@iovlabs.org>, SDL (@sergiodemianlerner)
+layer: Net
+complexity: 2
+created: 2018-05-05
+---
+
+
 # Federation Notification System
 
 |RSKIP          |68           |

@@ -1,0 +1,13 @@
+{%- assign authors=include.authors|split:"," -%}
+{%- for author in authors -%}
+  {%- if author contains "<" -%}
+    {%- assign authorparts=author|split:"<" -%}
+    <a href="mailto:{{authorparts[1]|remove:">"}}">{{authorparts[0]|strip}}</a>
+  {%- elsif author contains "(@" -%}
+    {%- assign authorparts=author|split:"(@" -%}
+    <a target="_blank" rel="noopener" href="https://research.rsk.dev/u/{{authorparts[1]|remove:")"}}">{{authorparts[0]|strip}}</a>
+  {%- else -%}
+    {{author}}
+  {%- endif -%}
+  {% if forloop.last == false %}, {% endif %}
+{%- endfor -%}

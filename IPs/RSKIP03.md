@@ -1,3 +1,16 @@
+---
+rskip: 3
+title: Parallel Execution using static contract dependencies
+description: This RSKIP describes how transactions should be processed in order to be safely parallelized.
+status: Rejected
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-06-22
+---
+
+
 # Parallel Execution using static contract dependencies
 
 |RSKIP          |03           |

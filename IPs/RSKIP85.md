@@ -1,3 +1,14 @@
+---
+rskip: 85
+title: Improvements to REMASC contract
+description: 
+status: Draft
+purpose: Sca
+author: LS
+layer: Core
+complexity: 2
+created: 2018-07-11
+---
 #  **Improvements to REMASC contract**  
 
 | RSKIP          | 85                              |

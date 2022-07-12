@@ -1,3 +1,15 @@
+---
+rskip: 56
+title: Sporadic Verification-less mining
+description: 
+status: Draft
+purpose: Fair
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2017-03-11
+---
+
 # Sporadic Verification-less mining
 
 |RSKIP          |56           |

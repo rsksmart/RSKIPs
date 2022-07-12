@@ -1,3 +1,15 @@
+---
+rskip: 26
+title: DUPN and SWAPN opcodes
+description: 
+status: Adopted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2016-12-27
+---
+
 # DUPN and SWAPN opcodes
 
 |RSKIP          |26           |

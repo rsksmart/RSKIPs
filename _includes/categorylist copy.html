@@ -1,0 +1,13 @@
+{%- assign categories=include.categories|split:"," -%}
+{%- for category in categories -%}
+  {%- if category contains "<" -%}
+    {%- assign categoryparts=category|split:"<" -%}
+    <a href="mailto:{{categoryparts[1]|remove:">"}}">{{categoryparts[0]|strip}}</a>
+  {%- elsif category contains "(@" -%}
+    {%- assign categoryparts=category|split:"(@" -%}
+    <a href="https://github.com/{{categoryparts[1]|remove:")"}}">{{categoryparts[0]|strip}}</a>
+  {%- else -%}
+    {{category}}
+  {%- endif -%}
+  {% if forloop.last == false %}, {% endif %}
+{%- endfor -%}

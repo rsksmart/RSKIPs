@@ -1,4 +1,14 @@
-
+---
+rskip: 17
+title: Simpler Persistent Storage Rent
+description: 
+status: Rejected
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2016-09-27
+---
 # Simpler Persistent Storage Rent
 
 |RSKIP          |17           |

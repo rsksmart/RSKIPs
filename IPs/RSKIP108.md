@@ -1,3 +1,14 @@
+---
+rskip: 108
+title: More Efficient Unitrie Key Mapping
+description: 
+status: Draft
+purpose: Sca, Usa
+author: SDL (@sergiodemianlerner), AL <angel@iovlabs.org>
+layer: 
+complexity: 2
+created: 2019
+---
 #  More Efficient Unitrie Key Mapping  
 
 | RSKIP          | 108                                |

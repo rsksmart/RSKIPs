@@ -1,3 +1,15 @@
+---
+rskip: 16
+title: Combined State Tree 
+description: 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2016-11-01
+---
+
 # Combined State Tree
 
 |RSKIP          |16           |

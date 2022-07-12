@@ -1,3 +1,15 @@
+---
+rskip: 1
+title: Distributed Memory
+description: This RSK contract memory is centralized. For contracts that are infrequently used this is not a problem. 
+status: Draft
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2009-06-16
+---
+
 # Distributed Memory
 
 |RSKIP          |1           |

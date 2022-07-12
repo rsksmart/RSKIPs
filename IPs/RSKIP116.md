@@ -1,3 +1,15 @@
+---
+rskip: 116
+title: Failure of SSTORE on Log-Gas Recursive CALLs 
+description: 
+status: Draft
+purpose: Sca, Sec, Usa
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 1
+created: 2019
+---
+
 # Failure of SSTORE on Low-Gas Recursive CALLs
 
 |RSKIP          |116           |
@@ -9,10 +21,11 @@
 |**Layer**      |Core |
 |**Complexity** |1 |
 |**Status**     |Draft |
+|**discussions-to**     |https://research.rsk.dev/t/rskip-116-failure-of-sstore-on-low-gas-recursive-calls/151|
 
 # **Abstract**
 
-A contract being called can call back the caller, directly or with intermediate calls, creating recursion. Some contracts are are not designed to handle recursion correctly: they rely on passing 2300 gas units to the called contract with the expectation that this will prevent recursion. However is a very bad practice as it prevents improving the opcodes costs. The easiest method to change the gas costs but yet protect these old contracts is by preventing recursion or preventing SSTORE when the call transfers less than m=8000 units of gas. This RSKIP proposes forcing SSTORE to fail on those cases.
+A contract being called can call back the caller, directly or with intermediate calls, creating recursion. Some contracts are are not designed to handle recursion correctly: they rely on passing 2300 gas units to the called contract with the expectation that this will prevent recursion. However is a very bad practice as it prevents improving the opcodes costs. The easiest method to change the gas costs but yet protect these old contracts is by preventing recursion or preventing SSTORE when the call transfers less than m=6400 units of gas. This RSKIP proposes forcing SSTORE to fail on those cases.
 
 # **Motivation**
 

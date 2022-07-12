@@ -1,3 +1,14 @@
+---
+rskip: 14
+title: Reward Manager Smart Contract (REMASC)
+description: 
+status: Rejected
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 3
+created: 2016-09-06
+---
 # Reward Manager Smart Contract (REMASC)
 
 |RSKIP          |14           |
@@ -101,7 +112,7 @@ This implies that a miner can perform validation-less mining by setting the empt
 
 A miner can mine an empty block that is child of an empty parent. The stateRoot will be empty, and the gparentStateRoot will still hold a distinct value. However, a grand-child of an empty block is forbidden, because it won’t have a new unique gparentStateRoot to refer to.
 
-<img src="./RSKIP14/BlockChainRSKIP14.png">
+<img src="../RSKIP14/BlockChainRSKIP14.png">
 
  
 The fact that empty blocks cannot reference uncles means that miners of empty blocks not only earn less because of missing transaction fees, but also may earn less because of missing uncle references. 

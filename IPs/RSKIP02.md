@@ -1,3 +1,15 @@
+---
+rskip: 2
+title: Dynamic Contract Dependency 
+description: This RSKIP describes new opcodes to enable contracts to declare and enable dependencies with other contracts. 
+status: Rejected
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2011-06-16
+---
+
 # Dynamic Contract Dependency
 
 |RSKIP          |2           |

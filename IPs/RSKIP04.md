@@ -1,3 +1,15 @@
+---
+rskip: 4
+title: Parallel Execution using runtime contract dependencies 
+description: This RSKIP describes how miners partition transactions into disjoint sets and how full nodes should process transactions in order to be safely parallelized. 
+status: Accepted
+purpose: Sca
+author: SDL (@sergiodemianlerner)
+layer: Core
+complexity: 2
+created: 2016-06-22
+---
+
 #Parallel Execution using runtime contract dependencies
 
 |RSKIP          |04           |
