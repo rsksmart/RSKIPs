@@ -191,13 +191,18 @@ RSK Improvement Proposals
 | 264 |[Simplified Emergency Time-locks Refresh](IPs/RSKIP264.md)|  12-AUG-21 | SDL | Sec | Core | 2 | Draft |
 | 265 |[Bridge UTXOs Coin Selection](IPs/RSKIP265.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 270 |[Bridge UTXO set size management](IPs/RSKIP270.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
-| 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
+| 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Accepted |
 | 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
+| 284 |[New deserialization method for Flyover refund addresses](IPs/RSKIP284.md)|  19-OCT-21 | JD | Usa,Sec | Core | 1 | Accepted |
 | 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Draft |
-| 290 |[Adjust Testnet block minimum difficulty](IPs/RSKIP290.md)|  18-NOV-21 | AE | Usa | Core | 1 | Draft |
-| 291 |[Network Upgrade: Hop](IPs/RSKIP291.md)|  14-DEC-21 | AE | Usa, Sec | Core | 2 | Draft |
+| 290 |[Adjust Testnet block minimum difficulty](IPs/RSKIP290.md)|  18-NOV-21 | AE | Usa | Core | 1 | Accepted |
+| 291 |[Network Upgrade: Hop](IPs/RSKIP291.md)|  14-DEC-21 | AE  | Sec,Usa | Core | 3 | Accepted |
+| 293 |[Add method `getActivePowpegRedeemScript` to the Bridge contract and perform additional Flyover peg-in validations](IPs/RSKIP293.md)|  18-JAN-22 | JD | Usa, Sec | Core | 2 | Accepted |
+| 294 |[Limit the number of inputs to include in a migration transaction](IPs/RSKIP294.md)|  03-FEB-22 | MI | Sca, Sec | Core | 1 | Accepted |
+| 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Accepted |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
+
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -206,22 +211,22 @@ RSK Improvement Proposals
 | Initials | Full name                    | Email                  |
 | -------- | :----------------------------| :----------------------|
 | AE       | Adrian Eidelman              | adrian@iovlabs.org     |
-| AL       | Angel Lopez                  | angel@iovlabs.org      |
+| AL       | Angel Lopez                  |                        |
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
 | DLL      | Diego López León             |                        |
 | DM       | Diego Masini                 | dmasini@iovlabs.org    |
 | FJ       | Federico Jinich              | federico@iovlabs.org    |
-| GM       | Guido Medina                 | guido@iovlabs.org |
+| GM       | Guido Medina                 |                        |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org       |
-| JIO      | Jose Ignacio Orlicki         | jorlicki@iovlabs.org   |
+| JIO      | Jose Ignacio Orlicki         |                        |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | JL       | Julian Len                   | julian@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
-| MM       | Martin Medina                | martin@iovlabs.org     |
+| MM       | Martin Medina                |                        |
 | MMA      | Matias Marquez               |                        |
-| MP       | Martin Picco                 | mpicco@iovlabs.org     |
+| MP       | Martin Picco                 |                        |
 | NPS      | Nicolas Perez Santoro        |                        |
 | NV       | Nicolás Vescovo              | nicolas.vescovo@iovlabs.org |
 | PDG      | Patricio Diego Gallardo      | patricio@iovlabs.org   |
@@ -230,7 +235,7 @@ RSK Improvement Proposals
 | RFV      | Ramses Fernandez-Valencia    | ramses@iovlabs.org     |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
-| SMS      | Sebastian Matias Sicardi     | sebastians@iovlabs.org |
+| SMS      | Sebastian Matias Sicardi     |                        |
 | VK       | Volodymyr Kravets            | volodymyr@iovlabs.org  |
 
 ## Build locally
