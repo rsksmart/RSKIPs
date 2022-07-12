@@ -1,7 +1,7 @@
 ---
 rskip: 305
-title: Peg efficiency improvement (Segwit)
-description: This RSKIP introduces Segwit (Bitcoin Soft Fork 2017) for use in RSK Pegs and what are its benefits.
+title: Peg-out efficiency improvement (Segwit)
+description: This RSKIP introduces Segwit V0 (Bitcoin Soft Fork 2017) for use in peg-ins and peg-outs to improve performance, cost reductions, and security.
 status: Draft
 purpose: Sca Usa Sec
 author: PG (@patogallaiovlabs) - RFV (@ramsesfv) - NV (@NVescovo)
@@ -10,11 +10,11 @@ complexity: 2
 created: 2022-06-01
 ---
 
-# Peg efficiency improvement (Segwit)
+# Peg-out efficiency improvement (Segwit)
 
 |RSKIP          | 305        |
 | :------------ |:-------------|
-|**Title**      |Peg efficiency improvement (Segwit) |
+|**Title**      |Peg-out efficiency improvement (Segwit) |
 |**Created**    |01-JUN-2022 |
 |**Author**     |Patricio Gallardo, Ramsès Fernàndez-València, Nicolás Vescovo|
 |**Purpose**    |Sca Usa Sec |
@@ -24,7 +24,7 @@ created: 2022-06-01
 
 ## Abstract
 
-This RSKIP introduces Segwit (Bitcoin Soft Fork 2017) for use in RSK Pegs and what are its benefits in terms of performance, cost reductions and security.
+This RSKIP introduces Segwit V0 (Bitcoin Soft Fork 2017) for use in peg-ins and peg-outs to improve performance, cost reductions, and security.
 
 ## Motivation
 
@@ -50,9 +50,9 @@ After doing a deep and detailed analysis of these protocols involved we summariz
 |PowHSM Complexity  | High       | Low       | Low       | -              |
 |Fee Cost type      | Fixed      | Variable  | Variable  | Variable       |
 |INPUT Fee Cost (vbytes) 7/13| 16| 120       | 238.75    | 955            |
-|INPUT Fee Cost (%)7/13| -98%    | -87%      | -75%      | -              |
+|INPUT Fee Cost reductions (%)7/13| -98%    | -87%      | -75%      | -              |
 |TX Fee Cost (vbytes) (1)| 106   | 210       | 328.75    | 1045           |
-|TX Fee Cost (%) (1)| -89%       | -78%      | -66%      | -              |
+|TX Fee Cost reductions (%) (1)| -89%       | -78%      | -66%      | -              |
 |Verification Complexity|Medium/Low| High    | Low       | Low            |
 |Robustness         | Medium/Low | Low       | High      | High           |
 |Implementation time| Long term  |Medium term|Short/Medium-term| -        |
@@ -69,7 +69,7 @@ At the time of writing, the Bridge contract works with a Federation, which is an
 
 ### Create a new Federation type
 
-In order to replace the current federation representation, a new federation type is going to be created by incrementing in one the value of the version type and save a new slot in the federation storage. For more information refer to [this detailed description](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP123.md#storage-upgrade) on how a federation upgrade should be managed.
+In order to replace the current federation representation, a new federation type is going to be created incrementing by one the value of the version type and save a new slot in the federation storage. For more information refer to [this detailed description](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP123.md#storage-upgrade) on how a federation upgrade should be managed.
 
 Although the schema and content of this slot is not to be changed more than the version number, it will serve to indicate how the federation multisig redeem script should be regenerated.
 
@@ -149,7 +149,7 @@ It will cointain the following content:
 
 * **Segregated witness data**
 
-While segregated witness data will contain the redeeming data (signatures and flag for activating ERP) and the actual redeem script (mentioned before as `<redeemScript>`)   
+While segregated witness data will contain the redeeming data (signatures and flag for activating the ERP - [Emergency Recovery Protocol](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP201.md)) and the actual redeem script (mentioned before as `<redeemScript>`)   
 
 Example:
 ```
