@@ -202,6 +202,7 @@ RSK Improvement Proposals
 | 294 |[Limit the number of inputs to include in a migration transaction](IPs/RSKIP294.md)|  03-FEB-22 | MI | Sca, Sec | Core | 1 | Accepted |
 | 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Accepted |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
+| 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
 
 
 (*) Under evaluation to be implemented in the next reference client release
@@ -228,8 +229,11 @@ RSK Improvement Proposals
 | MMA      | Matias Marquez               |                        |
 | MP       | Martin Picco                 |                        |
 | NPS      | Nicolas Perez Santoro        |                        |
-| PGP      | Pamela Gonzalez Perilli      |                        |
-| PMP      | Pedro Meulen Prete           |                        |
+| NV       | Nicolás Vescovo              | nicolas.vescovo@iovlabs.org |
+| PDG      | Patricio Diego Gallardo      | patricio@iovlabs.org   |
+| PGP      | Pamela Gonzalez Perilli      | pamela@iovlabs.org     |
+| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
+| RFV      | Ramses Fernandez-Valencia    | ramses@iovlabs.org     |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     |                        |
