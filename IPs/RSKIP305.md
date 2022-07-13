@@ -159,18 +159,18 @@ Example:
 ### Summary
 Putting it all together, the following is a list of the most important fields with their new values:
 
-* witness:      
-```
-<zero> <Sig1> <Sig2>...<SigN> <FlagERP> <redeemScript>
-```
-* scriptSig:    
-```
-<zero> <sha256(redeemScript)>
-```
-* scriptPubKey: 
-```
-HASH160 hash160(<zero> sha256(<redeemScript>)) EQUAL
-```
+* witness:
+	```
+	<zero> <Sig1> <Sig2>...<SigN> <FlagERP> <redeemScript>
+	```
+* scriptSig:
+	```
+	<zero> <sha256(redeemScript)>
+	```
+* scriptPubKey:
+	```
+	HASH160 hash160(<zero> sha256(<redeemScript>)) EQUAL
+	```
 
 ### Migration to the new federation
 
