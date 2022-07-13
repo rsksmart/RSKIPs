@@ -4,7 +4,7 @@ title: Peg-out efficiency improvement (Segwit)
 description: This RSKIP introduces Segwit V0 (Bitcoin Soft Fork 2017) for use in peg-ins and peg-outs to improve performance, cost reductions, and security.
 status: Draft
 purpose: Sca Usa Sec
-author: PG (@patogallaiovlabs) - RFV (@ramsesfv) - NV (@NVescovo)
+author: PDG (@patogallaiovlabs) - RFV (@ramsesfv) - NV (@NVescovo)
 layer: Core
 complexity: 2
 created: 2022-06-01
@@ -166,11 +166,11 @@ Putting it all together, the following is a list of the most important fields wi
 * scriptSig:    
 ```
 <zero> <sha256(redeemScript)>
-````
+```
 * scriptPubKey: 
 ```
 HASH160 hash160(<zero> sha256(<redeemScript>)) EQUAL
-````
+```
 
 ### Migration to the new federation
 
