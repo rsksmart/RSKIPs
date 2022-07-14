@@ -4,7 +4,7 @@ title: Peg-out efficiency improvement (Segwit)
 description: This RSKIP introduces Segwit V0 (Bitcoin Soft Fork 2017) for use in peg-ins and peg-outs to improve performance, cost reductions, and security.
 status: Draft
 purpose: Sca Usa Sec
-author: PDG (@patogallaiovlabs) - RFV (@ramsesfv) - NV (@NVescovo)
+author: PDG (@patogallaiovlabs), RFV (@ramsesfv), NV (@NVescovo)
 layer: Core
 complexity: 2
 created: 2022-06-01
@@ -34,36 +34,6 @@ m-out-of-n signatures, and each signature consumes 65 bytes, and n public keys, 
 Bringing Segwit to the RSK peg will tackle all these problems.
 
 ## Specification
-
-Segwit stands for segregated witness, and it is an upgrade to the Bitcoin consensus rules and network protocol proposed and implemented as a BIP – 91 (https://github.com/bitcoin/bips/blob/master/bip-0091.mediawiki) soft-fork that was activated on Bitcoin’s mainnet in 2017.
-
-Before segwit’s introduction, every input in a transaction was followed by the witness data that unlocked it. The witness data was embedded in the transaction as part of each input. It is called segregated witness because it implies separating the signature or unlocking script of a specific output. The witness data is moved outside the transaction.
-In Segwit v0, the Block Size concept is replaced by Block Weight. Block Size is measured in Bytes and Block Weight is measured in Weight Units (WU). The maximum weight of a 1 MB block is 4000 WU. In calculating the weight of a transaction, a non-witness 1 byte weighs 4 WU and a witness byte weighs 1 WU.
-
-## Rationale
-
-We first analyze two other protocols Frost and MuSig2 (part of Segwit v1: [BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki), [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki), and [BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki)). Although some advantage is obtained in relation to performance, this is not enough to counteract the greater difficulty of implementation that they need. This is why we consider that implementing Segwit v0 is the best option in the medium/short term.
-After doing a deep and detailed analysis of these protocols involved we summarized in a table a comparison between the different protocols in terms of complexity, fee costs and robustness.
-
-| Topics            | FROST      | Musig2    | Segwit    |P2SH (current)  |
-| ----------------- |:----------:| ---------:| ---------:| --------------:|
-|PowHSM Complexity  | High       | Low       | Low       | -              |
-|Fee Cost type      | Fixed      | Variable  | Variable  | Variable       |
-|INPUT Fee Cost (vbytes) 7/13| 16| 120       | 238.75    | 955            |
-|INPUT Fee Cost reductions (%)7/13| -98%    | -87%      | -75%      | -              |
-|TX Fee Cost (vbytes) (1)| 106   | 210       | 328.75    | 1045           |
-|TX Fee Cost reductions (%) (1)| -89%       | -78%      | -66%      | -              |
-|Verification Complexity|Medium/Low| High    | Low       | Low            |
-|Robustness         | Medium/Low | Low       | High      | High           |
-|Implementation time| Long term  |Medium term|Short/Medium-term| -        |
-|Threshold N limit (2)|Unlimited (3)| 34     | 67        | 15             |
- 
-**Observations*
-1. *A TX is composed of 1 input and 2 outputs.*
-2. *This is the higher N, independent of M. We are considering M as the half of N, which is the worst-case scenario. If M is more or less than half of N, the total starts to decrease.*
-3. *FROST unlimited threshold limits it just in theory and what we can represent through aggregated signatures, practically we would have restrictions at the Bridge complexity level.*
-
-## Implementations
 
 At the time of writing, the Bridge contract works with a Federation, which is an abstraction for a set of distinct secp256k1 public keys, which can ultimately be used to represent a Bitcoin multisig (N of M) P2SH.  The upgrade to this native contract involves replacing the current representation format type with a Segwit Compatible (P2SH-P2WSH).
 
@@ -160,17 +130,22 @@ Example:
 Putting it all together, the following is a list of the most important fields with their new values:
 
 * witness:
-	```
-	<zero> <Sig1> <Sig2>...<SigN> <FlagERP> <redeemScript>
-	```
-* scriptSig:
-	```
-	<zero> <sha256(redeemScript)>
-	```
-* scriptPubKey:
-	```
-	HASH160 hash160(<zero> sha256(<redeemScript>)) EQUAL
-	```
+
+```
+<zero> <Sig1> <Sig2>...<SigN> <FlagERP> <redeemScript>
+```
+
+* scriptSig:    
+
+```
+<zero> <sha256(redeemScript)>
+```
+
+* scriptPubKey: 
+
+```
+HASH160 hash160(<zero> sha256(<redeemScript>)) EQUAL
+```
 
 ### Migration to the new federation
 
@@ -181,6 +156,32 @@ But once the migration is completed, only Segwit compatible will be the accepted
 The migration process description can be [found here (RSKIP186)](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP186.md).
 
 
+## Rationale
+Segwit stands for segregated witness, and it is an upgrade to the Bitcoin consensus rules and network protocol proposed and implemented as a BIP – 91 (https://github.com/bitcoin/bips/blob/master/bip-0091.mediawiki) soft-fork that was activated on Bitcoin’s mainnet in 2017.
+
+Before segwit’s introduction, every input in a transaction was followed by the witness data that unlocked it. The witness data was embedded in the transaction as part of each input. It is called segregated witness because it implies separating the signature or unlocking script of a specific output. The witness data is moved outside the transaction.
+In Segwit v0, the Block Size concept is replaced by Block Weight. Block Size is measured in Bytes and Block Weight is measured in Weight Units (WU). The maximum weight of a 1 MB block is 4000 WU. In calculating the weight of a transaction, a non-witness 1 byte weighs 4 WU and a witness byte weighs 1 WU.
+
+We first analyze two other protocols Frost and MuSig2 (part of Segwit v1: [BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki), [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki), and [BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki)). Although some advantage is obtained in relation to performance, this is not enough to counteract the greater difficulty of implementation that they need. This is why we consider that implementing Segwit v0 is the best option in the medium/short term.
+After doing a deep and detailed analysis of these protocols involved we summarized in a table a comparison between the different protocols in terms of complexity, fee costs and robustness.
+
+| Topics            | FROST      | Musig2    | Segwit    |P2SH (current)  |
+| ----------------- |:----------:| ---------:| ---------:| --------------:|
+|PowHSM Complexity  | High       | Low       | Low       | -              |
+|Fee Cost type      | Fixed      | Variable  | Variable  | Variable       |
+|INPUT Fee Cost (vbytes) 7/13| 16| 120       | 238.75    | 955            |
+|INPUT Fee Cost reductions (%)7/13| -98%    | -87%      | -75%      | -              |
+|TX Fee Cost (vbytes) (1)| 106   | 210       | 328.75    | 1045           |
+|TX Fee Cost reductions (%) (1)| -89%       | -78%      | -66%      | -              |
+|Verification Complexity|Medium/Low| High    | Low       | Low            |
+|Robustness         | Medium/Low | Low       | High      | High           |
+|Implementation time| Long term  |Medium term|Short/Medium-term| -        |
+|Threshold N limit (2)|Unlimited (3)| 34     | 67        | 15             |
+ 
+**Observations*
+1. *A TX is composed of 1 input and 2 outputs.*
+2. *This is the higher N, independent of M. We are considering M as the half of N, which is the worst-case scenario. If M is more or less than half of N, the total starts to decrease.*
+3. *FROST unlimited threshold limits it just in theory and what we can represent through aggregated signatures, practically we would have restrictions at the Bridge complexity level.*
 
 
 ## Backwards Compatibility
