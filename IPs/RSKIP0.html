@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>RSKIP Purpose and Guidelines | RSK Improvement Proposals</title>
+    <meta
+      property="og:title"
+      content="RSKIP Purpose and Guidelines | RSK Improvement Proposals"
+    />
+    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
+
+  <meta name="generator" content="Jekyll" />
+  <meta property="og:locale" content="en_US" />
+  <link rel="canonical" href="https://ips.rsk.co/IPs/RSKIP0.html" />
+  <meta property="og:url" content="https://ips.rsk.co/IPs/RSKIP0.html" />
+  <meta property="og:site_name" content="RSK Improvement Proposals" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@" />
+  <script type="application/ld+json">
+    {
+      "@type": "WebSite",
+      "url": "https://ips.rsk.co",
+      "name": "RSK Improvement Proposals",
+      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
+      "@context": "https://schema.org"
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet"><link type="application/atom+xml" rel="alternate" href="https://ips.rsk.co/pages/rsksmart/rskips/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
+</head>
+<body><header class="site-header" role="banner">
+  <button id="dark-mode-toggle" class="dark-mode-toggle theme-toggle-button">
+    <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.5,2C5.71,3.15 4.5,5.18 4.5,7.5C4.5,9.82 5.71,11.85 7.53,13C4.46,13 2,10.54 2,7.5A5.5,5.5 0 0,1 7.5,2M19.07,3.5L20.5,4.93L4.93,20.5L3.5,19.07L19.07,3.5M12.89,5.93L11.41,5L9.97,6L10.39,4.3L9,3.24L10.75,3.12L11.33,1.47L12,3.1L13.73,3.13L12.38,4.26L12.89,5.93M9.59,9.54L8.43,8.81L7.31,9.59L7.65,8.27L6.56,7.44L7.92,7.35L8.37,6.06L8.88,7.33L10.24,7.36L9.19,8.23L9.59,9.54M19,13.5A5.5,5.5 0 0,1 13.5,19C12.28,19 11.15,18.6 10.24,17.93L17.93,10.24C18.6,11.15 19,12.28 19,13.5M14.6,20.08L17.37,18.93L17.13,22.28L14.6,20.08M18.93,17.38L20.08,14.61L22.28,17.15L18.93,17.38M20.08,12.42L18.94,9.64L22.28,9.88L20.08,12.42M9.63,18.93L12.4,20.08L9.87,22.27L9.63,18.93Z" />
+    </svg>
+  </button>
+
+
+<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link underline" href="/all.html">All</a><a class="page-link underline" href="/scalability.html">Scalability</a><a class="page-link underline" href="/security.html">Security</a><a class="page-link underline" href="/usability.html">Usability</a><a class="page-link underline" href="/fairness.html">Fairness</a><a class="page-link underline" href="/standardtrack.html">Standard Track</a></div>
+
+
+
+
+
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">RSKIP Purpose and Guidelines</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="rskip-purpose-and-guidelines">RSKIP Purpose and Guidelines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">RSKIP</th>
+      <th style="text-align: left">0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Title</strong></td>
+      <td style="text-align: left">RSKIP Purpose and Guidelines</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Created</strong></td>
+      <td style="text-align: left">15-APR-2021</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Author</strong></td>
+      <td style="text-align: left">JL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer</strong></td>
+      <td style="text-align: left">Misc</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Complexity</strong></td>
+      <td style="text-align: left">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Status</strong></td>
+      <td style="text-align: left">Active</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="what-is-a-rskip">What is a RSKIP?</h2>
+
+<p>RSKIP stands for RSK Improvement Proposal. A RSKIP is a design document providing information to the RSK community describing a new feature for RSK, its processes, or its environment. The RSKIP should provide a concise technical specification of the feature and a rationale for the feature. The RSKIP author is responsible for building consensus within the community and documenting dissenting opinions.</p>
+
+<h2 id="rskip-rational">RSKIP Rational</h2>
+
+<p>We intend RSKIPs to be the primary mechanism for proposing new features, collecting community input on an issue, and for documenting the design decisions that have gone into RSK. Because the RSKIPs are maintained as text files in a versioned repository, their revision history is the historical record of the feature proposal.</p>
+
+<p>For RSK implementers, RSKIPs are a convenient way to track the progress and compatibility of their implementation. Ideally, each implementation maintainer would list the RSKIPs that they have implemented. This will give end users a convenient way to know the current status of a given implementation or library.</p>
+
+<h2 id="rskip-types">RSKIP Types</h2>
+
+<p>There are three types of RSKIP:</p>
+
+<ul>
+  <li>A <strong>Standards Track RSKIP</strong> describes any change that affects most or all RSK implementation. This can be a change to a network protocol, a change in block or transaction validity rules, or any change or addition that affects the interoperability of applications using RSK. Furthermore, Standards Track RSKIPs can be broken down into the following categories.
+    <ul>
+      <li><strong>CORE</strong> - Consensus related</li>
+      <li><strong>Node</strong> - Related to node manager interfaces, such as RPC</li>
+      <li><strong>Net</strong> - Related to p2p networking</li>
+      <li><strong>UI</strong> - User Interface</li>
+      <li><strong>2nd</strong> - 2nd layer protocols, such as off-chain payment channels</li>
+      <li><strong>DApp</strong> - Dapp application interfaces</li>
+    </ul>
+  </li>
+  <li>An <strong>Informational RSKIP</strong> describes an RSK design issue, or provides general guidelines or information to the RSK community, but does not propose a new feature. Informational RSKIPs do not necessarily represent an RSK community consensus or recommendation, so users and implementers are free to ignore Informational RSKIPs or follow their advice.</li>
+  <li>A <strong>Process RSKIP</strong> describes a process surrounding RSK or proposes a change to (or an event in) a process. Process RSKIPs are like Standards-Track RSKIPs but they apply to areas other than the RSK protocol itself. They may propose an implementation, but not to RSK’s codebase; they often require community consensus. Unlike Informational RSKIPs, they are more than recommendations, and users are typically not free to ignore them. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in RSK development.</li>
+</ul>
+
+<h2 id="rskip-purpose-terms">RSKIP purpose terms</h2>
+
+<p>Describes what aspects of RSK will improve</p>
+
+<ul>
+  <li><strong>Sca</strong> - an RSKIP that improves scalability</li>
+  <li><strong>Usa</strong> - an RSKIP that improves usability</li>
+  <li><strong>Fair</strong> - an RSKIP that improves fairness</li>
+  <li><strong>Sec</strong> - an RSKIP that improves security</li>
+</ul>
+
+<p>A RSKIP can include more than one purpose term</p>
+
+<h2 id="rskip-purpose-complexity">RSKIP purpose complexity</h2>
+
+<p>Describes the complexity of the improvement with one of the following levels</p>
+
+<ul>
+  <li><strong>1</strong> - Minimal</li>
+  <li><strong>2</strong> - Medium</li>
+  <li><strong>3</strong> - High</li>
+</ul>
+
+<h2 id="rskip-workflow">RSKIP Workflow</h2>
+
+<p>The RSKIP repository Editors change the RSKIPs status. Please publish all RSKIP-related in the forum and tag the RSKIP Editors, which is listed under RSKIP Editors below. Also, see RSKIP Editor Responsibilities &amp; Workflow.</p>
+
+<p>The RSKIP process begins with a new idea for RSK. It is highly recommended that a single RSKIP contain a single key proposal or new idea. The more focused the RSKIP, the more successful it tends to be. A change to one client doesn’t require a RSKIP; a change that affects multiple clients, or defines a standard for multiple apps to use, does. The RSKIP editors reserve the right to reject RSKIP proposals if they appear too unfocused or too broad. When in doubt, split your RSKIP into several well-focused ones.</p>
+
+<p>Each RSKIP must have a champion – someone who writes the RSKIP using the style and format described below, shepherds the discussions in the appropriate forums, and attempts to build community consensus around the idea. The RSKIP champion should first attempt to ascertain whether the idea is RSKIP-able.</p>
+
+<p>Vetting an idea publicly before going as far as writing a RSKIP is meant to save the potential author time. Asking the RSK community first if an idea is original, helps to prevent too much time being spent on something that is guaranteed to be rejected based on prior discussions. It also helps to make sure the idea applies to the entire community and not just the author. It is highly recommended to open a discussion thread on the <a href="https://research.rsk.dev/c/rskip/13">RSK Research and Innovation Forum</a>. Another appropriate public channel to gauge interest around your RSKIP could be on <a href="https://github.com/rsksmart/RSKIPs/issues">the Issues section of this repository</a>.</p>
+
+<p>Reviewers and commenters are expected to provide thoughtful and actionable feedback. Summary rejections without justification are unhelpful. When possible, reviewers should point out possible paths the authors can take which could lead to eventual acceptance. Responses should be posted in the same channel as the proposal or in others with similar exposure.</p>
+
+<p>Once the champion has asked the RSK community whether an idea has any chance of acceptance a draft RSKIP should be presented as a <a href="https://github.com/rsksmart/RSKIPs/pulls">pull request</a> (PR). This gives the author a chance to continuously edit the draft RSKIP for proper formatting and quality. This also allows for further public comments and the author of the RSKIP to address the proposal’s concerns.</p>
+
+<p>If RSKIP editors approve, the issuer of the RSKIP must assign the PR number to the RSKIP, renaming it. Then label it as Standard Track, Informational, or Process, and give it the status “Draft”. The editors will put what complexity level the RSKIP has, what kind of improvement it is, and then add it to the main git repository. The RSKIP editors will not deny RSKIP status without reason. Reasons for denying RSKIP status include duplication of effort, being technically unsound, not providing proper motivation, or addressing backward compatibility.</p>
+
+<p>The RSKIP author may update the Draft as necessary in the git repository. Updates to drafts may also be submitted by the author as pull requests.</p>
+
+<p>Standards Track RSKIPs consist of three parts, a design document, a reference implementation, and (if warranted) an update to the formal specification. The RSKIP should be reviewed and accepted before its integration begins, a reference implementation will aid people in studying the RSKIP.</p>
+
+<p>Standards Track RSKIPs must include an implementation – in the form of code, a patch, or an URL to the same – before it can be considered an Accepted or Pending Fork.</p>
+
+<p>For a RSKIP to be “Accepted” it must meet certain minimum criteria. It must be a clear and complete description of the proposed enhancement. The enhancement must represent a net improvement. The proposed implementation, if applicable, must be solid and must not complicate the protocol unduly. Once a RSKIP has been Accepted, the implementations must be completed. When the implementation is completed and accepted by the community, the status will be changed to “Pending Fork’’ if necessary for a hard or soft fork, and Active if not.</p>
+
+<p>A RSKIP can also be assigned the status “Deferred”. The RSKIP’s author or editor can assign the RSKIP this status when no progress is being made on it. Once a RSKIP is deferred, its editor can re-assign it to have “Draft” status. An RSKIP that is not being considered for immediate adoption in the reference client may be reconsidered in the future for a subsequent release of the reference client.</p>
+
+<p>A RSKIP Author(s) can withdrawn the proposed RSKIP. This state means finality and the RSKIP can no longer be resurrected using its number. If the idea is pursued at later date it is considered a new proposal.</p>
+
+<p>A RSKIP can also be “Rejected”. Perhaps, after all, it was not a good idea. It is still important to have a record of this fact.</p>
+
+<p>RSKIPs can also be superseded by a different RSKIP, rendering the original obsolete.</p>
+
+<p>The possible paths of the status of RSKIPs are as follows:</p>
+
+<p align="center">
+  <img width="800" height="300" src="./RSKIProcess.png" />
+</p>
+
+<h2 id="what-belongs-in-a-successful-rskip">What belongs in a successful RSKIP?</h2>
+
+<p>Each RSKIP should have the following parts:</p>
+
+<ul>
+  <li>
+    <p>Preamble – RFC 822 style headers containing meta-data about the RSKIP, including the RSKIP number, a short descriptive title (limited to a maximum of 44 characters), the names, and optionally the contact info for each author, etc.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Abstract – a short (~200 word) description of the technical issue being addressed.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Motivation – Motivation is critical for RSKIPs that want to change the RSK protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the RSKIP solves. RSKIP submissions without sufficient motivation may be rejected outright.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Specification – The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current RSK platforms.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Rationale – The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale should provide evidence of consensus within the community and discuss important objections or concerns raised during the discussion.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Backward Compatibility – All RSKIPs that introduce backward incompatibilities must include a section describing these incompatibilities and their severity. The RSKIP must explain how the author proposes to deal with these incompatibilities. RSKIP submissions without a sufficient backward compatibility treatise may be rejected outright.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Implementations - The implementations must be completed before any RSKIP is given the status “Final”, but it need not be completed before the RSKIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of “rough consensus and running code” is still useful when it comes to resolving many discussions of API details.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Test Cases - Test cases for implementation are mandatory for RSKIPs that are affecting consensus changes. Other RSKIPs can choose to include links to test cases if applicable.
+<!-- --></p>
+  </li>
+  <li>
+    <p>Copyright Waiver - All RSKIPs must be in the public domain. See the bottom of this RSKIP for an example copyright waiver.
+<!-- --></p>
+  </li>
+  <li>
+    <p>The final implementation must include test code and documentation appropriate for the RSK protocol.</p>
+  </li>
+</ul>
+
+<h2 id="rskip-formats-and-templates">RSKIP Formats and Templates</h2>
+
+<p>RSKIPs should be written in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown</a> format. Here is a <a href="/IPs/RSKIP0_TEMPLATE">template</a> to follow. Image files should be included in a subdirectory for that RSKIP.</p>
+
+<h2 id="rskip-header-preamble">RSKIP Header Preamble</h2>
+
+<p>Each RSKIP must begin with an RFC 822 style header preamble, preceded and followed by three hyphens (—). This header is also termed “front matter” by Jekyll. The headers must appear in the following order. Headers marked with “*” are optional and are described below. All other headers are required.</p>
+
+<p>` * RSKIP: ` <em>RSKIP number</em> (determined by the RSKIP editor)</p>
+
+<p>` * Title: ` <em>RSKIP title</em></p>
+
+<p>` * Author: ` <em>list of author’s real names and optionally, email address or github user</em></p>
+
+<p>` * Discussions-To: ` <em>email address, url to forum posts</em></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>` * Status: ` *&lt;Draft</td>
+      <td>Active</td>
+      <td>Accepted</td>
+      <td>Deferred</td>
+      <td>Rejected</td>
+      <td>Withdrawn</td>
+      <td>Adopted</td>
+      <td>Superseded&gt;*</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>` * Type: ` *&lt;Standards Track</td>
+      <td>Informational</td>
+      <td>Process&gt;*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>` * Created: ` <em>date created on, in ISO 8601 (yyyy-mm-dd) format</em></p>
+
+<p>` * Replaces: ` <em>RSKIP number</em></p>
+
+<p>` * Superseded-By: ` <em>RSKIP number</em></p>
+
+<p>` * Resolution: ` <em>url</em></p>
+
+<p>The Author header lists the names, and optionally the email addresses of all the authors/owners of the RSKIP. The format of the Author header value must be</p>
+
+<p>Random J. User <a href="mailto:address@dom.ain">address@dom.ain</a>
+if the email address is included, and just</p>
+
+<p>Random J. 
+User if the address is not given.</p>
+
+<p>If there are multiple authors, each should be on a separate line following RFC 2822 continuation line conventions.</p>
+
+<p>Note: The Resolution header is required for Standards Track RSKIPs only. It contains a URL that should point to an email message or other web resource where the pronouncement about the RSKIP is made.</p>
+
+<p>While a RSKIP is in private discussions (usually during the initial Draft phase), a Discussions-To header will indicate the mailing list or URL where the RSKIP is being discussed. No Discussions-To header is necessary if the RSKIP is being discussed privately with the author or on the RSK forum.</p>
+
+<p>The Type header specifies the type of RSKIP: Standards Track, Informational, or Process. If the track is Standard please include the subcategory (core, networking, interface, etc).</p>
+
+<p>The Created header records the date that the RSKIP was assigned a number, while Post-History is used to record the dates of when new versions of the RSKIP are posted to the Research and Innovation Forum. Both headers should be in yyyy-mm-dd format, e.g. 1994-08-12.</p>
+
+<p>RSKIPs may have a Requires header, indicating the RSKIP numbers that this RSKIP depends on.</p>
+
+<p>RSKIPs may also have a Superseded-By header indicating that a RSKIP has been rendered obsolete by a later document; the value is the number of the RSKIP that replaces the current document. The newer RSKIP must have a Replaces header containing the number of the RSKIP that it rendered obsolete.</p>
+
+<h2 id="auxiliar-files">Auxiliar Files</h2>
+
+<p>RSKIPs may include auxiliary files such as diagrams. Such files must be named RSKIP-XXXX-Y.ext, where “XXXX” is the RSKIP number, “Y” is a serial number (starting at 1), and “ext” is replaced by the actual file extension (e.g. “png”).</p>
+
+<h2 id="transferring-rskip-ownership">Transferring RSKIP Ownership</h2>
+
+<p>It occasionally becomes necessary to transfer ownership of RSKIPs to a new champion. In general, we’d like to retain the original author as a co-author of the transferred RSKIP, but that’s really up to the original author. A good reason to transfer ownership would be that the original author no longer has the time or interest in updating it or following through with the RSKIP process, or has fallen off the face of the net (i.e. is unreachable or not responding to the forum). A bad reason to transfer ownership is due to not agreeing with the direction of the RSKIP. We try to build consensus around a RSKIP, but if that’s not possible, you can always submit a competing RSKIP.</p>
+
+<p>If you are interested in assuming ownership of a RSKIP, send a message asking to take over, addressed to both the original author and the RSKIP editor. If the original author doesn’t respond promptly, the RSKIP editor will make a unilateral decision (it’s not like such decisions can’t be reversed).</p>
+
+<h2 id="rskip-editors">RSKIP Editors</h2>
+
+<p>` * Sergio Lerner (@sergioLerner) `</p>
+
+<p>` * Julian Len (@julianlen)`</p>
+
+<p>` * Diego Masini (@diegomasini)`</p>
+
+<p>` * Shreemoy Mishra (@smishraIOV)`</p>
+
+<p>` * Javier Alvarez Cid-Fuentes (@javicid)`</p>
+
+<p>` * Raul Laprida (@raullaprida)`</p>
+
+<h2 id="rskip-editor-responsibilities-and-workflow">RSKIP Editor Responsibilities and Workflow</h2>
+
+<p>For each new RSKIP that comes in, an editor does the following:</p>
+
+<ul>
+  <li>Read the RSKIP to check if it is ready: sound and complete. The ideas must make technical sense, even if they don’t seem likely to be accepted.</li>
+  <li>The title should accurately describe the content.</li>
+  <li>Edit the RSKIP for language (spelling, grammar, sentence structure, etc.), markup, code style.
+If the RSKIP isn’t ready, the editor will send it back to the author for revision, with specific instructions.</li>
+</ul>
+
+<p>Once the RSKIP is ready for the repository, the RSKIP editor will:</p>
+
+<ul>
+  <li>Read the RSKIP to check if it is ready: sound and complete. The ideas must make technical sense, even if they don’t seem likely to be accepted.</li>
+  <li>The title should accurately describe the content.</li>
+  <li>Edit the RSKIP for language (spelling, grammar, sentence structure, etc.), markup, code style. If the RSKIP isn’t ready, the editor will send it back to the author for revision, with specific instructions.</li>
+  <li>Once the RSKIP is ready for the repository, the RSKIP editor will:
+    <ul>
+      <li>Add the RSKIP to the RSKIP’s repository on GitHub.</li>
+      <li>List the RSKIP in <a href="https://github.com/rsksmart/RSKIPs/blob/master/README.md">README.md</a></li>
+      <li>Send a message back to the RSKIP author with the next step.</li>
+      <li>Many RSKIPs are written and maintained by developers with write access to the RSK codebase. The RSKIP editors monitor RSKIP changes and correct any structure, grammar, spelling, or markup mistakes we see.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The editors don’t pass judgment on RSKIPs. We merely do the administrative &amp; editorial part.</p>
+
+<h2 id="history">History</h2>
+
+<p>This document was derived heavily from Ethereum’s EIP-1 written by Martin Becze and from Bitcoin’s BIP-0001 written by Amir Taaki which in turn was derived from Python’s PEP-0001. In many places, text was simply copied and modified. Although the PEP-0001 text was written by Barry Warsaw, Jeremy Hylton, and David Goodger, they are not responsible for its use in the RSK Improvement Process, and should not be bothered with technical questions specific to RSK or the RSKIP. Please direct all comments to the RSKIP editors.</p>
+
+<hr />
+<h2 id="copyright">Copyright</h2>
+
+<p>Copyright and related rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer>
+    <div class="footer_cont">
+        <div class="footer_box">
+            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+        </div>
+    </div>
+</footer><script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+  </body>
+
+</html>
