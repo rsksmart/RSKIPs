@@ -75,7 +75,6 @@ Any pair of transactions that are _connected_ cannot be in different parallel su
 
 This cases should not be considered as writing a key, since they doesn't affect the output of the parallel execution:
 - Adding 0 balance
-- Write a key with the value that was already set
 
 ### Block validation algorithm
 
