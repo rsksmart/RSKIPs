@@ -1,5 +1,5 @@
 ---
-rskip: ???
+rskip: 343
 title: Peg-out efficiency improvement (Taproot)
 description: This RSKIP introduces Taproot (Bitcoin Soft Fork Nov. 2021) for use in peg-ins and peg-outs to improve performance, cost reductions, and security.
 status: Draft
@@ -12,7 +12,7 @@ created: 2022-07-18
 
 # Peg-out efficiency improvement (Taproot)
 
-|RSKIP          | ???        |
+|RSKIP          | 343        |
 | :------------ |:-------------|
 |**Title**      |Peg-out efficiency improvement (Taproot) |
 |**Created**    |18-JUL-2022 |
