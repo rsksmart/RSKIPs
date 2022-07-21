@@ -1,5 +1,7 @@
 # RSKIPs
-RSK Improvement Proposals
+This repository contains the RSK Improvement Proposals (RSKIPs).
+
+You can find a easily browseable version of this information [here](https://ips.rsk.co/).
 
 ## RSKIP status terms
 * **Draft** - an RSKIP that is open for consideration
