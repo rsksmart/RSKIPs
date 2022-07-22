@@ -2,39 +2,8 @@
 
 ---
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <title>Home | RSK Improvement Proposals</title>
-    <meta
-      property="og:title"
-      content="Home | RSK Improvement Proposals"
-    />
-    <meta name="description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-    <meta property="og:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-    <meta name="twitter:description" content="RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards." />
-    <meta name="generator" content="Jekyll" />
-    <meta property="og:locale" content="en_US" />
-    <link rel="canonical" href="https://ips.rsk.co" />
-    <meta property="og:url" content="https://ips.rsk.co" />
-    <meta property="og:site_name" content="RSK Improvement Proposals" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@" />
-    <script type="application/ld+json">
-    {
-      "@type": "WebSite",
-      "url": "https://ips.rsk.co",
-      "name": "RSK Improvement Proposals",
-      "description": "RSK Improvement Proposals (RSKIPs) describe standards for the RSK platform, including core protocol specifications, client APIs, and contract standards.",
-      "@context": "https://schema.org"
-    }
-  </script>
-  <link rel="stylesheet" href="/assets/css/style.css" /><link type="application/atom+xml" rel="alternate" href="https://ips.rsk.co/feed.xml" title="RSK Improvement Proposals" /><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script>
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,900&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700,800&display=swap" rel="stylesheet">
-</head>
+<html lang="en">
+  {%- include head.html -%}
 <body>
 
 <header class="site-header" role="banner">
@@ -93,13 +62,13 @@
   <li><strong>3</strong> - High</li>
 </ul>
 
-<h1 id="index">Index</h1>
+<h2 id="index">Index</h2>
 
 {% include indextable.html rskips=site.pages %}
 
 <p>(*) Under evaluation to be implemented in the next reference client release</p>
 
-<h1 id="author-index">Author Index</h1>
+<h2 id="author-index">Author Index</h2>
 
 <table class="indextable" id="author_table">
   <thead>
@@ -291,6 +260,9 @@
 
       window.onhashchange = colorAuthor
     </script>
+        <!-- Start of HubSpot Embed Code -->
+        <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2784460.js"></script>
+        <!-- End of HubSpot Embed Code -->
   </body>
 
 </html>
