@@ -207,6 +207,7 @@ You can find a easily browseable version of this information [here](https://ips.
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
 | 326 |[Change btcDestinationAddress format in release_request_received event](IPs/RSKIP326.md)|  21-JUNE-22 | KI | Usa | Core | 1 | Draft |
+| 327 |[Add a new event called "pegout_confirmed" that will be emitted when a pegout has reached the required confirmations](IPs/RSKIP327.md)|  29-Jul-22 | JT | Usa | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -225,6 +226,7 @@ You can find a easily browseable version of this information [here](https://ips.
 | JIO      | Jose Ignacio Orlicki         |                        |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | JL       | Julian Len                   | julian@iovlabs.org     |
+| JT       | Jeremy Then                  | jeremy.then@iovlabs.org|
 | KI       | Kelvin Isievwore             | kelvin@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
