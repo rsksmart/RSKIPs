@@ -207,7 +207,7 @@ You can find a easily browseable version of this information [here](https://ips.
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
 | 326 |[Change btcDestinationAddress format in release_request_received event](IPs/RSKIP326.md)|  21-JUNE-22 | KI | Usa | Core | 1 | Draft |
-| 346 |[Add a new event called "pegout_confirmed" that will be emitted when a pegout has reached the required confirmations](IPs/RSKIP346.md)|  29-Jul-22 | JT | Usa | Core | 2 | Draft |
+| 346 |[New pegout_confirmed event and add_signature event logging order](IPs/RSKIP346.md)|  29-Jul-22 | JT | Usa | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
