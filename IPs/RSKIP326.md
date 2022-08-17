@@ -1,8 +1,8 @@
-# Change btcDestinationAddress format to string in `release_request_received` event, create new `pegout_confirmed` event, emit `add_signature` when a tx is actually signed.
+# Pegout events improvements
 
 |RSKIP          |326           |
 | :------------ |:-------------|
-|**Title**      |Change btcDestinationAddress format to string in `release_request_received` event, create new `pegout_confirmed` event, emit `add_signature` when a tx is actually signed. |
+|**Title**      |Pegout events improvements |
 |**Created**    |21-JUNE-22 |
 |**Author**     |KI & JT |
 |**Purpose**    |Usa |
@@ -12,21 +12,8 @@
 
 ## Abstract
 
-### release_request_received format
+Improve pegout related events for a better UX by emitting meaningful events, updating the `btcDestinationAddress` event signature, creating a new `pegout_confirmed` event and only emitting the `add_signature` event if a signature was actually added.
 
-As of now, the `btcDestinationAddress` field logged by the `release_request_received` event is a hash160 bytes format which is not user friendly. This RSKIP proposes updating the `btcDestinationAddress` field to the string format which is more user friendly.
-
-### New pegout_confirmed event
-
-Currently no event is being emitted when a pegout that is waiting for confirmation (in the `releaseTransactionSet` structure) has the required confirmations and is moved to waiting for signatures (to the `rskTxsWaitingForSignatures`).
-Right now, to check if a pegout has enough confirmation and that is moved to the `rskTxsWaitingForSignatures` structure, we need to get the state of the bridge and look for the pegout in `releaseTransactionSet` or `rskTxsWaitingForSignatures`, which is not that performant or convenient.
-
-We need to add a new event to the Bridge that will be emitted when the Bridge moves a pegout to the `rskTxsWaitingForSignatures`.
-I propose this event is called `pegout_confirmed`.
-
-### add_signature event logging order
-
-At the moment the `add_signature` event is being emitted before actually adding the signature.
 ## Motivation
 
 ### release_request_received format
@@ -46,6 +33,8 @@ In some cases a signature will not be added to a transaction, so there would not
 ## Specification
 
 ### release_request_received changes
+
+As of now, the `btcDestinationAddress` field logged by the `release_request_received` event is a hash160 bytes format which is not user friendly. This RSKIP proposes updating the `btcDestinationAddress` field to the string format which is more user friendly.
 
 #### Current signature:
 
@@ -73,19 +62,25 @@ If `RSKIP326` is activated, the event will log the `btcDestinationAddress` field
 
 ### pegout_confirmed event signature and description
 
+Currently no event is being emitted when a pegout that is waiting for confirmation (in the `releaseTransactionSet` structure) has the required confirmations and is moved to waiting for signatures (to the `rskTxsWaitingForSignatures`).
+Right now, to check if a pegout has enough confirmation and that is moved to the `rskTxsWaitingForSignatures` structure, we need to get the state of the bridge and look for the pegout in `releaseTransactionSet` or `rskTxsWaitingForSignatures`, which is not that performant or convenient.
+
+We need to add a new event to the Bridge that will be emitted when the Bridge moves a pegout to the `rskTxsWaitingForSignatures`.
+I propose this event is called `pegout_confirmed`.
+
+
 This event will exist after the batch pegout consensus changes (HOP, RSKIP271).
 
 ```
 pegout_confirmed(bytes32 indexed btcTxHash, uint pegoutCreationBlockNumber)
 ```
 
-- `btcTxHash`: the hash of the Bitcoin transaction without signatures that was just confirmed
+- `btcTxHash`: the hash of the Bitcoin transaction without signatures that was just created
 - `pegoutCreationBlockNumber`: the block where the pegout transaction was created, this is just informational value and totally optional
 
 ### add_signature event logging order
 
-At the end of the `BridgeSupport::addSignature` method, we can see that is calling `eventLogger.logAddSignature` before `BridgeSupport::processSigning`.
-So, I propose to remove the `eventLogger.logAddSignature` call from `BridgeSupport::addSignature` and use it inside `BridgeSupport::processSigning` when the signature is actually added to the btcTx.
+Emit the `add_signature` event if the transaction was actually signed, not when there's an attempt to sign it.
 
 ## Backwards Compatibility
 
@@ -94,7 +89,7 @@ This change is a hard-fork and therefore all full nodes, block explorers must be
 ## References
 
 [1] [RSKIP-185](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP185.md)
-[2] Other RSKIP https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md
+[2] [RSKIP-271]https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md
 
 ### Copyright
 
