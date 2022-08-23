@@ -16,25 +16,26 @@ Improve pegout related events for a better UX by emitting meaningful events, upd
 
 ## Motivation
 
-### release_request_received format
+### release_request_received event data format
 
 These changes will improve the user experience of getting event information from the blockchain in a human readable/friendly format.
+Right now, the `btcDestinationAddress` is being printed as hexadecimal/hash160. This RSKIP suggests to change the format so it's in a `base58` format.
 
 ### New pegout_confirmed event
 
-At the moment clients don't have an easy way to know if a pegout has enough confirmations and is already waiting for signatures. With this new event, clients will be able know, probably live, when a pegout is already confirmed and waiting for signatures.
+At the moment clients don't have an easy way to know if a pegout has enough confirmations and is already waiting for signatures. With this new event, clients will be able to know, probably live, when a pegout is already confirmed and waiting for signatures.
 
 An example of this is the 2wp-app/2wp-api. This tool informs users on the status of their pegout. Right now, to know if a pegout has been confirmed and is waiting for signature this tool makes intricate logic.
 
-### add_signature event logging order
+### add_signature event emitting instances
 
-In some cases a signature will not be added to a transaction, so there would not be a need to actually emit the `add_signature` event.
+In some cases, a signature will not be added to a transaction when the Bridge method `addSignature` is called (for example, if the given signature is not valid). So there would not be a need to actually emit the `add_signature` event in these cases.
 
 ## Specification
 
 ### release_request_received changes
 
-As of now, the `btcDestinationAddress` field logged by the `release_request_received` event is a hash160 bytes format which is not user friendly. This RSKIP proposes updating the `btcDestinationAddress` field to the string format which is more user friendly.
+As of now, the `btcDestinationAddress` field logged by the `release_request_received` event is a hash160 bytes format which is not user friendly. This RSKIP proposes updating the `btcDestinationAddress` field to the string base58 format which is more user friendly.
 
 #### Current signature:
 
@@ -50,7 +51,7 @@ The btcDestinationAddress field is currently in the bytes format.
 release_request_received(address indexed sender, string btcDestinationAddress, uint256 amount)
 ```
 
-The btcDestinationAddress field will be updated to a user friendly string format.
+The btcDestinationAddress field will be updated to a user friendly string format (`base58` or bech32 depending on the address type).
 
 ##### Data
 
@@ -60,7 +61,7 @@ The btcDestinationAddress field will be updated to a user friendly string format
 
 If `RSKIP326` is activated, the event will log the `btcDestinationAddress` field in a user friendly string format.
 
-### pegout_confirmed event signature and description
+### New event, pegout_confirmed
 
 Currently no event is being emitted when a pegout that is waiting for confirmation (in the `releaseTransactionSet` structure) has the required confirmations and is moved to waiting for signatures (to the `rskTxsWaitingForSignatures`).
 Right now, to check if a pegout has enough confirmation and that is moved to the `rskTxsWaitingForSignatures` structure, we need to get the state of the bridge and look for the pegout in `releaseTransactionSet` or `rskTxsWaitingForSignatures`, which is not that performant or convenient.
