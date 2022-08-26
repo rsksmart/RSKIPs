@@ -12,14 +12,14 @@
 
 ## Abstract
 
-Improve pegout related events for a better UX by emitting meaningful events, updating the `btcDestinationAddress` event signature, creating a new `pegout_confirmed` event and only emitting the `add_signature` event if a signature was actually added.
+Improve pegout related events for a better UX by emitting meaningful events, updating the `btcDestinationAddress` field in `release_request_received` event signature, creating a new `pegout_confirmed` event, and only emitting the `add_signature` event if a signature was actually added.
 
 ## Motivation
 
 ### release_request_received event data format
 
 These changes will improve the user experience of getting event information from the blockchain in a human readable/friendly format.
-Right now, the `btcDestinationAddress` is being printed as hexadecimal/hash160. This RSKIP suggests to change the format so it's in a `base58` format.
+Right now, the `btcDestinationAddress` is being stored as the hash160 representation of the address. This RSKIP suggests changing the format to a string representation (`base58` or `bech32` format depending on the address type).
 
 ### New pegout_confirmed event
 
@@ -35,7 +35,7 @@ In some cases, a signature will not be added to a transaction when the Bridge me
 
 ### release_request_received changes
 
-As of now, the `btcDestinationAddress` field logged by the `release_request_received` event is a hash160 bytes format which is not user friendly. This RSKIP proposes updating the `btcDestinationAddress` field to the string base58 format which is more user friendly.
+As of now, the `btcDestinationAddress` field logged by the `release_request_received` event is a hash160 bytes format which is not user friendly. This RSKIP proposes updating the `btcDestinationAddress` field to its string representation (base58 or bech32) which is more user friendly.
 
 #### Current signature:
 
@@ -63,7 +63,7 @@ If `RSKIP326` is activated, the event will log the `btcDestinationAddress` field
 
 ### New event, pegout_confirmed
 
-Currently no event is being emitted when a pegout that is waiting for confirmation (in the `releaseTransactionSet` structure) has the required confirmations and is moved to waiting for signatures (to the `rskTxsWaitingForSignatures`).
+Currently no event is being emitted when a pegout that was waiting for confirmation (in the `releaseTransactionSet` structure) has gotten the required confirmations and is moved to waiting for signatures (to the `rskTxsWaitingForSignatures`).
 Right now, to check if a pegout has enough confirmation and that is moved to the `rskTxsWaitingForSignatures` structure, we need to get the state of the bridge and look for the pegout in `releaseTransactionSet` or `rskTxsWaitingForSignatures`, which is not that performant or convenient.
 
 We need to add a new event to the Bridge that will be emitted when the Bridge moves a pegout to the `rskTxsWaitingForSignatures`.
@@ -73,15 +73,15 @@ I propose this event is called `pegout_confirmed`.
 This event will exist after the batch pegout consensus changes (HOP, RSKIP271).
 
 ```
-pegout_confirmed(bytes32 indexed btcTxHash, uint pegoutCreationBlockNumber)
+pegout_confirmed(bytes32 indexed btcTxHash, uint256 pegoutCreationRskBlockNumber)
 ```
 
 - `btcTxHash`: the hash of the Bitcoin transaction without signatures that was just created
-- `pegoutCreationBlockNumber`: the block where the pegout transaction was created, this is just informational value and totally optional
+- `pegoutCreationRskBlockNumber`: the RSK block where the pegout transaction was created, this is just informational value and totally optional
 
 ### add_signature event logging order
 
-Emit the `add_signature` event if the transaction was actually signed, not when there's an attempt to sign it.
+Emit the `add_signature` event when the transaction has been actually signed, not when there's an attempt to sign it.
 
 ## Backwards Compatibility
 
@@ -90,7 +90,7 @@ This change is a hard-fork and therefore all full nodes, block explorers must be
 ## References
 
 [1] [RSKIP-185](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP185.md)
-[2] [RSKIP-271]https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md
+[2] [RSKIP-271](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md)
 
 ### Copyright
 
