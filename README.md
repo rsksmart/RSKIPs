@@ -1,5 +1,7 @@
 # RSKIPs
-RSK Improvement Proposals
+This repository contains the RSK Improvement Proposals (RSKIPs).
+
+You can find a easily browseable version of this information [here](https://ips.rsk.co/).
 
 ## RSKIP status terms
 * **Draft** - an RSKIP that is open for consideration
@@ -136,6 +138,7 @@ RSK Improvement Proposals
 | 141 |[Network Upgrade: Papyrus](IPs/RSKIP141.md)| 27-SEP-19 | AE | Sca,Usa,Sec | Core | 2 | Adopted |
 | 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Draft |
 | 145 |[Struct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Draft |
+| 146 |[Encode bridge events in Solidity format](IPs/RSKIP146.md)|  25-OCT-19 | MI & JD | Usa | Core | 2 | Adopted |
 | 148 |[ERC1820 Pseudo-introspection Registry Contract](IPs/RSKIP148.md)|  6-NOV-19 | PMP | Usa | DApp | 1 | Adopted |
 | 149 |[Improved Asset transfers](IPs/RSKIP149.md)|  10-NOV-19 | SDL | Sca | Core | 2 | Draft |
 | 152 |[CHAINID Opcode](IPs/RSKIP152.md)|  19-NOV-19 | SMS | Sec | Core | 1 | Draft |
@@ -203,7 +206,7 @@ RSK Improvement Proposals
 | 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Accepted |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
-
+| 326 |[Change btcDestinationAddress format in release_request_received event](IPs/RSKIP326.md)|  21-JUNE-22 | KI | Usa | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -222,6 +225,7 @@ RSK Improvement Proposals
 | JIO      | Jose Ignacio Orlicki         |                        |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | JL       | Julian Len                   | julian@iovlabs.org     |
+| KI       | Kelvin Isievwore             | kelvin@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
