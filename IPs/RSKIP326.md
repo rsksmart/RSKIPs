@@ -81,7 +81,7 @@ pegout_confirmed(bytes32 indexed btcTxHash, uint256 pegoutCreationRskBlockNumber
 
 ### add_signature event logging order
 
-Emit the `add_signature` event when the transaction has been actually signed, not when there's an attempt to sign it.
+Emit the `add_signature` event after the transaction has been actually signed, not when there's an attempt to sign it.
 
 ## Backwards Compatibility
 
