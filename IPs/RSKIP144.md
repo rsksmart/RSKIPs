@@ -75,8 +75,8 @@ Any pair of transactions that are _connected_ cannot be in different parallel su
 
 > Recursive deletes must be correctly and efficiently handled. If a transaction deletes a contract using `SELFDESTRUCT` and another transaction is reading or writing a key of that contract, those two transactions must be considered _connected_.
 
-This cases should not be considered as writing a key, since they doesn't affect the output of the parallel execution:
-- Adding 0 balance
+It is worth it mention that sending 0 balance to a non-existent account creates that account. Hence, a key is considered written.
+
 
 ### Block validation algorithm
 
