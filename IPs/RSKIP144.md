@@ -37,8 +37,8 @@ Transactions in a block are divided into `N+1` sublists, where the first `N` sub
 ## New block gas limits
 
 Each sublist has its own gas limit value. The block `gasLimit` constant is replaced for two new constants:
-- `parallelSublistGasLimit = 3.400.000` is the gas limit for each _parallel sublists_
-- `sequentialSublistGasLimit = 3.400.000` is the gas limit for the _sequential sublist_
+- `parallelSublistGasLimit` is the gas limit for each _parallel sublists_
+- `sequentialSublistGasLimit` is the gas limit for the _sequential sublist_
 
 The gas used in each sublist must be treated similar to the how the gas limit was treated. The sum of the gas limit of all the transactions in a sublist cannot exceed the sublist's gas limit.
 
