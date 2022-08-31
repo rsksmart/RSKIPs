@@ -63,7 +63,7 @@ A new constant `maxTransactionExecutionThreads` is specified. It determines the 
 
 ## New block validation consensus
 
-It must be ensured that blocks that have transactions that are executed in parallel always produce the same output. Therefore, when a block is executed in parallel, nodes must verify the resulting world state is deterministic.
+It must be ensured that blocks that have transactions that are executed in parallel always produce the same output. Therefore, when a block is executed (either in parallel or sequentially) nodes must verify the resulting world state is deterministic as if it had been executed in parallel.
 
 For simplicity, two transactions are defined as _connected_ if:
 - Both transactions write the same storage key
