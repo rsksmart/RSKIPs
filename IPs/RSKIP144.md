@@ -40,7 +40,9 @@ Each sublist has its own gas limit value. The block `gasLimit` constant is repla
 - `parallelSublistGasLimit` is the gas limit for each _parallel sublists_
 - `sequentialSublistGasLimit` is the gas limit for the _sequential sublist_
 
-The gas used in each sublist must be treated similar to the how the gas limit was treated. The sum of the gas limit of all the transactions in a sublist cannot exceed the sublist's gas limit.
+Both _parallel sublists_ and _sequential sublist_ values are equal to the block `gasLimit` constant. The gas used in each sublist must be treated similar to the how the gas limit was treated. The sum of the gas limit of all the transactions in a sublist cannot exceed the sublist's gas limit.
+
+
 
 > As a result, the cumulative gas than can be used per block is `N * parallelSublistGasLimit + sequentialSublistGasLimit`.
 
