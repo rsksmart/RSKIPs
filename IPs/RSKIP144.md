@@ -21,7 +21,7 @@ Now, RSK nodes process transactions from blocks one by one, in the specified ord
 
 There are several obstacles to parallelization. [RSKIP02](RSKIP02) and [RSKIP04](RSKIP04) explore different methods that worked prior the implementation of the Unitrie. This RSKIP proposes using a runtime method to partition the transaction set into threads similar to RSKIP04 but tailored for the Unitrie.
 
-Miners must specify a valid execution plan that is included in the block header. We propose a greedy algorithm that produces a satisfactory plan. In our algorithm, miners are forced to serialize transaction execution to create blocks. at the same time they execute the transactions, they discover runtime key-access overlaps between transactions and build an execution plan. Miners can also use alternative methods tu produce optimized schedules. For a simpler overlap detection and to prevent DoS attacks, an additional part is added including all the transactions that could not be parallelized, that is executed after the execution of the parallel parts is completed. Once all transactions have been processed, the partition is created along with a schedule that determines which transactions belong in each part.
+Miners must specify a valid execution plan that is included in the block header. We propose a greedy algorithm that produces a satisfactory plan. In our algorithm, miners are forced to serialize transaction execution to create blocks. At the same time they execute the transactions, they discover runtime key-access overlaps between transactions and build an execution plan. Miners can also use alternative methods tu produce optimized schedules. For a simpler overlap detection and to prevent DoS attacks, an additional part is added including all the transactions that could not be parallelized, that is executed after the execution of the parallel parts is completed. Once all transactions have been processed, the partition is created along with a schedule that determines which transactions belong in each part.
 
 Full nodes can use this schedule to split the transaction set and parallelize execution.
 
@@ -63,7 +63,7 @@ A new constant `maxTransactionExecutionThreads` is specified. It determines the 
 
 ## New block validation consensus
 
-It must be ensured that blocks that have transactions that are executed in parallel always produce the same output. Therefore, when a block is executed (either in parallel or sequentially) nodes must verify the resulting world state is deterministic as if it had been executed in parallel.
+It must be ensured that blocks that have transactions that are executed in parallel always produce the same output. Therefore, when a block is executed (either in parallel or sequentially) nodes must verify the resulting world state is deterministic as if it had been executed sequentially.
 
 For simplicity, two transactions are defined as _connected_ if:
 - Both transactions write the same storage key
@@ -75,7 +75,7 @@ Any pair of transactions that are _connected_ cannot be in different parallel su
 
 > Recursive deletes must be correctly and efficiently handled. If a transaction deletes a contract using `SELFDESTRUCT` and another transaction is reading or writing a key of that contract, those two transactions must be considered _connected_.
 
-It is worth it mention that sending 0 balance to a non-existent account creates that account. Hence, a key is considered written.
+> Sending 0 balance to a non-existent account creates that account. Hence, a key is considered written.
 
 
 ### Block validation algorithm
