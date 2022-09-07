@@ -52,59 +52,54 @@ Note that the entry does not stores the Bitcoin destination address, but the RSK
  
 Initially, the fields `acceptanceCount`, `rejectionCount` and `voted` are set to zero and the block height is stored in `blockNumber`.
 
-Five new methods are created for the bridge contract:
+These new methods are created for the bridge contract:
 
-* `accept(bytes32 requestId) returns (uint32)`
-* `reject(bytes32 requestId) returns (uint32)`
-* `cancel(bytes32 requestId) returns (uint32)`
-* `acceptUpto(bytes32 requestId,uint32 maxEntries)`
-* `rejectUpto(bytes32 requestId,uint32 maxEntries)`
+* `getPendingPegoutState(bytes32 requestId) returns (bytes)`
+* `cancelPendingPegout(bytes32 requestId) returns (uint32)`
+* `acceptPendingPegouts(bytes32 requestId,uint32 maxEntries)`
+* `rejectPendingPegouts(bytes32 requestId,uint32 maxEntries)`
 
 All methods can be called by EOAs or by the `CALL` opcodes.
 The cost of `releaseBtc()` is increased to 50000, to account for up to 7 rejections. 
 
+To help us define these external methods, we first define 2 internal methods `accept(requestId)` and `reject(requestId)`.
 
 ## accept
-While the peg-out request is in the `pendingPegoutRequests` map, pegnatories can call the method `accept(requestId)`. When the requestId exists in the map, and the msg.sender is a valid pegnatory and it is the first time the pegnatory accepts or rejects the peg-out request, and the reject or accept thresholds have not been reached:
+When the `requestId` exists in the map, and the msg.sender is a valid pegnatory and the pegnatory index is not set in `voted`, and the reject or accept thresholds have not been reached:
 
 1. The number of acceptances for this peg-out request (`acceptanceCount`) is incremented by one
-2. The pegnatory index is added to its `voted` bit-vector.
+2. The pegnatory index is set in its `voted` bit-vector.
 
-In this case the `accept` method then returns 1.
-If the msg.sender is not a valid pegnatory, then the method does nothing and returns 2.
-If a valid pegnatory calls this method more than once, the following calls are ignored, and the method returns 3.
-When the signatories threshold of acceptances is reached, the request is moved to the peg-out queue, un-linked from the embedded link-list, and the method returns 4. When moving to the request to the release request queue, the Bitcoin destination address should be computed from the stored `senderAddress`.
-The gas cost of the `accept` method is set to 5000.
+When the signatories threshold of acceptances is reached, the request is moved to the peg-out queue, un-linked from the embedded link-list, and an event `pegOutAccepted(requestId, rskTxHash)` is emitted. When moving to the request to the release request queue, the Bitcoin destination address should be computed from the stored `senderAddress`.
 
 ## reject
-While the peg-out request is in the `pendingPegoutRequests` map, pegnatories can call the method `reject(requestId)`. When the requestId exists in the map, and the msg.sender is a valid pegnatory and it is the first time the pegnatory accepts or rejects the peg-out request, and the reject or accept thresholds have not been reached:
+When the `requestId` exists in the map, and the msg.sender is a valid pegnatory and the pegnatory index is not set in `voted`, and the reject or accept thresholds have not been reached:
 
 1. The number of rejections for this peg-out (`rejectionCount`) request is incremented by one
-2. The pegnatory index is added to its acceptances bit-vector.
+2. The pegnatory index is set in its `voted` bit-vector.
 
+When the signatories threshold of rejections is reached, the request is cancelled (in a similar way to the cancel method). The rejection threshold is the number of pegnatories minus the acceptance threshold, plus one.
 
-In this case the `reject` method then returns 1.
-If the msg.sender is not a valid pegnatory, then the method does nothing and returns 2.
-If a valid pegnatory calls this method more than once, the following calls are ignored, and the method returns 3.
-When the signatories threshold of rejections is reached, the request is cancelled and the method returns 4. The rejection threshold is the number of pegnatories minus the acceptance threshold, plus one.
-
-The gas cost of the `reject` method is set to 5000.
 
 ## cancel
-If a user calls `cancel(requestId)` and the peg-out requestId request exists, and the current block height is higher than the block number stored in the map plus 3000, the peg-out request is removed from the `pendingPegoutRequests` map, and it is unlinked from the linked-lisst. This involves eventually modifying the previous and next request records of point at each other. The amount locked in the peg-out request removed is returned to the `senderAddress`, using direct account balance modification. In this case, the returned value is 1. If the peg-out request does not exist, the returned value is 2. If the block heght deadline has not been reached, the returned value is 3.
+If a user calls `cancel(requestId)` and the peg-out requestId request exists, and the current block height is higher than the block number stored in the map plus 3000, the peg-out request is removed from the `pendingPegoutRequests` map, and it is unlinked from the linked-list. This involves eventually modifying the previous and next request records of point at each other. 
+Also, an event `pegOutCancelled(requestId, rskTxHash)` is emitted.
+The amount locked in the peg-out request removed is returned to the `senderAddress`, using direct account balance modification. In this case, the returned value is 1. If the peg-out request does not exist, the returned value is 2. If the block heght deadline has not been reached, the returned value is 3.
 
 The gas cost of `cancel` is set to 15000. 
-## acceptUpto
 
-This method enables the acceptance of all pending peg-out requests up to a certain pending request, and upto a maximum number of pending requests scanned given as argument.
+## acceptPendingPegouts
+
+This method enables the acceptance of all pending peg-out requests up to a certain pending request, and upto a maximum number of pending requests scanned given as argument. The internal `accept` method is called for each of the scanned entries.
 The method does not return any value.
-The gas cost of the `acceptUpto` method is set to 5000*maxEntries.
+The gas cost of the `acceptPendingPegouts` method is set to 5000*maxEntries.
 
-## rejectUpto
+## rejectPendingPegouts
 
-This method enables the rejection of all pending peg-out requests up to a certain pending request, and upto a maximum number of pending requests scanned given as argument.
+This method enables the rejection of all pending peg-out requests up to a certain pending request, and upto a maximum number of pending requests scanned given as argument. The internal `reject` method is called for each of the scanned entries.
+
 The method does not return any value.
-The gas cost of the `rejectUpto` method is set to 5000*maxEntries.
+The gas cost of the `rejectPendingPegouts` method is set to 5000*maxEntries.
 
 ## Internal Storage
 
