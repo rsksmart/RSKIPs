@@ -28,7 +28,7 @@ This RSKIP proposes enables pegnatories to accept specific peg-outs from a peg-o
 
 # **Motivation**
 
-The bridge contract is not designed to allow the blocking of peg-outs. Pegnatories may be requested to do it. To comply, pegnatories may need to turn off the PowHSM devices. However, the peg-outs are  executed as soon as the devices are turned on and connected to the network again. The bridge assumes peg-out transactions are aways executed and it cannot cancel a peg-out already commanded. Peg-outs are grouped in batches so that a Bitcoin transaction can contain several peg-outs and therefore selective blocking cannot be performed.
+The bridge contract is not designed to allow the blocking of peg-outs. Pegnatories may be requested to do it. To comply, pegnatories may need to turn off the PowHSM devices. However, the peg-outs are  executed as soon as the devices are turned on and connected to the network again. The bridge assumes peg-out transactions are always executed and it cannot cancel a peg-out already commanded. Peg-outs are grouped in batches so that a Bitcoin transaction can contain several peg-outs and therefore selective blocking cannot be performed.
 
 In this proposal, we give pegnatories the capability to accept peg-outs before they are included in the batch and signed.
 
