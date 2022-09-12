@@ -1,14 +1,14 @@
-# Bridge peg-out request index
+# Bridge peg-out creation index
 
-|RSKIP          |298           |
-| :------------ |:-------------|
-|**Title**      |Bridge peg-out request index |
-|**Created**    |18-APR-22 |
-|**Author**     |JD |
-|**Purpose**    |Sca |
-|**Layer**      |Core |
-|**Complexity** |2 |
-|**Status**     |Draft |
+|RSKIP          | 298                           |
+| :------------ |:------------------------------|
+|**Title**      | Bridge peg-out creation index |
+|**Created**    | 18-APR-22                     |
+|**Author**     | JD                            |
+|**Purpose**    | Sca                           |
+|**Layer**      | Core                          |
+|**Complexity** | 2                             |
+|**Status**     | Draft                         |
 
 ## Abstract
 
@@ -33,17 +33,17 @@ The proposed changes will imply a consensus change and should be treated as such
 
 #### Proposed data structure
 
-- index key: (DataWord) Combinaton of string `pegoutTxIndex-` and a Bitcoin transaction hash (Sha256hash -> 32 bytes). The resulting string should be hashed itself using Keccak256 hashing to end up having a valid 32 bytes long DataWord
+- index key: (DataWord) Combinaton of string `pegoutCreationIndex-` and a Bitcoin transaction hash (Sha256hash -> 32 bytes). The resulting string should be hashed itself using Keccak256 hashing to end up having a valid 32 bytes long DataWord
 - index value: RSK transaction hash (Keccak256 -> 32 bytes)
 
 #### Element addition
 
 The elements will be added to the index when a new peg-out is created. This occurs in the `updateCollections` Bridge method.
-When this happens, the Bridge now will store in its storage a new entry for the peg-out request index. This will use the Bitcoin transaction hash logged in `RELEASE_REQUESTED` event as the key and the current RSK transaction hash as the value.
+When this happens, the Bridge now will store in its storage a new entry for the peg-out creation index. This will use the Bitcoin transaction hash logged in `RELEASE_REQUESTED` event as the key and the current RSK transaction hash as the value.
 
 #### Element fetching
 
-When a user calls `getPegoutRskTxHash` the Bridge should try to get the parameterized Bitcoin transaction hash from the newly created index.
+When a user calls `getPegoutCreationRskTxHashByBtcTxHash` the Bridge should try to get the parameterized Bitcoin transaction hash from the newly created index.
 If the element does not exist it should return an empty byte array.
 
 #### Element removal
@@ -53,10 +53,10 @@ At this stage, the Bridge should also remove the index entry as it is no longer 
 
 ### New Bridge method
 
-The Bridge will expose a new method called `getPegoutRskTxHash` with the following signature:
+The Bridge will expose a new method called `getPegoutCreationRskTxHashByBtcTxHash` with the following signature:
 
 ```
-function getPegoutRskTxHash(bytes32 btcTxHash) returns bytes32
+function getPegoutCreationRskTxHashByBtcTxHash(bytes32 btcTxHash) returns bytes32
 ```
 
 ### Copyright
