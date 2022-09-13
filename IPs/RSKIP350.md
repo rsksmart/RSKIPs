@@ -28,7 +28,7 @@ This RSKIP proposes enables pegnatories to accept specific peg-outs from a peg-o
 
 # **Motivation**
 
-The bridge contract is not designed to allow the blocking of peg-outs. Pegnatories may be requested to do it. To comply, pegnatories may need to turn off the PowHSM devices. However, the peg-outs are executed as soon as the devices are turned on and connected to the network again. The bridge assumes peg-out transactions are always executed and it cannot cancel a peg-out already commanded. Peg-outs are grouped in batches so that a Bitcoin transaction can contain several peg-outs and therefore selective blocking cannot be performed.
+The bridge contract is not designed to allow the blocking of peg-outs. Pegnatories may be requested to do it. To comply, pegnatories may need to turn off the PowHSM devices. However, the peg-outs are executed as soon as the devices are turned on and connected to the network again. The bridge assumes peg-out transactions are always executed, a peg-out that is already commanded cannot be cancelled. Peg-outs are grouped in batches so that a Bitcoin transaction can contain several peg-outs and therefore selective blocking cannot be performed.
 
 In this proposal, we give pegnatories the capability to accept peg-outs before they are included in the batch and signed.
 
@@ -78,7 +78,7 @@ Each entry in the map consist of:
 
 This forms a single-linked list of pending requests.
 
-Note that the entry does not stores the Bitcoin destination address, but the RSK sender address, to enable reimbursements.
+Note that the entry does not store the Bitcoin destination address, but the RSK sender address, to enable reimbursements.
  
 Initially, the fields `acceptanceCount`, `rejectionCount` and `voted` are set to zero. The field `previous` is set to the previous `requestId`. The field `requestEpoch` is filled with the current epoch number (block heigh divided by `epochLength`).
 
@@ -101,7 +101,7 @@ When the `requestId` exists in the map, and the `msg.sender` is a valid pegnator
 ## cancel
 If the peg-out `requestId` request exists:
 
-* the storace cells used are zeroed so they are removed from storage 
+* the storage cells used are zeroed so they are removed from storage 
 * an event `pegOutCancelled(requestId, rskTxHash)` is emitted 
 * the amount locked in the peg-out request removed is returned to the `senderAddress`, using direct account balance modification. 
 
@@ -137,7 +137,7 @@ This method returns the peg-out request entry serialized. If the `requestId` doe
 
 ## Internal Storage
 
-Entries in the `pendingPegoutRequests` are stored as independent cells in the Bridge contract storage. To derive the storage address, the message `("pendingAcceptance-" + Hex(requestId))` is hashed with Keccak256. The function Hex() returns the 64-byte lowercase hexadecimal representation of the hash without the "0x" prefix.
+Entries in the `pendingPegoutRequests` are stored as independent cells in the Bridge contract storage. To derive the storage address, the message `("pendingAcceptance-" + Hex(requestId))` is hashed with Keccak256. The function `Hex()` returns the 64-byte lowercase hexadecimal representation of the hash without the "0x" prefix.
 
 The peg-out request payload consist of:
 
@@ -172,11 +172,11 @@ Peg-out fees will be estimated according to the number of transactions queued in
 
 # Rationale
 
-This proposal is deisgned to enable batch accepts and rejections, because forcing individual votes can be very costly to pegnatories in terms of gas spent. To enalbe batch votes, it is important that the batch voted cannot change between the time the pegnatory is notified of the batch and the time the vote transaction is included in the blockchain. That's why votes apply to all peg-out requests until a specified point in the batch. An alternative would be to divide the time in two phases, one that builds a batch, and another one for voting. I nthe voting phase, new peg-outs are queued for the following batch. However, this design still has the problem that blockchain reorganizations can change the content of batches, and pegnatories votes should never mutate with block reorganizations. Therefore the votes must include either the id of a chain of peg-outs, or a block hash (which indirectly also fixes all previous peg-out requests). 
+This proposal is deisgned to enable batch accepts and rejections, because forcing individual votes can be very costly to pegnatories in terms of gas spent. To enalbe batch votes, it is important that the batch voted cannot change between the time the pegnatory is notified of the batch and the time the vote transaction is included in the blockchain. That's why votes apply to all peg-out requests until a specified point in the batch. An alternative would be to divide the time in two phases, one that builds a batch, and another one for voting. In the voting phase, new peg-outs are queued for the following batch. However, this design still has the problem that blockchain reorganizations can change the content of batches, and pegnatories votes should never mutate with block reorganizations. Therefore the votes must include either the id of a chain of peg-outs, or a block hash (which indirectly also fixes all previous peg-out requests). 
  
 This proposal ensures that pegnatories will always have at least one full epoch to accept ore reject a certain peg-out request. Peg-out requests issued close to the deadline of the epoch will be moved to the next epoch. The maximum time a peg-out request can be outstanding is two epochs, minus one block. We set `epochLength` to 120, which corresponds approximately to one hour. This gives enough time for pegnatories to perform any automated check, yet it doesn't block user funds for too long. 
  
-Redefiniting the batching time in term of epochs allow to synchronize both and that the batch waiting time is not extended by one epoch. However, if a peg-out request is issued close to the end of the epoch prior a batch creation, the peg.out may not receive enough votes and it will be delayed until the net batch creation event.
+Redefining the batching time in term of epochs has two benefits: allows to synchronize both values, and prevents extending the batch waiting time by one epoch. However, if a peg-out request is issued close to the end of the epoch prior a batch creation, the peg.out may not receive enough votes and it will be delayed until the next batch creation event.
 
 This proposals has theflexibility to accept/reject all or specific peg-outs to reduce the number of Bridge calls required and hashes transferred. 
 
