@@ -1,5 +1,5 @@
 ---
-rskip: XX
+rskip: 351
 title: Miniheader: block header compression
 status: Draft
 purpose: Sca
