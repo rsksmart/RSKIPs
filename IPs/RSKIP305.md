@@ -35,13 +35,13 @@ Bringing Segwit to the RSK peg will tackle all these problems.
 
 ## Specification
 
-At the time of writing, the Bridge contract works with a Federation, which is an abstraction for a set of distinct secp256k1 public keys, which can ultimately be used to represent a Bitcoin multisig (N of M) P2SH.  The upgrade to this native contract involves replacing the current representation format type with a Segwit Compatible (P2SH-P2WSH).
+At the time of writing, the Bridge contract works with a Powpeg, which is an abstraction for a set of distinct secp256k1 public keys, which can ultimately be used to represent a Bitcoin multisig (N of M) P2SH.  The upgrade to this native contract involves replacing the current representation format type with a Segwit Compatible (P2SH-P2WSH).
 
-### Create a new Federation type
+### Create a new Powpeg type
 
-In order to replace the current federation representation, a new federation type is going to be created incrementing by one the value of the version type and save a new slot in the federation storage. For more information refer to [this detailed description](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP123.md#storage-upgrade) on how a federation upgrade should be managed.
+In order to replace the current powpeg representation, a new powpeg type is going to be created incrementing by one the value of the version type and save a new slot in the powpeg storage. For more information refer to [this detailed description](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP123.md#storage-upgrade) on how a powpeg upgrade should be managed.
 
-Although the schema and content of this slot is not to be changed more than the version number, it will serve to indicate how the federation multisig redeem script should be regenerated.
+Although the schema and content of this slot is not to be changed more than the version number, it will serve to indicate how the powpeg multisig redeem script should be regenerated.
 
 Currently the redeem script is as follow:
 * `<redeemScript>`:
@@ -87,7 +87,7 @@ hash160(<zero> sha256(<redeemScript>))
 
 ### New Address
 
-Also, this new federation type will have a new way of calculating the address, and this is how Segwit compatible addresses are computed:
+Also, this new powpeg type will have a new way of calculating the address, and this is how Segwit compatible addresses are computed:
 
 ```
 Base-58 ( “05” + hash160 ( sha256 ( <segwitScript> ) ) )
@@ -147,9 +147,9 @@ Putting it all together, the following is a list of the most important fields wi
 HASH160 hash160(<zero> sha256(<redeemScript>)) EQUAL
 ```
 
-### Migration to the new federation
+### Migration to the new powpeg
 
-During migration, both mechanisms (legacy and Segwit compatible) will be working at the same time. Legacy would be for the federation leaving and Segwit compatible for the incoming federation. 
+During migration, both mechanisms (legacy and Segwit compatible) will be working at the same time. Legacy would be for the powpeg leaving and Segwit compatible for the incoming powpeg. 
 All the funds (outputs) will be transferred from the current address to the new Segwit compatible address before mentioned (New Address section).
 
 But once the migration is completed, only Segwit compatible will be the accepted address and the unique mechanism to support the peg outs.
