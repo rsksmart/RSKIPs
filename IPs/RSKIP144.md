@@ -48,9 +48,9 @@ Both _parallel sublists_ and _sequential sublist_ values are equal to the block 
 
 > In consequence, the transaction gas limit can be as maximum `max{ parallelSublistGasLimit, sequentialSublistGasLimit }`
 
-## New block header field
+## New block extension header field
 
-A new field `txExecutionSublistsEdges` is added to the block header. It determines how transactions are partitioned in a block. This field consists of an array of short unsigned integers that indicates at which position in the transaction list each sublist ends.
+A new field `txExecutionSublistsEdges` is added to the block header extension. It determines how transactions are partitioned in a block. This field consists of an array of short unsigned integers that indicates at which position in the transaction list each sublist ends.
 
 For example, in a block with 10 transactions, `txExecutionSublistsEdges = [3, 6]` indicates that the first _parallel sublist_ contains transactions 0, 1 and 2; the second _parallel sublist_ contains transactions 3, 4 and 5; and the _sequential sublist_ contains transactions 6 to 9.
 
@@ -60,6 +60,8 @@ A new constant `maxTransactionExecutionThreads` is specified. It determines the 
 - An empty `txExecutionSublistsEdges` indicates that all transactions go in the _sequential sublist_.
 - The maximum number of parallel sublists that the miner can specify is equal to `maxTransactionExecutionThreads`.
 - The REMASC transaction must be included as the last transaction of the sequential sublist.
+
+> See RSKIP 351 for block header extension definition
 
 ## New block validation consensus
 
