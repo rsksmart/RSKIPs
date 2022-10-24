@@ -75,7 +75,7 @@ OP_ELSE
 OP_ENDIF
 ```
 
-The `OP_CHECKMULTISIG` opcode is moved inside the `OP_IF` and `OP_ELSE` statements right after the `OP_N` opcode, making the script comply with Bitcoin Core standard checks.
+The `OP_CHECKMULTISIG` opcode is moved inside the `OP_NOTIF` and `OP_ELSE` statements right after the `OP_N` opcode, making the script comply with Bitcoin Core standard checks.
 
 References to the Bitcoin Core line codes involved in the standard input check can be found in [3][4][5]. 
 
