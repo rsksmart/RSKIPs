@@ -7,7 +7,6 @@ purpose: Usa,Sec
 layer: Core
 complexity: 2
 status: Draft
-description: 
 ---
 
 |RSKIP          |353           |
@@ -95,6 +94,6 @@ This change is a hard-fork and therefore all full nodes must be updated.
 
 [5] [Bitcoin Core reference - Maximum number of signature check operations in an IsStandard() P2SH script](https://github.com/bitcoin/bitcoin/blob/d919e8d5742a98d7f2b957b142003166ba178d9e/src/policy/policy.h#L30) 
 
-### Copyright
+## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
