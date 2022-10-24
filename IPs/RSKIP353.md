@@ -75,7 +75,9 @@ OP_ELSE
 OP_ENDIF
 ```
 
-The `OP_CHECKMULTISIG` opcode is moved inside the `OP_ELSE` statement just after the `OP_N` opcode, making the script comply with Bitcoin Core standard checks. 
+The `OP_CHECKMULTISIG` opcode is moved inside the `OP_ELSE` statement just after the `OP_N` opcode, making the script comply with Bitcoin Core standard checks.
+
+References to the Bitcoin Core line codes involved in the standard input check can be found in [3][4][5]. 
 
 ## Backwards Compatibility
 
@@ -83,9 +85,15 @@ This change is a hard-fork and therefore all full nodes must be updated.
 
 ## References
 
-[1] [RSKIP-201: ](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP201.md)
+[1] [RSKIP-201: Time-locked Emergency Multisignature](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP201.md)
 
 [2] [Incident report: RSK peg-out service outage](https://blog.rsk.co/noticia/incident-report-rsk-peg-out-service-outage/) 
+
+[3] [Bitcoin Core reference - Number of signature check operations validation](https://github.com/bitcoin/bitcoin/blob/f6fdedf850d10d877316871aacfd5b6656178e70/src/policy/policy.cpp#L177)
+
+[4] [Bitcoin Core reference - Number of signature check operations retrieval](https://github.com/bitcoin/bitcoin/blob/d492dc1cdaabdc52b0766bf4cba4bd73178325d0/src/script/script.cpp#L153)
+
+[5] [Bitcoin Core reference - Maximum number of signature check operations in an IsStandard() P2SH script](https://github.com/bitcoin/bitcoin/blob/d919e8d5742a98d7f2b957b142003166ba178d9e/src/policy/policy.h#L30) 
 
 ### Copyright
 
