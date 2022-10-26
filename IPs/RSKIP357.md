@@ -29,7 +29,7 @@ As described in [1][2], the PowPeg redeem scripts need to be aligned with Bitcoi
 
 ## Specification
 
-The value for `fundsMigrationAgeSinceActivationEnd` in [BridgeMainNetConstants.java#L102](https://github.com/rsksmart/rskj/blob/0fbd4bbbfa464d5031f09a622ce34778ac8327c3/rskj-core/src/main/java/co/rsk/config/BridgeMainNetConstants.java#L102) changes from `10585L` to `172_800L`. Since this change is a hard fork, the new value should become active only when activated by the network upgrade that includes this change.
+The value for `fundsMigrationAgeSinceActivationEnd` in [BridgeMainNetConstants.java#L102](https://github.com/rsksmart/rskj/blob/HOP-4.0.0/rskj-core/src/main/java/co/rsk/config/BridgeMainNetConstants.java) changes from `10585L` to `172_800L`. Since this change is a hard fork, the new value should become active only when activated by the network upgrade that includes this change.
 
 ## Backwards Compatibility
 
