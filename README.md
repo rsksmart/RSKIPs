@@ -209,8 +209,8 @@ You can find a easily browseable version of this information [here](https://ips.
 | 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Draft |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 353 |[Align RSK P2SH redeem script with Bitcoin Core standard transactions checks](IPs/RSKIP353.md)|  24-OCT-22 | MI,AE | Usa,Sec | Core | 2 | Draft |
-| 357 |Adjust the number of block confirmations for a PowPeg migration period|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Draft |
-| 358 |Network Upgrade (patch): Hop 4.0.1| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Draft |
+| 357 |[Adjust the number of block confirmations for a PowPeg migration period](IPs/RSKIP357.md)|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Draft |
+| 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
