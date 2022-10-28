@@ -61,9 +61,9 @@ A new method called **registerFastBridgeBtcTransaction**() is added to the Bridg
 - *bytes* **liquidityProviderBtcAddress**: Binary encoding representing  the Liquidity Provider BTC refund address.
 - *bool* **shouldTransferToContract**: Status provided by the caller contract to know if should transfer value to the contract or not.
 
-To compute the UPI, the IDAs are serialized as a concatenation of derivationArgumentsHash (32 bytes), userRefundBtcAddress (21 bytes), liquidityProviderBtcAddress (21 bytes), liquidityBridgeContractAddress (20 bytes). Each argument occupies a fixed number of bytes shown in brackets. Formally, this is:
+To compute the UPI, the IDAs are serialized as a concatenation of derivationArgumentsHash (32 bytes), userRefundBtcAddress (21 bytes), liquidityBridgeContractAddress (20 bytes), liquidityProviderBtcAddress (21 bytes). Each argument occupies a fixed number of bytes shown in brackets. Formally, this is:
 
-`UPI = Keccak256(derivationArgumentsHash, userRefundBtcAddress, liquidityProviderBtcAddress , liquidityBridgeContractAddress)`
+`UPI = Keccak256(derivationArgumentsHash, userRefundBtcAddress, liquidityBridgeContractAddress , liquidityProviderBtcAddress)`
 
 The total number of bytes hashed is 94. Note that the concatenation order is different from the argument passing order.
 
