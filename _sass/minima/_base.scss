@@ -101,12 +101,15 @@ li {
 
 
 .footer_box a{
-  color: var(--accent-color);
+  color: var(--text-color-primary);
+  font-size: 28px;
 }
 
 .footer_box a:hover{
-  color: var(--accent-color);
+  color: var(--text-color-primary);
 }
+
+
 
 /**
  * Headings
@@ -255,13 +258,14 @@ pre {
  */
 
 .svg-icon {
-    width: 16px;
-    height: 16px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
     fill: var(--accent-color);
     padding-right: 5px;
     vertical-align: text-top;
 }
+
 
 .social-media-list {
   li + li {

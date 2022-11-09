@@ -81,6 +81,14 @@ body.darkmode{
   z-index: 1;
 }
 
+
+@media (max-width: 600px) {
+  body.darkmode .site-nav .menu-icon > svg { 
+    fill: white !important; 
+  }
+}
+
+
 @media (max-width: 750px) {
   .theme-toggle-button{
     display: none;
@@ -138,6 +146,8 @@ body.darkmode{
   }
 }
 
+.site-nav .menu-icon > svg { fill: black; }
+
 .bold{
   font-weight: bold;
 }
@@ -186,7 +196,8 @@ main.page-content {
  /* FOOTER */
 
  footer{
-  border-top: var(--accent-color) solid 3px;
+  margin-top: 2rem;
+
  }
 
  .footer_cont{
@@ -199,3 +210,4 @@ main.page-content {
  .footer_cont ul{
   margin-top: 25px;
 }
+
