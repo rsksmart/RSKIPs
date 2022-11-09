@@ -8,8 +8,16 @@
 
 <header class="site-header" role="banner">
   {%- include dark_mode.html -%}
-<div class="wrapper"><a class="site-title" rel="author" href="/">RSK Improvement Proposals</a>
+<div class="wrapper">
 
+  <div class="logo-div">
+    <a href="/">
+      <img src="img/rootstock-white-logo.svg" class="header-logo-dark" alt="">
+    </a>
+    <a href="/">
+      <img src="img/rootstock-orange-logo-full.svg" class="header-logo-light" alt="">
+    </a>
+  </div>
 <nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
@@ -25,9 +33,9 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <h1 id="rskips">RSKIPs</h1>
-<p>RSK Improvement Proposals</p>
-<h2 id="rskip-status-terms">RSKIP status terms</h2>
+        <h1 id="rskips" class="">RSKIPs</h1>
+<p>Rootstock Improvement Proposals</p>
+<h2 id="rskip-status-terms" class="">RSKIP status terms</h2>
 <ul>
   <li><strong>Draft</strong> - an RSKIP that is open for consideration</li>
   <li><strong>Accepted</strong> - an RSKIP that is planned for immediate adoption in the reference client, i.e. expected to be included in the next reference client release.</li>
@@ -36,7 +44,7 @@
   <li><strong>Rejected</strong> - an RSKIP that was rejected</li>
 </ul>
 
-<h2 id="rskip-purpose-terms">RSKIP purpose terms</h2>
+<h2 id="rskip-purpose-terms" class="">RSKIP purpose terms</h2>
 <ul>
   <li><strong>Sca</strong> - an RSKIP that improves scalability</li>
   <li><strong>Usa</strong> - an RSKIP that improves usability</li>
@@ -45,7 +53,7 @@
   <li><strong>ST</strong> - an RSKIP that proposes a standard track</li>
 </ul>
 
-<h2 id="layer">Layer</h2>
+<h2 id="layer" class="">Layer</h2>
 <ul>
   <li><strong>Core</strong> - Core, consensus related</li>
   <li><strong>Node</strong> - Related to node manager interfaces, such as RPC</li>
@@ -55,14 +63,14 @@
   <li><strong>DApp</strong> - Dapp application interfaces</li>
 </ul>
 
-<h2 id="implementation-complexity">Implementation Complexity</h2>
+<h2 id="implementation-complexity" class="">Implementation Complexity</h2>
 <ul>
   <li><strong>1</strong> - Minimal</li>
   <li><strong>2</strong> - Medium</li>
   <li><strong>3</strong> - High</li>
 </ul>
 
-<h2 id="index">Index</h2>
+<h2 id="index" class=" mb-50">Index</h2>
 
 {% include indextable.html rskips=site.pages %}
 
@@ -225,7 +233,11 @@
   <footer>
     <div class="footer_cont">
         <div class="footer_box">
-            <ul class="social-media-list"><li><a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Visit on Github</span></a></li></ul>
+          <a href="https://github.com/rsksmart/RSKIPs" target="_blank" rel="noopener" class="logo-link">
+            <img src="img/github-black.svg" alt="" class="github-logo-blk">
+            <img src="img/github-white.svg" alt="" class="github-logo-wht">
+            <p>Visit on Github</p>
+          </a>
         </div>
     </div>
 </footer>

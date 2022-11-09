@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: RSK Improvement Proposals
+title: Rootstock Improvement Proposals
 description: >-
-  RSK Improvement Proposals (RSKIPs) describe standards for the RSK
+  Rootstock Improvement Proposals (RSKIPs) describe standards for the RSK
   platform, including core protocol specifications, client APIs, and contract
   standards.
 url: "https://ips.rsk.co"
