@@ -190,7 +190,7 @@ main.page-content {
  }
 
  tr.selected {
-  background-color: var(--highlight);
+  background-color: var(--highlight) !important;
  }
 
  /* FOOTER */
