@@ -175,7 +175,7 @@ a:hover{
  * Blockquotes
  */
 blockquote {
-  color: var(--accent-color);
+  color: var(--text-color-primary);
   border-left: 4px solid $grey-color-light;
   padding-left: $spacing-unit / 2;
   @include relative-font-size(1.125);
@@ -198,6 +198,20 @@ code {
   border: 1px solid $grey-color-light;
   border-radius: 3px;
   background-color: var(--code-highlight);
+}
+pre,
+code {
+  @include relative-font-size(0.9375);
+  border: 1px solid $grey-color-light;
+  border-radius: 3px;
+  background-color: var(--code-highlight);
+}
+
+pre code {
+  @include relative-font-size(0.9375);
+  border: 1px solid $grey-color-light;
+  border-radius: 3px;
+  background-color: transparent;
 }
 
 code {
@@ -284,6 +298,7 @@ table {
 thead{
   background-color: var(--table-background);
   color: var(--text-color-primary) !important;
+  border-radius: 1rem;
 }
 
   th, td {

@@ -38,13 +38,17 @@ body{
   --table-background-green: #79C600;
   --table-bg-alt: #f8f8f8;
   --code-background: #f1f0f0;
-  --code-highlight: #ff71e07d;
+  --code-highlight: #FFC2F3;
   --accent-color: #79C600; 
   --btn-gradient: rgba(255,145,0,1);
-  --highlight: #ff71e05d;
+  --highlight: #ff71e0c3;
   --transition-delay: 1s;
   --light: #d8dbe0;
   --dark: #28292c;
+  --highlight-red:  rgb(162, 0, 0) ;
+  --highlight-dg:   #1f385c;
+  --brand-highlight-a: #1b078e;
+  --brand-highlight-b: #528205;
 }
 
 body.darkmode{
@@ -52,13 +56,17 @@ body.darkmode{
   --text-color-secondary: #79C600;
   --text-color-third: black;
   --background-color: black;
-  --table-background: #FF71E1;
+  --table-background: #79C600;
   --table-bg-alt: #0c0e0e;
-  --code-background: #FAF9F5;
+  --code-background: #faf9f512;
   --code-highlight: #9E76FF;
   --accent-color: #FF9100;
   --highlight: #9E76FF;
   --btn-gradient: rgba(121,198,0,1);
+  --highlight-red:  #FF71E1 ;
+  --highlight-dg:   #79C600;
+  --brand-highlight-a: #FF9100;
+  --brand-highlight-b: #DEFF1A;
 }
 
 /* ======== NEW TOGGLE BTN ========= */
@@ -115,17 +123,12 @@ body.darkmode{
   background: #FFF;
 }
 
-
-
-
-
-
 .highlight .c1 {
-    color: #3e3e3b;
+    color: var(--text-color-primary);
 }
 
 .highlight .cm {
-  color: #3e3e3b;
+  color: var(--text-color-primary);
 }
 
 .theme-toggle-button{
@@ -144,6 +147,9 @@ body.darkmode{
   right: 200px;
   z-index: 1;
 }
+
+
+
 
 .theme-toggle-button .icon{
   margin-right: 0 !important;
@@ -242,6 +248,14 @@ main.page-content {
 }
 
 
+.site-title{
+  margin-bottom: 0;
+  font-family: 'rootstock-sans-headline', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color-primary);
+}
+
  @include media-query($on-palm) {
      .purpose {
       display: none;
@@ -264,9 +278,13 @@ main.page-content {
   background-color: var(--highlight) !important;
  }
 
+ table thead{
+  border-radius: 1rem !important;
+ }
 
  table th{
-  border: var(--text-color-primary) 2px solid;
+  border: black 1px solid;
+  color: #000;
   font-family: 'rootstock-sans-headline', sans-serif;
   padding: 10px;
  }
