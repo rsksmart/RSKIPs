@@ -33,36 +33,51 @@ body{
   --text-color-third: white;
   --secondary-dark: #194d91;
   --background-color: #FAF9F5;
-  --table-background: black;
+  --table-background: #79C600;
   --table-background-pink: #FF71E1;
   --table-background-green: #79C600;
   --table-bg-alt: #f8f8f8;
-  --code-background: #e6e5e2;
+  --code-background: #f1f0f0;
   --code-highlight: #ff71e07d;
-  --accent-color: #FF9100; 
+  --accent-color: #79C600; 
   --btn-gradient: rgba(255,145,0,1);
   --highlight: #ff71e05d;
   --transition-delay: 1s;
+  --light: #d8dbe0;
+  --dark: #28292c;
 }
 
 body.darkmode{
   --text-color-primary: white;
-  --text-color-secondary: #DEFF1A;
+  --text-color-secondary: #79C600;
   --text-color-third: black;
   --background-color: black;
   --table-background: #FF71E1;
-  --table-bg-alt: #1d3a43;
-  --code-background: #e4e0d6;
+  --table-bg-alt: #0c0e0e;
+  --code-background: #FAF9F5;
   --code-highlight: #9E76FF;
-  --accent-color: #79C600;
+  --accent-color: #FF9100;
   --highlight: #9E76FF;
   --btn-gradient: rgba(121,198,0,1);
 }
 
+/* ======== NEW TOGGLE BTN ========= */
+
+
+
+.highlight .c1 {
+    color: #3e3e3b;
+}
+
+.highlight .cm {
+  color: #3e3e3b;
+}
+
+
+
 
 .theme-toggle-button{
-  background-color: var(--accent-color);
-  background-image: linear-gradient(90deg, var(--btn-gradient));
+  background-color: var(--text-color-primary);
   color: var(--background-color);
   display: flex;
   justify-content: center;
@@ -81,6 +96,9 @@ body.darkmode{
   z-index: 1;
 }
 
+.theme-toggle-button .icon{
+  margin-right: 0 !important;
+}
 
 @media (max-width: 600px) {
   body.darkmode .site-nav .menu-icon > svg { 
@@ -137,6 +155,10 @@ body.darkmode{
 }
 
 
+.page-link:hover{
+  color: #FF9100;
+}
+
 .site-header {
   .wrapper {
     display: flex;
@@ -192,6 +214,20 @@ main.page-content {
  tr.selected {
   background-color: var(--highlight) !important;
  }
+
+
+ table th{
+  border: var(--text-color-primary) 2px solid;
+  font-family: 'rootstock-sans-headline', sans-serif;
+ }
+
+ table td{
+  border: 1px solid var(--table-bg-alt);
+ }
+
+
+
+ 
 
  /* FOOTER */
 
