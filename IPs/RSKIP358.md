@@ -30,7 +30,7 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 - Codename: Hop 4.0.1
 - Activation:
 	- RSK Mainnet block: yet to be defined
-	- RSK Testnet block: yet to be defined
+	- RSK Testnet block: #3,362,200
 
 ### Included RSKIPs
 
@@ -38,7 +38,8 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 
 ### Accepted RSKIPs
 
-- No accepted RSKIPs so far
+- [RSKIP-353](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP353.md): Align RSK P2SH redeem script with Bitcoin Core standard transactions checks
+- [RSKIP-357](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP357.md): Adjust the number of block confirmations for a PowPeg migration period
 
 ### Rejected RSKIPs
 
