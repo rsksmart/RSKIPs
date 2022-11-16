@@ -148,7 +148,94 @@ body.darkmode{
   z-index: 1;
 }
 
+/* ======= HIGHLIGHT ======= */
 
+.orange-highlight{
+  color: black;
+  background-color: #FF9100;
+  padding: 0px 10px;
+  margin-bottom: 35px;
+}
+
+.pink-highlight{
+  color: black;
+  background-color: #FF71E1;
+  padding: 0px 10px;
+  margin-bottom: 35px;
+  margin-top: 50px;
+}
+
+.green-highlight{
+  color: black;
+  background-color: #79C600;
+  padding: 0px 10px;
+  margin-bottom: 35px;
+  margin-top: 50px;
+}
+
+.purple-highlight{
+  color: black;
+  background-color: #9E76FF;
+  padding: 0px 10px;
+  margin-bottom: 35px;
+  margin-top: 50px;
+}
+
+.cyan-highlight{
+  color: black;
+  background-color: #08FFD0;
+  padding: 0px 10px;
+  margin-bottom: 35px;
+  margin-top: 50px;
+}
+
+
+/* ======= LABELS ======= */
+
+.orange-label{
+  color: black;
+  background-color: #FF9100;
+  border-radius: 25px;
+  padding: 5px 15px;
+  text-transform: uppercase;
+  font-family: 'rootstock-sans-headline', sans-serif;
+}
+
+.pink-label{
+  color: black;
+  background-color: #FF71E1;
+  border-radius: 25px;
+  padding: 5px 15px;
+  text-transform: uppercase;
+  font-family: 'rootstock-sans-headline', sans-serif;
+}
+
+.green-label{
+  color: black;
+  background-color: #79C600;
+  border-radius: 25px;
+  padding: 5px 15px;
+  text-transform: uppercase;
+  font-family: 'rootstock-sans-headline', sans-serif;
+}
+
+.purple-label{
+  color: black;
+  background-color: #9E76FF;
+  border-radius: 25px;
+  padding: 5px 15px;
+  text-transform: uppercase;
+  font-family: 'rootstock-sans-headline', sans-serif;
+}
+
+.cyan-label{
+  color: black;
+  background-color: #08FFD0;
+  border-radius: 25px;
+  padding: 5px 15px;
+  text-transform: uppercase;
+  font-family: 'rootstock-sans-headline', sans-serif;
+}
 
 
 .theme-toggle-button .icon{
@@ -161,6 +248,9 @@ body.darkmode{
   }
 }
 
+.ml-5{
+  margin-left: 30px;
+}
 
 @media (max-width: 750px) {
   .theme-toggle-button{
@@ -176,11 +266,13 @@ body.darkmode{
 
 
 #index{
-  font-size: 32px;
+  font-size: 64px;
+  margin-top: 50px;
+  margin-bottom: 25px!important;
 }
 
 #author-index{
-  font-size: 32px;
+  font-size: 36px;
 }
 
 
