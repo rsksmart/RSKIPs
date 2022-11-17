@@ -2,8 +2,8 @@
  * Site header
  */
 .site-header {
-  border-top: 5px solid var(--accent-color);
-  border-bottom: 3px solid var(--accent-color);
+
+  margin-bottom: 3.5rem ;
   min-height: $spacing-unit * 1.865;
 
   // Positioning context for the mobile navigation icon
@@ -23,6 +23,33 @@
     color: var(--accent-color);
   }
 }
+
+.logo-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+body.darkmode .header-logo-dark{
+  width: 170px;
+  display: block;
+}
+
+.header-logo-dark{
+  display: none;
+}
+
+.header-logo-light{
+  width: 170px;
+}
+
+body.darkmode .header-logo-light{
+  display: none;
+}
+
+
 
 .site-nav {
   float: right;
@@ -44,7 +71,7 @@
 
     // Gaps between nav items, but not on the last one
     &:not(:last-child) {
-      margin-right: 20px;
+      margin-right: 2rem;
     }
   }
 
@@ -102,7 +129,32 @@
   }
 }
 
+.github-logo-wht{
+display: none;
+}
 
+body.darkmode .github-logo-wht{
+  display: block;
+  width: 30px;
+  margin-right: 25px;
+  margin-bottom: 15px;
+}
+
+.github-logo-blk{
+  width: 30px;
+  margin-right: 25px;
+  margin-bottom: 15px;
+}
+body.darkmode .github-logo-blk{
+  display: none;
+}
+
+
+.logo-link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 .site-footer {
