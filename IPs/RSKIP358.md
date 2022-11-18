@@ -31,6 +31,7 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 - Activation:
 	- RSK Mainnet block: yet to be defined
 	- RSK Testnet block: #3,362,200
+- Open for comments until: Dec, 22nd, 2022.
 
 ### Included RSKIPs
 
@@ -52,7 +53,9 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 
 ## Timeline
 
-Oct-26-22: RSKIP created and proposed RSKIPs listed
+- Nov-18-22: This RSKIP will be open for comments until Dec 2nd.
+- Nov-17-22: RSKIPs 353 and 357 have been included in RSK Hop Testnet 4.0.1/4.1.1 as described [here](https://blog.rsk.co/noticia/rsk-hop-testnet-4-0-1-and-4-1-1-are-here-testnet-only-versions/).
+- Oct-26-22: RSKIP created and proposed RSKIPs listed
 
 ## References
 
