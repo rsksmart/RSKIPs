@@ -22,7 +22,7 @@ This RSKIP proposes a technique to compress the block header. By moving informat
 
 ## Specification
 
-The block header compression is specified similar to RSKIP 194
+The block header compression is specified similar to RSKIP 194.
 
 ### Block header version
 
@@ -32,10 +32,17 @@ For block headers version 1, there are two separate serialization methods, one f
 
 ### Compressed header
 
-When serializing the block header version 1 to obtain the block hash, the field logsBloom is replaced by an RLP list of
+When serializing the block header to obtain the block hash, the `logBloom` field is renamed `extendedData`. This affects all headers past and future.
 
-* The blockVersion field (integer) (1 byte)
-* The Keccak hash of the bloom filter data and the `txExecutionSublistsEdges` as a list of two elements (32 bytes).
+- For version 0:
+  ```
+  extendedData = logBlooms
+  ```
+- For version 1:
+  ```
+  extendedHeaderEncoded = RLP(logsBloom, txExecutionSublistsEdges)
+  extendedData = RLP(version, Keccak256(extendedHeaderEncoded))
+  ```
 
 ### Extended header
 
