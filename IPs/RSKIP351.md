@@ -40,8 +40,19 @@ When serializing the block header to obtain the block hash, the `logBloom` field
   ```
 - For version 1:
   ```
-  extendedHeaderEncoded = RLP(logsBloom, txExecutionSublistsEdges)
-  extendedData = RLP(version, Keccak256(extendedHeaderEncoded))
+  extendedData = RLP(version, blockHeaderExtensionHash)
+  ```
+
+#### Block Header Extension
+
+A new data structure called Block Header Extension is used to transfer the information that is not included in the compressed header.
+
+- For version 0 is not existent.
+- For version 1:
+  ```
+  blockHeaderExtensionEncoded = RLP(logsBloom, txExecutionSublistsEdges)
+  blockHeaderExtensionHash = Keccak256(RLP(
+    Keccak256(logsBloom), txExecutionSublistsEdges))
   ```
 
 ### Extended header
@@ -61,6 +72,8 @@ The logs bloom field allows new space in the block header for adding the hash of
 RSKIP 144 introduces a new field on the block header. It is a good opportunity to build this data structure correctly.
 
 This implementation is a first intention of refurbishing the header to allow smoother modifications in the future. A better implementation would completely rebuild the block header "cleaning up" the unnecessary used space, moving fields like the minimum gas price to the new data structure, as described in RSKIP 194.
+
+Block header extension hash used `Keccak256(logsBloom)` because it allows to verify the structure without requesting logs bloom that is 256 bytes long. If necessary, a methods `getHeaderExtensionCompressed` can be created. For future versions, we recommend hash any field that has length >= 32 bytes (keccak256 output size).
 
 ## Backwards compatibility
 
