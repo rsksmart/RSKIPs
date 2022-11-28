@@ -73,7 +73,7 @@ RSKIP 144 introduces a new field on the block header. It is a good opportunity t
 
 This implementation is a first intention of refurbishing the header to allow smoother modifications in the future. A better implementation would completely rebuild the block header "cleaning up" the unnecessary used space, moving fields like the minimum gas price to the new data structure, as described in RSKIP 194.
 
-Block header extension hash used `Keccak256(logsBloom)` because it allows to verify the structure without requesting logs bloom that is 256 bytes long. If necessary, a methods `getHeaderExtensionCompressed` can be created. For future versions, we recommend hash any field that has length >= 32 bytes (keccak256 output size).
+Block header extension hash uses `Keccak256(logsBloom)` because it allows to verify the structure without requesting logs bloom that is 256 bytes long. If necessary, a methodd `getHeaderExtensionCompressed` can be created. For future versions, we recommend to hash any field that has length >= 32 bytes (keccak256 output size).
 
 ## Backwards compatibility
 
