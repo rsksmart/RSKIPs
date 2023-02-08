@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="ml-5">
+        <h2 id="rskips" class="orange-highlight">RSKIPs</h2>
+      </div>
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+    
+    {%- include footer-purpose.html -%}
+
+    <script src="../assets/js/dark_mode.js"></script>
+    <script src="../../assets/js/dark_mode.js"></script>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2784460.js"></script>
+    <!-- End of HubSpot Embed Code -->
+  </body>
+
+</html>

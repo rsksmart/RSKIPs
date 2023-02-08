@@ -6,9 +6,16 @@
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
 
-    <a class="site-title" rel="author" href="{{ "/" }}">{{ site.title | escape }}</a>
+    <div class="logo-div">
+      <a href="/">
+        <img src="../img/rootstock-white-logo.svg" class="header-logo-dark" alt="">
+      </a>
+      <a href="/">
+        <img src="../img/rootstock-logo-black.svg" class="header-logo-light" alt="">
+      </a>
+    </div>
 
-    
+
 
   
 
