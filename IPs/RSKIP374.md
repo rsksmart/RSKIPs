@@ -26,9 +26,9 @@ This RSKIP proposes a change to the number of block confirmations required for a
 
 ## Motivation
 
-As described in RSKIP357 [[1]](#references), as part of the efforts done to solve the peg-outs service incident[[2](#references)] it was necessary to increase the PowPeg migration period from 10,585 to 172,800 blocks to give enough time for a mining pool to process the non-standard transactions before the migration period finishes.
+As described in RSKIP357 [1], as part of the efforts done to solve the peg-outs service incident [2] it was necessary to increase the PowPeg migration period from 10,585 to 172,800 blocks to give enough time for a mining pool to process the non-standard transactions before the migration period finishes.
 
-Once the issue with the peg-outs has been solved and the service has been resumed, this RSKIP proposes to restore the PowPeg migration period back to its orginal value of 10,585 blocks.
+Once the issue with the peg-outs has been solved, all migration transactions have been mined and the service has been resumed, this RSKIP proposes to restore the PowPeg migration period back to its original value of 10,585 blocks.
 
 ## Specification
 
