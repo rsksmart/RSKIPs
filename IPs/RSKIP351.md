@@ -1,6 +1,6 @@
 ---
 rskip: 351
-title: Miniheader: block header compression
+title: Miniheader - block header compression
 status: Draft
 purpose: Sca
 author: IO (ilan@iovlabs.org)
