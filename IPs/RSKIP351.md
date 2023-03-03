@@ -51,8 +51,7 @@ A new data structure called Block Header Extension is used to transfer the infor
 - For version 1:
   ```
   blockHeaderExtensionEncoded = RLP(logsBloom, txExecutionSublistsEdges)
-  blockHeaderExtensionHash = Keccak256(RLP(
-    Keccak256(logsBloom), txExecutionSublistsEdges))
+  blockHeaderExtensionHash = Keccak256(blockHeaderExtensionEncoded)
   ```
 
 ### Extended header
