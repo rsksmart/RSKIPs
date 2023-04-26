@@ -42,7 +42,7 @@ Each sublist has its own gas limit value. The block `gasLimit` constant is repla
 
 Both _parallel sublists_ and _sequential sublist_ values are equal to `(block gas limit/ N+1)`.
 
-The gas limit in each sublist must be treated similar to the how the block gas limit was treated. The sum of the gas used of all the transactions in a sublist cannot exceed the sublist's gas limit.
+The gas limit in each sublist must be treated similar to how the block gas limit was treated. The sum of the gas used of all the transactions in a sublist cannot exceed the sublist's gas limit.
 
 > As a result, the total gas than can be used per block is equal to the block gas limit.
 
