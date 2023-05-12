@@ -1,54 +1,46 @@
 ---
-rskip: pull_request_number_here
-title: Title
-created: DD-MMM-YY
-author: INITIALS
-purpose: Sca,Usa,Fair,Sec or ST
-layer: Core,Node,UI,2nd,Net or DApp 
-complexity: 1, 2 or 3
-status: Draft,Accepted,Adopted,Deferred or Rejected
+rskip: 385
+title: Bridge method `getEstimatedFeesForNextPegOutEvent` improvement
+created: 12-MAY-23
+author: MI
+purpose: Usa
+layer: Core
+complexity: 1
+status: Draft
 description: 
 ---
 
-|RSKIP          |pull_request_number_here           |
+|RSKIP          |385           |
 | :------------ |:-------------|
-|**Title**      |Title |
-|**Created**    |DD-MMM-YY |
-|**Author**     |INITIALS |
-|**Purpose**    |Sca,Usa,Fair,Sec or ST |
-|**Layer**      |Core,Node,UI,2nd,Net or DApp |
-|**Complexity** |1, 2 or 3 |
-|**Status**     |Draft,Accepted,Adopted,Deferred or Rejected |
+|**Title**      |Bridge method `getEstimatedFeesForNextPegOutEvent` improvement |
+|**Created**    |12-MAY-23 |
+|**Author**     |MI |
+|**Purpose**    |Usa |
+|**Layer**      |Core |
+|**Complexity** |1 |
+|**Status**     |Draft |
 
 ## Abstract
 
-To be completed...
+This RSKIP proposes an improvement to how the estimated fee for the next pegout event is calculated in the Bridge contract.
 
 ## Motivation
 
-To be completed...
+As described in RSKIP271 [1], along with the peg-out batching functionality new methods were added to the Bridge contract. One of these new methods is `getEstimatedFeesForNextPegOutEvent()`, created so that users can estimate the peg-out fees. This method returns the fees of a peg-out transaction containing (N+2) outputs and 2 inputs, where N is the number of peg-outs requests waiting in the queue. (N+2) because it considers one extra output for the change and one extra output for the peg-out the user would potentially include in the queue.
+
+With the current implementation, when 0 peg-out requests are waiting in the queue `getEstimatedFeesForNextPegOutEvent()` always returns 0. This can be misleading to users since it is not the correct value. 
 
 ## Specification
 
-To be completed...
+When there are 0 peg-out requests in the queue, the method `getEstimatedFeesForNextPegOutEvent()` should return the fees of a peg-out transaction containing 2 outputs (one for the pegout and one for the change) and 2 inputs.
 
-### Subsection 1 of Specification such as format.
+## Backward Compatibility
 
-Blah.
-
-### Subsection 2 of specs such.
-
-Blah two...
-
-## Rationale
-
-Discuss design decisions, community debates and possible attacks.
+This change is a hard fork and therefore all full nodes must be updated.
 
 ## References
 
-[1] Other RSKIP https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP??.md
-
-[2] Other Articles such as Smart Contracts for Bribing Miners http://homepages.cs.ncl.ac.uk/patrick.mccorry/minerbribery.pdf
+[1] [RSKIP 271](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP271.md)
 
 ### Copyright
 
