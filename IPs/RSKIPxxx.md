@@ -135,7 +135,7 @@ This method extends the parking time of the ordinal to a year starting from the 
  
 To know exactly how much you need to pay to extend the parking time, the Bridge provides the following method:
  
-`uint256 getOrdinalParkingExtensionFee()`
+`uint256 getOrdinalParkingExtensionFee(uint256 tId, int index)`
 
 This method returns how much the user needs to pay to extend the parking period for one year from the current date. The value is expressed in weis.
 
