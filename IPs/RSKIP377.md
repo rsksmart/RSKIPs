@@ -30,7 +30,7 @@ The Bridge contract in Rootstock is constantly evolving and adding new features.
 
 These different use cases show that there could be multiple different redeem scripts created for the same PowPeg composition. Different transactions could then have different PowPeg redeem scripts all belonging to the same PowPeg composition. The last retired federation P2SH script is stored so that it is possible to identify transactions that were created by the PowPeg conformation that existed until the latest PowPeg change.
 
-In order to simplify identifying these transactions with distinct redeem scripts all belonging to the same PowPeg structure, this RSKIP proposes to store as the last retired federation P2SH script a P2SH script built only from the **standard** redeem script.
+To simplify identifying these transactions with distinct redeem scripts all belonging to the same PowPeg structure, this RSKIP proposes to store as the last retired federation P2SH script a P2SH script built only from the **standard** redeem script.
 
 Standard redeem script format:
 ```
