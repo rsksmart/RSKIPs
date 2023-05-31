@@ -21,7 +21,7 @@ Now, RSK nodes process transactions from blocks one by one, in the specified ord
 
 There are several obstacles to parallelization. [RSKIP02](RSKIP02) and [RSKIP04](RSKIP04) explore different methods that worked prior the implementation of the Unitrie. This RSKIP proposes using a runtime method to partition the transaction set into threads similar to RSKIP04 but tailored for the Unitrie.
 
-Miners must specify a valid execution plan that is included in the block header. We propose a greedy algorithm that produces a satisfactory plan. In our algorithm, miners are forced to serialize transaction execution to create blocks. At the same time they execute the transactions, they discover runtime key-access overlaps between transactions and build an execution plan. Miners can also use alternative methods tu produce optimized schedules. For a simpler overlap detection and to prevent DoS attacks, an additional part is added including all the transactions that could not be parallelized, that is executed after the execution of the parallel parts is completed. Once all transactions have been processed, the partition is created along with a schedule that determines which transactions belong in each part.
+Miners must specify a valid execution plan that is included in the block header. We propose a greedy algorithm that produces a satisfactory plan. In our algorithm, miners are forced to serialize transaction execution to create blocks. At the same time they execute the transactions, they discover runtime key-access overlaps between transactions and build an execution plan. Miners can also use alternative methods to produce optimized schedules. For a simpler overlap detection and to prevent DoS attacks, an additional part is added including all the transactions that could not be parallelized, that is executed after the execution of the parallel parts is completed. Once all transactions have been processed, the partition is created along with a schedule that determines which transactions belong in each part.
 
 Full nodes can use this schedule to split the transaction set and parallelize execution.
 
@@ -40,17 +40,17 @@ Each sublist has its own gas limit value. The block `gasLimit` constant is repla
 - `parallelSublistGasLimit` is the gas limit for each _parallel sublists_
 - `sequentialSublistGasLimit` is the gas limit for the _sequential sublist_
 
-Both _parallel sublists_ and _sequential sublist_ values are equal to the block `gasLimit` constant. The gas used in each sublist must be treated similar to the how the gas limit was treated. The sum of the gas limit of all the transactions in a sublist cannot exceed the sublist's gas limit.
+Both _parallel sublists_ and _sequential sublist_ values are equal to `(block gas limit/ N+1)`.
 
+The gas limit in each sublist must be treated similar to how the block gas limit was treated. The sum of the gas used of all the transactions in a sublist cannot exceed the sublist's gas limit.
 
+> As a result, the total gas than can be used per block is equal to the block gas limit.
 
-> As a result, the cumulative gas than can be used per block is `N * parallelSublistGasLimit + sequentialSublistGasLimit`.
+> In consequence, the maximum gas used by a transaction is the sublist gas limit.
 
-> In consequence, the transaction gas limit can be as maximum `max{ parallelSublistGasLimit, sequentialSublistGasLimit }`
+## New block extension header field
 
-## New block header field
-
-A new field `txExecutionSublistsEdges` is added to the block header. It determines how transactions are partitioned in a block. This field consists of an array of short unsigned integers that indicates at which position in the transaction list each sublist ends.
+A new field `txExecutionSublistsEdges` is added to the block header extension. It determines how transactions are partitioned in a block. This field consists of an array of short unsigned integers that indicates at which position in the transaction list each sublist ends.
 
 For example, in a block with 10 transactions, `txExecutionSublistsEdges = [3, 6]` indicates that the first _parallel sublist_ contains transactions 0, 1 and 2; the second _parallel sublist_ contains transactions 3, 4 and 5; and the _sequential sublist_ contains transactions 6 to 9.
 
@@ -60,6 +60,8 @@ A new constant `maxTransactionExecutionThreads` is specified. It determines the 
 - An empty `txExecutionSublistsEdges` indicates that all transactions go in the _sequential sublist_.
 - The maximum number of parallel sublists that the miner can specify is equal to `maxTransactionExecutionThreads`.
 - The REMASC transaction must be included as the last transaction of the sequential sublist.
+
+> See RSKIP 351 for block header extension definition
 
 ## New block validation consensus
 

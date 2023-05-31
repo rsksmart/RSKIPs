@@ -1,8 +1,8 @@
 ---
 rskip: 358
-title: Network Upgrade (patch): Hop 4.0.1
+title: Network Upgrade (patch) - Hop 4.0.1
 description: 
-status: Draft
+status: Accepted
 purpose: Usa, Sec
 author: AE
 layer: Core
@@ -19,7 +19,7 @@ created: 2022-10-26
 |**Purpose**    |Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Accepted |
 
 ## Abstract
 
@@ -30,7 +30,8 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 - Codename: Hop 4.0.1
 - Activation:
 	- RSK Mainnet block: yet to be defined
-	- RSK Testnet block: yet to be defined
+	- RSK Testnet block: #3,362,200
+- Open for comments until: Dec, 2nd, 2022 (CLOSED).
 
 ### Included RSKIPs
 
@@ -38,7 +39,8 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 
 ### Accepted RSKIPs
 
-- No accepted RSKIPs so far
+- [RSKIP-353](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP353.md): Align RSK P2SH redeem script with Bitcoin Core standard transactions checks
+- [RSKIP-357](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP357.md): Adjust the number of block confirmations for a PowPeg migration period
 
 ### Rejected RSKIPs
 
@@ -51,7 +53,10 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 
 ## Timeline
 
-Oct-26-22: RSKIP created and proposed RSKIPs listed
+- Dec-02-22: Open for comments period is now finished. Release and activation dates for the patch will be announced soon.
+- Nov-18-22: This RSKIP will be open for comments until Dec 2nd.
+- Nov-17-22: RSKIPs 353 and 357 have been included in RSK Hop Testnet 4.0.1/4.1.1 as described [here](https://blog.rsk.co/noticia/rsk-hop-testnet-4-0-1-and-4-1-1-are-here-testnet-only-versions/).
+- Oct-26-22: RSKIP created and proposed RSKIPs listed
 
 ## References
 
