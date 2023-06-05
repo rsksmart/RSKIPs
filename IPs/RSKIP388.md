@@ -1,6 +1,6 @@
 ---
 rskip: 388
-title: Network Upgrade: Fingerroot
+title: Network Upgrade - Fingerroot
 description: 
 status: Draft
 purpose: Usa, Sec
