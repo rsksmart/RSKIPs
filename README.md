@@ -213,6 +213,7 @@ You can find a easily browseable version of this information [here](https://ips.
 | 357 |[Adjust the number of block confirmations for a PowPeg migration period](IPs/RSKIP357.md)|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Adopted |
 | 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Adopted |
 | 374 |[Reestablish the number of block confirmations for a PowPeg migration period](IPs/RSKIP374.md)| 15-FEB-23 | MI | Usa,Sec | Core | 1 | Draft |
+| 375 |[Use the pegout creation transaction hash as key in the map structure that stores the pegout transactions waiting for signatures](IPs/RSKIP375.md)| 30-MAY-23 | MI | Sca,Usa | Core | 1 | Draft |
 | 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Draft |
 | 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Draft |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Draft |
