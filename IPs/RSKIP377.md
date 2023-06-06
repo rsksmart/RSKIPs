@@ -51,7 +51,7 @@ Update the current implementation of RSKIP186 [3]. When a PowPeg change occurs e
 
 [2] [RSKIP 176](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP176.md)
 
-[2] [RSKIP 186](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP186.md)
+[3] [RSKIP 186](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP186.md)
 
 ### Copyright
 
