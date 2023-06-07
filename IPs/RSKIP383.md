@@ -36,7 +36,7 @@ This RSKIP proposes a change in the duration of said stages for Mainnet to make 
 As part of the correction of the Hop POWpeg redeemscript (see [RSKIP-353](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP353.md)) a change in the migration stage was introduced (see [RSKIP-357](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP357.md)). This change extended the migration stage to ensure no funds would be at risk during the non-standard script managed UTXOs were migrated to the standard redeem script.
 Now, a new RSKIP proposes to restablish the migration duration (see [RSKIP-374](Reestablish the number of block confirmations for a PowPeg migration period)).
 
-With all these changes, a new question arised, what about users wanting to decide whether they want to keep participating in the 2wp or not? When a new POWPeg composition is voted, people may or may not agree with this.
+With all these changes, a new question arised, what about users wanting to decide whether they want to keep participating in the 2wp or not? When a new POWPeg composition is voted, community members may or may not agree with this.
 
 The users have 18,500 rootstock blocks (approximately 6 and half days) to remove their funds from the POWpeg if they don't agree with the new POWpeg composition.
 This is not a short time, but we need to take into account the time it takes to actually be able to remove funds from the POWpeg.
@@ -44,7 +44,7 @@ This is not a short time, but we need to take into account the time it takes to 
 Let's assume user Alice has a certain amount of RBTC staked in a DeFi protocol on Rootstock. When Alice finds out about a POWpeg composition change taking place she may not want to keep on participating. She would have to withdraw her funds from the protocol, and then proceed to perform a peg-out.
 With the addition of the peg-out batching the peg-out will take up to 3hs to be processed, and then the usual 34hs to be confirmed, signed and broadcasted. In total, Alice may take up to 40hs until she gets her BTC back on Bitcoin.
 Been optimistical Alice has enough time to get out.
-This may not be the case if the UTXOs are few. If Alice has a high amount or RBTC to peg-out, there is a chance there is not enough UTXOs in the Bridge ATM (i.e. UTXOs are consumed in a pending peg-out or a change UTXO is still waiting to be confirmed).
+This may not be the case if the UTXOs are few. If Alice has a high amount of RBTC to peg-out, there is a chance there are not enough UTXOs in the Bridge ATM (i.e. UTXOs are consumed in a pending peg-out or a change UTXO is still waiting to be confirmed).
 In this case Alice may have to double the waiting time or worse. A change UTXO takes near 60 hours to be registered in the Bridge (around 40 hs for it to be broadcasted to Bitcoin and around 17 more hours to be confirmed), this means that Alice may have to wait 100 hours 
 
 There are many RSKIPs proposing improvements to avoid having Alice in the waiting line for long (e.g. [RSKIP-265](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP265.md), [RSKIP-270](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP270.md) or [RSKIP-272](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md)) but those are not implemented yet.
@@ -53,7 +53,7 @@ For all the reasons listed above, we consider relevant to extend the activation 
 
 ## Specification
 
-Change the federationActivationAge in the Bridge to 40320.
+Change the federationActivationAge in the Bridge to 40320 blocks.
 
 This change should be handled as a consensus rule.
 
