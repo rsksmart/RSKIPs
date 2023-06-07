@@ -49,7 +49,7 @@ This RSKIP specifies the changes included in the RSK network upgrade named Finge
 - [RSKIP-252](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP252.md): Transaction Gas Price Cap
 - [RSKIP-326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): Pegout events improvements
 - [RSKIP-374](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP374.md): Reestablish the number of block confirmations for a PowPeg migration period
-- [RSKIP-375](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP375.md): Pegout creation hash as key
+- [RSKIP-375](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP375.md): Use the pegout creation transaction hash as the key in the map structure that stores the pegout transactions waiting for signatures
 - [RSKIP-377](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP377.md): Store the last retired federation standard P2SH script
 - [RSKIP-383](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP383.md): Increase POWpeg activation age
 - [RSKIP-385](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP385.md): Bridge method `getEstimatedFeesForNextPegOutEvent` improvement
