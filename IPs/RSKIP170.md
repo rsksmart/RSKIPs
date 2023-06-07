@@ -31,7 +31,7 @@ Allowing users to peg-in BTC to any address in RSK, EOA or contract.
 
 ## Specification
 
-This RSKIP proposes an extension to the current peg-in workflow. By including an output with an OP_RETURN op code and certain payload in the transaction sent to the federation to perform the peg-in, the user can determine the RSK address where the RBTCs will be transferred to and a BTC refund address. 
+This RSKIP proposes an extension to the current peg-in workflow. By including an output with an OP_RETURN op code [1] and certain payload in the transaction sent to the federation to perform the peg-in, the user can determine the RSK address where the RBTCs will be transferred to and a BTC refund address. 
 
 The BTC transaction sent to the federation must contain 
  one output with value 0 and OP_RETURN op code followed by the following data:
@@ -52,7 +52,7 @@ The BTC transaction sent to the federation must contain
       "value": 0.00000000,
       "n": 1,
       "scriptPubKey": {
-        "asm": "OP_RETURN 52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "asm": "OP_RETURN 52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
         "hex": "6a2b52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
         "type": "nulldata"
       }
@@ -81,17 +81,46 @@ When a BTC transaction is sent to the Bridge, the following steps take place:
 - There is no limit to the amount of outputs with OP_RETURN the peg-in transaction can have. But there can be only one with `RSKT` prefix indicating peg-in instructions. Transactions with more than one OP_RETURN outputs containing `RSKT` prefix will be rejected, following the existing protocol for refunds.
 - The output with OP_RETURN containing the peg-in instructions does not have to be in any particular order among the other outputs.
 
+### New event in bridge `pegin_btc`
+Currently, when a peg-in is completed succesfully the bridge emits an event called `lock_btc` with the following information:
+- [Topic] RSK adddress that received the funds
+- Hash of the BTC transaction that generated the peg-in
+- String representation of the sender BTC address, e.g. base58, bech32
+- The amount (in weis) transferred to the recipient
+
+Signature:
+
+`lock_btc(address indexed receiver, bytes32 btcTxHash, string senderBtcAddress, int256 amount)`
+
+This RSKIP proposes the creation of a new event called `pegin_btc` that replaces `lock_btc` after the HF activation. The new event is similar to `lock_btc` with the following differences:
+
+ 1. Removes the sender address since in BTC addresses are usually used only once [2], any information needed related to the BTC transaction that originated the peg-in can be obtained from the tx hash.
+ 2. Set the BTC transaction hash as a topic (in `lock_btc` it's part of the event data) to be able to filter events by this field. Useful to monitor peg-in transactions.
+ 3. Add a new field indicating the version of the peg-in protocol used.
+
+ The format of `pegin_btc` event will be the following:
+- [Topic] RSK adddress that received the funds
+- [Topic] Hash of the BTC transaction that generated the peg-in
+- The amount (in weis) transferred to the recipient
+- The version of the peg-in protocol used
+
+Signature:
+
+`pegin_btc(address indexed receiver, bytes32 indexed btcTxHash, int256 amount, uint protocolVersion)`
+
 ## Rationale
 
-[RSKIP41](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP41.md) includes optional fields with the purpose of executing a smart contract in RSK, in case the RSK destination address is a contract instead of an account. In this version of the protocol, the possibility of executing a smart contract from the peg-in transaction is not contemplated. 
+[RSKIP41](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP41.md) [3] includes optional fields with the purpose of executing a smart contract in RSK, in case the RSK destination address is a contract instead of an account. In this version of the protocol, the possibility of executing a smart contract from the peg-in transaction is not contemplated. 
 
 If the RSK destination address set in the payload is a contract then the locked funds will be transferred to fund this contract. It is **not** required that the contract has a payable fallback function to receive the funds. In case the recipient contract has a payable fallback function with some implementation, the code will not be executed. Only the transfer will be made.
 
 ## References
 
-[1] https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP41.md
+[1] https://bitcoinfoundation.org/files/bitcoin/core-development-update-5/
 
-[2] https://bitcoinfoundation.org/files/bitcoin/core-development-update-5/
+[2] https://en.bitcoin.it/wiki/Address_reuse
+
+[3] https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP41.md
 
 ### Copyright
 
