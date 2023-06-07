@@ -22,7 +22,7 @@ description:
 
 ## Abstract
 
-For the PowHSMs to sign a pegout transaction, the PowPeg node needs to provide the transaction to  sign along with the block number where the pegout was created. This information allows the PowHSM to validate that the transaction to be signed has enough PoW accumulated on top.
+For the PowHSMs to sign a pegout transaction, the PowPeg node needs to provide the transaction to sign along with the Rootstock block number where the pegout was created. This information allows the PowHSM to validate that the transaction to be signed has enough PoW accumulated on top.
 
 The mechanism currently used by the PowPeg to obtain the block where a pegout was created is not effective and has some disadvantages. This RSKIP proposes a simpler and more effective way to obtain the Rootstock block where a given pegout was created.
 
