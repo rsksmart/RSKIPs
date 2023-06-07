@@ -51,7 +51,7 @@ This RSKIP specifies the changes included in the RSK network upgrade named Finge
 - [RSKIP-374](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP374.md): Reestablish the number of block confirmations for a PowPeg migration period
 - [RSKIP-375](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP375.md): Pegout creation hash as key
 - [RSKIP-377](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP377.md): Store the last retired federation standard P2SH script
-- [RSKIP-383](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP383.md): Increase migration activation age
+- [RSKIP-383](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP383.md): Increase POWpeg activation age
 - [RSKIP-385](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP385.md): Bridge method `getEstimatedFeesForNextPegOutEvent` improvement
 
 ## Timeline
