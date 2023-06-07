@@ -23,14 +23,14 @@ created: 2023-05-31
 
 ## Abstract
 
-This RSKIP specifies the changes included in the RSK patch network upgrade named Fingerroot.
+This RSKIP specifies the changes included in the RSK network upgrade named Fingerroot.
 
 ## Specification
 
 - Codename: Fingerroot
 - Activation:
-	- RSK Mainnet block: yet to be defined
-	- RSK Testnet block: yet to be defined
+	- RSK Mainnet block: to be defined
+	- RSK Testnet block: to be defined
 
 ### Included RSKIPs
 
@@ -46,6 +46,7 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 
 ### Proposed RSKIPs
 
+- [RSKIP-252](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP252.md): Transaction Gas Price Cap
 - [RSKIP-326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): Pegout events improvements
 - [RSKIP-374](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP374.md): Reestablish the number of block confirmations for a PowPeg migration period
 - [RSKIP-375](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP375.md): Pegout creation hash as key
