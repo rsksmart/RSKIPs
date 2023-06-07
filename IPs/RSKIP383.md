@@ -1,6 +1,6 @@
 ---
 rskip: 383
-title: POWpeg migration age normalization
+title: Increase POWpeg activation age
 created: 10-MAY-23
 author: JD
 purpose: Fair
@@ -12,7 +12,7 @@ description:
 
 |RSKIP          |383           |
 | :------------ |:-------------|
-|**Title**      |POWpeg migration age normalization |
+|**Title**      |Increase POWpeg activation age |
 |**Created**    |10-MAY-23 |
 |**Author**     |JD |
 |**Purpose**    |Fair |

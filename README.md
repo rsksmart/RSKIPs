@@ -214,7 +214,7 @@ You can find a easily browseable version of this information [here](https://ips.
 | 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Draft |
 | 374 |[Reestablish the number of block confirmations for a PowPeg migration period](IPs/RSKIP374.md)| 15-FEB-23 | MI | Usa,Sec | Core | 1 | Draft |
 | 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Draft |
-| 383 |[POWpeg migration age normalization](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Draft |
+| 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Draft |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Draft |
 | 388 |[Network Upgrade: Fingerroot](IPs/RSKIP388.md)| 31-MAY-23 | AE | Usa,Sec | Core | 2 | Draft |
 
