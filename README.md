@@ -209,9 +209,9 @@ You can find a easily browseable version of this information [here](https://ips.
 | 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Draft |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 351 |[Miniheader: block header compression](IPs/RSKIP351.md)|  12-SEP-22 | IO | Sca | Core | 1 | Draft |
-| 353 |[Align RSK P2SH redeem script with Bitcoin Core standard transactions checks](IPs/RSKIP353.md)|  24-OCT-22 | MI,AE | Usa,Sec | Core | 2 | Draft |
-| 357 |[Adjust the number of block confirmations for a PowPeg migration period](IPs/RSKIP357.md)|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Draft |
-| 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Draft |
+| 353 |[Align RSK P2SH redeem script with Bitcoin Core standard transactions checks](IPs/RSKIP353.md)|  24-OCT-22 | MI,AE | Usa,Sec | Core | 2 | Adopted |
+| 357 |[Adjust the number of block confirmations for a PowPeg migration period](IPs/RSKIP357.md)|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Adopted |
+| 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Adopted |
 | 374 |[Reestablish the number of block confirmations for a PowPeg migration period](IPs/RSKIP374.md)| 15-FEB-23 | MI | Usa,Sec | Core | 1 | Draft |
 | 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Draft |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Draft |
