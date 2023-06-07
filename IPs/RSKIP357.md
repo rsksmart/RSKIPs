@@ -6,7 +6,7 @@ author: AE
 purpose: Usa,Sec
 layer: Core
 complexity: 1
-status: Accepted
+status: Adopted
 ---
 
 |RSKIP          |357           |
@@ -17,7 +17,7 @@ status: Accepted
 |**Purpose**    |Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 ## Abstract
 
