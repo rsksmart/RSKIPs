@@ -23,8 +23,8 @@ description:
 ## Abstract
 
 Everytime the POWpeg composition changes a migration takes place. This migration consists of three stages:
-- Preparation: A new POWpeg has been voted but the new POWpeg has no control yet.
-- Activation: The new POWpeg is now active but the funds from the retiring POWpeg have not started to migrate yet.
+- Pre-activation: A new POWpeg has been voted but the new POWpeg has no control yet. The event `commit_federation` is emmited with the information of the upcoming POWpeg composition.
+- Pre-migration: The new POWpeg is now active but the funds from the retiring POWpeg have not started to migrate yet.
 - Migration: The UTXOs from the retiring POWpeg are migrated to the active POWpeg
 
 Each of these stages have a certain duration set in Rootstock blocks to enable users and/or systems to act on them.
@@ -49,11 +49,11 @@ In this case Alice may have to double the waiting time or worse. A change UTXO t
 
 There are many RSKIPs proposing improvements to avoid having Alice in the waiting line for long (e.g. [RSKIP-265](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP265.md), [RSKIP-270](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP270.md) or [RSKIP-272](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP272.md)) but those are not implemented yet.
 
-For all the reasons listed above, we consider relevant to extend the activation age to 40320 Rootstock blocks (approximately 14 days).
+For all the reasons listed above, we consider relevant to postpone the activation age to 40,320 Rootstock blocks (approximately 14 days).
 
 ## Specification
 
-Change the federationActivationAge in the Bridge to 40320 blocks.
+Change the federationActivationAge in the Bridge to 40,320 blocks.
 
 This change should be handled as a consensus rule.
 
