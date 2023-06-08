@@ -24,12 +24,12 @@ created: 2023-06-19
 
 # **Abstract**
 
-This is a proposal for making Bitcoin ordinals and inscriptions available in Rootstock using the current Powpeg bridge. Once ordinals or inscriptions have representations in Rootstock,  they can be traded. Later they can be transfered back to any Bitcoin address.
+This is a proposal for making Bitcoin ordinals and inscriptions available in Rootstock using the current Powpeg bridge. Once ordinals or inscriptions have representations in Rootstock,  they can be traded. Later they can be transferred back to any Bitcoin address.
 
 
 # **Motivation**
 
-Inscriptions are images, videos, recordings or text that is stored in the Bitcoin blockchain, can be owned by a user and the ownership can be transferred to another user using standard Bitcoin transactions. We can think that every satoshi ever minted in Bitcoin is a separate “virtual cheque” and has an unique serial number. Then those serial numbers are called Ordinals. Inscriptions are linked to specific ordinals, and move with those ordinals with every transaction that involves those virtual cheques. There has been a rising interest on inscriptions since their introduction.
+Inscriptions are images, videos, recordings, or text that are stored in the Bitcoin blockchain, can be owned by a user and the ownership can be transferred to another user using standard Bitcoin transactions. We can think that every satoshi ever minted in Bitcoin is a separate “virtual cheque” and has a unique serial number. Then those serial numbers are called Ordinals. Inscriptions are linked to specific ordinals, and move with those ordinals with every transaction that involves those virtual cheques. There has been a rising interest on inscriptions since their introduction.
 
 The Rootstock bridge is designed to transfer fungible tokens, but not non-fungible elements. To transfer non-fungible elements, the bridge must segregate them, and avoid mixing them with other elements. The bridge is not prepared to do this now, and sending an UTXO containing an ordinal to the Bridge will cause the ordinal to be commingled with other UTXOs, and its ownership would be inadvertently transferred to a user performing a peg-out at a later time.
 
@@ -37,9 +37,9 @@ The Rootstock bridge is designed to transfer fungible tokens, but not non-fungib
 
 This is a proposal for making Bitcoin ordinals and inscriptions available in Rootstock using the current Powpeg bridge. Once ordinals or inscriptions have representations in Rootstock,  they can be traded as ONFTs (Ordinal NFTs). At any moment, the owner of the ONFTs can redeem them in Bitcoin and transfer them to any Bitcoin address.
 
-Internally, the bridge does not know anything about NFTs or EIP-712. The bridge will only provide the service of the temporal custody of isolated UTXOs, what we’ll call parking. The bridge will provide one additional service: changing the owner of a parked UTXO. 
+Internally, the bridge does not know anything about NFTs or EIP-721. The bridge will only provide the service of the temporal custody of isolated UTXOs, what we’ll call parking. The bridge will provide one additional service: changing the owner of a parked UTXO. 
 
-Using external user-provided smart-contracts, those ordinals can be turned into EIP-712-compatible NFTs. To enable this, the community needs to define a standard URI for the lookup of ordinals in the Bitcoin blockchain, so that NFTs marketplaces can retrieve the associated inscription. That standard is out of scope of this document.
+Using external user-provided smart-contracts, those ordinals can be turned into EIP-721-compatible NFTs. To enable this, the community needs to define a standard URI for the lookup of ordinals in the Bitcoin blockchain, so that NFTs marketplaces can retrieve the associated inscription. That standard is out of scope of this document.
 
 To avoid attackers spamming the Bridge with ordinals, there are upfront and recurrent costs for parking ordinals within RSK. Ordinals whose annual fee has been unpaid will be assigned to the first user who pays its parking fees. In the future, a blinded auction process could be added.  
  
