@@ -57,6 +57,8 @@ This RSKIP specifies the changes included in the RSK network upgrade named Finge
 ## Timeline
 
 MAY-31-23: RSKIP created and proposed RSKIPs listed
+JUN-09-23: Rootstock Community Call
+JUN-14-23: Comments and new proposals deadline
 
 ## References
 
