@@ -38,7 +38,7 @@ To sign a peg-out transaction, the PowHSM needs to have registered the block whe
 
 There is currently no easy way for the PowPeg node to obtain the Rootstock block where a pegout transaction was created. At the moment, it keeps an index in local storage that connects pegout transactions hash (without signatures) to the hash of the transaction where the pegout was created by the Bridge contract. This solution presents some disadvantages, for example, this index is kept encoded in a local file and if for any reason this file is deleted or corrupted it leaves the PowPeg incapacitated to sign pegouts.
 
-This RSKIP proposes setting the Rootstock transaction hash where a pegout is created as the key in the map structure that holds the pegouts that have already accumulated enough confirmations and are now waiting for signatures. The PowPeg node then reads this map by accessing the Bridge storage and can get from it all the information needed to supply the PowHsm to sign.
+This RSKIP proposes setting the Rootstock transaction hash where a pegout is created as the key in the map structure that holds the pegouts that have already accumulated enough confirmations and are now waiting for signatures. The PowPeg node then reads this map by accessing the Bridge storage and can get from it all the information needed to supply the PowHSM to sign.
 
 ## Specification
 
