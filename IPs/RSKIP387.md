@@ -84,7 +84,7 @@ The method call must transfer the full payment of the annual parking cost of all
 
 ## Peg-In using Destination-Mapped Federation Addresses
 
-It’s also possible to create a Bitcoin address that automatically assigns the ownership of the ordinal in Rootstock to a specific RSK address or contract. This is called destination-mapped federation addresses (DMFA). This can be used transfer ordinals when the source wallet doen't allow adding an OP_RETURN output, nor controlling the private key associated with the first input.
+It’s also possible to create a Bitcoin address that automatically assigns the ownership of the ordinal in Rootstock to a specific RSK address or contract. This is called destination-mapped federation addresses (DMFA). This can be used transfer ordinals when the source wallet doen't allow adding an `OP_RETURN` output, nor controlling the private key associated with the first input.
 
 This requires creating a special unique single-use reception address for the ordinal. The transaction is registered with the following method:
 
@@ -190,12 +190,12 @@ Each cell contains the following fields:
 
 The methods that change the owner and parking date of the ordinal will modify the content of the index cell.
 
-The storage cell with an address equal to the hash of "OrdinalCount"stores the number of ordinals parked. Initially it is zero.
+The storage cell with an address equal to the hash of "OrdinalCount" stores the number of ordinals parked. Initially it is zero.
 
 ## Powpeg Public Keys for Ordinals 
 
 To avoid type confusion attacks where the HSMs sign the release of ordinals as if they were BTCs or vice-versa, the Powpeg will use a new set of private and public keys that are used to control only  ordinals.
-A new public key with index <TBD> will be added on pegnatory registration, and returned with getFederatorBtcPublicKey().
+A new public key with index <TBD> will be added on pegnatory registration, and returned with `getFederatorBtcPublicKey()`.
 
 
 ## Single-use Ordinals Address Derivation
@@ -221,9 +221,9 @@ The mechanism is the same as presented in the section "Single-use Ordinals Addre
 
 `redeemScript: PUSH_0 OP_DROP OP_M <publicKeys> OP_N OP_CHECKMULTISIG`
 
-## New Release Request Events
+## New Release Request Event
 
-Since the `release_requested` triggers a 4000 block confirmation delay enforced by the Powpeg node and the HSM, a different event is required to request HSM signatures to release ordinals. A new event `release_requested2` is added, containing an additional argument, which is the public key index. The HSM will enforce a 4000 block confirmations or 120 block confirmations depending on this argument. If the argument is out of bounds, the Powpeg node and the HSM must do nothing.  
+Since the `release_requested` triggers a 4000 block confirmation delay enforced by the Powpeg node and the HSM, a different event is required to request HSM signatures to signa transaction that release ordinals. A new event `release_requested2` is added, containing an additional argument, which is the public key index. The HSM will enforce a 4000 block confirmations or 120 block confirmations depending on this argument. If the argument is out of bounds, the Powpeg node and the HSM must do nothing.  
 
 
 ## Gas costs
@@ -243,9 +243,9 @@ The folllwing list provide the gas costs of the new methods:
 
 # Rationale
 
-## Extension Costs
+## Parking Extension Costs
 
-The extension cost returned by `getOrdinalParkingExtensionFee()` will generally be lower than the value returned bu `getOrdinalsAnnualParkingFee()`. AS an example, ff currently the expiration of an ordinal is 6 months in the future, then the value returned will be half of the annual cost, because 6 months have already been paid and only 6 months remain to be paid. Parking fees cannot be paid in advance for more than a year.
+The extension cost returned by `getOrdinalParkingExtensionFee()` will generally be lower than the value returned bu `getOrdinalsAnnualParkingFee()`. As an example, if currently the expiration of an ordinal is 6 months in the future, then the value returned will be half of the annual cost, because 6 months have already been paid and only 6 months remain to be paid. Parking fees cannot be paid in advance for more than a year.
 
 ## Security 
 
