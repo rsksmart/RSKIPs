@@ -1,5 +1,5 @@
 ---
-rskip: xxx
+rskip: 387
 title: Support for Bridging Ordinals
 description: 
 status: Draft
@@ -11,7 +11,7 @@ created: 2023-06-19
 ---
 # Support for Bridging Ordinals
 
-|RSKIP          |xxx           |
+|RSKIP          |387           |
 | :------------ |:-------------|
 |**Title**      |Support for Bridging Ordinals|
 |**Created**    |19-MAY-2023 |
