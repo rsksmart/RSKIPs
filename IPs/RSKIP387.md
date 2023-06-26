@@ -148,13 +148,13 @@ To send an ordinal, the following method must be called:
 
 `function releaseOrdinal(uint256 txId, uint256 index, bytes btcScriptPubkey) returns (uint32 err)`
 
-This method will queue the release of an ordinal, sending it to the Bitcoin address associated with the btcScriptPubkey specified. The caller must be the owner of the ordinal. Every 1 hour the ordinals that are queued to be released will be processed. The bridge may attempt to create a single transaction containing all ordinal UTXOs, and all ordinal outputs, plus a single additional input used for fee payments, and a single additional output used for change.
+This method will queue the release of an ordinal, sending it to the Bitcoin address associated with the btcScriptPubkey specified. The caller must be the owner of the ordinal. Every 1 hour the ordinals that are queued to be released will be processed. The bridge may attempt to create a single transaction containing all ordinal UTXOs, and all ordinal outputs, plus a single additional input used for fee payments, and a single additional output used for change. Ordinal peg-outs will not be mixed with BTC peg-outs.
 
-Ordinals can be sent to any segwit or Pay-to-Script-Hash (P2SH) Bitcoin address by directly specifying the btcScriptPubkey. The Bridge must perform validations on the btcScriptPubkey to make sure it corresponds to a standard segwit address or P2SH. If the scriptPubKey is invalid, the release will fail with an error of 2. If the ordinal does not exists, the function will return 1. the On sucess, the function returns 0.
+Ordinals can be sent to any segwit or Pay-to-Script-Hash (P2SH) Bitcoin address by directly specifying the btcScriptPubkey. The Bridge must perform validations on the btcScriptPubkey to make sure it corresponds to a standard segwit address or P2SH. If the scriptPubKey is invalid, the release will fail with an error of 2. If the ordinal does not exists, the function will return 1. the On success, the function returns 0.
 
 For a description of valid segwit scriptPubKey, refer to the segwit [BIP-141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) or to the function [Solver()](https://github.com/bitcoin/bitcoin/blob/153a6882f42fff3fdc63bf770d4c86a62c46c448/src/script/standard.cpp#L168) in Bitcoin Core's source code. 
 
-Ordinals require 120 Rootstock confirmations (about 1 hour) for HSMs to sign releases. 
+Ordinals require 120 Rootstock confirmations (about 1 hour) for HSMs to be able to sign releases. HSMs must also require a cumulative proof of work equivalent to 120 Rootstock blocks.
 
 ## Paying Parking Fees
 Each ordinal parked stores the date when the last annual parking fee was paid. Initially this date corresponds to the date of parking. The parking expires one year later. If the parking expires and the fee has not been paid, anyone will be able to claim the ordinal by paying its parking fee. If a bridge migration event occurs, all parked ordinals that have their fee unpaid will not be migrated, and they will be lost forever.
