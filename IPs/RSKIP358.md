@@ -2,7 +2,7 @@
 rskip: 358
 title: Network Upgrade (patch) - Hop 4.0.1
 description: 
-status: Accepted
+status: Adopted
 purpose: Usa, Sec
 author: AE
 layer: Core
@@ -19,7 +19,7 @@ created: 2022-10-26
 |**Purpose**    |Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 ## Abstract
 
@@ -29,13 +29,15 @@ This RSKIP specifies the changes included in the RSK patch network upgrade named
 
 - Codename: Hop 4.0.1
 - Activation:
-	- RSK Mainnet block: yet to be defined
+	- RSK Mainnet block: #4,976,300
 	- RSK Testnet block: #3,362,200
 - Open for comments until: Dec, 2nd, 2022 (CLOSED).
 
 ### Included RSKIPs
 
-- No included RSKIPs so far
+
+- [RSKIP-353](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP353.md): Align RSK P2SH redeem script with Bitcoin Core standard transactions checks
+- [RSKIP-357](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP357.md): Adjust the number of block confirmations for a PowPeg migration period
 
 ### Accepted RSKIPs
 
