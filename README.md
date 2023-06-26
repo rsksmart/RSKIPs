@@ -217,6 +217,7 @@ You can find a easily browseable version of this information [here](https://ips.
 | 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Draft |
 | 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Draft |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Draft |
+| 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Draft |
 | 388 |[Network Upgrade: Fingerroot](IPs/RSKIP388.md)| 31-MAY-23 | AE | Usa,Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
