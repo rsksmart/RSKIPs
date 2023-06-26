@@ -74,7 +74,7 @@ The address is constructed differently from the BTC peg-in address. The construc
 
 To register an ordinal, the following method can be called:
 
-`function registerBtcTransactionWithOrdinals(bytes btcTxSerialized, int height, bytes pmtSerialized) payable`
+`function registerBtcTransactionWithOrdinals(bytes btcTxSerialized, int height, bytes pmtSerialized) payable returns (int executionStatus)`
 
 This method will register the UTXOs as independent entities. Each UTXO registered will be assigned a serial number (or index) starting from 0 on each transaction.  This serial number matches the UTXO output index. If there are outputs that are not transfers to the federation ordinal address, then those serial numbers will be skipped.
 
@@ -83,6 +83,27 @@ The UTXOs will be owned in RSK by the same private key that controls the first i
 The method call must transfer the full payment of the annual parking cost of all the registered ordinals, as if `payParkingExtensionFee()` would have been called for each ordinal. If the amount paid is less than the amount required, the transaction will fail and the amount paid will be reimbursed to the calling address. If the amount is greated than the required, the excess will be reimbursed.
 
 Ordinals require only 6 Bitcoin confirmations for peg-in (1 hour on average).
+
+The method returns an integer value indicating the execution status:
+
+  `< 0 : Error `
+
+   `0 : Call method before fork activation `
+
+   `> 0 : Success. Number of transaction outputs in the transaction btcTxSerialized`
+
+
+#### Error codes
+
+`ORD_UNPROCESSABLE_TX_INVALID_SENDER_ERROR_CODE = -301`
+
+`ORD_UNPROCESSABLE_TX_ALREADY_PROCESSED_ERROR_CODE = -302`
+
+`ORD_UNPROCESSABLE_TX_VALIDATIONS_ERROR = -303`
+
+`ORD_UNPROCESSABLE_TX_VALUE_TOO_HIGH_ERROR = -305`
+
+`ORD_BRIDGE_GENERIC_ERROR = -900`
 
 ## Restrictions on peg-in amounts
 
@@ -101,9 +122,11 @@ To use this peg-in mechnism, the user needs to create a special unique DMFA rece
    bytes btcTxSerialized,
    uint32 height,
    bytes pmtSerialized,
-   address rskOwner,bytes256 extraData);`
+   address rskOwner,bytes256 extraData) payable returns (int executionStatus)`
 
 The rskOwner field specifies the owner of the ordinal. The extraData field allows transferring the ordinal directly to a specially designed EIP-721 contract. In a following section we specify how the DMFA address is constructed. Anyone can call registerBtcTransactionWithOrdinalsDMFA() , but the ownership will always be transferred to the rskOnwer associated with the dataHash field computed by the bridge when called.
+
+The return code is interpreted similar to the registerBtcTransactionWithOrdinals() method.
 
 ## Changing the Ownership of an Ordinal
 
@@ -181,7 +204,7 @@ Since currently there is a maximum number of inputs (established by the HSM) and
 In the following sections we specify how the Bridge must internally handle ordinals.
 
 ### New Bridge Storage Address Mappings
-The utility internal function `getOrdinalIndex(btcTxHash, uint256 id)` returns the sequential index of the ordinal. The internal function g`etOrdinalIndexKey(uint index)` returns the key used to lookup the index. The key is computed as the keccak256 hash of the following string:
+The utility internal function `getOrdinalIndex(bytes btcTxHash, uint256 id)` returns the sequential index of the ordinal. The internal function `getOrdinalIndexKey(uint index)` returns a storage address used to lookup the index. The key is computed as the keccak256 hash of the following string:
 
 `"OrdinalIndex-" + btcTxHash.toHexString() + id.toHexString()`
 
