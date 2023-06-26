@@ -222,18 +222,16 @@ Each cell contains the following fields:
 * **parkDate**: the parking date (updated when the parking is extended)
 * **owner**: the RSK address of the ordinal owner
 
-
 The methods that change the owner and parking date of the ordinal will modify the content of the index cell.
 
 The storage cell with an address equal to the hash of "OrdinalCount" stores the number of ordinals parked. Initially it is zero.
 
-### Powpeg Public Keys for Ordinals 
+### Powpeg Public Keys for Ordinals
 
 To avoid type confusion attacks where the HSMs sign the release of ordinals as if they were BTCs or vice-versa, the Powpeg will use a new set of private and public keys that are used to control only  ordinals.
 A new public key with index <TBD> will be added on pegnatory registration, and returned with `getFederatorBtcPublicKey()`.
 
-
-### Single-use Ordinals Address Derivation
+### Single-use Ordinals Address Derivation
 The Powpeg ordinals address derivation starts with the creation of a custom redeem script that pushes the verData field. The verData field is defines as:
 
 * **version**: specifies the derivation version (1 byte) 
@@ -328,7 +326,7 @@ This proposal is about moving ordinals into Rootstock and back into Bitcoin, but
 
 This requires storing into the NFT contract the image/sound/blob related to the NFT, and letting the Powpeg use a bridge UTXO to perform the inscription. Performing the inscription requires doing two transactions. This may be a more complex procedure. Also, users may question the traceability of these inscriptions, because it’s difficult for a bitcoiner that has only access to the Bitcoin blockchain to know if a certain inscription was performed by the Powpeg, or by any other entity.
 
-## Involvement of the Pegnatories
+## Involvement of the Pegnatories
 
 Pegnatories are not involved in the parking of ordinals. The reason is that the ordinal registration process must be paid by the user, and the ordinal parking transaction doesn't pay for the registration. To be able to pay for the registration, the ordinal parking transaction would need to either have a second output where bitcoins are transferred to the Powpeg or it should embedd the paymnet inside the ordinal UTXO. 
 Using a second output makes the registration algorithm more complex, and forces the bridge to deal to refunds in case the amount paid is unecessary high and reclaims in case it's too low. Also the output amount would be below the peg-in minimum, preventing the Bridge to consume it efficiently, leading to UTXO fragmentation, and loss of funds. 
