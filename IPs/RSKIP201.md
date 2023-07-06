@@ -2,7 +2,7 @@
 rskip: 201
 title: Time-locked Emergency Multisignature
 description: 
-status: Draft
+status: Adopted
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-01
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 # **Abstract**
