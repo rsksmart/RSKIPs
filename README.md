@@ -183,14 +183,14 @@ You can find a easily browseable version of this information [here](https://ips.
 | 220 |[Obtain block or block header by hash or height in bridge methods](IPs/RSKIP220.md)|  26-MAR-21 | PGP,SDL | Sca | Core | 1 | Adopted |
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
-| 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Draft |
+| 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Adopted |
 | 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Draft |
 | 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Draft |
 | 241 |[User-triggered peg-out tx fee-bumping](IPs/RSKIP241.md)|  5-MAY-21 | SDL | Usa,Sec | Core | 2 | Draft |
 | 242 |[Proxy code Incentive](IPs/RSKIP242.md)|  14-MAY-21 | SDL | Sca,Fair | Core | 1 | Draft |
 | 243 |[Intra-transaction Gas Refunds](IPs/RSKIP243.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
 | 244 |[Variable Storage Costs](IPs/RSKIP244.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
-| 252 |[Transaction Gas Price Cap](IPs/RSKIP252.md)|  29-JUN-21 | SDL | Sec,Fair | Core | 1 | Draft |
+| 252 |[Transaction Gas Price Cap](IPs/RSKIP252.md)|  29-JUN-21 | SDL | Sec,Fair | Core | 1 | Accepted |
 | 264 |[Simplified Emergency Time-locks Refresh](IPs/RSKIP264.md)|  12-AUG-21 | SDL | Sec | Core | 2 | Draft |
 | 265 |[Bridge UTXOs Coin Selection](IPs/RSKIP265.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
 | 270 |[Bridge UTXO set size management](IPs/RSKIP270.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
@@ -206,17 +206,17 @@ You can find a easily browseable version of this information [here](https://ips.
 | 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Accepted |
 | 298 |[Bridge peg-out creation index](IPs/RSKIP298.md)|  18-APR-22 | JD | Sca | Core | 2 | Draft |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
-| 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Draft |
+| 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Accepted |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 351 |[Miniheader: block header compression](IPs/RSKIP351.md)|  12-SEP-22 | IO | Sca | Core | 1 | Draft |
 | 353 |[Align RSK P2SH redeem script with Bitcoin Core standard transactions checks](IPs/RSKIP353.md)|  24-OCT-22 | MI,AE | Usa,Sec | Core | 2 | Adopted |
 | 357 |[Adjust the number of block confirmations for a PowPeg migration period](IPs/RSKIP357.md)|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Adopted |
 | 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Adopted |
-| 374 |[Reestablish the number of block confirmations for a PowPeg migration period](IPs/RSKIP374.md)| 15-FEB-23 | MI | Usa,Sec | Core | 1 | Draft |
-| 375 |[Use the pegout creation transaction hash as the key in the map structure that stores the pegout transactions waiting for signatures](IPs/RSKIP375.md)| 30-MAY-23 | MI | Sca,Usa | Core | 1 | Draft |
-| 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Draft |
-| 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Draft |
-| 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Draft |
+| 374 |[Reestablish the number of block confirmations for a PowPeg migration period](IPs/RSKIP374.md)| 15-FEB-23 | MI | Usa,Sec | Core | 1 | Accepted |
+| 375 |[Use the pegout creation transaction hash as the key in the map structure that stores the pegout transactions waiting for signatures](IPs/RSKIP375.md)| 30-MAY-23 | MI | Sca,Usa | Core | 1 | Accepted |
+| 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Accepted |
+| 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Accepted |
+| 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Accepted |
 | 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Draft |
 | 388 |[Network Upgrade: Fingerroot](IPs/RSKIP388.md)| 31-MAY-23 | AE | Usa,Sec | Core | 2 | Draft |
 
