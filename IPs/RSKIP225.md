@@ -2,7 +2,7 @@
 rskip: 225
 title: Emergency Multisig public keys
 description: 
-status: Draft
+status: Adopted
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-04
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 |**discussions-to**     | |
 
 
