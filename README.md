@@ -219,6 +219,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Adopted |
 | 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Draft |
 | 388 |[Network Upgrade: Fingerroot](IPs/RSKIP388.md)| 31-MAY-23 | AE | Usa,Sec | Core | 2 | Adopted |
+| 398 |[PUSH0 instruction](IPs/RSKIP398.md)| 11-JUL-23 | VK | Sca | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
