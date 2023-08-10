@@ -328,7 +328,7 @@ This proposal is about moving ordinals into Rootstock and back into Bitcoin, but
 
 This requires storing into the NFT contract the image/sound/blob related to the NFT, and letting the Powpeg use a bridge UTXO to perform the inscription. Performing the inscription requires doing two transactions. This may be a more complex procedure. Also, users may question the traceability of these inscriptions, because it’s difficult for a bitcoiner that has only access to the Bitcoin blockchain to know if a certain inscription was performed by the Powpeg, or by any other entity.
 
-## Involvement of the Pegnatories
+## Involvement of the Pegnatories
 
 Pegnatories are not involved in the parking of ordinals. The reason is that the ordinal registration process must be paid by the user, and the ordinal parking transaction doesn't pay for the registration. To be able to pay for the registration, the ordinal parking transaction would need to either have a second output where bitcoins are transferred to the Powpeg or it should embedd the paymnet inside the ordinal UTXO. 
 Using a second output makes the registration algorithm more complex, and forces the bridge to deal to refunds in case the amount paid is unecessary high and reclaims in case it's too low. Also the output amount would be below the peg-in minimum, preventing the Bridge to consume it efficiently, leading to UTXO fragmentation, and loss of funds. 
