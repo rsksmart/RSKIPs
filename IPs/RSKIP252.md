@@ -2,7 +2,7 @@
 rskip: 252
 title: Transaction Gas Price Cap
 description: 
-status: Draft
+status: Adopted
 purpose: Sec, Fair
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2021-06-29
 |**Purpose**    |Sec, Fair |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 |**discussions-to**     ||
 
 # **Abstract**
