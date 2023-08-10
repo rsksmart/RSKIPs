@@ -6,7 +6,7 @@ author: JD
 purpose: Fair
 layer: Core
 complexity: 1
-status: Draft
+status: Adopted
 description: 
 ---
 
@@ -18,7 +18,7 @@ description:
 |**Purpose**    |Fair |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
