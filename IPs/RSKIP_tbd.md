@@ -23,7 +23,7 @@ description: New Mechanism for current Powpeg to ensure the newly elected Powpeg
 ## Abstract
 
 The Powpeg composition changes from time to time for different reasons, mainly members joining or leaving and/or POWHSM upgrades that require onboarding.
-The Powpeg Bitcoin address may also change when the redeemscript is upgraded, for instance when the ERP redeemscript was added.
+The Powpeg Bitcoin address also changes when the redeemscript is upgraded, for instance when the ERP redeemscript was added.
 Everytime this happens, the Bridge undergoes a process that is irreversible, after a certain amount of blocks, the new Powpeg composition will receive all the funds and become responsible for its safety. If the newly elected Powpeg were to be unable to securely store the funds, the users could have their funds at risk.
 
 This RSKIP proposes a new process that will happen before the new Powpeg takes over, and could imply reverting the Powpeg election if the new Powpeg is considered not safe.
@@ -56,6 +56,20 @@ The current process consists in the following phases:
 6. Migration phase: Funds from the retiring Powpeg wallet are moved to the active Powpeg.
 7. Post migration phase: Retiring Powpeg information is removed from the Bridge. New elections are re-enabled.
 
+### Commit new Powpeg
+
+The commitment of a new Powpeg composition remains almost unchanged except for a subtle need.
+Given the election could be reverted (see [here](#election-rollback)) the Bridge will have to store the last retired Powpeg script in a backup until the validation phase finishes.
+
+**Important**: This needs to take place before the current powpeg p2sh script is written in the storage.
+
+Suggested implementation:
+```
+KEY: "SVP_LAST_RETIRED_P2SHSCRIPT_BKP"
+VALUE: value of lastRetiredFedP2SHScript before commitment of new Powpeg
+```
+
+
 ### New phase - Validation
 
 If this RSKIP is implemented a new phase will be added, in between the _pre activation_ and _activation_ phases, the _validation_ phase. This phase will, in a sense, replace the _preactivation_ phase.
@@ -68,40 +82,17 @@ If this protocol fails the election will be rollbacked.
 
 The Spendability Validation Protocol is a new process in which the soon-to-be-retired Powpeg will send funds to the newly elected Powpeg, for it to send them back, proving that it can truly hold and spend funds, before proceeding with the activation and migration of the funds in the wallet.
 This protocol involves three parts:
-- Proof funding: The new Powpeg won't have funds to create the proof so the current Powpeg will create a UTXO covering the expenses.
-- Proof creation: Once the new Powpeg receives the funds, it will create a UTXO to the current Powpeg to proof that it can spend funds.
-- Proof verification: The current Powpeg will receive the proof, validate it was created by the new Powpeg and proceed.
+- New Powpeg funding: The new Powpeg won't have funds to create the proof so the current Powpeg will create a UTXO covering the expenses.
+- Proof transaction creation: Once the new Powpeg receives the funds, it will create a UTXO to the current Powpeg to proof that it can spend funds.
+- Proof transaction verification: The current Powpeg will receive the proof, validate it was created by the new Powpeg and proceed.
 
-#### Proof transaction
-
-The Proof transaction is the UTXO that the new Powpeg will create to the current Powpeg.
-This transaction will be as simple and small as possible to avoid spending much satoshis as fees.
-
-This is the Proof transaction structure:
-```
-{
-    inputs: [
-        {
-            txid: FUNDING_TX_ID,
-            output_index: FUNDING_TX_OUTPUT_INDEX
-        }
-    ],
-    outputs: [
-        {
-            script: CURRENT_POWPEG_OUTPUT_SCRIPT,
-            value: TOTAL_UTXO - FEES
-        }
-    ]
-}
-```
-
-#### Proof funding
+#### New Powpeg funding
 
 Once the SVP starts, the Bridge will send the minimum required satoshis to the new Powpeg address. It should be enough for the new Powpeg to be able to send back a transaction. The size of the Proof transaction will vary depending on the size of the new Powpeg input script.
 
 The process consists of the following 3 steps.
 
-##### Funding creation
+##### Funding transaction creation
 
 As soon as a new Powpeg has been committed, the Bridge will create a SPV funding transaction for the new Powpeg.
 
@@ -128,20 +119,20 @@ KEY: "SVP_FUNDING_TX"
 VALUE: sighash of SVP funding tx
 ```
 
-##### Funding confirmation
+##### Funding transaction confirmation
 
 The SVP funding transaction goes through the usual peg-out confirmation process. Once the transaction accumulates at least 4_000 Rootstock blocks (for mainnet) it should be ready to be moved from the current set to the waiting for signatures set (i.e. "rskTxsWaitingFS").
 
-##### Funding signing
+##### Funding transaction signing
 
 The funding transaction should be signed as any other peg-out. Once it is fully signed it should be removed from the set and an release_btc event should be emitted.
 From now on, the funding transaction should be broadcasted to Bitcoin, and the new Powpeg will be responsible for registering in the Bridge, and create the Proof.
 
-### Proof creation
+### Proof transaction creation
 
 For the new Powpeg to be able to proof its spendability, the funding needs to be registered, and once registered the Proof will be created, confirmed, signed and broadcasted, for the current Powpeg to validate it.
 
-#### Funding registration
+#### Funding transaction registration
 
 The funding registration should be registered through a new Bridge method, dedicated specifically for SVP operations.
 
@@ -157,7 +148,7 @@ It will perform a number of verifications:
 - Block height is registered and has at least 6 confirmations (notice that we intentionally don't propose using the minimum confirmations of a regular Bitcoin transaction)
 - Transaction hash is part of provided partial merkle tree
 - Partial merkle tree is well formed and its merkle root matches the merkle root of the provided block height
-- Transaction sighash of first input is registered in the new storage (key SVP_FUNDING_TX, see [here](#funding-creation) for more details)
+- Transaction sighash of first input is registered in the new storage (key SVP_FUNDING_TX, see [here](#funding-transaction-creation) for more details)
 
 Once everything is verified, the transaction will accepted and the SVP Proof Transaction will be created.
 
@@ -165,7 +156,7 @@ The method has a response value. Please see the possible value [here](#bridge-me
 
 **Important remark**: This method will be public, meaning any user could call it.
 
-#### Proof creation
+#### Proof transaction creation
 
 Although this is written in a separated section, this should happen in the same `registerSVPBitcoinTransaction` method.
 With the newly registered UTXO, the Bridge will spend it back to the current Powpeg.
@@ -177,11 +168,34 @@ KEY: "SVP_PROOF_TX"
 VALUE: sighash of SVP proof tx
 ```
 
-#### Proof confirmation
+##### Proof transaction
+
+The Proof transaction is a Bitcoin transaciton where a UTXO from the new Powpeg is spent to the current Powpeg.
+This transaction will be as simple and small as possible to avoid spending much satoshis as fees.
+
+This is the Proof transaction structure:
+```
+{
+    inputs: [
+        {
+            txid: FUNDING_TX_ID,
+            output_index: FUNDING_TX_OUTPUT_INDEX
+        }
+    ],
+    outputs: [
+        {
+            script: CURRENT_POWPEG_OUTPUT_SCRIPT,
+            value: TOTAL_UTXO - FEES
+        }
+    ]
+}
+```
+
+#### Proof transaction confirmation
 
 The SVP proof transaction goes through the usual peg-out confirmation process. Once the transaction accumulates at least 4_000 Rootstock blocks (for mainnet) it should be ready to be moved from the current set to the waiting for signatures set (i.e. "rskTxsWaitingFS").
 
-#### Proof signing
+#### Proof transaction signing
 
 The proof transaction should be signed as any other peg-out. But for this to happen, the Bridge needs to change the behavior of the method `addSignature` to accept signatures from public keys that don't belong to an active/retiring Powpeg (let's recall the new Powpeg should not be active at this point).
 The `addSignature` method should check that the public key belongs to the new Powpeg and that the sighash of the transaction intended to be signed exists in the newly created storage entry (i.e. "SVP_PROOF_TX").
@@ -230,6 +244,13 @@ The recommendation is that this phase takes at least 3 times the blocks a peg-ou
 - Mainnet: 12000
 - Testnet: 60 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
 - Regtest: 10
+
+### Bridge Storage changes
+
+|Storage Key   |Type          |Description   |
+|:------------ |:-------------|:-------------|
+|SVP_FUNDING_TX|bytes32|sighash of SVP funding tx|
+|SVP_FUNDING_TX|bytes32|sighash of SVP funding tx|
 
 ### Bridge method registerSVPBitcoinTransaction - response values
 
