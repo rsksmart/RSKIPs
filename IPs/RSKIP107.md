@@ -77,8 +77,8 @@ The new node format is as follows:
   - **valueHash**, 32 bytes: Hash digest of value stored
   - **valueLength**, uint24 (3 bytes): size of the value contained (if lvalue>0 and hasLongVal)
 
-- if the node is not terminal (either left or right nodes are present. This can be validated by checking that at least one of the 2 bits for nodePresent is in 1) :
-  - **childrenSize**, 0-9 bytes: the size in bytes of the subtree excluding the current node (size of the node's children), variable length integer
+- if the node is not terminal (meaning either the left or right nodes are present, which can be validated by checking that at least one of the two bits for 'nodePresent' is set to 1) :
+  - **childrenSize**, 0-9 bytes: the size in bytes of the underlying subtree, excluding the current node (the root of the subtree), represented as a variable-length integer
 
 - if !hasLongVal:
   - **value**, variable-size extends up to the bounds of the node buffer: stored value 
