@@ -1,54 +1,46 @@
 ---
-rskip: pull_request_number_here
-title: Title
-created: DD-MMM-YY
-author: INITIALS
-purpose: Sca,Usa,Fair,Sec or ST
-layer: Core,Node,UI,2nd,Net or DApp 
-complexity: 1, 2 or 3
-status: Draft,Accepted,Adopted,Deferred or Rejected
+rskip: 376
+title: Set version 2 to PowPeg migration transactions
+created: 12-DEC-23
+author: MI
+purpose: Usa
+layer: Core 
+complexity: 1
+status: Draft
 description: 
 ---
 
-|RSKIP          |pull_request_number_here           |
+|RSKIP          |376           |
 | :------------ |:-------------|
-|**Title**      |Title |
-|**Created**    |DD-MMM-YY |
-|**Author**     |INITIALS |
-|**Purpose**    |Sca,Usa,Fair,Sec or ST |
-|**Layer**      |Core,Node,UI,2nd,Net or DApp |
-|**Complexity** |1, 2 or 3 |
-|**Status**     |Draft,Accepted,Adopted,Deferred or Rejected |
+|**Title**      |Set version 2 to PowPeg migration transactions |
+|**Created**    |12-DEC-23 |
+|**Author**     |MI |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |1 |
+|**Status**     |Draft |
 
 ## Abstract
 
-To be completed...
+Since the implementation of RSKIP201 [1], peg-out transactions are created with version number 2 following the specification in BIP68 [2]. This RSKIP proposes that also PowPeg migration transactions are created with version 2 to be consistent with peg-out transactions.
 
 ## Motivation
 
-To be completed...
+Peg-out and migration transactions should be treatead equally by the Bridge and should both have the same format.
 
 ## Specification
 
-To be completed...
+When a PowPeg composition change is executed and the migration process starts in the Bridge, migration transactions sending funds from the retiring to the newly active PowPeg address should be created using version 2.
 
-### Subsection 1 of Specification such as format.
+## Backwards Compatibility
 
-Blah.
-
-### Subsection 2 of specs such.
-
-Blah two...
-
-## Rationale
-
-Discuss design decisions, community debates and possible attacks.
+This change is a hard fork and therefore all full nodes must be updated.
 
 ## References
 
-[1] Other RSKIP https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP??.md
+[1] [RSKIP201](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP201.md)
 
-[2] Other Articles such as Smart Contracts for Bribing Miners http://homepages.cs.ncl.ac.uk/patrick.mccorry/minerbribery.pdf
+[2] [BIP68](https://github.com/bitcoin/bips/blob/master/bip-0068.mediawiki)
 
 ### Copyright
 
