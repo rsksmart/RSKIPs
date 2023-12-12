@@ -222,6 +222,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 398 |[PUSH0 instruction](IPs/RSKIP398.md)| 11-JUL-23 | VK | Sca | Core | 2 | Draft |
 | 400 |[Calldata gas cost reduction](IPs/RSKIP400.md)| 12-JUL-23 | VK | Sca | Core | 2 | Draft |
 | 412 |[BASEFEE instruction](IPs/RSKIP412.md)| 9-NOV-23 | VK | Usa | Core | 2 | Draft |
+| 414 |[Network Upgrade: Arrowhead](IPs/RSKIP414.md)| 7-DEC-23 | VK | Usa,Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
