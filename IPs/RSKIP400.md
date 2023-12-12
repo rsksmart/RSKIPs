@@ -30,7 +30,7 @@ This improvement implements Ethereum [EIP-2028: Transaction data gas cost reduct
 ## Motivation
 
 By lowering gas cost of calldata, this change improves scalability in general, as more data can fit within a single
-block. Additionally, it's especially useful for layer two scaling solutions like rollup's.
+block. Additionally, it's especially useful for layer two scaling solutions like rollups.
 
 ## Backward Compatibility
 
