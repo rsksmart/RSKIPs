@@ -7,7 +7,7 @@ purpose: Usa
 author: VK
 layer: Core
 complexity: 2
-created: 2023/11/
+created: 2023/11/9
 ---
 # BASEFEE instruction
 
