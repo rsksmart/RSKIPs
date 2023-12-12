@@ -29,13 +29,13 @@ This RSKIP implements [Ethereum BASEFEE instruction](https://eips.ethereum.org/E
 
 # **Motivation**
 
-In order to maintain compatibility with the EVM, RSK needs to implement the BASEFEE opcode.
+In order to maintain compatibility with the EVM, Rootstock needs to implement the `BASEFEE` opcode.
 
-There's an important difference when comparing *RSK* vs *ETH* `BASEFEE` opcode: as RSK doesn't define a base fee for its blocks, the block `minimum gas price` is returned instead. More details on the specification section.
+There's an important difference when comparing *Rootstock* vs *ETH* `BASEFEE` opcode: as Rootstock doesn't define a base fee for its blocks, the block `minimum gas price` is returned instead. More details on the specification section.
 
 # **Specification**
 
-`BASEFEE` opcode pushes on the stack the minimum gas price of the block where the transaction is executing. The cost of `BASEFEE` is 2. 
+The `BASEFEE` opcode pushes onto the stack the minimum gas price of the block in which the transaction is being executed. The cost of the `BASEFEE` opcode is 2. 
 
 # **Copyright**
 
