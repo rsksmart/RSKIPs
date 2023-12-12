@@ -7,7 +7,7 @@ purpose: Sca
 author: VK
 layer: Core
 complexity: 2
-created: 2023/07/
+created: 2023/07/12
 ---
 # Calldata gas cost reduction
 
