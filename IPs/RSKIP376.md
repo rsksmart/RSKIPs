@@ -15,7 +15,7 @@ description:
 |**Title**      |Set version 2 to PowPeg migration transactions |
 |**Created**    |12-DEC-23 |
 |**Author**     |MI |
-|**Purpose**    |Sca |
+|**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
 |**Status**     |Draft |
