@@ -37,7 +37,7 @@ This RSKIP proposes a simplified way for the Bridge to identify the type of a tr
 
 ## Specification
 
-The proposal is to have to an index in the storage of the Bridge contract to save the sighash [1] of the first input of each peg-out or migration transaction created by the Bridge. This provides a simple way for the Bridge to identify transactions that were created by the Bridge contract (peg-out or migration transactions).
+The proposal is to have an index in the storage of the Bridge contract to save the sighash [1] of the first input of each peg-out or migration transaction created by the Bridge. This provides a simple way for the Bridge to identify transactions that were created by the Bridge contract (peg-out or migration transactions).
 
 When a transaction is received via `registerBtcTransaction` method the Bridge can then calculate the sighash of the first input of the transaction and check if it exists in the index. If it does, then that means that the transaction was created by the Bridge and is either a peg-out or a migration transaction. UTXOs sending funds to the PowPeg address should be registered in the Bridge and the transaction marked as processed. If the sighash does not exist in the index but the transaction sends funds to the PowPeg address, then it is a peg-in and should be processed as such. Finally, if the sighash does not exist in the index and the transaction has no outputs to the PowPeg address then simply ignore the transaction since it's not related to the Bridge.
 
