@@ -2,7 +2,7 @@
 rskip: 170
 title: Peg-in to any address
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: MI <marcos@iovlabs.org>
 layer: Core
@@ -19,7 +19,7 @@ created: 2020-09-01
 |**Purpose**    |USa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
