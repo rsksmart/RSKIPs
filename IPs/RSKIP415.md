@@ -31,7 +31,7 @@ Since RSKIP123 [1] implementation, pegnatories have 3 different keys each. One f
 There are 2 places in rskj code where the pegnatories Rootstock address is being derived from the Bitcoin public key, resulting in an incorrect address value.
 
 - [add_signature event](https://github.com/rsksmart/rskj/blob/FINGERROOT-5.0.0/rskj-core/src/main/java/co/rsk/peg/utils/BridgeEventLoggerImpl.java#L77-L81) When a peg-out transaction is signed by one of the pegnatories this event is emmited, part of the event information is the Rootstock address of the pegnatory that signed.
-- [REMASC rewards payment](https://github.com/rsksmart/rskj/blob/FINGERROOT-5.0.0/rskj-core/src/main/java/co/rsk/remasc/RemascFederationProvider.java#L56-L59) [2] Part of the mining fees collected from Rootstock transactions are paid to the current pegnatories. The reward is sent in RBTC to their Rootstock address.
+- [REMASC rewards payment](https://github.com/rsksmart/rskj/blob/FINGERROOT-5.0.0/rskj-core/src/main/java/co/rsk/remasc/RemascFederationProvider.java#L56-L59) Part of the mining fees collected from Rootstock transactions are paid to the current pegnatories. The reward is sent in RBTC to their Rootstock address. [2]
 
 ## Specification
 
