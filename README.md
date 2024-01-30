@@ -126,7 +126,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 119 |[Precompiled contract for inspecting block headers](IPs/RSKIP119.md) | 2019 | DM  | Usa  | Core | 1 | Draft |
 | 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 122 |[New method GetBtcTransactionConfirmations for Bridge contract](IPs/RSKIP122.md) | 2019 | SMS  | Usa  | Core | 2 | Draft |
-| 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Draft |
+| 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Adopted |
 | 125 |[Create2](IPs/RSKIP125.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 131 |[Preventing CREATE2-after-SUICIDE in the same block](IPs/RSKIP131.md) | 2019 | SMS & SDL  | Sca,Usa  | Core | 1 | Adopted  |
 | 132 |[Bridge ReceiveHeaders Gas Cost increase](IPs/RSKIP132.md) | 2019 | JD & SDL  | Fair  | Core | 1 | Adopted  |

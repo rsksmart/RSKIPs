@@ -2,7 +2,7 @@
 rskip: 123
 title: Multikey federation members 
 description: 
-status: Draft
+status: Adopted
 purpose: Sca, Sec
 author: AM <amendelzon@iovlabs.org>
 layer: Core
@@ -19,7 +19,7 @@ created: 2019-05-28
 |**Purpose**    |Sca,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
