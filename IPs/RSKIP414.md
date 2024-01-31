@@ -52,6 +52,7 @@ TBD
 - [RSKIP-203](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP203.md): GetCallStackDepth precompiled contract
 - [RSKIP-379](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP379.md): Bridge peg-out and migration transactions index
 - [RSKIP-376](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP376.md): Set version 2 to PowPeg migration transactions
+- [RSKIP-415](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP415.md): Fix pegnatories address derivation from public keys
 
 ## Timeline
 
