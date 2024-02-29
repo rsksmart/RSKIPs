@@ -116,10 +116,10 @@ For that purpose, the method will be modified to be able to identify it.
 It should verify:
 - SVP period is ongoing
 (i.e. proposedFederation exists & CURRENT_RSK_BLOCK < PROPOSED_FED_CREATION_BLOCK_NUMBER + SVP_PERIOD)
-- Transaction hash without signatures matches the record in the FUND_TX_HASH_UNSIGNED storage entry (see [here](#funding-transaction-creation) for more details)
+- Transaction hash without signatures matches the record in the FUND_TX_HASH_UNSIGNED storage entry
 
 Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, FUND_TX_HASH_SIGNED.
-The saving of the funding transaction hash signed means that the proof Transaction can be created.
+The funding transaction hash signed being saved means that the proof Transaction can be created.
 
 **Important remark**: This method will be public, meaning any user could call it.
 
@@ -131,7 +131,7 @@ The `processPowpegChangeValidation` will perform some actions if a proposedFeder
 - SVP period ended. This implies the validation was not successful.
     -  The Bridge will emit a new event,
         
-        `COMMIT_FEDERATION_FAILED(newPowpegCreationBlockNumber indexed uint)`
+        `COMMIT_FEDERATION_FAILED(blockNumber indexed uint)`
     - The proposed Powpeg will be eliminated.
     - The election will be allowed once again.
 
@@ -174,7 +174,7 @@ The SVP proof transaction should go through a new "peg-out signing process", sin
 
 #### Proof transaction signing
 
-The proof transaction should be signed as any other peg-out, but by the proposed powpeg. For this to happen, a new Bridge method `addSpendTxSignature` should be created to accept signatures from public keys that don't belong to an active/retiring Powpeg (let's recall the proposed Powpeg is not active at this point).
+The proof transaction should be signed as any other peg-out, but by the proposed powpeg. For this to happen, a new Bridge method `ADD_SPEND_TX_SIGNATURE` should be created to perform the exact same actions as the `ADD_SIGNATURE` but to accept signatures from public keys that don't belong to an active/retiring Powpeg (let's recall the proposed Powpeg is not active at this point).
 The `addSpendTxSignature` method should check that the public key belongs to the proposed Powpeg and that the hash of the transaction intended to be signed exists in the `SPEND_TX_HASH` storage entry.
 
 Once fully signed, the Bridge should remove the entry from the `spendTxWaitingForSignatures` and emit the release_btc event as usual.
@@ -194,7 +194,6 @@ If the hash matches the one registered in the storage, then the SVP process is c
 The duration of this phase must account for:
 - Spending a UTXO from the current Powpeg (Bridge confirmations + pegnatories signing)
 - Confirming the UTXO on Bitcoin (Bitcoin confirmations for the UTXO to be accepted)
-**(?) I think we are not checking this**
 - Sending back the UTXO to the current Powpeg (Proposed pegnatories signing)
 
 The recommendation is that this phase takes at least 3 times the blocks a peg-out confirmation has. **TODO: CONFIRM THIS**
@@ -209,6 +208,11 @@ The recommendation is that this phase takes at least 3 times the blocks a peg-ou
 |FUND_TX_HASH_UNSIGNED|bytes32|hash of SVP funding tx unsigned|
 |FUND_TX_HASH_SIGNED|bytes32|hash of SVP funding tx signed|
 |SPEND_TX_HASH|bytes32|hash of SVP proof tx|
+
+### New Bridge methods
+|Method   |Type          |Description   |
+|:------------ |:-------------|:-------------|
+|ADD_SPEND_TX_SIGNATURE|void|method to sign the proof transaction by the proposed pegnatories|
 
 
 ## Rationale
