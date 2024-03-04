@@ -226,6 +226,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 412 |[BASEFEE instruction](IPs/RSKIP412.md)| 9-NOV-23 | VK | Usa | Core | 2 | Draft |
 | 414 |[Network Upgrade: Arrowhead](IPs/RSKIP414.md)| 7-DEC-23 | VK | Usa,Sec | Core | 2 | Draft |
 | 415 |[Fix pegnatories address derivation from public keys](IPs/RSKIP415.md)| 30-JAN-24 | MI | Usa | Core | 1 | Draft |
+| 417 |[Improve empty Bridge response when called from a smart contract](IPs/RSKIP417.md)| 28-FEB-24 | MI | Usa | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
