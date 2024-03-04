@@ -1,6 +1,6 @@
 ---
 rskip: 417
-title: Improve empty Bridge response when called from a smart contract
+title: Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response
 created: 28-FEB-24
 author: MI
 purpose: Usa
@@ -12,7 +12,7 @@ description:
 
 |RSKIP          |417           |
 | :------------ |:-------------|
-|**Title**      |Improve empty Bridge response when called from a smart contract |
+|**Title**      |Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response |
 |**Created**    |28-FEB-24 |
 |**Author**     |MI |
 |**Purpose**    |Usa |
