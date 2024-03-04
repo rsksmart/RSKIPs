@@ -22,7 +22,7 @@ description:
 
 ## Abstract
 
-When a Bridge method with no return value is called from a smart contract it causes the node to throw a null pointer exception and the transaction to be reverted. This RSKIP proposes a change so that the transaction does not get reverted and no exception is thrown.
+When a Bridge method with no return value is called from a smart contract it causes the node to throw a null pointer exception and the transaction to be reverted. This RSKIP proposes a change so that no exception is thrown and the transaction is not reverted.
 
 ## Motivation
 
