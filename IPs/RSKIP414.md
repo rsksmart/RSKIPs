@@ -49,7 +49,7 @@ TBD
 - [RSKIP-398](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP398.md): `PUSH0` instruction
 - [RSKIP-400](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP400.md): `Calldata` gas cost reduction
 - [RSKIP-412](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP412.md): `BASEFEE` instruction
-- [RSKIP-203](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP203.md): `GetCallStackDepth` precompiled contract
+- [RSKIP-203](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP203.md): `getCallStackDepth` precompiled method
 - [RSKIP-379](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP379.md): Bridge peg-out and migration transactions index
 - [RSKIP-376](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP376.md): Set `version 2` to PowPeg migration transactions
 - [RSKIP-415](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP415.md): Fix pegnatories address derivation from public keys
