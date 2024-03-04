@@ -59,7 +59,7 @@ TBD
 
 - DEC-7-23: RSKIP created and proposed RSKIPs listed
 - JAN-18-24: Rootstock Community Call
-- MAR-05-24: Comments and new proposals deadline
+- MAR-04-24: Comments and new proposals deadline
 - TBD: Network upgrade activated on Testnet
 - TBD: Network upgrade activated on Mainnet
 
