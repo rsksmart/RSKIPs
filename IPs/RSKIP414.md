@@ -46,7 +46,7 @@ TBD
 
 ### Proposed RSKIPs
 
-- [RSKIP-398](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP398.md): `PUSH0` opcode
+- [RSKIP-398](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP398.md): `PUSH0` instruction
 - [RSKIP-400](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP400.md): `Calldata` gas cost reduction
 - [RSKIP-412](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP412.md): `BASEFEE` opcode
 - [RSKIP-203](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP203.md): `GetCallStackDepth` precompiled contract
