@@ -2,7 +2,7 @@
 rskip: 185
 title: Peg-out refund and events
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: JD (@josedahlquist)
 layer: Core
@@ -19,7 +19,7 @@ created: 2020-11-19
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
