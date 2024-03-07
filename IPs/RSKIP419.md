@@ -1,8 +1,8 @@
 ---
-rskip: pull_request_number_here
+rskip: 419
 title: Powpeg Spendability Validation Protocol
 created: 31-AUG-23
-author: JD
+author: JD, JZ
 purpose: Sec
 layer: Core
 complexity: 2
@@ -10,11 +10,11 @@ status: Draft
 description: New Mechanism for current Powpeg to ensure the newly elected Powpeg will safely hold user funds
 ---
 
-|RSKIP          |pull_request_number_here           |
+|RSKIP          |419           |
 | :------------ |:-------------|
 |**Title**      |Powpeg Spendability Validation Protocol |
 |**Created**    |31-AUG-23 |
-|**Author**     |JD |
+|**Author**     |JD, JZ |
 |**Purpose**    |Sec|
 |**Layer**      |Core|
 |**Complexity** |2|
