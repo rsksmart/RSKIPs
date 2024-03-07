@@ -72,8 +72,8 @@ If this protocol fails, things will return to their previous state.
 The Spendability Validation Protocol is a new process in which the current Powpeg will send funds to the newly elected Powpeg, for it to send them back, proving that it can truly hold and spend funds, before proceeding with the activation and migration of the funds in the wallet.
 
 This protocol involves three parts:
-- Proposed Powpeg funding: the proposed Powpeg won't have funds to create the proof so the current Powpeg will create a UTXO covering the expenses.
-- Proof transaction creation: once the proposed Powpeg receives the funds, it will create a UTXO to the current Powpeg to proof that it can spend them.
+- Proposed Powpeg funding: the proposed Powpeg won't have funds to create the proof so the current Powpeg will create an UTXO covering the expenses.
+- Proof transaction creation: once the proposed Powpeg receives the funds, it will create an UTXO to the current Powpeg to proof that it can spend them.
 - Proof transaction verification: the current Powpeg will receive the proposed Powpeg spending-proof transaction, validate it was created by the proposed Powpeg from the funding transaction and proceed with the commitment.
 
 #### Proposed Powpeg funding
@@ -87,7 +87,7 @@ The process consists of the following 3 steps:
 
 As soon as the proposed Powpeg has been voted (and saved in a new Bridge storage entry, key `proposedFederation`), the Bridge will create a SPV funding transaction for it.
 
-This transaction is similar to a peg-out where the recipient is the proposed Powpeg Bitcoin address, and the amount to receive is calculated based on the minimum amount of satoshis required to spend a UTXO by it.
+This transaction is similar to a peg-out where the recipient is the proposed Powpeg Bitcoin address, and the amount to receive is calculated based on the minimum amount of satoshis required to spend an UTXO by it.
 
 Once the transaction is created, it has to be stored in the set for peg-outs waiting for confirmations, and the sighash has to be stored in the pegout index so the change could be registered.
 
@@ -147,7 +147,7 @@ The `processPowpegChangeValidation` will perform some actions if a proposedFeder
 
 ##### Proof transaction
 
-The Proof transaction is a Bitcoin transaction where a UTXO from the proposed Powpeg is sent to the current Powpeg.
+The Proof transaction is a Bitcoin transaction where an UTXO from the proposed Powpeg is sent to the current Powpeg.
 This transaction will be as simple and small as possible to avoid spending much satoshis as fees.
 
 Proof transaction structure:
@@ -192,7 +192,7 @@ If the hash matches the one registered in the storage, then the SVP process is c
 ### Validation phase duration
 
 The duration of this phase must account for:
-- Spending a UTXO from the current Powpeg (Bridge confirmations + pegnatories signing)
+- Spending an UTXO from the current Powpeg (Bridge confirmations + pegnatories signing)
 - Confirming the UTXO on Bitcoin (Bitcoin confirmations for the UTXO to be accepted)
 - Sending back the UTXO to the current Powpeg (Proposed pegnatories signing)
 
