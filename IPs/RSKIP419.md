@@ -85,7 +85,7 @@ The process consists of the following 3 steps:
 
 ##### 1. Funding transaction creation
 
-As soon as the proposed Powpeg has been voted (and saved in a new Bridge storage entry, key `proposedFederation`), the Bridge will create a SPV funding transaction for it.
+As soon as the proposed Powpeg has been voted (and saved in a new Bridge storage entry, key `proposedFederation`), the Bridge will create a SVP funding transaction for it.
 
 This transaction is similar to a peg-out but with two outputs, where the recipients are the proposed Powpeg Bitcoin address, and the proposed Powpeg Bitcoin address with a custom flyover prefix to make sure the flyover protocol would work too. The amount to receive by both is calculated based on the minimum amount of satoshis required to spend an UTXO by each of them (+ bitcoin fees).
 
@@ -93,7 +93,7 @@ Once the transaction is created, it has to be stored in the set for peg-outs wai
 
 Also, a new value in the storage should be added to identify this special kind of transaction:
     
-    KEY: "SVP_FUND_TX_HASH_UNSIGNED"
+    KEY: "svpFundTxHashUnsigned"
     VALUE: hash of SVP funding tx without signatures
 
 ##### 2. Funding transaction confirmation
@@ -116,13 +116,12 @@ For that purpose, the method will be modified to be able to identify it.
 It should verify:
 - SVP period is ongoing
 (i.e. proposedFederation exists & CURRENT_RSK_BLOCK < PROPOSED_FED_CREATION_BLOCK_NUMBER + SVP_PERIOD)
-- Transaction hash without signatures matches the record in the SVP_FUND_TX_HASH_UNSIGNED storage entry
+- Transaction hash without signatures matches the record in the svpFundTxHashUnsigned storage entry
 
 
-Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, SVP_FUND_TX_HASH_SIGNED. Also, the SVP_FUND_TX_HASH_UNSIGNED will be removed from the storage.
+Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, svpFundTxHashSigned. Also, the svpFundTxHashUnsigned will be removed from the storage.
 The funding transaction hash signed being saved means that the proof Transaction can be created.
 
-**Important remark**: this method is public, meaning any user could call it.
 
 #### Proof transaction creation or validation process failure
 
@@ -133,20 +132,21 @@ The `processPowpegChangeValidation` will perform some actions if a proposedFeder
 Since the proposedFederation still exists, this implies the proof transaction was not received, and therefore that the validation was not successful
     -  The Bridge will emit a new event,
         
-        `COMMIT_FEDERATION_FAILED(blockNumber indexed uint)`
+        `COMMIT_FEDERATION_FAILED(proposedFederationRedeemScript indexed bytes)`
+    - The proposed Powpeg redeem script will be logged for debugging.
     - The proposed Powpeg will be eliminated.
     - The election will be allowed once again.
 
 - SVP period still ongoing        
-    - If the funding transaction signed hash is registered in the SVP_FUND_TX_HASH_SIGNED storage entry, the Bridge will:
+    - If the funding transaction signed hash is registered in the svpFundTxHashSigned storage entry, the Bridge will:
         - Create it as described [here](#proof-transaction)
-        - Add it to a new storage set, key `spendTxWaitingForSignatures`
+        - Add it to a new storage set, key `svpSpendTxWaitingForSignatures`
         - Set it in a new Storage entry:
             ```
-            KEY: "SVP_SPEND_TX_HASH"
+            KEY: "svpSpendTxHash"
             VALUE: hash of SVP proof tx without signatures
             ```
-        - Remove the SVP_FUND_TX_HASH_SIGNED from the storage    
+        - Remove the svpFundTxHashSigned from the storage    
 
 ##### Proof transaction
 
@@ -160,6 +160,10 @@ Proof transaction structure:
         {
             txid: SVP_FUND_TX_HASH_SIGNED,
             output_index: SVP_FUNDING_TX_OUTPUT_INDEX
+        },
+        {
+            txid: SVP_FUND_TX_HASH_SIGNED,
+            output_index: SVP_FLYOVER_FUNDING_TX_OUTPUT_INDEX
         }
     ],
     outputs: [
@@ -177,21 +181,21 @@ The SVP proof transaction should go through a new "peg-out signing process", sin
 
 #### Proof transaction signing
 
-The proof transaction should be signed as any other peg-out, but by the proposed powpeg. For this to happen, a new Bridge method `addSpendTxSignature` should be created to perform the exact same actions as the `addSignature` but to accept signatures from public keys that don't belong to an active/retiring Powpeg (let's recall the proposed Powpeg is not active at this point).
-The `addSpendTxSignature` method should check that the public key belongs to the proposed Powpeg and that the hash of the transaction intended to be signed exists in the `SVP_SPEND_TX_HASH` storage entry.
+The proof transaction should be signed as any other peg-out, but by the proposed powpeg. For this to happen, a new Bridge method `addSvpSpendTxSignature` should be created to perform the exact same actions as the `addSignature` but to accept signatures from public keys that don't belong to an active/retiring Powpeg (let's recall the proposed Powpeg is not active at this point).
+The `addSvpSpendTxSignature` method should check that the public key belongs to the proposed Powpeg and that the hash of the transaction intended to be signed exists in the `svpSpendTxHash` storage entry.
 
-Once fully signed, the Bridge should remove the entry from the `spendTxWaitingForSignatures` and emit the release_btc event as usual.
+Once fully signed, the Bridge should remove the entry from the `svpSpendTxWaitingForSignatures`.
 
 ### Proof verification
 
 With the SVP proof transaction broadcasted, the Bridge now needs to validate it and proceed with the election commitment as expected.
 
-The proof transaction should be registered through the registerBtcTransaction method. As before, it should verify:
+The proof transaction should be registered through a new `registerSvpSpendTxTransaction` method that would behave similar to the `registerBtcTransaction`. As before, it should verify:
 - SVP period is ongoing
-- Transaction hash without signatures is registered in the `SVP_SPEND_TX_HASH` storage key.
+- Transaction hash without signatures is registered in the `svpSpendTxHash` storage key.
 
 If the hash matches the one registered in the storage, then the SVP process is considered completed and we can proceed with the committment of the proposed -and now validated- Powpeg.
-The `SVP_SPEND_TX_HASH` and the `proposedFederation` will be removed from storage.
+The `svpSpendTxHash` and the `proposedFederation` will be removed from storage. The utxo sent to the current Powpeg will be registered so it can be spend.
 
 ### Validation phase duration
 
@@ -209,14 +213,14 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 
 |Storage Key   |Type          |Description   |
 |:------------ |:-------------|:-------------|
-|SVP_FUND_TX_HASH_UNSIGNED|bytes32|hash of SVP funding tx unsigned|
-|SVP_FUND_TX_HASH_SIGNED|bytes32|hash of SVP funding tx signed|
-|SVP_SPEND_TX_HASH|bytes32|hash of SVP proof tx|
+|svpFundTxHashUnsigned(btcTxHash indexed bytes32) | bytes32 | hash of SVP funding tx unsigned|
+|svpFundTxHashSigned(btcTxHash indexed bytes32) | bytes32 | hash of SVP funding tx signed|
+|svpSpendTxHash(btcTxHash indexed bytes32) | bytes32 | hash of SVP proof tx|
 
 ### New Bridge methods
 |Method   |Type          |Description   |
 |:------------ |:-------------|:-------------|
-|ADD_SPEND_TX_SIGNATURE|void|method to sign the proof transaction by the proposed pegnatories|
+|addSvpSpendTxSignature | void | method to sign the proof transaction by the proposed pegnatories|
 
 
 ## Rationale
