@@ -132,7 +132,7 @@ The `processPowpegChangeValidation` will perform some actions if a proposedFeder
 Since the proposedFederation still exists, this implies the proof transaction was not received, and therefore that the validation was not successful
     -  The Bridge will emit a new event,
         
-        `COMMIT_FEDERATION_FAILED(proposedFederationRedeemScript indexed bytes)`
+        `COMMIT_FEDERATION_FAILED(bytes proposedFederationRedeemScript, uint blockNumber)`
     - The proposed Powpeg redeem script will be logged for debugging.
     - The proposed Powpeg will be eliminated.
     - The election will be allowed once again.
@@ -181,8 +181,11 @@ The SVP proof transaction should go through a new "peg-out signing process", sin
 
 #### Proof transaction signing
 
-The proof transaction should be signed as any other peg-out, but by the proposed powpeg. For this to happen, a new Bridge method `addSvpSpendTxSignature` should be created to perform the exact same actions as the `addSignature` but to accept signatures from public keys that don't belong to an active/retiring Powpeg (let's recall the proposed Powpeg is not active at this point).
-The `addSvpSpendTxSignature` method should check that the public key belongs to the proposed Powpeg and that the hash of the transaction intended to be signed exists in the `svpSpendTxHash` storage entry.
+The proof transaction should be signed as any other peg-out, but by the proposed powpeg. For this to happen, two new Bridge methods `getStateForSvpClient` and `addSvpSpendTxSignature` should be created.
+
+The first one should perform the exact same actions as the `getStateForBtcReleaseClient` but to inform if the SVP spend tx is waiting for signatures (i.e., that `svpSpendTxWaitingForSignatures` is not empty).
+
+The second one should perform the exact same actions as the `addSignature` but to accept signatures from public keys that belong to the proposed Powpeg instead of the active/retiring ones (let's recall the proposed Powpeg is not active at this point), and to check that the hash of the transaction intended to be signed exists in the `svpSpendTxHash` storage entry.
 
 Once fully signed, the Bridge should remove the entry from the `svpSpendTxWaitingForSignatures`.
 
@@ -213,14 +216,16 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 
 |Storage Key   |Type          |Description   |
 |:------------ |:-------------|:-------------|
-|svpFundTxHashUnsigned(btcTxHash indexed bytes32) | bytes32 | hash of SVP funding tx unsigned|
-|svpFundTxHashSigned(btcTxHash indexed bytes32) | bytes32 | hash of SVP funding tx signed|
-|svpSpendTxHash(btcTxHash indexed bytes32) | bytes32 | hash of SVP proof tx|
+|svpFundTxHashUnsigned | bytes32 | hash of SVP funding tx unsigned|
+|svpFundTxHashSigned | bytes32 | hash of SVP funding tx signed|
+|svpSpendTxHash | bytes32 | hash of SVP proof tx|
+|svpSpendTxWaitingForSignatures | ¿? | SVP proof tx that is to be signed|
 
 ### New Bridge methods
 |Method   |Type          |Description   |
 |:------------ |:-------------|:-------------|
-|addSvpSpendTxSignature | void | method to sign the proof transaction by the proposed pegnatories|
+|addSvpSpendTxSignature(federatorPublicKeySerialized bytes, signatures bytes[]) | void | method to sign the proof transaction by the proposed pegnatories|
+|getStateForSvpClient | bytes | method to get the svpSpendTxWaitingForSignatures |
 
 
 ## Rationale
