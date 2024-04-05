@@ -219,7 +219,7 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 |svpFundTxHashUnsigned | bytes32 | hash of SVP funding tx unsigned|
 |svpFundTxHashSigned | bytes32 | hash of SVP funding tx signed|
 |svpSpendTxHash | bytes32 | hash of SVP proof tx|
-|svpSpendTxWaitingForSignatures | ¿? | SVP proof tx that is to be signed|
+|svpSpendTxWaitingForSignatures | bytes | SVP proof tx that is to be signed|
 
 ### New Bridge methods
 |Method   |Type          |Description   |
