@@ -230,14 +230,10 @@ addSvpSpendTxSignature(federatorPublicKeySerialized bytes, signatures bytes[])
 getStateForSvpClient() returns bytes 
 ```
 
-## Rationale
-
-Discuss design decisions, community debates and possible attacks.
-
 ## References
 
-- [RSKIP170 - Peg-in to any address](RSKIP170.md)
-- [RSKIP353 - Align RSK P2SH redeem script with Bitcoin Core standard transactions checks](RSKIP353.md)
+- [Rootstock devportal - Powpeg](https://dev.rootstock.io/rsk/architecture/powpeg/)
+- [Building the Most Secure, Permissionless and Uncensorable Bitcoin Peg](https://medium.com/iovlabs-innovation-stories/building-the-most-secure-permissionless-and-uncensorable-bitcoin-peg-b5dc7020e5ec)
 
 ### Copyright
 
