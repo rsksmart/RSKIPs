@@ -212,21 +212,23 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 - Testnet: 80 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
 - Regtest: 15
 
-### Bridge Storage changes
+### New Bridge storage fields
 
-|Storage Key   |Type          |Description   |
-|:------------ |:-------------|:-------------|
-|svpFundTxHashUnsigned | bytes32 | hash of SVP funding tx unsigned|
-|svpFundTxHashSigned | bytes32 | hash of SVP funding tx signed|
-|svpSpendTxHash | bytes32 | hash of SVP proof tx|
-|svpSpendTxWaitingForSignatures | bytes | SVP proof tx that is to be signed|
+|Storage Key   |Description   |
+|:------------ |:-------------|
+|svpFundTxHashUnsigned | hash of SVP funding tx unsigned|
+|svpFundTxHashSigned | hash of SVP funding tx signed|
+|svpSpendTxHash | hash of SVP proof tx|
+|svpSpendTxWaitingForSignatures | SVP proof tx that is to be signed|
 
 ### New Bridge methods
-|Method   |Type          |Description   |
-|:------------ |:-------------|:-------------|
-|addSvpSpendTxSignature(federatorPublicKeySerialized bytes, signatures bytes[]) | void | method to sign the proof transaction by the proposed pegnatories|
-|getStateForSvpClient | bytes | method to get the svpSpendTxWaitingForSignatures |
+```
+addSvpSpendTxSignature(federatorPublicKeySerialized bytes, signatures bytes[])
+```
 
+```
+getStateForSvpClient() returns bytes 
+```
 
 ## Rationale
 
