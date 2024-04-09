@@ -2,7 +2,7 @@
 rskip: 398
 title: PUSH0 instruction
 description: 
-status: Draft
+status: Adopted
 purpose: Sca
 author: VK
 layer: Core
@@ -20,7 +20,7 @@ created: 2023/07/11
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 ## Abstract

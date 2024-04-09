@@ -2,7 +2,7 @@
 rskip: 400
 title: Calldata gas cost reduction
 description: 
-status: Draft
+status: Adopted
 purpose: Sca
 author: VK
 layer: Core
@@ -20,7 +20,7 @@ created: 2023/07/12
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 ## Abstract

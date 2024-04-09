@@ -2,7 +2,7 @@
 rskip: 412
 title: BASEFEE instruction
 description:
-status: Draft
+status: Adopted
 purpose: Usa
 author: VK
 layer: Core
@@ -20,7 +20,7 @@ created: 2023/11/9
 |**Purpose**    | Usa                 |
 |**Layer**      | Core                |
 |**Complexity** | 2                   |
-|**Status**     | Draft               |
+|**Status**     | Adopted             |
 
 
 # **Abstract**
