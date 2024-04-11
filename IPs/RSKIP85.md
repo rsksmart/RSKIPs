@@ -2,7 +2,7 @@
 rskip: 85
 title: Improvements to REMASC contract
 description: 
-status: Draft
+status: Adopted
 purpose: Sca
 author: LS
 layer: Core
@@ -19,7 +19,7 @@ created: 2018-07-11
 | **Purpose**    | Sca, Medium                     |
 | **Layer**      | Core                            |
 | **Complexity** | 2                               |
-| **Status**     | Draft                           |
+| **Status**     | Adopted                           |
 
 # Abstract
 
