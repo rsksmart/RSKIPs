@@ -2,7 +2,7 @@
 rskip: 141
 title: Network Upgrade - Papyrus 	
 description: 
-status: Accepted
+status: Adopted
 purpose: Sca, Usa, Sec
 author: AE (@adrian.eidelman)
 layer: Core
@@ -19,7 +19,7 @@ created: 2019-09-27
 |**Purpose**    |Sca,Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 ## Abstract
 

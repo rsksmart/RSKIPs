@@ -2,7 +2,7 @@
 rskip: 181
 title: Peg-in rejection events
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: JD (@josedahlquist)
 layer: Core
@@ -20,7 +20,7 @@ created: 2020-11-03
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
