@@ -2,7 +2,7 @@
 rskip: 186
 title: Active Federation creation block height registration
 description: 
-status: Draft
+status: Adopted
 purpose: Sec
 author: JD (@josedahlquist)
 layer: Core
@@ -19,7 +19,7 @@ created: 2020-11-19
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
