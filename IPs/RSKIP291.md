@@ -2,7 +2,7 @@
 rskip: 291
 title: Network Upgrade - Hop
 description: 
-status: Accepted
+status: Adopted
 purpose: Usa, Sec
 author: AE (@adrian.eidelman)
 layer: Core
@@ -19,7 +19,7 @@ created: 2021-12-14
 |**Purpose**    |Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 ## Abstract
 
