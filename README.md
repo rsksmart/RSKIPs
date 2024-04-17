@@ -227,6 +227,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 414 |[Network Upgrade: Arrowhead](IPs/RSKIP414.md)| 7-DEC-23 | VK | Usa,Sec | Core | 2 | Adopted |
 | 415 |[Fix pegnatories address derivation from public keys](IPs/RSKIP415.md)| 30-JAN-24 | MI | Usa | Core | 1 | Adopted |
 | 417 |[Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response](IPs/RSKIP417.md)| 28-FEB-24 | MI | Usa | Core | 1 | Adopted |
+| 419 |[Powpeg Spendability Validation Protocol](IPs/RSKIP419.md)| 31-AUG-23 | JD, JZ | Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -239,13 +240,14 @@ You can find an easily browseable version of this information [here](https://ips
 | AM       | Ariel Mendelzon              | amendelzon@iovlabs.org |
 | DLL      | Diego López León             |                        |
 | DM       | Diego Masini                 | dmasini@iovlabs.org    |
-| FJ       | Federico Jinich              | federico@iovlabs.org    |
+| FJ       | Federico Jinich              | federico@iovlabs.org   |
 | GM       | Guido Medina                 |                        |
 | IO       | Ilan Olkies                  | ilan@iovlabs.org       |
 | JIO      | Jose Ignacio Orlicki         |                        |
 | JD       | Jose Dahlquist               | jose@rsk.co            |
 | JL       | Julian Len                   | julian@iovlabs.org     |
 | JT       | Jeremy Then                  | jeremy.then@iovlabs.org|
+| JZ       | Julia Zack                   | julia.zack@iovlabs.org |
 | KI       | Kelvin Isievwore             | kelvin@iovlabs.org     |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
