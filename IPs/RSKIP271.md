@@ -2,7 +2,7 @@
 rskip: 271
 title: Bridge peg-out batching
 description: 
-status: Accepted
+status: Adopted
 purpose: Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-08
 |**Purpose**    |Sec, Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 #  **Abstract**
 

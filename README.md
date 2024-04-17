@@ -105,14 +105,14 @@ You can find an easily browseable version of this information [here](https://ips
 | 71  |[Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
 | 75  |[Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 77  |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
-| 85  |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Draft |
+| 85  |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Adopted |
 | 87  |[Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
 | 89  |[Add Bitcoin block query methods to the bridge contract](IPs/RSKIP89.md)| JULY-18 | SDL | Usa      | Core     | 2 | Adopted   |
 | 91  |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
 | 92  |[Merkle Proof serialization](IPs/RSKIP92.md) | 2018 | DLL & MC | Sca | Core | 2 | Adopted |
 | 95  |[DELEGATECALL as an instruction set extension](IPs/RSKIP95.md) | 2018 | SDL | Sca | Core | 2 | Draft |
 | 98  |[Deactivation of the federated fallback system for block production ](IPs/RSKIP98.md) | 2018 | SDL | Sca | Core | 1 | Adopted |
-| 99  |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Draft |
+| 99  |[Orchid Network Upgrade](IPs/RSKIP99.md) | 2018 | AE | Scan,Sec,Usa | Core | 3 | Adopted |
 | 102 |[Efficient and Secure Fee Bumping](IPs/RSKIP102.md) | 2018 | SDL | Usa  | Core | 2 | Draft |
 | 106 |[Precompiled contract for HDWallet utility functions](IPs/RSKIP106.md) | 2019 | AM | Usa  | Core | 1 | Adopted |
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
@@ -170,7 +170,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 199 |[registerBtcTransaction Is Public](IPs/RSKIP199.md)|  07-JAN-21 | MI | Sca,USa,Sec | Core | 2 | Adoted |
 | 200 |[Receive headers limits](IPs/RSKIP194.md)|  08-JAN-21 | PGP & MI | Sec | Core | 2 | Adopted |
 | 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Adopted |
-| 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Draft |
+| 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Adopted |
 | 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
 | 209 |[Stack-overflow removal](IPs/RSKIP209.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
@@ -214,19 +214,19 @@ You can find an easily browseable version of this information [here](https://ips
 | 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Adopted |
 | 374 |[Reestablish the number of block confirmations for a PowPeg migration period](IPs/RSKIP374.md)| 15-FEB-23 | MI | Usa,Sec | Core | 1 | Adopted |
 | 375 |[Use the pegout creation transaction hash as the key in the map structure that stores the pegout transactions waiting for signatures](IPs/RSKIP375.md)| 30-MAY-23 | MI | Sca,Usa | Core | 1 | Adopted |
-| 376 |[Set version 2 to PowPeg migration transactions](IPs/RSKIP376.md)| 12-DEC-23 | MI | Usa | Core | 1 | Draft |
+| 376 |[Set version 2 to PowPeg migration transactions](IPs/RSKIP376.md)| 12-DEC-23 | MI | Usa | Core | 1 | Adopted |
 | 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Adopted |
-| 379 |[Bridge peg-out and migration transactions index](IPs/RSKIP379.md)| 12-DEC-23 | MI | Sca,Sec | Core | 2 | Draft |
+| 379 |[Bridge peg-out and migration transactions index](IPs/RSKIP379.md)| 12-DEC-23 | MI | Sca,Sec | Core | 2 | Adopted |
 | 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Adopted |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Adopted |
 | 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Draft |
 | 388 |[Network Upgrade: Fingerroot](IPs/RSKIP388.md)| 31-MAY-23 | AE | Usa,Sec | Core | 2 | Adopted |
-| 398 |[PUSH0 instruction](IPs/RSKIP398.md)| 11-JUL-23 | VK | Sca | Core | 2 | Draft |
-| 400 |[Calldata gas cost reduction](IPs/RSKIP400.md)| 12-JUL-23 | VK | Sca | Core | 2 | Draft |
-| 412 |[BASEFEE instruction](IPs/RSKIP412.md)| 9-NOV-23 | VK | Usa | Core | 2 | Draft |
-| 414 |[Network Upgrade: Arrowhead](IPs/RSKIP414.md)| 7-DEC-23 | VK | Usa,Sec | Core | 2 | Draft |
-| 415 |[Fix pegnatories address derivation from public keys](IPs/RSKIP415.md)| 30-JAN-24 | MI | Usa | Core | 1 | Draft |
-| 417 |[Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response](IPs/RSKIP417.md)| 28-FEB-24 | MI | Usa | Core | 1 | Draft |
+| 398 |[PUSH0 instruction](IPs/RSKIP398.md)| 11-JUL-23 | VK | Sca | Core | 2 | Adopted |
+| 400 |[Calldata gas cost reduction](IPs/RSKIP400.md)| 12-JUL-23 | VK | Sca | Core | 2 | Adopted |
+| 412 |[BASEFEE instruction](IPs/RSKIP412.md)| 9-NOV-23 | VK | Usa | Core | 2 | Adopted |
+| 414 |[Network Upgrade: Arrowhead](IPs/RSKIP414.md)| 7-DEC-23 | VK | Usa,Sec | Core | 2 | Adopted |
+| 415 |[Fix pegnatories address derivation from public keys](IPs/RSKIP415.md)| 30-JAN-24 | MI | Usa | Core | 1 | Adopted |
+| 417 |[Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response](IPs/RSKIP417.md)| 28-FEB-24 | MI | Usa | Core | 1 | Adopted |
 | 419 |[Powpeg Spendability Validation Protocol](IPs/RSKIP419.md)| 31-AUG-23 | JD, JZ | Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
