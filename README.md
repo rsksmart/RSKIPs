@@ -228,6 +228,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 415 |[Fix pegnatories address derivation from public keys](IPs/RSKIP415.md)| 30-JAN-24 | MI | Usa | Core | 1 | Adopted |
 | 417 |[Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response](IPs/RSKIP417.md)| 28-FEB-24 | MI | Usa | Core | 1 | Adopted |
 | 419 |[Powpeg Spendability Validation Protocol](IPs/RSKIP419.md)| 31-AUG-23 | JD, JZ | Sec | Core | 2 | Draft |
+| 427 |[Express amount value as weis in peg-out related events](IPs/RSKIP427.md)| 17-APR-24 | MI | Usa | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
