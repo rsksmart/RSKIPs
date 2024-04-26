@@ -26,11 +26,11 @@ This RSKIP proposes a change in the unit used in `amount` field of `release_requ
 
 ## Motivation
 
-In the original specification [1] it was specified that `release_request_received` and `release_request_rejected` Bridge events should express the _amount_ field in weis.
+According to the original specification [1] `release_request_received` and `release_request_rejected` Bridge events should express the _amount_ field in weis.
 
 ## Specification
 
-When `release_request_received` or `release_request_rejected` Bridge events are emitted, the _amount_ field should include the value in weis that the user sent to the Bridge.
+When `release_request_received` or `release_request_rejected` Bridge events are emitted, the _amount_ field should have the value in weis that the user sent to the Bridge. The change only affects the value used when the events are emitted, signatures remain unchanged.
 
 ## Backward Compatibility
 
