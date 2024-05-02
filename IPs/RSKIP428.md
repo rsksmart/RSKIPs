@@ -55,7 +55,7 @@ peg-outs.
 
 ### Implementation
 
-`SEGWIT_PEGOUT_CREATED` is the name of the new event that will be created. Its signature is:
+`segwit_pegout_created` is the name of the new event that will be created. Its signature is:
 
 ```
 segwit_pegout_created(bytes32 indexed btcTxHash, bytes utxoOutpointValues)
@@ -79,8 +79,8 @@ This event should be emitted every time a new peg-out is created.
 
 ## Rationale
 
-To make PowPeg able to retrieve the outpoint values used in a segwit peg-out transaction, so them can be 
-provided to the HSM Segwit in order to sign the given peg-out.
+To make the PowPeg nodes able to retrieve the outpoint values used in a segwit peg-out transaction, 
+so they can be provided to the HSM Segwit in order to sign the given peg-out.
 
 ## Backwards Compatibility
 
