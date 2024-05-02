@@ -216,6 +216,7 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 
 |Storage Key   |Description   |
 |:------------ |:-------------|
+|proposedFederation | voted federation pending to be validated|
 |svpFundTxHashUnsigned | hash of SVP funding tx unsigned|
 |svpFundTxHashSigned | hash of SVP funding tx signed|
 |svpSpendTxHash | hash of SVP proof tx|
