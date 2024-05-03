@@ -1,6 +1,6 @@
 ---
 rskip: 428
-title: HSM Segwit Support
+title: Emit a new event with the utxo outpoints when a peg-out is created
 created: 23-APR-24
 author: NC
 purpose: Sca
@@ -12,7 +12,7 @@ description:
 
 |RSKIP          | 428                |
 | :------------ |:-------------------|
-|**Title**      | Support HSM Segwit |
+|**Title**      | Emit a new event with the utxo outpoints when a peg-out is created |
 |**Created**    | 23-APR-24          |
 |**Author**     | NC                 |
 |**Purpose**    | Sca                |
@@ -23,35 +23,35 @@ description:
 ## Abstract
 
 This RSKIP proposes creating a new event that stores the outpoint values of the inputs used in a 
-peg-out to enable HSM Segwit support in RSK.
+peg-out to enable the PowHSM sign segwit peg-outs.
 
 ## Motivation
 
-To support HSM Segwit, the PowPeg must provide the outpoint values for signing a segwit peg-out[1].
-Currently, selected UTXOs for a peg-out are removed from the available utxos set once 
-the peg-out is created. Storing the outpoint values in an event will allow the PowPeg to retrieve 
-and provide the outpoint values to the HSM, so being able to sign segwit peg-out properly.
+In order to the PowHSM sign segwit peg-outs[1], it needs the outpoint values to be provided when 
+signing. Currently, selected UTXOs for a peg-out are removed from the available utxos set once 
+the peg-out is created. Storing the outpoint values in an event, once a peg-out is created and before
+the selected utxos are discarded, is a solution that will allow the PowPeg to retrieve and provide 
+the required outpoint values to the PowHSM to be able to sign a given segwit peg-out.
 
 ## Specification
 
-The proposal is to create a new event to store the Bitcoin Transaction Hash of the peg-out and 
-the outpoint values of each utxo used for it. This event should be emitted whenever a peg-out is 
-created, including user peg-outs, migrations, and refunds for rejected transactions.
+The proposal is to create a new event to store the bitcoin transaction hash of the peg-out and 
+the outpoint values of each utxo used as input of the given peg-out. Then this event will be emitted
+whenever a transaction that spends from the federation address, in other words peg-outs, is created.
 
-As described, this new event is composed of two parameters:
+This new event is composed of two parameters:
 
-First, the Bitcoin Transaction Hash, must be the hash of the peg-out without witnesses and 
+First, the bitcoin transaction hash, must be the hash of the peg-out without witnesses and 
 signatures.
 
-Second, the list of outpoint values. When dealing with non-segwit peg-outs, the outpoint values will
+Second, the list of utxo outpoint values. When dealing with non-segwit peg-outs, the outpoint values will
 be an empty list. When dealing with segwit peg-outs, this will be a list of one or more integer 
-values in VarInt format[2], ordered in the same order as the inputs of the peg-out transaction.
+values in VarInt format[2], ordered in the same order as the inputs of the peg-out.
 
-So, when the PowPeg processes the peg-outs to sign, it will follow a straightforward process. 
-It will retrieve the outpoint values from the new event in the rsk transaction where the peg-out 
-was created. These values are then provided to the HSM, facilitating the signing of the segwit 
-peg-outs.
-
+Therefore, when the PowPeg node processes the peg-outs to sign, it will follow a 
+straightforward process. It will retrieve the outpoint values from the new event in the rsk 
+transaction where the peg-out was created. Then these values will be provided to the PowHSM to sign 
+the given segwit peg-out.
 
 ### Implementation
 
@@ -63,24 +63,23 @@ segwit_pegout_created(bytes32 indexed btcTxHash, bytes utxoOutpointValues)
 
 As we see, this event consists of two params:
 
-- `btcTxHash` parameter represents the transaction hash without signatures of the pegout or 
-migration transaction created. This param is limited to 32 bytes, which is the size of any Bitcoin
-transaction hash. This parameter is indexed and allows search queries by a given Bitcoin transaction hash.
+- `btcTxHash` parameter represents the bitcoin transaction hash without signatures of the pegout. 
+- This param is limited to 32 bytes, which is the size of any Bitcoin
+transaction hash. This parameter is indexed and allows search queries by a given bitcoin transaction
+hash.
 
-
-- `utxoOutpointValues` parameter represents the outpoint values used for the pegout transaction. 
-The order must match the inputs order for the pegout transaction. This parameter stores a list of 
+- `utxoOutpointValues` parameter represents the utxo outpoint values used for the pegout transaction. 
+The order must match the inputs order of the pegout. This parameter stores a list of 
 integers in VarInt format serialized as a byte array. The list of outpoint values is serialized and
 deserialized using VarInt encoding/decoding mechanism. The order of the outpoint values is preserved
 when serializing and deserializing the list of values.
 
-This event should be emitted every time a new peg-out is created.
-
+This event must be emitted every time a new peg-out is created.
 
 ## Rationale
 
-To make the PowPeg nodes able to retrieve the outpoint values used in a segwit peg-out transaction, 
-so they can be provided to the HSM Segwit in order to sign the given peg-out.
+To make the PowPeg able to retrieve the outpoint values used in a segwit peg-out transaction, 
+so they can be provided to the PowHSM to sign the given segwit peg-out.
 
 ## Backwards Compatibility
 
