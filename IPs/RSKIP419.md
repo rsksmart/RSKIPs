@@ -193,7 +193,7 @@ Once fully signed, the Bridge should remove the entry from the `svpSpendTxWaitin
 
 With the SVP proof transaction broadcasted, the Bridge now needs to validate it and proceed with the election commitment as expected.
 
-The proof transaction should be registered through a new `registerSvpSpendTxTransaction` method that would behave similar to the `registerBtcTransaction`. As before, it should verify:
+The proof transaction should be registered through a new `registerSvpSpendTransaction` method that would behave similar to the `registerBtcTransaction`. As before, it should verify:
 - SVP period is ongoing
 - Transaction hash without signatures is registered in the `svpSpendTxHash` storage key.
 
@@ -232,7 +232,7 @@ getStateForSvpClient() returns bytes
 ```
 
 ```
-registerSvpSpendTxTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
+registerSvpSpendTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
 ```
 
 ## References
