@@ -27,11 +27,12 @@ peg-out to enable the PowHSM sign segwit peg-outs.
 
 ## Motivation
 
-In order to the PowHSM sign segwit peg-outs[1], it needs the outpoint values to be provided when 
-signing. Currently, selected UTXOs for a peg-out are removed from the available utxos set once 
-the peg-out is created. Storing the outpoint values in an event, once a peg-out is created and before
-the selected utxos are discarded, is a solution that will allow the PowPeg to retrieve and provide 
-the required outpoint values to the PowHSM to be able to sign a given segwit peg-out.
+For the PowHSM sign segwit peg-outs[1], the outpoint values must be provided since they are needed 
+for calculating the sighash of a segwit bitcoin transaction. Currently, selected UTXOs for a 
+peg-out are removed from the available utxos set once the peg-out is created. Storing the outpoint 
+values in an event, once a peg-out is created and before the selected utxos are discarded, is a 
+solution that will allow the PowPeg to retrieve and provide the required outpoint values to the 
+PowHSM to be able to sign a given segwit peg-out.
 
 ## Specification
 
