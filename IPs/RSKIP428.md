@@ -5,20 +5,20 @@ created: 23-APR-24
 author: NC
 purpose: Sca
 layer: Core 
-complexity: 2
+complexity: 1
 status: Draft
 description: 
 ---
 
-|RSKIP          | 428                |
-| :------------ |:-------------------|
+|RSKIP          | 428                                                                |
+| :------------ |:-------------------------------------------------------------------|
 |**Title**      | Emit a new event with the utxo outpoints when a peg-out is created |
-|**Created**    | 23-APR-24          |
-|**Author**     | NC                 |
-|**Purpose**    | Sca                |
-|**Layer**      | Core               |
-|**Complexity** | 2                  |
-|**Status**     | Draft              |
+|**Created**    | 23-APR-24                                                          |
+|**Author**     | NC                                                                 |
+|**Purpose**    | Sca                                                                |
+|**Layer**      | Core                                                               |
+|**Complexity** | 1                                                                  |
+|**Status**     | Draft                                                              |
 
 ## Abstract
 
