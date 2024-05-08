@@ -26,26 +26,26 @@ This RSKIP proposes creating a new event that stores the outpoint values of the 
 
 ## Motivation
 
-For the PowHSM sign segwit peg-outs[1], the outpoint values of the inputs must be provided since they are needed for calculating the sighash of a segwit bitcoin transaction. Currently, selected UTXOs for a peg-out are removed from the available utxos set once the peg-out is created, meaning it is not easy to get them to retrieve the outpoint values for a given segwit peg-out. Storing the outpoint values in an event, when a peg-out is created and before the selected utxos are discarded, is a solution that will allow the PowPeg to retrieve and provide the required outpoint values to the PowHSM to be able to sign a given segwit peg-out.
+For the PowHSM sign segwit peg-outs[1], the outpoint values of the inputs must be provided since they are needed for calculating the sighash of a segwit bitcoin transaction. Currently, selected UTXOs for a peg-out are removed from the available utxos set once the peg-out is created, meaning they cannot be retrieved later. Storing the outpoint values in an event, when peg-outs are created and before the selected utxos are removed from the set, is a solution that will allow the PowPeg to retrieve and provide the required outpoint values to the PowHSM to sign segwit peg-outs.
 
 ## Specification
 
-The proposal is to create a new event to store the bitcoin transaction hash of the peg-out and the outpoint values of each utxo used as input of a given peg-out. This event will be emitted whenever a transaction spending funds from the federation is created. In other words, when a peg-out is created.
+The proposal is to create a new event to store the bitcoin transaction hash and the UTXO outpoint values of a transaction spending funds from the federation, which from now on we will call it peg-out. This event will be emitted when a peg-out is created.
 
 This new event is composed of two parameters:
 
 First, the bitcoin transaction hash, must be the hash of the peg-out without witnesses and signatures.
 
-Second, the list of utxo outpoint values. When dealing with non-segwit peg-outs, the outpoint values will be an empty list. When dealing with segwit peg-outs, this will be a list of one or more integer values in VarInt format[2], ordered in the same order as the inputs of the peg-out.
+Second, the list of utxo outpoint values of the peg-out. This will be a list of one or more integer values in VarInt format[2], ordered in the same order as the inputs of the peg-out.
 
 Therefore, when the PowPeg node processes the peg-outs to sign, it will follow a straightforward process. It will retrieve the outpoint values from the new event in the rsk transaction where the peg-out was created. Then these values will be provided to the PowHSM to sign the given segwit peg-out.
 
 ### Implementation
 
-`segwit_pegout_created` is the name of the new event that will be created. Its signature is:
+`pegout_transaction_created` is the name of the new event that will be created. Its signature is:
 
 ```
-segwit_pegout_created(bytes32 indexed btcTxHash, bytes utxoOutpointValues)
+pegout_transaction_created(bytes32 indexed btcTxHash, bytes utxoOutpointValues)
 ```
 
 As we see, this event consists of two params:
