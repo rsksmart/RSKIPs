@@ -207,7 +207,7 @@ The duration of this phase must account for:
 - Confirming the UTXO on Bitcoin (Bitcoin confirmations for the UTXO to be accepted)
 - Sending back the UTXO to the current Powpeg (Proposed pegnatories signing)
 
-The recommendation is that this phase takes approximately the blocks a peg-out confirmation has plus the bitcoin blocks needed to register the chance, twice. And a couple of thousands more blocks to be safe.
+The recommendation is that this phase takes approximately the blocks a peg-out confirmation has plus the bitcoin blocks needed to register the change, twice. And a couple of thousands more blocks to be safe.
 - Mainnet: 16_000
 - Testnet: 80 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
 - Regtest: 15
