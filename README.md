@@ -256,9 +256,9 @@ You can find an easily browseable version of this information [here](https://ips
 | MM       | Martin Medina                |                        |
 | MMA      | Matias Marquez               |                        |
 | MP       | Martin Picco                 |                        |
+| NC       | Nathaniel Calderón           | nathaniel.calderon@rootstocklabs.com |
 | NPS      | Nicolas Perez Santoro        |                        |
 | NV       | Nicolás Vescovo              | nicolas.vescovo@iovlabs.org |
-| NC       | Nathaniel Calderón        | nathaniel.calderon@rootstocklabs.com |
 | PDG      | Patricio Diego Gallardo      | patricio@iovlabs.org   |
 | PGP      | Pamela Gonzalez Perilli      | pamela@iovlabs.org     |
 | PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
