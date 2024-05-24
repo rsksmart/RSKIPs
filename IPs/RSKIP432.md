@@ -1,6 +1,6 @@
 ---
 rskip: 432
-title: EthSwap
+title: RbtcSwap
 description:
 status: Draft
 purpose: Usa
@@ -9,12 +9,12 @@ layer: Core
 complexity: 2
 created: 2024-05
 ---
-# EthSwap
+# RbtcSwap
 
 
 |RSKIP          | 432 |
 | :------------ |:-------------|
-|**Title**      |EthSwap|
+|**Title**      |RbtcSwap|
 |**Created**    |MAY-2024 |
 |**Author**     |@rmoreliovlabs |
 |**Purpose**    |Usa |
