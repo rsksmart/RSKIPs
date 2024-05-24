@@ -1,5 +1,5 @@
 ---
-rskip: TBD
+rskip: 432
 title: EthSwap
 description:
 status: Draft
@@ -12,7 +12,7 @@ created: 2024-05
 # EthSwap
 
 
-|RSKIP          | TBD |
+|RSKIP          | 432 |
 | :------------ |:-------------|
 |**Title**      |EthSwap|
 |**Created**    |MAY-2024 |
