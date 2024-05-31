@@ -4,7 +4,7 @@ title: RbtcSwap
 description:
 status: Draft
 purpose: Usa
-author: @rmoreliovlabs
+author: (@rmoreliovlabs)
 layer: Core
 complexity: 2
 created: 2024-05
