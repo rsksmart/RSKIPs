@@ -9,7 +9,7 @@ layer: Core
 complexity: 2
 created: 2024-06
 ---
-# EthSwap
+# StableMinGasPrice
 
 
 |RSKIP          | 433 |
