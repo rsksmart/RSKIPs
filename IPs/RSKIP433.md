@@ -1,6 +1,6 @@
 ---
 rskip: 433
-title: StableMinGasPrice
+title: Stable Minimum Gas Price
 description:
 status: Draft
 purpose: Usa
@@ -9,12 +9,12 @@ layer: Core
 complexity: 2
 created: 2024-06
 ---
-# StableMinGasPrice
+# Stable Minimum Gas Price
 
 
 |RSKIP          | 433 |
 | :------------ |:-------------|
-|**Title**      |StableMinGasPrice|
+|**Title**      |Stable Minimum Gas Price|
 |**Created**    |JUNE-2024 |
 |**Author**     |RM |
 |**Purpose**    |Usa |
@@ -52,14 +52,24 @@ miner {
         enabled = false
         minStableGasPrice = 4265280000000 # 0.00000426528 USD per gas unit
         refreshRate = 360
-        method = HTTP_GET
-        httpGet {
-          ...
-        }
-        ethCall {
-         ...
-        }
+        method = HTTP_GET || ETH_CALL
+        
+        #     Examples:
+        #     method = "HTTP-GET"
+        #     params {
+        #         url = "https://domain.info/ticker"
+        #         jsonPath = "/USD/buy"
+        #         timeout = 2 seconds
+        #     }
+        #     
+        #     method = "ETH_CALL"
+        #     params {
+        #        from: "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd825",
+        #        to: "0xcd2a3d9f938e13cd947ec05abc7fe734df8dd826",
+        #        data: "0x8300df49"
+        #     }
     }
+}
 ```
 
 When the `stableGasPrice` feature is **enabled**, we should adjust the behaviour to retrieve BTC price data according to the he cached _minStableGasPrice_ or the specified method to keep transaction costs stable in fiat currency (like USD or EUR). It first checks if there is a recent, **cached** Bitcoin price within the defined _refresh rate_ and uses this value if available. If no valid cached price exists, it fetches the latest Bitcoin price using the specified method (HTTP_GET or ETH_CALL). 
@@ -69,6 +79,10 @@ If the price retrieval fails but a cached price is still valid, the system uses 
 ## Rationale
 
 The mechanism would only trigger if a RSK miner configures the minimumGasPrice in fiat currency by enabling `stableGasPrice` in the configuration settings.
+
+## Backwards Compatibility
+
+This feature would be backwards compatible, as it is just a node behaviour change and it ensures that existing configurations and functionalities remain intact for users who choose not to adopt or enable the `stableGasPrice` setting.
 
 # **Copyright**
 
