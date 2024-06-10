@@ -28,9 +28,9 @@ This RSKIP proposes a feature that allows RSK miners to configure the minimum ga
 
 ## Motivation
 
-In the current RSK network, miners have the ability to set the minimum gas price through the `miner.minGasPrice` configuration, which is denominated in WEI. This parameter is essentially linked to the Bitcoin price, causing the gas price to vary in correlation with Bitcoin's value. This behaviour creates uncertainty in transaction costs, often leading to increased costs when Bitcoin prices go up. This unpredictability can negatively impact user experience, as transaction fees become less stable.
+In the current RSK network, miners have the ability to set the minimum gas price through the `miner.minGasPrice` configuration, which is denominated in WEI. This parameter is essentially linked to the Bitcoin price, causing the gas price to vary in correlation with Bitcoin's value. This behavior creates uncertainty in transaction costs, often leading to increased costs when Bitcoin prices go up. This unpredictability can negatively impact user experience, as transaction fees become less stable.
 
-This can be solved adding a new feature that allows miners to specify and configure the minimum gas price in fiat currency. By decoupling gas prices from Bitcoin's market fluctuations, this property  aims to stabilize transaction costs in terms of fiat value, thereby improving predictability. This approach not only protects users from the volatility of cryptocurrency markets but also provides a better user experiencie.
+This can be solved adding a new feature that allows miners to specify and configure the minimum gas price in fiat currency. By decoupling gas prices from Bitcoin's market fluctuations, this property  aims to stabilize transaction costs in terms of fiat value, thereby improving predictability. This approach not only protects users from the volatility of cryptocurrency markets but also provides a better user experience.
 
 ## Specification
 
@@ -72,7 +72,7 @@ miner {
 }
 ```
 
-When the `stableGasPrice` feature is **enabled**, we should adjust the behaviour to retrieve BTC price data according to the he cached _minStableGasPrice_ or the specified method to keep transaction costs stable in fiat currency (like USD or EUR). It first checks if there is a recent, **cached** Bitcoin price within the defined _refresh rate_ and uses this value if available. If no valid cached price exists, it fetches the latest Bitcoin price using the specified method (HTTP_GET or ETH_CALL). 
+When the `stableGasPrice` feature is **enabled**, we should adjust the behavior to retrieve BTC price data according to the he cached _minStableGasPrice_ or the specified method to keep transaction costs stable in fiat currency (like USD or EUR). It first checks if there is a recent, **cached** Bitcoin price within the defined _refresh rate_ and uses this value if available. If no valid cached price exists, it fetches the latest Bitcoin price using the specified method (HTTP_GET or ETH_CALL). 
 
 If the price retrieval fails but a cached price is still valid, the system uses the cached price. If **both** the price fetch and cached price are unavailable, it defaults to the original `minGasPrice` setting.
 
@@ -82,7 +82,7 @@ The mechanism would only trigger if a RSK miner configures the minimumGasPrice i
 
 ## Backwards Compatibility
 
-This feature would be backwards compatible, as it is just a node behaviour change and it ensures that existing configurations and functionalities remain intact for users who choose not to adopt or enable the `stableGasPrice` setting.
+This feature would be backwards compatible, as it is just a node behavior change and it ensures that existing configurations and functionalities remain intact for users who choose not to adopt or enable the `stableGasPrice` setting.
 
 # **Copyright**
 
