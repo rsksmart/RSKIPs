@@ -1,30 +1,30 @@
 ---
 rskip: 433
-title: Stable Minimum Gas Price
+title: Fiat Stable Minimum Gas Price
 description:
 status: Draft
 purpose: Usa
 author: RM
-layer: Core
+layer: Node
 complexity: 2
 created: 2024-06
 ---
-# Stable Minimum Gas Price
+# Fiat Stable Minimum Gas Price
 
 
 |RSKIP          | 433 |
 | :------------ |:-------------|
-|**Title**      |Stable Minimum Gas Price|
+|**Title**      |Fiat Stable Minimum Gas Price|
 |**Created**    |JUNE-2024 |
 |**Author**     |RM |
 |**Purpose**    |Usa |
-|**Layer**      |Core |
+|**Layer**      |Node |
 |**Complexity** |2 |
 |**Status**     |Draft |
 
 # **Abstract**
 
-This RSKIP proposes a feature that allows RSK miners to configure the minimum gas price (MinGasPrice) in fiat currency instead of the current cryptocurrency (WEI) linked to Bitcoin.
+This RSKIP proposes a feature that allows Rootstock miners to configure the minimum gas price (MinGasPrice) in fiat currency instead of the current cryptocurrency (WEI) linked to Bitcoin.
 
 ## Motivation
 
@@ -82,7 +82,7 @@ The mechanism would only trigger if a RSK miner configures the minimumGasPrice i
 
 ## Backwards Compatibility
 
-This feature would be backwards compatible, as it is just a node behavior change and it ensures that existing configurations and functionalities remain intact for users who choose not to adopt or enable the `stableGasPrice` setting.
+This feature would be backwards compatible, as it is just a node behavior change and it ensures that existing configurations and functionalities remain intact for users who choose not to adopt or enable the `stableGasPrice` setting. Therefore, this feature doesn't require consensus rules changes and, as a consequence, is not mandatory for all network nodes to adopt it.
 
 # **Copyright**
 
