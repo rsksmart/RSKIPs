@@ -1,6 +1,6 @@
 ---
 rskip: 427
-title: Express amount value as weis in peg-out related events
+title: Express the amount value in wei for peg-out related events
 created: 17-APR-24
 author: MI
 purpose: Usa
@@ -12,7 +12,7 @@ description:
 
 |RSKIP          |427           |
 | :------------ |:-------------|
-|**Title**      |Express amount value as weis in peg-out related events |
+|**Title**      |Express the amount value in wei for peg-out related events |
 |**Created**    |17-APR-24 |
 |**Author**     |MI |
 |**Purpose**    |Usa |
