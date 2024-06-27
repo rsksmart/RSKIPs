@@ -193,7 +193,7 @@ Once fully signed, the Bridge should remove the entry from the `svpSpendTxWaitin
 
 With the SVP proof transaction broadcasted, the Bridge now needs to validate it and proceed with the election commitment as expected.
 
-The proof transaction should be registered through a new `registerSvpSpendTxTransaction` method that would behave similar to the `registerBtcTransaction`. As before, it should verify:
+The proof transaction should be registered through a new `registerSvpSpendTransaction` method that would behave similar to the `registerBtcTransaction`. As before, it should verify:
 - SVP period is ongoing
 - Transaction hash without signatures is registered in the `svpSpendTxHash` storage key.
 
@@ -207,7 +207,7 @@ The duration of this phase must account for:
 - Confirming the UTXO on Bitcoin (Bitcoin confirmations for the UTXO to be accepted)
 - Sending back the UTXO to the current Powpeg (Proposed pegnatories signing)
 
-The recommendation is that this phase takes approximately the blocks a peg-out confirmation has plus the bitcoin blocks needed to register the chance, twice. And a couple of thousands more blocks to be safe.
+The recommendation is that this phase takes approximately the blocks a peg-out confirmation has plus the bitcoin blocks needed to register the change, twice. And a couple of thousands more blocks to be safe.
 - Mainnet: 16_000
 - Testnet: 80 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
 - Regtest: 15
@@ -232,7 +232,7 @@ getStateForSvpClient() returns bytes
 ```
 
 ```
-registerSvpSpendTxTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
+registerSvpSpendTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
 ```
 
 ## References
