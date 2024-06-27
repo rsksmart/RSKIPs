@@ -228,8 +228,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 415 |[Fix pegnatories address derivation from public keys](IPs/RSKIP415.md)| 30-JAN-24 | MI | Usa | Core | 1 | Adopted |
 | 417 |[Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response](IPs/RSKIP417.md)| 28-FEB-24 | MI | Usa | Core | 1 | Adopted |
 | 419 |[Powpeg Spendability Validation Protocol](IPs/RSKIP419.md)| 31-AUG-23 | JD, JZ | Sec | Core | 2 | Draft |
-
-(*) Under evaluation to be implemented in the next reference client release
+| X   |Network Upgrade: Lovell|27-JUN-24 | AE | Usa, Sec, Sca | Core | 2 | Draft |
 
 # Author Index
 
@@ -248,7 +247,7 @@ You can find an easily browseable version of this information [here](https://ips
 | JL       | Julian Len                   | julian@iovlabs.org     |
 | JT       | Jeremy Then                  | jeremy.then@iovlabs.org|
 | JZ       | Julia Zack                   | julia.zack@iovlabs.org |
-| KI       | Kelvin Isievwore             | kelvin@iovlabs.org     |
+| KI       | Kelvin Isievwore             |                        |
 | LS       | Lisandro Sebrie              |                        |
 | MC       | Martín Coll                  |                        |
 | MI       | Marcos Irisarri              | marcos@iovlabs.org     |
@@ -258,9 +257,9 @@ You can find an easily browseable version of this information [here](https://ips
 | NPS      | Nicolas Perez Santoro        |                        |
 | NV       | Nicolás Vescovo              | nicolas.vescovo@iovlabs.org |
 | PDG      | Patricio Diego Gallardo      | patricio@iovlabs.org   |
-| PGP      | Pamela Gonzalez Perilli      | pamela@iovlabs.org     |
-| PMP      | Pedro Meulen Prete           | pedro@iovlabs.org      |
-| RFV      | Ramses Fernandez-Valencia    | ramses@iovlabs.org     |
+| PGP      | Pamela Gonzalez Perilli      |                        |
+| PMP      | Pedro Meulen Prete           |                        |
+| RFV      | Ramses Fernandez-Valencia    |                        |
 | SDL      | Sergio Demian Lerner         | sergio@iovlabs.org     |
 | SM       | Shreemoy Mishra              | shreemoy@iovlabs.org   |
 | SMS      | Sebastian Matias Sicardi     |                        |
