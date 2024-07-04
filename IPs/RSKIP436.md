@@ -13,7 +13,7 @@ created: 2024-07-04
 
 |RSKIP          |436           |
 | :------------ |:-------------|
-|**Title**      |Network Upgrade (patch): Hop 6.3.1 |
+|**Title**      |Network Upgrade (patch): Arrowhead 6.3.1 |
 |**Created**    |04-JUL-2024 |
 |**Author**     |AE |
 |**Purpose**    |Usa |
@@ -25,7 +25,7 @@ created: 2024-07-04
 
 This RSKIP specifies the changes included in the Rootstock patch network upgrade Arrowhead 6.3.1. This network upgrade aims to fix the issue that caused the PowPeg service outage, as described in [1]. This patch is only intended for the Rootstock Mainnet network.
 
-## Specificationi
+## Specification
 
 - Codename: Arrowhead 6.3.1
 - Activation:
