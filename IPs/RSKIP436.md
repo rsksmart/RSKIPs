@@ -29,13 +29,15 @@ This RSKIP specifies the changes included in the Rootstock patch network upgrade
 
 - Codename: Arrowhead 6.3.1
 - Activation:
-	- Rootstock Mainnet block: To be confirmed
+	- Rootstock Mainnet block: 6,549,300
 	- Rootstock Testnet block: N/A
 - Open for comments until Jul, 9th, 2024.
 
 ### Included RSKIPs
 
 ### Accepted RSKIPs
+
+- [RSKIP-434](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP434.md): Bridge Bitcoin block chainwork up to 12 Bytes
 
 ### Rejected RSKIPs
 
@@ -47,6 +49,7 @@ This RSKIP specifies the changes included in the Rootstock patch network upgrade
 
 ## Timeline
 
+- Jul-10-24: The open-for-comments window is now closed. The Rootstock Core Development team will proceed with the release.
 - Jul-4-24: RSKIP created and proposed RSKIPs listed
 
 ## References
