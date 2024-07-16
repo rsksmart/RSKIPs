@@ -1,22 +1,22 @@
 ---
-rskip: 91
-title: STATIC_CALL opcode 
+rskip: 438
+title: Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode
 description: 
-status: Adopted
-purpose: Usa
-author: AE (@adrian.eidelman)
+status: Draft
+purpose: Fair
+author: FML (@fmacleal)
 layer: Core
 complexity: 2
-created: 2018-07-12
+created: 2024-07-16
 ---
 
-# STATIC_CALL opcode
+# Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode
 
 | RSKIP          | 437                                                                                             |
 | :------------- |:------------------------------------------------------------------------------------------------|
 | **Title**      | Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode |
-| **Created**    | 12-JUL-2024                                                                                     |
-| **Author**     | FL                   		                                                                         |
+| **Created**    | 16-JUL-2024                                                                                     |
+| **Author**     | FML                   		                                                                        |
 | **Purpose**    | Fair		                                                                                          |
 | **Layer**      | Core                                                                                            |
 | **Complexity** | 2                                                                                               |
