@@ -28,7 +28,7 @@ The following RSKIP is an adaptation of [EIP3860](https://eips.ethereum.org/EIPS
 ## Abstract
 Extending the [EIP-170](https://eips.ethereum.org/EIPS/eip-170), that it's already implemented in RSK, this RSKIP proposes to limit the maximum size of the `initcode` 
 (`MAX_INITCODE_SIZE =  2 * MAX_CONTRACT_SIZE = 49152`). Nevertheless, it's also proposed to introduce a charge of `2` gas  for every 32-byte chunk of `initcode`
-to represent the cost of jumpdest-analysis. Lastly, the size limit results in the nice-to-have property that EVM code size, code offset (`PC`), and jump offset fits a 16-bit value.
+to represent the cost of jumpdest-analysis.
 
 ## Motivation
 During contract creation the client has to perform jumpdest-analysis on the `initcode` prior to execution. The work performed scales linearly with the size of the `initcode`. 
@@ -41,15 +41,7 @@ There are three costs charged today:
 3. Cost of address calculation (hashing of code) in case of `CREATE2` only: 6 gas per word.
 
 Only the first cost applies to `initcode`, but only in the case of contract creation transactions. For the case of `CREATE`/`CREATE2` there is no such cost, and it is possible to programmatically 
-generate variations of `initcode` in a relatively cheap manner. 
-
-Furthermore, the lack of a limit has caused lengthy discussions for some EVM proposals, influencing the design, or even causing a delay or cancellation of a feature.
-
-Due to that, the EVM team was motivated by three reasons:
-
-1. Ensuring `initcode` is fairly charged (most importantly cost is proportional to `initcode`’s length) to minimize the risks for the future.
-2. To have a cost system which is extendable in the future.
-3. To simplify EVM engines by the explicit limits (code size, code offsets (`PC`), and jump offsets fit 16-bits).
+generate variations of `initcode` in a relatively cheap manner.
 
 ## Specification
 
@@ -57,9 +49,9 @@ Due to that, the EVM team was motivated by three reasons:
 | **Constant**           | **Value**              |
 |:-----------------------|:-----------------------|
 | `INITCODE_WORST_COST`  | `2`                    |
-| `INITCODE_WORST_COST`  | `2 * MAX_CONTRACT_SIZE` |
+| `MAX_INITCODE_SIZE`  | `2 * MAX_CONTRACT_SIZE` |
 
-Where `MAX_CONTRACT_SIZE` is defined in [EIP-170](https://eips.ethereum.org/EIPS/eip-170) as `24576`.
+Where `MAX_CONTRACT_SIZE` is defined as `24576`.
 We define `initcode_cost(initcode)` to equal `INITCODE_WORD_COST * ceil(len(initcode) / 32)`.
 
 ### Rules
@@ -76,7 +68,7 @@ resulting contract address and the execution of `initcode`.
 
 ### Gas cost constant
 The value of `INITCODE_WORD_COST` is selected based on performance benchmarks of differing worst-cases per implementation, more details about how this value was 
-selected can be found in the [EIP-3860](https://eips.ethereum.org/EIPS/eip-3860#gas-cost-constant).
+selected can be found in the [EIP-3860](https://eips.ethereum.org/EIPS/eip-3860#gas-cost-constant) that were based on to create this RSKIP.
 
 ### Gas cost per word (32-byte chunk)
 The chosen cost of 2 gas per word was decided and discussed in the [EIP-3860](https://eips.ethereum.org/EIPS/eip-3860#gas-cost-per-word-32-byte-chunk). It's intended to
@@ -86,8 +78,8 @@ and `6` for `CREATE2`, after activation `2` for `CREATE` and` 6 + 2` for `CREATE
 ### Reason for size limit of initcode
 Estimating and creating worst case scenarios is easier with an upper bound in place, given one parameter for the search is greatly reduced. This allows for selecting a much more optimistic gas per byte.
 
-Should there be no upper bound, the cost would need to be higher accounting for unknown unknowns. Given most initcode (TODO: state maximum initcode size resulting in deployment 
-seen on mainnet here) does not exceed the proposed limit, penalising contracts by overly conservative costs seems unnecessary.
+Should there be no upper bound, the cost would need to be higher accounting for unknown unknowns. Given most initcode does not exceed the proposed limit, penalising contracts by overly conservative 
+costs seems unnecessary.
 
 ### Effect of size limit of initcode
 In most, if not all cases when a new contract is being created, the resulting runtime code is copied from the `initcode` itself. For the basic case the` 2 * MAX_CONTRACT_SIZE` limit allows `MAX_CONTRACT_SIZE` 
@@ -99,7 +91,7 @@ Despite that, it was decided to include it in the specification for consistency,
 
 ### How to report initcode limit violation?
 It was specified that `initcode` size limit violation for `CREATE`/`CREATE2` results in exceptional abort of the execution. This places it in the group of early out-of-gas checks, 
-including: stack underflow, memory expansion, static call violation, initcode hashing cost, and initcode cost introduced by this EIP. They precede the later “light” checks: call depth and balance.
+including: stack underflow, memory expansion, static call violation, initcode hashing cost, and initcode cost introduced by this RSKIP. They precede the later “light” checks: call depth and balance.
 The choice gives consistency to the order of checks and lowers implementation complexity (out-of-gas checks can be performed in any order).
 
 ## Backwards compatibility
