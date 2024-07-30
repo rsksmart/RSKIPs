@@ -2,7 +2,7 @@
 rskip: 436
 title: Network Upgrade (patch) - Arrowhead 6.3.1
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: AE
 layer: Core
@@ -19,7 +19,7 @@ created: 2024-07-04
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
@@ -35,6 +35,8 @@ This RSKIP specifies the changes included in the Rootstock patch network upgrade
 
 ### Included RSKIPs
 
+- [RSKIP-434](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP434.md): Bridge Bitcoin block chainwork up to 12 Bytes
+
 ### Accepted RSKIPs
 
 - [RSKIP-434](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP434.md): Bridge Bitcoin block chainwork up to 12 Bytes
@@ -49,6 +51,7 @@ This RSKIP specifies the changes included in the Rootstock patch network upgrade
 
 ## Timeline
 
+- Jul-24-24: Network upgrade successfuly activated
 - Jul-10-24: The open-for-comments window is now closed. The Rootstock Core Development team will proceed with the release.
 - Jul-4-24: RSKIP created and proposed RSKIPs listed
 
