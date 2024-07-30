@@ -229,10 +229,10 @@ You can find an easily browseable version of this information [here](https://ips
 | 417 |[Avoid transactions to be reverted when Bridge method calls from smart contracts return an empty response](IPs/RSKIP417.md)| 28-FEB-24 | MI | Usa | Core | 1 | Adopted |
 | 419 |[Powpeg Spendability Validation Protocol](IPs/RSKIP419.md)| 31-AUG-23 | JD, JZ | Sec | Core | 2 | Draft |
 | 427 |[Express the amount value in wei for peg-out related events](IPs/RSKIP427.md)| 17-APR-24 | MI | Usa | Core | 1 | Draft |
-| 428 | [New pegout creation event including UTXO outpoint values](IPs/RSKIP428.md)| 23-APR-24 | NC, MI | Sca, Sec | Core | 1 | Draft |
-| 434 |[Bridge Bitcoin block chainwork up to 12 unsigned bytes](IPs/RSKIP434.md)| 26-Jun-24 | JD,JZ,MI | Sec | Core | 1 | Draft |
+| 428 |[New pegout creation event including UTXO outpoint values](IPs/RSKIP428.md)| 23-APR-24 | NC, MI | Sca, Sec | Core | 1 | Draft |
+| 434 |[Bridge Bitcoin block chainwork up to 12 unsigned bytes](IPs/RSKIP434.md)| 26-Jun-24 | JD,JZ,MI | Sec | Core | 1 | Adopted |
 | 435 |[Network Upgrade: Lovell](IPs/RSKIP435.md)|27-JUN-24 | AE | Usa, Sec, Sca | Core | 2 | Draft |
-| 436 |[Network Upgrade (patch): Arrowhead 6.3.1](IPs/RSKIP436.md)|4-JUL-24 | AE | Usa | Core | 2 | Draft |
+| 436 |[Network Upgrade (patch): Arrowhead 6.3.1](IPs/RSKIP436.md)|4-JUL-24 | AE | Usa | Core | 2 | Adopted |
 
 (*) Under evaluation to be implemented in the next reference client release
 
