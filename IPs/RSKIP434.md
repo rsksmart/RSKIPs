@@ -6,7 +6,7 @@ author: JD,JZ,MI
 purpose: Sec
 layer: Core
 complexity: 1
-status: Draft
+status: Adopted
 description: Change in Bridge Bitcoin storage to accept blocks with chainwork serialized up to 12 unsigned bytes
 ---
 
@@ -18,7 +18,7 @@ description: Change in Bridge Bitcoin storage to accept blocks with chainwork se
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
