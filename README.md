@@ -238,39 +238,41 @@ You can find an easily browseable version of this information [here](https://ips
 
 # Author Index
 
-| Initials | Full name                    | Email                  |
-| -------- | :----------------------------| :----------------------|
-| AE       | Adrian Eidelman              | adrian@rootstocklabs.com|
-| AL       | Angel Lopez                  |                         |
-| AM       | Ariel Mendelzon              | amendelzon@rootstocklabs.com |
-| DLL      | Diego López León             |                        |
-| DM       | Diego Masini                 |                        |
-| FJ       | Federico Jinich              | federico@rootstocklabs.com|
-| GM       | Guido Medina                 |                        |
-| IO       | Ilan Olkies                  | ilan@rootstocklabs.com|
-| JIO      | Jose Ignacio Orlicki         |                        |
-| JD       | Jose Dahlquist               | jose@rootstocklabs.com|
-| JL       | Julian Len                   | julian@rootstocklabs.com|
-| JT       | Jeremy Then                  | jeremy.then@rootstocklabs.com|
-| JZ       | Julia Zack                   | julia.zack@rootstocklabs.com |
-| KI       | Kelvin Isievwore             |                        |
-| LS       | Lisandro Sebrie              |                        |
-| MC       | Martín Coll                  |                        |
-| MI       | Marcos Irisarri              | marcos@rootstocklabs.com|
-| MM       | Martin Medina                |                        |
-| MMA      | Matias Marquez               |                        |
-| MP       | Martin Picco                 |                        |
-| NC       | Nathaniel Calderón           | nathaniel.calderon@rootstocklabs.com|
-| NPS      | Nicolas Perez Santoro        |                        |
-| NV       | Nicolás Vescovo              | nicolas.vescovo@rootstocklabs.com|
-| PDG      | Patricio Diego Gallardo      | patricio@rootstocklabs.com|
-| PGP      | Pamela Gonzalez Perilli      |                        |
-| PMP      | Pedro Meulen Prete           |                        |
-| RFV      | Ramses Fernandez-Valencia    |                        |
-| SDL      | Sergio Demian Lerner         | sergio@rootstocklabs.com|
-| SM       | Shreemoy Mishra              | shreemoy@rootstocklabs.com|
-| SMS      | Sebastian Matias Sicardi     |                        |
-| VK       | Volodymyr Kravets            | volodymyr@rootstocklabs.com|
+| Initials | Full name                 | Email                                  |
+|----------|:--------------------------|:---------------------------------------|
+| AE       | Adrian Eidelman           | adrian@rootstocklabs.com               |
+| AL       | Angel Lopez               |                                        |
+| AM       | Ariel Mendelzon           | amendelzon@rootstocklabs.com           |
+| DLL      | Diego López León          |                                        |
+| DM       | Diego Masini              |                                        |
+| FJ       | Federico Jinich           | federico@rootstocklabs.com             |
+| GM       | Guido Medina              |                                        |
+| IO       | Ilan Olkies               | ilan@rootstocklabs.com                 |
+| JIO      | Jose Ignacio Orlicki      |                                        |
+| JD       | Jose Dahlquist            | jose@rootstocklabs.com                 |
+| JL       | Julian Len                | julian@rootstocklabs.com               |
+| JT       | Jeremy Then               | jeremy.then@rootstocklabs.com          |
+| JZ       | Julia Zack                | julia.zack@rootstocklabs.com           |
+| KI       | Kelvin Isievwore          |                                        |
+| LS       | Lisandro Sebrie           |                                        |
+| MC       | Martín Coll               |                                        |
+| MI       | Marcos Irisarri           | marcos@rootstocklabs.com               |
+| MM       | Martin Medina             |                                        |
+| MMA      | Matias Marquez            |                                        |
+| MP       | Martin Picco              |                                        |
+| NC       | Nathaniel Calderón        | nathaniel.calderon@rootstocklabs.com   |
+| NPS      | Nicolas Perez Santoro     |                                        |
+| NV       | Nicolás Vescovo           | nicolas.vescovo@rootstocklabs.com      |
+| PDG      | Patricio Diego Gallardo   | patricio@rootstocklabs.com             |
+| PGP      | Pamela Gonzalez Perilli   |                                        |
+| PMP      | Pedro Meulen Prete        |                                        |
+| RFV      | Ramses Fernandez-Valencia |                                        |
+| SDL      | Sergio Demian Lerner      | sergio@rootstocklabs.com               |
+| SM       | Shreemoy Mishra           | shreemoy@rootstocklabs.com             |
+| SMS      | Sebastian Matias Sicardi  |                                        |
+| VK       | Volodymyr Kravets         | volodymyr@rootstocklabs.com            |
+| FML      | Frederico M. Leal         | frederico.macielleal@rootstocklabs.com |
+
 
 ## Build locally
 
