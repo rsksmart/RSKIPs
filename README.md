@@ -234,6 +234,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 435 |[Network Upgrade: Lovell](IPs/RSKIP435.md)|27-JUN-24 | AE | Usa, Sec, Sca | Core | 2 | Draft |
 | 436 |[Network Upgrade (patch): Arrowhead 6.3.1](IPs/RSKIP436.md)|4-JUL-24 | AE | Usa | Core | 2 | Adopted |
 | 438 |[Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode](IPs/RSKIP438.md)|16-JUL-24 | FML | Fai | Core | 2 | Draft |
+| TBD |[MCOPY instruction](IPs/RSKIPTBD.md)| 12-AUG-24 | AE | Usa | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
