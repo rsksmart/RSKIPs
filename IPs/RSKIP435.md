@@ -47,6 +47,8 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 - [RSKIP-427](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP427.md): Express the amount value in wei for peg-out related events
 - [RSKIP-428](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP428.md): New pegout creation event including UTXO outpoint values
 - [RSKIP-438](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP438.md): Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode
+- [RSKIP-445](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP445.md): MCOPY instruction
+- [RSKIP-446](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP446.md): Transient storage opcodes
 
 ## Timeline
 
