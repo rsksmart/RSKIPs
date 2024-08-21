@@ -235,6 +235,11 @@ getStateForSvpClient() returns bytes
 registerSvpSpendTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
 ```
 
+### New Bridge events
+```
+commitFederationFailed(bytes proposedFederationRedeemScript, uint blockNumber)
+```
+
 ## References
 
 - [Rootstock devportal - Powpeg](https://dev.rootstock.io/rsk/architecture/powpeg/)
