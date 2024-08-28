@@ -55,7 +55,7 @@ The current process consists in the following phases:
 6. Migration phase: Funds from the retiring Powpeg wallet are moved to the active Powpeg.
 7. Post migration phase: Retiring Powpeg information is removed from the Bridge. New elections are re-enabled.
 
-The election process in itself doesn't change: the authorized members will still propose a new composition and once the voting finishes the commit event will be emitted, but the proposed Powpeg will not be committed yet and its validation will start.
+The election process in itself doesn't change: the authorized members will still propose a new composition and once the voting finishes the commit event will be emitted with the proposed Powpeg information, but the proposed Powpeg will not be committed yet and its validation will start.
 
 
 ### New phase - Validation
@@ -89,7 +89,7 @@ As soon as the proposed Powpeg has been voted (and saved in a new Bridge storage
 
 This transaction is similar to a peg-out but with two outputs, where the recipients are the proposed Powpeg Bitcoin address, and the proposed Powpeg Bitcoin address with a custom flyover prefix to make sure the flyover protocol would work too. The amount to receive by both is calculated based on the minimum amount of satoshis required to spend an UTXO by each of them (+ bitcoin fees).
 
-Once the transaction is created, it has to be stored in the set for peg-outs waiting for confirmations, and the sighash has to be stored in the pegout index so the change could be registered.
+Once the transaction is created, the release request should be settled as if it were a peg-out: it has to be stored in the set for peg-outs waiting for confirmations, the sighash has to be stored in the pegout index so the change could be registered, and the events `release_requested` and `pegout_transaction_created` should be emitted.
 
 Also, a new value in the storage should be added to identify this special kind of transaction:
     
@@ -102,7 +102,7 @@ The SVP funding transaction goes through the usual peg-out confirmation process.
 
 ##### 3. Funding transaction signing
 
-The funding transaction should be signed as any other peg-out. Once it is fully signed it should be removed from the set and a release_btc event should be emitted.
+The funding transaction should be signed as any other peg-out. Once it is fully signed it should be removed from the set and a `release_btc` event should be emitted.
 Eventually, when the funding transaction is registered in the Bridge, the Proof transaction could be created.
 
 
@@ -111,25 +111,25 @@ Eventually, when the funding transaction is registered in the Bridge, the Proof 
 Once the funding transaction is registered, the Proof will be created for the proposed Powpeg to sign and broadcast it so it can prove it can spend funds.
 
 ##### Funding transaction registration
-The funding transaction should be registered through the registerBtcTransaction method.
+The funding transaction should be registered through the `registerBtcTransaction` method.
 For that purpose, the method will be modified to be able to identify it.
 It should verify:
 - SVP period is ongoing
-(i.e. proposedFederation exists & CURRENT_RSK_BLOCK < PROPOSED_FED_CREATION_BLOCK_NUMBER + SVP_PERIOD)
-- Transaction hash without signatures matches the record in the svpFundTxHashUnsigned storage entry
+(i.e. `proposedFederation` exists & CURRENT_RSK_BLOCK < PROPOSED_FED_CREATION_BLOCK_NUMBER + SVP_PERIOD)
+- Transaction hash without signatures matches the record in the `svpFundTxHashUnsigned` storage entry
 
 
-Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, svpFundTxHashSigned. Also, the svpFundTxHashUnsigned will be removed from the storage.
-The funding transaction hash signed being saved means that the proof Transaction can be created.
+Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, `svpFundTxHashSigned`. Also, the `svpFundTxHashUnsigned` will be removed from the storage.
+The funding transaction hash signed being saved means that the proof transaction can be created.
 
 
 #### Proof transaction creation or validation process failure
 
 A new method, `processPowpegChangeValidation` will be called from the `updateCollections` method.
 
-The `processPowpegChangeValidation` will perform some actions if a proposedFederation exists depending on this two scenarios:
+The `processPowpegChangeValidation` will perform some actions if a proposed federation exists depending on this two scenarios:
 - SVP period ended.
-Since the proposedFederation still exists, this implies the proof transaction was not received, and therefore that the validation was not successful
+Since the `proposedFederation` still exists, this implies the proof transaction was not received, and therefore that the validation was not successful
     -  The Bridge will emit a new event,
         
         `COMMIT_FEDERATION_FAILED(bytes proposedFederationRedeemScript, uint blockNumber)`
@@ -138,7 +138,7 @@ Since the proposedFederation still exists, this implies the proof transaction wa
     - The election will be allowed once again.
 
 - SVP period still ongoing        
-    - If the funding transaction signed hash is registered in the svpFundTxHashSigned storage entry, the Bridge will:
+    - If the funding transaction signed hash is registered in the `svpFundTxHashSigned` storage entry, the Bridge will:
         - Create it as described [here](#proof-transaction)
         - Add it to a new storage set, key `svpSpendTxWaitingForSignatures`
         - Set it in a new Storage entry:
@@ -146,7 +146,7 @@ Since the proposedFederation still exists, this implies the proof transaction wa
             KEY: "svpSpendTxHash"
             VALUE: hash of SVP proof tx without signatures
             ```
-        - Remove the svpFundTxHashSigned from the storage    
+        - Remove the `svpFundTxHashSigned` from the storage    
 
 ##### Proof transaction
 
@@ -233,6 +233,11 @@ getStateForSvpClient() returns bytes
 
 ```
 registerSvpSpendTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
+```
+
+### New Bridge events
+```
+commitFederationFailed(bytes proposedFederationRedeemScript, uint blockNumber)
 ```
 
 ## References
