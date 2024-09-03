@@ -195,7 +195,7 @@ With the SVP proof transaction broadcasted, the Bridge now needs to validate it 
 
 The proof transaction should be registered through a new `registerSvpSpendTransaction` method that would behave similar to the `registerBtcTransaction`. As before, it should verify:
 - SVP period is ongoing
-- Transaction hash without signatures is registered in the `svpSpendTxHash` storage key.
+- Transaction hash without signatures is registered in the `svpSpendTxHashUnsigned` storage key.
 
 If the hash matches the one registered in the storage, then the SVP process is considered completed and we can proceed with the committment of the proposed -and now validated- Powpeg.
 The `svpSpendTxHashUnsigned` and the `proposedFederation` will be removed from storage. The utxo sent to the current Powpeg will be registered so it can be spend.
