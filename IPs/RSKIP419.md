@@ -143,7 +143,7 @@ Since the `proposedFederation` still exists, this implies the proof transaction 
         - Add it to a new storage set, key `svpSpendTxWaitingForSignatures`
         - Set it in a new Storage entry:
             ```
-            KEY: "svpSpendTxHash"
+            KEY: "svpSpendTxHashUnsigned"
             VALUE: hash of SVP proof tx without signatures
             ```
         - Remove the `svpFundTxHashSigned` from the storage    
@@ -185,7 +185,7 @@ The proof transaction should be signed as any other peg-out, but by the proposed
 
 The first one should perform the exact same actions as the `getStateForBtcReleaseClient` but to inform if the SVP spend tx is waiting for signatures (i.e., that `svpSpendTxWaitingForSignatures` is not empty).
 
-The second one should perform the exact same actions as the `addSignature` but to accept signatures from public keys that belong to the proposed Powpeg instead of the active/retiring ones (let's recall the proposed Powpeg is not active at this point), and to check that the hash of the transaction intended to be signed exists in the `svpSpendTxHash` storage entry.
+The second one should perform the exact same actions as the `addSignature` but to accept signatures from public keys that belong to the proposed Powpeg instead of the active/retiring ones (let's recall the proposed Powpeg is not active at this point), and to check that the hash of the transaction intended to be signed exists in the `svpSpendTxHashUnsigned` storage entry.
 
 Once fully signed, the Bridge should remove the entry from the `svpSpendTxWaitingForSignatures`.
 
@@ -195,10 +195,10 @@ With the SVP proof transaction broadcasted, the Bridge now needs to validate it 
 
 The proof transaction should be registered through a new `registerSvpSpendTransaction` method that would behave similar to the `registerBtcTransaction`. As before, it should verify:
 - SVP period is ongoing
-- Transaction hash without signatures is registered in the `svpSpendTxHash` storage key.
+- Transaction hash without signatures is registered in the `svpSpendTxHashUnsigned` storage key.
 
 If the hash matches the one registered in the storage, then the SVP process is considered completed and we can proceed with the committment of the proposed -and now validated- Powpeg.
-The `svpSpendTxHash` and the `proposedFederation` will be removed from storage. The utxo sent to the current Powpeg will be registered so it can be spend.
+The `svpSpendTxHashUnsigned` and the `proposedFederation` will be removed from storage. The utxo sent to the current Powpeg will be registered so it can be spend.
 
 ### Validation phase duration
 
@@ -219,7 +219,7 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 |proposedFederation | voted federation pending to be validated|
 |svpFundTxHashUnsigned | hash of SVP funding tx unsigned|
 |svpFundTxHashSigned | hash of SVP funding tx signed|
-|svpSpendTxHash | hash of SVP proof tx|
+|svpSpendTxHashUnsigned | hash of SVP proof tx|
 |svpSpendTxWaitingForSignatures | SVP proof tx that is to be signed|
 
 ### New Bridge methods
