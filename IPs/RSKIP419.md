@@ -219,7 +219,7 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 |proposedFederation | voted federation pending to be validated|
 |svpFundTxHashUnsigned | hash of SVP funding tx unsigned|
 |svpFundTxHashSigned | hash of SVP funding tx signed|
-|svpSpendTxHashUnisgned | hash of SVP proof tx|
+|svpSpendTxHashUnsigned | hash of SVP proof tx|
 |svpSpendTxWaitingForSignatures | SVP proof tx that is to be signed|
 
 ### New Bridge methods
