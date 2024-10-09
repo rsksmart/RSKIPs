@@ -236,6 +236,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 438 |[Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode](IPs/RSKIP438.md)|16-JUL-24 | FML | Fai | Core | 2 | Draft |
 | 445 |[MCOPY instruction](IPs/RSKIP445.md)| 12-AUG-24 | AE | Usa | Core | 2 | Draft |
 | 446 |[Transient storage opcodes](IPs/RSKIP446.md)| 12-AUG-24 | AE | Usa | Core | 2 | Draft|
+| 453 |[Enhance Compatibility with Ethereum in Contract Deployment](IPs/RSKIP453.md)| 09-OCT-24 | AS | Usa | Core | 1 | Draft|
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -245,10 +246,12 @@ You can find an easily browseable version of this information [here](https://ips
 |----------|:--------------------------|:---------------------------------------|
 | AE       | Adrian Eidelman           | adrian@rootstocklabs.com               |
 | AL       | Angel Lopez               |                                        |
+| AS       | Angel Soto                | angel.soto@rootstocklabs.com           |
 | AM       | Ariel Mendelzon           | amendelzon@rootstocklabs.com           |
 | DLL      | Diego López León          |                                        |
 | DM       | Diego Masini              |                                        |
 | FJ       | Federico Jinich           | federico@rootstocklabs.com             |
+| FML      | Frederico M. Leal         | frederico.macielleal@rootstocklabs.com |
 | GM       | Guido Medina              |                                        |
 | IO       | Ilan Olkies               | ilan@rootstocklabs.com                 |
 | JIO      | Jose Ignacio Orlicki      |                                        |
@@ -274,7 +277,6 @@ You can find an easily browseable version of this information [here](https://ips
 | SM       | Shreemoy Mishra           | shreemoy@rootstocklabs.com             |
 | SMS      | Sebastian Matias Sicardi  |                                        |
 | VK       | Volodymyr Kravets         | volodymyr@rootstocklabs.com            |
-| FML      | Frederico M. Leal         | frederico.macielleal@rootstocklabs.com |
 
 
 ## Build locally
