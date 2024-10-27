@@ -24,7 +24,9 @@ description:
 
 This RSKIP proposes enabling RSK to accept Bitcoin blocks with chain work up to 32 unsigned bytes(256 bits). This change is necessary to ensure the bridge can process Bitcoin blocks with chain work values that exceed the current 12 unsigned bytes limit(96 bits).
 
-Before [RSKIP434](RSKIP435.md) this limitation was even lower, 12 signed bytes, 1 bit reserved for the sign and 95 bits used to store the chain work value. This 95 bits limit chain work got surpassed by the block #849,138 causing a rsk nodes to be unable to process Bitcoin blocks, resulting in a [Rootstock peg-in / peg-out service outage](https://blog.rootstock.io/noticia/incident-report-rootstock-peg-in-peg-out-service-outage-on-june-24th/).[1]
+Before [RSKIP434](RSKIP435.md) this limitation was even lower, 12 signed bytes, 1 bit reserved for the sign and 95 bits used to store the chain work value. This 95 bits limit chain work got surpassed by the block #849,138 causing rsk nodes to be unable to process Bitcoin blocks, resulting in a [Rootstock peg-in / peg-out service outage](https://blog.rootstock.io/noticia/incident-report-rootstock-peg-in-peg-out-service-outage-on-june-24th/).[1]
+
+Therefore, in order to guarantee the future stability of the Rootstock network, it is necessary to increase the chain work limit before the chain work value exceed the current 12 unsigned byte limit.
 
 ## Motivation
 
@@ -34,7 +36,7 @@ Ensure rsk nodes stability and prevent future disruptions in the Rootstock netwo
 
 - Store chain work values of Bitcoin block headers using 32 unsigned bytes. This implies that after this RSKIP gets activated, stored blocks in rsk nodes' storage will be 20 bytes larger in size than before the RSKIP activation.
 - Add support to serialize and deserialize chain work values up to 32 unsigned bytes of Bitcoin block headers stored in the Rootstock Bridge.
-- Deprecate binary checkpoint support in benefit of adding support to textual checkpoint format. Checkpoints with 32 bytes chainwork must be in textual format in order to be processed, since binary checkpoint format cannot support mixed bitcoin headers sizes, 12 bytes and 32 bytes chainwork. 
+- Deprecate binary checkpoint support in benefit of adding support to textual checkpoint format. Checkpoints with 32 bytes chainwork must be in textual format in order to be processed since binary checkpoint format does not support mix bitcoin headers sizes, 12 bytes and 32 bytes chainwork. 
 
 ### Backward Compatibility
 
