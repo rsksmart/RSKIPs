@@ -36,15 +36,15 @@ Ensure rsk nodes stability and prevent future disruptions in the Rootstock netwo
 
 - Store chain work values of Bitcoin block headers using 32 unsigned bytes. This implies that after this RSKIP gets activated, stored blocks in rsk nodes' storage will be 20 bytes larger in size than before the RSKIP activation.
 - Add support to serialize and deserialize chain work values up to 32 unsigned bytes of Bitcoin block headers stored in the Rootstock Bridge.
-- Deprecate binary checkpoint support in benefit of adding support to textual checkpoint format. Checkpoints with 32 bytes chainwork must be in textual format in order to be processed since binary checkpoint format does not support mix bitcoin headers sizes, 12 bytes and 32 bytes chainwork. 
+- Deprecate binary checkpoint support in favor of adding support for the textual checkpoint format. Checkpoints with 32-byte chain work must be in textual format to be processed, as the binary checkpoint format does not support mixed Bitcoin header sizes of 12 bytes and 32 bytes for chain work.
 
 ### Backward Compatibility
 
-This change is a hard fork since we are going to increase by 20 bytes the size for storing block headers in order to support larger chain works(up to 32 unsigned byte). Therefore, all nodes must be updated.
+This change is a hard fork, as it increases the size for storing block headers by 20 bytes to support larger chain work values (up to 32 unsigned bytes). Therefore, all nodes must be updated.
 
 ## Rationale
 
-Given the continued increased in Bitcoin's network difficulty, the chain work value of Bitcoin blocks will continue to grow and will inevitably exceed 96 bits, which would again cause an overflow issue. Therefore, this long-term solution is needed to prevent future disruption in the Rootstock network.
+Given the continued increase in Bitcoin's network difficulty, the chain work value of Bitcoin blocks will continue to grow and will inevitably exceed 96 bits, which would again cause an overflow issue. Therefore, this long-term solution is needed to prevent future disruption in the Rootstock network.
 
 ## References
 
