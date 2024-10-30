@@ -1,6 +1,6 @@
 ---
 rskip: 454
-title: Add support to bitcoin blocks with chain work up to 32 unsigned bytes
+title: Support bitcoin blocks with chain work up to 32 unsigned bytes
 created: 25-Oct-24
 author: NC
 purpose: Sca
@@ -12,7 +12,7 @@ description:
 
 |RSKIP          | 454                                                                   |
 | :------------ |:----------------------------------------------------------------------|
-|**Title**      | Add support to bitcoin blocks with chain work up to 32 unsigned bytes |
+|**Title**      | Support bitcoin blocks with chain work up to 32 unsigned bytes |
 |**Created**    | 25-Oct-24                                                             |
 |**Author**     | NC                                                                    |
 |**Purpose**    | Sca                                                                   |
@@ -22,21 +22,21 @@ description:
 
 ## Abstract
 
-This RSKIP proposes enabling RSK to accept Bitcoin blocks with chain work up to 32 unsigned bytes(256 bits). This change is necessary to ensure the bridge can process Bitcoin blocks with chain work values that exceed the current 12 unsigned bytes limit(96 bits).
+This RSKIP proposes enabling RSK to accept Bitcoin blocks with chain work up to 32 unsigned bytes (256 bits). This change is necessary to ensure the bridge can process Bitcoin blocks with chain work values that exceed the current 12 unsigned bytes limit (96 bits).
 
-Before [RSKIP434](RSKIP435.md) this limitation was even lower, 12 signed bytes, 1 bit reserved for the sign and 95 bits used to store the chain work value. This 95 bits limit chain work got surpassed by the block #849,138 causing rsk nodes to be unable to process Bitcoin blocks, resulting in a [Rootstock peg-in / peg-out service outage](https://blog.rootstock.io/noticia/incident-report-rootstock-peg-in-peg-out-service-outage-on-june-24th/).[1]
+Before [RSKIP434](RSKIP434.md) the chain work was even lower (12 signed bytes, 1 bit reserved for the sign and 95 bits used to store the chain work value). This 95 bits limit chain work got surpassed by the block #849,138 causing rsk nodes to be unable to process Bitcoin blocks, resulting in a [Rootstock peg-in / peg-out service outage](https://blog.rootstock.io/noticia/incident-report-rootstock-peg-in-peg-out-service-outage-on-june-24th/).[1]
 
-Therefore, in order to guarantee the future stability of the Rootstock network, it is necessary to increase the chain work limit before the chain work value exceed the current 12 unsigned byte limit.
+Therefore, in order to guarantee the future stability of the Rootstock network, it is necessary to increase the chain work limit before the chain work value exceed the current 12 unsigned bytes limit.
 
 ## Motivation
 
-Ensure rsk nodes stability and prevent future disruptions in the Rootstock network caused by the inability to process Bitcoin blocks with chain work values that exceed the current 12-byte limit. 
+Ensure rsk nodes stability and prevent future disruptions in the Rootstock network caused by the inability to process Bitcoin blocks with chain work values that exceed the current 12 unsigned bytes limit. 
 
 ## Specification
 
 - Store chain work values of Bitcoin block headers using 32 unsigned bytes. This implies that after this RSKIP gets activated, stored blocks in rsk nodes' storage will be 20 bytes larger in size than before the RSKIP activation.
 - Add support to serialize and deserialize chain work values up to 32 unsigned bytes of Bitcoin block headers stored in the Rootstock Bridge.
-- Deprecate binary checkpoint support in favor of adding support for the textual checkpoint format. Checkpoints with 32-byte chain work must be in textual format to be processed, as the binary checkpoint format does not support mixed Bitcoin header sizes of 12 bytes and 32 bytes for chain work.
+- Deprecate binary checkpoint support in favor of adding support for the textual checkpoint format. Checkpoints with 32 unsigned bytes chain work must be in textual format to be processed, as the binary checkpoint format does not support mixing Bitcoin header sizes.
 
 ### Backward Compatibility
 
