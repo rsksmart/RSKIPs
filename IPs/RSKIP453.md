@@ -1,6 +1,6 @@
 ---
 rskip: 453
-title: Enhance Compatibility with Ethereum in Contract Deployment
+title: Prevent address creation on failed CREATE/CREATE2 operations
 description: 
 status: Draft
 purpose:    
@@ -9,12 +9,12 @@ layer: Core
 complexity: 2
 created: 2024/10/09
 ---
-# MCOPY instruction
+# Prevent address creation on failed CREATE/CREATE2 operations
 
 
 |RSKIP          | 453 |
 | :------------ |:-------------|
-|**Title**      |MCOPY instruction|
+|**Title**      |Prevent Address Creation on Failed CREATE/CREATE2 Operations|
 |**Created**    |OCT-2024 |
 |**Author**     |AS |
 |**Purpose**    |Usa |
