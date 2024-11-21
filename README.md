@@ -238,6 +238,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 446 |[Transient storage opcodes](IPs/RSKIP446.md)| 12-AUG-24 | AE | Usa | Core | 2 | Draft|
 | 453 |[Prevent address creation on failed CREATE/CREATE2 operations](IPs/RSKIP453.md)| 09-OCT-24 | AS | Usa | Core | 1 | Draft|
 | 454 |[Support bitcoin blocks with chain work up to 32 unsigned bytes](IPs/RSKIP454.md)| 25-Oct-24 | NC | Sca | Core | 1 | Draft |
+| 455 |[PowPeg migration to multiple outputs](IPs/RSKIP455.md)| 20-NOV-24 | MI | Usa | Core | 1 | Draft|
 
 (*) Under evaluation to be implemented in the next reference client release
 
