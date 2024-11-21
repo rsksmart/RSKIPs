@@ -132,6 +132,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 132 |[Bridge ReceiveHeaders Gas Cost increase](IPs/RSKIP132.md) | 2019 | JD & SDL  | Fair  | Core | 1 | Adopted  |
 | 134 |[Locking cap](IPs/RSKIP134.md) | 2019 | JD       | Sec,Sca,Usa      | Core     | 2 | Draft   |
 | 135 |[Managing BridgeMaster Federation Members](IPs/RSKIP135.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
+| 136 |[EXTCODEHASH opcode](IPs/RSKIP136.md)| 04-SEP-19 | JL | Usa | Core | 2 | Draft |
 | 138 |[Multi-signed transactions supporting enveloping and multi-key accounts](IPs/RSKIP138.md)| 10-SEP-19 | SDL       | Sca      | Core     | 2 | Draft   |
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
 | 140 |[EXTCODEHASH opcode](IPs/RSKIP140.md)| 04-SEP-19 | JL | Usa | Core | 2 | Adopted |
