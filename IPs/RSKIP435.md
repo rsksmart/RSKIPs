@@ -50,6 +50,7 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 - [RSKIP-445](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP445.md): MCOPY instruction
 - [RSKIP-446](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP446.md): Transient storage opcodes
 - [RSKIP-453](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP453.md): Prevent address creation on failed CREATE/CREATE2 operations
+- [RSKIP-454](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP454.md): Support bitcoin blocks with chain work up to 32 unsigned bytes
 
 ## Timeline
 
