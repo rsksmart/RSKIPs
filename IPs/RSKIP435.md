@@ -49,6 +49,7 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 - [RSKIP-438](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP438.md): Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode
 - [RSKIP-445](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP445.md): MCOPY instruction
 - [RSKIP-446](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP446.md): Transient storage opcodes
+- [RSKIP-453](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP453.md): Prevent address creation on failed CREATE/CREATE2 operations
 
 ## Timeline
 
