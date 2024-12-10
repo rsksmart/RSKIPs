@@ -222,18 +222,16 @@ Each cell contains the following fields:
 * **parkDate**: the parking date (updated when the parking is extended)
 * **owner**: the RSK address of the ordinal owner
 
-
 The methods that change the owner and parking date of the ordinal will modify the content of the index cell.
 
 The storage cell with an address equal to the hash of "OrdinalCount" stores the number of ordinals parked. Initially it is zero.
 
-### Powpeg Public Keys for Ordinals 
+### Powpeg Public Keys for Ordinals
 
 To avoid type confusion attacks where the HSMs sign the release of ordinals as if they were BTCs or vice-versa, the Powpeg will use a new set of private and public keys that are used to control only  ordinals.
 A new public key with index <TBD> will be added on pegnatory registration, and returned with `getFederatorBtcPublicKey()`.
 
-
-### Single-use Ordinals Address Derivation
+### Single-use Ordinals Address Derivation
 The Powpeg ordinals address derivation starts with the creation of a custom redeem script that pushes the verData field. The verData field is defines as:
 
 * **version**: specifies the derivation version (1 byte) 
