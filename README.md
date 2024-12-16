@@ -239,6 +239,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 453 |[Prevent address creation on failed CREATE/CREATE2 operations](IPs/RSKIP453.md)| 09-OCT-24 | AS | Usa | Core | 1 | Draft|
 | 454 |[Support bitcoin blocks with chain work up to 32 unsigned bytes](IPs/RSKIP454.md)| 25-OCT-24 | NC | Sca | Core | 1 | Draft |
 | 459 |[Mark rejected peg-ins as processed](IPs/RSKIP459.md)| 10-DEC-24 | MI | Usa | Core | 1 | Draft |
+| 460 |[Ignore non-standard outputs when searching for the witness commitment hash](IPs/RSKIP460.md)| 12-DEC-24 | MI | Usa,Sec | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
