@@ -224,15 +224,22 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 
 ### New Bridge methods
 ```
-addSvpSpendTxSignature(bytes federatorPublicKeySerialized, bytes[] signatures)
+getProposedFederationAddress() returns string
 ```
-
+```
+getProposedFederationSize() returns int256
+```
+```
+getProposedFederatorPublicKeyOfType(int256 index, string type) returns bytes
+```
+```
+getProposedFederationCreationTime() returns int256
+```
+```
+getProposedFederationCreationBlockNumber() returns int256
+```
 ```
 getStateForSvpClient() returns bytes 
-```
-
-```
-registerSvpSpendTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
 ```
 
 ### New Bridge events
