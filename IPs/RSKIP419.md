@@ -12,9 +12,9 @@ description: New Mechanism for current Powpeg to ensure the newly elected Powpeg
 
 |RSKIP          |419           |
 | :------------ |:-------------|
-|**Title**      |Powpeg Spendability Validation Protocol |
-|**Created**    |31-AUG-23 |
-|**Author**     |JD, JZ |
+|**Title**      |Powpeg Spendability Validation Protocol|
+|**Created**    |31-AUG-23|
+|**Author**     |JD, JZ|
 |**Purpose**    |Sec|
 |**Layer**      |Core|
 |**Complexity** |2|
@@ -119,7 +119,7 @@ It should verify:
 - Transaction hash without signatures matches the record in the `svpFundTxHashUnsigned` storage entry
 
 
-Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, `svpFundTxHashSigned`. Also, the `svpFundTxHashUnsigned` will be removed from the storage.
+Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, `svpFundTxSigned`. Also, the `svpFundTxHashUnsigned` will be removed from the storage.
 The funding transaction hash signed being saved means that the proof transaction can be created.
 
 
@@ -138,7 +138,7 @@ Since the `proposedFederation` still exists, this implies the proof transaction 
     - The election will be allowed once again.
 
 - SVP period still ongoing        
-    - If the funding transaction signed hash is registered in the `svpFundTxHashSigned` storage entry, the Bridge will:
+    - If the funding transaction signed hash is registered in the `svpFundTxSigned` storage entry, the Bridge will:
         - Create it as described [here](#proof-transaction)
         - Add it to a new storage set, key `svpSpendTxWaitingForSignatures`
         - Set it in a new Storage entry:
@@ -146,7 +146,7 @@ Since the `proposedFederation` still exists, this implies the proof transaction 
             KEY: "svpSpendTxHashUnsigned"
             VALUE: hash of SVP proof tx without signatures
             ```
-        - Remove the `svpFundTxHashSigned` from the storage    
+        - Remove the `svpFundTxSigned` from the storage    
 
 ##### Proof transaction
 
@@ -158,11 +158,11 @@ Proof transaction structure:
 {
     inputs: [
         {
-            txid: SVP_FUND_TX_HASH_SIGNED,
+            txid: SVP_FUND_TX_SIGNED_HASH,
             output_index: SVP_FUNDING_TX_OUTPUT_INDEX
         },
         {
-            txid: SVP_FUND_TX_HASH_SIGNED,
+            txid: SVP_FUND_TX_SIGNED_HASH,
             output_index: SVP_FLYOVER_FUNDING_TX_OUTPUT_INDEX
         }
     ],
@@ -218,7 +218,7 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 |:------------ |:-------------|
 |proposedFederation | voted federation pending to be validated|
 |svpFundTxHashUnsigned | hash of SVP funding tx unsigned|
-|svpFundTxHashSigned | hash of SVP funding tx signed|
+|svpFundTxSigned | SVP funding tx signed|
 |svpSpendTxHashUnsigned | hash of SVP proof tx|
 |svpSpendTxWaitingForSignatures | SVP proof tx that is to be signed|
 
