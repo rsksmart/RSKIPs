@@ -51,6 +51,9 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 - [RSKIP-446](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP446.md): Transient storage opcodes
 - [RSKIP-453](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP453.md): Prevent address creation on failed CREATE/CREATE2 operations
 - [RSKIP-454](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP454.md): Support bitcoin blocks with chain work up to 32 unsigned bytes
+- [RSKIP-455](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP455.md): PowPeg migration to multiple outputs
+- [RSKIP-459](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP459.md): Mark rejected peg-ins as processed
+- [RSKIP-460](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP460.md): Ignore non-standard outputs when searching for the witness commitment hash
 
 ## Timeline
 
