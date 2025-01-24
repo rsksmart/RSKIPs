@@ -76,6 +76,9 @@ This protocol involves three parts:
 - Proof transaction creation: once the proposed Powpeg receives the funds, it will create an UTXO to the current Powpeg to proof that it can spend them.
 - Proof transaction verification: the current Powpeg will receive the proposed Powpeg spending-proof transaction, validate it was created by the proposed Powpeg from the funding transaction and proceed with the commitment.
 
+### Backwards compatibility
+This change is a hard-fork and therefore all full nodes must be updated.
+
 #### Proposed Powpeg funding
 
 Once the SVP starts, the Bridge will send the required satoshis to the proposed Powpeg address. It should be enough for it to be able to send back a transaction. Since the size of the Proof transaction will vary depending on the size of the proposed Powpeg input script, the calculation of the funds sent from the current Powpeg should consider that.
@@ -125,9 +128,9 @@ The funding transaction hash signed being saved means that the proof transaction
 
 #### Proof transaction creation or validation process failure
 
-A new method, `processPowpegChangeValidation` will be called from the `updateCollections` method.
+A new method, `updateSvpState` will be called from the `updateCollections` method.
 
-The `processPowpegChangeValidation` will perform some actions if a proposed federation exists depending on this two scenarios:
+The `updateSvpState` will perform some actions if a proposed federation exists depending on this two scenarios:
 - SVP period ended.
 Since the `proposedFederation` still exists, this implies the proof transaction was not received, and therefore that the validation was not successful
     -  The Bridge will emit a new event,
@@ -208,9 +211,9 @@ The duration of this phase must account for:
 - Sending back the UTXO to the current Powpeg (Proposed pegnatories signing)
 
 The recommendation is that this phase takes approximately the blocks a peg-out confirmation has plus the bitcoin blocks needed to register the change, twice. And a couple of thousands more blocks to be safe.
-- Mainnet: 16_000
-- Testnet: 80 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
-- Regtest: 15
+- Mainnet: 20_000
+- Testnet: 2_000 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time. _Disclaimer: this implies increasing the federation activation age value also, since the validation period has to be lower than the activation one._
+- Regtest: 125
 
 ### New Bridge storage fields
 
@@ -247,10 +250,15 @@ getStateForSvpClient() returns bytes
 commitFederationFailed(bytes proposedFederationRedeemScript, uint blockNumber)
 ```
 
+### Other changes
+To follow EVM common practices, the `getProposedFederationCreationTime` Bridge's method returns the value from the epoch seconds.
+To be consistent with this, the creation time being returned from `getFederationCreationTime` and `getRetiringFederationCreationTime` Bridge's methods is modified to be this way.
+
 ## References
 
 - [Rootstock devportal - Powpeg](https://dev.rootstock.io/rsk/architecture/powpeg/)
 - [Building the Most Secure, Permissionless and Uncensorable Bitcoin Peg](https://medium.com/iovlabs-innovation-stories/building-the-most-secure-permissionless-and-uncensorable-bitcoin-peg-b5dc7020e5ec)
+- [Units and globally available variables in Solidity](https://docs.soliditylang.org/en/latest/units-and-global-variables.html#block-and-transaction-properties)
 
 ### Copyright
 
