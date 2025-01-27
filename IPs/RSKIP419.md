@@ -12,9 +12,9 @@ description: New Mechanism for current Powpeg to ensure the newly elected Powpeg
 
 |RSKIP          |419           |
 | :------------ |:-------------|
-|**Title**      |Powpeg Spendability Validation Protocol |
-|**Created**    |31-AUG-23 |
-|**Author**     |JD, JZ |
+|**Title**      |Powpeg Spendability Validation Protocol|
+|**Created**    |31-AUG-23|
+|**Author**     |JD, JZ|
 |**Purpose**    |Sec|
 |**Layer**      |Core|
 |**Complexity** |2|
@@ -76,6 +76,9 @@ This protocol involves three parts:
 - Proof transaction creation: once the proposed Powpeg receives the funds, it will create an UTXO to the current Powpeg to proof that it can spend them.
 - Proof transaction verification: the current Powpeg will receive the proposed Powpeg spending-proof transaction, validate it was created by the proposed Powpeg from the funding transaction and proceed with the commitment.
 
+### Backwards compatibility
+This change is a hard-fork and therefore all full nodes must be updated.
+
 #### Proposed Powpeg funding
 
 Once the SVP starts, the Bridge will send the required satoshis to the proposed Powpeg address. It should be enough for it to be able to send back a transaction. Since the size of the Proof transaction will vary depending on the size of the proposed Powpeg input script, the calculation of the funds sent from the current Powpeg should consider that.
@@ -119,15 +122,15 @@ It should verify:
 - Transaction hash without signatures matches the record in the `svpFundTxHashUnsigned` storage entry
 
 
-Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, `svpFundTxHashSigned`. Also, the `svpFundTxHashUnsigned` will be removed from the storage.
+Once everything is verified, the transaction will be registered and the transaction hash will be saved in a new storage entry, `svpFundTxSigned`. Also, the `svpFundTxHashUnsigned` will be removed from the storage.
 The funding transaction hash signed being saved means that the proof transaction can be created.
 
 
 #### Proof transaction creation or validation process failure
 
-A new method, `processPowpegChangeValidation` will be called from the `updateCollections` method.
+A new method, `updateSvpState` will be called from the `updateCollections` method.
 
-The `processPowpegChangeValidation` will perform some actions if a proposed federation exists depending on this two scenarios:
+The `updateSvpState` will perform some actions if a proposed federation exists depending on this two scenarios:
 - SVP period ended.
 Since the `proposedFederation` still exists, this implies the proof transaction was not received, and therefore that the validation was not successful
     -  The Bridge will emit a new event,
@@ -138,7 +141,7 @@ Since the `proposedFederation` still exists, this implies the proof transaction 
     - The election will be allowed once again.
 
 - SVP period still ongoing        
-    - If the funding transaction signed hash is registered in the `svpFundTxHashSigned` storage entry, the Bridge will:
+    - If the funding transaction signed hash is registered in the `svpFundTxSigned` storage entry, the Bridge will:
         - Create it as described [here](#proof-transaction)
         - Add it to a new storage set, key `svpSpendTxWaitingForSignatures`
         - Set it in a new Storage entry:
@@ -146,7 +149,7 @@ Since the `proposedFederation` still exists, this implies the proof transaction 
             KEY: "svpSpendTxHashUnsigned"
             VALUE: hash of SVP proof tx without signatures
             ```
-        - Remove the `svpFundTxHashSigned` from the storage    
+        - Remove the `svpFundTxSigned` from the storage    
 
 ##### Proof transaction
 
@@ -158,11 +161,11 @@ Proof transaction structure:
 {
     inputs: [
         {
-            txid: SVP_FUND_TX_HASH_SIGNED,
+            txid: SVP_FUND_TX_SIGNED_HASH,
             output_index: SVP_FUNDING_TX_OUTPUT_INDEX
         },
         {
-            txid: SVP_FUND_TX_HASH_SIGNED,
+            txid: SVP_FUND_TX_SIGNED_HASH,
             output_index: SVP_FLYOVER_FUNDING_TX_OUTPUT_INDEX
         }
     ],
@@ -208,9 +211,10 @@ The duration of this phase must account for:
 - Sending back the UTXO to the current Powpeg (Proposed pegnatories signing)
 
 The recommendation is that this phase takes approximately the blocks a peg-out confirmation has plus the bitcoin blocks needed to register the change, twice. And a couple of thousands more blocks to be safe.
-- Mainnet: 16_000
-- Testnet: 80 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
-- Regtest: 15
+- Mainnet: 20_000
+- Testnet: 2_000 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
+_Disclaimer: this implies also increasing the federation activation age to 2400, since the activation period has to be higher than the validation one._
+- Regtest: 125
 
 ### New Bridge storage fields
 
@@ -218,21 +222,28 @@ The recommendation is that this phase takes approximately the blocks a peg-out c
 |:------------ |:-------------|
 |proposedFederation | voted federation pending to be validated|
 |svpFundTxHashUnsigned | hash of SVP funding tx unsigned|
-|svpFundTxHashSigned | hash of SVP funding tx signed|
+|svpFundTxSigned | SVP funding tx signed|
 |svpSpendTxHashUnsigned | hash of SVP proof tx|
 |svpSpendTxWaitingForSignatures | SVP proof tx that is to be signed|
 
 ### New Bridge methods
 ```
-addSvpSpendTxSignature(bytes federatorPublicKeySerialized, bytes[] signatures)
+getProposedFederationAddress() returns string
 ```
-
+```
+getProposedFederationSize() returns int256
+```
+```
+getProposedFederatorPublicKeyOfType(int256 index, string type) returns bytes
+```
+```
+getProposedFederationCreationTime() returns int256
+```
+```
+getProposedFederationCreationBlockNumber() returns int256
+```
 ```
 getStateForSvpClient() returns bytes 
-```
-
-```
-registerSvpSpendTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pmtSerialized) returns int
 ```
 
 ### New Bridge events
@@ -240,10 +251,15 @@ registerSvpSpendTransaction(bytes svpSpendTxSerialized, uint256 height, bytes pm
 commitFederationFailed(bytes proposedFederationRedeemScript, uint blockNumber)
 ```
 
+### Other changes
+To follow EVM common practices, the `getProposedFederationCreationTime` Bridge method returns the value from the epoch seconds.
+To be consistent with this, the creation time being returned from `getFederationCreationTime` and `getRetiringFederationCreationTime` Bridge methods is modified to also return the value from the epoch seconds instead of milliseconds.
+
 ## References
 
 - [Rootstock devportal - Powpeg](https://dev.rootstock.io/rsk/architecture/powpeg/)
 - [Building the Most Secure, Permissionless and Uncensorable Bitcoin Peg](https://medium.com/iovlabs-innovation-stories/building-the-most-secure-permissionless-and-uncensorable-bitcoin-peg-b5dc7020e5ec)
+- [Units and globally available variables in Solidity](https://docs.soliditylang.org/en/latest/units-and-global-variables.html#block-and-transaction-properties)
 
 ### Copyright
 
