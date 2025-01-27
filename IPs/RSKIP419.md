@@ -212,7 +212,8 @@ The duration of this phase must account for:
 
 The recommendation is that this phase takes approximately the blocks a peg-out confirmation has plus the bitcoin blocks needed to register the change, twice. And a couple of thousands more blocks to be safe.
 - Mainnet: 20_000
-- Testnet: 2_000 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time. _Disclaimer: this implies increasing the federation activation age value also, since the validation period has to be lower than the activation one._
+- Testnet: 2_000 - For testnet it is recommended to wait a bit longer as the Bitcoin miners don't tend to follow the 10' block creation time.
+_Disclaimer: this implies also increasing the federation activation age to 2400, since the activation period has to be higher than the validation one._
 - Regtest: 125
 
 ### New Bridge storage fields
@@ -251,8 +252,8 @@ commitFederationFailed(bytes proposedFederationRedeemScript, uint blockNumber)
 ```
 
 ### Other changes
-To follow EVM common practices, the `getProposedFederationCreationTime` Bridge's method returns the value from the epoch seconds.
-To be consistent with this, the creation time being returned from `getFederationCreationTime` and `getRetiringFederationCreationTime` Bridge's methods is modified to be this way.
+To follow EVM common practices, the `getProposedFederationCreationTime` Bridge method returns the value from the epoch seconds.
+To be consistent with this, the creation time being returned from `getFederationCreationTime` and `getRetiringFederationCreationTime` Bridge methods is modified to also return the value from the epoch seconds instead of milliseconds.
 
 ## References
 
