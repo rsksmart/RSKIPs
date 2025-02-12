@@ -29,8 +29,8 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 
 - Codename: Lovell
 - Activation:
-	- Rootstock Mainnet block: To be defined
-	- Rootstock Testnet block: To be defined
+	- Rootstock Mainnet block: 7,338,024
+	- Rootstock Testnet block: 6,110,487
 
 ### Included RSKIPs
 
