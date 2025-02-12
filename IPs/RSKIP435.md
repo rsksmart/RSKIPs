@@ -71,6 +71,7 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 - JUN-27-24: RSKIP created with an initial list of proposed RSKIPs
 - JAN-27-25: RSKIP-455 has been excluded from the scope of Lovell and will be evaluated for a future network upgrade.
 - JAN-28-25: The proposed scope is now finalized, and it's open for comments until Feb 4th, 2025
+- FEB-4-25: The network upgrade scope has been approved by the Rootstock community. This is now closed for comments and activation heights have been defined
 
 ## References
 
