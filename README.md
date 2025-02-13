@@ -241,6 +241,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 455 |[PowPeg migration to multiple outputs](IPs/RSKIP455.md)| 20-NOV-24 | MI | Usa | Core | 1 | Draft|
 | 459 |[Mark rejected peg-ins as processed](IPs/RSKIP459.md)| 10-DEC-24 | MI | Usa | Core | 1 | Draft |
 | 460 |[Ignore non-standard outputs when searching for the witness commitment hash](IPs/RSKIP460.md)| 12-DEC-24 | MI | Usa,Sec | Core | 1 | Draft |
+| XXX |[Superchain](IPs/RSKIPXXX.md)| 04-FEB-25 | VK | Usa,Sec | Core | 2 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
