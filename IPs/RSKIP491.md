@@ -1,5 +1,5 @@
 ---
-rskip: TBD
+rskip: 491
 title: Reduce target difficulty to 10s block time
 description: This RSKIP proposes a 30% reduction in target difficulty to lower the average block time from 14 seconds to 10 seconds, improving transaction finality while maintaining network security.
 status: Draft
@@ -12,7 +12,7 @@ created: 2025-02-27
 
 # Reduce target difficulty to 10s block time
 
-|RSKIP          | TBD        |
+|RSKIP          | 491        |
 | :------------ |:-------------|
 |**Title**      |Reduce target difficulty to 10s block time |
 |**Created**    |27-FEB-2025 |
