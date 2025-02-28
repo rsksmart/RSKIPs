@@ -31,9 +31,9 @@ Currently, Rootstock maintains a 14-second block time, balancing security and ef
 
 Recent analysis of block template refresh intervals (as explored in [this research](https://blog.rootstock.io/noticia/leveraging-bitcoins-security-exploring-the-dynamics-of-merged-mining/)) showed that several mining pools have improved their block template refresh policies, reducing the time it takes to update new templates. These improvements have led to:  
 - a **decrease in the sibling-to-main block ratio**,  
-- and **faster effective block times**, previously averaging 30 seconds and now around [24 seconds](https://stats.rootstock.io/).  
+- and **faster effective block times**, previously averaging 30 seconds and now around [24 seconds](https://stats.rootstock.io/)(at the time of writing).  
 
-With these optimizations in place, reducing the block time to **10 seconds** is now more feasible, as the network can sustain faster block production without compromising stability.  
+With these optimizations in place, reducing the block time to **10 seconds** is now feasible, as the network can sustain faster block production without compromising stability.  
 
 By leveraging these mining pool improvements, this proposal aims to:  
 - **Reduce block time to 10 seconds** with minimal impact on network congestion while maintaining stability.  
@@ -44,7 +44,7 @@ By leveraging these mining pool improvements, this proposal aims to:
 ## Specification  
 To achieve a 10-second block time, the target block time reference must be changed from **14s to 10s** in the difficulty adjustment calculation.  
 
-In RSKj, this value is configured in the **`Constants`** class, which defines the target block time for mainnet. The relevant code can be found [here](https://github.com/rsksmart/rskj/blob/master/rskj-core/src/main/java/org/ethereum/config/Constants.java#L250).  
+In RSKj, this value is configured in the **`Constants`** class, which defines the target block time for mainnet and testnet. The relevant code can be found [here](https://github.com/rsksmart/rskj/blob/master/rskj-core/src/main/java/org/ethereum/config/Constants.java#L250) for mainnet and [here](https://github.com/rsksmart/rskj/blob/master/rskj-core/src/main/java/org/ethereum/config/Constants.java#L280) for testnet.
 
 ## Implementation
 A lower difficulty target may lead to an increase in sibling blocks, which could impact network performance. While monitoring can help assess these effects, it cannot entirely prevent potential performance degradation.  
