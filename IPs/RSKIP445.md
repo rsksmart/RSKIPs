@@ -2,7 +2,7 @@
 rskip: 445
 title: MCOPY instruction
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: AE
 layer: Core
@@ -20,7 +20,7 @@ created: 2024/08/12
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 ## Abstract

@@ -2,7 +2,7 @@
 rskip: 453
 title: Prevent address creation on failed CREATE/CREATE2 operations
 description: 
-status: Draft
+status: Adopted
 purpose:    
 author: AS
 layer: Core
@@ -20,7 +20,7 @@ created: 2024/10/09
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 ## Abstract

@@ -6,7 +6,7 @@ author: JD, JZ
 purpose: Sec
 layer: Core
 complexity: 2
-status: Draft
+status: Adopted
 description: New Mechanism for current Powpeg to ensure the newly elected Powpeg will safely hold user funds
 ---
 
@@ -18,7 +18,7 @@ description: New Mechanism for current Powpeg to ensure the newly elected Powpeg
 |**Purpose**    |Sec|
 |**Layer**      |Core|
 |**Complexity** |2|
-|**Status**     |Draft|
+|**Status**     |Adopted|
 
 
 ## Abstract

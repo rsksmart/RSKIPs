@@ -2,7 +2,7 @@
 rskip: 438
 title: Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode
 description: 
-status: Draft
+status: Adopted
 purpose: Fair
 author: FML (@fmacleal)
 layer: Core
@@ -20,7 +20,7 @@ created: 2024-07-16
 | **Purpose**    | Fair		                                                                                          |
 | **Layer**      | Core                                                                                            |
 | **Complexity** | 2                                                                                               |
-| **Status**     | Draft                                                                                           |
+| **Status**     | Adopted                                                                                           |
 
 
 The following RSKIP is an adaptation of [EIP3860](https://eips.ethereum.org/EIPS/eip-3860)
