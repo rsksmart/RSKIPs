@@ -2,7 +2,7 @@
 rskip: 446
 title: Transient storage opcodes (TLOAD/TSTORE)
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: AE
 layer: Core
@@ -20,7 +20,7 @@ created: 2024/08/11
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 ## Abstract
