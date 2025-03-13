@@ -34,6 +34,16 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 
 ### Included RSKIPs
 
+- [RSKIP-419](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP419.md): PowPeg Spendability Validation Protocol
+- [RSKIP-427](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP427.md): Express the amount value in wei for peg-out related events
+- [RSKIP-428](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP428.md): New pegout creation event including UTXO outpoint values
+- [RSKIP-438](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP438.md): Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode
+- [RSKIP-445](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP445.md): MCOPY instruction
+- [RSKIP-446](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP446.md): Transient storage opcodes
+- [RSKIP-453](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP453.md): Prevent address creation on failed CREATE/CREATE2 operations
+- [RSKIP-454](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP454.md): Support bitcoin blocks with chain work up to 32 unsigned bytes
+- [RSKIP-459](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP459.md): Mark rejected peg-ins as processed
+- [RSKIP-460](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP460.md): Ignore non-standard outputs when searching for the witness commitment hash
 
 ### Accepted RSKIPs
 
@@ -72,6 +82,7 @@ This RSKIP specifies the consensus changes proposed to be included in Rootstock'
 - JAN-27-25: RSKIP-455 has been excluded from the scope of Lovell and will be evaluated for a future network upgrade.
 - JAN-28-25: The proposed scope is now finalized, and it's open for comments until Feb 4th, 2025
 - FEB-4-25: The network upgrade scope has been approved by the Rootstock community. This is now closed for comments and activation heights have been defined
+- MAR-13-25: Network upgrade successfully activated
 
 ## References
 
