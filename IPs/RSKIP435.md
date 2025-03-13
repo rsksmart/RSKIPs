@@ -2,7 +2,7 @@
 rskip: 435
 title: Network Upgrade - Lovell
 description: 
-status: Draft
+status: Adopted
 purpose: Usa, Sec, Sca
 author: AE
 layer: Core
@@ -19,7 +19,7 @@ created: 2024-06-27
 |**Purpose**    | Usa,Sec,Sca                |
 |**Layer**      | Core                       |
 |**Complexity** | 2                          |
-|**Status**     | Draft                      |
+|**Status**     | Adopted                      |
 
 ## Abstract
 
