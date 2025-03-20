@@ -53,6 +53,7 @@ function setUnionBridgeContractAddress(address unionBridgeContractAddress) publi
 ```
 
 **Response codes:**
+
 - 0: Success – The Union Bridge contract address was successfully updated.
 - -1: Unauthorized caller – The caller does not have the necessary permissions to update the contract address.
 - -10: Generic error – A non-specific error occurred while processing the request.
@@ -109,13 +110,13 @@ A new method will be added to the Bridge contract to allow the transfer of RBTC 
 **Method Signature:** 
 
 ```
-function requestRBTC(uint256 amountInWeis) public returns
+function requestUnionRBTC(uint256 amountInWeis) public returns
 ```
 
 An event will be emitted each time this method is invoked, to provide transparency about the transfer.
 
 ```
-event rbtc_requested(address indexed requester, uint256 amountInWeis);
+event union_rbtc_requested(address indexed requester, uint256 amountInWeis);
 ```
 
 ### 6. Tracking transfers to the Union Bridge
@@ -128,7 +129,7 @@ Tracks the total amount of RBTC (expressed in weis) transferred to the Union Bri
 
 ### 7. Receiving funds back from the Union Bridge
 
-The Union Bridge contract will have the capability to send funds back to the PowPeg. When this happens, the tracking entry for the amount transferred will need to be updated to reflect the returned RBTC.
+The Union Bridge contract will have the capability to send funds back to the PowPeg. When this happens, the tracking entry for the amount transferred will need to be updated to reflect the returned RBTC. The Bridge will not allow **weisTransferredToUnionBridge** to go negative, which could only happen if the Union Bridge is malfunctioning. If this happens, the method will fail with an error code and the Union-PowPeg integration will automatically enter pause mode.
 
 A new method will be added to the Bridge contract to allow the transfer of RBTC from the Union Bridge back to the PowPeg. The method will have the following restrictions:
 
