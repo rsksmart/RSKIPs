@@ -92,8 +92,8 @@ function increaseUnionBridgeLockingCap(uint256 newCap) public returns (int256);
 **Response codes:**
 
 - 0: Success – The locking cap has been adjusted successfully.
--1: Unauthorized caller – Only authorized entities can adjust the locking cap.
--2: Invalid value – The specified cap value is invalid (e.g., less than the current cap or excessive).
+- -1: Unauthorized caller – Only authorized entities can adjust the locking cap.
+- -2: Invalid value – The specified cap value is invalid (e.g., less than the current cap or excessive).
 - -10: Generic error – A non-specific error occurred while processing the request.
 
 ### 5. Method for Transferring RBTC to the Union Bridge
@@ -104,6 +104,7 @@ A new method will be added to the Bridge contract to allow the transfer of RBTC 
 - The total requested amount (current request + previously requested amounts) must not exceed the current locking cap.
 
 **Method Signature:** 
+
 ```
 function requestRBTC(uint256 amountInWeis) public returns
 ```
@@ -124,9 +125,31 @@ Tracks the total amount of RBTC (expressed in weis) transferred to the Union Bri
 
 ### 7. Receiving funds back from the Union Bridge
 
-The Union Bridge contract will be capable of sending funds back to the PowPeg. When this happens, the tracking entry for the transferred amount will need to be updated.
+The Union Bridge contract will have the capability to send funds back to the PowPeg. When this happens, the tracking entry for the amount transferred will need to be updated to reflect the returned RBTC.
 
-No new method will be added. It will require modifying the existing `releaseBtc` method to include special logic for transactions received from the Union Bridge contract address.
+A new method will be added to the Bridge contract to allow the transfer of RBTC from the Union Bridge back to the PowPeg. The method will have the following restrictions:
+
+- It will only be callable by the Union Bridge contract address.
+- The amount sent back cannot exceed the total amount of RBTC previously transferred to the Union Bridge, as tracked by the **weisTransferredToUnionBridge** storage entry. In other words, the Union Bridge cannot return more RBTC than it has previously received.
+
+**Method Signature:** 
+
+```
+function releaseUnionRBTC() public returns (int256)
+```
+
+**Response codes:**
+
+- 0: Success – Funds were successfully transferred from the Union Bridge back to the PowPeg, and the internal tracking was updated accordingly.
+- -1: Unauthorized caller – The caller is not the Union Bridge contract address.
+- -2: Invalid value – The amount being returned exceeds the previously transferred amount.
+- -10: Generic error – A non-specific error occurred while processing the request.
+
+An event will be emitted each time this method is invoked, to provide transparency about the transfer.
+
+```
+event union_rbtc_released(address indexed receiver, uint256 amountInWeis);
+```
 
 ### 8. Pause mechanism
 
