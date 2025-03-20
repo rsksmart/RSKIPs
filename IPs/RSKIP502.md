@@ -22,7 +22,7 @@ description:
 
 ## Abstract
 
-This RSKIP proposes the integration of the Union Bridge [1] with the existing PowPeg to enable secure RBTC transfers between the two systems. The PowPeg will facilitate the transfer of RBTC to the Union Bridge, with the addition of a locking cap to mitigate risks by limiting the total amount of RBTC that can be transferred. The integration will extend the current Bridge contract's functionality, incorporating new methods for managing transfers, updating the Union Bridge contract address, and adjusting the locking cap. These changes will ensure that the PowPeg remains secure and robust while supporting the ongoing development of the Union Bridge. Special considerations have been made to allow seamless testing and updates during the Union Bridge's development phase, with restrictions placed on mainnet interactions to avoid unauthorized changes.
+This RSKIP proposes the integration of the Union Bridge [[1]](#references)  with the existing PowPeg to enable secure RBTC transfers between the two systems. The PowPeg will facilitate the transfer of RBTC to the Union Bridge, with the addition of a locking cap to mitigate risks by limiting the total amount of RBTC that can be transferred. The integration will extend the current Bridge contract's functionality, incorporating new methods for managing transfers, updating the Union Bridge contract address, and adjusting the locking cap. These changes will ensure that the PowPeg remains secure and robust while supporting the ongoing development of the Union Bridge. Special considerations have been made to allow seamless testing and updates during the Union Bridge's development phase, with restrictions placed on mainnet interactions to avoid unauthorized changes.
 
 ## Motivation
 
@@ -65,13 +65,13 @@ It will be disabled on mainnet to prevent unauthorized updates.
 
 ### 3. Authorizer for changing the Union Bridge contract address
 
-An authorizer key will be created to allow the update of the Union Bridge contract address. This key will be similar to the whitelist authorizer [2], with a single key being sufficient for this purpose. No voting or multisig will be needed since this will only be relevant on testnet.
+An authorizer key will be created to allow the update of the Union Bridge contract address. This key will be similar to the whitelist authorizer [[2]](#references), with a single key being sufficient for this purpose. No voting or multisig will be needed since this will only be relevant on testnet.
 
 ### 4. Union Bridge locking cap
 
 A locking cap will be implemented to control the maximum amount of RBTC that can be transferred to the Union Bridge. This cap helps mitigate risks by preventing excessive transfers beyond the system's control limits.
 
-In order to integrate the locking cap logic with the Union Bridge, new methods need to be added to the existing Bridge contract to enable querying and updating the locking cap. Based on RSKIP134 [3], which provides a standard mechanism for managing caps in smart contracts, new methods are defined.
+In order to integrate the locking cap logic with the Union Bridge, new methods need to be added to the existing Bridge contract to enable querying and updating the locking cap. Based on RSKIP134 [[3]](#references), which provides a standard mechanism for managing caps in smart contracts, new methods are defined.
 
 #### 4.1 Method to get the current locking cap
 
@@ -204,9 +204,9 @@ This RSKIP outlines the necessary steps for integrating the Union Bridge with th
 
 [1] Union Bridge whitepaper https://arxiv.org/abs/2501.07435
 
-[2] RSKIP87 https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP87.md
+[2] [RSKIP87](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP87.md): Whitelisting unlimited mode  
 
-[3] RSKIP134 https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP134.md
+[3] [RSKIP134](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP134.md): Locking cap
 
 ### Copyright
 
