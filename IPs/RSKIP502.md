@@ -49,7 +49,7 @@ The Union Bridge contract address will be updated periodically during its develo
 **Method signature:**
 
 ```
-function setUnionBridgeContractAddress(address unionBridgeContractAddress) public returns (int256);
+function setUnionBridgeContractAddressForTestnet(address unionBridgeContractAddress) public returns (int256);
 ```
 
 **Response codes:**
