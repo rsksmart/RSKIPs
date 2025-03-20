@@ -35,6 +35,7 @@ This proposal aims to ensure that the PowPeg remains secure while enabling a smo
 ## Specification
 
 ### 1. New storage entry for Union Bridge contract address
+
 A new storage entry is necessary to store the address of the Union Bridge contract. This will allow the Bridge to identify when transactions are coming from the Union Bridge, and provide a mechanism for managing these interactions securely.
 
 Storage entry name: `unionBridgeContractAddress`
@@ -42,9 +43,11 @@ Storage entry name: `unionBridgeContractAddress`
 Maximum size: 32 bytes
 
 ### 2. Logic for updating the Union Bridge contract address
+
 The Union Bridge contract address will be updated periodically during its development and testing phase. A new method will be added to the Bridge contract to allow updating this address. This method will only be available on testnet and regtest environments and will not be enabled on mainnet.
 
 **Method signature:**
+
 ```
 function setUnionBridgeContractAddress(address unionBridgeContractAddress) public returns (int256);
 ```
