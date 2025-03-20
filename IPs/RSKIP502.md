@@ -170,19 +170,58 @@ event union_rbtc_released(address indexed receiver, uint256 amountInWeis);
 
 To allow for emergency halts or suspension of interactions between the PowPeg and the Union Bridge, a pause mechanism will be implemented. When the system is paused, all transfers between the PowPeg and the Union Bridge will be suspended until the pause is lifted.
 
-The pause mechanism will allow authorized signers to pause the system temporarily. Once the system is paused, no transfers of RBTC between the PowPeg and Union Bridge can occur. The system can later be unpaused, resuming the normal transfer of RBTC.
+The pause mechanism will allow authorized signers to pause or unpause the system as needed. Once the system is paused, no transfers of RBTC between the PowPeg and Union Bridge can occur. The system can later be unpaused, resuming normal RBTC transfers between the two.
+
+Two separate methods will be implemented:
+
+- Pause method: Pauses the integration, preventing further transfers.
+- Unpause method: Lifts the pause, resuming transfers between the PowPeg and the Union Bridge.
+
+#### 8.1 Pause Method
 
 **Method signature:** 
 
 ```
-function toggleUnionBridgeIntegrationPause() public returns (int256);
+function pauseUnionBridgeIntegration() public returns (int256);
 ```
 
 **Response codes:**
 
-- 0: Success – The system has been toggled (paused or unpaused) successfully.
-- -1: Unauthorized caller – Only authorized entities can toggle the pause state.
-- -10: Generic error – An unexpected issue occurred during the toggle action.
+- 0: Success – The system has been paused successfully.
+- -1: Unauthorized caller – Only authorized entities can pause the system.
+- -2: Already paused – The system is already paused; no action needed.
+- -10: Generic error – A non-specific error occurred while attempting to pause the system.
+
+**Event**
+
+An event will be emitted each time this method is invoked to provide transparency about the status of the integration between the PowPeg and Union Bridge.
+
+```
+event union_bridge_integration_paused(address indexed pauser);
+```
+
+#### 8.2 Unpause Method
+
+**Method signature:** 
+
+```
+function unpauseUnionBridgeIntegration() public returns (int256);
+```
+
+**Response codes:**
+
+- 0: Success – The system has been unpaused successfully, and transfers can resume.
+- -1: Unauthorized caller – Only authorized entities can unpause the system.
+- -2: Already unpaused – The system is already unpaused; no action needed.
+- -10: Generic error – A non-specific error occurred while attempting to unpause the system.
+
+**Event**
+
+An event will be emitted each time this method is invoked to provide transparency about the status of the integration between the PowPeg and Union Bridge.
+
+```
+event union_bridge_integration_unpaused(address indexed unpauser);
+```
 
 ## Backwards Compatibility
 
