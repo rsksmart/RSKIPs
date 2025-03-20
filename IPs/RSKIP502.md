@@ -104,14 +104,23 @@ function increaseUnionBridgeLockingCap(uint256 newCap) public returns (int256);
 
 A new method will be added to the Bridge contract to allow the transfer of RBTC to the Union Bridge. The method will have the following restrictions:
 
-- Only callable by the Union Bridge contract.
+- Only callable by the Union Bridge contract address.
 - The total requested amount (current request + previously requested amounts) must not exceed the current locking cap.
 
 **Method Signature:** 
 
 ```
-function requestUnionRBTC(uint256 amountInWeis) public returns
+function requestUnionRBTC(uint256 amountInWeis) public returns (int256)
 ```
+
+**Response codes:**
+
+- 0: Success – Funds were successfully transferred to the Union Bridge contract, and the internal tracking was updated accordingly.
+- -1: Unauthorized caller – The caller is not the Union Bridge contract address.
+- -2: Invalid value – The amount requested, combined with previously requested amounts, exceeds the current locking cap value.
+- -10: Generic error – A non-specific error occurred while processing the request.
+
+**Event**
 
 An event will be emitted each time this method is invoked, to provide transparency about the transfer.
 
@@ -148,6 +157,8 @@ function releaseUnionRBTC() public returns (int256)
 - -1: Unauthorized caller – The caller is not the Union Bridge contract address.
 - -2: Invalid value – The amount being returned exceeds the previously transferred amount.
 - -10: Generic error – A non-specific error occurred while processing the request.
+
+**Event**
 
 An event will be emitted each time this method is invoked, to provide transparency about the transfer.
 
