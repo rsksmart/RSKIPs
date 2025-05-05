@@ -29,7 +29,7 @@ This RSKIP adds precompiled contracts for addition and scalar multiplication on 
 
 # Motivation
 
-The Solidity language has a bigint artichmetic opcodes and a modular exponentiation precompile. However, uting these low level functions to build complex protocols over secp256k1 is inefficient, costly and error-prone. Cryptographic libraries should be re-used and not re-implemented because they are  security-critical. Therefore exposing well-tested cryptographic functions to Solidity is desirable.
+The Solidity language has bigint artichmetic opcodes and a modular exponentiation precompile. However, using these low level functions to build complex protocols over secp256k1 is inefficient, costly and error-prone. Cryptographic libraries should be re-used and not re-implemented because they are  security-critical. Therefore, exposing well-tested cryptographic functions to Solidity is desirable.
 For this reason the [EIP-196](https://eips.ethereum.org/EIPS/eip-196) was created. In this RSKIP we propose to introduce precompiles for point addition (ADD)  and scalar multiplication (MUL) on the elliptic curve "secp256k1". Having efficient operations on this curve is essential to enable musig2 functionality in contracts that need to coordinate the aggregatation of signatures for Bitcoin transactions.  
 
 
