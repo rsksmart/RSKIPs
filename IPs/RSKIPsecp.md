@@ -1,17 +1,17 @@
 ---
 rskip:
-title: Precompiled contracts for addition and scalar multiplication on the elliptic curve Secp256k1
+title: Precompiled contracts for +/* on Secp256k1
 description: This RSKIP introduces precompiled contracts for elliptic curve operations that are required in order to efficiently perform MuSig2 signature verifications on the Secp256k1 curve.
 status: Draft
 purpose: Usa
-author: SDL (@sergiodemianlerner)
-type: 
-category: Core
+author: SDL (@sergiodemianlerner) 
+layer: Core
 complexity: 2
 status: 
 created: 2024-04-10
 ---
 # Precompiled contracts for +/* on Secp256k1
+
 |RSKIP          |              |
 | :------------ |:-------------|
 |**Title**      |Precompiled contracts for +/* on Secp256k1|
