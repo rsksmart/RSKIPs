@@ -101,7 +101,7 @@ Inputs to test:
 
 # Implementation
 
-See https://github.com/rsksmart/rskj/tree/secp_ec for canonincal implementation and testing code. This implementation uses the BouncyCastle cryptographic library, which is slower than libsecp256k1. The gas costs are set accondingly to libsecp256k1 performance.
+See https://github.com/rsksmart/rskj/tree/secp_ec for canonincal implementation and testing code. This implementation uses the BouncyCastle cryptographic library, which is slower than libsecp256k1. The gas costs are set according to libsecp256k1 performance.
 
 # Security Considerations
 
