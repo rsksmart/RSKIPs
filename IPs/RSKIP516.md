@@ -1,5 +1,5 @@
 ---
-rskip:
+rskip: 516
 title: Precompiled contracts for +/* on Secp256k1
 description: This RSKIP introduces precompiled contracts for elliptic curve operations that are required in order to efficiently perform MuSig2 signature verifications on the Secp256k1 curve.
 status: Draft
@@ -12,7 +12,7 @@ created: 2024-04-10
 ---
 # Precompiled contracts for +/* on Secp256k1
 
-|RSKIP          |              |
+|RSKIP          |    516           |
 | :------------ |:-------------|
 |**Title**      |Precompiled contracts for +/* on Secp256k1|
 |**Created**    |10-APR-2024 |
