@@ -42,6 +42,16 @@ Storage entry name: `unionBridgeContractAddress`
 
 Maximum size: 20 bytes
 
+#### 1.1 Method to get the Union Bridge contract address
+
+A method will be added to allow anyone to query the current Union Bridge contract address. This ensures transparency regarding the contract the Bridge is transfering funds to.
+
+**Method signature:**
+
+```
+function getUnionBridgeContractAddress() public view returns (address);
+```
+
 ### 2. Logic for updating the Union Bridge contract address
 
 The Union Bridge contract address will be updated periodically during its development and testing phase. A new method will be added to the Bridge contract to allow updating this address. This method will only be available on testnet and regtest environments and will not be enabled on mainnet.
