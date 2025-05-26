@@ -166,7 +166,7 @@ A new method will be added to the Bridge contract to allow the transfer of RBTC 
 **Method Signature:** 
 
 ```
-function releaseUnionRBTC() public returns (int256)
+function releaseUnionRBTC() public payable returns (int256)
 ```
 
 **Response codes:**
