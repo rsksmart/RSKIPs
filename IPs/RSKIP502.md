@@ -116,6 +116,7 @@ A new method will be added to the Bridge contract to allow the transfer of RBTC 
 
 - Only callable by the Union Bridge contract address.
 - The total requested amount (current request + previously requested amounts) must not exceed the current locking cap.
+- This method only transfers RBTC value; no code is executed on the receiving contract, even if it has a fallback or receive function. The Union Bridge contract must be capable of receiving RBTC passively.
 
 **Method Signature:** 
 
@@ -138,6 +139,12 @@ An event will be emitted each time this method is invoked, to provide transparen
 ```
 event union_rbtc_requested(address indexed requester, uint256 amountInWeis);
 ```
+
+**Important execution note**
+
+This method only transfers native RBTC value from the Bridge to the Union Bridge contract.
+
+No function logic on the Union Bridge contract will be executed — even if the receiving contract implements a fallback() or receive() function. The recipient must be capable of receiving RBTC silently, without relying on any executable logic upon receipt.
 
 ### 6. Tracking transfers to the Union Bridge
 
@@ -192,7 +199,10 @@ Setting either flag to `false` will suspend transfers in that direction until it
 **Method signature:** 
 
 ```
-function setUnionBridgeTransferPermissions(bool requestEnabled, bool releaseEnabled) public returns (int256);
+function setUnionBridgeTransferPermissions(
+    bool requestEnabled, 
+    bool releaseEnabled
+) public returns (int256);
 ```
 
 **Response codes:**
