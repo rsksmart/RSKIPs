@@ -40,7 +40,7 @@ A new storage entry is necessary to store the address of the Union Bridge contra
 
 Storage entry name: `unionBridgeContractAddress`
 
-Maximum size: 32 bytes
+Maximum size: 20 bytes
 
 ### 2. Logic for updating the Union Bridge contract address
 
