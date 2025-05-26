@@ -22,7 +22,11 @@ description:
 
 ## Abstract
 
-This RSKIP proposes the integration of the Union Bridge [[1]](#references)  with the existing PowPeg to enable secure RBTC transfers between the two systems. The PowPeg will facilitate the transfer of RBTC to the Union Bridge, with the addition of a locking cap to mitigate risks by limiting the total amount of RBTC that can be transferred. The integration will extend the current Bridge contract's functionality, incorporating new methods for managing transfers, updating the Union Bridge contract address, and adjusting the locking cap. These changes will ensure that the PowPeg remains secure and robust while supporting the ongoing development of the Union Bridge. Special considerations have been made to allow seamless testing and updates during the Union Bridge's development phase, with restrictions placed on mainnet interactions to avoid unauthorized changes.
+This RSKIP proposes the integration of the Union Bridge [[1]](#references) with the existing PowPeg to enable secure RBTC transfers between the two systems. The PowPeg will facilitate the transfer of RBTC to the Union Bridge, with the addition of a locking cap to mitigate risks by limiting the total amount of RBTC that can be transferred. The purpose of this integration is to release the corresponding RBTC to a user who performed a peg-in to Rootstock via the Union Bridge, and vice-versa for a peg-out operation.
+
+The integration will extend the current Bridge contract's functionality, incorporating new methods for managing transfers, updating the Union Bridge contract address, and adjusting the locking cap. These changes will ensure that the PowPeg remains secure and robust while supporting the ongoing development of the Union Bridge. 
+
+Special considerations have been made to allow seamless testing and updates during the Union Bridge's development phase, with restrictions placed on mainnet interactions to avoid unauthorized changes.
 
 ## Motivation
 
@@ -109,6 +113,18 @@ function increaseUnionBridgeLockingCap(uint256 newCap) public returns (int256);
 - -1: Unauthorized caller – Only authorized entities can adjust the locking cap.
 - -2: Invalid value – The specified cap value is invalid (e.g., less than the current cap or excessive).
 - -10: Generic error – A non-specific error occurred while processing the request.
+
+**Event**
+
+To ensure the update is visible to external systems and can be logged for auditing purposes, an event will be emitted on every successful cap increase.
+
+```
+event union_bridge_locking_cap_increased(
+    address indexed caller,
+    uint256 previousCap,
+    uint256 newCap
+);
+```
 
 ### 5. Method for Transferring RBTC to the Union Bridge
 
