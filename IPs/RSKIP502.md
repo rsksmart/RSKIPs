@@ -128,6 +128,7 @@ function requestUnionRBTC(uint256 amountInWeis) public returns (int256)
 - 0: Success – Funds were successfully transferred to the Union Bridge contract, and the internal tracking was updated accordingly.
 - -1: Unauthorized caller – The caller is not the Union Bridge contract address.
 - -2: Invalid value – The amount requested, combined with previously requested amounts, exceeds the current locking cap value.
+- -3: Request disabled: - Transfers from the PowPeg to the Union Bridge are currently disabled.
 - -10: Generic error – A non-specific error occurred while processing the request.
 
 **Event**
@@ -166,6 +167,7 @@ function releaseUnionRBTC() public returns (int256)
 - 0: Success – Funds were successfully transferred from the Union Bridge back to the PowPeg, and the internal tracking was updated accordingly.
 - -1: Unauthorized caller – The caller is not the Union Bridge contract address.
 - -2: Invalid value – The amount being returned exceeds the previously transferred amount.
+- -3: Release disabled: - Transfers from the Union Bridge to the PowPeg are currently disabled.
 - -10: Generic error – A non-specific error occurred while processing the request.
 
 **Event**
@@ -182,15 +184,15 @@ To support precise operational control and emergency response, a pause mechanism
 
 Authorized signers can invoke a single method to configure the allowed transfer directions:
 
-- `enablePowPegToUnionBridge`: if `true`, allows transfers from the PowPeg to the Union Bridge.
-- `enableUnionBridgeToPowPeg`: if `true`, allows transfers from the Union Bridge to the PowPeg.
+- `requestEnabled`: if `true`, allows transfers from the PowPeg to the Union Bridge.
+- `releaseEnabled`: if `true`, allows transfers from the Union Bridge to the PowPeg.
 
 Setting either flag to `false` will suspend transfers in that direction until it is re-enabled. Both flags are `true` by default when the RSKIP is activated.
 
 **Method signature:** 
 
 ```
-function setUnionBridgeTransferPermissions(bool enablePowPegToUnionBridge, bool enableUnionBridgeToPowPeg) public returns (int256);
+function setUnionBridgeTransferPermissions(bool requestEnabled, bool releaseEnabled) public returns (int256);
 ```
 
 **Response codes:**
