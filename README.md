@@ -242,7 +242,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 459 |[Mark rejected peg-ins as processed](IPs/RSKIP459.md)| 10-DEC-24 | MI | Usa | Core | 1 | Adopted |
 | 460 |[Ignore non-standard outputs when searching for the witness commitment hash](IPs/RSKIP460.md)| 12-DEC-24 | MI | Usa,Sec | Core | 1 | Adopted |
 | 491 |[Reduce target difficulty to lower average block time to 10s](IPs/RSKIP491.md)| 27-FEB-2025 | PDG | Usa | Core | 1 | Draft |
-| XXX |[Block time-centric difficulty adjustment with uncle threshold](IPs/RSKIPXXX.md)| 29-MAY-2025 | PDG | Sec,Sca | Core | 1 | Draft |
+| 517 |[Block time-centric difficulty adjustment with uncle threshold](IPs/RSKIP517.md)| 29-MAY-2025 | PDG | Sec,Sca | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 

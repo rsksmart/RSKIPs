@@ -1,5 +1,5 @@
 ---
-rskip: XXX
+rskip: 517
 title: Block time-centric difficulty adjustment with uncle threshold
 description: Modifies difficulty adjustment algorithm to prioritize block time over uncle rate, enhancing stability and security.
 status: Draft
@@ -12,7 +12,7 @@ created: 2025-05-29
 
 # Block time-centric difficulty adjustment with uncle threshold
 
-| RSKIP          | XXX                                                           |
+| RSKIP          | 517                                                           |
 | :------------ |:-------------|
 | **Title**      | Block time-centric difficulty adjustment with uncle threshold |
 | **Created**    | 29-MAY-2025                                                   |
