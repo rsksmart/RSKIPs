@@ -94,8 +94,8 @@ The new difficulty adjustment introduces a conditional factor $F$ that adapts ba
 $$
 F = \begin{cases}
 \alpha & \text{if } R > C \\
-\alpha & \text{if } C \leq R \land A > T \cdot 1.10 \\
--\alpha & \text{if } C  \leq R  \land A < T \cdot 0.90 \\
+\alpha & \text{if } R \leq C \land A > T \cdot 1.10 \\
+-\alpha & \text{if } R  \leq C  \land A < T \cdot 0.90 \\
 0 & \text{otherwise}
 \end{cases}
 $$
