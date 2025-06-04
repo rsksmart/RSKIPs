@@ -104,7 +104,7 @@ The threshold $C$ should be defined based on empirical data from stress testing 
 
 Given that the network currently³ produces main blocks every 24 seconds with an uncle rate of 0.5, we suggest the following conservative parameter values for the new calculation:
 
-* $\alpha \small\text{(base difficulty change factor)} = 0.0025$
+* $\alpha \small\text{(base difficulty change factor)} = 0.005$
 * $T \small\text{(target block time) = 20 (with a tolerance range of ±10\%, i.e., [18, 22])}$
 * $C \small\text{(uncle threshold)} = 0.7$
 * $N \small\text{(window size / difficulty adjustment frequency)} = 30 (blocks)$ 
