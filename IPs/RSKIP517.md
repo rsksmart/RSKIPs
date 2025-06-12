@@ -88,7 +88,6 @@ and the uncle rate $R$ as:
 $$
 R = \frac{\sum_{i=1}^{N} U_{B_i}}{N}
 $$
-
 The new difficulty adjustment introduces a conditional factor $F$ that adapts based on both the uncle rate and deviation from the target block time. This mechanism ensures that uncle blocks impact difficulty when their rate exceeds a defined threshold, preserving network stability while allowing controlled block time reductions. The adjustment factor is defined as:
 
 $$
@@ -108,6 +107,35 @@ Given that the network currently³ produces main blocks every 24 seconds with an
 * $T \small\text{(target block time) = 20 (with a tolerance range of ±10\%, i.e., [18, 22])}$
 * $C \small\text{(uncle threshold)} = 0.7$
 * $N \small\text{(window size / difficulty adjustment frequency)} = 30 (blocks)$ 
+
+#### Computing Difficulty on rskj
+
+To compute the new difficulty on `rskj` we had to consider performance and precision, and we evaluated three choices:
+
+1. Compute it using `long` and fixed-point arithmetic.
+2. Compute it using `BigInteger` and fixed-point arithmetic.
+3. Use `BigDecimal`.
+
+We discarded the first option because difficulty value exceeds the `long` range, making it imprecise. Then we benchmarked `BigInteger` fixed-point against `BigDecimal` using powers of two for the fixed-point option and we found it to be imprecise but with better performance than `BigDecimal`. So, considering that we only perform a single "expensive" multiplication and that difficulty adjustment is a performance-critical operation, we opted for `BigDecimal` to handle the computation of the updated difficulty.
+
+
+```java
+BigDecimal factor;
+if (uncleRate > UNCLE_TRESHOLD) {
+    factor = ALPHA_POS;
+} else if (uncleRate <= UNCLE_TRESHOLD && blockTimeAverage > (BLOCK_TARGET * 1.1)) {
+    factor = ALPHA_POS;
+} else if (uncleRate <= UNCLE_TRESHOLD && blockTimeAverage < (BLOCK_TARGET * 0.9)) {
+    factor = ALPHA_NEG;
+} else {
+    throw new IllegalStateException("this shouldn't happen");
+}
+
+BigInteger newDifficulty = new BigDecimal(parentHeader.getDifficulty().asBigInteger())
+    .multiply(factor)
+    .setScale(0, RoundingMode.DOWN)
+    .toBigInteger();
+```
 
 ## Rationale
 
@@ -142,3 +170,4 @@ To be developed alongside the implementation. Test cases will include:
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+
