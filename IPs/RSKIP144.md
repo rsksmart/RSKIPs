@@ -8,6 +8,18 @@ author: SDL (@sergiodemianlerner)
 layer: Core
 complexity: 3
 created: 23-OCT-2019
+---
+# Precompiled contracts for +/* on Secp256k1
+
+|RSKIP          |    144           |
+| :------------ |:-------------|
+|**Title**      |Parallel Transaction Execution for Unitrie|
+|**Created**    |23-OCT-2019 |
+|**Author**     |SDL |
+|**Purpose**    |Sca |
+|**Layer**      |Core |
+|**Complexity** |3 |
+|**Status**     |Draft |
 
 # Abstract
 
