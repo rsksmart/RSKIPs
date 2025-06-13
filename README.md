@@ -244,6 +244,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 491 |[Reduce target difficulty to lower average block time to 10s](IPs/RSKIP491.md)| 27-FEB-2025 | PDG | Usa | Core | 1 | Draft |
 | 502 |[PowPeg and Union Bridge integration](IPs/RSKIP502.md)| 19-MAR-2025 | MI | Sca | Core | 1 | Draft |
 | 516 |[Precompiled contracts for +/* on Secp256k1](IPs/RSKIP516.md)| 10-APR-2025 | SDL | Usa | Core | 2 | Draft |
+| 518 |[Network Upgrade: Reed](IPs/RSKIP518.md)| 13-JUN-2025 | AE | Usa, Sca | Core | 3 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
