@@ -108,16 +108,20 @@ Given that the network currently³ produces main blocks every 24 seconds with an
 * $C \small\text{(uncle threshold)} = 0.7$
 * $N \small\text{(window size / difficulty adjustment frequency)} = 30 (blocks)$ 
 
-#### Computing Difficulty on rskj
 
-To compute the new difficulty on `rskj` we had to consider performance and precision, and we evaluated three choices:
+## Implementation
+
+We provide an implementation ([link](https://github.com/rsksmart/rskj/pull/3178)) for `rskj` containing the core elements to compute difficulty update using the new defined algorithm.
+
+### Computing Difficulty Update
+
+To compute difficulty on `rskj` we had to consider performance and precision of the selected numerical type, and we evaluated three choices:
 
 1. Compute it using `long` and fixed-point arithmetic.
 2. Compute it using `BigInteger` and fixed-point arithmetic.
 3. Use `BigDecimal`.
 
 We discarded the first option because difficulty value exceeds the `long` range, making it imprecise. Then we benchmarked `BigInteger` fixed-point against `BigDecimal` using powers of two for the fixed-point option and we found it to be imprecise but with better performance than `BigDecimal`. So, considering that we only perform a single "expensive" multiplication and that difficulty adjustment is a performance-critical operation, we opted for `BigDecimal` to handle the computation of the updated difficulty.
-
 
 ```java
 BigDecimal factor;
@@ -141,7 +145,7 @@ BigInteger newDifficulty = new BigDecimal(parentHeader.getDifficulty().asBigInte
 
 Uncles are an indirect signal of network congestion or miner behavior, not a direct reflection of time-based difficulty needs. Currently, difficulty is highly sensitive to uncles, which undermines attempts to reduce block time. This proposal decouples the automatic inclusion of uncles in every difficulty update, instead applying a threshold so they influence the algorithm only when truly abnormal.
 
-This preserves network security by ensuring uncle production doesn't spiral out of control, while also enabling more accurate and less volatile difficulty changes.  The block time becomes the main feedback signal, aligning the difficulty with actual network performance and the long-term goal of reducing average block time.
+This preserves network security by ensuring uncle production doesn't spiral out of control, while also enabling more accurate and less volatile difficulty changes. The block time becomes the main feedback signal, aligning the difficulty with actual network performance and the long-term goal of reducing average block time.
 
 To further strengthen this approach, we incorporate statistical reasoning into the choice of difficulty update inputs. The mining process follows an exponential distribution, where each block time represents a random sample. Attempting to adjust difficulty based on individual block times introduces error, since the exponential distribution is not symmetric and its mean is not centered. However, when summing multiple exponential variables—as done with a sliding window—their distribution converges toward a normal distribution by the Central Limit Theorem⁴. This aggregated approach yields a more reliable estimate of the true mean block time, improving the accuracy and stability of difficulty adjustments.
 
