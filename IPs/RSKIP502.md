@@ -137,7 +137,7 @@ A new method will be added to the Bridge contract to allow the transfer of RBTC 
 **Method Signature:** 
 
 ```
-function requestUnionRBTC(uint256 amountInWeis) public returns (int256)
+function requestUnionBridgeRbtc(uint256 amountInWeis) public returns (int256)
 ```
 
 **Response codes:**
@@ -182,7 +182,7 @@ A new method will be added to the Bridge contract to allow the transfer of RBTC 
 **Method Signature:** 
 
 ```
-function releaseUnionRBTC() public payable returns (int256)
+function releaseUnionBridgeRbtc() public payable returns (int256)
 ```
 
 **Response codes:**
