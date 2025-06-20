@@ -23,30 +23,32 @@ created: 2025-06-13
 
 ## Abstract
 
-This RSKIP specifies the consensus changes proposed to be included in Rootstock's network upgrade named Reed.
+This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’s upcoming network upgrade, code-named Reed. Some of the proposed RSKIPs, if ultimately approved, are intended to activate only on the Rootstock Testnet initially, as part of an incremental rollout strategy that allows for validation in a less critical environment before Mainnet deployment. These RSKIPs are marked with the (Testnet-only) tag below.
 
 ## Specification
 
 - Codename: Reed
 - Activation:
-	- Rootstock Mainnet block: TBD
-	- Rootstock Testnet block: TBD
+	- Rootstock Mainnet block: to be determined
+	- Rootstock Testnet block: to be determined
 
 ### Included RSKIPs
-
 
 ### Accepted RSKIPs
 
 ### Rejected RSKIPs
 
-
 ### Proposed RSKIPs
 
 - [RSKIP-305](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP305.md): Peg-out efficiency improvement (Segwit)
+- [RSKIP-144](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP144.md): (Testnet-only) Parallel Transaction Execution for the Unitrie
+- [RSKIP-502](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP502.md): (Testnet-only) Union Bridge Integration: New Methods Added to PowPeg Bridge Contract
+- [RSKIP-516](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP516.md): (Testnet-only) Precompiled contracts for +/* on Secp256k1
 
 ## Timeline
 
 - JUN-13-25: RSKIP created with an initial list of proposed RSKIPs
+- JUN-19-25: Added additional proposed RSKIPs
 
 ## References
 
