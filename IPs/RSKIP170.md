@@ -52,8 +52,8 @@ The BTC transaction sent to the federation must contain
       "value": 0.00000000,
       "n": 1,
       "scriptPubKey": {
-        "asm": "OP_RETURN 52534b5400010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
-        "hex": "6a2b52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "asm": "OP_RETURN 52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
+        "hex": "6a2e52534b54010e537aad84447a2c2a7590d5f2665ef5cf9b667a014f4c767a2d308eebb3f0f1247f9163c896e0b7d2",
         "type": "nulldata"
       }
     }
