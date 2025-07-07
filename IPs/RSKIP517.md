@@ -105,7 +105,7 @@ Given that the network currently³ produces main blocks every 24 seconds with an
 
 * $\alpha \small\text{(base difficulty change factor)} = 0.005$
 * $T \small\text{(target block time) = 20 (with a tolerance range of ±10\%, i.e., [18, 22])}$
-* $C \small\text{(uncle threshold)} = 0.7$
+* $C \small\text{(uncle threshold)} = 0.8$
 * $N \small\text{(window size / difficulty adjustment frequency)} = 30 (blocks)$ 
 
 
