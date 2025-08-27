@@ -60,8 +60,8 @@ Reed will be released in two parts, with Testnet-only features included in the s
 
 - JUN-13-25: RSKIP created with an initial list of proposed RSKIPs
 - JUN-19-25: Added additional proposed RSKIPs
-- AUG-07-07: Core Devs Community Call covering all RSKIPs proposed. The upgrade proposal is open for comments until August 22nd.
-- AUG-07-23: The upgrade proposal is now closed for comments. Accepted RSKIPs list has been updated.
+- AUG-07-25: Core Devs Community Call covering all RSKIPs proposed. The upgrade proposal is open for comments until August 22nd.
+- AUG-27-25: The upgrade proposal is now closed for comments. Accepted RSKIPs list has been updated.
 
 ## References
 
