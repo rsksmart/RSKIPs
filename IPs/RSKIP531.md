@@ -45,7 +45,7 @@ Introduce a protocol change where a configurable fraction $\alpha \in [0,1]$ of 
 
   * On block inclusion, distribute $\alpha \cdot block.fees$ to `block.coinbase`
   * Accumulate $(1 - \alpha) \cdot block.fees$ as usual
-* Initial default value: $\alpha = 0.03$
+* Initial recommended value: $\alpha = 0.03$
 
 ## Rationale
 
