@@ -246,6 +246,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 516 |[Precompiled contracts for +/* on Secp256k1](IPs/RSKIP516.md)| 10-APR-2025 | SDL | Usa | Core | 2 | Draft |
 | 517 |[Block time-centric difficulty adjustment with uncle threshold](IPs/RSKIP517.md)| 29-MAY-2025 | PDG | Sec,Sca | Core | 1 | Draft |
 | 518 |[Network Upgrade: Reed](IPs/RSKIP518.md)| 13-JUN-2025 | AE | Usa, Sca | Core | 3 | Draft |
+| 531 |[Mitigation of Fee-Withholding Incentive in REMASC](IPs/RSKIP531.md)| 01-SEP-2025 | PDG | Sec | Core | 1 | Draft |
 
 (*) Under evaluation to be implemented in the next reference client release
 
