@@ -1,5 +1,5 @@
 ---
-rskip: XXX
+rskip: 531
 title: Mitigation of Fee-Withholding Incentive in REMASC
 description: Proposes a modification to REMASC to prevent fee-withholding strategies by introducing immediate partial fee distribution.
 status: Draft
@@ -12,7 +12,7 @@ created: 2025-09-01
 
 # Mitigation of Fee-Withholding Incentive in REMASC
 
-| RSKIP          | XXX                       |
+| RSKIP          | 531                       |
 | :------------ |:-------------|
 | **Title**      | Mitigation of Fee-Withholding Incentive in REMASC |
 | **Created**    | 01-SEP-2025                                       |
@@ -35,7 +35,7 @@ REMASC introduces a delayed miner reward system to incentivize long-term honest 
 * **Uneven Reward Distribution**: Strategic fee withholding creates an unfair advantage, favoring miners who adopt this behavior over those who don't
 * **No Penalization**: Excluded transactions simply roll over to future blocks, meaning there's no cost to miners for withholding fees
 
-We demonstrate both theoretically and empirically that this strategy yields an advantage for medium-hashrate strategic miners while degrading overall network performance. Addressing this vulnerability is critical to maintaining network efficiency and user experience.
+We demonstrate both theoretically and empirically that this strategy yields an advantage for medium-hashrate strategic miners while degrading overall network performance \[3]. Addressing this vulnerability is critical to maintaining network efficiency and user experience.
 
 ## Specification
 
@@ -49,7 +49,7 @@ Introduce a protocol change where a configurable fraction $\alpha \in [0,1]$ of 
 
 ## Rationale
 
-Simulations confirm that even low $\alpha$ (e.g., 0.03) removes the advantage or turns it negative, making the fee-withholding strategy irrational. By providing immediate partial fee distribution, this change:
+Simulations \[3] confirm that even low $\alpha$ (e.g., 0.03) removes the advantage or turns it negative, making the fee-withholding strategy irrational. By providing immediate partial fee distribution, this change:
 
 * **Eliminates Network Degradation**: Removes the incentive to withhold fees, ensuring consistent network performance
 * **Maintains REMASC Benefits**: Preserves the delayed reward incentives for long-term security
@@ -67,6 +67,8 @@ This is a consensus-breaking change and requires a hard fork. All nodes must upg
 \[1] REMASC Documentation – [https://github.com/rsksmart/remasc](https://github.com/rsksmart/remasc)
 
 \[2] RSKIP15 – Security Bonding via Delayed Rewards [https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP15.md](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP15.md)
+
+\[3] Mining Reward Simulation Tools – [https://github.com/patogallaiovlabs/sim-rewards](https://github.com/patogallaiovlabs/sim-rewards)
 
 ## Copyright
 
