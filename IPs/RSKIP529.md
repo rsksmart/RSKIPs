@@ -30,19 +30,76 @@ To be completed...
 
 ## Specification
 
-The Bridge contract will include a new storage entry, key `super_event`.
+### 1. New storage entry for the serialized `super event`
+
+A new storage entry is necessary to store the serialized `super event` sent by the Union Bridge contract.
 
 ```
+**Storage entry name:** `superEvent`
 
+**Data type:** `bytes`
+
+**Maximum size:** TBD
 ```
 
-### Subsection 1 of Specification such as format.
+The value is considered *unset* if `superEvent.length == 0`.
 
-Blah.
+### 2. Method to get the serialized `super event`
 
-### Subsection 2 of specs such.
+A method will be added to allow anyone to query the current `super event`. If no value is set, then it should return an empty array of bytes.
 
-Blah two...
+**Method signature:**
+
+```
+function getSuperEvent() public view returns (bytes memory);
+```
+
+### 3. Method to set the `super event` value in storage
+
+A method will be added to allow the Union Bridge contract address to set the current `super event` value in storage. 
+
+- If the caller is not the Union Bridge contract address then it should revert.
+- It should receive a non-empty array of bytes and store it under the `superEvent` storage key of the Bridge contract. 
+- If there is an already existing value under the `superEvent` storage key of the Bridge contract, it will be overriden by the new value.
+
+**Method signature:**
+
+```
+function setSuperEvent(bytes memory superEvent) public;
+```
+
+### 4. Method to clear the `super event` value in storage
+
+A method will be added to allow the Union Bridge contract address to clear the current `super event` value in storage. 
+
+- If the caller is not the Union Bridge contract address then it should revert.
+- It should store an empty byte array under the `superEvent` storage key of the Bridge, overriding whatever value was previously there.
+
+**Method signature:**
+
+```
+function clearSuperEvent() public;
+```
+
+### 5. Method to get the accumulated difficulty of the latest `super block`
+
+A method will be added to allow anyone to query the latest `super block` accumulated difficulty.
+
+**Method signature:**
+
+```
+function getSuperBlockCumulativeDifficulty() public view returns(bytes);
+```
+
+### 6. Method to get the latest `super block` chain height
+
+A method will be added to allow anyone to query the latest `super block` chain height.
+
+**Method signature:**
+
+```
+function getSuperBlockchainHeight() public view returns(uint32);
+```
 
 ## Rationale
 
@@ -50,9 +107,8 @@ Discuss design decisions, community debates and possible attacks.
 
 ## References
 
-[1] Other RSKIP https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP??.md
+[1] [RSKIP502](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP502.md): PowPeg and Union Bridge integration  
 
-[2] Other Articles such as Smart Contracts for Bribing Miners http://homepages.cs.ncl.ac.uk/patrick.mccorry/minerbribery.pdf
 
 ### Copyright
 
