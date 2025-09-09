@@ -1,6 +1,6 @@
 ---
 rskip: 529
-title: Super event storage entry
+title: Super events
 created: 26-AUG-25
 author: MI
 purpose: Sca
@@ -12,7 +12,7 @@ description:
 
 |RSKIP          |529           |
 | :------------ |:-------------|
-|**Title**      |Super events storage entry |
+|**Title**      |Super events |
 |**Created**    |26-AUG-25 |
 |**Author**     |MI |
 |**Purpose**    |Sca |
