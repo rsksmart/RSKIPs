@@ -110,7 +110,6 @@ function increaseUnionBridgeLockingCap(uint256 newCap) public returns (int256);
 **Response codes:**
 
 - 0: Success – The locking cap has been adjusted successfully.
-- -1: Unauthorized caller – Only authorized entities can adjust the locking cap.
 - -2: Invalid value – The specified cap value is invalid (e.g., less than the current cap or excessive).
 - -10: Generic error – A non-specific error occurred while processing the request.
 
@@ -224,7 +223,6 @@ function setUnionBridgeTransferPermissions(
 **Response codes:**
 
 - 0: Success – Transfer permissions updated.
-- -1: Unauthorized caller – Only authorized entities can change the transfer permissions.
 - -10: Generic error – A non-specific error occurred while attempting to pause the system.
 
 **Event**
