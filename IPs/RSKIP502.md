@@ -6,7 +6,7 @@ author: MI
 purpose: Sca
 layer: Core
 complexity: 1
-status: Draft
+status: Accepted
 description: 
 ---
 
@@ -18,7 +18,7 @@ description:
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Accepted |
 
 ## Abstract
 

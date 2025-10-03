@@ -136,7 +136,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
 | 140 |[EXTCODEHASH opcode](IPs/RSKIP140.md)| 04-SEP-19 | JL | Usa | Core | 2 | Adopted |
 | 141 |[Network Upgrade: Papyrus](IPs/RSKIP141.md)| 27-SEP-19 | AE | Sca,Usa,Sec | Core | 2 | Adopted |
-| 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Draft |
+| 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Accepted |
 | 145 |[Struct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Draft |
 | 146 |[Encode bridge events in Solidity format](IPs/RSKIP146.md)|  25-OCT-19 | MI & JD | Usa | Core | 2 | Adopted |
 | 148 |[ERC1820 Pseudo-introspection Registry Contract](IPs/RSKIP148.md)|  6-NOV-19 | PMP | Usa | DApp | 1 | Adopted |
@@ -205,7 +205,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 294 |[Limit the number of inputs to include in a migration transaction](IPs/RSKIP294.md)|  03-FEB-22 | MI | Sca, Sec | Core | 1 | Adopted |
 | 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Adopted |
 | 298 |[Bridge peg-out creation index](IPs/RSKIP298.md)|  18-APR-22 | JD | Sca | Core | 2 | Draft |
-| 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Draft |
+| 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Adopted |
 | 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Adopted |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
 | 351 |[Miniheader: block header compression](IPs/RSKIP351.md)|  12-SEP-22 | IO | Sca | Core | 1 | Draft |
@@ -242,10 +242,10 @@ You can find an easily browseable version of this information [here](https://ips
 | 459 |[Mark rejected peg-ins as processed](IPs/RSKIP459.md)| 10-DEC-24 | MI | Usa | Core | 1 | Adopted |
 | 460 |[Ignore non-standard outputs when searching for the witness commitment hash](IPs/RSKIP460.md)| 12-DEC-24 | MI | Usa,Sec | Core | 1 | Adopted |
 | 491 |[Reduce target difficulty to lower average block time to 10s](IPs/RSKIP491.md)| 27-FEB-2025 | PDG | Usa | Core | 1 | Draft |
-| 502 |[PowPeg and Union Bridge integration](IPs/RSKIP502.md)| 19-MAR-2025 | MI | Sca | Core | 1 | Draft |
-| 516 |[Precompiled contracts for +/* on Secp256k1](IPs/RSKIP516.md)| 10-APR-2025 | SDL | Usa | Core | 2 | Draft |
+| 502 |[PowPeg and Union Bridge integration](IPs/RSKIP502.md)| 19-MAR-2025 | MI | Sca | Core | 1 | Accepted |
+| 516 |[Precompiled contracts for +/* on Secp256k1](IPs/RSKIP516.md)| 10-APR-2025 | SDL | Usa | Core | 2 | Adopted |
 | 517 |[Block time-centric difficulty adjustment with uncle threshold](IPs/RSKIP517.md)| 29-MAY-2025 | PDG | Sec,Sca | Core | 1 | Draft |
-| 518 |[Network Upgrade: Reed](IPs/RSKIP518.md)| 13-JUN-2025 | AE | Usa, Sca | Core | 3 | Draft |
+| 518 |[Network Upgrade: Reed](IPs/RSKIP518.md)| 13-JUN-2025 | AE | Usa, Sca | Core | 3 | Adopted |
 
 (*) Under evaluation to be implemented in the next reference client release
 
@@ -262,7 +262,7 @@ You can find an easily browseable version of this information [here](https://ips
 | FJ       | Federico Jinich           | federico@rootstocklabs.com             |
 | FML      | Frederico M. Leal         | frederico.macielleal@rootstocklabs.com |
 | GM       | Guido Medina              |                                        |
-| IO       | Ilan Olkies               | ilan@rootstocklabs.com                 |
+| IO       | Ilan Olkies               |                                        |
 | JIO      | Jose Ignacio Orlicki      |                                        |
 | JD       | Jose Dahlquist            | jose@rootstocklabs.com                 |
 | JL       | Julian Len                | julian@rootstocklabs.com               |
@@ -285,7 +285,7 @@ You can find an easily browseable version of this information [here](https://ips
 | SDL      | Sergio Demian Lerner      | sergio@rootstocklabs.com               |
 | SM       | Shreemoy Mishra           | shreemoy@rootstocklabs.com             |
 | SMS      | Sebastian Matias Sicardi  |                                        |
-| VK       | Volodymyr Kravets         | volodymyr@rootstocklabs.com            |
+| VK       | Volodymyr Kravets         |                                        |
 
 
 ## Build locally
