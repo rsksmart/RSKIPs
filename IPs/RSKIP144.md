@@ -2,7 +2,7 @@
 rskip: 144
 title: Parallel Transaction Execution for Unitrie
 description: This RSKIP describes how miners partition transactions into disjoint sets in order to be safely parallelized, and how full nodes should process transactions.
-status: Draft
+status: Accepted
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 23-OCT-2019
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft |
+|**Status**     |Accepted |
 
 # Abstract
 

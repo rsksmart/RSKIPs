@@ -2,7 +2,7 @@
 rskip: 305
 title: Peg-out efficiency improvement (Segwit)
 description: This RSKIP introduces Segwit V0 (Bitcoin Soft Fork 2017) for use in peg-ins and peg-outs to improve performance, cost reductions, and security.
-status: Draft
+status: Adopted
 purpose: Sca Usa Sec
 author: PDG (@patogallaiovlabs), RFV (@ramsesfv), NV (@NVescovo)
 layer: Core
@@ -20,7 +20,7 @@ created: 2022-06-01
 |**Purpose**    |Sca Usa Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 

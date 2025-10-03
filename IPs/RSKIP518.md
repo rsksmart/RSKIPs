@@ -2,7 +2,7 @@
 rskip: 518
 title: Network Upgrade - Reed
 description: 
-status: Draft
+status: Adopted
 purpose: Usa, Sca
 author: AE
 layer: Core
@@ -19,7 +19,7 @@ created: 2025-06-13
 |**Purpose**    | Usa,Sca                    |
 |**Layer**      | Core                       |
 |**Complexity** | 3                          |
-|**Status**     | Draft                      |
+|**Status**     | Adopted                    |
 
 ## Abstract
 
@@ -29,10 +29,15 @@ This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’
 
 - Codename: Reed
 - Activation:
-	- Rootstock Mainnet block: to be determined
-	- Rootstock Testnet block: to be determined
+	- Rootstock Mainnet block: 8,052,200
+	- Rootstock Testnet block: 6,835,655
 
 ### Included RSKIPs
+
+- [RSKIP-305](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP305.md): Peg-out efficiency improvement (Segwit)
+- [RSKIP-516](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP516.md): Precompiled contracts for +/* on Secp256k1
+
+Note: the remaining accepted RSKIPs will be released in a second release on Testnet as explained later in this document. 
 
 ### Accepted RSKIPs
 
@@ -62,6 +67,7 @@ Reed will be released in two parts, with Testnet-only features included in the s
 - JUN-19-25: Added additional proposed RSKIPs
 - AUG-07-25: Core Devs Community Call covering all RSKIPs proposed. The upgrade proposal is open for comments until August 22nd.
 - AUG-27-25: The upgrade proposal is now closed for comments. Accepted RSKIPs list has been updated.
+- SEP-30-25: Reed successfully activated on Mainnet and Testnet
 
 ## References
 
