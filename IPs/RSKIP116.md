@@ -39,7 +39,7 @@ When a CALL that incremented the LOCKCOUNTER returns, the LOCKCOUNTER is decreme
 
 # **Discussion**
 
-The value m=6400 is computed as a value which must be lower or equal to the minimum cost to execute a a call with call-back and a SSTORE (700+700+5000). 
+The value m=6400 is computed as a value which must be lower or equal to the minimum cost to execute a call with call-back and a SSTORE (700+700+5000). 
 
 There is a variant to this RSKIP that was analyzed but discarded: 
 
