@@ -59,7 +59,7 @@ function getBaseEvent() public view returns (bytes memory);
 A method will be added to allow the Union Bridge contract address to set the current `base event` value in storage. 
 
 - If the caller is not the Union Bridge contract address then it should revert.
-- It should receive a non-empty array of bytes whose length is at most 128 bytes, which it then stores under the `baseEvent` storage key of the Bridge contract. 
+- It should receive an array of bytes whose length is at most 128 bytes, which it then stores under the `baseEvent` storage key of the Bridge contract. 
 - If there is an already existing value under the `baseEvent` storage key of the Bridge contract, it will be overriden by the new value.
 
 **Method signature:**
@@ -110,7 +110,7 @@ function getSuperEvent() public view returns (bytes memory);
 A method will be added to allow the Union Bridge contract address to set the current `super event` value in storage. 
 
 - If the caller is not the Union Bridge contract address then it should revert.
-- It should receive a non-empty array of bytes whose length is at most 128 bytes, which it then stores under the `superEvent` storage key of the Bridge contract. 
+- It should receive an array of bytes whose length is at most 128 bytes, which it then stores under the `superEvent` storage key of the Bridge contract. 
 - If there is an already existing value under the `superEvent` storage key of the Bridge contract, it will be overriden by the new value.
 
 **Method signature:**
