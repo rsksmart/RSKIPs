@@ -23,18 +23,18 @@ created: 2025-10-10
 
 ## Abstract
 
-This RSKIP extends the BlockHeader precompiled contract [[1]](#references) by adding two new methods to retrieve difficulty-related information from block headers: `getTotalDifficulty` and `getCumulativeDifficulty`. These methods provide access to the total difficulty and cumulative difficulty values for blocks within the accessible depth range.
+This RSKIP extends the BlockHeader precompiled contract [[1]](#references) by adding two new methods to retrieve difficulty-related information from block headers: `getCumulativeWork` and `getDifficultyWithUncles`. The `getCumulativeWork` method provides access to the accumulated difficulty of the blockchain up to a certain block, while `getDifficultyWithUncles` provides the block difficulty plus the difficulty of its uncles, all within the accessible depth range.
 
 ## Motivation
 
-The existing BlockHeader precompiled contract provides access to various block header fields, including RSK difficulty through the `getRSKDifficulty` method. However, it lacks access to total difficulty and cumulative difficulty values.
+The existing BlockHeader precompiled contract provides access to various block header fields, including RSK difficulty through the `getRSKDifficulty` method. However, it lacks access to accumulated blockchain work and block difficulty with uncles, which are essential for security analysis, network health monitoring, mining pool analysis, and building sophisticated smart contracts that need to analyze network security, mining activity, and consensus mechanisms.
 
 ## Specification
 
 This RSKIP adds two new methods to the existing BlockHeader precompiled contract at address `0x0000000000000000000000000000000001000010`:
 
-- `getTotalDifficulty(uint256 blockDepth) returns (bytes)`
-- `getCumulativeDifficulty(uint256 blockDepth) returns (bytes)`
+- `getCumulativeWork(uint256 blockDepth) returns (bytes)`
+- `getDifficultyWithUncles(uint256 blockDepth) returns (bytes)`
 
 Both methods follow the same validation rules and gas cost structure as the existing methods specified in RSKIP119 [[1]](#references).
 
@@ -51,9 +51,9 @@ If there is no block at the specified depth, an empty byte array is returned.
 
 In case of error, each of these methods behaves as if a solidity `assert` statement was being used. That is, contract state is reverted and all the gas is consumed.
 
-### getTotalDifficulty
+### getCumulativeWork
 
-The method `getTotalDifficulty(uint256 blockDepth) returns (bytes)` takes as input the depth of the block to query and returns a byte array representation of the total cumulative difficulty of the chain up to that block.
+The method `getCumulativeWork(uint256 blockDepth) returns (bytes)` takes as input the depth of the block to query and returns a byte array representation of the total work of the chain up to that block. In blockchain context, "work" refers to the accumulated difficulty of all blocks from genesis up to the specified block, representing the total computational effort required to mine the chain.
 
 #### Validations
 
@@ -65,66 +65,66 @@ This method has a fixed cost of 4,000 gas units. On top of that, normal transact
 
 #### Sample usage
 
-We want to recover the total difficulty for the parent block of the executing block.
+We want to recover the total work for the parent block of the executing block.
 
 ```
-getTotalDifficulty(0)
+getCumulativeWork(0)
 ```
 
-We want to recover the total difficulty for the 2500th block starting at the executing block.
+We want to recover the total work for the 2500th block starting at the executing block.
 
 ```
-getTotalDifficulty(2500)
+getCumulativeWork(2500)
+```
+
+We try to recover the total work for a block beyond the 4000 depth limit. An empty byte array is returned.
+
+```
+getCumulativeWork(5000) => []
+```
+
+We try to recover the total work for a block that is not beyond the 4000 depth limit but still does not exist. An empty byte array is returned.
+
+```
+getCumulativeWork(3500) => []
+```
+
+### getDifficultyWithUncles
+
+The method `getDifficultyWithUncles(uint256 blockDepth) returns (bytes)` takes as input the depth of the block to query and returns a byte array representation of the difficulty of the block itself plus its uncles.
+
+#### Validations
+
+- `blockDepth` must be an unsigned value ranging from 0 to 3999.
+
+#### Gas cost
+
+This method has a fixed cost of 4,000 gas units. On top of that, normal transaction gas costs apply.
+
+#### Sample usage
+
+We want to recover the total difficulty for the parent block of the executing block, plus its uncles difficulty.
+
+```
+getDifficultyWithUncles(0)
+```
+
+We want to recover the total difficulty for the 2500th block starting at the executing block, plus its uncles difficulty.
+
+```
+getDifficultyWithUncles(2500)
 ```
 
 We try to recover the total difficulty for a block beyond the 4000 depth limit. An empty byte array is returned.
 
 ```
-getTotalDifficulty(5000) => []
+getDifficultyWithUncles(5000) => []
 ```
 
 We try to recover the total difficulty for a block that is not beyond the 4000 depth limit but still does not exist. An empty byte array is returned.
 
 ```
-getTotalDifficulty(3500) => []
-```
-
-### getCumulativeDifficulty
-
-The method `getCumulativeDifficulty(uint256 blockDepth) returns (bytes)` takes as input the depth of the block to query and returns a byte array representation of the cumulative difficulty for that block. This is the difficulty of the block itself plus its uncles.
-
-#### Validations
-
-- `blockDepth` must be an unsigned value ranging from 0 to 3999.
-
-#### Gas cost
-
-This method has a fixed cost of 4,000 gas units. On top of that, normal transaction gas costs apply.
-
-#### Sample usage
-
-We want to recover the cumulative difficulty for the parent block of the executing block.
-
-```
-getCumulativeDifficulty(0)
-```
-
-We want to recover the cumulative difficulty for the 2500th block starting at the executing block.
-
-```
-getCumulativeDifficulty(2500)
-```
-
-We try to recover the cumulative difficulty for a block beyond the 4000 depth limit. An empty byte array is returned.
-
-```
-getCumulativeDifficulty(5000) => []
-```
-
-We try to recover the cumulative difficulty for a block that is not beyond the 4000 depth limit but still does not exist. An empty byte array is returned.
-
-```
-getCumulativeDifficulty(3500) => []
+getDifficultyWithUncles(3500) => []
 ```
 
 ## Rationale
