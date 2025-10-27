@@ -53,7 +53,7 @@ In case of error, each of these methods behaves as if a solidity `assert` statem
 
 ### getCumulativeWork
 
-The method `getCumulativeWork(uint256 blockDepth) returns (bytes)` takes as input the depth of the block to query and returns a byte array representation of the total work of the chain up to that block. In blockchain context, "work" refers to the accumulated difficulty of all blocks from genesis up to the specified block, representing the total computational effort required to mine the chain.
+The method `getCumulativeWork(uint256 blockDepth) returns (bytes)` takes as input the depth of the block to query and returns a byte array representation of the total work -considering also the uncles work- of the chain up to that block. In blockchain context, "work" refers to the accumulated difficulty of all blocks from genesis up to the specified block, representing the total computational effort required to mine the chain.
 
 #### Validations
 
