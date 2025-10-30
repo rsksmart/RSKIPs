@@ -28,16 +28,19 @@ This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’
 ## Specification
 
 - Codename: Reed
-- Activation:
+- Block activations for Reed 8.0.0:
 	- Rootstock Mainnet block: 8,052,200
 	- Rootstock Testnet block: 6,835,655
+- Block activations for Reed 8.1.0:
+	- Rootstock Mainnet block: N/A
+	- Rootstock Testnet block: TBD
 
 ### Included RSKIPs
 
 - [RSKIP-305](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP305.md): Peg-out efficiency improvement (Segwit)
 - [RSKIP-516](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP516.md): Precompiled contracts for +/* on Secp256k1
 
-Note: the remaining accepted RSKIPs will be released in a second release on Testnet as explained later in this document. 
+Note: The remaining accepted RSKIPs will be released in a second release on Testnet as explained later in this document. 
 
 ### Accepted RSKIPs
 
@@ -45,6 +48,8 @@ Note: the remaining accepted RSKIPs will be released in a second release on Test
 - [RSKIP-516](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP516.md): Precompiled contracts for +/* on Secp256k1
 - [RSKIP-144](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP144.md): (Testnet-only) Parallel Transaction Execution for the Unitrie (*)
 - [RSKIP-502](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP502.md): (Testnet-only) Union Bridge Integration: New Methods Added to PowPeg Bridge Contract (*)
+- [RSKIP-529](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP529.md): (Testnet-only) New storage cells in Bridge native contract for base and super events info (*)
+- [RSKIP-536](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP536.md): (Testnet-only) Additional methods for the BlockHeader precompiled contract (*)
 
 ### Rejected RSKIPs
 
@@ -56,6 +61,8 @@ No rejected RSKIPs
 - [RSKIP-516](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP516.md): Precompiled contracts for +/* on Secp256k1
 - [RSKIP-144](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP144.md): (Testnet-only) Parallel Transaction Execution for the Unitrie (*)
 - [RSKIP-502](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP502.md): (Testnet-only) Union Bridge Integration: New Methods Added to PowPeg Bridge Contract (*)
+- [RSKIP-529](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP529.md): (Testnet-only) New storage cells in Bridge native contract for base and super events info (*)
+- [RSKIP-536](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP536.md): (Testnet-only) Additional methods for the BlockHeader precompiled contract (*)
 
 ## Two-Phase Rollout Strategy (*)
 
@@ -68,6 +75,7 @@ Reed will be released in two parts, with Testnet-only features included in the s
 - AUG-07-25: Core Devs Community Call covering all RSKIPs proposed. The upgrade proposal is open for comments until August 22nd.
 - AUG-27-25: The upgrade proposal is now closed for comments. Accepted RSKIPs list has been updated.
 - SEP-30-25: Reed successfully activated on Mainnet and Testnet
+- OCT-30-25: In preparation for the second Reed release, RSKIP 502 has been split into RSKIPs 502, 529, and 536, all of which are required to run Union Bridge on Testnet.
 
 ## References
 
