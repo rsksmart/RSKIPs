@@ -12,7 +12,7 @@ description:
 
 |RSKIP          |529           |
 | :------------ |:-------------|
-|**Title**      |Super events |
+|**Title**      |New storage cells in Bridge native contract for base and super events info |
 |**Created**    |26-AUG-25 |
 |**Author**     |MI |
 |**Purpose**    |Sca |
@@ -22,11 +22,13 @@ description:
 
 ## Abstract
 
-To be completed...
+This RSKIP adds new storage cells to the Bridge native contract for storing base and super event information. These storage entries allow the Union Bridge contract to store peg-out event data that can be used for zero-knowledge proofs of cumulative work of the Rootstock chain, enabling more efficient verification of specific peg-out events at a much lower cost than retrieving data from contract storage.
 
 ## Motivation
 
-To be completed...
+RSKIP535 [2](#references) defines how base event information can be stored in the block header extension to enable efficient zero-knowledge proofs of cumulative work. However, for this mechanism to work effectively, the Union Bridge contract needs a way to store and manage the current base and super event data that will be included in block headers.
+
+The Bridge native contract provides persistent storage capabilities to maintain the current state of base and super events. This data is then used by miners to populate the baseEvent field in block headers as specified in RSKIP535, enabling the zero-knowledge proof functionality described in that RSKIP.
 
 ## Specification
 
@@ -60,7 +62,7 @@ A method will be added to allow the Union Bridge contract address to set the cur
 
 - If the caller is not the Union Bridge contract address then it should revert.
 - It should receive an array of bytes whose length is at most 128 bytes, which it then stores under the `baseEvent` storage key of the Bridge contract. 
-- If there is an already existing value under the `baseEvent` storage key of the Bridge contract, it will be overriden by the new value.
+- If there is an already existing value under the `baseEvent` storage key of the Bridge contract, it will be overridden by the new value.
 
 **Method signature:**
 
@@ -111,7 +113,7 @@ A method will be added to allow the Union Bridge contract address to set the cur
 
 - If the caller is not the Union Bridge contract address then it should revert.
 - It should receive an array of bytes whose length is at most 128 bytes, which it then stores under the `superEvent` storage key of the Bridge contract. 
-- If there is an already existing value under the `superEvent` storage key of the Bridge contract, it will be overriden by the new value.
+- If there is an already existing value under the `superEvent` storage key of the Bridge contract, it will be overridden by the new value.
 
 **Method signature:**
 
@@ -134,11 +136,26 @@ function clearSuperEvent() public;
 
 ## Rationale
 
-Discuss design decisions, community debates and possible attacks.
+The design decisions for this RSKIP are based on the following considerations:
+
+### Storage Design
+**128-byte size limitation**: This limit prevents excessive storage usage while accommodating typical peg-out event data. It also prevents potential DoS attacks through large data storage and keeps gas costs predictable.
+
+### Access Control
+**Union Bridge contract-only writes**: Restricting write access to the Union Bridge contract address ensures data integrity and prevents unauthorized modifications. This follows the principle of least privilege and maintains the security model of the bridge system.
+
+**Public read access**: Allowing anyone to read the event data enables transparency and supports the zero-knowledge proof mechanisms described in RSKIP535.
+
+### Backwards Compatibility
+**Non-intrusive design**: The new storage cells do not interfere with existing Bridge contract functionality, ensuring smooth upgrades and maintaining existing bridge operations.
+
+**Optional usage**: The storage cells can be used independently, allowing for gradual adoption and testing without breaking existing systems.
 
 ## References
 
 [1] [RSKIP502](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP502.md): PowPeg and Union Bridge integration  
+
+[2] [RSKIP535](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP535.md): Add the baseEvent field to the Block header extension  
 
 
 ### Copyright
