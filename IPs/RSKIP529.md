@@ -26,9 +26,9 @@ This RSKIP adds new storage cells to the Bridge native contract for storing base
 
 ## Motivation
 
-RSKIP535 [2](#references) defines how base event information can be stored in the block header extension to enable efficient zero-knowledge proofs of cumulative work. However, for this mechanism to work effectively, the Union Bridge contract needs a way to store and manage the current base and super event data that will be included in block headers.
+RSKIP535 [[2]](#references) defines how base event information can be stored in the block header extension to enable efficient zero-knowledge proofs of cumulative work. However, for this mechanism to work effectively, the Union Bridge contract needs a way to store and manage the current base and super event data that will be included in block headers.
 
-The Bridge native contract provides persistent storage capabilities to maintain the current state of base and super events. As described in RSKIP535 [2](#references), this data is then used by miners to populate the baseEvent field in block headers, enabling the zero-knowledge proof functionality.
+The Bridge native contract provides persistent storage capabilities to maintain the current state of base and super events. As described in RSKIP535 [[2]](#references), this data is then used by miners to populate the baseEvent field in block headers, enabling the zero-knowledge proof functionality.
 
 ## Specification
 
