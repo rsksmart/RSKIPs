@@ -12,15 +12,15 @@ created: 2025-10-08
 
 ## Abstract
 
-This RSKIP adds a new field `baseEvent`  to the Rootstock Block header, according to the rules of [RSKIP 194](./RSKIP194). The new field can be used by a new bridge to store peg-out information and allow proving a chain in zero knowledge at a much lower cost than retrieving it from contract storage. 
+This RSKIP adds a new field `baseEvent`  to the Rootstock Block header, according to the rules of [RSKIP 194](./RSKIP194.md). The new field can be used by a new bridge to store peg-out information and allow proving a chain in zero knowledge at a much lower cost than retrieving it from contract storage. 
 
 ## Motivation
 
-[RSKIP 194](./RSKIP194) proposes a modification in the block header to allow extending the block header without interfering with the PowHSMs.
+[RSKIP 194](./RSKIP194.md) proposes a modification in the block header to allow extending the block header without interfering with the PowHSMs.
 
-[RSKIP 144](./RSKIP144) adds a new field to the header called `txExecutionSublistsEdges`. 
+[RSKIP 144](./RSKIP144.md) adds a new field to the header called `txExecutionSublistsEdges`. 
 
-[RSKIP 351](./RSKIP351) indicates how this field is appended to the extension data.
+[RSKIP 351](./RSKIP351.md) indicates how this field is appended to the extension data.
 
 This RSKIP add one additional field `baseEvent` to the block header extension , and also redefines the version number to 2 such that both `txExecutionSublistsEdges` and `baseEvent` fields can be included.
 
