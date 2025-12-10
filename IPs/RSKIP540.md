@@ -22,7 +22,7 @@ description:
 
 ## Abstract
 
-This RSKIP proposes improvements to the `getEstimatedFeesForNextPegOutEvent()` Bridge method and introduces a new method `getEstimatedFeesForPegOutAmount()` that allows users to estimate fees for a specific peg-out amount. The improvement changes how the extra peg-out output is calculated in the fee estimation, using the minimum peg-out value. Note that these methods return estimates based on the current state of the Bridge and are not guaranteed to match the actual fees charged when the peg-out event occurs.
+This RSKIP proposes improvements to the `getEstimatedFeesForNextPegOutEvent()` Bridge method and introduces a new method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis)` that allows users to estimate fees for a specific peg-out amount. The improvement changes how the extra peg-out output is calculated in the fee estimation, using the minimum peg-out value. Note that these methods return estimates based on the current state of the Bridge and are not guaranteed to match the actual fees charged when the peg-out event occurs.
 
 ## Motivation
 
@@ -30,7 +30,7 @@ As described in RSKIP271 [[1]](#references) and RSKIP385 [[2]](#references), the
 
 Currently, the implementation uses 1 BTC as the amount for this hypothetical peg-out request. This value may not accurately represent typical user transactions, especially for smaller peg-outs. Using the minimum peg-out value instead provides a more conservative and realistic fee estimation that works for all valid peg-out amounts, ensuring users receive accurate estimates regardless of the amount they intend to peg-out.
 
-Additionally, users currently cannot estimate fees for a specific peg-out amount they intend to perform. A new method `getEstimatedFeesForPegOutAmount()` would allow users to query the estimated fees for their specific peg-out amount, providing better user experience and more accurate fee predictions. It is important to note that these estimates are based on the current state of the Bridge and may differ from actual fees due to changes in UTXO availability, peg-out requests state, or fee configuration.
+Additionally, users currently cannot estimate fees for a specific peg-out amount they intend to perform. A new method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis)` would allow users to query the estimated fees for their specific peg-out amount, providing better user experience and more accurate fee predictions. It is important to note that these estimates are based on the current state of the Bridge and may differ from actual fees due to changes in UTXO availability, peg-out requests state, or fee configuration.
 
 ## Specification
 
@@ -39,7 +39,7 @@ Additionally, users currently cannot estimate fees for a specific peg-out amount
 The method `getEstimatedFeesForNextPegOutEvent()` should be modified so that when building the peg-out transaction and adding the extra hypothetical peg-out request, it uses the minimum peg-out value instead of 1 BTC.
 
 The method signature remains unchanged:
-```
+```solidity
 function getEstimatedFeesForNextPegOutEvent() public view returns (uint256);
 ```
 
@@ -53,23 +53,23 @@ function getEstimatedFeesForNextPegOutEvent() public view returns (uint256);
 - It adds an extra peg-out request for the minimum peg-out value (as defined in RSKIP219 [[3]](#references)) instead of 1 BTC
 - Returns the estimated fees for this transaction
 
-### 2. New method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmount)`
+### 2. New method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis)`
 
-A new method is added that allows users to estimate fees for a specific peg-out amount. This method builds a peg-out transaction similar to `getEstimatedFeesForNextPegOutEvent()` but uses the provided `pegOutAmount` parameter for the hypothetical peg-out request.
+A new method is added that allows users to estimate fees for a specific peg-out amount. This method builds a peg-out transaction similar to `getEstimatedFeesForNextPegOutEvent()` but uses the provided `pegOutAmountInWeis` parameter for the hypothetical peg-out request.
 
 **Method signature:**
-```
-function getEstimatedFeesForPegOutAmount(uint256 pegOutAmount) public view returns (uint256);
+```solidity
+function getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis) public view returns (uint256);
 ```
 
 **Behavior:**
 - This method builds a peg-out transaction using available UTXOs in the Bridge and current peg-out requests
-- It adds an extra peg-out request using the provided `pegOutAmount` parameter as the amount
+- It adds an extra peg-out request using the provided `pegOutAmountInWeis` parameter as the amount
 - Returns the estimated fees for this transaction
-- The `pegOutAmount` parameter must be greater than or equal to the minimum peg-out value as defined in RSKIP219 [[3]](#references)
+- The `pegOutAmountInWeis` parameter must be expressed in weis
 
 **Validation:**
-- The `pegOutAmount` parameter must be greater than or equal to the minimum peg-out value
+- The `pegOutAmountInWeis` parameter must be greater than or equal to the minimum peg-out value as defined in RSKIP219 [[3]](#references)
 - If the validation fails, the method should revert with an appropriate error message
 
 ### Important Note on Fee Estimation Accuracy
@@ -93,16 +93,12 @@ Using the minimum peg-out value instead of 1 BTC for the hypothetical peg-out re
 - **Conservative approach**: Using the minimum ensures the fee estimate works for all valid peg-out amounts
 - **Better UX**: Users performing small peg-outs will receive more accurate fee estimates
 
-### New Method `getEstimatedFeesForPegOutAmount()`
+### New Method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis)`
 
-The new method `getEstimatedFeesForPegOutAmount()` addresses the limitation where users cannot estimate fees for their specific peg-out amount. This provides:
+The new method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis)` addresses the limitation where users cannot estimate fees for their specific peg-out amount. This provides:
 - **Better accuracy**: Users can get fee estimates tailored to their specific transaction amount
 - **Improved UX**: Users can compare fees for different peg-out amounts before submitting their request
 - **Flexibility**: Enables applications and wallets to provide more accurate fee predictions to users
-
-### Backwards Compatibility
-
-The modification to `getEstimatedFeesForNextPegOutEvent()` maintains the same method signature, ensuring backwards compatibility with existing code that calls this method. The behavior change is an improvement that provides more accurate fee estimates, especially for smaller peg-out amounts.
 
 ## Backwards Compatibility
 
@@ -110,11 +106,11 @@ This change is a hard fork and therefore all full nodes must be updated.
 
 The modification to `getEstimatedFeesForNextPegOutEvent()` changes its behavior but maintains the same method signature, so existing contracts and applications calling this method will continue to work, though they will receive different (more accurate) fee estimates.
 
-The new method `getEstimatedFeesForPegOutAmount()` is an addition and does not affect existing functionality.
+The new method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis)` is an addition and does not affect existing functionality.
 
 ## Security Considerations
 
-No new security issues were identified related to this RSKIP. The new method `getEstimatedFeesForPegOutAmount()` includes validation to ensure the peg-out amount meets the minimum requirements, preventing invalid fee calculations.
+No new security issues were identified related to this RSKIP. The new method `getEstimatedFeesForPegOutAmount(uint256 pegOutAmountInWeis)` includes validation to ensure the peg-out amount meets the minimum requirements, preventing invalid fee calculations.
 
 Applications and users should be aware that the fee estimates returned by these methods are not guaranteed and may differ from actual fees due to changing conditions (UTXO availability, peg-out requests, fee configuration) between estimation and execution. This is expected behavior and not a security issue, but applications should handle potential fee discrepancies appropriately.
 
