@@ -1,5 +1,5 @@
 ---
-rskip: TBD
+rskip: 543
 title: Implement EIP-2718 Style Typed Transactions in Rootstock
 description: Introduce Ethereum style transaction versioning
 status: Draft
@@ -11,7 +11,7 @@ created: 2026-01-05
 ---
 # Implement EIP-2718 Typed Transactions in Rootstock
 
-| RSKIP | TBD |
+| RSKIP | 543 |
 | --- | --- |
 | **Title** | Implement EIP-2718 Typed Transactions in Rootstock |
 | **Created** | 05-JAN-2026 |
