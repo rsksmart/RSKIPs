@@ -9,10 +9,9 @@ layer: Core
 complexity: 2
 created: 2026-01-05
 ---
-# Implement EIP-2718 Typed Transactions in Rootstock
 
 | RSKIP | 543 |
-| --- | --- |
+| :------------ |:-------------|
 | **Title** | Implement EIP-2718 Typed Transactions in Rootstock |
 | **Created** | 05-JAN-2026 |
 | **Author** | Patricio Gallardo, Shreemoy Mishra |
