@@ -250,7 +250,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 535 |[Add the `baseEvent` field to the Block header extension](IPs/RSKIP535.md)| 08-OCT-2025 | SDL | Sca | Core | 1 | Draft |
 | 536 |[Additional methods for BlockHeader precompiled contract](IPs/RSKIP536.md)| 10-OCT-2025 | MI | Usa | Core | 1 | Draft |
 | 540 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method](IPs/RSKIP540.md)| 04-DEC-2025 | MI | Usa | Core | 1 | Draft |
-
+| 545 |[Implement EIP-7702 Account Abstraction in Rootstock](IPs/RSKIP545.md)| 06-JAN-2026 | PDG, SM, SDL | Sca, Usa | Core | 3 | Draft |
 (*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
