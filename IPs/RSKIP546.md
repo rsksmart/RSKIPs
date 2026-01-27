@@ -1,5 +1,5 @@
 ---
-rskip: pull_request_number_here
+rskip: 546
 title: Implement Transactions and Receipts encoding following Ethereum's Type 1 and Type 2 Envelope formats
 created: 27-JAN-2026
 author: PDG (@patogallaiovlabs), SM (@smishraiov)
@@ -10,7 +10,7 @@ status: Draft
 description: 
 ---
 
-|RSKIP          | TBD          |
+|RSKIP          | 546          |
 | :------------ |:-------------|
 |**Title**      | Implement Transactions and Receipts following Ethereum's Type 1 and Type 2 Envelope formats |
 |**Created**    | 27-JAN-2026 |
