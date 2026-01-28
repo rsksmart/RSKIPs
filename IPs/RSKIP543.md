@@ -64,7 +64,19 @@ Just as now, transaction signatures (when required, e.g. not Remasc) should be c
 
 ### Transaction Receipts
 
-Following EIP-2718, Transaction Receipts should include the transaction’s type. RSKJ already has a type field (currently set to `0x0`).  The value is stored in Transaction Result and Transaction Receipt classes as a string. To be consistent with EIP-2718, this string object is meant to represent an unsigned 8-bit value (though currently there is no check for this). This field can be extended to allow storing values for Rootstock-specific transaction types - which will have the first byte set to `0x02`. For example,  if the type (i.e. 8-bit number) of a Rootstock specific transaction is `3`, then we can store the overall type as `0x0203` .
+EIP-2718 specifies the following for receipts. The receipt root in the block header MUST be the root hash of `Trie(rlp(Index) => Receipt)` where:
+
+* `Index` is the index in the block of the transaction this receipt is for
+* `Receipt` is either `TransactionType || ReceiptPayload` or `LegacyReceipt`
+* `TransactionType` is a positive unsigned 8-bit number between `0` and `0x7f` that represents the type of the transaction
+    * The above restriction may have to be modified to allow for Rootstock-specific transaction types
+* `ReceiptPayload` is byte array whose interpretation is dependent on the `TransactionType` and defined in a RSKIP where such a transaction type is proposed.
+* `LegacyReceipt` is  `rlp([status, cumulativeGasUsed, logsBloom, logs])`
+
+The `TransactionType` of the receipt MUST match the `TransactionType` of the transaction with a matching `Index`.
+
+
+Currently, RSKJ already includes a type field in receipts (currently set to `0x0`).  The value is stored in `TransactionResult` and `TransactionReceipt` classes as a string.
 
 ### Activation
 
