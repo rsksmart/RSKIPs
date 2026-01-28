@@ -36,7 +36,7 @@ The specification is intended to mirror that of [EIP-7702](https://eips.ethereum
 
 ### **Prerequisites**
 
-EIP-7702 has several prerequisites that have not been implemented in Rootstock. Some of them are not strictly necessary for this RSKIP. For example, we do not necessarily require EIP-2929, EIP-2930, EIP-3607, or EIP-4844. However, we do require the implementation of [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) style typed transactions. While transaction versions have not been implemented in Rootstock - *Transaction Receipts* have already been modified to include a “type” field consistent with EIP-2718. We also require [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541) to prevent deployments of contracts that contain deployed bytecode starting with `0xEF`. This is to avoid interference with EIP-7702’s “delegation indicator”. As initial drafts (corresponding to EIP-2718 and EIP-3541) we present the pull requests for [RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543) and [RSKIP-544](https://github.com/rsksmart/RSKIPs/pull/544).
+EIP-7702 has several prerequisites that have not been implemented in Rootstock. Some of them are not strictly necessary for this RSKIP. For example, we do not necessarily require EIP-2929, EIP-2930, EIP-3607, or EIP-4844. However, we do require the implementation of [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) style typed transactions. While transaction versions have not been implemented in Rootstock - *Transaction Receipts* have already been modified to include a “type” field consistent with EIP-2718. We also require [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541) to prevent deployments of contracts that contain deployed bytecode starting with `0xEF`. This is to avoid interference with EIP-7702’s “delegation indicator”. As initial drafts (corresponding to EIP-2718 and EIP-3541) we present the pull requests for [RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543) and [RSKIP-544](https://github.com/rsksmart/RSKIPs/pull/544). Another helpful proposal [RSKIP-546](https://github.com/rsksmart/RSKIPs/pull/546) introduces Ethereum's Type 1 and Type 2 transaction formats, which contain some fields that are referenced in this RSKIP (e.g. `access_list`, `max_fee_per_gas` and `max_priority_fee_per_gas`).
 
 Todo: if the PRs for new RSKIPs are merged into main, then update the links. 
 
@@ -69,7 +69,7 @@ where
 
 `authorization_list = [[chain_id, address, nonce, y_parity, r, s], ...]`
 
-and this is described more fully below.  Note that the transaction payload includes fields that do not currently exist on Rootstock. This includes the fields `max_priority_fee_per_gas` and  `max_fee_per_gas` from EIP-1559 and `access_list` from EIP-2930. These field names are retained to ensure compatibility for preexisting wallet software and tooling in use in Ethereum. The `access_list` can simply be ignored by RSKJ - at least initially. The gas fee variables (`max_priority_fee_per_gas`,  `max_fee_per_gas`) can be reinterpreted internally in terms of `gasprice` and `minimumGasPrice`. 
+and this is described more fully below.  Note that the transaction payload includes fields that do not currently exist on Rootstock. This includes the fields `max_priority_fee_per_gas` and  `max_fee_per_gas` from EIP-1559 and `access_list` from EIP-2930. These field names are retained to ensure compatibility for preexisting wallet software and tooling in use in Ethereum. The `access_list` can simply be ignored. The transaction's `gasPrice` can be set to the lower of `max_priority_fee_per_gas` and  `max_fee_per_gas`. Of course, all of the fields have to be used when validating the transaction's signature.
 
 Following EIP-7702, a null destination is not valid for the set-code transaction. Thus, it cannot be used for contract creation. The original EIP also prohibits the use of this transaction for EIP-4844 style blobs. Since Rootstock currently has no implementation for Ethereum’s blob-carrying transactions, this restriction is currently moot. However, we leave this remark here for future reference in case there is a RSKIP to implement a system similar to EIP-4844.
 
@@ -90,7 +90,7 @@ tuple cannot fit within the following bounds:
  assert auth.s < 2**256` 
 
 The  `ReceiptPayload` (expected to be in EIP-2718 format) for this transaction is
-`rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`.
+`rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. So the overall EIP-2718 encoding for the receipt is `04 || rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`
 
 ### Behavior
 
