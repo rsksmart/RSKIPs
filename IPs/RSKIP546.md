@@ -22,7 +22,7 @@ description:
 
 ## Abstract
 
-This is a proposal to support Ethereum's Type 1 and Type 2 formatted transactions in Rootstock. Apart from the new (EIP-2718 based) encodings for transactions and receipts, this proposal does not introduce any other changes to Rootstock's consensus rules. In particular, neither "Access Lists" (EIP-2930) nor "Dynamic GasPrice" parameters (EIP-1559) will be implemented. Transactions encoded in these new formats will be executed in the same way as legacy transactions. Access Lists, if provided, will not be used in the EVM, but will result in additional gas fees. For Type 2 transactions, the lower of the two EIP-1559 gas price fields will be used as the transaction’s effective gas price.
+This is a proposal to support Ethereum's Type 1 and Type 2 formatted transactions in Rootstock. Apart from the new (EIP-2718 based) encodings for transactions and receipts, this proposal does not introduce any other changes to Rootstock's consensus rules. In particular, neither "Access Lists" (EIP-2930) nor "Dynamic GasPrice" parameters (EIP-1559) will be implemented. Transactions encoded in these new formats will be executed in the same way as legacy transactions. Access Lists, if provided, will not be used in the EVM, but will result in additional gas fees  as specified below. For Type 2 transactions, the lower of the two EIP-1559 gas price fields will be used as the transaction’s effective gas price.
 
 ## Motivation
 
@@ -56,7 +56,18 @@ The EIP-2718 TransactionPayload for this transaction type is `rlp([chain_id, non
 
 The `signature_y_parity`, `signature_r`, `signature_s` elements of this transaction represent a secp256k1 signature over `keccak256(0x02 || rlp([chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, destination, amount, data, access_list]))`.
 
-Unlike Ethereum, Rootstock does not support the dynamic fee market of EIP-1559 and there is no Base Fee to burn. One of `maxPriorityFeePerGas` and `maxFeePerGas` fields, whichever is lower, will become the effective gas price for this transaction. This is what the `GASPRICE` opcode (`0x3a`) will return in the context of this transaction.
+In Ethereum, under EIP-1559 rules, a transaction’s effective gasprice is computed based on a BaseFee (which is burnt). Block producers only get the “priority fee” component. The priority fee for a transaction is computed as below (which is copied from EIP-1559).
+
+```
+# From https://eips.ethereum.org/EIPS/eip-1559
+# priority fee is capped because the base fee is filled first
+
+priority_fee_per_gas = min(transaction.max_priority_fee_per_gas, transaction.max_fee_per_gas - block.base_fee_per_gas)
+
+#Note: in Rootstock, there is no base_fee_per_gas
+```
+
+Unlike Ethereum, Rootstock does not support the dynamic fee market of EIP-1559. The “Base Fee” is effectively zero. Therefore, in Rootstock,  one of `maxPriorityFeePerGas` or `maxFeePerGas` fields, whichever is lower, will become the effective gas price for this transaction. This is what the `GASPRICE` opcode (`0x3a`) will return in the context of this transaction.
 
 The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. Thus, the full receipt will be `02 || ReceiptPayload`.
 
