@@ -1,5 +1,5 @@
 ---
-rskip: TBD
+rskip: 544
 title: Reject new contract code starting with the `0xEF` byte
 description: Implements EIP-3541
 status: Draft
@@ -10,7 +10,7 @@ complexity: 1
 created: 2026-01-05
 ---
 
-| RSKIP | TBD |
+| RSKIP | 544 |
 | --- | --- |
 | **Title** | Reject new contract code starting with the `0xEF` byte|
 | **Created** | 05-JAN-2026 |
