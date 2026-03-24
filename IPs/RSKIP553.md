@@ -32,7 +32,11 @@ This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’
 
 ### Included RSKIPs
 
+No included RSKIPs
+
 ### Accepted RSKIPs
+
+No accepted RSKIPs
 
 ### Rejected RSKIPs
 
