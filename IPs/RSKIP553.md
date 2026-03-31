@@ -36,7 +36,12 @@ No included RSKIPs
 
 ### Accepted RSKIPs
 
-No accepted RSKIPs
+- [RSKIP-535](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP535.md): (Testnet-only) Add the baseEvent field to the Block header extension
+- [RSKIP-536](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP536.md): (Mainnet-only) Additional methods for the BlockHeader precompiled contract
+- [RSKIP-540](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP540.md): Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method
+- [RSKIP-544](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP544.md): Reject new contract code starting with the `0xEF` byte
+- [RSKIP-551](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP551.md): Deprecate RSKIP-459
+- [RSKIP-552](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP552.md): Improve Blake2F input validation
 
 ### Rejected RSKIPs
 
