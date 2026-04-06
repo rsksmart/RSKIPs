@@ -16,8 +16,8 @@ This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’
 
 - Codename: Vetiver
 - Block activations for Vetiver 9.0.0:
-	- Rootstock Mainnet block: TBD
-	- Rootstock Testnet block: TBD
+	- Rootstock Mainnet block: 8,804,200
+	- Rootstock Testnet block: 7,604,200
 
 ### Included RSKIPs
 
@@ -54,6 +54,7 @@ No rejected RSKIPs
 
 - MAR-23-26: RSKIP created with an initial list of proposed RSKIPs
 - APR-06-26: Update to reflect RSKIPs included in Vetiver
+- APR-06-26: Activation heights for Mainnet and Testnet defined
 
 ## References
 
