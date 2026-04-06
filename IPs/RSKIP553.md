@@ -1,14 +1,3 @@
----
-rskip: 553
-title: Network Upgrade - Vetiver
-description: 
-status: Draft
-purpose: Usa, Sca, Sec
-author: AE
-layer: Core
-complexity: 2
-created: 2026-03-23
----
 # Network Upgrade: Vetiver
 
 |RSKIP          | 553                        |
@@ -32,7 +21,12 @@ This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’
 
 ### Included RSKIPs
 
-No included RSKIPs
+- [RSKIP-535](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP535.md): (Testnet-only) Add the baseEvent field to the Block header extension
+- [RSKIP-536](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP536.md): (Mainnet-only) Additional methods for the BlockHeader precompiled contract
+- [RSKIP-540](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP540.md): Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method
+- [RSKIP-544](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP544.md): Reject new contract code starting with the `0xEF` byte
+- [RSKIP-551](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP551.md): Deprecate RSKIP-459
+- [RSKIP-552](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP552.md): Improve Blake2F input validation
 
 ### Accepted RSKIPs
 
@@ -59,6 +53,7 @@ No rejected RSKIPs
 ## Timeline
 
 - MAR-23-26: RSKIP created with an initial list of proposed RSKIPs
+- APR-06-26: Update to reflect RSKIPs included in Vetiver
 
 ## References
 
