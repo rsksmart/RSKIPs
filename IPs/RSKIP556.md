@@ -1,5 +1,5 @@
 ---
-rskip: 556
+rskip: 558
 title: Blob Carrying Transactions (EIP-4418)
 created: 10-APR-2026
 author: SM (@smishraiov)
@@ -10,7 +10,7 @@ status: Draft
 description: Blob transactions for ephemeral data storage
 ---
 
-|RSKIP          |556           |
+|RSKIP          |558           |
 | :------------ |:-------------|
 |**Title**      |Blob Carrying Transactions (EIP-4418) |
 |**Created**    |APR-10-2026 |
