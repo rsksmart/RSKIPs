@@ -54,6 +54,8 @@ The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulativeGa
 
 The EIP-2718 TransactionPayload for this transaction type is `rlp([chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, destination, amount, data, access_list, signature_y_parity, signature_r, signature_s])`.
 
+Note that the names of the signature fields above differ slightly from those in Type 1 transaction. This inconsistency is a result of following the notation and text from the original EIPs. There are similar inconsisenties in the names of signature fields for legacy transactions (in EIP-2718) and also in Type 4 transactions (in EIP-7702). Implementations, of course, should be careful to use consistent field names.
+
 The `signature_y_parity`, `signature_r`, `signature_s` elements of this transaction represent a secp256k1 signature over `keccak256(0x02 || rlp([chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, destination, amount, data, access_list]))`.
 
 In Ethereum, under EIP-1559 rules, a transaction’s effective gasprice is computed based on a BaseFee (which is burnt). Block producers only get the “priority fee” component. The priority fee for a transaction is computed as below (which is copied from EIP-1559).
