@@ -1,18 +1,8 @@
----
-rskip: 558
-title: Blob Carrying Transactions (EIP-4418)
-created: 10-APR-2026
-author: SM (@smishraiov)
-purpose: Sca,Usa
-layer: Core
-complexity: 3
-status: Draft
-description: Blob transactions for ephemeral data storage
----
+# RSKIP-558: Blob Carrying Transactions (EIP-4844)
 
 |RSKIP          |558           |
 | :------------ |:-------------|
-|**Title**      |Blob Carrying Transactions (EIP-4418) |
+|**Title**      |Blob Carrying Transactions (EIP-4844) |
 |**Created**    |APR-10-2026 |
 |**Author**     |SM |
 |**Purpose**    |Sca,Usa |
