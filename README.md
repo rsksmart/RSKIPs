@@ -255,6 +255,9 @@ You can find an easily browseable version of this information [here](https://ips
 | 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Draft |
 | 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Draft |
 | 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Draft |
+| 545 |[Implement EIP-7702 Account Abstraction in Rootstock](IPs/RSKIP545.md)| 06-JAN-2026 | PDG, SM, SDL | Sca, Usa | Core | 3 | Draft |
+
+(*) Under evaluation to be implemented in the next reference client release
 
 # Author Index
 
