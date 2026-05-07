@@ -54,8 +54,6 @@ The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulativeGa
 
 The EIP-2718 TransactionPayload for this transaction type is `rlp([chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, destination, amount, data, access_list, signature_y_parity, signature_r, signature_s])`.
 
-Note that the names of the signature fields above differ slightly from those in Type 1 transaction. This inconsistency is a result of following the notation and text from the original EIPs. There are similar inconsisenties in the names of signature fields for legacy transactions (in EIP-2718) and also in Type 4 transactions (in EIP-7702). Implementations, of course, should be careful to use consistent field names.
-
 The `signature_y_parity`, `signature_r`, `signature_s` elements of this transaction represent a secp256k1 signature over `keccak256(0x02 || rlp([chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, destination, amount, data, access_list]))`.
 
 In Ethereum, under EIP-1559 rules, a transaction’s effective gasprice is computed based on a BaseFee (which is burnt). Block producers only get the “priority fee” component. The priority fee for a transaction is computed as below (which is copied from EIP-1559).
@@ -71,8 +69,12 @@ priority_fee_per_gas = min(transaction.max_priority_fee_per_gas, transaction.max
 
 Unlike Ethereum, Rootstock does not support the dynamic fee market of EIP-1559. The “Base Fee” is effectively zero. Therefore, in Rootstock,  one of `maxPriorityFeePerGas` or `maxFeePerGas` fields, whichever is lower, will become the effective gas price for this transaction. This is what the `GASPRICE` opcode (`0x3a`) will return in the context of this transaction.
 
-The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. Thus, the full receipt will be `02 || ReceiptPayload`.
+The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. Thus, the full receipt will be `02 || ReceiptPayload`. 
 
+
+### Inconsistencies in Field Names
+
+Note that the names of several fields differ across the different transaction types. For example, `to` and `value` fields from legacy transactions (and type 1) become `destination` and `amount` respectively in Type 2 transactions. There are also inconsistencies in the signature fields (`yParity`, `r`, `s` in legacy (EIP-2718) vs `signatureYParity`, `signatureR`, `signatureS` in type 2). Minor differences show up in the names of receipt fields as well, such as `cumulativeGasUsed` vs `cumulative_transaction_gas_used`. These inconsistencies are a result of following the notation and text from the original EIPs. Implementers should use field names consistently.
 
 ### Transaction Normalization and Additional Gas
 
