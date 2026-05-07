@@ -1,3 +1,14 @@
+---
+rskip: 553
+title: Network Upgrade: Vetiver
+created: 23-MAR-26
+author: AE
+purpose: Usa, Sca, Sec
+layer: Core
+complexity: 2
+status: Draft
+---
+
 # Network Upgrade: Vetiver
 
 |RSKIP          | 553                        |
