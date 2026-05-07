@@ -10,6 +10,7 @@ status: Adopted
 ---
 
 # Network Upgrade: Vetiver
+
 ## Abstract
 This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’s upcoming network upgrade, codenamed Vetiver. Some of the proposed RSKIPs, if ultimately approved, are intended to activate initially only on the Rootstock Testnet as part of an incremental rollout strategy. This approach allows them to be validated in a less critical environment before deployment on Mainnet. These RSKIPs are marked below as (Testnet only). Additionally, some RSKIPs that were already activated on Testnet in previous network upgrades are now being proposed for activation on Mainnet. These RSKIPs are marked below as (Mainnet only).
 ## Specification
