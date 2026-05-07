@@ -1,14 +1,4 @@
----
-rskip: 551
-title: Deprecate RSKIP459
-created: 18-MAR-26
-author: MI
-purpose: Usa
-layer: Core
-complexity: 1
-status: Draft
-description: 
----
+# Deprecate RSKIP459
 
 |RSKIP          |551           |
 | :------------ |:-------------|
@@ -18,7 +8,7 @@ description:
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 

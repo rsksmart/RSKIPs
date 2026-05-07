@@ -1,15 +1,4 @@
----
-rskip: 540
-title: Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method
-created: 04-DEC-25
-author: MI
-purpose: Usa
-layer: Core
-complexity: 1
-status: Draft
-description: 
----
-
+# Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method
 |RSKIP          |540           |
 | :------------ |:-------------|
 |**Title**      |Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method |
@@ -18,7 +7,7 @@ description:
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 

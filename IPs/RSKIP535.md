@@ -1,7 +1,7 @@
 ---
 rskip: 535
 title: Add the baseEvent field to the Block header extension
-status: Draft
+status: Adopted (Testnet)
 purpose: Sca
 author: SDL
 layer: Core
