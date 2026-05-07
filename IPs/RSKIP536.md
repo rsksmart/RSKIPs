@@ -1,14 +1,15 @@
-# Additional methods for BlockHeader precompiled contract
+---
+rskip: 536
+title: "Additional methods for BlockHeader precompiled contract"
+created: 10-OCT-25
+author: MI
+purpose: Usa
+layer: Core
+complexity: 1
+status: Adopted
+---
 
-|RSKIP          |536 |
-| :------------ |:------------- |
-|**Title**      |Additional methods for BlockHeader precompiled contract |
-|**Created**    |10-OCT-25 |
-|**Author**     |MI |
-|**Purpose**    |Usa |
-|**Layer**      |Core |
-|**Complexity** |1 |
-|**Status**     |Adopted |
+# Additional methods for BlockHeader precompiled contract
 
 ## Abstract
 

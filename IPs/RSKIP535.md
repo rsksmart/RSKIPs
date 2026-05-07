@@ -10,6 +10,8 @@ requires: 144, 194,351
 created: 2025-10-08
 ---
 
+# Add the baseEvent field to the Block header extension
+
 ## Abstract
 
 This RSKIP adds a new field `baseEvent`  to the Rootstock Block header, according to the rules of [RSKIP 194](./RSKIP194.md). The new field can be used by a new bridge to store peg-out information and allow proving a chain in zero knowledge at a much lower cost than retrieving it from contract storage. 

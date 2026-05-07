@@ -1,14 +1,15 @@
-# Improve Blake2F Input Validation
+---
+rskip: 552
+title: "Improve Blake2F input validation"
+created: 16-MAR-26
+author: FML
+purpose: Sec
+layer: Core
+complexity: 1
+status: Adopted
+---
 
-|RSKIP          | 552                                          |
-| :------------ |:---------------------------------------------|
-|**Title**      | Improve Blake2F Input Validation              |
-|**Created**    | 16-MAR-26                                    |
-|**Author**     | FML                                          |
-|**Purpose**    | Sec                                          |
-|**Layer**      | Core                                         |
-|**Complexity** | 1                                            |
-|**Status**     | Adopted                                      |
+# Improve Blake2F Input Validation
 
 ## Abstract
 
