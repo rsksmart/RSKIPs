@@ -6,7 +6,7 @@ author: AE
 purpose: Usa, Sca, Sec
 layer: Core
 complexity: 2
-status: Draft
+status: Adopted
 ---
 
 # Network Upgrade: Vetiver

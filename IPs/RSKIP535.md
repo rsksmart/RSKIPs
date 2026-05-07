@@ -1,7 +1,7 @@
 ---
 rskip: 535
 title: Add the baseEvent field to the Block header extension
-status: Draft
+status: Adopted (Testnet)
 purpose: Sca
 author: SDL
 layer: Core
@@ -9,6 +9,8 @@ complexity: 1
 requires: 144, 194,351
 created: 2025-10-08
 ---
+
+# Add the baseEvent field to the Block header extension
 
 ## Abstract
 
