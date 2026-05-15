@@ -99,19 +99,20 @@ The authorization list is processed before the execution portion of the transact
 For each `[chain_id, address, nonce, y_parity, r, s]` tuple, perform the
 following:
 
-1. Verify the chain ID is 30 or 31, the ID of the current chain. A chain ID of 0 can be used to indicate universal cross-chain deployment.
-2. Let `authority = ecrecover(msg, y_parity, r, s)`.
+1. Verify the chain ID is 0 or the ID of the current chain (which for Rootstock can be 30, 31 or 33).
+2. Verify the nonce is less than `2**64 - 1`.
+3. Let `authority = ecrecover(msg, y_parity, r, s)`.
     - Where `msg = keccak(MAGIC || rlp([chain_id, address, nonce]))` and  `MAGIC` is defined above in parameters.
     - Verify `s` is less than or equal to `secp256k1n/2`, as specified in [EIP-2](https://eips.ethereum.org/EIPS/eip-2).
-3. Verify the code of `authority` is empty or already delegated (see *delegation indicator* below).
-4. Verify the nonce of `authority` is equal to `nonce`.
-5. Add `PER_EMPTY_ACCOUNT_COST - PER_AUTH_BASE_COST` gas to the global refund
+4. Verify the code of `authority` is empty or already delegated (see *delegation indicator* below).
+5. Verify the nonce of `authority` is equal to `nonce`.
+6. Add `PER_EMPTY_ACCOUNT_COST - PER_AUTH_BASE_COST` gas to the global refund
 counter if `authority` is not empty.
-6. Set the code of `authority` to be `0xef0100 || address`. This is a delegation
+7. Set the code of `authority` to be `0xef0100 || address`. This is a delegation
 indicator.
     - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator. Clear the account’s code by resetting the account’s code hash to the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`.
     - This indicates that set-code transaction can be used to ‘insert code’ (delegate address, actually) into a pure EOA, to update the account to point to a code in a different delegated address, or to delete delegation entirely in order to reset the account back to a pure EOA.
-7. Increase the nonce of `authority` by one.
+8. Increase the nonce of `authority` by one.
 
 If any step above fails, immediately stop processing the tuple and continue to the next tuple in the list. When multiple tuples from the same authority are present, set the code using the address in the last valid occurrence.
 
