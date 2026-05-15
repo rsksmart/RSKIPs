@@ -3,22 +3,13 @@ rskip: 455
 title: PowPeg migration to multiple outputs
 created: 20-NOV-24
 author: MI
-purpose: Usa
+purpose: Usa, Sca
 layer: Core
 complexity: 1
 status: Draft
-description: 
 ---
 
-|RSKIP          |455           |
-| :------------ |:-------------|
-|**Title**      |PowPeg migration to multiple outputs |
-|**Created**    |20-NOV-24 |
-|**Author**     |MI |
-|**Purpose**    |Usa |
-|**Layer**      |Core |
-|**Complexity** |1 |
-|**Status**     |Draft |
+# PowPeg migration to multiple outputs
 
 ## Abstract
 
@@ -32,16 +23,6 @@ When a PowPeg composition change process is executed, all funds are migrated to 
 
 Update the process of creating the PowPeg composition change migration transaction to include multiple outputs to the new PowPeg address, ensuring that the Bridge has enough UTXOs available to operate normally.
 
-### How many outputs
-
-The Bridge contract creates a single peg-out transaction every 360 Rootstock blocks, this transaction includes all the peg-out requests sent during that period [[2]](#references). Under current network conditions, this is approximately every 3 hours.
-
-After a peg-out transaction is created it requires 4,000 Rootstock blocks to be confirmed and signed, approximately 33 hours. Once the transaction is broadcasted it requires 100 Bitcoin confirmations for the change UTXO to be registered in the Bridge, approximately 16 hours.  Adding these values, we can estimate that after a UTXO is spent in a peg-out transaction it will take approximately 49 hours for the change UTXO to be available in the Bridge to be used for other peg-out transactions.
-
-Considering one peg-out transaction created every 3 hours, in a 49 hour period the Bridge creates approximately 17 peg-out transactions. Estimating 2 inputs per peg-out, the Bridge requires at least 34 UTXOs to function normally and prevent delays in peg-out processing times.
-
-The proposal is that migration transactions include **50 outputs** to the new PowPeg address, to ensure availability for the Bridge to process peg-out requests in time.
-
 ### How many inputs
 
 Current restriction, implemented as part of RSKIP294 [[1]](#references), limits the number of inputs in a migration transaction to **50**. This restriction was part of a limitation of a previous version of the PowHSM firmware. New versions currently in use by the pegnatories no longer have this restriction.
@@ -50,21 +31,42 @@ The new restriction should consider the max standard transaction size accepted b
 
 Considering the current PowPeg redeem script format [[3]](#references), with a max number of 20 members in the multisig and adding the flyover information to the redeem script, then the max number of inputs that a migration transaction with 50 outputs can have is **199**. Evidence has been created for [mainnet](https://mempool.space/tx/035373430d0de72e9bf67d0f715f30489109df4ea8ac3924e00e3e63b00dbe6a) and [testnet](https://mempool.space/testnet/tx/23ce5a3d959e3175b337c4c99511f7f48846569bacd5a94902a88f220c0734cd).
 
-### Minimum split value
+The proposal is to select a maximum of **150 inputs** per migration transaction, increasing the current maximum but staying safely away from the upper limit.
+
+### How many outputs
+
+The Bridge contract creates a single peg-out transaction every 360 Rootstock blocks, this transaction includes all the peg-out requests sent during that period [[2]](#references). Under current network conditions, this is approximately every 3 hours.
+
+After a peg-out transaction is created it requires 4,000 Rootstock blocks to be confirmed and signed, approximately 33 hours. Once the transaction is broadcast it requires 100 Bitcoin confirmations for the change UTXO to be registered in the Bridge, approximately 16 hours. Adding these values, we can estimate that after a UTXO is spent in a peg-out transaction it will take approximately 49 hours for the change UTXO to be available in the Bridge to be used for other peg-out transactions.
+
+Considering one peg-out transaction created every 3 hours, in a 49 hour period the Bridge creates approximately 17 peg-out transactions. Estimating 2 inputs per peg-out, the Bridge requires at least 34 UTXOs to function normally and prevent delays in peg-out processing times.
+
+The proposal is that migration transactions include maximum of **50 outputs** to the new PowPeg address, to ensure availability for the Bridge to process peg-out requests in time.
+
+### Strategy
 
 The current logic in the migration process migrates all existing funds to a single output. As a consequence of this behaviour the Bridge always has one "big UTXO" that is the result of the past migration. Smaller UTXOs are then added as users perform peg-ins, but the "big UTXO" is always present. Sometimes it is spent in peg-out operations and as a result a new "big UTXO" is registered in the Bridge, being the change output of the peg-out.
 
 From the moment the "big UTXO" is used in the creation of a peg-out until the change is registered back, 49 hours will go by approximately. If the migration process is executed during the period where the "big UTXO" is not available, this will result in a split of low value UTXOs.
 
-To prevent this, a new **minimum split value** of **1,000 BTC (one thousand BTC)** is defined. When the migration process is executed, it will check if the sum of the value of all the available UTXOs is above or equal to the **minimum split value**. If `true`, the split logic will be executed. If `false`, then UTXOs are migrated to a single output.
+To prevent this, and other scenarios where the Bridge may have low availability of funds, the following strategy is proposed.
 
-The rationale behind this value is taken from an analysis of the historical amount of BTC locked in Rootstock two-way peg [[4]](#references). A minimum of 1,500 BTC has been locked in the two-way peg since 2021.
+1. Given a threshold T = 20 BTC
+2. Define MAX_INPUTS = 150 inputs in a migration transaction. Select up to 150 UTXOs and include them in a BTC transaction as inputs
+3. Sum up its values, resulting in V
+4. If V < 2T, then the migration is made in a single output
+5. If 2T ≤ V < 50T, then add multiple outputs of 20 BTC until V value is covered. If the remaining value to add is below 20 BTC, add it to the last output
+6. If V ≥ 50T, split the amount into 50 outputs as evenly as possible with sat remainder in the last output
+
+If there are more than 150 UTXOs in the retiring federation or new UTXOs are registered during the migration, the same process should be repeated with the remaining UTXOs until the migration is complete.
+
+The rationale behind these values is taken from an analysis of the historical amount of BTC locked in Rootstock two-way peg [[4]](#references). A minimum of 1,500 BTC has been locked in the two-way peg since 2021.
 
 ### Summary
 
-In summary, migration transactions are limited to **199 inputs** and **50 outputs** to be considered standard by the Bitcoin network and properly mined. These values should be revisited if there is ever a change to the current format of the PowPeg redeem script.
+In summary, migration transactions are limited to **150 inputs** and **50 outputs** to be considered standard by the Bitcoin network and properly mined. These values should be revisited if there is ever a change to the current format of the PowPeg redeem script.
 
-Every time the Bridge has to create a migration transaction, it will select the first 199 UTXOs available using the same sorting mechanism as the one used when creating peg-outs. Next it will check if the total value of the selected UTXOs is above or equal to the **minimum split value**. If `true`, the split logic will be executed. If `false`, then selected UTXOs will be migrated to a single output. If there are more than 199 UTXOs available in the Bridge, then multiple migration transactions will be created as specified in RSKIP294 [[1]](#references). On each migration transaction, the inputs will be split into 50 outputs as long as the total value is >= 1,000 BTC.
+During the migration period, the Bridge will try to migrate available funds on each call to `updateCollections`. Every time there are funds available to migrate, it should follow the steps described in [#Strategy](#strategy) section.
 
 ## Rationale
 
