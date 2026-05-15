@@ -21,15 +21,15 @@ When a PowPeg composition change process is executed, all funds are migrated to 
 
 ## Specification
 
-Update the process of creating the PowPeg composition change migration transaction to include multiple outputs to the new PowPeg address, ensuring that the Bridge has enough UTXOs available to operate normally.
+Change migration transactions so that, during a PowPeg composition change, funds are sent to the new PowPeg address using multiple outputs instead of one, preserving enough UTXOs for normal Bridge operation.
 
 ### How many inputs
 
 Current restriction, implemented as part of RSKIP294 [[1]](#references), limits the number of inputs in a migration transaction to **50**. This restriction was part of a limitation of a previous version of the PowHSM firmware. New versions currently in use by the pegnatories no longer have this restriction.
 
-The new restriction should consider the max standard transaction size accepted by the Bitcoin network. The max standard transaction size defined by Bitcoin is [400,000 weight units](https://github.com/bitcoin/bitcoin/blob/67ea4b9994e668dcea5e5d0f62f886d92e3737dc/src/policy/policy.h#L34C26-L34C48) or [100,000 virtual bytes](https://github.com/bitcoinj/bitcoinj/blob/b2d8af7aad0baff7a4dc2fb9bf67648805327ce7/core/src/main/java/org/bitcoinj/core/Transaction.java#L140), both values representing the same size.
+The new restriction should consider the max standard transaction size accepted by the Bitcoin network. The max standard transaction size defined by Bitcoin is [400,000 weight units](https://github.com/bitcoin/bitcoin/blob/67ea4b9994e668dcea5e5d0f62f886d92e3737dc/src/policy/policy.h#L34C26-L34C48) or [100,000 virtual bytes](https://github.com/bitcoinj/bitcoinj/blob/b2d8af7aad0baff7a4dc2fb9bf67648805327ce7/core/src/main/java/org/bitcoinj/core/Transaction.java#L140). Both values represent the same size.
 
-Considering the current PowPeg redeem script format [[3]](#references), with a max number of 20 members in the multisig and adding the flyover information to the redeem script, then the max number of inputs that a migration transaction with 50 outputs can have is **199**. Evidence has been created for [mainnet](https://mempool.space/tx/035373430d0de72e9bf67d0f715f30489109df4ea8ac3924e00e3e63b00dbe6a) and [testnet](https://mempool.space/testnet/tx/23ce5a3d959e3175b337c4c99511f7f48846569bacd5a94902a88f220c0734cd).
+Considering the current PowPeg redeem script format [[3]](#references), with a max number of 20 members in the multisig and adding the flyover information to the redeem script, the max number of inputs that a migration transaction with 50 outputs can have is **199**. Evidence has been created for [mainnet](https://mempool.space/tx/035373430d0de72e9bf67d0f715f30489109df4ea8ac3924e00e3e63b00dbe6a) and [testnet](https://mempool.space/testnet/tx/23ce5a3d959e3175b337c4c99511f7f48846569bacd5a94902a88f220c0734cd).
 
 The proposal is to select a maximum of **150 inputs** per migration transaction, increasing the current maximum but staying safely away from the upper limit.
 
@@ -41,11 +41,11 @@ After a peg-out transaction is created it requires 4,000 Rootstock blocks to be 
 
 Considering one peg-out transaction created every 3 hours, in a 49 hour period the Bridge creates approximately 17 peg-out transactions. Estimating 2 inputs per peg-out, the Bridge requires at least 34 UTXOs to function normally and prevent delays in peg-out processing times.
 
-The proposal is that migration transactions include maximum of **50 outputs** to the new PowPeg address, to ensure availability for the Bridge to process peg-out requests in time.
+The proposal is that migration transactions include a maximum of **50 outputs** to the new PowPeg address, to ensure availability for the Bridge to process peg-out requests in time.
 
 ### Strategy
 
-The current logic in the migration process migrates all existing funds to a single output. As a consequence of this behaviour the Bridge always has one "big UTXO" that is the result of the past migration. Smaller UTXOs are then added as users perform peg-ins, but the "big UTXO" is always present. Sometimes it is spent in peg-out operations and as a result a new "big UTXO" is registered in the Bridge, being the change output of the peg-out.
+The current logic in the migration process migrates all existing funds to a single output. As a consequence of this behaviour the Bridge always has one "big UTXO" that is the result of the past migration. Smaller UTXOs are then added as users perform peg-ins, but the "big UTXO" is always present. It is frequently spent in peg-out operations and as a result a new "big UTXO" is registered in the Bridge, being the change output of the peg-out.
 
 From the moment the "big UTXO" is used in the creation of a peg-out until the change is registered back, 49 hours will go by approximately. If the migration process is executed during the period where the "big UTXO" is not available, this will result in a split of low value UTXOs.
 
@@ -64,7 +64,7 @@ The rationale behind these values is taken from an analysis of the historical am
 
 ### Summary
 
-In summary, migration transactions are limited to **150 inputs** and **50 outputs** to be considered standard by the Bitcoin network and properly mined. These values should be revisited if there is ever a change to the current format of the PowPeg redeem script.
+In summary, migration transactions are limited to **150 inputs** and **50 outputs** to be considered standard by the Bitcoin network and properly mined. Since these limits depend on the current format of the PowPeg redeem script, they should be revisited if that format ever changes.
 
 During the migration period, the Bridge will try to migrate available funds on each call to `updateCollections`. Every time there are funds available to migrate, it should follow the steps described in [#Strategy](#strategy) section.
 
@@ -74,7 +74,7 @@ During the migration period, the Bridge will try to migrate available funds on e
 
 Considering a typical transaction output for a P2SH address is 32 bytes, including 50 outputs in a migration transaction adds 1,600 bytes to the transaction size. The cost will vary depending on the network fees at the moment the transaction is created. 
 
-## Backwards Compatibility
+## Backward Compatibility
 
 This change is a hard fork and therefore all full nodes must be updated.
 
