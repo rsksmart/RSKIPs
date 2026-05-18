@@ -25,7 +25,7 @@ Change migration transactions so that, during a PowPeg composition change, funds
 
 ### How many inputs
 
-Current restriction, implemented as part of RSKIP294 [[1]](#references), limits the number of inputs in a migration transaction to **50**. This restriction was part of a limitation of a previous version of the PowHSM firmware. New versions currently in use by the pegnatories no longer have this restriction.
+Current restriction, implemented as part of RSKIP294 [[2]](#references), limits the number of inputs in a migration transaction to **50**. This restriction was part of a limitation of a previous version of the PowHSM firmware. New versions currently in use by the pegnatories no longer have this restriction.
 
 The new restriction should consider the max standard transaction size accepted by the Bitcoin network. The max standard transaction size defined by Bitcoin is [400,000 weight units](https://github.com/bitcoin/bitcoin/blob/67ea4b9994e668dcea5e5d0f62f886d92e3737dc/src/policy/policy.h#L34C26-L34C48) or [100,000 virtual bytes](https://github.com/bitcoinj/bitcoinj/blob/b2d8af7aad0baff7a4dc2fb9bf67648805327ce7/core/src/main/java/org/bitcoinj/core/Transaction.java#L140). Both values represent the same size.
 
