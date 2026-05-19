@@ -255,6 +255,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Adopted |
 | 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Adopted |
 | 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Adopted |
+| 566 |[Bridge peg-out change & migration UTXO events](IPs/RSKIP566.md)| 06-MAY-2026 | JT | Usa | Core | 1 | Draft |
 
 # Author Index
 
