@@ -79,15 +79,20 @@ TransactionPayload)`.
 
 The `authorization_list` is a list of tuples that indicate what code the signer of each tuple (signer is called an “authorizer”) desires to execute in the context of their EOA.  A single set-code transaction can therefore be used to set or modify code for multiple EOAs. Each EOA’s authorization is a tuple in the list. While each EOA must sign its own authorization, they need not send their set-code transaction themselves. The owner of an EOA can send their own set code transaction - if they wish. A set-code transaction is invalid if the length of `authorization_list` is zero. 
 
-The set-code transaction is also considered invalid when any field in an authorization
-tuple cannot fit within the following bounds:
+The set-code transaction is also considered invalid when any field in an authorization tuple cannot fit within the following bounds:
 
-`assert auth.chain_id < 2**256
- assert auth.nonce < 2**64 - 1
- assert len(auth.address) == 20
- assert auth.y_parity < 2**8
- assert auth.r < 2**256
- assert auth.s < 2**256` 
+```
+assert auth.chain_id < 2**256
+assert auth.nonce < 2**64
+assert len(auth.address) == 20
+assert auth.y_parity < 2**8
+assert auth.r < 2**256
+assert auth.s < 2**256
+``` 
+
+Note that these initial assertsions are only to ensure the values fit into appropriately-sized unsigned integers (e.g. `uint64` for `nonce`). Additional checks are performed later, for example step 2 (below) ensures an authority's nonce can still be incremented safely without overflowing.
+
+### Transaction Receipt
 
 The  `ReceiptPayload` (expected to be in EIP-2718 format) for this transaction is
 `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. So the overall EIP-2718 encoding for the receipt is `04 || rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`
