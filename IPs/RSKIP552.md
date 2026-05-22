@@ -1,26 +1,15 @@
 ---
 rskip: 552
-title: Improve Blake2F Input Validation
+title: "Improve Blake2F input validation"
 created: 16-MAR-26
-author: FML (@fmacleal)
+author: FML
 purpose: Sec
 layer: Core
 complexity: 1
-status: Draft
-description: Add null-safety checks to Blake2F precompiled contract input handling
+status: Adopted
 ---
 
 # Improve Blake2F Input Validation
-
-|RSKIP          | 552                                          |
-| :------------ |:---------------------------------------------|
-|**Title**      | Improve Blake2F Input Validation              |
-|**Created**    | 16-MAR-26                                    |
-|**Author**     | FML                                          |
-|**Purpose**    | Sec                                          |
-|**Layer**      | Core                                         |
-|**Complexity** | 1                                            |
-|**Status**     | Draft                                        |
 
 ## Abstract
 

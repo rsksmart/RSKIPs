@@ -1,24 +1,15 @@
 ---
 rskip: 544
-title: Reject new contract code starting with the `0xEF` byte
-description: Implements EIP-3541
-status: Draft
+title: "Reject new contract code starting with the 0xEF byte"
+created: 05-JAN-26
+author: PG, SM
 purpose: Usa
-author: PDG (@patogallaiovlabs), SM (@smishraiov)
 layer: Core
 complexity: 1
-created: 2026-01-05
+status: Adopted
 ---
 
-| RSKIP | 544 |
-| --- | --- |
-| **Title** | Reject new contract code starting with the `0xEF` byte|
-| **Created** | 05-JAN-2026 |
-| **Author** | Patricio Gallardo, Shreemoy Mishra |
-| **Purpose** | Usa |
-| **Layer** | Core |
-| **Complexity** | 1 |
-| **Status** | Draft |
+# Reject new contract code starting with the `0xEF` byte
 
 ## Abstract
 
