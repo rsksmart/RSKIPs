@@ -247,16 +247,14 @@ You can find an easily browseable version of this information [here](https://ips
 | 517 |[Block time-centric difficulty adjustment with uncle threshold](IPs/RSKIP517.md)| 29-MAY-2025 | PDG | Sec,Sca | Core | 1 | Draft |
 | 518 |[Network Upgrade: Reed](IPs/RSKIP518.md)| 13-JUN-2025 | AE | Usa, Sca | Core | 3 | Adopted |
 | 529 |[New storage cells in Bridge native contract for base and super events info](IPs/RSKIP529.md)| 26-AUG-2025 | MI | Sca | Core | 1 | Draft |
-| 535 |[Add the `baseEvent` field to the Block header extension](IPs/RSKIP535.md)| 08-OCT-2025 | SDL | Sca | Core | 1 | Draft |
-| 536 |[Additional methods for BlockHeader precompiled contract](IPs/RSKIP536.md)| 10-OCT-2025 | MI | Usa | Core | 1 | Draft |
-| 540 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method](IPs/RSKIP540.md)| 04-DEC-2025 | MI | Usa | Core | 1 | Draft |
+| 535 |[Add the `baseEvent` field to the Block header extension](IPs/RSKIP535.md)| 08-OCT-2025 | SDL | Sca | Core | 1 | Adopted (Testnet) |
+| 536 |[Additional methods for BlockHeader precompiled contract](IPs/RSKIP536.md)| 10-OCT-2025 | MI | Usa | Core | 1 | Adopted |
+| 540 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method](IPs/RSKIP540.md)| 04-DEC-2025 | MI | Usa | Core | 1 | Adopted |
 | 543 |[Implement EIP-2718 Typed Transactions in Rootstock](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
-| 544 |[Reject new contract code starting with the `0xEF` byte](IPs/RSKIP544.md)| 05-JAN-2026 | PDG, SM | Usa | Core | 1 | Draft |
-| 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Draft |
-| 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Draft |
-| 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Draft |
-| 558 |[Blob Carrying Transactions (EIP-4418)](IPs/RSKIP558.md)| 10-APR-2026 | SM | Sca, Usa | Core | 3 | Draft |
-
+| 544 |[Reject new contract code starting with the `0xEF` byte](IPs/RSKIP544.md)| 05-JAN-2026 | PDG, SM | Usa | Core | 1 | Adopted |
+| 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Adopted |
+| 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Adopted |
+| 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Adopted |
 
 # Author Index
 
