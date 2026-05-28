@@ -127,7 +127,20 @@ Those familiar with EIP-4844 will observe there is no “excess blob gas” in h
 
 Commitments have an index (within each block). To obtain the blob commitment root, the commitments can be stored in order as leaf nodes in Rootstock’s Trie data structure without any RLP encoding. If there are no blobs in a block, then the `blob_commitments_root` will be set as  `EMPTY_HASH` for the hash of an [empty trie](https://github.com/rsksmart/rskj/blob/6a4c9a24813e01f938e3074afa3e81163d8b4916/rskj-core/src/main/java/co/rsk/trie/Trie.java#L75), which is the Keccak hash of a RLP encoded  empty byte array.  In Ethereum, blob commitment roots are stored in beacon block headers. In Rootstock, there is no separate consensus chain (or consensus block), these new fields will be added to every Rootstock block once this consensus change becomes effective. 
 
-The addition of the two new fields ( `blob_gas_used` and `blob_commitments_root`) should be done following the same block header extension procedure as was used in [RSKIP-535](./RSKIP535.md) for the `baseEvent` field. A new block header (and header extension) `version` number will be required  - this is currently anticipated to be `0x03`. The receipt format for blob transactions is the same as that for previously introduced typed-transactions (types 1, 2 and 4). Assuming that HSM firmware will be updated to support typed transactions, no additional changes will be needed to HSM firmware.
+The addition of the two new fields ( `blob_gas_used` and `blob_commitments_root`) should be done following the same block header extension procedure as was used in [RSKIP-535](./RSKIP535.md) for the `baseEvent` field. A new block header (and header extension) `version` number will be required  - this is currently anticipated to be `0x03`. 
+
+
+The two fields should be added to the Block Header Extension as follows (version 3):
+    
+```
+blockHeaderExtensionEncoded = RLP(logsBloom, txExecutionSublistsEdges,baseEvent, blob_commitments_root, blob_gas_used)
+
+blockHeaderExtensionHash = Keccak256(RLP(Keccak256(logsBloom), txExecutionSublistsEdges,baseEvent, blob_commitments_root, blob_gas_used))
+```
+
+As in [RSKIP-535](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP535.md), if parallel transaction is not activated, then the value `txExecutionSublistsEdges` is left empty.
+
+The receipt format for blob transactions is the same as that for previously introduced typed-transactions (types 1, 2 and 4). Assuming that HSM firmware will be updated to support typed transactions, no additional changes will be needed to HSM firmware.
 
 ### **Gas accounting**
 
