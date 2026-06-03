@@ -10,16 +10,6 @@ complexity: 3
 created: 2026-01-06
 ---
 
-| RSKIP | 545 |
-| :------------ |:-------------|
-| **Title** | Implement EIP-7702 Account Abstraction in Rootstock |
-| **Created** | 06-JAN-2026 |
-| **Author** | Patricio Gallardo, Shreemoy Mishra, Sergio Demian Lerner |
-| **Purpose** | Sca, Usa |
-| **Layer** | Core |
-| **Complexity** | 3 |
-| **Status** | Draft |
-
 ## Abstract
 
 This RSKIP proposes to implement [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) style Account Abstraction in Rootstock to improve user experience and smart contract wallet capabilities. This will allow Externally Owned Accounts (EOAs) to set code in their accounts in the form of delegation pointers (contract addresses) which contain the code to run in the EOA’s own context. As stated in the abstract of EIP-7702, This is done by attaching a list of authorization tuples – individually formatted as `[chain_id, address, nonce, y_parity, r, s]` – to the transaction. For each tuple, a delegation indicator `(0xef0100 || address)` is written to the authorizing account’s code. All code executing operations must load and execute the code pointed to by the delegation.
