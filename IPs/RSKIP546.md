@@ -10,16 +10,6 @@ status: Draft
 description: 
 ---
 
-|RSKIP          | 546          |
-| :------------ |:-------------|
-|**Title**      | Implement Transactions and Receipts following Ethereum's Type 1 and Type 2 Envelope formats |
-|**Created**    | 27-JAN-2026 |
-|**Author**     | Patricio Gallardo, Shreemoy Mishra |
-|**Purpose**    | Usa |
-|**Layer**      | Core |
-|**Complexity** | 1 |
-|**Status**     | Draft |
-
 ## Abstract
 
 This is a proposal to support Ethereum's Type 1 and Type 2 formatted transactions in Rootstock. Apart from the new (EIP-2718 based) encodings for transactions and receipts, this proposal does not introduce any other changes to Rootstock's consensus rules. In particular, neither "Access Lists" (EIP-2930) nor "Dynamic GasPrice" parameters (EIP-1559) will be implemented. Transactions encoded in these new formats will be executed in the same way as legacy transactions. Access Lists, if provided, will not be used in the EVM, but will result in additional gas fees  as specified below. For Type 2 transactions, the lower of the two EIP-1559 gas price fields will be used as the transaction’s effective gas price.
