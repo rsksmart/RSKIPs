@@ -10,16 +10,6 @@ complexity: 2
 created: 2026-01-05
 ---
 
-| RSKIP | 543 |
-| :------------ |:-------------|
-| **Title** | Implement EIP-2718 Typed Transactions in Rootstock |
-| **Created** | 05-JAN-2026 |
-| **Author** | Patricio Gallardo, Shreemoy Mishra |
-| **Purpose** | Sca, Usa |
-| **Layer** | Core |
-| **Complexity** | 2 |
-| **Status** | Draft |
-
 ## Abstract
 
 This is a proposal to implement [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) style *Typed Transactions* in Rootstock. This will  improve Rootstock’s compatibility with the Ethereum ecosystem and make it easier to introduce other changes such as Account Abstraction and Data Availability mechanisms for rollups. Transaction Receipts in Rootstock already include a [“type field”](https://github.com/rsksmart/rskj/pull/1984) - though this is only for JSON RPC. The main departure of our proposal from EIP-2718 is the use of a Rootstock specific namespace to ensure that there are no conflicts in the type encoding between Rootstock and Ethereum.
