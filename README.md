@@ -257,6 +257,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Adopted |
 | 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Adopted |
 | 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Adopted |
+| 559 |[Fix waiting pegouts ordering](IPs/RSKIP559.md)| 16-APR-2026 | VZ | Sec | Core | 2 | Draft |
 
 # Author Index
 
@@ -295,6 +296,7 @@ You can find an easily browseable version of this information [here](https://ips
 | SM       | Shreemoy Mishra           | shreemoy@rootstocklabs.com             |
 | SMS      | Sebastian Matias Sicardi  |                                        |
 | VK       | Volodymyr Kravets         |                                        |
+| VZ       | Vladislav Zablotsky       |                                        |
 
 
 ## Build locally
