@@ -2,7 +2,7 @@
 rskip: 107
 title: Smaller Unitrie Nodes for Higher Scalability
 description: 
-status: Draft
+status: Adopted
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2019
 | **Purpose**    | Sca                                          |
 | **Layer**      | Core                                         |
 | **Complexity** | 1                                            |
-| **Status**     | Draft                                        |
+| **Status**     | Adopted                                        |
 
 # Abstract
 
@@ -77,9 +77,8 @@ The new node format is as follows:
   - **valueHash**, 32 bytes: Hash digest of value stored
   - **valueLength**, uint24 (3 bytes): size of the value contained (if lvalue>0 and hasLongVal)
 
-- if the left and right nodes are not present:
-
-  - **treeSize**, 0-9 bytes: the size of the tree, variable length integer
+- if the node is not terminal (meaning either the left or right nodes are present, which can be validated by checking that at least one of the two bits for 'nodePresent' is set to 1) :
+  - **childrenSize**, 0-9 bytes: the size in bytes of the underlying subtree, excluding the current node (the root of the subtree), represented as a variable-length integer
 
 - if !hasLongVal:
   - **value**, variable-size extends up to the bounds of the node buffer: stored value 
@@ -90,7 +89,7 @@ The overhead for a small leaf node is 2 bytes (flags and 1-byte of prefix length
 
 Because an Unitrie account having 1 RBTC-wei occupies 3 bytes. Assuming a 27-byte shared prefix, the space consumed without node overhead  is 30 bytes. Therefore we've reduced the overhead of small accounts from 266% (80/30) to 7% (2/30).
 
-The value treeSize enables sharding the state tree between nodes and requesting pieces in parallel from different nodes by specifying and offset and size of the requested chunk, while still being able to validate each piece independently, without the need to collect all pieces first.
+The value childrenSize enables sharding the state tree between nodes and requesting pieces in parallel from different nodes by specifying and offset and size of the requested chunk, while still being able to validate each piece independently, without the need to collect all pieces first.
 
 **Shared Prefix Size Compression**
 
