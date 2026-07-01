@@ -231,7 +231,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 427 |[Express the amount value in wei for peg-out related events](IPs/RSKIP427.md)| 17-APR-24 | MI | Usa | Core | 1 | Adopted |
 | 428 |[New pegout creation event including UTXO outpoint values](IPs/RSKIP428.md)| 23-APR-24 | NC, MI | Sca, Sec | Core | 1 | Adopted |
 | 434 |[Bridge Bitcoin block chainwork up to 12 unsigned bytes](IPs/RSKIP434.md)| 26-Jun-24 | JD,JZ,MI | Sec | Core | 1 | Adopted |
-| 435 |[Network Upgrade: Lovell](IPs/RSKIP435.md)|27-JUN-24 | AE | Usa, Sec, Sca | Core | 2 | Draft |
+| 435 |[Network Upgrade: Lovell](IPs/RSKIP435.md)|27-JUN-24 | AE | Usa, Sec, Sca | Core | 2 | Adopted |
 | 436 |[Network Upgrade (patch): Arrowhead 6.3.1](IPs/RSKIP436.md)|4-JUL-24 | AE | Usa | Core | 2 | Adopted |
 | 438 |[Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode](IPs/RSKIP438.md)|16-JUL-24 | FML | Fai | Core | 2 | Adopted |
 | 445 |[MCOPY instruction](IPs/RSKIP445.md)| 12-AUG-24 | AE | Usa | Core | 2 | Adopted |
@@ -252,9 +252,12 @@ You can find an easily browseable version of this information [here](https://ips
 | 540 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method](IPs/RSKIP540.md)| 04-DEC-2025 | MI | Usa | Core | 1 | Adopted |
 | 543 |[Implement EIP-2718 Typed Transactions in Rootstock](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
 | 544 |[Reject new contract code starting with the `0xEF` byte](IPs/RSKIP544.md)| 05-JAN-2026 | PDG, SM | Usa | Core | 1 | Adopted |
+| 545 |[Implement EIP-7702 Account Abstraction in Rootstock](IPs/RSKIP545.md)| 06-JAN-2026 | PDG, SM, SDL | Sca, Usa | Core | 3 | Draft |
+| 546 |[Implement Transactions and Receipts encoding following Ethereum's Type 1 and Type 2 Envelope formats](IPs/RSKIP546.md)| 27-JAN-2026 | PDG, SM | Usa | Core | 1 | Draft |
 | 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Adopted |
 | 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Adopted |
 | 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Adopted |
+| 555 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP555.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
 | 558 |[Blob Carrying Transactions (EIP-4844)](IPs/RSKIP558.md)| 10-APR-2026 | SM | Sca, Usa | Core | 3 | Draft |
 
 # Author Index
@@ -266,6 +269,7 @@ You can find an easily browseable version of this information [here](https://ips
 | AS       | Angel Soto                | angel.soto@rootstocklabs.com           |
 | AM       | Ariel Mendelzon           | amendelzon@rootstocklabs.com           |
 | DLL      | Diego López León          |                                        |
+| DC       | Darcy Camargo             | darcy.camargo@rootstocklabs.com        |
 | DM       | Diego Masini              |                                        |
 | FJ       | Federico Jinich           | federico@rootstocklabs.com             |
 | FML      | Frederico M. Leal         | frederico.macielleal@rootstocklabs.com |
