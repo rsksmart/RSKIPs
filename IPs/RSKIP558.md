@@ -4,8 +4,8 @@
 | :------------ |:-------------|
 |**Title**      |Blob Carrying Transactions (EIP-4844) |
 |**Created**    |APR-10-2026 |
-|**Author**     |SM |
-|**Purpose**    |Sca,Usa |
+|**Author**     |SM, PDG |
+|**Purpose**    |Sca, Usa |
 |**Layer**      |Core |
 |**Complexity** |3 |
 |**Status**     |Draft |
@@ -56,7 +56,7 @@ Users, such as rollup operators, first encode data into blobs. Each blob represe
 
 A simple way of encoding data into blobs is to combine 31 bytes of user data with a leading or trailing zero byte  (`0x00`) to obtain a “32-byte chunk”. This chunk is interpreted as a field element. The size (32 bytes) comes from the parameter `BYTES_PER_FIELD_ELEMENT`.  Users continue creating such elements till they have a full blob with `FIELD_ELEMENTS_PER_BLOB`  chunks. If they do not have enough data to encode, they must still fill the blob to 128KB,  e.g. by padding with zero bytes. If they have more data to encode, they must create additional blobs.
 
-Users then compute a KZG commitment for each blob. By doing this, users are committing to a very specific polynomial representation of their data. By contrast, RSKIP-281 uses (Keccak, or user-defined) hashes as a mechanism for users to commit to ephemeral data. Users then generate KZG proofs for these commitments. These proofs form the basis for efficient verification of blob data. The idea is that blobs, commitments, and proofs are submitted together in a transaction. Only commitments are stored permanently as part of historical data on the L1 - blobs and proofs are deleted after some time.
+Users then compute a KZG commitment for each blob. By doing this, users are committing to a very specific polynomial representation of their data. Users then generate KZG proofs for these commitments. These proofs form the basis for efficient verification of blob data. The idea is that blobs, commitments, and proofs are submitted together in a transaction. Only commitments are stored permanently as part of historical data on the L1 - blobs and proofs are deleted after some time.
 
 Users who create and post blobs (such as rollup node operators) may choose to store the blobs and proofs (off chain) for as long as they deem necessary, in case there are disputes. Since commitments are stored permanently, users can verify (off-chain) that a paritcular blob was at some point published to and validated by the network.
 
@@ -71,7 +71,7 @@ This flow (commitment and verification) is implemented using the API of a native
 
 Baring one, all of these methods use blobs as an input. One method, `verify_kzg_proof` does not require access to the underlying blob. This can be used to verify that the polynomial that a user has committed to evaluates to a specific value at a specific point. This method is used to implement a pre-compiled contract (described later), which can be used to settle “on-chain” disputes regarding claims made about data posted using blobs. This is what the parameters `POINT_EVALUATION_PRECOMPILE_ADDRESS` and `POINT_EVALUATION_PRECOMPILE_GAS`  refer to.
 
-The c-kzg library includes references to newer blob methods from [EIP-7594](https://eips.ethereum.org/EIPS/eip-7594). These are related to the latest version of blob transactions (after the Fusaka upgrade), which is more complex and is intended for peer data availability sampling (Peer DAS). Peer DAS is Ethereum’s current scaling approach through sharding of blobs - so validators only need to store pieces of data (called “cells”) instead of entire blobs. We do not use peer DAS as it is not well suited for Rootstock’s merged mining based consensus. We stick with the original EIP-4844 and require users to precompute proofs for KZG commitments over an entire blob (not to multiple cells as in Peer DAS). As noted earlier, commitments will be stored permanently, while blobs and proofs are ephemeral.
+The c-kzg library includes references to newer blob methods from [EIP-7594](https://eips.ethereum.org/EIPS/eip-7594). These are related to the latest version of blob transactions (after the Fusaka upgrade), which is more complex and is intended for peer data availability sampling (Peer DAS). Peer DAS is Ethereum’s current scaling approach through sharding of blobs - so validators only need to store pieces of data (called “cells”) instead of entire blobs. We do not use peer DAS as it is not well suited for Rootstock’s merged mining based consensus. We stick with the original EIP-4844 and require users to precompute proofs for KZG commitments over an entire blob (not to multiple cells as in Peer DAS).
 
 ### Type aliases
 
