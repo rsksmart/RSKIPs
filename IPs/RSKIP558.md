@@ -46,7 +46,7 @@ Just like EIP-4844 and RSKIP-281, any proposal of this kind for ephemeral storag
 | `RSK_BLOB_GAS_PRICE_DIVISOR` | `8`  |
 | `RSK_MAX_BLOBS_PER_TX` | `1` |
 
-In Ethereum, blobs refer to temporary transaction data stored by consensus clients for approximately 18 days, after which the data can be pruned. The actual parameterization for minimum storage duration is in terms of number of blocks, not days. This duration has not changed since the initial deployment of EIP-4844 nearly two years ago (via Dencun hard fork in March 2024). Accordingly, we propose to retain blob data using a parameter `RSK_MIN_SIDECAR_REQ_BLOCKS` which is set at 2**16 Rootstock blocks. At an average block time of 25 seconds, this corresponds to about 19 days. In order to limit the impact of blob transactions on the network, a transaction cannot carry more than `RSK_MAX_BLOBS_PER_TX` blobs. There is no such limit on Ethereum. As in Ethereum, the parameter `MAX_BLOB_GAS_PER_BLOCK`  caps the number of blobs that can be included in a block (and we set this to two intially). These limits can later be modified in the future. 
+In Ethereum, blobs refer to temporary transaction data stored by consensus clients for approximately 18 days, after which the data can be pruned. The actual parameterization for minimum storage duration is in terms of number of blocks, not days. This duration has not changed since the initial deployment of EIP-4844 nearly two years ago (via Dencun hard fork in March 2024). Accordingly, we propose to retain blob data using a parameter `RSK_MIN_SIDECAR_REQ_BLOCKS` which is set at `2**16` Rootstock blocks. At an average block time of 25 seconds, this corresponds to about 19 days. In order to limit the impact of blob transactions on the network, a transaction cannot carry more than `RSK_MAX_BLOBS_PER_TX` blobs. There is no such limit on Ethereum. As in Ethereum, the parameter `MAX_BLOB_GAS_PER_BLOCK`  caps the number of blobs that can be included in a block (and we set this to two intially). These limits can later be modified in the future. 
 
 ### Cryptographic Helpers
 
@@ -71,7 +71,7 @@ This flow (commitment and verification) is implemented using the API of a native
 
 Baring one, all of these methods use blobs as an input. One method, `verify_kzg_proof` does not require access to the underlying blob. This can be used to verify that the polynomial that a user has committed to evaluates to a specific value at a specific point. This method is used to implement a pre-compiled contract (described later), which can be used to settle “on-chain” disputes regarding claims made about data posted using blobs. This is what the parameters `POINT_EVALUATION_PRECOMPILE_ADDRESS` and `POINT_EVALUATION_PRECOMPILE_GAS`  refer to.
 
-The c-kzg library includes references to newer blob methods from [EIP-7594](https://eips.ethereum.org/EIPS/eip-7594). These are related to the latest version of blob transactions (after the Fusaka upgrade), which is more complex and is intended for peer data availability sampling (Peer DAS). Peer DAS is Ethereum’s current scaling approach through sharding of blobs - so validators only need to store pieces of data (called “cells”) instead of entire blobs. We do not use peer DAS as it is not well suited for Rootstock’s merged mining based consensus. We stick with the original EIP-4844 and require users to precompute proofs for KZG commitments over an entire blob (not to multiple cells as in Peer DAS).
+The c-kzg library includes references to newer blob methods from [EIP-7594](https://eips.ethereum.org/EIPS/eip-7594). These are related to the latest version of blob transactions (after the Fusaka upgrade), which is more complex and is intended for peer data availability sampling (Peer DAS). Peer DAS is Ethereum’s current scaling approach through sharding of blobs - so validators only need to store pieces of data (called “cells”) instead of entire blobs. We do not use peer DAS as it is not well suited for Rootstock’s merged mining based consensus (relatively small number of validators makes "sharding" and "sampling" less meaningful). We stick with the original EIP-4844 and require users to precompute proofs for KZG commitments over an entire blob (not to multiple cells as in Peer DAS).
 
 ### Type aliases
 
@@ -144,7 +144,7 @@ The receipt format for blob transactions is the same as that for previously intr
 
 ### **Gas accounting**
 
-As in EIP-4844, gas accounting for blobs is controlled by `GAS_PER_BLOB` . The value 2**17 is just the the number of bytes in a blob (128KB). The maximum number of blobs in a block is initially limited to two (2) by setting `MAX_BLOB_GAS_PER_BLOCK` at 2**18.
+As in EIP-4844, gas accounting for blobs is controlled by `GAS_PER_BLOB` . The value `2**17` is just the the number of bytes in a blob (128KB). The maximum number of blobs in a block is initially limited to two (2) by setting `MAX_BLOB_GAS_PER_BLOCK` at `2**18`.
 
 Blob gas is priced differently than execution. In particular, the minimum gas price for blobs is obtained by dividing the current `min_gasPrice` by `RSK_BLOB_GAS_PRICE_DIVISOR` . For example if the current `min_gasPrice` is 0.026 `gwei`, then the minimum gas price for blobs is 0.00325 `gwei`. This rescaling makes the cost of using blobs about 128 times cheaper than using transaction calldata. The factor 128 is the product of the Divisor (8) and the cost of calldata, which is 16 gas/byte (for non-zero bytes).
 
@@ -156,7 +156,7 @@ def get_total_blob_gas(tx: Transaction) -> int:
     return GAS_PER_BLOB * len(tx.blob_versioned_hashes)
 ```
 
-The block validity conditions are modified to include blob gas checks. The actual `blob_fee` as calculated via `calc_blob_fee` is deducted from the sender’s balance before transaction execution. It is not refunded in case of transaction failure.
+As in EIP-4844, `calc_blob_fee` calculates the ultimate fee that is charged to the transaction sender for blob data. The `max_fee_per_blob_gas` field in the transaction is not used in this computation. The value of `max_fee_per_blob_gas` is used only for validation - to ensure it is higher than the minimum blob gas price and that the sender has sufficient balance. An amount `calc_blob_fee` is deducted from the sender’s balance before transaction execution. It is not refunded in case of transaction failure.
 
 ### Opcode to get versioned hashes
 
@@ -236,11 +236,13 @@ Block
 		     └── blobbytes   #can be pruned
 ```
 
-In Rootstock, nodes automatically broadcast all transactions that pass initial validation to their peers. However, blocks are broadcast only to a subset (a square root of the number) of peers. The others are just sent blockhashes, and they can request full block bodies as needed. This proposal does not change any of the semantics for the P2P propagation of transactions and blocks. Blob transactions and blocks containing them are relatively larger, which is why the initial values for the parameters are set conservatively to limit the number of blobs in a single transaction to 1 (using `RSK_MAX_BLOBS_PER_TX`) and that in a block to 2 (using `MAX_BLOB_GAS_PER_BLOCK`). 
+In Rootstock, all nodes automatically broadcast every transaction that passes initial validation to all their peers. The rules are different for blocks. During initial propagation, miners broadcast full data for blocks they have just mined to a subset (a square root) of connected nodes. The remaining connected peers only receive a block's hash. Regular (non-mining) nodes only broadcast block hashes (the "repay path"). Nodes request full block bodies from peers, including the blobsidecar, as needed.
+
+This proposal does not change any of the semantics for the P2P propagation of transactions and blocks. Blob transactions and blocks containing them are relatively larger, which is why the initial values for the parameters are set conservatively to limit the number of blobs in a single transaction to 1 (using `RSK_MAX_BLOBS_PER_TX`) and that in a block to 2 (using `MAX_BLOB_GAS_PER_BLOCK`). 
 
 ### Block Validation
 
-A miner who includes blob transactions in a Rootstock block must populate the `Blobsidecar` with corresponding blobs, commitments, and proofs. The block header must contain the correct `blob_gas_used`  and `blob_commitment_root` . A miner must also validate the commitments of any blobs included in a parent block, using the blobs and proofs from the `Blobsidecar` of the parent block. Any block that fails the check is invalid and cannot be used as a parent. These checks are are added to core consensus rules for block production.
+A miner who includes blob transactions in a Rootstock block must populate the `Blobsidecar` with corresponding blobs, commitments, and proofs. The block header must contain the correct `blob_gas_used`  and `blob_commitment_root` . A miner producing a block must validate the commitments of any blobs included in the parent block. They must do so using the full blob data and associated proofs from the `Blobsidecar` of the parent block. Any block that fails this check is invalid and cannot be used as a parent. These checks are added to core consensus rules for block production.
 
 Once a block is produced, all clients validate the blob fields in the block header. Non-mining full nodes do not have to validate commitments. Blobs are ephemeral and depending on how far behind the tip of the chain a node is, blobs and proofs may not be available. This (non availability of blob) will certainly be the case for a node that is synchronizing with the network and is more than  `RSK_MIN_SIDECAR_REQ_BLOCKS` blocks (approximately 19 days) behind the chain tip, when blobs may have been pruned. Although some archival nodes (perhaps those operated by rollups, block indexers, or explorers) may retain blobs for longer. As mentioned in the Networking section, once a node is fully synchronized, it must validate blob transaction payload and wrapper data.
 
@@ -289,7 +291,7 @@ The KZG commitment scheme is deterministic. Identical blobs, i.e. blobs created 
 
 Nodes can delete block-level blob sidecars after `2**16`  (`RSK_MIN_SIDECAR_REQ_BLOCKS`) blocks (approximately 19 days assuming 25 seconds block time on Rootstock). Deletion is a node implementation issue and there is no consensus check for deletion or retention. The only requirement for consensus is that blob commitments must be stored permanently in the historical database - so that users can still verify (off chain) that a certain blob was in fact seen on and validated by the network.
 
-To make pruning easier, the node implementations can store a copy of only the commitments (and reference indexes) together with other block data. The full contents of `Blobsidecar` can be stored separately and deleted after the retention period.
+To make pruning easier, node implementations can store a copy of only the commitments (and reference indexes) together with other block data. The full contents of `Blobsidecar` can be stored separately and deleted after the retention period. No matter where the commitments are stored long term, when block data are requested by peers, nodes will have to serve them in the standard format using inlined `Blobsidecar` containing actual values for commitments. Values for blobs and proofs that have been pruned can be set as null.
 
 Versioned hashes can be computed from commitments, but not the other way around. Since versioned hashes appear in transactions, they cannot be removed. A Rootstock node must store both. Versioned-hashes are 32-bytes each while commitments are 48 bytes each. Thus, a Rootstock node will store a total of 80 bytes permanently for each blob ever included in a block.  However, 80 bytes is very small (a 1:1600 ratio) compared to the 128KB for the original blob, which is deleted. Recall that if apps use transaction calldata (instead of blobs) that data can never be removed.
 
