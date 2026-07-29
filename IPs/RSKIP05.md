@@ -2,7 +2,7 @@
 rskip: 5
 title: Shift Operations
 description: The EVM lack shift operations. Although shift operations can be carried on using MUL / DIV, shift operations should be much less expensive.
-status: Accepted
+status: Adopted
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2016-06-22
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 # **Abstract**
 
