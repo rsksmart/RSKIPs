@@ -57,7 +57,7 @@ This RSKIP constitutes of the following main changes in the protocol:
 | Constant | Default Value | Description |
 | --- | --- | --- |
 | `EPOCH_LENGTH` | 100 | The sliding window size (in blocks) used to evaluate chain safety. |
-| `SAFE_THRESHOLD` | 0.5 | The minimum ratio of supporting blocks required to maintain a SAFE status. |
+| `SAFE_THRESHOLD` | 0.0 | The parameter associated with the necessary number of supporting blocks required to maintain a SAFE status. |
 | `DELAY_PARAMETER` | 60 | A buffer (in seconds) applied to cache eviction calculations. |
 
 For any given Rootstock block `RSKA`:
