@@ -41,13 +41,13 @@ The solution for this is to, instead of checking the block (e.g. `RSKX`) referen
 
 This creates another technical issue: Ideally, the protocol would look at the block referenced in the parent Bitcoin block (`RSKX`) and verify if its parent (`RSKX.parent()`) belongs to the canonical RSK chain. However, data inside the Bitcoin `RSK-Tag` is stored in the `hashForMergedMining` format (which strips Bitcoin-specific metadata). Because this hash format does not directly expose the parent block identifier, **nodes cannot look up `RSKX.parent()` directly.**
 
-To solve this, FACON requires nodes to maintain a localized cache of both canonical blocks and valid Uncle blocks. Instead of validating the parent of `RSKX`, the protocol validates **`RSKX` itself** against this combined cache (i.e. `RSKX.parent()`is in the canonical chain if and only if `RSKX` is in the set of canonical chain blocks and Uncle blocks).
+To solve this, FACON requires nodes to maintain a localized cache of both canonical blocks and its embedded Uncle blocks. Instead of validating the parent of `RSKX`, the protocol validates **`RSKX` itself** against this combined cache (i.e. `RSKX.parent()`is in the canonical chain if and only if `RSKX` is in the set of canonical chain blocks and Uncle blocks).
 
 # 3. Specifications
 
 This RSKIP constitutes of the following main changes in the protocol:
 
-- A **new proof type**, called Fork-Balance Proof, that shall be included in [RSKIP-351](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP351.md)'s `extendedData` field (Section 3.4. and 3.5.)
+- A **new kind of proof**, called Fork-Balance Proof, that shall be included in [RSKIP-351](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP351.md)'s `extendedData` field (Section 3.4. and 3.5.)
 - A new `evidenceValue`  component on blocks, included in the Fork-Balance Proof (Section 3.2.).
 - A `safetyLevel` measurement of blocks, that will be determined through the values of `evidenceValue`  on validation (Section 3.3.).
 - The inclusion of the optional “safe”parameter for existing RPC calls that return blocks, that will use `safetyLevel`  to decide which block to return (Section 3.6.)
@@ -99,10 +99,6 @@ else RSKA.lastSafeBlock() = RSKA.parent().lastSafeBlock();
 
 The Fork-balance Proof of a RSK block `RSKA`, merged-mined with `BTCA`, in composed of the elements:
 
-- `proofType` (`integer`) = Determines which proof is being provided:
-    - `proofType = 0` if `RSKA.evidenceValue = 1` (Supporting).
-    - `proofType = 1` if `RSKA.evidenceValue = -1` (Hiding).
-    - `proofType = 2` if  `RSKA.evidenceValue = 0` (Neutral).
 - `parentBtcHeader` (80 bytes) = Header of  `BTCB = BTCA.parent().header()` .
 - `coinbaseHash` (32 bytes) = Double-SHA256 hash of the coinbase transaction of `BTCB` .
 - `coinbaseProof` (around 384 bytes) = Merkle proof of inclusion of the coinbase transaction in the Merkle root (`parentBtcHeader.hashMerkleRoot()` ) of transactions in the header.
@@ -113,7 +109,6 @@ Thus, to allow the verification of the evidence value, each RSK block header ext
 
 ```jsx
 forkBalanceProof = RLP(
-    proofType,         // Integer
     parentBtcHeader,   // 80 bytes
     coinbaseHash,      // 32 bytes
     coinbaseProof,     // ~384 bytes
@@ -181,7 +176,7 @@ This modification introduces a breaking change to the block validation and requi
 
 ## 5.1. Note on Block Data Cache Duration
 
-Since having the Uncle Blocks information is a matter of being able to validate the blocks, I propose keeping a new `facBlocksCache` and `lastBtcBlockTimestamp` , accessible in the `BlockChainImpl` class. This cache would keep all processed blocks that get classified as valid Best Blocks (canonical chain) or valid non-Best Block (Uncles). Blocks in the cache that are too old would be removed from it, but defining the threshold for the removal is a challenge.
+Since having the Uncle Blocks information is a matter of being able to validate the blocks, I propose keeping a new `facBlocksCache` and `lastBtcBlockTimestamp` , accessible in the `BlockChainImpl` class. This cache would keep all processed blocks that get classified as valid Best Blocks (canonical chain) and also add its emdebbed Undles list. Blocks in the cache that are too old would be removed from it, but defining the threshold for the removal is a challenge.
 
 A RSK block  `RSKA` to be added to the blockchain will include `BTCA` header, and their timestamp difference will be limited by 300 seconds due to RSKIP-179. Since there is no strict constraint between `BTCA` and `BTCB=BTCA.parent()` timestamps, which means that the best approach is to remove the tail block `RSKX` of the cache at the moment of `RSKA` inclusion when:
 
