@@ -51,6 +51,12 @@ Wallets implementing RSK support must use the following derivation path:
 |RSK MainNet|m / 44' / 137' / 0' / 0 / N|
 |RSK TestNet|m / 44' / 37310' / 0' / 0 / N|
 
+## References
+
+| Reference | Description |
+| - | - |
+| [trezor/trezor-common#133](https://github.com/trezor/trezor-common/pull/133) | RSK mainnet/testnet SLIP-44 IDs added to Trezor's coin registry |
+
 ## History
 [BIP-0032](https://www.github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) describes hierarchical deterministic wallets (or "HD Wallets"): wallets which can be shared partially or entirely with different systems, each with or without the ability to spend coins. The specification consists of two parts. In a first part, a system for deriving a tree of keypairs from a single seed is presented. The second part demonstrates how to build a wallet structure on top of such a tree.
 
