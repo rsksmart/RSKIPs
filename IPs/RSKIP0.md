@@ -2,7 +2,7 @@
 rskip: 0
 title: RSKIP Purpose and Guidelines
 description: A RSKIP is a design document providing information to the RSK community describing a new feature for RSK, its processes, or its environment.
-status: Purpose and Guidelines
+status: Adopted
 purpose: Sec
 author: JL (@julianlen)
 layer: Misc
@@ -20,7 +20,7 @@ created: 2021-04-15
 |**Purpose**    |Sec |
 |**Layer**      |Misc |
 |**Complexity** |2 |
-|**Status**     |Active |
+|**Status**     |Adopted |
 
 ## What is a RSKIP?
 
