@@ -2,7 +2,7 @@
 rskip: 64
 title: Garbage Collector for State Pruning
 description: 
-status: Draft
+status: Adopted
 purpose: Sca, Usa
 author: SDL (@sergiodemianlerner), MMA
 layer: Core
@@ -20,7 +20,7 @@ created: 2018
 | **Purpose**    | Sca, Usa                            |
 | **Layer**      | Core                                |
 | **Complexity** | 2                                   |
-| **Status**     | Draft                               |
+| **Status**     | Adopted                             |
 
 ## Abstract
 
