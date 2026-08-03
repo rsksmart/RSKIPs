@@ -2,7 +2,7 @@
 rskip: 34
 title: Contract const DATA Sections
 description: 
-status: Draft
+status: Deferred
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-01-20
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 
 # **Abstract**
 
