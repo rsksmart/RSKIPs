@@ -108,7 +108,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 71  |[Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
 | 75  |[Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 77  |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
-| 85  |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Adopted |
+| 85  |[Improvements to REMASC contract](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Adopted |
 | 87  |[Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
 | 89  |[Add Bitcoin block query methods to the bridge contract](IPs/RSKIP89.md)| JULY-18 | SDL | Usa      | Core     | 2 | Adopted   |
 | 91  |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
