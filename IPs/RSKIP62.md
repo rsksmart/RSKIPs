@@ -1,8 +1,8 @@
 ---
 rskip: 62
-title: Compressed block propagation using state trie update batch
+title: Compressed block propagation using state trie update batch (COBLO)
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2018-05-07
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 # **Abstract**
 
