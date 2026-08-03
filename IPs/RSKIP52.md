@@ -2,7 +2,7 @@
 rskip: 52
 title: Cache Oriented Storage Rent
 description: 
-status: Draft
+status: Rejected
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-12-12
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft* |
+|**Status**     |Rejected |
 
 # **Abstract**
 
