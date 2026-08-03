@@ -67,7 +67,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 29       | [Change in Account creation cost](IPs/RSKIP29.md)                                | 01-JAN-17 | SDL       | Sca      | Core     | 1 | Reject   |
 | 30       | [Code Pagination](IPs/RSKIP30.md)                                                | 01-JAN-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 31       | [Hibernation Compression](IPs/RSKIP31.md)                                        | 10-JAN-17 | SDL       | Sca      | Core     | 3 | Draft    |
-| 32       | [Double-Hashed Addresses](IPs/RSKIP32.md)                                        | 10-JAN-17 | SDL       | Sca      | Core     | 2 | Draft*   |
+| 32       | [Double-Hashed Addresses](IPs/RSKIP32.md)                                        | 10-JAN-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 33       | [CODEREPLACE opcode](IPs/RSKIP33.md)                                             | 17-JAN-17 | SDL       | Sec/Usa  | Core     | 2 | Adopted    |
 | 34       | [Contract const DATA Sections](IPs/RSKIP34.md)                                   | 20-JAN-17 | SDL       | Sca      | Core     | 1 | Draft*   |
 | 35       | [Managing BridgeMaster Federation Members](IPs/RSKIP35.md)                       | 02-FEB-17 | SDL       | Sca      | Core     | 3 | Draft    |
