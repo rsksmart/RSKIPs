@@ -5,10 +5,13 @@ You can find an easily browseable version of this information [here](https://ips
 
 ## RSKIP status terms
 * **Draft** - an RSKIP that is open for consideration
+* **Active** - an RSKIP whose implementation is completed and accepted by the community, when no hard or soft fork is required.
 * **Accepted** - an RSKIP planned for immediate adoption in the reference client, i.e., expected to be included in the following reference client release.
 * **Adopted** - an RSKIP adopted in a previous reference client release.
 * **Deferred** - an RSKIP not being considered for immediate adoption in the reference client. May be reconsidered in the future for a subsequent release of the reference client.
 * **Rejected** - an RSKIP that was rejected
+* **Withdrawn** - an RSKIP withdrawn by its author(s).
+* **Superseded** - an RSKIP rendered obsolete by a later RSKIP.
 
 ## RSKIP purpose terms
 * **Sca** - an RSKIP that improves scalability
