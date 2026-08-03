@@ -2,7 +2,7 @@
 rskip: 68
 title: Federation Notification System
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sec
 author: JIO <jorlicki@iovlabs.org>, SDL (@sergiodemianlerner)
 layer: Net
@@ -21,7 +21,7 @@ created: 2018-05-05
 |**Purpose**    |Sec |
 |**Layer**      |Net |
 |**Complexity** |2 |
-|**Status**     |Draft* |
+|**Status**     |Withdrawn |
 
 # Abstract
 
