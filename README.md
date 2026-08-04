@@ -96,7 +96,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 55       | [Native Probabilistic payments](IPs/RSKIP55.md)                                  | 11-MAR-17 | SDL       | Usa      | Core     | 3 | Draft*   |
 | 56       | [Sporadic Verification-less mining](IPs/RSKIP56.md)                                  | 11-MAR-17 | SDL       | Fair      | Core     | 3 | Draft   |
 | 57       | [Derivation Path for Hierarchical Deterministic Wallets](IPs/RSKIP57.md)         | 05-ABR-18 | IO | Usa    | Net      | 1 | Adopted  |
-| 58       | [Handling Bitcoin Forks](IPs/RSKIP58.md)         | 14-NOV-17 | SDL | Sca    | Core      | 3 | Draft    |
+| 58       | [Handling Bitcoin Forks](IPs/RSKIP58.md)         | 14-NOV-17 | SDL | Sca    | Core      | 3 | Withdrawn    |
 | 59       | [Child Contracts](IPs/RSKIP59.md)                                                | 11-JUN-16 | SDL       | Sca      | Core     | 1 | Accepted   |
 | 60       | [Checksum Address Encoding](IPs/RSKIP60.md)                                      | 25-JUN-18 | IO | ST     | Net      | 1 | Adopted   |
 | 61       | [Cache Oriented Storage Rent (collect at EOT version)](IPs/RSKIP61.md)           | 03-MAY-18 | SDL       | Sca      | Core     | 2 | Draft*   |
