@@ -1,6 +1,6 @@
 ---
 rskip: 414
-title: Network Upgrade - Arrowhead
+title: "Network Upgrade: Arrowhead"
 description: 
 status: Adopted
 purpose: Usa, Sec
