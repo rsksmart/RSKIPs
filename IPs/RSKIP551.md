@@ -1,6 +1,6 @@
 ---
 rskip: 551
-title: "Deprecate RSKIP-459"
+title: "Deprecate RSKIP459"
 created: 18-MAR-26
 author: MI
 purpose: Usa

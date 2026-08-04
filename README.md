@@ -152,14 +152,14 @@ You can find an easily browseable version of this information [here](https://ips
 | 169 |[Rectify EXTCODEHASH implementation](IPs/RSKIP169.md)|  31-JUL-20 | NPS | Usa | Core | 2 | Adopted |
 | 170 |[Peg-in to any address](IPs/RSKIP170.md)|  01-SEP-20 | MI | Usa | Core | 2 | Adopted |
 | 171 |[Clean EVM Internal Buffer in Call-like Opcodes](IPs/RSKIP171.md)|  02-SEP-20 | FJ | Usa | Core | 1 | Adopted |
-| 172 |[Subroutines for EVM](IPs/RSKIP172.md)|  01-SEP-20 | AL | Usa | Core | 2 | Draft |
+| 172 |[Simple Subroutines for the EVM](IPs/RSKIP172.md)|  01-SEP-20 | AL | Usa | Core | 2 | Draft |
 | 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
 | 174 |[Preserve balance in contract creation](IPs/RSKIP174.md)| 23-JUL-21 | VK | Usa/Fair | Core | 1 | Adopted |
 | 176 |[Programmable Peg-in Addresses for faster peg-ins](IPs/RSKIP176.md)| 15-SEP-20 | SDL,GM | Usa | Core | 2 | Adopted |
 | 177 |[Universal Merged Mining Extension](IPs/RSKIP177.md)|  APR-2020 | SDL & MP | Usa | Node | 1 | Adopted |
 | 178 |[External Confirmation Hashrate](IPs/RSKIP178.md)|  2-SEP-20 | SDL | Sec | Core | 2 | Draft |
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Adopted |
-| 180 |[Limit the RSK merged mining merkle proof](IPs/RSKIP180.md)|  15-JUL-21 | VK | Sec | Core | 1 | Adopted |
+| 180 |[Limit the RSK merged mining merkle proof size](IPs/RSKIP180.md)|  15-JUL-21 | VK | Sec | Core | 1 | Adopted |
 | 181 |[Peg-in rejection events](IPs/RSKIP181.md)|  03-NOV-20 | JD | Usa | Core | 2 | Adopted |
 | 185 |[Peg-out refund and events](IPs/RSKIP185.md)|  19-NOV-20 | JD | Usa | Core | 1 | Adopted |
 | 186 |[Active Federation creation block height registration](IPs/RSKIP186.md)|  19-NOV-20 | JD | Sec | Core | 2 | Adopted |
@@ -184,7 +184,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
 | 218 |[New Fee Rewards Address for the RSK Core Developers Fund](IPs/RSKIP218.md)|  25-MAR-21 | FJ | Usa | Core | 1 | Adopted |
 | 219 |[New minimum values for peg-in and peg-outs](IPs/RSKIP219.md)|  12-JUL-21 | MI | Usa | Core | 1 | Adopted |
-| 220 |[Obtain block or block header by hash or height in bridge methods](IPs/RSKIP220.md)|  26-MAR-21 | PGP,SDL | Sca | Core | 1 | Adopted |
+| 220 |[Obtain Bitcoin Block information from bridge methods](IPs/RSKIP220.md)|  26-MAR-21 | PGP,SDL | Sca | Core | 1 | Adopted |
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Adopted |
@@ -240,7 +240,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 436 |[Network Upgrade (patch): Arrowhead 6.3.1](IPs/RSKIP436.md)|4-JUL-24 | AE | Usa | Core | 2 | Adopted |
 | 438 |[Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode](IPs/RSKIP438.md)|16-JUL-24 | FML | Fai | Core | 2 | Adopted |
 | 445 |[MCOPY instruction](IPs/RSKIP445.md)| 12-AUG-24 | AE | Usa | Core | 2 | Adopted |
-| 446 |[Transient storage opcodes](IPs/RSKIP446.md)| 12-AUG-24 | AE | Usa | Core | 2 | Adopted |
+| 446 |[Transient storage opcodes (TLOAD/TSTORE)](IPs/RSKIP446.md)| 12-AUG-24 | AE | Usa | Core | 2 | Adopted |
 | 453 |[Prevent address creation on failed CREATE/CREATE2 operations](IPs/RSKIP453.md)| 09-OCT-24 | AS | Usa | Core | 1 | Adopted |
 | 454 |[Support bitcoin blocks with chain work up to 32 unsigned bytes](IPs/RSKIP454.md)| 25-Oct-24 | NC | Sca | Core | 1 | Adopted |
 | 455 |[PowPeg migration to multiple outputs](IPs/RSKIP455.md)| 20-NOV-24 | MI | Usa | Core | 1 | Draft|
@@ -255,7 +255,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 535 |[Add the `baseEvent` field to the Block header extension](IPs/RSKIP535.md)| 08-OCT-2025 | SDL | Sca | Core | 1 | Adopted (Testnet) |
 | 536 |[Additional methods for BlockHeader precompiled contract](IPs/RSKIP536.md)| 10-OCT-2025 | MI | Usa | Core | 1 | Adopted |
 | 540 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method](IPs/RSKIP540.md)| 04-DEC-2025 | MI | Usa | Core | 1 | Adopted |
-| 543 |[Implement EIP-2718 Typed Transactions in Rootstock](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
+| 543 |[Implement EIP-2718 Style Typed Transactions in Rootstock](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
 | 544 |[Reject new contract code starting with the `0xEF` byte](IPs/RSKIP544.md)| 05-JAN-2026 | PDG, SM | Usa | Core | 1 | Adopted |
 | 545 |[Implement EIP-7702 Account Abstraction in Rootstock](IPs/RSKIP545.md)| 06-JAN-2026 | PDG, SM, SDL | Sca, Usa | Core | 3 | Draft |
 | 546 |[Implement Transactions and Receipts encoding following Ethereum's Type 1 and Type 2 Envelope formats](IPs/RSKIP546.md)| 27-JAN-2026 | PDG, SM | Usa | Core | 1 | Draft |
