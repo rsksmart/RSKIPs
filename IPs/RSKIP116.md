@@ -1,6 +1,6 @@
 ---
 rskip: 116
-title: Failure of SSTORE on Low-Gas Recursive CALLs 
+title: Failure of SSTORE on Low-Gas Recursive CALLs
 description: 
 status: Draft
 purpose: Sca, Sec, Usa
