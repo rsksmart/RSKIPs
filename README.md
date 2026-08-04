@@ -164,6 +164,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 185 |[Peg-out refund and events](IPs/RSKIP185.md)|  19-NOV-20 | JD | Usa | Core | 1 | Adopted |
 | 186 |[Active Federation creation block height registration](IPs/RSKIP186.md)|  19-NOV-20 | JD | Sec | Core | 2 | Adopted |
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Adopted |
+| 188 |[Precompiled Contracts for BLS12-381 Curve Operations](IPs/RSKIP188.md)|  20-NOV-20 | FJ | Usa | Core | 2 | Withdrawn |
 | 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
 | 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Adopted |
 | 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
