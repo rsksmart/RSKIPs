@@ -42,7 +42,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 1        | [Distributed Memory](IPs/RSKIP01.md)                                              | 09-JUN-16 | SDL       | Sca      | Core     | 2 | Draft    |
 | 2        | [Dynamic Contract Dependency](IPs/RSKIP02.md)                                     | 11-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
 | 3        | [Parallel Execution using static contract dependencies](IPs/RSKIP03.md)           | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
-| 4        | [Parallel Execution using runtime contract dependencies](IPs/RSKIP04.md)          | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Accepted |
+| 4        | [Parallel Execution using runtime contract dependencies](IPs/RSKIP04.md)          | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 5        | [Shift Operations](IPs/RSKIP05.md)                                                | 22-JUN-16 | SDL       | Sca      | Core     | 1 | Rejected |
 | 6        | [Block Size Limit](IPs/RSKIP06.md)                                                | 22-JUN-16 | SDL       | Sca      | Core     | 1 | Adopted  |
 | 7        | [Persistent Storage Rent Paid by Code](IPs/RSKIP07.md)                            | 11-JUN-16 | SDL       | Sca      | Core     | 3 | Rejected |
