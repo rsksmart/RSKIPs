@@ -171,7 +171,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
 | 197 |[Fix Precompile Calls Not Conforming With CALL Semantics](IPs/RSKIP197.md)|  15-DEC-20 | FJ | Usa | Core | 2 | Adopted |
 | 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Draft |
-| 199 |[registerBtcTransaction Is Public](IPs/RSKIP199.md)|  07-JAN-21 | MI | Sca,USa,Sec | Core | 2 | Adoted |
+| 199 |[registerBtcTransaction Is Public](IPs/RSKIP199.md)|  07-JAN-21 | MI | Sca,USa,Sec | Core | 2 | Adopted |
 | 200 |[Receive headers limits](IPs/RSKIP194.md)|  08-JAN-21 | PGP & MI | Sec | Core | 2 | Adopted |
 | 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Adopted |
 | 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Adopted |
