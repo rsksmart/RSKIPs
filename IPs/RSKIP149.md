@@ -2,7 +2,7 @@
 rskip: 149
 title: Improved asset transfers
 description: 
-status: Draft 
+status: Withdrawn 
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2019-11
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 # **Abstract**
 
