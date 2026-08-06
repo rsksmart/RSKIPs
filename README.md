@@ -208,7 +208,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 293 |[Add method `getActivePowpegRedeemScript` to the Bridge contract and perform additional Flyover peg-in validations](IPs/RSKIP293.md)|  18-JAN-22 | JD | Usa, Sec | Core | 2 | Adopted |
 | 294 |[Limit the number of inputs to include in a migration transaction](IPs/RSKIP294.md)|  03-FEB-22 | MI | Sca, Sec | Core | 1 | Adopted |
 | 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Adopted |
-| 298 |[Bridge peg-out creation index](IPs/RSKIP298.md)|  18-APR-22 | JD | Sca | Core | 2 | Draft |
+| 298 |[Bridge peg-out creation index](IPs/RSKIP298.md)|  18-APR-22 | JD | Sca | Core | 2 | Withdrawn |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Adopted |
 | 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Adopted |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
