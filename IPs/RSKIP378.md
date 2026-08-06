@@ -6,7 +6,7 @@ author: JZ
 purpose: Usa, Sec
 layer: Core
 complexity: 1
-status: Draft
+status: Accepted
 description: Adds a safety margin for the size (SegWit virtual size, following BIP 141) of the release transactions the Bridge creates (peg-outs and migrations).
 ---
 
@@ -18,7 +18,7 @@ description: Adds a safety margin for the size (SegWit virtual size, following B
 |**Purpose**    |Usa, Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Accepted |
 
 ## Abstract
 

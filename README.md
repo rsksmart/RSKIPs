@@ -220,7 +220,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 375 |[Use the pegout creation transaction hash as the key in the map structure that stores the pegout transactions waiting for signatures](IPs/RSKIP375.md)| 30-MAY-23 | MI | Sca,Usa | Core | 1 | Adopted |
 | 376 |[Set version 2 to PowPeg migration transactions](IPs/RSKIP376.md)| 12-DEC-23 | MI | Usa | Core | 1 | Adopted |
 | 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Adopted |
-| 378 |[Enforce release transaction size limit](IPs/RSKIP378.md)| 06-JUL-26 | JZ | Usa,Sec | Core | 1 | Draft |
+| 378 |[Enforce release transaction size limit](IPs/RSKIP378.md)| 06-JUL-26 | JZ | Usa,Sec | Core | 1 | Accepted |
 | 379 |[Bridge peg-out and migration transactions index](IPs/RSKIP379.md)| 12-DEC-23 | MI | Sca,Sec | Core | 2 | Adopted |
 | 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Adopted |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Adopted |
