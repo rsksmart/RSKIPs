@@ -121,7 +121,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 107 |[Smaller Unitrie Nodes for Higher Scalability](IPs/RSKIP107.md) | 2019 | SDL | Sca | Core | 1 | Draft |
 | 108 |[More Efficient Unitrie Key Mapping](IPs/RSKIP108.md) | 2019 | SDL & AL | Usa,Sca  | Core | 2 | Draft |
 | 109 |[Lower Storage Gas Costs for Shorter Keys](IPs/RSKIP109.md) | 2019 | SDL  | Usa,Sca  | Core | 2 | Draft |
-| 110 |[Fork Detection Data in RSKBLOCK tags](IPs/RSKIP110.md) | 2019 | SDL  | Sec  | Core | 1 | Draft |
+| 110 |[Fork Detection Data in RSKBLOCK tags](IPs/RSKIP110.md) | 2019 | SDL  | Sec  | Core | 1 | Adopted |
 | 112 |[Unitrie Node identifiers](IPs/RSKIP112.md) | 2019 | SDL  | Sec,Sca  | Core | 1 | Draft |
 | 113 |[Unified Cache Oriented Storage Rent for the Unitrie](IPs/RSKIP113.md) | 2019 | SDL  | Sec,Sca  | Core | 2 | Draft |
 | 115 |[Removal of Unused Headers from the Bridge Contract](IPs/RSKIP115.md) | 2019 | SDL  | Sca  | Core | 2 | Draft |
