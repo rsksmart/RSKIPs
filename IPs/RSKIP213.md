@@ -2,7 +2,7 @@
 rskip: 213
 title: Simple Transaction Versioning System
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,8 +20,9 @@ created: 2021-02
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1|
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
+**This RSKIP is superseded by [RSKIP-543](RSKIP543.md)**
 
 # **Abstract**
 
