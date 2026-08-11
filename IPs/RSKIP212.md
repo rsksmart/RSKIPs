@@ -2,7 +2,7 @@
 rskip: 212
 title: HW-compatible Transaction Versioning System
 description: 
-status: Draft
+status: Deferred
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-01
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 
 
 # **Abstract**
