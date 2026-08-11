@@ -26,7 +26,7 @@ created: 2016-12-23
 
 The current RSK trie (inherited from Ethereum) has several problems, both in its design and in its implementation. This RSKIP attempts to current these problems and also improve the performance of the node by adding lazy evaluation of hashes in the trie, and providing an uniform cache structure.
 
-NOTE: Parts of this document has been deprecated because the method described here is not compatible with parallel verification.
+NOTE: Parts of this document have been deprecated: the Clone, Commit, Rollback (CCR) block-verification method described here is not compatible with parallel transaction verification. The node format of the adopted binary trie (Unitrie) is specified in [RSKIP107](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP107.md).
 
 
 # **Motivation**
