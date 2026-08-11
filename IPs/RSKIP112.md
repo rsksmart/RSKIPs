@@ -2,7 +2,7 @@
 rskip: 112
 title: Unitrie Node identifiers
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sec, Sca
 author: SDL (@sergiodemianlerner)
 layer: 
@@ -18,7 +18,7 @@ created: 2019
 | **Author**     | SDL                      |
 | **Layer**      | Sec, Sca                 |
 | **Complexity** | 1                        |
-| **Status**     | Draft                    |
+| **Status**     | Withdrawn                |
 
 # Abstract
 
