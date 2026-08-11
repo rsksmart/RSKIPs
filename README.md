@@ -211,7 +211,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 298 |[Bridge peg-out creation index](IPs/RSKIP298.md)|  18-APR-22 | JD | Sca | Core | 2 | Withdrawn |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Adopted |
 | 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Adopted |
-| 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
+| 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Deferred |
 | 351 |[Miniheader: block header compression](IPs/RSKIP351.md)|  12-SEP-22 | IO | Sca | Core | 1 | Draft |
 | 353 |[Align RSK P2SH redeem script with Bitcoin Core standard transactions checks](IPs/RSKIP353.md)|  24-OCT-22 | MI,AE | Usa,Sec | Core | 2 | Adopted |
 | 357 |[Adjust the number of block confirmations for a PowPeg migration period](IPs/RSKIP357.md)|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Adopted |
