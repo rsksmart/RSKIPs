@@ -2,7 +2,7 @@
 rskip: 208
 title: checkEnvironment Precompile method
 description: 
-status: Draft
+status: Withdrawn
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-01
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 
 # **Abstract**
