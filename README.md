@@ -165,17 +165,17 @@ You can find an easily browseable version of this information [here](https://ips
 | 186 |[Active Federation creation block height registration](IPs/RSKIP186.md)|  19-NOV-20 | JD | Sec | Core | 2 | Adopted |
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Adopted |
 | 188 |[Precompiled Contracts for BLS12-381 Curve Operations](IPs/RSKIP188.md)|  20-NOV-20 | FJ | Usa | Core | 2 | Withdrawn |
-| 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
+| 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Deferred |
 | 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Adopted |
 | 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
 | 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
 | 197 |[Fix Precompile Calls Not Conforming With CALL Semantics](IPs/RSKIP197.md)|  15-DEC-20 | FJ | Usa | Core | 2 | Adopted |
-| 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Deferred |
 | 199 |[registerBtcTransaction Is Public](IPs/RSKIP199.md)|  07-JAN-21 | MI | Sca,USa,Sec | Core | 2 | Adopted |
 | 200 |[Receive headers limits](IPs/RSKIP194.md)|  08-JAN-21 | PGP & MI | Sec | Core | 2 | Adopted |
 | 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Adopted |
 | 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Adopted |
-| 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Deferred |
 | 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
 | 209 |[Stack-overflow removal](IPs/RSKIP209.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 212 | [HW-compatible Transaction Versioning System](IPs/RSKIP212.md) | 29-JAN-21     | SDL       | Sca      | Core   | 1 | Draft   |
@@ -190,16 +190,16 @@ You can find an easily browseable version of this information [here](https://ips
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Adopted |
 | 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Draft |
 | 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Draft |
-| 241 |[User-triggered peg-out tx fee-bumping](IPs/RSKIP241.md)|  5-MAY-21 | SDL | Usa,Sec | Core | 2 | Draft |
+| 241 |[User-triggered peg-out tx fee-bumping](IPs/RSKIP241.md)|  5-MAY-21 | SDL | Usa,Sec | Core | 2 | Deferred |
 | 242 |[Proxy code Incentive](IPs/RSKIP242.md)|  14-MAY-21 | SDL | Sca,Fair | Core | 1 | Draft |
 | 243 |[Intra-transaction Gas Refunds](IPs/RSKIP243.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
 | 244 |[Variable Storage Costs](IPs/RSKIP244.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
 | 252 |[Transaction Gas Price Cap](IPs/RSKIP252.md)|  29-JUN-21 | SDL | Sec,Fair | Core | 1 | Adopted |
-| 264 |[Simplified Emergency Time-locks Refresh](IPs/RSKIP264.md)|  12-AUG-21 | SDL | Sec | Core | 2 | Draft |
+| 264 |[Simplified Emergency Time-locks Refresh](IPs/RSKIP264.md)|  12-AUG-21 | SDL | Sec | Core | 2 | Deferred |
 | 265 |[Bridge UTXOs Coin Selection](IPs/RSKIP265.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
-| 270 |[Bridge UTXO set size management](IPs/RSKIP270.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
+| 270 |[Bridge UTXO set size management](IPs/RSKIP270.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Deferred |
 | 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Adopted |
-| 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
+| 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Deferred |
 | 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
 | 284 |[New deserialization method for Flyover refund addresses](IPs/RSKIP284.md)|  19-OCT-21 | JD | Usa,Sec | Core | 1 | Adopted |
 | 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Draft |

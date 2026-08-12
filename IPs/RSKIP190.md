@@ -2,7 +2,7 @@
 rskip: 190
 title: Powpeg address change audit trail
 description: 
-status: Draft
+status: Deferred
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2020-11
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 
 
 # **Abstract**
