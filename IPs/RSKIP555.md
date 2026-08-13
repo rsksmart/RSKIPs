@@ -176,7 +176,7 @@ This modification introduces a breaking change to the block validation and requi
 
 ## 5.1. Note on Block Data Cache Duration
 
-Since having the Uncle Blocks information is a matter of being able to validate the blocks, I propose keeping a new `facBlocksCache` and `lastBtcBlockTimestamp` , accessible in the `BlockChainImpl` class. This cache would keep all processed blocks that get classified as valid Best Blocks (canonical chain) and also add its emdebbed Undles list. Blocks in the cache that are too old would be removed from it, but defining the threshold for the removal is a challenge.
+Since having the Uncle Blocks information is a matter of being able to validate the blocks, I propose keeping a new `facBlocksCache` and `lastBtcBlockTimestamp` , accessible in the `BlockChainImpl` class. This cache would keep all processed blocks that get classified as valid Best Blocks (canonical chain) and also add its emdebbed Uncles list. Blocks in the cache that are too old would be removed from it, but defining the threshold for the removal is a challenge.
 
 A RSK block  `RSKA` to be added to the blockchain will include `BTCA` header, and their timestamp difference will be limited by 300 seconds due to RSKIP-179. Since there is no strict constraint between `BTCA` and `BTCB=BTCA.parent()` timestamps, which means that the best approach is to remove the tail block `RSKX` of the cache at the moment of `RSKA` inclusion when:
 
