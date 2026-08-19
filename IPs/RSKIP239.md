@@ -2,7 +2,7 @@
 rskip: 239
 title: Reprice Trie Read Opcodes 
 description: 
-status: Draft
+status: Deferred
 purpose: Sca, Sec
 author: SDL (@sergiodemianlerner), SM (@shreemoy)
 layer: Core
@@ -19,7 +19,7 @@ created: 2021-04-20
 |**Purpose**    |Sca, Sec|
 |**Layer**      |Core|
 |**Complexity** |1|
-|**Status**     |Draft|
+|**Status**     |Deferred|
 |**Discussions-to** | https://research.rsk.dev/t/rskip-239-reprice-trie-reads/162  |
 
 ## Abstract
