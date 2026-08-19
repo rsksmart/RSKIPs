@@ -2,7 +2,8 @@
 rskip: 37
 title: Single Address Smart Wallets
 description: 
-status: Draft
+status: Superseded
+superseded-by: 545
 purpose: Sca, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +21,8 @@ created: 2017-02-18
 |**Purpose**    |Sca/Usa |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft |
+|**Status**     |Superseded |
+|**Superseded-By** |[RSKIP545](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP545.md) |
 
 # **Abstract**
 
