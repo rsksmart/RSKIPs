@@ -181,14 +181,14 @@ You can find an easily browseable version of this information [here](https://ips
 | 212 | [HW-compatible Transaction Versioning System](IPs/RSKIP212.md) | 29-JAN-21     | SDL       | Sca      | Core   | 1 | Draft   |
 | 213 |[Simple Transaction Versioning System](IPs/RSKIP213.md)|  2-FEB-21 | SDL | Sca | Core | 1 | Draft |
 | 214 |[Ephemeral Calldata using Precompile](IPs/RSKIP214.md)|  29-JAN-21 | SDL | Sca | Core | 2 | Draft |
-| 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
+| 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Withdrawn |
 | 218 |[New Fee Rewards Address for the RSK Core Developers Fund](IPs/RSKIP218.md)|  25-MAR-21 | FJ | Usa | Core | 1 | Adopted |
 | 219 |[New minimum values for peg-in and peg-outs](IPs/RSKIP219.md)|  12-JUL-21 | MI | Usa | Core | 1 | Adopted |
 | 220 |[Obtain Bitcoin Block information from bridge methods](IPs/RSKIP220.md)|  26-MAR-21 | PGP,SDL | Sca | Core | 1 | Adopted |
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Adopted |
-| 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Draft |
+| 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Deferred |
 | 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Deferred |
 | 241 |[User-triggered peg-out tx fee-bumping](IPs/RSKIP241.md)|  5-MAY-21 | SDL | Usa,Sec | Core | 2 | Deferred |
 | 242 |[Proxy code Incentive](IPs/RSKIP242.md)|  14-MAY-21 | SDL | Sca,Fair | Core | 1 | Draft |
@@ -200,9 +200,9 @@ You can find an easily browseable version of this information [here](https://ips
 | 270 |[Bridge UTXO set size management](IPs/RSKIP270.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Deferred |
 | 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Adopted |
 | 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Deferred |
-| 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
+| 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Deferred |
 | 284 |[New deserialization method for Flyover refund addresses](IPs/RSKIP284.md)|  19-OCT-21 | JD | Usa,Sec | Core | 1 | Adopted |
-| 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Draft |
+| 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Deferred |
 | 290 |[Adjust Testnet block minimum difficulty](IPs/RSKIP290.md)|  18-NOV-21 | AE | Usa | Core | 1 | Adopted |
 | 291 |[Network Upgrade: Hop](IPs/RSKIP291.md)|  14-DEC-21 | AE  | Sec,Usa | Core | 3 | Adopted |
 | 293 |[Add method `getActivePowpegRedeemScript` to the Bridge contract and perform additional Flyover peg-in validations](IPs/RSKIP293.md)|  18-JAN-22 | JD | Usa, Sec | Core | 2 | Adopted |
@@ -224,7 +224,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 379 |[Bridge peg-out and migration transactions index](IPs/RSKIP379.md)| 12-DEC-23 | MI | Sca,Sec | Core | 2 | Adopted |
 | 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Adopted |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Adopted |
-| 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Draft |
+| 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Deferred |
 | 388 |[Network Upgrade: Fingerroot](IPs/RSKIP388.md)| 31-MAY-23 | AE | Usa,Sec | Core | 2 | Adopted |
 | 398 |[PUSH0 instruction](IPs/RSKIP398.md)| 11-JUL-23 | VK | Sca | Core | 2 | Adopted |
 | 400 |[Calldata gas cost reduction](IPs/RSKIP400.md)| 12-JUL-23 | VK | Sca | Core | 2 | Adopted |
