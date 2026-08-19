@@ -77,7 +77,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 36       | [Transaction Encapsulation](IPs/RSKIP36.md)                                      | 02-FEB-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 37       | [Single Address Smart Wallets](IPs/RSKIP37.md)                                   | 18-FEB-17 | SDL       | Sca/Usa  | Core     | 3 | Draft    |
 | 38       | [Signature Compression](IPs/RSKIP38.md)                                          | 21-FEB-17 | SDL       | Sca      | Core     | 3 | Draft    |
-| 39       | [Multi-key Accounts](IPs/RSKIP39.md)                                             | 25-FEB-17 | SDL       | Sca      | Core     | 2 | Draft    |
+| 39       | [Multi-key Accounts](IPs/RSKIP39.md)                                             | 25-FEB-17 | SDL       | Sca      | Core     | 2 | Withdrawn    |
 | 40       | [Basic Bridge for two-way-peg to Bitcoin](IPs/RSKIP40.md)                        | 25-APR-17 | SDL       | Usa      | Core     | 2 | Adopted  |
 | 41       | [Extended Bitcoin Bridge Transactions](IPs/RSKIP41.md)                           | 25-APR-17 | SDL       | Usa      | Core     | 2 | Draft*   |
 | 42       | [Remove world midstates from receipts](IPs/RSKIP42.md)                           | 22-JUN-17 | SDL       | Sca      | Core     | 1 | Adopted  |
