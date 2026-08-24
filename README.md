@@ -168,7 +168,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Deferred |
 | 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Adopted |
 | 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
-| 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
+| 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Withdrawn |
 | 197 |[Fix Precompile Calls Not Conforming With CALL Semantics](IPs/RSKIP197.md)|  15-DEC-20 | FJ | Usa | Core | 2 | Adopted |
 | 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Deferred |
 | 199 |[registerBtcTransaction Is Public](IPs/RSKIP199.md)|  07-JAN-21 | MI | Sca,USa,Sec | Core | 2 | Adopted |
