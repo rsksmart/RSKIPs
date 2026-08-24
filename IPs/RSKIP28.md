@@ -2,7 +2,7 @@
 rskip: 28
 title: Ephemeral Data
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2016-12-29
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 [comment]: <> ([ MUST BE COMPLETED WITH THE DESIGN PRESENTED IN THE MIT ])
 
