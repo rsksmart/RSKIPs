@@ -1,6 +1,6 @@
 ---
 rskip: 53
-title: LTCP 
+title: Lumino Transaction Compression Protocol (LTCP) 
 description: 
 status: Withdrawn
 purpose: Sca
@@ -14,7 +14,7 @@ created: 2017-02-
 
 |RSKIP          |53           |
 | :------------ |:-------------|
-|**Title**      |LTCP |
+|**Title**      |Lumino Transaction Compression Protocol (LTCP) |
 |**Created**    |FEB-2017 |
 |**Author**     |SDL |
 |**Purpose**    |Sca |
