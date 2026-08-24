@@ -1,6 +1,6 @@
 ---
 rskip: 435
-title: Network Upgrade - Lovell
+title: "Network Upgrade: Lovell"
 description: 
 status: Adopted
 purpose: Usa, Sec, Sca

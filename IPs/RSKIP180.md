@@ -10,7 +10,7 @@ complexity: 1
 created: 2021-07-15
 ---
 
-# Limit the RSK merged mining merkle proof
+# Limit the RSK merged mining merkle proof size
 
 
 |RSKIP          | 180 |

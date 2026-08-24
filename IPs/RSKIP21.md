@@ -2,7 +2,7 @@
 rskip: 21
 title: Efficient Persistent Storage Rent
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2016-12-02
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 # **Abstract**
 

@@ -2,7 +2,7 @@
 rskip: 153
 title: Add BLAKE2 Compression Function `F` Precompile 
 description: 
-status: Accepted
+status: Adopted
 purpose: Usa
 author: FJ (@fedejinich)
 layer: Core
@@ -19,7 +19,7 @@ created: 2020-11-19
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 ## Abstract
 

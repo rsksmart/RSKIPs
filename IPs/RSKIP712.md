@@ -2,7 +2,7 @@
 rskip: 712
 title: RSK typed structured data hashing and signing
 description: 
-status: Draft
+status: Adopted
 purpose: ST
 author: JL (@julianlen)
 layer: UI
@@ -20,7 +20,7 @@ created: 2020-11-02
 |**Purpose**    |ST |
 |**Layer**      |UI |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
-The following RSKIP is a proxy for [EIP712](https://eips.ethereum.org/EIPS/eip-712)
+The following RSKIP is a proxy for [EIP712](https://eips.ethereum.org/EIPS/eip-712). RSK supports EIP-712 typed structured data hashing and signing: as a UI-layer standard it is implemented by wallets and tooling, where it is widely adopted.

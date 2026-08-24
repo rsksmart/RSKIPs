@@ -1,6 +1,6 @@
 ---
 rskip: 518
-title: Network Upgrade - Reed
+title: "Network Upgrade: Reed"
 description: 
 status: Adopted
 purpose: Usa, Sca
@@ -30,10 +30,10 @@ This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’
 - Codename: Reed
 - Block activations for Reed 8.0.0:
 	- Rootstock Mainnet block: 8,052,200
-	- Rootstock Testnet block: 6,835,655
+	- Rootstock Testnet block: 6,835,700
 - Block activations for Reed 8.1.0:
 	- Rootstock Mainnet block: N/A
-	- Rootstock Testnet block: TBD
+	- Rootstock Testnet block: 7,139,600
 
 ### Included RSKIPs
 
