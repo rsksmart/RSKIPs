@@ -81,7 +81,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 40       | [Basic Bridge for two-way-peg to Bitcoin](IPs/RSKIP40.md)                        | 25-APR-17 | SDL       | Usa      | Core     | 2 | Adopted  |
 | 41       | [Extended Bitcoin Bridge Transactions](IPs/RSKIP41.md)                           | 25-APR-17 | SDL       | Usa      | Core     | 2 | Draft*   |
 | 42       | [Remove world midstates from receipts](IPs/RSKIP42.md)                           | 22-JUN-17 | SDL       | Sca      | Core     | 1 | Adopted  |
-| 43       | [Sequential Address format](IPs/RSKIP43.md)                                      | 23-JUN-17 | SDL       | Sca      | Core     | 2 | Draft    |
+| 43       | [Sequential Address format](IPs/RSKIP43.md)                                      | 23-JUN-17 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 44       | [Remove the zero-byte discount in data](IPs/RSKIP44.md)                          | 24-JUN-17 | SDL       | Sca      | Core     | 1 | Draft    |
 | 45       | [New Event Tree and Extended LOG](IPs/RSKIP45.md)                                | 26-JUN-17 | SDL       | Sca      | Core     | 2 | Adopted  |
 | 46       | [Block Mining Fees Information Mechanism](IPs/RSKIP46.md)                        | 04-OCT-17 | MM        | Usa      | Node     | 1 | Adopted  |
