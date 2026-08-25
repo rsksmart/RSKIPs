@@ -57,7 +57,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 16       | [Combined State Tree](IPs/RSKIP16.md)                                            | 01-NOV-16 | SDL       | Sca      | Core     | 3 | Draft    |
 | 17       | [Simpler Persistent Storage Rent](IPs/RSKIP17.md)                                | 27-SEP-16 | SDL       | Sca      | Core     | 3 | Rejected |
 | 18       | [Fast Hibernation Wakeup using Trie](IPs/RSKIP18.md)                             | 28-SEP-16 | SDL       | Sca      | Core     | 2 | Draft    |
-| 19       | [RSK Address formats](IPs/RSKIP19.md)                                            | 24-NOV-16 | SDL       | Sca      | Core     | 1 | Draft*   |
+| 19       | [RSK Address formats](IPs/RSKIP19.md)                                            | 24-NOV-16 | SDL       | Sca      | Core     | 1 | Withdrawn |
 | 20       | [Survive and Ephemeral Memory Spaces](IPs/RSKIP20.md)                            | 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft    |
 | 21       | [Efficient Persistent Storage Rent](IPs/RSKIP21.md)                              | 02-DIC-16 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 22       | [Commit to number of Merkle tree elements](IPs/RSKIP22.md)                       | 04-DIC-16 | SDL       | Sca      | Core     | 1 | Draft    |
