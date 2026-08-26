@@ -2,7 +2,7 @@
 rskip: 179
 title: BTC-RSK timestamp linking
 description: 
-status: Draft
+status: Adopted
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2020-10
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 |**discussions-to**     |https://research.rsk.dev/t/rskip-179-btc-rsk-timestamp-linking/44 |
 
 

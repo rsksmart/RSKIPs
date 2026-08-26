@@ -5,10 +5,13 @@ You can find an easily browseable version of this information [here](https://ips
 
 ## RSKIP status terms
 * **Draft** - an RSKIP that is open for consideration
+* **Active** - an RSKIP whose implementation is completed and accepted by the community, when no hard or soft fork is required.
 * **Accepted** - an RSKIP planned for immediate adoption in the reference client, i.e., expected to be included in the following reference client release.
 * **Adopted** - an RSKIP adopted in a previous reference client release.
 * **Deferred** - an RSKIP not being considered for immediate adoption in the reference client. May be reconsidered in the future for a subsequent release of the reference client.
 * **Rejected** - an RSKIP that was rejected
+* **Withdrawn** - an RSKIP withdrawn by its author(s).
+* **Superseded** - an RSKIP rendered obsolete by a later RSKIP.
 
 ## RSKIP purpose terms
 * **Sca** - an RSKIP that improves scalability
@@ -39,7 +42,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 1        | [Distributed Memory](IPs/RSKIP01.md)                                              | 09-JUN-16 | SDL       | Sca      | Core     | 2 | Draft    |
 | 2        | [Dynamic Contract Dependency](IPs/RSKIP02.md)                                     | 11-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
 | 3        | [Parallel Execution using static contract dependencies](IPs/RSKIP03.md)           | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Rejected |
-| 4        | [Parallel Execution using runtime contract dependencies](IPs/RSKIP04.md)          | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Accepted |
+| 4        | [Parallel Execution using runtime contract dependencies](IPs/RSKIP04.md)          | 22-JUN-16 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 5        | [Shift Operations](IPs/RSKIP05.md)                                                | 22-JUN-16 | SDL       | Sca      | Core     | 1 | Rejected |
 | 6        | [Block Size Limit](IPs/RSKIP06.md)                                                | 22-JUN-16 | SDL       | Sca      | Core     | 1 | Adopted  |
 | 7        | [Persistent Storage Rent Paid by Code](IPs/RSKIP07.md)                            | 11-JUN-16 | SDL       | Sca      | Core     | 3 | Rejected |
@@ -56,14 +59,14 @@ You can find an easily browseable version of this information [here](https://ips
 | 18       | [Fast Hibernation Wakeup using Trie](IPs/RSKIP18.md)                             | 28-SEP-16 | SDL       | Sca      | Core     | 2 | Draft    |
 | 19       | [RSK Address formats](IPs/RSKIP19.md)                                            | 24-NOV-16 | SDL       | Sca      | Core     | 1 | Draft*   |
 | 20       | [Survive and Ephemeral Memory Spaces](IPs/RSKIP20.md)                            | 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft    |
-| 21       | [Efficient Persistent Storage Rent](IPs/RSKIP21.md)                              | 02-DIC-16 | SDL       | Sca      | Core     | 2 | Draft*   |
+| 21       | [Efficient Persistent Storage Rent](IPs/RSKIP21.md)                              | 02-DIC-16 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 22       | [Commit to number of Merkle tree elements](IPs/RSKIP22.md)                       | 04-DIC-16 | SDL       | Sca      | Core     | 1 | Draft    |
 | 23       | [Onchain PoUBS](IPs/RSKIP23.md)                                                  | 05-DIC-16 | SDL       | Sca      | Core     | 3 | Draft*   |
-| 24       | [New Binary Trie](IPs/RSKIP24.md)                                                | 23-DIC-16 | SDL       | Sca      | Core     | 3 | Adopted  |
+| 24       | [New Binary Trie](IPs/RSKIP24.md)                                                | 23-DIC-16 | SDL       | Sca      | Core     | 3 | Superseded  |
 | 25       | [Memory caches](IPs/RSKIP25.md)                                                  | 27-DIC-16 | SDL       | Sca      | Core     | 2 | Draft    |
 | 26       | [DUPN and SWAPN opcodes](IPs/RSKIP26.md)                                         | 27-DIC-16 | SDL       | Sca      | Core     | 1 | Adopted  |
-| 27       | [Highly Efficient Storage Rent](IPs/RSKIP27.md)                                  | 29-DIC-16 | SDL       | Sca/Fair | Core     | 2 | Draft    |
-| 28       | [Ephemeral segwit](IPs/RSKIP28.md)                                               | 29-DIC-16 | SDL       | Sca      | Core     | 1 | Draft*   |
+| 27       | [Highly Efficient Storage Rent](IPs/RSKIP27.md)                                  | 29-DIC-16 | SDL       | Sca/Fair | Core     | 2 | Withdrawn |
+| 28       | [Ephemeral Data](IPs/RSKIP28.md)                                                 | 29-DIC-16 | SDL       | Sca      | Core     | 1 | Withdrawn |
 | 29       | [Change in Account creation cost](IPs/RSKIP29.md)                                | 01-JAN-17 | SDL       | Sca      | Core     | 1 | Reject   |
 | 30       | [Code Pagination](IPs/RSKIP30.md)                                                | 01-JAN-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 31       | [Hibernation Compression](IPs/RSKIP31.md)                                        | 10-JAN-17 | SDL       | Sca      | Core     | 3 | Draft    |
@@ -73,7 +76,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 35       | [Managing BridgeMaster Federation Members](IPs/RSKIP35.md)                       | 02-FEB-17 | SDL       | Sca      | Core     | 3 | Draft    |
 | 36       | [Transaction Encapsulation](IPs/RSKIP36.md)                                      | 02-FEB-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 37       | [Single Address Smart Wallets](IPs/RSKIP37.md)                                   | 18-FEB-17 | SDL       | Sca/Usa  | Core     | 3 | Draft    |
-| 38       | [Signature Compression](IPs/RSKIP38.md)                                          | 21-FEB-17 | SDL       | Sca      | Core     | 3 | Draft    |
+| 38       | [Signature Compression](IPs/RSKIP38.md)                                          | 21-FEB-17 | SDL       | Sca      | Core     | 3 | Withdrawn |
 | 39       | [Multi-key Accounts](IPs/RSKIP39.md)                                             | 25-FEB-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 40       | [Basic Bridge for two-way-peg to Bitcoin](IPs/RSKIP40.md)                        | 25-APR-17 | SDL       | Usa      | Core     | 2 | Adopted  |
 | 41       | [Extended Bitcoin Bridge Transactions](IPs/RSKIP41.md)                           | 25-APR-17 | SDL       | Usa      | Core     | 2 | Draft*   |
@@ -87,25 +90,25 @@ You can find an easily browseable version of this information [here](https://ips
 | 49       | [One-To-Many hub payment channels](IPs/RSKIP49.md)                               | 01-DIC-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 50       | [Script Versions using HEADER pesuo-opcode](IPs/RSKIP50.md)                      | 07-DIC-17 | SDL       | Sca      | Core     | 1 | Adopted  |
 | 51       | [Memory-Mapped configuration register](IPs/RSKIP51.md)                           | 10-DIC-17 | SDL       | Usa      | Core     | 1 | Adopted  |
-| 52       | [Cache Oriented Storage Rent](IPs/RSKIP52.md)                                    | 12-DIC-17 | SDL       | Sca      | Core     | 2 | Draft*   |
+| 52       | [Cache Oriented Storage Rent](IPs/RSKIP52.md)                                    | 12-DIC-17 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 53       | [Lumino Transaction Compression (LTCP)](IPs/RSKIP53.md)                          | 20-FEB-17 | SDL       | Sca      | Core     | 3 | Draft*   |
 | 54       | [Transaction amount & destination privacy](IPs/RSKIP54.md)                       | 07-MAR-17 | SDL       | Usa      | Core     | 3 | Draft    |
 | 55       | [Native Probabilistic payments](IPs/RSKIP55.md)                                  | 11-MAR-17 | SDL       | Usa      | Core     | 3 | Draft*   |
 | 56       | [Sporadic Verification-less mining](IPs/RSKIP56.md)                                  | 11-MAR-17 | SDL       | Fair      | Core     | 3 | Draft   |
-| 57       | [Derivation Path for Hierarchical Deterministic Wallets](IPs/RSKIP57.md)         | 05-ABR-18 | IO | Usa    | Net      | 1 | Draft    |
+| 57       | [Derivation Path for Hierarchical Deterministic Wallets](IPs/RSKIP57.md)         | 05-ABR-18 | IO | Usa    | Net      | 1 | Adopted  |
 | 58       | [Handling Bitcoin Forks](IPs/RSKIP58.md)         | 14-NOV-17 | SDL | Sca    | Core      | 3 | Draft    |
 | 59       | [Child Contracts](IPs/RSKIP59.md)                                                | 11-JUN-16 | SDL       | Sca      | Core     | 1 | Accepted   |
 | 60       | [Checksum Address Encoding](IPs/RSKIP60.md)                                      | 25-JUN-18 | IO | ST     | Net      | 1 | Adopted   |
-| 61       | [Cache Oriented Storage Rent (collect at EOT version)](IPs/RSKIP61.md)           | 03-MAY-18 | SDL       | Sca      | Core     | 2 | Draft*   |
+| 61       | [Cache Oriented Storage Rent (collect at EOT version)](IPs/RSKIP61.md)           | 03-MAY-18 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 62       | [Compressed block propagation using state trie update batch (COBLO)](IPs/RSKIP62.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft*   |
 | 63       | [Double Signing for Delayed Signature Aggregation](IPs/RSKIP63.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 64       | [Garbage Collector for State Pruning](IPs/RSKIP64.md) | 29-MAY-18 | SDL & MMa | Sca,Usa      | Core     | 2 | Draft   |
-| 65       | [MINGASPRICE Opcode](IPs/RSKIP64.md)                                             | 18-MAY-18 | JIO       | Sec      | CORE     | 1 | DRAFT   |
+| 65       | [MINGASPRICE Opcode](IPs/RSKIP65.md)                                             | 18-MAY-18 | JIO       | Sec      | Core     | 1 | Withdrawn   |
 | 70       | [Default TX Data](IPs/RSKIP70.md)| 25-NOV-16 | SDL       | Sca      | Core     | 2 | Draft   |
 | 71  |[Transfer 2300 gas units for code execution in external transactions](IPs/RSKIP71.md) | 30-JAN-19 | SDL | Usa | Core | 1 | Draft |
 | 75  |[Native Off-Chain Probabilistic payments](IPs/RSKIP75.md)| 07-MAY-18 | SDL       | Sca      | Core     | 2 | Draft   |
 | 77  |[Smoother Difficulty adjustment](IPs/RSKIP77.md) | 2016 | SDL | Sca, Fair | Core | 2 | Draft |
-| 85  |[Remasc native contract improvements](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Adopted |
+| 85  |[Improvements to REMASC contract](IPs/RSKIP85.md) | 11-JUL-2018 | LS | Sca | Core | 2 | Adopted |
 | 87  |[Whitelisting unlimited mode](IPs/RSKIP87.md)| 12-JUL-18 | JD       | Usa      | Core     | 2 | Adopted   |
 | 89  |[Add Bitcoin block query methods to the bridge contract](IPs/RSKIP89.md)| JULY-18 | SDL | Usa      | Core     | 2 | Adopted   |
 | 91  |[STATIC_CALL opcode](IPs/RSKIP91.md) | 2018 | AE | Usa | Core | 2 | Adopted |
@@ -120,7 +123,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 109 |[Lower Storage Gas Costs for Shorter Keys](IPs/RSKIP109.md) | 2019 | SDL  | Usa,Sca  | Core | 2 | Draft |
 | 110 |[Fork Detection Data in RSKBLOCK tags](IPs/RSKIP110.md) | 2019 | SDL  | Sec  | Core | 1 | Draft |
 | 112 |[Unitrie Node identifiers](IPs/RSKIP112.md) | 2019 | SDL  | Sec,Sca  | Core | 1 | Draft |
-| 113 |[Unified Cache Oriented Storage Rent for the Unitrie](IPs/RSKIP113.md) | 2019 | SDL  | Sec,Sca  | Core | 2 | Draft |
+| 113 |[Unified Cache-Oriented Storage Rent for the Unitrie](IPs/RSKIP113.md) | 2019 | SDL  | Sec,Sca  | Core | 2 | Withdrawn |
 | 115 |[Removal of Unused Headers from the Bridge Contract](IPs/RSKIP115.md) | 2019 | SDL  | Sca  | Core | 2 | Draft |
 | 116 |[Failure of SSTORE on Low-Gas Recursive CALLs](IPs/RSKIP116.md) | 2019 | SDL  | Sec,Sca,Usa  | Core | 1 | Draft |
 | 119 |[Precompiled contract for inspecting block headers](IPs/RSKIP119.md) | 2019 | DM  | Usa  | Core | 1 | Draft |
@@ -136,79 +139,80 @@ You can find an easily browseable version of this information [here](https://ips
 | 139 |[Precompile to get transaction refunds](IPs/RSKIP139.md)| 10-SEP-19 | SDL       | Sca      | Core     | 1 | Draft   |
 | 140 |[EXTCODEHASH opcode](IPs/RSKIP140.md)| 04-SEP-19 | JL | Usa | Core | 2 | Adopted |
 | 141 |[Network Upgrade: Papyrus](IPs/RSKIP141.md)| 27-SEP-19 | AE | Sca,Usa,Sec | Core | 2 | Adopted |
-| 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Accepted |
-| 145 |[Struct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Draft |
+| 144 |[Parallel Transaction Execution for Unitrie](IPs/RSKIP144.md)| 13-OCT-19 | SDL | Sca | Core | 3 | Adopted (Testnet) |
+| 145 |[Struct Transaction Format](IPs/RSKIP145.md)|  20-FEB-17 | SDL | Sca | Core | 2 | Withdrawn |
 | 146 |[Encode bridge events in Solidity format](IPs/RSKIP146.md)|  25-OCT-19 | MI & JD | Usa | Core | 2 | Adopted |
 | 148 |[ERC1820 Pseudo-introspection Registry Contract](IPs/RSKIP148.md)|  6-NOV-19 | PMP | Usa | DApp | 1 | Adopted |
 | 149 |[Improved Asset transfers](IPs/RSKIP149.md)|  10-NOV-19 | SDL | Sca | Core | 2 | Draft |
-| 152 |[CHAINID Opcode](IPs/RSKIP152.md)|  19-NOV-19 | SMS | Sec | Core | 1 | Draft |
+| 152 |[CHAINID Opcode](IPs/RSKIP152.md)|  19-NOV-19 | SMS | Sec | Core | 1 | Adopted |
 | 153 |[Add BLAKE2 Compression Function `F` Precompile](IPs/RSKIP153.md)|  19-NOV-20 | FJ | Usa | Core | 2 | Adopted |
-| 157 |[Cumulative Difficulty in JSON-RPC block responses](IPs/RSKIP157.md)|  11-FEB-20 | MP | Usa | Node | 1 | Accepted |
+| 157 |[Cumulative Difficulty in JSON-RPC block responses](IPs/RSKIP157.md)|  11-FEB-20 | MP | Usa | Node | 1 | Adopted |
 | 159 |[Minimal Proxy Contract](IPs/RSKIP159.md)|  19-FEB-20 | PMP | Usa | DApp | 1 | Adopted |
 | 167 |[Install Code Precompile](IPs/RSKIP167.md)|  07-JUL-20 | SDL | Usa | Core | 1 | Draft |
 | 169 |[Rectify EXTCODEHASH implementation](IPs/RSKIP169.md)|  31-JUL-20 | NPS | Usa | Core | 2 | Adopted |
 | 170 |[Peg-in to any address](IPs/RSKIP170.md)|  01-SEP-20 | MI | Usa | Core | 2 | Adopted |
 | 171 |[Clean EVM Internal Buffer in Call-like Opcodes](IPs/RSKIP171.md)|  02-SEP-20 | FJ | Usa | Core | 1 | Adopted |
-| 172 |[Subroutines for EVM](IPs/RSKIP172.md)|  01-SEP-20 | AL | Usa | Core | 2 | Draft |
+| 172 |[Simple Subroutines for the EVM](IPs/RSKIP172.md)|  01-SEP-20 | AL | Usa | Core | 2 | Draft |
 | 173 |[Chunk-Based Code Merkleization using the Unitrie](IPs/RSKIP173.md)|  10-SEP-20 | SDL | Sca | Core | 2 | Draft |
 | 174 |[Preserve balance in contract creation](IPs/RSKIP174.md)| 23-JUL-21 | VK | Usa/Fair | Core | 1 | Adopted |
 | 176 |[Programmable Peg-in Addresses for faster peg-ins](IPs/RSKIP176.md)| 15-SEP-20 | SDL,GM | Usa | Core | 2 | Adopted |
 | 177 |[Universal Merged Mining Extension](IPs/RSKIP177.md)|  APR-2020 | SDL & MP | Usa | Node | 1 | Adopted |
 | 178 |[External Confirmation Hashrate](IPs/RSKIP178.md)|  2-SEP-20 | SDL | Sec | Core | 2 | Draft |
 | 179 |[BTC-RSK timestamp linking](IPs/RSKIP179.md)|  16-OCT-20 | SDL | Sec | Core | 1 | Adopted |
-| 180 |[Limit the RSK merged mining merkle proof](IPs/RSKIP180.md)|  15-JUL-21 | VK | Sec | Core | 1 | Adopted |
+| 180 |[Limit the RSK merged mining merkle proof size](IPs/RSKIP180.md)|  15-JUL-21 | VK | Sec | Core | 1 | Adopted |
 | 181 |[Peg-in rejection events](IPs/RSKIP181.md)|  03-NOV-20 | JD | Usa | Core | 2 | Adopted |
 | 185 |[Peg-out refund and events](IPs/RSKIP185.md)|  19-NOV-20 | JD | Usa | Core | 1 | Adopted |
 | 186 |[Active Federation creation block height registration](IPs/RSKIP186.md)|  19-NOV-20 | JD | Sec | Core | 2 | Adopted |
 | 187 |[Network Upgrade: Iris](IPs/RSKIP187.md)|  20-NOV-20 | AE | Usa, Sec | Core | 2 | Adopted |
-| 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Draft |
+| 188 |[Precompiled Contracts for BLS12-381 Curve Operations](IPs/RSKIP188.md)|  20-NOV-20 | FJ | Usa | Core | 2 | Withdrawn |
+| 190 |[Powpeg address change audit trail](IPs/RSKIP190.md)|  21-NOV-20 | SDL | Sec | Core | 1 | Deferred |
 | 191 |[Remove opcodes incompatible with Ethereum](IPs/RSKIP191.md)|  23-NOV-20 | AL | Usa | Core | 1 | Adopted |
 | 192 |[getTransactionIndex Precompile method](IPs/RSKIP192.md)|  24-NOV-20 | SDL | Usa | Core | 1 | Draft |
 | 194 |[Bloom filter compression](IPs/RSKIP194.md)|  28-NOV-20 | SDL | Sca | Core | 1 | Draft |
 | 197 |[Fix Precompile Calls Not Conforming With CALL Semantics](IPs/RSKIP197.md)|  15-DEC-20 | FJ | Usa | Core | 2 | Adopted |
-| 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Draft |
-| 199 |[registerBtcTransaction Is Public](IPs/RSKIP199.md)|  07-JAN-21 | MI | Sca,USa,Sec | Core | 2 | Adoted |
+| 198 |[Minpeg, a miners' multisig in the peg](IPs/RSKIP198.md)|  JAN-21 | SDL | Sec | Core | 2 | Deferred |
+| 199 |[registerBtcTransaction Is Public](IPs/RSKIP199.md)|  07-JAN-21 | MI | Sca,USa,Sec | Core | 2 | Adopted |
 | 200 |[Receive headers limits](IPs/RSKIP194.md)|  08-JAN-21 | PGP & MI | Sec | Core | 2 | Adopted |
 | 201 |[Time-locked Emergency Multisignature](IPs/RSKIP201.md)|  15-JAN-21 | SDL | Sec | Core | 2 | Adopted |
 | 203 |[getCallStackDepth Precompile method](IPs/RSKIP203.md)|  15-JAN-21 | SDL | Usa | Core | 1 | Adopted |
-| 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Draft |
+| 207 |[Emergency Time-locks Refresh](IPs/RSKIP207.md)|  18-JAN-21 | SDL | Sec | Core | 2 | Deferred |
 | 208 |[checkEnvironment Precompile method](IPs/RSKIP208.md)|  19-JAN-21 | SDL | Usa | Core | 1 | Draft |
 | 209 |[Stack-overflow removal](IPs/RSKIP209.md)|  21-JAN-21 | SDL | Sec | Core | 2 | Draft |
 | 212 | [HW-compatible Transaction Versioning System](IPs/RSKIP212.md) | 29-JAN-21     | SDL       | Sca      | Core   | 1 | Draft   |
 | 213 |[Simple Transaction Versioning System](IPs/RSKIP213.md)|  2-FEB-21 | SDL | Sca | Core | 1 | Draft |
 | 214 |[Ephemeral Calldata using Precompile](IPs/RSKIP214.md)|  29-JAN-21 | SDL | Sca | Core | 2 | Draft |
-| 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Draft |
+| 215 |[Ephemeral Blockchain](IPs/RSKIP215.md)|  3-FEB-21 | SDL | Sca | Core | 2 | Withdrawn |
 | 218 |[New Fee Rewards Address for the RSK Core Developers Fund](IPs/RSKIP218.md)|  25-MAR-21 | FJ | Usa | Core | 1 | Adopted |
 | 219 |[New minimum values for peg-in and peg-outs](IPs/RSKIP219.md)|  12-JUL-21 | MI | Usa | Core | 1 | Adopted |
-| 220 |[Obtain block or block header by hash or height in bridge methods](IPs/RSKIP220.md)|  26-MAR-21 | PGP,SDL | Sca | Core | 1 | Adopted |
+| 220 |[Obtain Bitcoin Block information from bridge methods](IPs/RSKIP220.md)|  26-MAR-21 | PGP,SDL | Sca | Core | 1 | Adopted |
 | 223 |[Cumulative Work in Fork Detection Data](IPs/RSKIP223.md)|  31-MAR-21 | SDL | Sec | Core | 2 | Draft |
 | 224 |[Include Uncles in CPV in Fork Detection Data](IPs/RSKIP224.md)|  1-APR-21 | SDL | Sec | Core | 2 | Draft |
 | 225 |[Emergency Multisig public keys](IPs/RSKIP225.md)|  1-APR-21 | SDL | Sec | Core | 1 | Adopted |
-| 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Draft |
-| 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Draft |
-| 241 |[User-triggered peg-out tx fee-bumping](IPs/RSKIP241.md)|  5-MAY-21 | SDL | Usa,Sec | Core | 2 | Draft |
+| 239 |[Reprice Trie Read Opcodes](IPs/RSKIP239.md)|  20-APR-21 | SDL & SM | Sec, Sca | Core | 1 | Deferred |
+| 240 |[Implement Storage Rent in RSK](IPs/RSKIP240.md)|  27-APR-21 | SDL, SM & DM | Sec, Sca, Fair | Core | 2 | Deferred |
+| 241 |[User-triggered peg-out tx fee-bumping](IPs/RSKIP241.md)|  5-MAY-21 | SDL | Usa,Sec | Core | 2 | Deferred |
 | 242 |[Proxy code Incentive](IPs/RSKIP242.md)|  14-MAY-21 | SDL | Sca,Fair | Core | 1 | Draft |
 | 243 |[Intra-transaction Gas Refunds](IPs/RSKIP243.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
 | 244 |[Variable Storage Costs](IPs/RSKIP244.md)|  16-MAY-21 | SDL | Sca,Fair | Core | 2 | Draft |
 | 252 |[Transaction Gas Price Cap](IPs/RSKIP252.md)|  29-JUN-21 | SDL | Sec,Fair | Core | 1 | Adopted |
-| 264 |[Simplified Emergency Time-locks Refresh](IPs/RSKIP264.md)|  12-AUG-21 | SDL | Sec | Core | 2 | Draft |
+| 264 |[Simplified Emergency Time-locks Refresh](IPs/RSKIP264.md)|  12-AUG-21 | SDL | Sec | Core | 2 | Deferred |
 | 265 |[Bridge UTXOs Coin Selection](IPs/RSKIP265.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
-| 270 |[Bridge UTXO set size management](IPs/RSKIP270.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
+| 270 |[Bridge UTXO set size management](IPs/RSKIP270.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Deferred |
 | 271 |[Bridge peg-out Batching](IPs/RSKIP271.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Adopted |
-| 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Draft |
-| 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Draft |
+| 272 |[Bridge UTXO Management Account](IPs/RSKIP272.md)|  13-AUG-21 | SDL | Sec,Usa | Core | 2 | Deferred |
+| 281 |[Rollup-optimized Ephemeral Calldata](IPs/RSKIP281.md)|  5-OCT-21 | SDL | Sca | Core | 2 | Deferred |
 | 284 |[New deserialization method for Flyover refund addresses](IPs/RSKIP284.md)|  19-OCT-21 | JD | Usa,Sec | Core | 1 | Adopted |
-| 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Draft |
+| 285 |[Utility Methods to Make PPA safer](IPs/RSKIP285.md)|  25-OCT-21 | SDL | Usa,Sec | Core | 1 | Deferred |
 | 290 |[Adjust Testnet block minimum difficulty](IPs/RSKIP290.md)|  18-NOV-21 | AE | Usa | Core | 1 | Adopted |
 | 291 |[Network Upgrade: Hop](IPs/RSKIP291.md)|  14-DEC-21 | AE  | Sec,Usa | Core | 3 | Adopted |
 | 293 |[Add method `getActivePowpegRedeemScript` to the Bridge contract and perform additional Flyover peg-in validations](IPs/RSKIP293.md)|  18-JAN-22 | JD | Usa, Sec | Core | 2 | Adopted |
 | 294 |[Limit the number of inputs to include in a migration transaction](IPs/RSKIP294.md)|  03-FEB-22 | MI | Sca, Sec | Core | 1 | Adopted |
 | 297 |[Increase max timestamp difference between btc and rsk blocks for Testnet](IPs/RSKIP297.md)|  13-APR-22 | VK | Usa | Core | 1 | Adopted |
-| 298 |[Bridge peg-out creation index](IPs/RSKIP298.md)|  18-APR-22 | JD | Sca | Core | 2 | Draft |
+| 298 |[Bridge peg-out creation index](IPs/RSKIP298.md)|  18-APR-22 | JD | Sca | Core | 2 | Withdrawn |
 | 305 |[Peg-out efficiency improvement (Segwit)](IPs/RSKIP305.md)|  01-JUN-22 | PDG, RVF & NV | Sca, Usa, Sec | Core | 2 | Adopted |
 | 326 |[Pegout events improvements](IPs/RSKIP326.md)|  21-JUNE-22 | KI & JT | Usa | Core | 1 | Adopted |
 | 336 |[Simple Parallelizable Semaphore](IPs/RSKIP336.md)|  11-JUL-22 | SDL | Sca | Core | 2 | Draft |
-| 351 |[Miniheader: block header compression](IPs/RSKIP351.md)|  12-SEP-22 | IO | Sca | Core | 1 | Draft |
+| 351 |[Miniheader - block header compression](IPs/RSKIP351.md)|  12-SEP-22 | IO | Sca | Core | 1 | Adopted (Testnet) |
 | 353 |[Align RSK P2SH redeem script with Bitcoin Core standard transactions checks](IPs/RSKIP353.md)|  24-OCT-22 | MI,AE | Usa,Sec | Core | 2 | Adopted |
 | 357 |[Adjust the number of block confirmations for a PowPeg migration period](IPs/RSKIP357.md)|  25-OCT-22 | AE | Usa,Sec | Core | 1 | Adopted |
 | 358 |[Network Upgrade (patch): Hop 4.0.1](IPs/RSKIP358.md)| 26-OCT-22 | AE | Usa,Sec | Core | 2 | Adopted |
@@ -216,10 +220,11 @@ You can find an easily browseable version of this information [here](https://ips
 | 375 |[Use the pegout creation transaction hash as the key in the map structure that stores the pegout transactions waiting for signatures](IPs/RSKIP375.md)| 30-MAY-23 | MI | Sca,Usa | Core | 1 | Adopted |
 | 376 |[Set version 2 to PowPeg migration transactions](IPs/RSKIP376.md)| 12-DEC-23 | MI | Usa | Core | 1 | Adopted |
 | 377 |[Store the last retired federation **standard** P2SH script](IPs/RSKIP377.md)| 17-MAY-23 | MI | Usa | Core | 1 | Adopted |
+| 378 |[Enforce release transaction size limit](IPs/RSKIP378.md)| 06-JUL-26 | JZ | Usa,Sec | Core | 1 | Draft |
 | 379 |[Bridge peg-out and migration transactions index](IPs/RSKIP379.md)| 12-DEC-23 | MI | Sca,Sec | Core | 2 | Adopted |
 | 383 |[Increase POWpeg activation age](IPs/RSKIP383.md)| 10-MAY-23 | JD | Fair | Core | 1 | Adopted |
 | 385 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvement](IPs/RSKIP385.md)| 12-MAY-23 | MI | Usa | Core | 1 | Adopted |
-| 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Draft |
+| 387 |[Support for Bridging Ordinals](IPs/RSKIP387.md)| 19-MAY-23 | SDL | Usa | Core | 2 | Deferred |
 | 388 |[Network Upgrade: Fingerroot](IPs/RSKIP388.md)| 31-MAY-23 | AE | Usa,Sec | Core | 2 | Adopted |
 | 398 |[PUSH0 instruction](IPs/RSKIP398.md)| 11-JUL-23 | VK | Sca | Core | 2 | Adopted |
 | 400 |[Calldata gas cost reduction](IPs/RSKIP400.md)| 12-JUL-23 | VK | Sca | Core | 2 | Adopted |
@@ -235,22 +240,22 @@ You can find an easily browseable version of this information [here](https://ips
 | 436 |[Network Upgrade (patch): Arrowhead 6.3.1](IPs/RSKIP436.md)|4-JUL-24 | AE | Usa | Core | 2 | Adopted |
 | 438 |[Limit the maximum size of initcode and apply extra gas cost for every 32-byte chunk of initcode](IPs/RSKIP438.md)|16-JUL-24 | FML | Fai | Core | 2 | Adopted |
 | 445 |[MCOPY instruction](IPs/RSKIP445.md)| 12-AUG-24 | AE | Usa | Core | 2 | Adopted |
-| 446 |[Transient storage opcodes](IPs/RSKIP446.md)| 12-AUG-24 | AE | Usa | Core | 2 | Adopted |
+| 446 |[Transient storage opcodes (TLOAD/TSTORE)](IPs/RSKIP446.md)| 12-AUG-24 | AE | Usa | Core | 2 | Adopted |
 | 453 |[Prevent address creation on failed CREATE/CREATE2 operations](IPs/RSKIP453.md)| 09-OCT-24 | AS | Usa | Core | 1 | Adopted |
 | 454 |[Support bitcoin blocks with chain work up to 32 unsigned bytes](IPs/RSKIP454.md)| 25-Oct-24 | NC | Sca | Core | 1 | Adopted |
 | 455 |[PowPeg migration to multiple outputs](IPs/RSKIP455.md)| 20-NOV-24 | MI | Usa | Core | 1 | Draft|
 | 459 |[Mark rejected peg-ins as processed](IPs/RSKIP459.md)| 10-DEC-24 | MI | Usa | Core | 1 | Adopted |
 | 460 |[Ignore non-standard outputs when searching for the witness commitment hash](IPs/RSKIP460.md)| 12-DEC-24 | MI | Usa,Sec | Core | 1 | Adopted |
 | 491 |[Reduce target difficulty to lower average block time to 10s](IPs/RSKIP491.md)| 27-FEB-2025 | PDG | Usa | Core | 1 | Draft |
-| 502 |[PowPeg and Union Bridge integration](IPs/RSKIP502.md)| 19-MAR-2025 | MI | Sca | Core | 1 | Accepted |
+| 502 |[PowPeg and Union Bridge integration](IPs/RSKIP502.md)| 19-MAR-2025 | MI | Sca | Core | 1 | Adopted (Testnet) |
 | 516 |[Precompiled contracts for +/* on Secp256k1](IPs/RSKIP516.md)| 10-APR-2025 | SDL | Usa | Core | 2 | Adopted |
 | 517 |[Block time-centric difficulty adjustment with uncle threshold](IPs/RSKIP517.md)| 29-MAY-2025 | PDG | Sec,Sca | Core | 1 | Draft |
 | 518 |[Network Upgrade: Reed](IPs/RSKIP518.md)| 13-JUN-2025 | AE | Usa, Sca | Core | 3 | Adopted |
-| 529 |[New storage cells in Bridge native contract for base and super events info](IPs/RSKIP529.md)| 26-AUG-2025 | MI | Sca | Core | 1 | Draft |
+| 529 |[New storage cells in Bridge native contract for base and super events info](IPs/RSKIP529.md)| 26-AUG-2025 | MI | Sca | Core | 1 | Adopted (Testnet) |
 | 535 |[Add the `baseEvent` field to the Block header extension](IPs/RSKIP535.md)| 08-OCT-2025 | SDL | Sca | Core | 1 | Adopted (Testnet) |
 | 536 |[Additional methods for BlockHeader precompiled contract](IPs/RSKIP536.md)| 10-OCT-2025 | MI | Usa | Core | 1 | Adopted |
 | 540 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method](IPs/RSKIP540.md)| 04-DEC-2025 | MI | Usa | Core | 1 | Adopted |
-| 543 |[Implement EIP-2718 Typed Transactions in Rootstock](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
+| 543 |[Implement EIP-2718 Style Typed Transactions in Rootstock](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
 | 544 |[Reject new contract code starting with the `0xEF` byte](IPs/RSKIP544.md)| 05-JAN-2026 | PDG, SM | Usa | Core | 1 | Adopted |
 | 545 |[Implement EIP-7702 Account Abstraction in Rootstock](IPs/RSKIP545.md)| 06-JAN-2026 | PDG, SM, SDL | Sca, Usa | Core | 3 | Draft |
 | 546 |[Implement Transactions and Receipts encoding following Ethereum's Type 1 and Type 2 Envelope formats](IPs/RSKIP546.md)| 27-JAN-2026 | PDG, SM | Usa | Core | 1 | Draft |
@@ -259,6 +264,8 @@ You can find an easily browseable version of this information [here](https://ips
 | 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Adopted |
 | 555 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP555.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
 | 558 |[Blob Carrying Transactions (EIP-4844)](IPs/RSKIP558.md)| 10-APR-2026 | SM, PDG | Sca, Usa | Core | 3 | Draft |
+| 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
+
 
 # Author Index
 

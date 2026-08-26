@@ -2,7 +2,7 @@
 rskip: 169
 title: Rectify EXTCODEHASH implementation
 description: 
-status: Draft
+status: Adopted
 purpose: Sca
 author: NPS
 layer: Core
@@ -20,7 +20,7 @@ created: 2020-07
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 # **Abstract**
