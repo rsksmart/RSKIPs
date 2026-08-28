@@ -126,7 +126,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 113 |[Unified Cache-Oriented Storage Rent for the Unitrie](IPs/RSKIP113.md) | 2019 | SDL  | Sec,Sca  | Core | 2 | Withdrawn |
 | 115 |[Removal of Unused Headers from the Bridge Contract](IPs/RSKIP115.md) | 2019 | SDL  | Sca  | Core | 2 | Draft |
 | 116 |[Failure of SSTORE on Low-Gas Recursive CALLs](IPs/RSKIP116.md) | 2019 | SDL  | Sec,Sca,Usa  | Core | 1 | Draft |
-| 119 |[Precompiled contract for inspecting block headers](IPs/RSKIP119.md) | 2019 | DM  | Usa  | Core | 1 | Draft |
+| 119 |[Precompiled contract for inspecting block headers](IPs/RSKIP119.md) | 2019 | DM  | Usa  | Core | 1 | Adopted |
 | 120 |[Shifting opcodes](IPs/RSKIP120.md) | 2019 | SMS  | Sca  | Core | 1 | Adopted |
 | 122 |[New method GetBtcTransactionConfirmations for Bridge contract](IPs/RSKIP122.md) | 2019 | SMS  | Usa  | Core | 2 | Draft |
 | 123 |[Multikey federation members](IPs/RSKIP123.md) | 2019 | AM  | Sca, Sec  | Core | 2 | Adopted |
