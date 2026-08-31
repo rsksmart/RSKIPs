@@ -135,9 +135,11 @@ Let `RSKA.evidenceValue()` be the evidence value associated to block `RSKA` (cal
 
 `RSKA.safetyLevel() = RSKA.parent().safetyLevel() + RSKA.facEvidenceValue() -RSKA.parent().facLastEvidenceEpoch()`
 
-The block `RSKA` is formally classified as FORK-**SAFE** if:
+The block `RSKA` is formally classified as fork-safe if:
 
-`RSKA.safetyLevel() > SAFE_THRESHOLD * EPOCH_LENGTH.`
+`RSKA.safetyLevel() >= SAFE_THRESHOLD * EPOCH_LENGTH.`
+
+Otherwise, it is classified as fork-unsafe.
 
 ### 4.3.1 Available Information
 
