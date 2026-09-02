@@ -1,22 +1,26 @@
 ---
 rskip: 559
-title: Deterministic next pegout selection fix
-description: Introduce a clear solution for selecting the next pegout with enough confirmations
+title: Deterministic selection of the next pegout to confirm
+description: Introduce a clear rule for selecting the next pegout ready to be confirmed and signed
 status: Draft
-purpose: Sec
-author: VZ
+purpose: Usa
+author: JT
 layer: Core
-complexity: 2
-created: 16-APR-26
+complexity: 1
+created: 01-SEP-26
 ---
 
-# Deterministic next pegout selection fix
+# Deterministic selection of the next pegout to confirm
 
 ## Abstract
 
-`getNextPegoutWithEnoughConfirmations` returns the first match found while iterating a `HashSet`,
-whose iteration order is an internal detail of the JDK. The pegout it selects can therefore differ
-between JDK versions. This RSKIP replaces that rule with an explicit ordering.
+Once a pegout has acquired the required number of confirmations in Rootstock, it is ready to be
+confirmed and signed by the powpeg, and the Bridge picks one of the pegouts waiting for
+confirmations to move forward.
+
+It picks it with `getNextPegoutWithEnoughConfirmations`, which returns the first match found while
+iterating a `HashSet`, whose iteration order is an internal detail of the JDK. The pegout selected
+can therefore differ between JDK versions. This RSKIP replaces that rule with an explicit ordering.
 
 ## Motivation
 
