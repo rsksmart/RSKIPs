@@ -112,7 +112,7 @@ Now we define elements for the better understanding of the specifications. For a
 
 In case a coinbase transaction contains multiple RSK tags, the one positioned last will be correct one, and thus the one considered in `BTCX.rskReference()`(just like the current validation already behaves).  
 
-!elements (1).png.png)
+![](RSKIP555/elements.png)
 
 ## **4.2. Evidence Classification**
 
