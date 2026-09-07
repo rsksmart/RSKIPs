@@ -71,7 +71,7 @@ We do NOT expect nodes to do:
 
 ## 3.1 Extending Confirmation
 
-Here we present a table with the minimum number of RSK blocks that a node need to wait on average for the detection to happen with different levels of confidence. The table consider different levels of strength of the attacker as a percentages of the honest hashrate, and confidence of 90%, 99% and 99.9%. 
+Here we present a table with the minimum number of RSK blocks that a node need to wait on average for the detection to happen with different levels of confidence. The table consider different levels of strength of the attacker as a percentages of the honest hashrate, and confidence of 90%, 99% and 99.9%. The Attacker Strength column is measure in how much hashrate the attacker has compared to the honest party, in percentages. 
 
 | **Attacker Strength   (% honest)** | **Number of blocks  for 90% confidence** | **Number of blocks  for 99% confidence** | **Number of blocks  for 99.9% confidence** |
 | --- | --- | --- | --- |
