@@ -83,7 +83,7 @@ Here we present a table with the minimum number of RSK blocks that a node need t
 | 300 | 99 | 162 | 224 |
 | 500 | 81 | 101 | 135 |
 
-The numbers were obtained by simulating the hidden fork scenario 500.000 times for each 
+The numbers were obtained by simulating the hidden fork scenario 500.000 times for each. Observe that as the attacker strength increases, less blocks are necessary to detect the hidden fork, as the evidence is stronger. Although the discovered fork also gets longer as the attacker strength increases (and thus the cost of performing the attack), delaying the confirmation completely cut off any advantage this could cause. 
 
 # 4. Specifications
 
