@@ -1,6 +1,6 @@
 ---
 
-| RSKIP | 555 |
+| RSKIP | 567 |
 | --- | --- |
 | **Title** | Introducing the Fork-Aware Consensus module |
 | **Created** | 25-MAY-2026 |
@@ -112,7 +112,7 @@ Now we define elements for the better understanding of the specifications. For a
 
 In case a coinbase transaction contains multiple RSK tags, the one positioned last will be correct one, and thus the one considered in `BTCX.rskReference()`(just like the current validation already behaves).  
 
-![](RSKIP555/elements.png)
+![](RSKIP567/elements.png)
 
 ## **4.2. Evidence Classification**
 

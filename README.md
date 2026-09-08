@@ -262,8 +262,8 @@ You can find an easily browseable version of this information [here](https://ips
 | 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Adopted |
 | 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Adopted |
 | 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Adopted |
-| 555 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP555.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
 | 559 |[Deterministic selection of the next pegout to confirm](IPs/RSKIP559.md)| 01-SEP-2026 | JT | Usa | Core | 1 | Draft |
+| 567 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP567.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
 | 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
 
 
