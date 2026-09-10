@@ -99,12 +99,14 @@ bech32m address goes in the existing field.
 
 Two requirements, because that string reaches the receipts trie:
 
-1. The address MUST be emitted in lowercase. BIP173 permits uppercase bech32, and a different case
-   is a different string and therefore a different receipts root.
-2. The human readable part MUST be derived from the network: `bc` for mainnet, `tb` for testnet and
-   `bcrt` for regtest. An unrecognised network MUST fail. It must not fall back to any of them, and
-   in particular not to testnet, which is the natural last branch of an if chain. The prefix is part
-   of the checksum, so a wrong one still produces a well formed address, with a valid checksum, that
+1. A bech32 or bech32m address MUST be emitted in lowercase. BIP173 permits an all uppercase form,
+   and a different case is a different string and therefore a different receipts root. Base58Check
+   is case sensitive, so a legacy or P2SH-P2WPKH address is emitted as its encoding produces it.
+2. The network dependent part of the encoding MUST come from the network, and an unrecognised
+   network MUST fail rather than fall back to another one. That part is the human readable part for
+   bech32 and bech32m, `bc`, `tb` and `bcrt`, and the version byte for Base58Check, `0x00` and
+   `0x05` on mainnet and `0x6f` and `0xc4` on testnet and regtest. In both encodings it is covered
+   by the checksum, so a wrong one does not produce a broken address. It produces a valid one that
    belongs to nobody on the chain in use.
 
 `release_btc` carries the whole serialized bitcoin transaction. Its signature does not change, but
@@ -186,16 +188,18 @@ a non legacy destination, emit the new rejection reason, or write the new storag
 requested through the existing fallback keep producing a legacy address, and blocks from before the
 fork replay to the same state.
 
-Consumers do not need an ABI change, but consumers that decode a destination address or an output
-script do need updating. These are different things:
+Consumers that only call `releaseBtc`, and consumers of the events, keep working with the ABI they
+have. A caller that wants to use `releaseBtcTo` has to add it. Separately, consumers that decode a
+destination address or an output script need updating:
 
 - Anything reading the pegout request queue from storage must handle the new key and format.
 - Anything decoding `release_btc` will start seeing `a914...87`, `0014...` and `5120...` outputs.
 - Anything rendering a bitcoin address must support bech32 (BIP173) and bech32m (BIP350), and must
-  take the human readable part from the network it is configured for.
+  take the network dependent part, the human readable part or the version byte, from the network it
+  is configured for.
 
-The last one is the most dangerous, because rendering a mainnet address with a testnet prefix
-produces a valid looking address that belongs to nobody.
+The last one is the most dangerous. Rendering an address for the wrong network produces a valid
+looking address, with a valid checksum, that belongs to nobody.
 
 ## References
 
