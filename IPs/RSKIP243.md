@@ -2,7 +2,7 @@
 rskip: 243
 title: Intra-transaction  Gas Refunds
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca, Fair
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2021-05-16
 |**Purpose**    |Sca, Fair |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 |**discussions-to**     ||
 
 # **Abstract**
