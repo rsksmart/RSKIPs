@@ -2,7 +2,7 @@
 rskip: 31
 title: Hibernation Compression
 description: 
-status: Draft
+status: Rejected
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-01-01
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft |
+|**Status**     |Rejected |
 
 # **Abstract**
 
