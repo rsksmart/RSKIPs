@@ -2,7 +2,7 @@
 rskip: 75
 title: Native Off-Chain Probabilistic payments
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2018-05-07
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 # **Abstract**
 
