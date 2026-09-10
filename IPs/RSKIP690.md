@@ -14,8 +14,8 @@ created: 07-SEP-26
 
 ## Abstract
 
-A pegout today always ends at a legacy P2PKH address derived from the public key that signed the
-rsk transaction. The requester cannot ask for anything else.
+Before RSKIP690 a pegout always ends at a legacy P2PKH address derived from the public key that
+signed the rsk transaction. The requester cannot ask for anything else.
 
 This RSKIP adds a Bridge method that takes the type of address to derive, and supports four of
 them: legacy (P2PKH), segwit compatible (P2SH-P2WPKH), native segwit (P2WPKH) and taproot (P2TR).
@@ -27,9 +27,9 @@ Most of the Bitcoin network has moved to segwit. Users who hold and spend from s
 wallets receive their pegouts at a legacy address they may not even use, and they pay more to spend
 that output than they would from a segwit one.
 
-The Bridge already has everything it needs to derive the other types, since all four are standard
-derivations from a single public key. What is missing is a way for the requester to say which one
-they want, and a stored form that can represent it.
+The Bridge already has everything it needs to derive the other types, since all four address types
+are standard derivations from a single public key. What is missing is a way for the requester to say
+which one they want, and a stored form that can represent it.
 
 ## Specification
 
@@ -40,8 +40,10 @@ releaseBtcTo(string addressType)
 ```
 
 It is payable, restricted to externally owned accounts, and the pegout amount is the value sent,
-exactly like the existing `releaseBtc` fallback. Amount validation, the locking cap and queueing are
-unchanged. `releaseBtc` keeps working and keeps producing a legacy address.
+exactly like the existing `releaseBtc` fallback. Once the destination is derived, the rest is the
+existing path, unchanged. `releaseBtc` keeps working and producing a legacy address.
+
+The behavior described here is active only when `RSKIP690` is active.
 
 `addressType` takes the names Bitcoin Core uses for its `addresstype` option:
 
@@ -55,6 +57,10 @@ unchanged. `releaseBtc` keeps working and keeps producing a legacy address.
 The value is matched **exactly**. No case folding, no trimming, no aliases. Any other value refunds
 the amount and emits `release_request_rejected`.
 
+The `addressType` is checked before the amount, so a call that carries both an unrecognized type and
+an amount below the minimum is rejected as an unrecognized type. The reason reaches the receipts
+trie, so the order is consensus.
+
 ### Address derivation
 
 Let `P` be the compressed public key recovered from the signature of the rsk transaction, and
@@ -63,28 +69,23 @@ Let `P` be the compressed public key recovered from the signature of the rsk tra
 ```
 P2PKH        h
 P2WPKH       h                                       the same 20 bytes, different wrapper
-P2SH-P2WPKH  hash160(0014 ‖ h)                       the inner script is fixed by BIP49
+P2SH-P2WPKH  hash160(0014 ‖ h)                       the inner script is pinned by BIP49
 P2TR         x_only( lift_x(x_only(P)) + t·G )       where t = int(tagged_hash("TapTweak", x_only(P)))
 ```
 
 The taproot output key follows BIP341 with an empty merkle root, which is the single key case
 described by BIP86.
 
-`t` is the output of a hash, so it can in principle land outside the range of valid scalars. BIP341
-requires failing in that case rather than reducing it, and this RSKIP requires the same: if `t` is
-not less than the order of the curve, the request is refunded and rejected with
-`UNSUPPORTED_DESTINATION_TYPE`, exactly as an unrecognised `addressType` would be.
-
-The probability is around 2^-127, so this branch is not expected to ever be taken. It is specified
-because the outcome reaches the receipts trie, and every node has to agree on it even for an input
-that never occurs.
+A public key for which the BIP341 tweak fails cannot produce a taproot address. The request is
+refunded and rejected with `UNSUPPORTED_ADDRESS_TYPE`. This branch is not expected to be taken, but
+its outcome reaches the receipts trie, so it is specified.
 
 ### Rejection reason
 
 `release_request_rejected` gains one value:
 
 ```
-UNSUPPORTED_DESTINATION_TYPE = 4
+UNSUPPORTED_ADDRESS_TYPE = 4
 ```
 
 It must be appended. The reason travels in event data and therefore reaches the receipts trie, so
@@ -111,17 +112,44 @@ its content now includes output scripts that were never seen before.
 
 ### Storage
 
-The pegout request queue stores the destination as its **address string** instead of the 20-byte
-hash. The stored form has never carried the type: only `hash160` was written, and the read stamped
-the network's P2PKH version back on. That works only while every entry is P2PKH.
+The pegout request queue is stored as a flat RLP list with three elements per queued request. Before
+this RSKIP the destination is written as its 20-byte hash and nothing else, so the stored form has
+never carried the address type. That works only while every entry is P2PKH.
 
-An address is the serialization of network, type and program, so the string is enough to recover the
-destination exactly, and no separate type field is needed.
+From the activation, the destination is written as the **address string**, UTF-8 encoded. The other
+two fields do not change:
 
-A new storage key holds the new format. Entries written before activation stay in the existing key
-until they are migrated. On read, both are loaded and concatenated, the pre-activation one first. On
-the first save after activation, every entry is written in the new format under the new key and the
-old key is left empty.
+```
+before   RLP( hash160 (20 bytes),     amount in satoshis, rskTxHash (32 bytes),  ... )
+after    RLP( address string (UTF-8), amount in satoshis, rskTxHash (32 bytes),  ... )
+              └──────────────────────── one request ─────────────────────────┘
+```
+
+For a legacy request of 0.5 BTC:
+
+```
+before   f83b 94 f7ee9ab7297134a0ccc76f3d50e94def17488f2c
+              84 02faf080
+              a0 207052a1e6e403818fc328a3ed2e8b7e4c5a0628280c5358570c9210aa4085a0
+
+after    f849 a2 6e3437753278564d727a6156706747444b35544a6a5a484b67674d3772384364416d
+              84 02faf080
+              a0 207052a1e6e403818fc328a3ed2e8b7e4c5a0628280c5358570c9210aa4085a0
+```
+
+An address is the serialization of network, type and program, so the string recovers the destination
+exactly and no separate type field is needed.
+
+**Keys.** The queue is read from more than one key, and each entry is written to exactly one of
+them. That is how RSKIP146 added the `rskTxHash` without needing a migration. This RSKIP adds a
+third key, `pegoutRequestQueue`, for the new format.
+
+The key that matters here is `releaseRequestQueueWithTxHash`, since that is where every current
+request lives. From the activation, entries with a `rskTxHash` are written to `pegoutRequestQueue`
+instead, and `releaseRequestQueueWithTxHash` is written empty.
+
+On read the keys are concatenated in order: `releaseRequestQueue`, `releaseRequestQueueWithTxHash`,
+`pegoutRequestQueue`. That order decides which requests are batched first, so it is consensus.
 
 ## Rationale
 
@@ -132,24 +160,22 @@ produce them. P2SH-P2WPKH is the exception, because BIP49 leaves exactly one val
 anywhere along the way, so the Bridge can compute it.
 
 **Why a string parameter and not an integer.** The Bridge is a precompiled contract, so parsing
-happens in the node and not in EVM opcodes. The cost is 64 bytes of calldata more than a single word
-parameter would take: a string is an ABI dynamic type, so it carries an offset word and a length
-word before its data. All four names fit in one 32 byte word, so the data itself costs the same word
-an integer would have used. In exchange the call is self describing and uses names the ecosystem
-already knows.
+happens in the node and not in EVM opcodes. The extra calldata is negligible against a pegout, and
+in exchange the call is self describing and uses names the ecosystem already knows.
 
 **Why exact matching.** The accepted set is consensus input. It can be widened later but never
 narrowed, so it starts strict.
 
-**Why the address string in storage.** It is self describing and needs no new structure, and can be easily converted back to `Address`. The
+**Why the address string in storage.** It is self describing and needs no new structure. The
 alternative, a type tag next to the program, is more compact but adds a second thing to keep in sync
 with the address the user was told about.
 
 **Why migrate in one step instead of a grace period.** The Bridge already reads several queue keys
 and writes each entry to exactly one of them, which is how RSKIP146 introduced the transaction hash
 without a cutoff. That change could not move its old entries, because they had no transaction hash
-to write. Here the pre-activation entries already carry everything the new format needs, so they can
-be rewritten immediately and no window exists where an entry is under two keys.
+to write. Here the entries under `releaseRequestQueueWithTxHash` already carry everything the new
+format needs, so they can be rewritten immediately and no window exists where an entry is under two
+keys.
 
 ## Backwards compatibility
 
@@ -159,9 +185,6 @@ Before activation `releaseBtcTo` does not exist and calling it fails, so no pre-
 a non legacy destination, emit the new rejection reason, or write the new storage key. Pegouts
 requested through the existing fallback keep producing a legacy address, and blocks from before the
 fork replay to the same state.
-
-Nothing in the powpeg needs to change. Signing, confirmation and broadcasting do not inspect the
-destination, and the PowHSM firmware hashes outputs without interpreting them.
 
 Consumers do not need an ABI change, but consumers that decode a destination address or an output
 script do need updating. These are different things:
