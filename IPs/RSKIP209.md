@@ -2,7 +2,7 @@
 rskip: 209
 title: Stack-overflow removal
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-01
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 |**discussions-to**     |https://research.rsk.dev/t/rskip-209-stack-overflow-removal/147 |
 
 
