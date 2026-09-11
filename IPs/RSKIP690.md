@@ -1,6 +1,6 @@
 ---
 rskip: 690
-title: Pegouts to multiple bitcoin address types
+title: Pegouts to different bitcoin address types
 description: Let a pegout requester choose the type of the bitcoin address the funds are sent to
 status: Draft
 purpose: Usa
@@ -10,16 +10,16 @@ complexity: 2
 created: 07-SEP-26
 ---
 
-# Pegouts to multiple bitcoin address types
+# Pegouts to different bitcoin address types
 
 ## Abstract
 
 Before RSKIP690 a pegout always ends at a legacy P2PKH address derived from the public key that
-signed the rsk transaction. The requester cannot ask for anything else.
+signed the rsk transaction sending funds to the Bridge. The requester cannot ask for anything else.
 
-This RSKIP adds a Bridge method that takes the type of address to derive, and supports four of
-them: legacy (P2PKH), segwit compatible (P2SH-P2WPKH), native segwit (P2WPKH) and taproot (P2TR).
-All four are still derived from the requester's own public key.
+This RSKIP adds a Bridge method that takes the type of address to derive, and supports the four
+types that can be derived from the requester's own public key: legacy (P2PKH), segwit compatible
+(P2SH-P2WPKH), native segwit (P2WPKH) and taproot (P2TR).
 
 ## Motivation
 
@@ -68,7 +68,7 @@ Let `P` be the compressed public key recovered from the signature of the rsk tra
 
 ```
 P2PKH        h
-P2WPKH       h                                       the same 20 bytes, different wrapper
+P2WPKH       h                                       the same value as P2PKH, see BIP141
 P2SH-P2WPKH  hash160(0014 ‖ h)                       the inner script is pinned by BIP49
 P2TR         x_only( lift_x(x_only(P)) + t·G )       where t = int(tagged_hash("TapTweak", x_only(P)))
 ```
@@ -97,7 +97,10 @@ renumbering an existing value would change historical receipts on replay.
 `releaseBtc`. The `btcDestinationAddress` field has been a string since RSKIP326, so a bech32 or
 bech32m address goes in the existing field.
 
-Two requirements, because that string reaches the receipts trie:
+`release_btc` carries the whole serialized bitcoin transaction. Its signature does not change, but
+its content now includes output scripts that were never seen before.
+
+Two requirements on the emitted address, because it reaches the receipts trie:
 
 1. A bech32 or bech32m address MUST be emitted in lowercase. BIP173 permits an all uppercase form,
    and a different case is a different string and therefore a different receipts root. Base58Check
@@ -109,49 +112,16 @@ Two requirements, because that string reaches the receipts trie:
    by the checksum, so a wrong one does not produce a broken address. It produces a valid one that
    belongs to nobody on the chain in use.
 
-`release_btc` carries the whole serialized bitcoin transaction. Its signature does not change, but
-its content now includes output scripts that were never seen before.
-
 ### Storage
 
-The pegout request queue is stored as a flat RLP list with three elements per queued request. Before
-this RSKIP the destination is written as its 20-byte hash and nothing else, so the stored form has
-never carried the address type. That works only while every entry is P2PKH.
+The pegout request queue stores the destination of each queued request. Before this RSKIP it is
+written as a 20-byte hash, so the stored form cannot carry the address type. That works only while
+every destination is P2PKH.
 
-From the activation, the destination is written as the **address string**, UTF-8 encoded. The other
-two fields do not change:
+From the activation, the destination is written as its address string, UTF-8 encoded. The rest of
+the entry does not change.
 
-```
-before   RLP( hash160 (20 bytes),     amount in satoshis, rskTxHash (32 bytes),  ... )
-after    RLP( address string (UTF-8), amount in satoshis, rskTxHash (32 bytes),  ... )
-              └──────────────────────── one request ─────────────────────────┘
-```
-
-For a legacy request of 0.5 BTC:
-
-```
-before   f83b 94 f7ee9ab7297134a0ccc76f3d50e94def17488f2c
-              84 02faf080
-              a0 207052a1e6e403818fc328a3ed2e8b7e4c5a0628280c5358570c9210aa4085a0
-
-after    f849 a2 6e3437753278564d727a6156706747444b35544a6a5a484b67674d3772384364416d
-              84 02faf080
-              a0 207052a1e6e403818fc328a3ed2e8b7e4c5a0628280c5358570c9210aa4085a0
-```
-
-An address is the serialization of network, type and program, so the string recovers the destination
-exactly and no separate type field is needed.
-
-**Keys.** The queue is read from more than one key, and each entry is written to exactly one of
-them. That is how RSKIP146 added the `rskTxHash` without needing a migration. This RSKIP adds a
-third key, `pegoutRequestQueue`, for the new format.
-
-The key that matters here is `releaseRequestQueueWithTxHash`, since that is where every current
-request lives. From the activation, entries with a `rskTxHash` are written to `pegoutRequestQueue`
-instead, and `releaseRequestQueueWithTxHash` is written empty.
-
-On read the keys are concatenated in order: `releaseRequestQueue`, `releaseRequestQueueWithTxHash`,
-`pegoutRequestQueue`. That order decides which requests are batched first, so it is consensus.
+Requests queued before the activation are not lost and keep their position in the queue.
 
 ## Rationale
 
@@ -168,75 +138,44 @@ in exchange the call is self describing and uses names the ecosystem already kno
 **Why exact matching.** The accepted set is consensus input. It can be widened later but never
 narrowed, so it starts strict.
 
-**Why the address string in storage.** It is self describing and needs no new structure. The
-alternative, a type tag next to the program, is more compact but adds a second thing to keep in sync
-with the address the user was told about.
-
-**Why migrate in one step instead of a grace period.** The Bridge already reads several queue keys
-and writes each entry to exactly one of them, which is how RSKIP146 introduced the transaction hash
-without a cutoff. That change could not move its old entries, because they had no transaction hash
-to write. Here the entries under `releaseRequestQueueWithTxHash` already carry everything the new
-format needs, so they can be rewritten immediately and no window exists where an entry is under two
-keys.
-
 ## Backwards compatibility
 
-Activation requires a hard fork.
+This change is a hard-fork and therefore all full nodes must be updated.
 
-Before activation `releaseBtcTo` does not exist and calling it fails, so no pre-fork block can queue
-a non legacy destination, emit the new rejection reason, or write the new storage key. Pegouts
-requested through the existing fallback keep producing a legacy address, and blocks from before the
-fork replay to the same state.
-
-Consumers that only call `releaseBtc`, and consumers of the events, keep working with the ABI they
-have. A caller that wants to use `releaseBtcTo` has to add it. Separately, consumers that decode a
-destination address or an output script need updating:
-
-- Anything reading the pegout request queue from storage must handle the new key and format.
-- Anything decoding `release_btc` will start seeing `a914...87`, `0014...` and `5120...` outputs.
-- Anything rendering a bitcoin address must support bech32 (BIP173) and bech32m (BIP350), and must
-  take the network dependent part, the human readable part or the version byte, from the network it
-  is configured for.
-
-The last one is the most dangerous. Rendering an address for the wrong network produces a valid
-looking address, with a valid checksum, that belongs to nobody.
+Before activation `releaseBtcTo` does not exist and calling it fails, so blocks from before the fork
+replay to the same state.
 
 ## References
 
-[1] [RSKIP146](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP146.md): Added the rsk
-transaction hash to each pegout request queue entry. It introduced the pattern this RSKIP follows
-for storage: a new key alongside the existing one, read together and written to separately, with no
-grace period.
-
-[2] [RSKIP326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): Changed
+[1] [RSKIP326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): Changed
 `btcDestinationAddress` in `release_request_received` from bytes to a string. That is why a bech32 or
 bech32m address fits the existing event with no signature change.
 
-[3] [BIP49](https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki): Derivation scheme for
+[2] [BIP49](https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki): Derivation scheme for
 P2WPKH nested in P2SH. It pins the redeem script to a single value, `0014 ‖ hash160(pubkey)`, which
 is what makes `p2sh-segwit` derivable from a public key while generic P2SH is not.
 
-[4] [BIP86](https://github.com/bitcoin/bips/blob/master/bip-0086.mediawiki): Key derivation for
+[3] [BIP86](https://github.com/bitcoin/bips/blob/master/bip-0086.mediawiki): Key derivation for
 single key P2TR outputs. Its convention, an empty merkle root, is what makes the derived output
 spendable with a normal key path signature by any taproot wallet.
 
-[5] [BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki): Segregated witness.
+[4] [BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki): Segregated witness.
 It defines the witness program of a P2WPKH output as `hash160(pubkey)`, the same 20 bytes as P2PKH,
 which is why those two types share a derivation.
 
-[6] [BIP173](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki): Bech32, the encoding
+[5] [BIP173](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki): Bech32, the encoding
 for witness version 0 addresses. It also permits an all uppercase form, which is why this RSKIP
 requires lowercase explicitly.
 
-[7] [BIP340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki): Schnorr signatures for
+[6] [BIP340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki): Schnorr signatures for
 secp256k1. It defines the tagged hash, the x only public key encoding and `lift_x`, the three
 primitives the taproot tweak is built from.
 
-[8] [BIP341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki): Taproot spending rules.
+[7] [BIP341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki): Taproot spending rules.
 It defines the tweak itself, `taproot_tweak_pubkey`, which this RSKIP applies with an empty merkle
 root.
 
-[9] [BIP350](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki): Bech32m, the encoding
+[8] [BIP350](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki): Bech32m, the encoding
 for witness version 1 and later. Taproot addresses require it, and encoding one with the bech32
 constant instead produces a well formed address with a wrong checksum.
 
