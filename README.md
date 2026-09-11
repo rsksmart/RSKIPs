@@ -267,7 +267,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 567 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP567.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
 | 643 |[Registering peg-out and migration transactions by hash](IPs/RSKIP643.md)| 29-SEP-2026 | JT | Sca | Core | 2 | Draft |
 | 692 |[Direct Precompile Call Failure Semantics](IPs/RSKIP692.md)| 15-SEP-2026 | IS | Sec | Core | 2 | Draft |
-| 690 |[Pegouts to multiple bitcoin address types](IPs/RSKIP690.md)| 07-SEP-2026 | JT | Usa | Core | 2 | Draft |
+| 690 |[Pegouts to different bitcoin address types](IPs/RSKIP690.md)| 07-SEP-2026 | JT | Usa | Core | 2 | Draft |
 | 694 |[Network Upgrade: Cardamom](IPs/RSKIP694.md)| 2-OCT-2026 | AE | Usa, Sec | Core | 2 | Draft |
 | 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
 
