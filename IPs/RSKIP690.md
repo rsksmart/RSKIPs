@@ -54,12 +54,20 @@ The behavior described here is active only when `RSKIP690` is active.
 | `bech32` | P2WPKH | `0014 <20B>` |
 | `bech32m` | P2TR | `5120 <32B>` |
 
-The value is matched **exactly**. No case folding, no trimming, no aliases. Any other value refunds
-the amount and emits `release_request_rejected`.
+The value is matched **exactly**. No case folding, no trimming, no aliases.
 
-The `addressType` is checked before the amount, so a call that carries both an unrecognized type and
-an amount below the minimum is rejected as an unrecognized type. The reason reaches the receipts
-trie, so the order is consensus.
+A call can fail more than one check at once, and the reason emitted reaches the receipts trie, so
+the order is consensus. It is:
+
+1. Caller is a contract. Emits `CALLER_CONTRACT` and does **not** refund, as RSKIP185 established.
+   This is checked first, so an unrecognized `addressType` does not turn a contract call into a
+   refund.
+2. `addressType` is not one of the four. Emits `UNSUPPORTED_ADDRESS_TYPE` and refunds.
+3. The amount fails the existing checks. Emits `LOW_AMOUNT` or `FEE_ABOVE_VALUE` and refunds,
+   unchanged from `releaseBtc`.
+
+Exactly one `release_request_rejected` is emitted, carrying the reason of the first check that
+failed.
 
 ### Address derivation
 
@@ -148,35 +156,39 @@ replay to the same state.
 
 ## References
 
-[1] [RSKIP326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): Changed
+[1] [RSKIP185](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP185.md): Made a pegout
+requested by a contract emit `release_request_rejected` with `CALLER_CONTRACT` instead of failing
+the transaction. It is why that check comes first and why it does not refund.
+
+[2] [RSKIP326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): Changed
 `btcDestinationAddress` in `release_request_received` from bytes to a string. That is why a bech32 or
 bech32m address fits the existing event with no signature change.
 
-[2] [BIP49](https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki): Derivation scheme for
+[3] [BIP49](https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki): Derivation scheme for
 P2WPKH nested in P2SH. It pins the redeem script to a single value, `0014 ‖ hash160(pubkey)`, which
 is what makes `p2sh-segwit` derivable from a public key while generic P2SH is not.
 
-[3] [BIP86](https://github.com/bitcoin/bips/blob/master/bip-0086.mediawiki): Key derivation for
+[4] [BIP86](https://github.com/bitcoin/bips/blob/master/bip-0086.mediawiki): Key derivation for
 single key P2TR outputs. Its convention, an empty merkle root, is what makes the derived output
 spendable with a normal key path signature by any taproot wallet.
 
-[4] [BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki): Segregated witness.
+[5] [BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki): Segregated witness.
 It defines the witness program of a P2WPKH output as `hash160(pubkey)`, the same 20 bytes as P2PKH,
 which is why those two types share a derivation.
 
-[5] [BIP173](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki): Bech32, the encoding
+[6] [BIP173](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki): Bech32, the encoding
 for witness version 0 addresses. It also permits an all uppercase form, which is why this RSKIP
 requires lowercase explicitly.
 
-[6] [BIP340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki): Schnorr signatures for
+[7] [BIP340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki): Schnorr signatures for
 secp256k1. It defines the tagged hash, the x only public key encoding and `lift_x`, the three
 primitives the taproot tweak is built from.
 
-[7] [BIP341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki): Taproot spending rules.
+[8] [BIP341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki): Taproot spending rules.
 It defines the tweak itself, `taproot_tweak_pubkey`, which this RSKIP applies with an empty merkle
 root.
 
-[8] [BIP350](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki): Bech32m, the encoding
+[9] [BIP350](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki): Bech32m, the encoding
 for witness version 1 and later. Taproot addresses require it, and encoding one with the bech32
 constant instead produces a well formed address with a wrong checksum.
 
