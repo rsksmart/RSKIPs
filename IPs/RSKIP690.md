@@ -63,14 +63,15 @@ trie, so the order is consensus.
 
 ### Address derivation
 
-Let `P` be the compressed public key recovered from the signature of the rsk transaction, and
-`h = hash160(P)`.
+Let `P` be the compressed public key recovered from the signature of the rsk transaction,
+`h = hash160(P)` and `t = int(tagged_hash("TapTweak", x_only(P)))`. `tagged_hash`, `x_only` and
+`lift_x` are defined in BIP340.
 
 ```
 P2PKH        h
-P2WPKH       h                                       the same value as P2PKH, see BIP141
-P2SH-P2WPKH  hash160(0014 ‖ h)                       the inner script is pinned by BIP49
-P2TR         x_only( lift_x(x_only(P)) + t·G )       where t = int(tagged_hash("TapTweak", x_only(P)))
+P2WPKH       h
+P2SH-P2WPKH  hash160(0014 ‖ h)
+P2TR         x_only( lift_x(x_only(P)) + t·G )
 ```
 
 The taproot output key follows BIP341 with an empty merkle root, which is the single key case
