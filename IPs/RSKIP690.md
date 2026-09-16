@@ -27,20 +27,19 @@ Most of the Bitcoin network has moved to segwit. Users who hold and spend from s
 wallets receive their pegouts at a legacy address they may not even use, and they pay more to spend
 that output than they would from a segwit one.
 
-The Bridge already has everything it needs to derive the other types, since all four address types
-are standard derivations from a single public key. What is missing is a way for the requester to say
-which one they want, and a stored form that can represent it.
+Since all four address types are standard derivations from a single public key, the user should be
+able to say which one they want for the Bridge to derive it.
 
 ## Specification
 
 ### The new method
 
-```
-releaseBtcTo(string addressType)
+```solidity
+function releaseBtcTo(string calldata addressType) external payable;
 ```
 
-It is payable, restricted to externally owned accounts, and the pegout amount is the value sent,
-exactly like the existing `releaseBtc` fallback. Once the destination is derived, the rest is the
+It is restricted to externally owned accounts, and the pegout amount is the value sent, exactly
+like the existing `releaseBtc` fallback. Once the destination is derived, the rest is the
 existing path, unchanged. `releaseBtc` keeps working and producing a legacy address.
 
 The behavior described here is active only when `RSKIP690` is active.
@@ -65,6 +64,8 @@ the order is consensus. It is:
 2. `addressType` is not one of the four. Emits `UNSUPPORTED_ADDRESS_TYPE` and refunds.
 3. The amount fails the existing checks. Emits `LOW_AMOUNT` or `FEE_ABOVE_VALUE` and refunds,
    unchanged from `releaseBtc`.
+4. The address cannot be derived from the requester's public key. Emits
+   `UNSUPPORTED_ADDRESS_TYPE` and refunds. Only taproot can reach this, see the derivation below.
 
 Exactly one `release_request_rejected` is emitted, carrying the reason of the first check that
 failed.
@@ -85,9 +86,8 @@ P2TR         x_only( lift_x(x_only(P)) + t·G )
 The taproot output key follows BIP341 with an empty merkle root, which is the single key case
 described by BIP86.
 
-A public key for which the BIP341 tweak fails cannot produce a taproot address. The request is
-refunded and rejected with `UNSUPPORTED_ADDRESS_TYPE`. This branch is not expected to be taken, but
-its outcome reaches the receipts trie, so it is specified.
+The BIP341 tweak can fail, and a public key for which it fails cannot produce a taproot address.
+That is the fourth case in the rejection order above.
 
 ### Rejection reason
 
@@ -97,8 +97,7 @@ its outcome reaches the receipts trie, so it is specified.
 UNSUPPORTED_ADDRESS_TYPE = 4
 ```
 
-It must be appended. The reason travels in event data and therefore reaches the receipts trie, so
-renumbering an existing value would change historical receipts on replay.
+It must be appended.
 
 ### Events
 
@@ -114,12 +113,7 @@ Two requirements on the emitted address, because it reaches the receipts trie:
 1. A bech32 or bech32m address MUST be emitted in lowercase. BIP173 permits an all uppercase form,
    and a different case is a different string and therefore a different receipts root. Base58Check
    is case sensitive, so a legacy or P2SH-P2WPKH address is emitted as its encoding produces it.
-2. The network dependent part of the encoding MUST come from the network, and an unrecognised
-   network MUST fail rather than fall back to another one. That part is the human readable part for
-   bech32 and bech32m, `bc`, `tb` and `bcrt`, and the version byte for Base58Check, `0x00` and
-   `0x05` on mainnet and `0x6f` and `0xc4` on testnet and regtest. In both encodings it is covered
-   by the checksum, so a wrong one does not produce a broken address. It produces a valid one that
-   belongs to nobody on the chain in use.
+2. The network dependent part of the encoding MUST come from the network.
 
 ### Storage
 
