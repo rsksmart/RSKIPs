@@ -92,7 +92,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 51       | [Memory-Mapped configuration register](IPs/RSKIP51.md)                           | 10-DIC-17 | SDL       | Usa      | Core     | 1 | Adopted  |
 | 52       | [Cache Oriented Storage Rent](IPs/RSKIP52.md)                                    | 12-DIC-17 | SDL       | Sca      | Core     | 2 | Withdrawn |
 | 53       | [Lumino Transaction Compression (LTCP)](IPs/RSKIP53.md)                          | 20-FEB-17 | SDL       | Sca      | Core     | 3 | Draft*   |
-| 54       | [Transaction amount & destination privacy](IPs/RSKIP54.md)                       | 07-MAR-17 | SDL       | Usa      | Core     | 3 | Draft    |
+| 54       | [Transaction amount & destination privacy](IPs/RSKIP54.md)                       | 07-MAR-17 | SDL       | Usa      | Core     | 3 | Withdrawn |
 | 55       | [Native Probabilistic payments](IPs/RSKIP55.md)                                  | 11-MAR-17 | SDL       | Usa      | Core     | 3 | Draft*   |
 | 56       | [Sporadic Verification-less mining](IPs/RSKIP56.md)                                  | 11-MAR-17 | SDL       | Fair      | Core     | 3 | Draft   |
 | 57       | [Derivation Path for Hierarchical Deterministic Wallets](IPs/RSKIP57.md)         | 05-ABR-18 | IO | Usa    | Net      | 1 | Adopted  |
