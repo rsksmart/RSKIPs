@@ -2,7 +2,7 @@
 rskip: 51
 title: Memory-Mapped configuration register 
 description: 
-status: Adopted
+status: Withdrawn
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -21,13 +21,13 @@ created: 2017-12-10
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Adopted |
+|**Status**     |Withdrawn |
 
 ## Revisions
 
 Revision: 2
 
-Status: Draft
+Status: Withdrawn
 
 # **Abstract**
 
