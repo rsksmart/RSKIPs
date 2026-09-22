@@ -2,7 +2,7 @@
 rskip: 34
 title: Contract const DATA Sections
 description: 
-status: Deferred
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
