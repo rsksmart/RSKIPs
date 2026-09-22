@@ -20,7 +20,7 @@ created: 2016-06-11
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Rejected in favor of RSKIP125 |
+|**Status**     |Rejected |
 
 # **Abstract**
 
