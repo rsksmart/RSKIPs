@@ -1,13 +1,13 @@
 ---
 rskip: 690
 title: Pegouts to different bitcoin address types
-description: Let a pegout requester choose the type of the bitcoin address the funds are sent to
-status: Draft
-purpose: Usa
+created: 07-SEP-26
 author: JT
+purpose: Usa
 layer: Core
 complexity: 2
-created: 07-SEP-26
+status: Draft
+description: Let a pegout requester choose the type of the bitcoin address the funds are sent to
 ---
 
 # Pegouts to different bitcoin address types
@@ -91,11 +91,9 @@ bech32m address goes in the existing field.
 `release_btc` carries the whole serialized bitcoin transaction. Its signature does not change, but
 its content now includes output scripts that were never seen before.
 
-`release_request_rejected` gains one reason value, appended to the ones RSKIP185 assigns:
+`release_request_rejected` gains one reason value, appended to the existing ones:
 
 - **4**: the address type is not supported.
-
-Value **3** is already taken by the fee above value rejection, which no RSKIP documents.
 
 Two requirements on the emitted address, because it reaches the receipts trie:
 
@@ -121,8 +119,8 @@ Requests queued before the activation are not lost and keep their position in th
 P2SH hash a script, and a public key does not determine a script. P2SH-P2WPKH is derivable only
 because BIP49 leaves exactly one valid inner script.
 
-**Why a string and not an integer.** The Bridge is a precompiled contract, so parsing costs no EVM
-opcodes, and in exchange the call is self describing and uses names the ecosystem already knows.
+**Why a string and not an integer.** The call is self describing and uses names the ecosystem
+already knows.
 
 **Why exact matching.** The accepted set is consensus input. It can be widened later but never
 narrowed.
