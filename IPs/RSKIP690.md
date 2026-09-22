@@ -55,20 +55,13 @@ The behavior described here is active only when `RSKIP690` is active.
 
 The value is matched **exactly**. No case folding, no trimming, no aliases.
 
-A call can fail more than one check at once, and the reason emitted reaches the receipts trie, so
-the order is consensus. It is:
+A call can fail more than one check. Exactly one `release_request_rejected` is emitted, carrying
+the reason of the first failure in this order:
 
-1. Caller is a contract. Emits `CALLER_CONTRACT` and does **not** refund, as RSKIP185 established.
-   This is checked first, so an unrecognized `addressType` does not turn a contract call into a
-   refund.
-2. `addressType` is not one of the four. Emits `UNSUPPORTED_ADDRESS_TYPE` and refunds.
-3. The amount fails the existing checks. Emits `LOW_AMOUNT` or `FEE_ABOVE_VALUE` and refunds,
-   unchanged from `releaseBtc`.
-4. The address cannot be derived from the requester's public key. Emits
-   `UNSUPPORTED_ADDRESS_TYPE` and refunds. Only taproot can reach this, see the derivation below.
-
-Exactly one `release_request_rejected` is emitted, carrying the reason of the first check that
-failed.
+1. Caller is a contract. `CALLER_CONTRACT`, not refunded.
+2. `addressType` is not one of the four. `UNSUPPORTED_ADDRESS_TYPE`, refunded.
+3. The amount fails the existing checks. `LOW_AMOUNT` or `FEE_ABOVE_VALUE`, refunded.
+4. The taproot tweak fails. `UNSUPPORTED_ADDRESS_TYPE`, refunded.
 
 ### Address derivation
 
@@ -89,16 +82,6 @@ described by BIP86.
 The BIP341 tweak can fail, and a public key for which it fails cannot produce a taproot address.
 That is the fourth case in the rejection order above.
 
-### Rejection reason
-
-`release_request_rejected` gains one value:
-
-```
-UNSUPPORTED_ADDRESS_TYPE = 4
-```
-
-It must be appended.
-
 ### Events
 
 **No event signature changes.** `releaseBtcTo` emits the same `release_request_received` as
@@ -108,12 +91,18 @@ bech32m address goes in the existing field.
 `release_btc` carries the whole serialized bitcoin transaction. Its signature does not change, but
 its content now includes output scripts that were never seen before.
 
+`release_request_rejected` gains one reason value, appended to the ones RSKIP185 assigns:
+
+- **4**: the address type is not supported.
+
+Value **3** is already taken by the fee above value rejection, which no RSKIP documents.
+
 Two requirements on the emitted address, because it reaches the receipts trie:
 
-1. A bech32 or bech32m address MUST be emitted in lowercase. BIP173 permits an all uppercase form,
-   and a different case is a different string and therefore a different receipts root. Base58Check
-   is case sensitive, so a legacy or P2SH-P2WPKH address is emitted as its encoding produces it.
-2. The network dependent part of the encoding MUST come from the network.
+1. A bech32 or bech32m address MUST be emitted in lowercase. Base58Check is case sensitive, so a
+   legacy or P2SH-P2WPKH address is emitted as its encoding produces it.
+2. The human readable part of a bech32 or bech32m address, and the version byte of a base58
+   address, MUST come from the network. There is no default.
 
 ### Storage
 
@@ -128,18 +117,23 @@ Requests queued before the activation are not lost and keep their position in th
 
 ## Rationale
 
-**Why these four types.** They are exactly the types Bitcoin Core can generate from a single key.
-P2WSH and generic P2SH hash a script that cannot be derived from a public key, so the Bridge cannot
-produce them. P2SH-P2WPKH is the exception, because BIP49 leaves exactly one valid inner script,
-`0014 ‖ hash160(pubkey)`. One public key gives one script, one hash and one address, with no choice
-anywhere along the way, so the Bridge can compute it.
+**Why these four types.** They are the ones that derive from a single public key. P2WSH and generic
+P2SH hash a script, and a public key does not determine a script. P2SH-P2WPKH is derivable only
+because BIP49 leaves exactly one valid inner script.
 
-**Why a string parameter and not an integer.** The Bridge is a precompiled contract, so parsing
-happens in the node and not in EVM opcodes. The extra calldata is negligible against a pegout, and
-in exchange the call is self describing and uses names the ecosystem already knows.
+**Why a string and not an integer.** The Bridge is a precompiled contract, so parsing costs no EVM
+opcodes, and in exchange the call is self describing and uses names the ecosystem already knows.
 
 **Why exact matching.** The accepted set is consensus input. It can be widened later but never
-narrowed, so it starts strict.
+narrowed.
+
+**Why the address is pinned to lowercase and to the network.** It reaches the receipts trie, so a
+different string is a different receipts root. A wrong human readable part does not produce an
+invalid address, it produces a valid one for another network.
+
+**Why the rejection order is fixed.** A call can fail more than one check and has to give the same
+reason on every node. The contract check comes first because it is the only one that does not
+refund; any later and a contract could get its value back by passing an unknown `addressType`.
 
 ## Backwards compatibility
 
@@ -150,41 +144,32 @@ replay to the same state.
 
 ## References
 
-[1] [RSKIP185](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP185.md): Made a pegout
-requested by a contract emit `release_request_rejected` with `CALLER_CONTRACT` instead of failing
-the transaction. It is why that check comes first and why it does not refund.
+[1] [RSKIP185](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP185.md): Peg-out refund and
+events, which assigns the existing `release_request_rejected` reasons
 
-[2] [RSKIP326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): Changed
-`btcDestinationAddress` in `release_request_received` from bytes to a string. That is why a bech32 or
-bech32m address fits the existing event with no signature change.
+[2] [RSKIP326](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP326.md): `btcDestinationAddress`
+changed from bytes to a string
 
 [3] [BIP49](https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki): Derivation scheme for
-P2WPKH nested in P2SH. It pins the redeem script to a single value, `0014 ‖ hash160(pubkey)`, which
-is what makes `p2sh-segwit` derivable from a public key while generic P2SH is not.
+P2WPKH nested in P2SH, which pins the redeem script to a single value
 
 [4] [BIP86](https://github.com/bitcoin/bips/blob/master/bip-0086.mediawiki): Key derivation for
-single key P2TR outputs. Its convention, an empty merkle root, is what makes the derived output
-spendable with a normal key path signature by any taproot wallet.
+single key P2TR outputs, the empty merkle root convention
 
-[5] [BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki): Segregated witness.
-It defines the witness program of a P2WPKH output as `hash160(pubkey)`, the same 20 bytes as P2PKH,
-which is why those two types share a derivation.
+[5] [BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki): Segregated witness,
+which defines the P2WPKH witness program as the same 20 bytes as P2PKH
 
 [6] [BIP173](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki): Bech32, the encoding
-for witness version 0 addresses. It also permits an all uppercase form, which is why this RSKIP
-requires lowercase explicitly.
+for witness version 0 addresses, which also permits an all uppercase form
 
-[7] [BIP340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki): Schnorr signatures for
-secp256k1. It defines the tagged hash, the x only public key encoding and `lift_x`, the three
-primitives the taproot tweak is built from.
+[7] [BIP340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki): Schnorr signatures,
+which define the tagged hash, the x only encoding and `lift_x`
 
-[8] [BIP341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki): Taproot spending rules.
-It defines the tweak itself, `taproot_tweak_pubkey`, which this RSKIP applies with an empty merkle
-root.
+[8] [BIP341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki): Taproot spending
+rules, which define the tweak this RSKIP applies with an empty merkle root
 
 [9] [BIP350](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki): Bech32m, the encoding
-for witness version 1 and later. Taproot addresses require it, and encoding one with the bech32
-constant instead produces a well formed address with a wrong checksum.
+required for witness version 1 and later
 
 ### Copyright
 
