@@ -2,7 +2,7 @@
 rskip: 110
 title: Fork Detection Data in RSKBLOCK tags 
 description: 
-status: Draft
+status: Adopted
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: 
@@ -17,9 +17,9 @@ created: 2019
 | **Created**    | 2019                                 |
 | **Author**     | SDL                                  |
 |                |                                      |
-| **Layer**      | Sec                                  |
+| **Layer**      | Core                                 |
 | **Complexity** |                                      |
-| **Status**     | Draft                                |
+| **Status**     | Adopted                              |
 
 # Abstract
 
