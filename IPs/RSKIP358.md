@@ -1,6 +1,6 @@
 ---
 rskip: 358
-title: Network Upgrade (patch) - Hop 4.0.1
+title: "Network Upgrade (patch): Hop 4.0.1"
 description: 
 status: Adopted
 purpose: Usa, Sec

@@ -2,7 +2,7 @@
 rskip: 45
 title: New Event Tree and Extended LOG
 description: 
-status: Adopted
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-06-26
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Adopted |
+|**Status**     |Withdrawn |
 
 # **Abstract**
 

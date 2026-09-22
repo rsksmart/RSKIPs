@@ -2,7 +2,7 @@
 rskip: 157
 title: Cumulative Difficulty in JSON-RPC block responses
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: MP <mpicco@iovlabs.org>
 layer: Node
@@ -19,7 +19,7 @@ created: 2020-02-11
 |**Purpose**    |Usa |
 |**Layer**      |Node |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 

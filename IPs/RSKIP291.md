@@ -1,6 +1,6 @@
 ---
 rskip: 291
-title: Network Upgrade - Hop
+title: "Network Upgrade: Hop"
 description: 
 status: Adopted
 purpose: Usa, Sec

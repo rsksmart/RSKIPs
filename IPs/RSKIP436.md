@@ -1,6 +1,6 @@
 ---
 rskip: 436
-title: Network Upgrade (patch) - Arrowhead 6.3.1
+title: "Network Upgrade (patch): Arrowhead 6.3.1"
 description: 
 status: Adopted
 purpose: Usa

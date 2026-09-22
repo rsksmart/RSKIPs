@@ -2,7 +2,7 @@
 rskip: 207
 title: Emergency Time-locks Refresh
 description: 
-status: Draft
+status: Deferred
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-01
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 
 #  **Abstract**
 

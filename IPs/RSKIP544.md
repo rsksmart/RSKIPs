@@ -31,11 +31,14 @@ The exceptional abort due to *code* starting with `0xEF` behaves exactly the sam
 
 ### Activation
 
-Todo: Block height at which activated is TBD
+This RSKIP was activated as part of the Vetiver 9.0.0 network upgrade ([RSKIP-553](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP553.md)):
+
+- Rootstock Mainnet block: 8,804,200
+- Rootstock Testnet block: 7,604,200
 
 ## Implementation
 
-Todo: There is no implementation of this proposal at present
+Implemented in RSKJ in [rsksmart/rskj#3448](https://github.com/rsksmart/rskj/pull/3448), released in [RSKJ 9.0.0 (Vetiver)](https://github.com/rsksmart/rskj/releases/tag/VETIVER-9.0.0) and gated behind the `rskip544` consensus rule.
 
 ## Rationale
 

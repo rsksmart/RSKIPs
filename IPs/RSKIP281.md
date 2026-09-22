@@ -2,7 +2,7 @@
 rskip: 281
 title: Rollup-optimized Ephemeral Calldata
 description: 
-status: Draft
+status: Deferred
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2021-10-05
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 |**discussions-to**     ||
 
 # **Abstract**

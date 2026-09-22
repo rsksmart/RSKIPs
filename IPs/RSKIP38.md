@@ -2,7 +2,7 @@
 rskip: 38
 title: Signature Compression
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-02-21
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft | 
+|**Status**     |Withdrawn | 
 
 
 # **Abstract**

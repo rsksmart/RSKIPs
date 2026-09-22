@@ -2,7 +2,7 @@
 rskip: 241
 title: User-triggered peg-out tx fee-bumping
 description: 
-status: Draft
+status: Deferred
 purpose: Usa, Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-05
 |**Purpose**    |Usa, Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 |**discussions-to**     | |
 
 

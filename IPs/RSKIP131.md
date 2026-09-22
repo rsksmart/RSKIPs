@@ -2,7 +2,7 @@
 rskip: 131
 title: Preventing CREATE2-after-SUICIDE in the same block
 description: 
-status: Draft
+status: Adopted
 purpose: Sca, Usa
 author: SMS (@sebastians), SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2019-06-10
 |**Purpose**    |Sca, Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 

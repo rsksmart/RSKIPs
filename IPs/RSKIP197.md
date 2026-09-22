@@ -2,7 +2,7 @@
 rskip: 197
 title: Fix Precompile Calls Not Conforming With CALL Semantics
 description: 
-status: Accepted
+status: Adopted
 purpose: Usa
 author: FJ (@fedejinich)
 layer: Core
@@ -19,7 +19,7 @@ created: 2020-12-15
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Accepted |
+|**Status**     |Adopted |
 
 ## Motivation
 
