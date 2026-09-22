@@ -73,7 +73,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 32       | [Double-Hashed Addresses](IPs/RSKIP32.md)                                        | 10-JAN-17 | SDL       | Sca      | Core     | 2 | Draft*   |
 | 33       | [CODEREPLACE opcode](IPs/RSKIP33.md)                                             | 17-JAN-17 | SDL       | Sec/Usa  | Core     | 2 | Adopted    |
 | 34       | [Contract const DATA Sections](IPs/RSKIP34.md)                                   | 20-JAN-17 | SDL       | Sca      | Core     | 1 | Draft*   |
-| 35       | [Managing BridgeMaster Federation Members](IPs/RSKIP35.md)                       | 02-FEB-17 | SDL       | Sca      | Core     | 3 | Draft    |
+| 35       | [Managing BridgeMaster Federation Members](IPs/RSKIP35.md)                       | 02-FEB-17 | SDL       | Sca      | Core     | 3 | Withdrawn |
 | 36       | [Transaction Encapsulation](IPs/RSKIP36.md)                                      | 02-FEB-17 | SDL       | Sca      | Core     | 2 | Draft    |
 | 37       | [Single Address Smart Wallets](IPs/RSKIP37.md)                                   | 18-FEB-17 | SDL       | Sca/Usa  | Core     | 3 | Draft    |
 | 38       | [Signature Compression](IPs/RSKIP38.md)                                          | 21-FEB-17 | SDL       | Sca      | Core     | 3 | Withdrawn |
