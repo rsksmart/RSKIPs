@@ -61,7 +61,7 @@ Any effect of the transaction not listed here is the same as for an exceptional 
 
 ### Direct calls with insufficient gas
 
-A direct call that cannot pay the cost the precompiled contract declares for its input is a precompile failure under this RSKIP, although the precompiled contract does not execute. Before activation such a call already reports status `0`, gas used equal to its gas limit, and no state change or log. After activation it consumes its gas limit, so the refunds that apply to an exceptional halt apply to it as stated in the Gas clause.
+A direct call that cannot pay the cost the precompiled contract declares for its input is a precompile failure under this RSKIP, although the precompiled contract does not execute. Before activation such a call already reports status `0`, gas used equal to its gas limit, and no state change or log. After activation it ends in an exceptional halt, so the refunds that apply to an exceptional halt apply to it as stated in the Gas clause.
 
 ### What does not change
 
@@ -71,6 +71,10 @@ A direct call that cannot pay the cost the precompiled contract declares for its
 - Transactions that end by an exceptional halt of the EVM already report failure and consume their gas as described here. Their outcome does not change.
 - Transactions that end by `REVERT` report failure and return their unused gas. Their outcome does not change.
 
+### JSON-RPC interface
+
+Nodes should return an error from `eth_call` and `eth_estimateGas` for a direct call whose precompiled contract fails. They should not return an empty result or a gas estimate for it. The error message should be fixed and should not include the message of the error raised by the precompiled contract. This part does not require a network upgrade, and nodes can adopt it at any time.
+
 ### Activation
 
 This change requires a network upgrade. Before activation the behaviour described in the Motivation is kept, so that historical blocks replay to the same state.
@@ -79,15 +83,17 @@ This change requires a network upgrade. Before activation the behaviour describe
 
 **A failing precompiled contract is an exceptional halt.** In Ethereum an error raised by a precompiled contract is an error of the call frame that invoked it. At the top level that means status `0`, all gas consumed, state reverted and no logs. EIP-196 states it for the `alt_bn128` contracts: the call "fails on invalid input and consumes all gas provided". This RSKIP applies the same outcome to a direct call in RSK, so that a precompiled contract and a contract fail in the same way.
 
-**The transaction consumes its gas limit.** Under RSKIP197 a nested call that fails costs the caller only the cost the precompiled contract declared, because the caller continues executing and can act on the failure. A direct call has no caller to continue. The transaction has halted, and a halted transaction consumes its gas limit, as any EVM exceptional halt does. Before activation the sender was already charged the full gas limit for a failing direct call. This RSKIP changes the charge only by the refunds that apply to an exceptional halt. Without such refunds the charge is unchanged. It makes the receipt and the block state what was charged, which also closes the gap that let a following transaction fit in a block that was full.
+**The transaction consumes its gas limit.** Under RSKIP197 a nested call that fails costs the caller only the cost the precompiled contract declared, because the caller continues executing and can act on the failure. A direct call has no caller to continue. The transaction has halted, and a halted transaction consumes its gas limit, as any EVM exceptional halt does. Before activation the sender was already charged the full gas limit for a failing direct call. This RSKIP changes the charge only by the refunds that apply to an exceptional halt. Without such refunds the charge is unchanged. This RSKIP makes the receipt and the block report what was charged, which also closes the gap that let a following transaction fit in a block that was full.
 
-**Refunds are not restated.** The gas clause defers to the refund rules that apply to any exceptional halt at the time of activation. Stating them here would duplicate rules defined elsewhere and would have to be kept in step with them.
+**Refunds are not restated.** The Gas clause defers to the refund rules that apply to any exceptional halt at the time of activation. Stating them here would duplicate rules defined elsewhere and would have to be kept in step with them.
 
 **A call that cannot pay the declared cost is a failure.** The precompiled contract does not execute in that case, and the sender is charged the full gas limit. Leaving that case out of the rule would keep a path that loses the refunds every other exceptional halt keeps.
 
 **Relationship to RSKIP197.** RSKIP197 specified the failure of a nested call and left the direct call as it was. The two paths have differed since Iris: a nested failure is rolled back and reported to the caller, while a direct failure is committed and reported as success. This RSKIP specifies the direct call so that both paths roll back the state changes of a failing precompiled contract. Logs of a failing nested call are outside this RSKIP.
 
-**Bridge state.** On mainnet and testnet, no current Bridge method can be made by an unprivileged transaction sender to commit state before failing. The state rollback therefore removes a latent condition rather than a live one, and it protects any future Bridge method that writes state during the call. Bridge events are a different matter. Before activation an event emitted by the Bridge is recorded even when the call fails, so a Bridge event in a receipt does not prove that the Bridge state it describes was committed. After activation events are recorded only for calls that succeed. Indexers that need the committed Bridge state should read it through the Bridge view methods rather than infer it from receipts.
+**Bridge state.** On mainnet and testnet, no current Bridge method lets an unprivileged sender commit state before the method fails. The state rollback therefore removes a latent condition rather than a live one, and it protects any future Bridge method that writes state during the call. Bridge events are a different matter. Before activation an event emitted by the Bridge is recorded even when the call fails, so a Bridge event in a receipt does not prove that the Bridge state it describes was committed. After activation events are recorded only for calls that succeed. Indexers that need the committed Bridge state should read it through the Bridge view methods rather than infer it from receipts.
+
+**The JSON-RPC interface reports the failure.** Wallets call `eth_call` and `eth_estimateGas` before they send a transaction. Currently both methods report a failing direct call as successful, and `eth_estimateGas` returns 44,064 for the call in test case 1. After activation a transaction sent with that gas limit fails and consumes it. Therefore the failure should be reported before the transaction is sent.
 
 ## Backwards Compatibility
 
@@ -109,6 +115,7 @@ The following observable changes apply to failing direct calls.
 - The gas used of a block that contains such a transaction is higher, so fewer transactions may fit in it.
 - Libraries that reject a transaction on status `0` now reject failing direct calls. Explorers show them as failed.
 - Consumers that read Bridge events from the receipts of failing calls no longer see them.
+- `eth_call` and `eth_estimateGas` return an error for a failing direct call instead of an empty result and a gas estimate. JSON-RPC clients that treat an empty result as success need to handle the error.
 
 Contracts are not affected. Nested calls behave as before.
 
@@ -126,6 +133,7 @@ Gas price is 1 in every case, so the fee equals the gas used.
 8. A transaction with no authorization list calls a precompiled contract with a gas limit below the cost the contract declares for the input. Before and after activation the receipt status is `0`, the gas used and the fee are the gas limit, and no state change or log is recorded.
 9. Where RSKIP545 is active, a set-code transaction with gas limit 100,000 carries one valid authorization whose authority is not empty. RSKIP545 grants a refund of 9,500 for it, which is `PER_EMPTY_ACCOUNT_COST` minus `PER_AUTH_BASE_COST`. The transaction calls a precompiled contract that fails. Before activation the receipt status is `1` and the fee is 100,000. After activation the authorization is processed, the receipt status is `0`, and the gas used and the fee are 90,500.
 10. Where RSKIP545 is active, a set-code transaction with gas limit 60,000 carries one authorization that earns the same refund as in case 9 and sends the data `0xdeadbeef` to the Bridge. The limit covers the intrinsic cost of 46,064, which includes the 25,000 charged for the authorization. It does not cover the 23,000 the Bridge declares for the input. Before activation the receipt status is `0` and the gas used and the fee are 60,000. After activation the receipt status is `0`, and the gas used and the fee are 50,500.
+11. A node receives `eth_call` and `eth_estimateGas` requests for the call of case 1. Both methods return an error.
 
 ## Implementation
 
