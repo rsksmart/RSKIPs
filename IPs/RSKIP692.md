@@ -137,7 +137,7 @@ Gas price is 1 in every case, so the fee equals the gas used.
 
 ## Implementation
 
-A partial implementation of the receipt status and gas changes is in rskj pull request #3678 [3]. The state rollback, the exclusion of logs, and the accounting of direct calls with insufficient gas are pending.
+TBD
 
 ## Security Considerations
 
@@ -149,13 +149,11 @@ This RSKIP closes two conditions. A precompiled contract that writes state and t
 
 [2] RSKIP545 Implement EIP-7702 Account Abstraction in Rootstock https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP545.md
 
-[3] Partial implementation https://github.com/rsksmart/rskj/pull/3678
+[3] RSKIP197 implementation https://github.com/rsksmart/rskj/pull/1392
 
-[4] RSKIP197 implementation https://github.com/rsksmart/rskj/pull/1392
+[4] EIP-196 Precompiled contracts for addition and scalar multiplication on the elliptic curve alt_bn128 https://eips.ethereum.org/EIPS/eip-196
 
-[5] EIP-196 Precompiled contracts for addition and scalar multiplication on the elliptic curve alt_bn128 https://eips.ethereum.org/EIPS/eip-196
-
-[6] Ethereum execution specifications, Prague, `process_message_call` https://github.com/ethereum/execution-specs
+[5] Ethereum execution specifications, Prague, `process_message_call` https://github.com/ethereum/execution-specs
 
 ## Copyright
 
