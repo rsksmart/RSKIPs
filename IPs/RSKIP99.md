@@ -2,7 +2,7 @@
 rskip: 99
 title: Orchid Network Upgrade
 description: 
-status: Draft
+status: Adopted
 purpose: Sca, Usa, Sec
 author: AE (@adrian.eidelman)
 layer: Core
@@ -19,7 +19,7 @@ created: 2018-08-31
 |**Purpose**    |Sca,Usa,Sec |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 # **Abstract**
 

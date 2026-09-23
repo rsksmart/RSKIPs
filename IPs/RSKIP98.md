@@ -36,7 +36,7 @@ Therefore we propose that the system is forever deactivated in the next consensu
 
 # **Specification**
 
-If block number >= N (TBD), only blocks presenting a valid merge-mined proof-of-work will be accepted.
+If block number >= 729,000 (the [Orchid network upgrade](RSKIP99.md)), only blocks presenting a valid merge-mined proof-of-work will be accepted.
 
 # Backwards Compatibility
 

@@ -1,6 +1,6 @@
 ---
 rskip: 141
-title: Network Upgrade - Papyrus 	
+title: "Network Upgrade: Papyrus"
 description: 
 status: Adopted
 purpose: Sca, Usa, Sec

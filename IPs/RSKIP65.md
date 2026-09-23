@@ -2,7 +2,7 @@
 rskip: 65
 title: MINGASPRICE Opcode
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sec
 author: JIO <jorlicki@iovlabs.org>
 layer: Core
@@ -20,7 +20,7 @@ created: 2018-05-11
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 ## Abstract
 
 In this RSKIP we propose an extra opcode. It will provide non-native smart contracts access to current block information about Minimum Gas Price. This information will allow smart contracts to mitigate some financial behavior attacks, based on statistics, by making them economically infeasible, i.e. the attack cannot make money by statistically manipulating the contract. We can also deal with network congestion from the smart contract.

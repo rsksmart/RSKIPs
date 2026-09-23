@@ -2,7 +2,7 @@
 rskip: 188
 title: Precompiled Contracts for BLS12-381 Curve Operations 
 description: 
-status: Draft
+status: Withdrawn
 purpose: Usa
 author: FJ (@fedejinich)
 layer: Core
@@ -20,7 +20,7 @@ created: 2020-11-20
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 ## Abstract
 

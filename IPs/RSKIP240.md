@@ -2,7 +2,7 @@
 rskip: 240
 title: Implement Storage Rent in RSK
 description: 
-status: Draft
+status: Deferred
 purpose: Sca, Sec, Fair
 author: SDL (@sergiodemianlerner), SM (@smishraiov), DM (@diegomasini), FJ (@fedejinich)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-04-27
 |**Purpose**    |Sca, Sec, Fair|
 |**Layer**      |Core|
 |**Complexity** |2|
-|**Status**     |Draft|
+|**Status**     |Deferred|
 |**Discussions-to**|https://research.rsk.dev/t/rskip-240-implement-storage-rent-in-rsk/163 |
 
 ## Abstract

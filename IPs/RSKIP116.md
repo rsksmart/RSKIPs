@@ -1,6 +1,6 @@
 ---
 rskip: 116
-title: Failure of SSTORE on Log-Gas Recursive CALLs 
+title: Failure of SSTORE on Low-Gas Recursive CALLs
 description: 
 status: Draft
 purpose: Sca, Sec, Usa
@@ -14,7 +14,7 @@ created: 2019
 
 |RSKIP          |116           |
 | :------------ |:-------------|
-|**Title**      |Failure of SSTORE on Log-Gas Recursive CALLs |
+|**Title**      |Failure of SSTORE on Low-Gas Recursive CALLs |
 |**Created**    |2019 |
 |**Author**     |SDL |
 |**Purpose**    |Sca, Sec, Usa |

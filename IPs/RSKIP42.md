@@ -1,6 +1,6 @@
 ---
 rskip: 42
-title: Remove world midstates from receiptsq
+title: Remove world midstates from receipts
 description: 
 status: Adopted
 purpose: Sca

@@ -8,7 +8,7 @@
 |**Purpose**    | Sca                           |
 |**Layer**      | Core                          |
 |**Complexity** | 2                             |
-|**Status**     | Draft                         |
+|**Status**     | Withdrawn                     |
 
 ## Abstract
 

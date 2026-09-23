@@ -1,7 +1,7 @@
 ---
 rskip: 351
 title: Miniheader - block header compression
-status: Draft
+status: Adopted (Testnet)
 purpose: Sca
 author: IO (ilan@iovlabs.org)
 layer: Core

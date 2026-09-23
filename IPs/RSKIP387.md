@@ -2,7 +2,7 @@
 rskip: 387
 title: Support for Bridging Ordinals
 description: 
-status: Draft
+status: Deferred
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2023-06-19
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 |**discussions-to**     ||
 
 # **Abstract**

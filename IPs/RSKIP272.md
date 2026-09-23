@@ -2,7 +2,7 @@
 rskip: 272
 title: Bridge UTXO Management Account
 description: 
-status: Draft
+status: Deferred
 purpose: Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-08
 |**Purpose**    |Sec, Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 
 #  **Abstract**
 

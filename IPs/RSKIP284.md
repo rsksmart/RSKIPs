@@ -8,7 +8,7 @@
 |**Purpose**    |Usa, Sec|
 |**Layer**      |Core |
 |**Complexity** |1|
-|**Status**     |Accepted|
+|**Status**     |Adopted|
 
 ## Abstract
 

@@ -2,7 +2,7 @@
 rskip: 198
 title: Minpeg, a miners' multisig in the peg
 description: 
-status: Draft
+status: Deferred
 purpose: Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-01
 |**Purpose**    |Sec |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 |**discussions-to**     ||
 
 
