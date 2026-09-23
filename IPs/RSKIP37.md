@@ -21,8 +21,8 @@ created: 2017-02-18
 |**Purpose**    |Sca/Usa |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Superseded |
-|**Superseded-By** |[RSKIP545](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP545.md) |
+|**Status**     |Rejected |
+|**Rejected-By** |[RSKIP545](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP545.md) |
 
 # **Abstract**
 
