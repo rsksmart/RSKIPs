@@ -2,7 +2,7 @@
 rskip: 37
 title: Single Address Smart Wallets
 description: 
-status: Superseded
+status: Rejected
 superseded-by: 545
 purpose: Sca, Usa
 author: SDL (@sergiodemianlerner)
