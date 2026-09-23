@@ -20,7 +20,7 @@ created: 2017-01-20
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Deferred |
+|**Status**     |Withdrawn |
 
 # **Abstract**
 
