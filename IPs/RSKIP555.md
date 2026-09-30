@@ -152,17 +152,24 @@ The existing `SUICIDE` (5000) and `NEW_ACCT_SUICIDE` (25000) costs and the `SUIC
 
 ### 7. `CREATE` (0xF0) and `CREATE2` (0xF5)
 
-The address of the newly created contract is inserted into `accessed_addresses`. No access charge is made for the insertion.
+The address of the contract being created is inserted into `accessed_addresses`. No access charge is made for the insertion, and the costs of `CREATE` and `CREATE2` are otherwise unchanged.
+
+The insertion happens at a fixed point in the opcode:
+
+1. The call depth and endowment balance checks run first. If either fails, nothing is inserted. Ethereum clients also reject a sender nonce overflow at this stage. Rootstock has no such check and none is added.
+2. The address is inserted into `accessed_addresses`.
+3. The collision check runs, together with Rootstock's check that the address wasn't destroyed earlier in the same block (introduced with [RSKIP-125][rskip125]). If either fails, the address **stays** in `accessed_addresses`.
+4. The initcode runs. If it reverts, runs out of gas, or the creation fails when storing the code, the address **stays** in `accessed_addresses`. Entries the initcode itself added are removed, per §9.
+
+The insertion belongs to the creating frame, not to the initcode frame. §9 removes it only if the creating frame itself fails.
+
+EIP-2929's text says the address is added "immediately". geth and the execution-specs both insert it after the pre-checks in step 1 and before the collision check, and that is what this RSKIP specifies. See [Rationale](#why-client-behaviour-is-the-reference).
 
 ### 8. `SSTORE` (0x55)
 
-`SSTORE` pricing changes in two parts, both applied at the same activation height.
+`SSTORE` moves to the EIP-2200 net metering algorithm, with the cold surcharge and the constant substitutions of EIP-2929. The pieces are applied in a fixed order. The order matters: Ethereum clients evaluate the sentry before any part of the opcode's cost is taken, and charge the whole cost once.
 
-**First, the cold surcharge.** Let `key` be the storage key and `addr` the executing contract. If `(addr, key)` isn't in `accessed_storage_keys`, charge `COLD_SLOAD_COST` and insert it. This charge is made *in addition to* the cost computed below.
-
-**Second, the EIP-2200 net metering algorithm**, evaluated with `SLOAD_GAS` equal to `WARM_STORAGE_READ_COST` (100) and `SSTORE_RESET_GAS` equal to 2900.
-
-Three values are involved:
+Let `key` be the storage key and `addr` the executing contract. Three values are involved:
 
 - `original`, the value the slot held at the start of the transaction;
 - `current`, the value the slot holds now;
@@ -170,27 +177,36 @@ Three values are involved:
 
 Tracking `original` is new to Rootstock. The current implementation compares only `current` and `new` (`VM.java:1321`-`1355`).
 
-The algorithm:
+The procedure:
 
-1. If remaining gas is less than or equal to `SSTORE_SENTRY_GAS` (2300), fail the current call frame with an out-of-gas exception. This is [EIP-1706][eip1706], a component of EIP-2200.
-2. If `current` equals `new`, charge `SLOAD_GAS` (100).
-3. If `current` doesn't equal `new`:
-   1. If `original` equals `current`, so the slot hasn't been modified yet in this transaction:
-      - If `original` is 0, charge `SSTORE_SET_GAS` (20000).
-      - Otherwise, charge `SSTORE_RESET_GAS` (2900). If `new` is 0, add `SSTORE_CLEARS_SCHEDULE` (15000) to the refund counter.
-   2. If `original` doesn't equal `current`, so the slot is dirty, charge `SLOAD_GAS` (100), then apply both of the following:
-      - If `original` isn't 0:
-        - If `current` is 0, subtract `SSTORE_CLEARS_SCHEDULE` (15000) from the refund counter.
-        - If `new` is 0, add `SSTORE_CLEARS_SCHEDULE` (15000) to the refund counter.
-      - If `original` equals `new`, so the slot has been reset to where it started:
-        - If `original` is 0, add `SSTORE_SET_GAS - SLOAD_GAS` (19900) to the refund counter.
-        - Otherwise, add `SSTORE_RESET_GAS - SLOAD_GAS` (2800) to the refund counter.
+1. **Sentry.** If the gas remaining *before this opcode is charged* is less than or equal to `SSTORE_SENTRY_GAS` (2300), fail the current call frame with an out-of-gas exception. This is [EIP-1706][eip1706], a component of EIP-2200. No cost has been taken at this point, so the cold surcharge can't push a frame under the sentry.
+2. **Cold surcharge.** Start with `cost = 0`. If `(addr, key)` isn't in `accessed_storage_keys`, set `cost` to `COLD_SLOAD_COST` (2100) and insert the key.
+3. **Net metering.** Add to `cost`, and adjust the refund counter, as follows. `SLOAD_GAS` is `WARM_STORAGE_READ_COST` (100) and `SSTORE_RESET_GAS` is 2900.
+   1. If `current` equals `new`, add `SLOAD_GAS` (100).
+   2. If `current` doesn't equal `new`:
+      1. If `original` equals `current`, so the slot hasn't been modified yet in this transaction:
+         - If `original` is 0, add `SSTORE_SET_GAS` (20000).
+         - Otherwise, add `SSTORE_RESET_GAS` (2900). If `new` is 0, add `SSTORE_CLEARS_SCHEDULE` (15000) to the refund counter.
+      2. If `original` doesn't equal `current`, so the slot is dirty, add `SLOAD_GAS` (100), then apply both of the following:
+         - If `original` isn't 0:
+           - If `current` is 0, subtract `SSTORE_CLEARS_SCHEDULE` (15000) from the refund counter.
+           - If `new` is 0, add `SSTORE_CLEARS_SCHEDULE` (15000) to the refund counter.
+         - If `original` equals `new`, so the slot has been reset to where it started:
+           - If `original` is 0, add `SSTORE_SET_GAS - SLOAD_GAS` (19900) to the refund counter.
+           - Otherwise, add `SSTORE_RESET_GAS - SLOAD_GAS` (2800) to the refund counter.
+4. **Charge.** Charge `cost` once. If the frame can't afford it, the frame fails with out-of-gas, and the key inserted in step 2 is removed with the rest of the frame's effects (§9).
+
+Worked example: a frame reaches `SSTORE` with 4400 gas on a cold slot where `current` equals `new`. The sentry passes, since 4400 is above 2300. The cost is 2100 + 100, and the frame continues with 2200 gas. Evaluating the sentry after taking the cold surcharge would fail this frame instead. geth ([`makeGasSStoreFunc`][gethacl]) and the execution-specs ([Berlin `sstore`][esstorage]) both pass it.
+
+**The refund counter can go negative within a frame.** The subtraction in step 3.2.2 can take a counter below zero when the addition it reverses happened in a different call frame. Example: a slot originally holds `X`. The outer frame writes 0 and adds 15000 to its counter. A reentrant inner frame then writes `Y`, which lands in step 3.2.2 and subtracts 15000 from the inner frame's counter, taking it to -15000. The transaction total is 0. EIP-2200 states the rule directly: "if the implementation uses call-frame refund counter, the counter can go negative. If the implementation uses transaction-wise refund counter, the counter always stays positive." Rootstock accumulates refunds per frame and merges them into the parent when the frame succeeds, so the per-frame counter must be **signed**. Only the transaction total is non-negative, and the existing cap of half the gas used applies to that total. An implementation that rejects a negative per-frame value fails the inner frame where Ethereum succeeds. One that clamps it at zero over-refunds by 15000. Both diverge.
 
 Refund policy is otherwise unchanged. `SSTORE_CLEARS_SCHEDULE` stays at 15000 and the `SELFDESTRUCT` refund is retained. Ethereum's later reform of both ([EIP-3529][eip3529]) isn't adopted here.
 
-### 9. Reversion
+### 9. Reversion and exceptional halts
 
-If a call frame reverts, `accessed_addresses` and `accessed_storage_keys` are restored to the contents they had when that frame began. Entries added by a frame that reverts don't stay warm for later frames.
+`accessed_addresses` and `accessed_storage_keys` are transaction-scoped constructs, implemented identically to the self-destruct list and the refund counter. If a call frame **reverts or halts exceptionally**, both sets are restored to the contents they had when that frame began. Exceptional halts include running out of gas, an invalid opcode, a stack underflow or overflow, and a state modification attempted under `STATICCALL`. Running out of gas while paying a cold cost is included: the entry inserted by that opcode is removed with the frame.
+
+Entries added by a failed frame don't stay warm for later frames. Entries added by the caller before the call, including the created address of §7, are unaffected.
 
 ### 10. Ethereum EIP coverage
 
@@ -243,6 +259,16 @@ EIP-2929's pre-warm set exists because the cold surcharge is meant to price a tr
 Rootstock could derive its own schedule from measurements of the unitrie. Doing so would produce numbers better fitted to Rootstock's storage layout and block gas limit, and it would defeat the purpose of the change, because contracts and tooling would still need Rootstock-specific gas assumptions. That's the problem this RSKIP sets out to remove.
 
 Adopting 2100, 2600 and 100 accepts a calibration performed for a different trie. That's a real cost, and it's the smaller one. If a Rootstock-specific schedule is ever wanted, it should be a separate proposal that starts from measurements, and it should be weighed against the compatibility it would give up.
+
+### Why client behaviour is the reference
+
+Two places in the Specification follow geth and the execution-specs rather than the EIP prose.
+
+EIP-2929 says the created address is added "immediately (ie. before checks are done to determine whether or not the address is unclaimed)". Both clients insert it after the depth and balance checks and before the collision check. Read literally, "immediately" would warm the address when `CREATE` fails on depth or balance, and Ethereum doesn't do that.
+
+EIP-2200 lists the sentry as step one of the `SSTORE` algorithm and EIP-2929 adds the cold surcharge "in addition", without saying which comes first. Both clients evaluate the sentry against the gas remaining before the opcode and charge the whole cost once.
+
+Where the prose and the clients disagree, the clients are what Ethereum's consensus actually is. A contract that behaves identically on both chains is the goal of this RSKIP, so the clients win.
 
 ### Why the 2300 gas stipend isn't raised instead
 
@@ -371,8 +397,8 @@ An implementation should verify at least the following. These are stated as requ
 1. Two `SLOAD` operations on the same slot in one transaction cost 2100 then 100.
 2. Two `SLOAD` operations on different slots of the same contract each cost 2100.
 3. An address warmed inside a nested call stays warm in the caller after that call returns.
-4. An address warmed inside a call frame that **reverts** is cold again in the caller.
-5. A storage slot warmed inside a call frame that reverts is cold again in the caller.
+4. An address warmed inside a call frame that **reverts** is cold again in the caller. The same holds when the frame **halts exceptionally**: out of gas, an invalid opcode, or a write attempted under `STATICCALL`.
+5. A storage slot warmed inside a call frame that reverts, or that runs out of gas, is cold again in the caller. This includes a frame that runs out of gas while paying the cold cost of that very slot.
 6. The access sets don't persist between two transactions in the same block.
 
 **Pre-warmed entries**
@@ -389,14 +415,14 @@ An implementation should verify at least the following. These are stated as requ
 13. `EXTCODECOPY`'s per-word copy cost is applied on top of the access cost, unchanged.
 14. A value-transferring `CALL` still adds `VT_CALL`, and a call creating an account still adds `NEW_ACCT_CALL`.
 15. `SELFDESTRUCT` to a cold beneficiary costs 2600 more than to a warm one.
-16. An address created by `CREATE` or `CREATE2` is warm immediately afterwards.
+16. An address created by `CREATE` or `CREATE2` is warm immediately afterwards. It's also warm when the creation fails after the pre-checks: the initcode reverts, the initcode runs out of gas, or the address collides. It isn't inserted when `CREATE` fails on the depth or balance check.
 
 **`SSTORE`**
 
 17. The full EIP-2200 transition table, covering every combination of `original`, `current` and `new` being zero or non-zero, including both dirty-slot branches and both reset-refund cases (19900 and 2800).
 18. A cold slot adds 2100 to whichever EIP-2200 cost applies, and a warm slot doesn't.
-19. An `SSTORE` attempted with 2300 or less gas remaining fails with out-of-gas, regardless of the values involved.
-20. Refunds accumulate and are subtracted correctly across multiple writes to the same slot inside one transaction.
+19. An `SSTORE` attempted with 2300 or less gas remaining *before the opcode is charged* fails with out-of-gas, regardless of the values involved. An `SSTORE` on a cold slot with `current` equal to `new` and 4400 gas remaining succeeds, costs 2200 and leaves 2200: the sentry is evaluated before the cold surcharge.
+20. Refunds accumulate and are subtracted correctly across multiple writes to the same slot inside one transaction, including across call frames. A slot originally holding `X` is written to 0 in the outer frame, then to `Y` in a reentrant inner frame that succeeds. The net refund for the slot is 0, and the inner frame doesn't fail even though its own counter reaches -15000.
 
 **Activation**
 
@@ -436,6 +462,12 @@ Ethereum's execution-spec fixtures at `tests/berlin/eip2929_gas_cost_increases` 
 
 [15] [folia-app/eip-2929, fixing `.transfer()` to Gnosis Safe with an access list][folia2929]
 
+[16] [go-ethereum, `core/vm/operations_acl.go` (`makeGasSStoreFunc`)][gethacl] and [`core/vm/evm.go` (`create`)][gethevm]
+
+[17] [ethereum/execution-specs, Berlin `vm/instructions/storage.py` (`sstore`)][esstorage] and [`system.py` (`generic_create`)][essystem]
+
+[18] [RSKIP-125: Create2][rskip125]
+
 [eip1087]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1087.md
 [eip1283]: https://eips.ethereum.org/EIPS/eip-1283
 [eip1706]: https://eips.ethereum.org/EIPS/eip-1706
@@ -454,6 +486,11 @@ Ethereum's execution-spec fixtures at `tests/berlin/eip2929_gas_cost_increases` 
 [folia2929]: https://github.com/folia-app/eip-2929
 [execspecs]: https://github.com/ethereum/execution-specs/tree/master/tests/berlin/eip2929_gas_cost_increases
 [tests649]: https://github.com/ethereum/tests/pull/649
+[gethacl]: https://github.com/ethereum/go-ethereum/blob/master/core/vm/operations_acl.go
+[gethevm]: https://github.com/ethereum/go-ethereum/blob/master/core/vm/evm.go
+[esstorage]: https://github.com/ethereum/execution-specs/blob/master/src/ethereum/forks/berlin/vm/instructions/storage.py
+[essystem]: https://github.com/ethereum/execution-specs/blob/master/src/ethereum/forks/berlin/vm/instructions/system.py
+[rskip125]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP125.md
 
 ### Copyright
 
