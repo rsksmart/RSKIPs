@@ -2,7 +2,7 @@
 rskip: 285
 title: Utility Methods to Make PPA Safer
 description: 
-status: Draft
+status: Deferred
 purpose: Usa, Sec
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2021-10-25
 |**Purpose**    |Usa/Sec |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 
 ## Abstract
 

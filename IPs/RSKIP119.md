@@ -2,7 +2,7 @@
 rskip: 119
 title: Precompiled contract for inspecting block headers  
 description: 
-status: Draft
+status: Adopted
 purpose: Usa
 author: DM (@diego)
 layer: Core
@@ -19,7 +19,7 @@ created: 2019-04-01
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 

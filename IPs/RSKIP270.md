@@ -2,7 +2,7 @@
 rskip: 270
 title: Bridge UTXO set size management
 description: 
-status: Draft
+status: Deferred
 purpose: Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -12,7 +12,7 @@ created: 2021-08
 # Bridge UTXO set size management
 
 
-|RSKIP          | xxx |
+|RSKIP          | 270 |
 | :------------ |:-------------|
 |**Title**      |Bridge UTXO set size management|
 |**Created**    |AUG-2021 |
@@ -20,7 +20,7 @@ created: 2021-08
 |**Purpose**    |Sec, Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 
 #  **Abstract**
 

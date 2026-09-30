@@ -2,7 +2,7 @@
 rskip: 191
 title: Remove opcodes incompatible with Ethereum
 description: 
-status: Draft
+status: Adopted
 purpose: Sec
 author: AL <angel@iovlabs.org>
 layer: Core
@@ -20,7 +20,7 @@ created: 2020-11
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 
 # **Abstract**

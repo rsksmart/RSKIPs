@@ -3,6 +3,7 @@ rskip: 107
 title: Smaller Unitrie Nodes for Higher Scalability
 description: 
 status: Draft
+replaces: 24
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
