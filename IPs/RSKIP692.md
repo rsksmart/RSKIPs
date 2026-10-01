@@ -67,7 +67,7 @@ A direct call that cannot pay the cost the precompiled contract declares for its
 
 - Nested calls keep the behaviour specified by RSKIP197.
 - A precompiled contract that completes and returns an error code is a successful call.
-- A failure raised before the precompiled contract starts executing, such as while it computes the cost it declares for its input, is not a precompile failure under this RSKIP. Its outcome does not change.
+- An error raised while the precompiled contract computes the cost it declares for its input is not a precompile failure under this RSKIP. Its outcome does not change. A direct call that cannot pay that cost is covered by the section on insufficient gas.
 - Transactions that end by an exceptional halt of the EVM already report failure and consume their gas as described here. Their outcome does not change.
 - Transactions that end by `REVERT` report failure and return their unused gas. Their outcome does not change.
 
@@ -111,8 +111,8 @@ For a transaction without refunds the fee is unchanged, because the sender was a
 
 The following observable changes apply to failing direct calls.
 
-- Receipts report status `0` instead of `1`, a higher gas used, and no logs.
-- The gas used of a block that contains such a transaction is higher, so fewer transactions may fit in it.
+- When the precompiled contract fails while executing, the receipt reports status `0` instead of `1`, a higher gas used, and no logs. The gas used of the block is higher, so fewer transactions may fit in it.
+- When the call cannot pay the cost the precompiled contract declares, the status and logs are unchanged. If the transaction carries a refund, the gas used of the receipt and of the block is lower by that refund.
 - Libraries that reject a transaction on status `0` now reject failing direct calls. Explorers show them as failed.
 - Consumers that read Bridge events from the receipts of failing calls no longer see them.
 - `eth_call` and `eth_estimateGas` return an error for a failing direct call instead of an empty result and a gas estimate. JSON-RPC clients that treat an empty result as success need to handle the error.
