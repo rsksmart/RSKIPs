@@ -158,7 +158,7 @@ The insertion happens at a fixed point in the opcode:
 
 1. The call depth and endowment balance checks run first. If either fails, nothing is inserted. Ethereum clients also reject a sender nonce overflow at this stage. Rootstock has no such check and none is added.
 2. The address is inserted into `accessed_addresses`.
-3. The collision check runs, together with Rootstock's check that the address wasn't destroyed earlier in the same block (introduced with [RSKIP-125][rskip125]). If either fails, the address **stays** in `accessed_addresses`.
+3. The collision check runs, together with Rootstock's check that the address wasn't destroyed earlier in the same block (specified in [RSKIP-131][rskip131], activated with [RSKIP-125][rskip125], and applied to both `CREATE` and `CREATE2`). If either fails, the address **stays** in `accessed_addresses`.
 4. The initcode runs. If it reverts, runs out of gas, or the creation fails when storing the code, the address **stays** in `accessed_addresses`. Entries the initcode itself added are removed, per §9.
 
 The insertion belongs to the creating frame, not to the initcode frame. §9 removes it only if the creating frame itself fails.
@@ -466,7 +466,9 @@ Ethereum's execution-spec fixtures at `tests/berlin/eip2929_gas_cost_increases` 
 
 [17] [ethereum/execution-specs, Berlin `vm/instructions/storage.py` (`sstore`)][esstorage] and [`system.py` (`generic_create`)][essystem]
 
-[18] [RSKIP-125: Create2][rskip125]
+[18] [RSKIP-131: Preventing CREATE2-after-SUICIDE in the same block][rskip131]
+
+[19] [RSKIP-125: Create2][rskip125]
 
 [eip1087]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1087.md
 [eip1283]: https://eips.ethereum.org/EIPS/eip-1283
@@ -491,6 +493,7 @@ Ethereum's execution-spec fixtures at `tests/berlin/eip2929_gas_cost_increases` 
 [esstorage]: https://github.com/ethereum/execution-specs/blob/master/src/ethereum/forks/berlin/vm/instructions/storage.py
 [essystem]: https://github.com/ethereum/execution-specs/blob/master/src/ethereum/forks/berlin/vm/instructions/system.py
 [rskip125]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP125.md
+[rskip131]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP131.md
 
 ### Copyright
 
