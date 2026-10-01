@@ -90,7 +90,7 @@ When a transaction begins, `accessed_addresses` is initialised with:
 2. the transaction recipient, or, for a contract-creation transaction, the address being created;
 3. every precompiled contract registered in `PrecompiledContracts` and active at the current block.
 
-Point 3 covers more addresses on Rootstock than on Ethereum. It includes the standard precompiles at `0x01` through `0x09`, and additionally the Rootstock native contracts. Which as of today, are:
+Point 3 covers more addresses on Rootstock than on Ethereum. It includes the standard precompiles at `0x01` through `0x09`, and additionally the Rootstock native contracts, which as of today are:
 
 | Address | Contract |
 | :------ | :------- |
@@ -272,11 +272,11 @@ Where the prose and the clients disagree, the clients are what Ethereum's consen
 
 ### Why the 2300 gas stipend isn't raised instead
 
-Raising the stipend is the obvious alternative to EIP-2930, and it has one clear advantage: it needs no tooling support at all. Around 4800 gas would cover both proxy shapes, since an EIP-1967 proxy needs 4700 and an EIP-1167 one needs 2600.
+Raising the stipend is the obvious alternative to EIP-2930, and it has one clear advantage: it needs no tooling support at all. The number that preserves today's behaviour isn't 4700, the access charges of an EIP-1967 proxy, because the fallback also has to run its dispatch and the implementation's receive body. It's the increase in those charges. Today they cost 900, so any recipient that fits in 2300 now spends at most 1400 on everything else. Raising the stipend by 3800, to around 6100, keeps every recipient that fits today fitting afterwards. The EIP-1167 shape needs less, 1900 more for 4200, but one stipend has to cover both.
 
 It's rejected for two reasons. The first is that it's a Rootstock-specific divergence in exactly the interface this RSKIP exists to align, so it trades the whole benefit for a partial mitigation.
 
-The second is more specific. EIP-1706, adopted here as a component of EIP-2200, exists to reject `SSTORE` when remaining gas is at or below 2300. The stipend is set at 2300 so that a callee can log an event and deliberately can't modify state. Forwarding 4800 gas to an untrusted callee re-opens the reentrancy surface that EIP-1706 closes. This RSKIP would be adopting a safety rule and defeating it in the same hard fork.
+The second is more specific. EIP-1706, adopted here as a component of EIP-2200, exists to reject `SSTORE` when remaining gas is at or below 2300. The stipend is set at 2300 so that a callee can log an event and deliberately can't modify state. Forwarding 6100 gas to an untrusted callee re-opens the reentrancy surface that EIP-1706 closes. This RSKIP would be adopting a safety rule and defeating it in the same hard fork.
 
 ## Backward Compatibility
 
@@ -308,7 +308,7 @@ A failure needs a **pair**: a payer that forwards exactly the stipend, and a rec
 
 The change is confined to the stipend, which is added only by the `CALL` opcode when it carries value. The following are unaffected:
 
-- A plain value transfer from an externally-owned account to a contract. A top-level transaction isn't a `CALL` and it forwards all of its gas, so a 4700 gas proxy fallback is trivially affordable.
+- A plain value transfer from an externally-owned account to a contract. A top-level transaction isn't a `CALL` and it forwards all of its gas, so a proxy fallback whose access charges alone are 4700 is trivially affordable.
 - Any contract call made with adequate gas, including every ordinary function call to the affected proxies. Those contracts keep working in full.
 - `call{value: n}("")` with all remaining gas forwarded, which is the pattern Solidity has recommended since Istanbul.
 - A payout back to the caller, which is the common `msg.sender.transfer(amount)` shape. The access sets are transaction-wide, so a proxy that has already served a call in this transaction holds its implementation slot and implementation address warm. The re-entrant fallback then costs roughly 200 gas and fits. Wrapped-coin `withdraw()` is this case.
@@ -350,7 +350,7 @@ Causes, by what the contract does on the path it takes today:
 | Cold account access alone | 18 | 46 |
 | Storage read alone | 11 | 187 |
 
-**This is overwhelmingly a proxy problem.** 14,244 of the 14,361 mainnet contracts (99.2%) and 17,998 of the 18,670 testnet ones (96.4%) are proxy fallbacks, and the arithmetic isn't marginal. An EIP-1967 proxy pays 2100 for the cold `SLOAD` of the implementation slot and 2600 for the cold `DELEGATECALL`, so `2100 + 2600 = 4700` against a 2300 stipend. It exceeds the budget at the `SLOAD` alone and never reaches the call. An EIP-1167 minimal proxy performs no `SLOAD` and still fails, because the `DELEGATECALL` by itself costs 2600. Neither can be repaired in place, since both are immutable deployed bytecode.
+**This is overwhelmingly a proxy problem.** 14,244 of the 14,361 mainnet contracts (99.2%) and 17,998 of the 18,670 testnet ones (96.4%) are proxy fallbacks, and the arithmetic isn't marginal. An EIP-1967 proxy pays 2100 for the cold `SLOAD` of the implementation slot and 2600 for the cold `DELEGATECALL`, so `2100 + 2600 = 4700` against a 2300 stipend. The `SLOAD` alone consumes 2100 of the 2300, and the `DELEGATECALL` can't be paid. An EIP-1167 minimal proxy performs no `SLOAD` and still fails, because the `DELEGATECALL` by itself costs 2600. Neither can be repaired in place, since both are immutable deployed bytecode.
 
 Two limits on these figures. The analysis is a static approximation: storage values are treated as unknown, so a fallback whose cost depends on what it reads is judged only on the paths the analysis can prove, which is why 2 mainnet and 67 testnet contracts came back inconclusive. And it models a bare `transfer()` into a cold frame, so a contract reached later in a transaction that has already touched its slots pays the warm rate and survives.
 
@@ -364,7 +364,7 @@ One shape does make value unreachable: an immutable payer whose only payout path
 
 > **Note**: reviewing the 945 mainnet payers is what turns this from an estimate into a number, and it should be a precondition of activation. Each payer classifies as one of three things: it pays only `msg.sender`, so it's safe; it pays third parties but is upgradeable, so it's fixable; or it's an immutable third-party payer, and it belongs to the real set. This RSKIP doesn't claim that set is empty.
 
-Because the recipients are immutable, the fix belongs to the payers and to tooling. Contracts still using `transfer()` or `send()` should move to `call{value: n}("")` with an explicit gas budget and a checked return value. Where the payer is itself immutable, an EIP-2930 access list naming the recipient and its implementation slot brings both to the warm rate, which drops the proxy fallback from 4700 to roughly 200 gas and fits the stipend again. That path only works if the transaction sender supplies the list, so it depends on wallet and library support as much as on the protocol.
+Because the recipients are immutable, the fix belongs to the payers and to tooling. Contracts still using `transfer()` or `send()` should move to `call{value: n}("")` with an explicit gas budget and a checked return value. Where the payer is itself immutable, an EIP-2930 access list naming the recipient and its implementation slot brings both to the warm rate, which drops the access charges from 4700 to 200, below today's 900, so anything that fits the stipend today fits again. That path only works if the transaction sender supplies the list, so it depends on wallet and library support as much as on the protocol.
 
 #### Precedent on Ethereum
 
