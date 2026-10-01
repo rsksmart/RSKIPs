@@ -46,34 +46,36 @@ A **direct call** is a transaction whose recipient is a precompiled contract. Th
 
 A **nested call** is a precompiled contract invoked by a contract through a call opcode. Nested calls are covered by RSKIP197 and are not changed by this RSKIP.
 
-A **precompile failure** is a precompiled contract that ends its execution by raising an error rather than by returning output. A precompiled contract that returns an error code as part of its output has not failed in this sense. A resource failure of the node itself, such as exhausting its memory or its stack, is not a precompile failure.
+A **precompile failure** occurs when a precompiled contract ends its execution by raising an error rather than by returning output. A precompiled contract that returns an error code as part of its output has not failed in this sense. A resource failure of the node itself, such as exhausting its memory or its stack, is not a precompile failure.
+
+A **failing direct call** is a direct call in which a precompile failure occurs, or a direct call that cannot pay the cost the precompiled contract declares for its input.
 
 ### Failing direct calls
 
-From the activation of this RSKIP, a direct call whose precompiled contract fails ends in an exceptional halt of the transaction, with the following effects.
+From the activation of this RSKIP, a failing direct call ends in an exceptional halt of the transaction, with the following effects.
 
 1. **Receipt status.** The receipt reports failure. The status field is `0`.
 2. **Gas.** The transaction consumes its gas limit before refunds. Refunds apply as for any exceptional halt. The gas used written to the receipt, counted in the gas used of the block and shown in traces is the gas consumed minus the applied refunds.
 3. **State.** Every state change made by the precompiled contract during the call is discarded. The nonce increment and the fee paid by the sender remain, as for any exceptional halt. The value sent with the transaction stays with the sender, as it does before activation.
-4. **Logs.** No log emitted by the precompiled contract during the call is recorded. It must not appear in the receipt, in the receipt bloom filter or in the block bloom filter.
+4. **Logs.** No log emitted by the precompiled contract during the call is recorded. The receipt must have no logs and its bloom filter must be zero, so it adds no bits to the logs bloom of the block.
 
 Any effect of the transaction not listed here is the same as for an exceptional halt of a transaction whose recipient is a contract.
 
 ### Direct calls with insufficient gas
 
-A direct call that cannot pay the cost the precompiled contract declares for its input is a precompile failure under this RSKIP, although the precompiled contract does not execute. Before activation such a call already reports status `0`, gas used equal to its gas limit, and no state change or log. After activation it ends in an exceptional halt, so the refunds that apply to an exceptional halt apply to it as stated in the Gas clause.
+Before activation, a direct call that cannot pay the cost the precompiled contract declares for its input already reports status `0`, gas used equal to its gas limit, and no state change or log. After activation it ends in an exceptional halt, so the refunds that apply to an exceptional halt apply to it as stated in the Gas clause.
 
 ### What does not change
 
 - Nested calls keep the behaviour specified by RSKIP197.
 - A precompiled contract that completes and returns an error code is a successful call.
-- An error raised while the precompiled contract computes the cost it declares for its input is not a precompile failure under this RSKIP. Its outcome does not change. A direct call that cannot pay that cost is covered by the section on insufficient gas.
+- An error raised while the precompiled contract computes the cost it declares for its input does not make the call a failing direct call. Its outcome does not change. A direct call that cannot pay that cost is covered by the section on insufficient gas.
 - Transactions that end by an exceptional halt of the EVM already report failure and consume their gas as described here. Their outcome does not change.
 - Transactions that end by `REVERT` report failure and return their unused gas. Their outcome does not change.
 
 ### JSON-RPC interface
 
-Nodes should return an error from `eth_call` and `eth_estimateGas` for a direct call whose precompiled contract fails. They should not return an empty result or a gas estimate for it. The error message should be fixed and should not include the message of the error raised by the precompiled contract. This part does not require a network upgrade, and nodes can adopt it at any time.
+Nodes should return an error from `eth_call` and `eth_estimateGas` for a failing direct call. They should not return an empty result or a gas estimate for it. The error message should be fixed and should not include the message of the error raised by the precompiled contract. This part does not require a network upgrade, and nodes can adopt it at any time.
 
 ### Activation
 
@@ -87,13 +89,13 @@ This change requires a network upgrade. Before activation the behaviour describe
 
 **Refunds are not restated.** The Gas clause defers to the refund rules that apply to any exceptional halt at the time of activation. Stating them here would duplicate rules defined elsewhere and would have to be kept in step with them.
 
-**A call that cannot pay the declared cost is a failure.** The precompiled contract does not execute in that case, and the sender is charged the full gas limit. Leaving that case out of the rule would keep a path that loses the refunds every other exceptional halt keeps.
+**A call that cannot pay the declared cost is a failing direct call.** The precompiled contract does not execute in that case, and the sender is charged the full gas limit. Leaving that case out of the rule would keep a path that loses the refunds every other exceptional halt keeps.
 
 **Relationship to RSKIP197.** RSKIP197 specified the failure of a nested call and left the direct call as it was. The two paths have differed since Iris: a nested failure is rolled back and reported to the caller, while a direct failure is committed and reported as success. This RSKIP specifies the direct call so that both paths roll back the state changes of a failing precompiled contract. Logs of a failing nested call are outside this RSKIP.
 
 **Bridge state.** On mainnet and testnet, no current Bridge method lets an unprivileged sender commit state before the method fails. The state rollback therefore removes a latent condition rather than a live one, and it protects any future Bridge method that writes state during the call. Bridge events are a different matter. Before activation an event emitted by the Bridge is recorded even when the call fails, so a Bridge event in a receipt does not prove that the Bridge state it describes was committed. After activation events are recorded only for calls that succeed. Indexers that need the committed Bridge state should read it through the Bridge view methods rather than infer it from receipts.
 
-**The JSON-RPC interface reports the failure.** Wallets call `eth_call` and `eth_estimateGas` before they send a transaction. Currently both methods report a failing direct call as successful, and `eth_estimateGas` returns 44,064 for the call in test case 1. After activation a transaction sent with that gas limit fails and consumes it. Therefore the failure should be reported before the transaction is sent.
+**The JSON-RPC interface reports the failure.** Wallets call `eth_call` and `eth_estimateGas` before they send a transaction. Currently both methods report a direct call with a precompile failure as successful, and `eth_estimateGas` returns 44,064 for the call in test case 1. After activation a transaction sent with that gas limit fails and consumes it. Therefore the failure should be reported before the transaction is sent.
 
 ## Backwards Compatibility
 
@@ -111,9 +113,9 @@ For a transaction without refunds the fee is unchanged, because the sender was a
 
 The following observable changes apply to failing direct calls.
 
-- When the precompiled contract fails while executing, the receipt reports status `0` instead of `1`, a higher gas used, and no logs. The gas used of the block is higher, so fewer transactions may fit in it.
+- When a precompile failure occurs, the receipt reports status `0` instead of `1`, a higher gas used, and no logs. The gas used of the block is higher, so fewer transactions may fit in it.
 - When the call cannot pay the cost the precompiled contract declares, the status and logs are unchanged. If the transaction carries a refund, the gas used of the receipt and of the block is lower by that refund.
-- Libraries that reject a transaction on status `0` now reject failing direct calls. Explorers show them as failed.
+- Libraries that reject a transaction on status `0` now reject direct calls with a precompile failure. Explorers show them as failed.
 - Consumers that read Bridge events from the receipts of failing calls no longer see them.
 - `eth_call` and `eth_estimateGas` return an error for a failing direct call instead of an empty result and a gas estimate. JSON-RPC clients that treat an empty result as success need to handle the error.
 
