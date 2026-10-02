@@ -265,6 +265,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 558 |[Blob Carrying Transactions (EIP-4844)](IPs/RSKIP558.md)| 10-APR-2026 | SM, PDG | Sca, Usa | Core | 3 | Draft |
 | 559 |[Deterministic selection of the next pegout to confirm](IPs/RSKIP559.md)| 01-SEP-2026 | JT | Usa | Core | 1 | Draft |
 | 567 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP567.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
+| 692 |[Direct Precompile Call Failure Semantics](IPs/RSKIP692.md)| 15-SEP-2026 | IS | Sec | Core | 2 | Draft |
 | 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
 
 
@@ -283,6 +284,7 @@ You can find an easily browseable version of this information [here](https://ips
 | FML      | Frederico M. Leal         | frederico.macielleal@rootstocklabs.com |
 | GM       | Guido Medina              |                                        |
 | IO       | Ilan Olkies               |                                        |
+| IS       | Italo Sampaio             | italo.sampaio@rootstocklabs.com        |
 | JIO      | Jose Ignacio Orlicki      |                                        |
 | JD       | Jose Dahlquist            | jose@rootstocklabs.com                 |
 | JL       | Julian Len                | julian@rootstocklabs.com               |
