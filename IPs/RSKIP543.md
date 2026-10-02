@@ -1,6 +1,6 @@
 ---
 rskip: 543
-title: Implement EIP-2718 Style Typed Transactions in Rootstock
+title: Typed Transaction Envelope
 description: Introduce Ethereum style transaction versioning
 status: Draft
 purpose: Sca, Usa

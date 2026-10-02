@@ -1,6 +1,6 @@
 ---
 rskip: 545
-title: Implement EIP-7702 Account Abstraction in Rootstock
+title: Set Code for EOAs
 description: Injects code into an EOA account through a set-code transaction  
 status: Draft
 purpose: Sca, Usa
