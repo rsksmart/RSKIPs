@@ -33,7 +33,7 @@ proof is for.
 
 Sending the whole raw transaction makes the registering RSK transaction grow with the Bitcoin
 transaction it carries, so the size and cost of a registration are only known once the release
-transaction exists. Replacing it with a 32-bytes BTC tx hash, makes the size and cost more predictable.
+transaction exists. Replacing it with a 32-byte BTC transaction hash makes the size and cost more predictable.
 
 ## Specification
 
