@@ -15,25 +15,24 @@ description: Let a peg-out or migration transaction be registered by its hash, w
 ## Abstract
 
 A peg-out or a migration transaction is registered in the Bridge so that the funds it pays back to a
-federation, the change of a peg-out and the funds moved by a migration, can be spent again. Today
+federation (the change of a peg-out and the funds moved by a migration) can be spent again. Today
 that is done by submitting the whole serialized transaction to `registerBtcTransaction`, which is
 redundant: the Bridge built that transaction, so it already knows its outputs.
 
-This RSKIP adds that the Bridge records given the transaction hash, the outputs of the
-transaction that pays back to a federation. It then adds a method that
-permits registering such a transaction, given its Bitcoin transaction hash and a proof that it has enough Bitcoin confirmations.
+This RSKIP makes the Bridge records, under each release transaction's hash, the outputs of the
+transaction that pays back to a federation. It then adds a method that registers such a transaction given its hash and a proof that it has enough confirmations.
 
-Finally, this RSKIP also adds two events reporting the outputs creadited to a federation, and the
-Bitcoin block height inclusion of each of those outputs, which until now was always stored as zero.
+Finally, this RSKIP also adds two events reporting the outputs credited to a federation, and the
+height of the Bitcoin block that included each of those outputs, which until now was always stored as zero.
 
 ## Motivation
 
-Registering a release transaction today means sending the Bridge back the whole BTC transaction, data the Bridge already had. Then, it picked the inputs and built the outputs. The one thing it
+Registering a release transaction today means sending the Bridge back the whole BTC transaction, data the Bridge already has: it picked the inputs and built the outputs itself. The one thing it
 cannot know is whether the transaction reached Bitcoin and whether it is buried deep enough, which is what the
 proof is for.
 
 Sending the whole raw transaction anyway makes the RSK transaction that does the registering grow
-with the Bitcoin transaction it carries, so what a registration takes is only known once the release
+with the Bitcoin transaction it carries, so the size and cost of a registration are only known once the release
 transaction exists. Meanwhile, a BTC tx hash is always 32 bytes, so every registration is the same size,
 known ahead of time, and identical for a peg-out with one input and for a migration with many.
 
@@ -45,7 +44,7 @@ known ahead of time, and identical for a peg-out with one input and for a migrat
 function registerPegoutTransaction(bytes32 btcTxHash, int height, bytes calldata pmt) external;
 ```
 
-The method exists only once `RSKIP643` is active, and anyone may call it. `height` and `pmt` means exactly as in `registerBtcTransaction` [1] and have the same types. A caller that can build a
+The method exists only once `RSKIP643` is active, and anyone may call it. `height` and `pmt` mean exactly as in `registerBtcTransaction` [1]. A caller that can build a
 proof for one can build it for the other.
 
 `btcTxHash` is the BTC transaction hash without the witness. The call does not revert and changes no
@@ -56,7 +55,7 @@ state when any of the following holds:
    at that height.
 3. The hash is not in the index described below.
 
-The third covers anything that is not a release transaction the Bridge created, a peg-in included or any random bitcoin transaction.
+The third covers anything that is not a release transaction the Bridge created, including a peg-in or any other Bitcoin transaction.
 
 Otherwise the Bridge credits the outputs recorded for that hash to the federation each one pays to,
 removes the entry from the index, and marks the hash as registered.
@@ -137,7 +136,7 @@ accounting.
 ## Rationale
 
 **Why the transaction hash is safe here, when RSKIP379 chose the input sighash instead.** RSKIP379
-avoided the transaction hash because signing changed it. That is only true while the signatures the
+avoided the transaction hash because signing changed it. That holds only while the signatures the
 federation adds are covered by the hash. Federations spend P2SH-P2WSH inputs, whose signatures live
 in the witness, and the hash used here excludes the witness, so it is the same before and after
 signing.
