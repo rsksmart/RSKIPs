@@ -175,6 +175,49 @@ into a trie and checks the result against the checkpoint's state root. A stream
 that does not reproduce that root is worthless, and the sync fails rather than
 retaining part of it.
 
+## Extension by trailing elements
+
+rskj's decoders read a fixed number of elements from each message and do not
+consult the list length again. An element appended after the last one they read
+is therefore accepted and ignored, which makes these messages extensible
+without a flag day: a node that understands an addition benefits, and one that
+does not is unaffected.
+
+This property is already relied on. RSKIP-697 appends a fifth element to the
+status message by the same means.
+
+One extension exists today on `SNAP_STATE_CHUNK_RESPONSE`, added by rustock:
+
+```
+params = RLP([ chunkOfTrieKeyValue, blockNumber, from, to, complete, refusal ])
+                                                                    ^^^^^^^
+```
+
+`refusal` is an integer saying why the payload is empty:
+
+| value | meaning |
+|---|---|
+| 0 | not a refusal — the chunk is in the payload |
+| 1 | no block at that number on this chain |
+| 2 | this chain has a different state root at that height |
+| 3 | the state was known but is no longer stored |
+| 4 | the offset is past the end of the trie |
+| 5 | the offset is not a multiple of this server's chunk granularity |
+
+Without it an empty payload is ambiguous: a client cannot tell "I have nothing
+for that offset, ask elsewhere" from "I have nothing for you at all" from "you
+asked for something malformed", and must guess which by retrying. None of these
+is misbehaviour, so none should be charged against the peer; the value only
+tells the client whether another request to the same peer is worth a round
+trip.
+
+A client MUST NOT depend on this element being present, and MUST treat its
+absence as "no reason given". A server that does not implement it simply sends
+the five elements rskj sends.
+
+This is documented here because it is on the wire, not to propose that other
+implementations adopt it.
+
 ## Rules
 
 A **server** MUST NOT answer with a range it cannot produce in full. A server
