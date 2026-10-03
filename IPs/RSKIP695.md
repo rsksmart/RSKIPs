@@ -52,9 +52,22 @@ compute for itself without executing the whole chain.
 the checkpoint, serve a reorg, and answer the precompiles that read recent
 block information. rskj requires `BLOCKS_REQUIRED = 6000`.
 
+## Related proposals
+
+This document describes how a client sequences snapshot sync and why. Three
+companions cover the wire itself:
+
+- **RSKIP-696** specifies the six messages below — ids, RLP layouts, and the
+  rules a sender and receiver must follow.
+- **RSKIP-697** lets a node announce the lowest block it can serve, so a
+  requester knows which peers can answer for a given range.
+- **RSKIP-698** carries the uncle headers a trunk header references, which is
+  what makes the cumulative work behind a checkpoint computable from a header
+  walk at all.
+
 ## Messages
 
-Six messages, ids 20 to 25:
+Six messages, ids 20 to 25, specified in RSKIP-696:
 
 | name | id | carries |
 |---|---|---|
