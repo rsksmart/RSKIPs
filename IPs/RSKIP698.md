@@ -124,7 +124,8 @@ Two messages are added to the RSK protocol at version `63`:
 The request mirrors the existing header request so that a node may substitute
 one for the other without changing its sync logic.
 
-Both are additive, and both are implemented in rustock as of commit `bb18635`.
+Both are additive. A reference implementation exists in rustock, an
+independent RSK node.
 
 Each `entry` is
 
@@ -139,8 +140,8 @@ sequence `unclesHash` commits to.
 A responder MUST send the complete uncle list for every entry, or omit the
 entry. A responder that no longer holds the body for a block, and therefore
 cannot produce its uncles, MUST NOT substitute an empty list; it stops the
-response at that entry. Combined with RSKIP "Announce the range of blocks a
-node serves", a requester knows in advance which peers can answer.
+response at that entry. Combined with RSKIP-697, a requester knows in
+advance which peers can answer.
 
 ### Validation
 
