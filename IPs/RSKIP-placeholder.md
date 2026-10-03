@@ -1,0 +1,189 @@
+---
+rskip: 696
+title: Snapshot sync wire messages
+description: Specification of the six snapshot sync messages already in use - their ids, their RLP layouts, and the rules a sender and a receiver must follow.
+status: Draft
+purpose: Usa
+author: SDL (@SergioDemianLerner), Claude Opus 5
+layer: Net
+complexity: 2
+created: 2026/10/03
+---
+# Snapshot sync wire messages
+
+
+|RSKIP          | 696 |
+| :------------ |:-------------|
+|**Title**      |Snapshot sync wire messages |
+|**Created**    |OCT-2026 |
+|**Author**     |SDL, Claude Opus 5 |
+|**Purpose**    |Usa |
+|**Layer**      |Net |
+|**Complexity** |2 |
+|**Status**     |Draft |
+
+
+## Abstract
+
+Six messages carry snapshot sync. They are implemented and in use, and have
+never been specified. This RSKIP writes down what is on the wire today: the
+message ids, the RLP layout of each, and the rules a sender and a receiver must
+follow.
+
+It describes existing behaviour and proposes no change to it. RSKIP-695
+describes how a client sequences these messages and why; this document is the
+format alone.
+
+## Framing
+
+Every message here carries a request id, and is framed identically:
+
+```
+message = RLP([ id, params ])
+```
+
+where `id` is an unsigned integer and `params` is the RLP-encoded list given
+below for that message type. The `params` element is an RLP *string* holding an
+encoded list, not a nested list: a receiver decodes `params` and then decodes
+its contents again. An implementation that writes a nested list instead
+produces a message rskj cannot parse, and the failure is silent — the request
+simply never arrives.
+
+A response MUST carry the id of the request it answers. A requester matches
+answers by id and MUST ignore an id it is not expecting.
+
+## Messages
+
+| name | id |
+|---|---|
+| `SNAP_STATE_CHUNK_REQUEST` | 20 |
+| `SNAP_STATE_CHUNK_RESPONSE` | 21 |
+| `SNAP_STATUS_REQUEST` | 22 |
+| `SNAP_STATUS_RESPONSE` | 23 |
+| `SNAP_BLOCKS_REQUEST` | 24 |
+| `SNAP_BLOCKS_RESPONSE` | 25 |
+
+### `SNAP_STATUS_REQUEST` (22)
+
+```
+params = RLP([])
+```
+
+Carries nothing: the request is the question. A server that does not serve
+snapshots does not answer.
+
+### `SNAP_STATUS_RESPONSE` (23)
+
+```
+params = RLP([ [block, ...], [difficulty, ...], trieSize ])
+```
+
+- `block` — a whole block, header and body, encoded as blocks are elsewhere
+  on the wire.
+- `difficulty` — the cumulative difficulty **at** the block of the same index.
+  The two lists MUST be the same length and in the same order.
+- `trieSize` — the total size in bytes of the state the server is offering,
+  so a client can size the transfer before committing to it.
+
+The newest block in the list is the checkpoint. The server also sends the
+blocks immediately below it — 400 in the current implementation — so that the
+client can check the chain's shape before trusting anything.
+
+A client MUST verify, for each adjacent pair, that
+
+```
+difficulty[i-1] == difficulty[i] - cumulativeDifficulty(block[i])
+```
+
+where `cumulativeDifficulty` is the block's own difficulty **plus the
+difficulty of every uncle it references**. Checking against the header
+difficulty alone rejects every honest peer, because an RSK chain absorbs
+roughly one uncle per block.
+
+### `SNAP_BLOCKS_REQUEST` (24)
+
+```
+params = RLP([ blockNumber ])
+```
+
+Asks for the run of blocks ending just below `blockNumber`.
+
+### `SNAP_BLOCKS_RESPONSE` (25)
+
+```
+params = RLP([ [block, ...], [difficulty, ...] ])
+```
+
+The same pairing as the status response, and the same verification applies. The
+current implementation answers with 400 blocks.
+
+A client walks downward by issuing a new request for the lowest block number it
+has received, until it holds the blocks it requires — 6,000 in the current
+implementation, enough to serve a reorg and to answer the precompiles that read
+recent block information.
+
+### `SNAP_STATE_CHUNK_REQUEST` (20)
+
+```
+params = RLP([ blockNumber, from, chunkSize ])
+```
+
+- `blockNumber` — the checkpoint whose state is being requested.
+- `from` — the byte offset into the state stream.
+- `chunkSize` — retained for compatibility and ignored by the current server,
+  which sizes its own responses. A sender SHOULD still populate it.
+
+### `SNAP_STATE_CHUNK_RESPONSE` (21)
+
+```
+params = RLP([ chunkOfTrieKeyValue, blockNumber, from, to, complete ])
+```
+
+- `chunkOfTrieKeyValue` — the run of trie nodes, as an RLP string.
+- `blockNumber` — echoes the request.
+- `from`, `to` — the byte range this chunk covers. `to` is where the client
+  asks next.
+- `complete` — `1` when this chunk ends the state stream, `0` otherwise,
+  encoded as an integer.
+
+The state is transferred as a flat, ordered byte stream rather than node by
+node, so a client requests offsets and not hashes. It reassembles the nodes
+into a trie and checks the result against the checkpoint's state root. A stream
+that does not reproduce that root is worthless, and the sync fails rather than
+retaining part of it.
+
+## Rules
+
+A **server** MUST NOT answer with a range it cannot produce in full. A server
+that has pruned the bodies behind a block cannot serve that block, and SHOULD
+end the run rather than send a short or empty answer, which a client cannot
+distinguish from "there is nothing there".
+
+A server MAY bound concurrent requests per peer. The current implementation
+allows three.
+
+A **client** MUST treat every figure in these messages as a claim until it is
+checked:
+
+- the state is verified **absolutely**, against the checkpoint's state root;
+- the blocks are verified by the ordinary block rules;
+- the checkpoint itself is verified only **relatively**, by the work behind it,
+  which is what the header phase in RSKIP-695 exists to establish.
+
+A client SHOULD treat a peer whose difficulty pairing fails as having offered
+an unusable snapshot rather than as merely slow, and go to another peer.
+
+## Encoding note
+
+Difficulties in these messages are written as rskj writes them everywhere:
+`BigInteger.toByteArray()`, which is two's complement, so a value whose top
+bit would otherwise be set carries a leading `0x00`. They are read back with
+`new BigInteger(bytes)`, which rejects a negative. An implementation that
+encodes them as canonical RLP integers — stripping that leading zero — is
+correct by the RLP specification and unreadable here, but only once a value's
+top bit is set, so the failure appears years into otherwise working
+interoperation. Mainnet's cumulative difficulty is in that range now.
+
+## Backwards compatibility
+
+None required: this describes messages already in use.
