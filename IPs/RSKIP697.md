@@ -192,7 +192,8 @@ implement the reading half without the writing half, or the reverse.
 
 ## Reference implementation
 
-Implemented in rustock: the capability and negotiation, the status element, the
+Implemented in rustock, an independent RSK node: the capability and
+negotiation, the status element, the
 `BLOCK_RANGE_UPDATE` message, and the peer-selection change that consults the
 range when assigning work.
 
@@ -212,8 +213,7 @@ current protocol, correctly read as having said nothing.
 rskj defines `Capability.SNAP = "snap"` with `SNAP_VERSION = 1`, advertises it
 whenever it speaks RSK, and looks for it in a peer's hello. It is already the
 mechanism by which a node says whether it has anything to do with snapshots, and
-it needs no proposal — only for other implementations to advertise it too, which
-rustock now does. It is mentioned here because it answers the adjacent question,
+it needs no proposal — only for other implementations to advertise it too. It is mentioned here because it answers the adjacent question,
 "will this peer serve me a snapshot", by the same means and should not be
 reinvented.
 
