@@ -266,6 +266,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 559 |[Deterministic selection of the next pegout to confirm](IPs/RSKIP559.md)| 01-SEP-2026 | JT | Usa | Core | 1 | Draft |
 | 567 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP567.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
 | 643 |[Registering peg-out and migration transactions by hash](IPs/RSKIP643.md)| 29-SEP-2026 | JT | Sca | Core | 2 | Draft |
+| 696 |[Snapshot sync wire messages](IPs/RSKIP696.md)| 03-OCT-2026 | SDL | Usa | Net | 2 | Draft |
 | 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
 
 
