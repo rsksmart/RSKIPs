@@ -122,6 +122,29 @@ has received, until it holds the blocks it requires — 6,000 in the current
 implementation, enough to serve a reorg and to answer the precompiles that read
 recent block information.
 
+**Blocks are identified by number but MUST be validated by hash.** The
+`blockNumber` in a request tells the server where to read; it does not bind
+what comes back. A server whose chain reorganises between two requests will
+answer the second from a different chain, at the same heights, in good faith.
+
+A client MUST therefore check that each returned block links by parent hash to
+the chain it already holds, anchored at the checkpoint hash from the status
+response, and MUST fail the sync rather than retain a run that does not link. A
+client that trusts the height alone will splice two chains together and arrive
+at a state root that matches neither.
+
+Two implementations do this differently and both are sufficient: one carries
+the lowest block held into the next chunk and requires the incoming block to be
+its parent; the other checks each block against the header chain it verified
+for itself, which is stronger because it binds the body to an independently
+established chain rather than only to the previous answer.
+
+Note that the checkpoint distance does **not** protect against this. A
+checkpoint 10,000 blocks behind the tip is deep enough that the *state* being
+offered is settled and will still be there when the transfer finishes, which is
+what that distance is for. The blocks below it are still served from whatever
+the server's canonical chain says at request time.
+
 ### `SNAP_STATE_CHUNK_REQUEST` (20)
 
 ```
