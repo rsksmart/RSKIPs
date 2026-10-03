@@ -168,6 +168,63 @@ set. It defaults to true, but a client that turns it off downloads the whole
 state before — in fact instead of — establishing the work behind the checkpoint
 it is trusting.
 
+## Parallelism
+
+Snapshot sync is the first RSK sync that invites fetching from several peers at
+once, and it is easy to get wrong in ways that fail late and expensively.
+
+### Only one phase is actually parallel
+
+The state is addressed by byte offsets into a fixed object, so any offset can
+be requested at any time, from anyone. The other two phases are **chains**: the
+next request is defined by the answer to the previous one. A block chunk is
+requested by the lowest block already held; a header chunk starts from the
+parent hash of the last header verified. Neither can be issued ahead of time,
+and no amount of concurrency changes that.
+
+So the shape is: a sequential walk that establishes trust, and a parallel
+transfer of the thing being trusted. Attempting to parallelise the walks yields
+requests whose answers cannot be checked until the gaps between them are filled,
+which is a reordering of the same work rather than a speed-up.
+
+### A block number is not a state
+
+A client fetching state from several peers must ensure they are all answering
+the same question. `SNAP_STATE_CHUNK_REQUEST` names a block *number*, and two
+peers on different forks each have a block at that height with a different
+state root. Both will answer in good faith. The chunks interleave into a trie
+that reproduces neither root, and the client learns this only after the whole
+state has been transferred.
+
+Binding each request to the expected **state root** is what makes multi-peer
+fetching sound; RSKIP-696 specifies the element that carries it and the refusal
+a server returns when its root differs. Without such a binding, a client should
+fetch the state from a single peer and accept the transfer rate that implies —
+which is the choice rskj's `parallel = false` default makes.
+
+### The anchor is not parallel either
+
+Everything a client verifies hangs from one checkpoint, taken from one status
+response. Data may come from anywhere; the anchor may not. A client that
+accepts a second peer's checkpoint part-way through has verified two chains
+against each other and neither against itself.
+
+### Peers are chosen by capability, not availability
+
+These messages go only to peers that announced the `snap` capability. A peer
+that did not will not recognise the message id; rskj throws out of
+`MessageType.valueOfType` and closes the connection, so spraying requests
+across all connected peers costs connections instead of gaining throughput.
+
+The same holds for any message gated on a protocol version — a request for
+headers carrying their uncles (RSKIP-698) goes only to a peer that negotiated
+the version carrying that message, and a client must keep the plain request as
+the fallback for everyone else.
+
+In practice this means a client maintains two sets: peers that can serve a
+snapshot, and peers that can serve the extensions it would like. Neither is the
+set of connected peers, and a round robin over the latter is a bug.
+
 ## Parameters
 
 | name | value | meaning |
