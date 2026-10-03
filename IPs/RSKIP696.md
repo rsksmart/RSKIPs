@@ -156,6 +156,32 @@ params = RLP([ blockNumber, from, chunkSize ])
 - `chunkSize` — retained for compatibility and ignored by the current server,
   which sizes its own responses. A sender SHOULD still populate it.
 
+**A block number does not identify a state.** Two peers on different forks
+both have a block at height `blockNumber`, with different state roots, and both
+will answer this request in good faith with their own state. Nothing in the
+three fields above distinguishes them.
+
+A client that fetches chunks from a single peer discovers a mismatch only at
+the end, when the reassembled trie fails to reproduce the checkpoint's state
+root, having downloaded the whole state to find out. A client that fetches
+chunks from *several* peers in parallel has no way to ask them the same
+question at all, and will interleave two states into a trie that reproduces
+neither.
+
+rustock therefore appends a fourth element, the state root the client expects:
+
+```
+params = RLP([ blockNumber, from, chunkSize, stateRoot ])
+                                             ^^^^^^^^^
+```
+
+A server that has a different state root at that height answers with refusal
+code 2 (`StateRootMismatch`) instead of serving its own state, so the client
+learns immediately and from the peer itself. rskj ignores the element, so a
+request carrying it is still answered normally by a server that does not
+implement it — in which case the root check at the end remains the only
+defence.
+
 ### `SNAP_STATE_CHUNK_RESPONSE` (21)
 
 ```
@@ -215,8 +241,51 @@ A client MUST NOT depend on this element being present, and MUST treat its
 absence as "no reason given". A server that does not implement it simply sends
 the five elements rskj sends.
 
-This is documented here because it is on the wire, not to propose that other
-implementations adopt it.
+The `stateRoot` element on `SNAP_STATE_CHUNK_REQUEST` above is the second such
+extension, and is what makes requesting chunks from more than one peer sound.
+
+These are documented here because they are on the wire, not to propose that
+other implementations adopt them.
+
+## Choosing peers
+
+Snapshot sync is not a conversation with one peer, and it is not a round robin
+over all of them either.
+
+**The anchor comes from one peer; the data may come from any.** A client takes
+one `SNAP_STATUS_RESPONSE`, fixes the checkpoint it names, and validates
+everything afterwards against that: the state against its state root, the
+blocks by parent-hash linkage to it, the headers by proof of work and linkage.
+Provenance of the data does not matter, because none of it is believed on the
+sender's word. A client MUST NOT re-anchor to a different peer's checkpoint
+part-way through; it either completes against the checkpoint it chose or starts
+again.
+
+**Requests are constrained by capability, not availability.** A client MUST
+send these six messages only to a peer that announced the `snap` capability
+during the handshake. A peer that did not will not recognise the message id,
+and rskj throws out of `MessageType.valueOfType` and closes the connection, so
+an indiscriminate round robin loses peers rather than spreading load. The same
+applies to any protocol-version-gated message: it goes only to a peer that
+negotiated the version carrying it.
+
+**What can and cannot be parallelised:**
+
+| | |
+|---|---|
+| state chunks | parallel across peers, **provided** each request binds the state root; without that binding, parallel fetching is unsound rather than merely risky |
+| block chunks | sequential by nature — each request names the lowest block held, so the next cannot be issued until the previous answer links |
+| historical headers | sequential by nature — each chunk starts from the parent hash of the last verified header |
+
+Only the state is embarrassingly parallel, because only the state is addressed
+by offsets into a fixed object rather than by a chain that must be walked. Both
+other phases are chains: their requests are defined by the answer to the
+previous one.
+
+A client SHOULD retry a failed or refused chunk against a different peer rather
+than the same one, and SHOULD treat a peer whose answers fail validation as
+unusable for this sync rather than charging it with misbehaviour — being on
+another fork is not a fault.
 
 ## Rules
 
