@@ -1,5 +1,5 @@
 ---
-rskip: PRNUMBER
+rskip: 695
 title: The snapshot sync protocol
 description: An informational description of the snapshot sync wire protocol - its six messages, its parameters, and the order in which a client fetches headers, state and blocks.
 status: Draft
@@ -12,7 +12,7 @@ created: 2026/10/02
 # The snapshot sync protocol
 
 
-|RSKIP          | PRNUMBER |
+|RSKIP          | 695 |
 | :------------ |:-------------|
 |**Title**      |The snapshot sync protocol |
 |**Created**    |OCT-2026 |
