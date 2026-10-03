@@ -135,9 +135,17 @@ which a client learns enough to justify its next expense.
 `AwaitingStatus → SamplingClaim → VerifyingHeaders → DownloadingState →
 DownloadingBlocks`. The extra `SamplingClaim` phase sharpens step 1 further: it
 bounds the peer's claimed difficulty from a few hundred sampled headers before
-committing even to the header walk, which costs roughly twenty-five minutes and
-ten gigabytes on mainnet. A checkpoint that cannot be supported is abandoned
-within seconds rather than at the end.
+committing even to the header walk. Measured on mainnet at head #9,288,884,
+that walk took **6,971 s and about 20.5 GB** — 10.06 GB of trunk headers back
+to genesis and 10.47 GB of the uncle headers they reference, at roughly one
+uncle per block. A checkpoint that cannot be supported is abandoned within
+seconds rather than after two hours.
+
+The uncle headers are what make it expensive. A client that totals cumulative
+work from a header walk must fetch them, because uncle difficulty counts toward
+the total and uncle headers exist only in block bodies, which roughly doubles
+the header stream. A client that does not total cumulative work does not pay
+it.
 
 **rskj** fetches blocks first and the state afterwards: `processSnapStatusResponse`
 requests block chunks, and only once `blocksVerified` holds does it call
