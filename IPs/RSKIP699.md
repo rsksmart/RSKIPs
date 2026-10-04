@@ -183,6 +183,55 @@ way to tell a correct side structure from a fabricated one without the uncle
 headers it was trying to avoid. Putting the value where proof-of-work already
 commits to it is what makes it worth anything.
 
+### Why not a Merkle Mountain Range
+
+FlyClient (Bünz, Kiffer, Luu and Zamani, IEEE S&P 2020) solves a strictly
+larger problem with a strictly larger mechanism. Each header commits the root
+of a Merkle Mountain Range over every preceding block, and the MMR's interior
+nodes carry the timestamps, the first and last difficulty, and the cumulative
+work of the blocks they cover. A sampled header then arrives with an
+`O(log n)` proof that it really is an ancestor of the claimed head, and that
+the work between two positions is what is claimed.
+
+That is more than this RSKIP offers, and the difference is not small. A client
+holding MMR proofs does not need to *bound* a peer's claimed work at all — it
+verifies it, from a logarithmic number of headers. Every ceiling, uncle
+allowance and concentration argument that a sampling client needs today exists
+only because no such proof is available, and an MMR would retire all of them
+together.
+
+It is not proposed here, for three reasons.
+
+**It is a much larger consensus change.** A committed cumulative difficulty is
+one field and one addition per block, checked against the parent's value: no
+new data structure, nothing to maintain, nothing to roll back. An MMR is a
+structure every consensus node must build, append to on each block, recompute
+roots for, and unwind correctly on every reorg. The proof format becomes
+consensus-relevant, and a bug in it is a chain split rather than a wrong RPC
+answer. The complexity is justified by logarithmic sync; it is not justified by
+work accounting alone.
+
+**The problem on the table is narrower.** Rootstock's header stream cannot be
+summed at all — not loosely, not approximately — because uncle difficulty
+counts toward the total and uncle headers travel only in bodies. That is a
+10.5 GB obstruction to header-only sync today, and one field removes it. An MMR
+would also remove it, at considerably more cost, while solving a problem
+nobody has yet asked Rootstock to solve.
+
+**The two compose.** An MMR for Rootstock would have to accumulate the same
+quantity this field defines — trunk difficulty plus referenced uncle
+difficulty. Adopting this RSKIP does not foreclose an MMR later; it settles the
+definition an MMR would need, and does so in the same header extension an MMR
+root would occupy.
+
+One warning for whoever does propose an MMR for Rootstock. FlyClient's
+construction accumulates "the cumulative work of all the covered blocks", which
+in Bitcoin and Ethereum means trunk work. **In Rootstock it must include uncle
+difficulty**, or the structure commits to a quantity that is not the one
+consensus uses to choose a chain. The same mismatch has been a live defect in
+implementations more than once, and it is not made safer by being inside a
+Merkle proof.
+
 ### Why unsigned
 
 A signed encoding costs a byte whenever the high bit is set, which is the
