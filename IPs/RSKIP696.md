@@ -305,6 +305,17 @@ checked:
 - the checkpoint itself is verified only **relatively**, by the work behind it,
   which is what the header phase in RSKIP-695 exists to establish.
 
+The `trieSize` in the status response deserves naming separately: it is a
+**hint**, not a fact. A client MUST size nothing from it and MUST decide
+completion from the reassembled state reproducing the checkpoint's state root,
+not from having received the number of bytes a peer announced.
+
+The cumulative difficulties are claims of the same kind. The pairwise check
+above proves they are *self-consistent*; it does not prove the chain carrying
+them exists. RSKIP-695 describes bounding the claim against a shipped
+checkpoint before committing to the header walk, which is how a client can
+refuse an impossible claim in seconds rather than after hours of walking.
+
 A client SHOULD treat a peer whose difficulty pairing fails as having offered
 an unusable snapshot rather than as merely slow, and go to another peer.
 
