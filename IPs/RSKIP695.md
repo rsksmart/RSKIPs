@@ -225,6 +225,154 @@ In practice this means a client maintains two sets: peers that can serve a
 snapshot, and peers that can serve the extensions it would like. Neither is the
 set of connected peers, and a round robin over the latter is a bug.
 
+## Bounding the claim before the walk
+
+The header phase is 92% of a snapshot sync. A peer whose claim cannot possibly
+be true should cost seconds to reject, not hours — and the cost of finding out
+is what decides whether a client can afford to be picky about who it syncs
+from.
+
+This section describes the approach one implementation uses. It is not required
+by the protocol, and a client that simply walks is correct; it is written down
+because the alternative to having something like it is doing the full walk for
+every peer that offers a checkpoint.
+
+### The shape of the problem
+
+A peer advertises a cumulative difficulty. Nothing in the status message makes
+that figure true, and sync decisions are made from it. The question is whether
+the claim is *possible* — not whether the peer is honest, and not which chain
+it is on.
+
+### A shipped checkpoint
+
+The client ships a `(height, hash, cumulative difficulty, difficulty)` record
+for a block well below the tip. Below that height the chain's work is known
+exactly, so nothing may claim more for it. That splits the problem in two:
+
+| | |
+|---|---|
+| at or below the checkpoint | answered by subtraction, no requests |
+| above it | needs evidence from the peer |
+
+The free half is not a defence on its own. A peer claiming a height *above* the
+checkpoint sidesteps it for nothing — and that is what a peer wanting to be
+chosen as a sync source would claim anyway, since it wants to look like the
+longest chain. It is worth having because it costs nothing, not because it
+stops an adversary.
+
+### Sampling the window above it
+
+```
+  ask the peer for one header every N blocks above the checkpoint
+  verify each sample's own proof of work
+  for each gap between consecutive samples:
+      bound the work those unseen blocks can carry   (see below)
+  ceiling = checkpoint work + sum of the gap bounds
+  refuse any claim above the ceiling
+```
+
+The samples must come **from the peer being judged**. If its chain is
+fabricated, nobody else holds those blocks, so a peer that cannot produce them
+has failed by another route. A client should give up on one that will not
+answer: refusing to substantiate a claim is not better than being unable to.
+
+### Why a gap can be bounded without seeing it
+
+Difficulty cannot move freely between blocks — the retarget rule limits each
+step to `1/divisor`. So given two sampled difficulties, every block between
+them faces two ceilings: it cannot rise more than `1/divisor` above its
+predecessor, and it cannot be so high that even falling as fast as the rule
+allows it would overshoot the next sample. **The lower of the two is the most
+that block could have been**, and summing those maxima bounds the gap.
+
+Two details matter for correctness:
+
+- Take the lower of the two ceilings rather than modelling a rise-then-fall
+  shape. Consensus permits difficulty to stay *unchanged*, and a shape that is
+  always rising or falling cannot express that; for two samples of equal
+  difficulty it has no valid path at all, because a maximal rise and a maximal
+  fall multiply to `1 - 1/divisor²` and never cancel.
+- A difficulty floor clamps the falling side exactly as consensus does. The
+  clamp only ever raises a value, which keeps the result an upper bound.
+
+Past the newest sample there is no later difficulty to aim for, so the bound
+there is unconstrained growth — which is why the newest sample should sit close
+to the claimed head.
+
+### The uncle trap
+
+A sampled header carries its own difficulty. The quantity being bounded is
+**cumulative** difficulty, which in RSK is the header difficulty *plus every
+uncle the block references* — so a bound computed from sampled header
+difficulties is bounding the wrong quantity, and it is bounding a smaller one.
+
+Measured on mainnet over a ~30,000-block window: uncles added **51.7%** to the
+work above the checkpoint. A ceiling of 1.68× the header-difficulty work in
+that window is only **1.106×** the real work.
+
+It holds, but on a 10% margin that nothing in the arithmetic guarantees. The
+consequences are worth stating plainly, because both are counter-intuitive:
+
+- **Tightening the sampling interval breaks it.** A shorter interval gives a
+  tighter bound, which is the obvious optimisation — and at 384 blocks the
+  bound falls to 0.85× the real work, at 192 to 0.74×. The ceiling drops below
+  the honest chain, every peer is judged impossible, and the node bounds itself
+  out of the network. The improvement is the failure.
+- **A rise in the uncle rate does the same thing**, with no code change at all.
+
+An implementation must therefore bound the uncle contribution rather than
+ignore it. Consensus caps uncles per block (`uncleListLimit`, 10 in rskj), and
+an uncle is a sibling computed from the same parent, so its difficulty sits
+within the retarget band of the including block's. Sampled headers also carry
+`uncleCount`, so the sampled blocks can be bounded exactly and only the
+unsampled ones need the loose factor.
+
+Whichever shape is chosen, the property to test is that the ceiling exceeds the
+honest chain's **uncle-inclusive** work at every spacing — not only at the one
+that happens to be configured.
+
+### What it costs, and how tight it is
+
+The bound loosens roughly as `(1 + 1/divisor)^(N/2)` across a gap of `N`
+blocks, so the interval trades tightness against request count. At a 768-block
+interval and a divisor of 400 the bound is about **1.68× the header-difficulty
+work in the sampled window** — see the uncle trap above for why that is not the
+same as 1.68× the true work — but that window is under 1% of the cumulative total, the
+rest being exact, so against the figure a peer actually claims the slack is
+about **0.44%**.
+
+The samples come from one peer, so the budget is requests rather than bytes.
+With a checkpoint refreshed each release the window is small: three months of
+chain at that interval is roughly **340 headers**, about twenty seconds against
+rskj's limit of 1,000 messages per minute per peer. Sampling the whole chain
+instead would be about 34 minutes, which is the reason the checkpoint exists.
+
+### Two separable decisions
+
+Checking that a peer is on the checkpointed chain — asking for the header at
+the checkpoint height and comparing its hash — and bounding the work it claims
+are **different decisions, and should be separately configurable**.
+
+Shipping a checkpoint *hash* is a statement about which chain is canonical: it
+asks whoever builds the node to choose a fork, which is a governance act.
+Bounding the work makes no such statement — it says only that a claim exceeds
+what any chain could carry. An operator may reasonably want the second without
+the first.
+
+Without the hash check, the work below the checkpoint is credited to any peer,
+including one on a fork that diverged below it and never did that work. On
+mainnet that is over 99% of the cumulative total, so the bound discriminates
+only within the sampled window.
+
+### What it does not do
+
+It does not say *which* chain a peer is on, only how much work it may claim. A
+peer serving a valid minority chain within the ceiling passes. It is a filter
+on who is worth talking to, **not a substitute for the header walk**, which
+remains the thing that establishes the checkpoint is on a chain this node
+accepts.
+
 ## Parameters
 
 | name | value | meaning |
@@ -251,6 +399,12 @@ verifying that claim or acting on it, and the two must not be confused:
 - The 6,000 blocks are validated by the ordinary block rules, so a server
   cannot slip an invalid block into the window.
 
-A client SHOULD bound the claimed work before committing to a long walk, and
-SHOULD treat a peer whose difficulties fail the pairwise check as having
-offered an unusable snapshot rather than as merely slow.
+A client SHOULD bound the claimed work before committing to a long walk — see
+"Bounding the claim before the walk" — and SHOULD treat a peer whose
+difficulties fail the pairwise check as having offered an unusable snapshot
+rather than as merely slow.
+
+Note what the bound does **not** replace. It establishes that a claim is
+arithmetically possible; the header walk establishes that the checkpoint sits
+on a chain this node accepts. A client that bounds the claim and skips the walk
+has checked that a lie was plausible, not that it was absent.
