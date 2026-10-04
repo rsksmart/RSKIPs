@@ -1,5 +1,5 @@
 ---
-rskip: NNN
+rskip: 699
 title: Add the cumulativeDifficulty field to the Block header extension
 status: Draft
 purpose: Usa
