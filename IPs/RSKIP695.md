@@ -421,11 +421,90 @@ work by a sixth and be judged plausible. It is still worth having, because the
 claim an attacker needs to make is not 17% high but orders of magnitude high —
 the gate exists to refuse a fabricated chain, not to referee a close race.
 
-The samples come from one peer, so the budget is requests rather than bytes.
-With a checkpoint refreshed each release the window is small: three months of
-chain at that interval is roughly **340 headers**, about twenty seconds against
-rskj's limit of 1,000 messages per minute per peer. Sampling the whole chain
-instead would be about 34 minutes, which is the reason the checkpoint exists.
+The samples come from one peer, so the first budget is requests rather than
+bytes. **Each sampled height costs one message**: scattered heights cannot be
+batched, since `GetBlockHeaders(start, count, skip)` walks a fixed stride and
+the random draw is deliberately not one. Paying a message per header is the
+price of unpredictability.
+
+Over a window `W` above the checkpoint, with `K` random samples and a maximum
+gap `N`, that is `max(K, W/N)` messages plus the skeleton walk. At 276,000
+blocks, `K = 340` and `N = 768`: about **585 messages and 0.6 MB**, some
+thirty-five seconds against rskj's limit of 1,000 messages per minute per peer.
+Samples need headers only, never uncles — `uncleCount` is a header field.
+
+Sampling the whole chain rather than a window would be about 34 minutes, which
+is the reason the checkpoint exists.
+
+### When to sample, and when to just download the window
+
+An implementation should know that sampling is not always the cheaper move.
+
+The alternative is to download every header **with its uncles** (RSKIP-698)
+over the window and compute the cumulative difficulty exactly — no ceiling, no
+allowance, no concentration argument. A header walk alone cannot: uncle
+difficulty counts toward the total and uncle headers travel only in block
+bodies, which is the gap RSKIP-698 closes.
+
+A walk batches headers — 192 per message in both rskj and this implementation —
+against the sampler's one. So:
+
+```
+  walk messages   = W / 192
+  sample messages = max(K, W / N)
+```
+
+These meet at `W = K * 192`, which for `K = 340` is **65,280 blocks**, about
+twenty-three days of chain. Below it the selection finds fewer available
+heights than `K` and returns all of them: it stops being a sample, spends a
+walk's worth of messages to retrieve a hundred and ninety-second of the data,
+and ends with a loose bound where the walk ends with the exact number. **In
+that regime sampling is strictly dominated** and an implementation should walk
+instead.
+
+| window | days | sample msgs | walk msgs | walk bytes | |
+|---|---|---|---|---|---|
+| 40,000 | 14 | 208 | 209 | 96 MB | walk |
+| 65,280 | 23 | 338 | 340 | 157 MB | walk |
+| 100,000 | 35 | 349 | 521 | 240 MB | marginal |
+| 276,000 | 96 | 513 | 1,438 | 663 MB | sample |
+
+**Bytes never favour the walk**, by about a thousandfold — 0.6 MB against
+663 MB at the last row, and 0.39 MB against 157 MB at the crossover. That
+matters because the cost is paid **per candidate peer**: vetting is what a
+client does to peers it does not yet trust, and it wants to do it to several.
+Five peers cost 3 MB sampled and 3.3 GB walked, the latter being larger than
+the state download the sync exists to perform.
+
+The corollary is worth stating because it is the opposite of the intuition:
+with a checkpoint refreshed each release, a client on a current build sits
+below the crossover. **The gate matters least when the checkpoint is fresh and
+most for clients on stale builds.**
+
+### Vetting several peers at once
+
+Each peer gets its **own independent draw**.
+
+- The heights do not mean the same thing. A sampler is built from *that peer's*
+  head and *that peer's* skeleton; two peers at different heads have different
+  windows, and if they are on different chains — the case being vetted for — a
+  given height is a different block for each.
+- **Sybil cost must scale with identities.** Requests go out concurrently, so
+  an attacker running `N` identities sees the draw as soon as the first is
+  queried. A shared draw lets one set of mined headers answer for all `N`:
+  `O(K)` rather than `O(KN)`.
+- **It must not become a vote.** Asking every peer the same heights and
+  comparing answers is majority voting among peers, which is what sybils are
+  cheap against. Each peer is judged against arithmetic, never against other
+  peers.
+
+Verified **answers** may be shared: a header is bound by its hash, so one that
+two skeletons agree on needs its proof of work checked once. **Positions** may
+not.
+
+The draw must come from a CSPRNG seeded from the OS, never from anything a peer
+can see, and must not be reused across sessions with the same peer — one that
+failed once would otherwise learn where to be honest next time.
 
 ### Two separable decisions
 
