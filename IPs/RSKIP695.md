@@ -64,6 +64,10 @@ companions cover the wire itself:
 - **RSKIP-698** carries the uncle headers a trunk header references, which is
   what makes the cumulative work behind a checkpoint computable from a header
   walk at all.
+- **RSKIP-699** commits that cumulative work to the header extension, which
+  would make it computable without the uncle headers, and without the
+  statistical allowance the gate below has to carry. It is a consensus change
+  and so a longer road; the three above do not depend on it.
 
 ## Messages
 
@@ -264,13 +268,30 @@ stops an adversary.
 ### Sampling the window above it
 
 ```
-  ask the peer for one header every N blocks above the checkpoint
-  verify each sample's own proof of work
+  draw K heights above the checkpoint uniformly at random
+  add evenly spaced heights until no gap exceeds N blocks
+  ask the peer for a header at each, and verify its proof of work
+  allowance = uncle bound implied by the sampled uncle counts   (see below)
   for each gap between consecutive samples:
       bound the work those unseen blocks can carry   (see below)
-  ceiling = checkpoint work + sum of the gap bounds
+  ceiling = checkpoint work + allowance * sum of the gap bounds
   refuse any claim above the ceiling
 ```
+
+The two halves of the selection do different jobs and must not be confused.
+The **random draw** is what the uncle bound rests on: the peer is committed to
+its chain before it learns where it will be checked, so the heights it is asked
+about are a uniform sample of a population it has already fixed. A grid of
+`checkpoint + k*N` destroys that -- a peer mines real uncles at those heights
+and fabricates between them. The **gap filling** proves nothing about uncles;
+it exists so that no stretch is wide enough for the difficulty bound below to
+compound out of usefulness, and it is a deterministic function of the draw.
+Counting the filled positions toward the sample count would overstate what the
+method proves.
+
+Fill gaps with evenly spaced points rather than by repeated bisection.
+Bisection produces only power-of-two subdivisions, so a gap just over `N * 2^m`
+costs nearly twice the requests it needs to.
 
 The samples must come **from the peer being judged**. If its chain is
 fabricated, nobody else holds those blocks, so a peer that cannot produce them
@@ -307,26 +328,76 @@ A sampled header carries its own difficulty. The quantity being bounded is
 uncle the block references* — so a bound computed from sampled header
 difficulties is bounding the wrong quantity, and it is bounding a smaller one.
 
-Measured on mainnet over a ~30,000-block window: uncles added **51.7%** to the
-work above the checkpoint. A ceiling of 1.68× the header-difficulty work in
-that window is only **1.106×** the real work.
+Measured on mainnet over 276,000 blocks above the checkpoint: uncles add
+**90.9%** to the work. A ceiling of 1.68× the header-difficulty work in that
+window is only **0.88×** the real work — below the honest chain, which means
+every truthful peer is judged impossible and the node bounds itself out of the
+network.
 
-It holds, but on a 10% margin that nothing in the arithmetic guarantees. The
-consequences are worth stating plainly, because both are counter-intuitive:
+Two consequences are worth stating plainly, because both are counter-intuitive:
 
-- **Tightening the sampling interval breaks it.** A shorter interval gives a
-  tighter bound, which is the obvious optimisation — and at 384 blocks the
-  bound falls to 0.85× the real work, at 192 to 0.74×. The ceiling drops below
-  the honest chain, every peer is judged impossible, and the node bounds itself
-  out of the network. The improvement is the failure.
+- **Tightening the sampling interval makes it worse.** A shorter interval gives
+  a tighter bound on header difficulty, which is the obvious optimisation, and
+  it drives the ceiling further below the honest chain. The improvement is the
+  failure.
 - **A rise in the uncle rate does the same thing**, with no code change at all.
+  The rate is not a constant: it was 51.7% over a 30,000-block window in 2026
+  and 90.9% over the wider window measured since.
 
 An implementation must therefore bound the uncle contribution rather than
-ignore it. Consensus caps uncles per block (`uncleListLimit`, 10 in rskj), and
-an uncle is a sibling computed from the same parent, so its difficulty sits
-within the retarget band of the including block's. Sampled headers also carry
-`uncleCount`, so the sampled blocks can be bounded exactly and only the
-unsampled ones need the loose factor.
+ignore it.
+
+#### Bounding it
+
+Consensus caps uncles per block (`uncleListLimit`, 10 in rskj), so a sound
+allowance always exists: assume ten everywhere, and multiply every gap bound by
+11. That is correct and nearly useless — roughly six times the honest chain's
+work on current mainnet figures.
+
+Sampled headers also carry `uncleCount`, which is inside what the block's proof
+of work commits to and so cannot be overstated for a block that was looked at.
+Because the heights were drawn at random from a population the peer had already
+fixed, the sampled counts are a uniform sample of it, and a concentration
+inequality turns them into a bound on the mean. Empirical Bernstein is the
+right one here — mainnet's uncle counts are tightly clustered against a range
+of 10, and it pays for the observed variance in the square-root term rather
+than for the range:
+
+```
+  mean <= mean_hat + sqrt(2 * V_hat * L / K) + 3 * R * L / K,   L = ln(3/delta)
+  allowance = 1 + min(that, R)
+```
+
+**What is and is not being claimed.** Not that any particular stretch of the
+chain is free of uncles: a peer can hold a run of ten-uncle blocks between two
+samples and no amount of sampling will see it. What the ceiling needs is
+weaker. It is a bound on the *sum* over every gap, and the allowance multiplies
+every gap alike, so the quantity that has to be bounded is the population mean.
+A stretch running hot is paid for by the stretches that do not.
+
+#### What it is worth
+
+Against measured mainnet uncle counts, at `delta = 1e-9`:
+
+| samples K | allowance | vs. the true 1.91 | vs. the 11.0 cap |
+|---|---|---|---|
+| 340 | 4.20 | 2.20× | 0.38× |
+| 1,000 | 2.78 | 1.45× | 0.25× |
+| 3,400 | 2.22 | 1.16× | 0.20× |
+
+So sampling is clearly worth doing — at 340 samples it is nearly three times
+tighter than assuming the cap. But the gain decays slowly, because at these
+sample counts the bound is dominated by the range term `3*R*L/K`, which does
+not depend on what was observed and shrinks only as `1/K`. At `K = 340` it
+contributes 1.93 of the 3.20.
+
+An implementation should not expect to escape this by sampling harder. The
+number of distinct heights a skeleton walk can ask about over a sampling window
+caps `K` in the low thousands, and with it the allowance at roughly 1.4× the
+truth. **Closing the rest is not a sampling problem.** A header that committed
+to its own cumulative difficulty would make the quantity exact and remove the
+uncle term entirely for a client that walks the headers it is judging. That is
+**RSKIP-699**, and it is the right fix.
 
 Whichever shape is chosen, the property to test is that the ceiling exceeds the
 honest chain's **uncle-inclusive** work at every spacing — not only at the one
@@ -335,12 +406,20 @@ that happens to be configured.
 ### What it costs, and how tight it is
 
 The bound loosens roughly as `(1 + 1/divisor)^(N/2)` across a gap of `N`
-blocks, so the interval trades tightness against request count. At a 768-block
-interval and a divisor of 400 the bound is about **1.68× the header-difficulty
-work in the sampled window** — see the uncle trap above for why that is not the
-same as 1.68× the true work — but that window is under 1% of the cumulative total, the
-rest being exact, so against the figure a peer actually claims the slack is
-about **0.44%**.
+blocks, so the interval trades tightness against request count; the uncle
+allowance adds its own factor on top, and at reachable sample counts that
+factor is the larger of the two.
+
+Measured end to end, with 340 samples spread over 276,000 blocks above the
+checkpoint at a divisor of 400: the ceiling sits about **3.9× the real work in
+the sampled window**. That window is about 6% of the cumulative total, the rest
+being exact, so against the figure a peer actually claims the slack is about
+**17%**.
+
+That is the honest number and it is not a small one: a peer can overstate its
+work by a sixth and be judged plausible. It is still worth having, because the
+claim an attacker needs to make is not 17% high but orders of magnitude high —
+the gate exists to refuse a fabricated chain, not to referee a close race.
 
 The samples come from one peer, so the budget is requests rather than bytes.
 With a checkpoint refreshed each release the window is small: three months of
