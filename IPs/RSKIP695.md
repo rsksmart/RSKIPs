@@ -462,6 +462,24 @@ and ends with a loose bound where the walk ends with the exact number. **In
 that regime sampling is strictly dominated** and an implementation should walk
 instead.
 
+**The condition is the capability, not only the window.** The walk yields the
+exact total only from a peer that sends the uncles. From an `rsk/62` peer it
+sums trunk difficulty alone, which is a *lower* bound on the chain's work —
+worse than the gate's upper bound, not better, since it understates an honest
+peer and so refuses it. Capabilities are negotiated per peer and known before a
+status is acted on, so an implementation can decide this at run time and need
+not wait for a network-wide upgrade:
+
+```
+  if peer supports RSKIP-698 and W < K * 192:
+      walk the window with uncles, compute the total exactly, skip the gate
+  else:
+      sample
+```
+
+The gate then stops running exactly where it was dominated, against the peers
+that can replace it, and keeps running everywhere else.
+
 | window | days | sample msgs | walk msgs | walk bytes | |
 |---|---|---|---|---|---|
 | 40,000 | 14 | 208 | 209 | 96 MB | walk |
