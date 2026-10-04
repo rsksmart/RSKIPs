@@ -64,10 +64,11 @@ companions cover the wire itself:
 - **RSKIP-698** carries the uncle headers a trunk header references, which is
   what makes the cumulative work behind a checkpoint computable from a header
   walk at all.
-- **RSKIP-699** commits that cumulative work to the header extension, which
-  would make it computable without the uncle headers, and without the
-  statistical allowance the gate below has to carry. It is a consensus change
-  and so a longer road; the three above do not depend on it.
+- **RSKIP-699** commits that cumulative work to the header extension. It is
+  under reconsideration and **should not be read as removing the need for the
+  uncle headers**: a field stating a total is data, not work, and a miner can
+  write any value into a header it mined. Only RSKIP-698 makes the work
+  provable.
 
 ## Messages
 
@@ -394,10 +395,30 @@ contributes 1.93 of the 3.20.
 An implementation should not expect to escape this by sampling harder. The
 number of distinct heights a skeleton walk can ask about over a sampling window
 caps `K` in the low thousands, and with it the allowance at roughly 1.4× the
-truth. **Closing the rest is not a sampling problem.** A header that committed
-to its own cumulative difficulty would make the quantity exact and remove the
-uncle term entirely for a client that walks the headers it is judging. That is
-**RSKIP-699**, and it is the right fix.
+truth. **Closing the rest is not a sampling problem**, and it is not a header
+field either.
+
+An earlier revision of this document said that a header committing to its own
+cumulative difficulty would make the quantity exact and remove the uncle term.
+That was wrong. Such a field is *data*: a miner can mine a header with valid
+proof of work and write any cumulative total into it, because the rule binding
+the field to its parent's value is enforced by nodes that validate the parent's
+**body**, which the client in question does not have. Trusting it replaces a
+proof with an assertion, and the assertion is worth less than the bound it would
+replace:
+
+```
+  honest chain claims   1.91 x its trunk work   (measured mainnet uncle rate)
+  attacker claims      11.00 x its trunk work   (uncleListLimit, fabricated)
+  attacker needs        1.91 / 11 = 17.4%  of the honest chain's trunk hashpower
+```
+
+What closes it is **exhibiting the uncles** -- RSKIP-698 -- because an uncle
+header carries its own proof of work, `unclesHash` binds the list to a block
+whose proof of work covers it, and the uncle rules are checkable against the
+trunk chain already in hand. That costs about 10.5 GB on mainnet today and no
+field makes it cheaper, because work is proven by exhibiting it. Shrinking the
+proof needs a different proof *system*, not another field.
 
 Whichever shape is chosen, the property to test is that the ceiling exceeds the
 honest chain's **uncle-inclusive** work at every spacing — not only at the one
