@@ -17,7 +17,7 @@ This RSKIP outlines the consensus changes proposed for inclusion in Rootstock’
 ## Specification
 
 - Codename: Cardamom
-- Block activations for Vetiver 10.0.0:
+- Block activations for Cardamom 10.0.0:
 	- Rootstock Mainnet block: TBD
 	- Rootstock Testnet block: TBD
 
