@@ -47,7 +47,7 @@ Raising the limit to around 12M without repricing state access would increase th
 
 This RSKIP requires a hard fork. Everything below activates under a single new consensus rule, `RSKIP555`, at the block height set by the network upgrade that includes it. The target upgrade is Cardamom.
 
-[EIP-1884][eip1884] is **not** adopted as an intermediate step. Its repricings of `SLOAD`, `BALANCE` and `EXTCODEHASH` are replaced by the costs below at the same height, and its `SELFBALANCE` opcode already exists on Rootstock under RSKIP-151.
+[EIP-1884][eip1884] is **not** adopted as an intermediate step: its repricings are superseded by the costs below, and its `SELFBALANCE` opcode already exists under RSKIP-151.
 
 ### 1. Access sets
 
@@ -66,19 +66,7 @@ When a transaction begins, `accessed_addresses` is initialised with:
 2. the transaction recipient, or, for a contract-creation transaction, the address being created;
 3. every precompiled contract registered in `PrecompiledContracts` and active at the current block.
 
-On Rootstock, point 3 covers the standard precompiles at `0x01` through `0x09` and the native contracts, which as of today are:
-
-| Address | Contract |
-| :------ | :------- |
-| `0x0000000000000000000000000000000001000006` | Bridge |
-| `0x0000000000000000000000000000000001000008` | REMASC |
-| `0x0000000000000000000000000000000001000009` | HDWalletUtils |
-| `0x0000000000000000000000000000000001000010` | BlockHeader |
-| `0x0000000000000000000000000000000001000011` | Environment |
-| `0x0000000000000000000000000000000001000016` | SECP256K1 add |
-| `0x0000000000000000000000000000000001000017` | SECP256K1 multiply |
-
-A native contract added by a later RSKIP is pre-warmed from its own activation height. The block `COINBASE` address is **not** pre-warmed; that is [EIP-3651][eip3651] and it's out of scope.
+On Rootstock, point 3 covers the standard precompiles at `0x01` through `0x09` and the native contracts (Bridge, REMASC and the others registered in `PrecompiledContracts`). A native contract added by a later RSKIP is pre-warmed from its own activation height. The block `COINBASE` address is **not** pre-warmed; that is [EIP-3651][eip3651] and it's out of scope.
 
 `accessed_storage_keys` starts empty.
 
@@ -120,12 +108,12 @@ If the beneficiary address isn't in `accessed_addresses`, charge `COLD_ACCOUNT_A
 
 The address of the contract being created is inserted into `accessed_addresses`. No access charge is made for the insertion, and the costs of both opcodes are otherwise unchanged. The insertion happens at a fixed point:
 
-1. The call depth and endowment balance checks run. If either fails, nothing is inserted. Ethereum clients also reject a sender nonce overflow at this stage; Rootstock has no such check and none is added.
+1. The call depth and endowment balance checks run. If either fails, nothing is inserted.
 2. The address is inserted into `accessed_addresses`.
 3. The collision check runs, together with the same-block destruction check of [RSKIP-131][rskip131] (activated with [RSKIP-125][rskip125] and applied to both opcodes). If either fails, the address **stays** inserted.
 4. The initcode runs. If it reverts, runs out of gas, or the creation fails when storing the code, the address **stays** inserted. Entries the initcode itself added are removed per §9.
 
-The insertion belongs to the creating frame, not to the initcode frame. This follows geth and the execution-specs rather than the "immediately" of EIP-2929's text; see [Rationale](#why-client-behaviour-is-the-reference).
+The insertion belongs to the creating frame, not to the initcode frame. See [Rationale](#why-client-behaviour-is-the-reference) for the insertion point.
 
 ### 8. `SSTORE` (0x55)
 
@@ -135,20 +123,12 @@ Let `key` be the storage key and `addr` the executing contract. Three values are
 
 1. **Sentry.** If the gas remaining *before this opcode is charged* is less than or equal to `SSTORE_SENTRY_GAS` (2300), fail the current call frame with out-of-gas ([EIP-1706][eip1706]).
 2. **Cold surcharge.** Set `cost = 0`. If `(addr, key)` isn't in `accessed_storage_keys`, set `cost` to `COLD_SLOAD_COST` (2100) and insert the key.
-3. **Net metering.** Add to `cost` and adjust the refund counter as follows, with `SLOAD_GAS` = `WARM_STORAGE_READ_COST` (100) and `SSTORE_RESET_GAS` = 2900.
-   1. If `current` equals `new`, add `SLOAD_GAS`.
-   2. Otherwise:
-      1. If `original` equals `current` (the slot is clean):
-         - If `original` is 0, add `SSTORE_SET_GAS`.
-         - Otherwise, add `SSTORE_RESET_GAS`. If `new` is 0, add `SSTORE_CLEARS_SCHEDULE` to the refund counter.
-      2. If `original` doesn't equal `current` (the slot is dirty), add `SLOAD_GAS`, then apply both:
-         - If `original` isn't 0: if `current` is 0, subtract `SSTORE_CLEARS_SCHEDULE` from the refund counter; if `new` is 0, add it.
-         - If `original` equals `new`: if `original` is 0, add `SSTORE_SET_GAS - SLOAD_GAS` (19900) to the refund counter; otherwise add `SSTORE_RESET_GAS - SLOAD_GAS` (2800).
+3. **Net metering.** Apply the [EIP-2200][eip2200] algorithm on `original`, `current` and `new`, with `SLOAD_GAS` = `WARM_STORAGE_READ_COST` (100) and `SSTORE_RESET_GAS` = 2900. Add its gas cost to `cost` and apply its refund adjustments to the refund counter.
 4. **Charge.** Charge `cost` once. If the frame can't afford it, it fails with out-of-gas and the key inserted in step 2 is removed with the rest of the frame's effects (§9).
 
-Because the sentry is evaluated before any cost is taken, the cold surcharge can't push a frame under it: a frame that reaches a cold `SSTORE` with 4400 gas and `current` equal to `new` succeeds and pays 2200, as in geth and the execution-specs.
+The sentry is evaluated before any cost is taken, so the cold surcharge can't push a frame under it: a cold `SSTORE` with 4400 gas and `current` equal to `new` succeeds and pays 2200.
 
-**The per-frame refund counter is signed.** The subtraction in step 3.2.2 can reverse an addition made in a different call frame, so a frame's counter can go negative while the transaction total stays at or above zero. EIP-2200 states it directly: "if the implementation uses call-frame refund counter, the counter can go negative. If the implementation uses transaction-wise refund counter, the counter always stays positive." Rootstock accumulates refunds per frame and merges them into the parent when the frame succeeds, so the per-frame value must be allowed to go negative. The existing cap of half the gas used applies to the transaction total only.
+**The per-frame refund counter is signed.** EIP-2200's dirty-slot case can subtract a refund that a different call frame added, so a frame's counter can go negative while the transaction total stays at or above zero. Rootstock accumulates refunds per frame and merges them into the parent on success, so the per-frame value must be allowed to go negative. The existing cap of half the gas used applies to the transaction total only.
 
 Refund policy is otherwise unchanged; Ethereum's later reduction of refunds ([EIP-3529][eip3529]) isn't adopted here.
 
@@ -157,21 +137,6 @@ Refund policy is otherwise unchanged; Ethereum's later reduction of refunds ([EI
 `accessed_addresses` and `accessed_storage_keys` are transaction-scoped constructs, implemented identically to the self-destruct list and the refund counter. If a call frame **reverts or halts exceptionally** (out of gas, invalid opcode, stack underflow or overflow, state modification under `STATICCALL`), both sets are restored to the contents they had when that frame began. Running out of gas while paying a cold cost is included: the entry inserted by that opcode is removed with the frame.
 
 Entries added by the caller before the call, including the created address of §7, are unaffected.
-
-### 10. Ethereum EIP coverage
-
-| EIP | Status under this RSKIP |
-| :-- | :---------------------- |
-| [EIP-2929][eip2929], gas cost increases for state access opcodes | **Adopted**, with the pre-warm set extended per §2 |
-| [EIP-2200][eip2200], structured definitions for net gas metering | **Adopted** |
-| [EIP-1283][eip1283], net gas metering for `SSTORE` | **Adopted** as a component of EIP-2200 |
-| [EIP-1706][eip1706], disable `SSTORE` with gasleft below the stipend | **Adopted** as a component of EIP-2200 |
-| [EIP-1884][eip1884], repricing for trie-size-dependent opcodes | **Not adopted.** Superseded by EIP-2929. `SELFBALANCE` already exists under RSKIP-151 |
-| [EIP-1087][eip1087], net gas metering with an in-transaction dirty map | **Not adopted.** Never accepted on Ethereum; superseded by EIP-1283 |
-| [EIP-2930][eip2930], optional access lists | **Not in this RSKIP.** Separate proposal |
-| [EIP-2565][eip2565], ModExp gas cost reduction | **Not in this RSKIP.** Separate proposal |
-| [EIP-3529][eip3529], reduction in refunds | **Not in this RSKIP.** Separate proposal, overlaps with [RSKIP-243][rskip243] |
-| [EIP-3651][eip3651], warm `COINBASE` | **Not adopted** |
 
 ## Rationale
 
@@ -189,51 +154,21 @@ The values 2100, 2600 and 100 were calibrated for a hexary Merkle-Patricia trie 
 
 ### Why client behaviour is the reference
 
-Two places in the Specification follow geth and the execution-specs rather than the EIP prose.
-
-EIP-2929 says the created address is added "immediately (ie. before checks are done to determine whether or not the address is unclaimed)". Both clients insert it after the depth and balance checks and before the collision check ([geth `create`][gethevm], [execution-specs `generic_create`][essystem]). Read literally, "immediately" would warm the address when `CREATE` fails on depth or balance, and Ethereum doesn't do that.
-
-EIP-2200 lists the sentry as step one of the `SSTORE` algorithm and EIP-2929 adds the cold surcharge "in addition", without saying which comes first. Both clients evaluate the sentry against the gas remaining before the opcode and charge the whole cost once ([geth `makeGasSStoreFunc`][gethacl], [execution-specs `sstore`][esstorage]).
-
-Where the prose and the clients disagree, the clients are what Ethereum's consensus actually is, and a contract that behaves identically on both chains is the goal.
-
-### Why the 2300 gas stipend isn't raised
-
-Raising the stipend to absorb the new cold costs would be a Rootstock-specific divergence in exactly the interface this RSKIP aligns. It would also defeat EIP-1706, adopted here as part of EIP-2200: the stipend is 2300 precisely so that a callee can log an event and can't modify state.
+Two places in the Specification follow geth and the execution-specs rather than the EIP prose. EIP-2929 says the created address is added "immediately"; both clients insert it after the depth and balance checks and before the collision check ([geth `create`][gethevm], [execution-specs `generic_create`][essystem]). EIP-2200 and EIP-2929 don't say whether the sentry or the cold surcharge comes first; both clients evaluate the sentry against the gas remaining before the opcode and charge the whole cost once ([geth `makeGasSStoreFunc`][gethacl], [execution-specs `sstore`][esstorage]). Where the prose and the clients disagree, the clients are Ethereum's consensus, and a contract that behaves identically on both chains is the goal.
 
 ## Backward Compatibility
 
-This RSKIP requires a network upgrade hardfork, so all full nodes have to be updated.
+This change is a hard fork and therefore all full nodes must be updated.
 
-### Costs
+Every transaction that reads state pays more: a cold `SLOAD` rises from 200 to 2100 gas, a cold `BALANCE` or `EXTCODEHASH` from 400 to 2600, a cold `CALL` base from 700 to 2600. Repeated access to the same slot or address pays 100, and repeated writes to the same slot become cheaper under EIP-2200. `eth_estimateGas` has to account for the access sets.
 
-Every transaction that reads state pays more. A cold `SLOAD` rises from 200 to 2100 gas, a cold `BALANCE` or `EXTCODEHASH` from 400 to 2600, a cold `CALL` base from 700 to 2600. Repeated access to the same slot or address pays 100, so contracts that reuse state may end up cheaper, while contracts that touch many distinct slots once become significantly more expensive.
-
-EIP-2200 moves cost downward for repeated writes. Today every `SSTORE` to a non-zero slot costs 5000; under §8 the second and later writes to a dirty slot cost 100. A reentrancy guard that sets and clears a flag in one transaction drops from roughly 10K gas net of refunds to roughly 2.3K.
-
-`eth_estimateGas` has to account for the access sets, since the cost of a call now depends on what the transaction has already touched.
-
-### The 2300 gas call stipend
-
-A value-transferring `CALL` passes a 2300 gas stipend to the recipient, and Solidity's `address.transfer()` and `address.send()` forward exactly that amount. Today it buys about eleven storage reads. After this change a single cold `SLOAD` costs 2100 and a single cold account access costs 2600, so a fallback that reads an implementation slot and then delegates (every EIP-1967 proxy), or delegates to a fixed address (every EIP-1167 proxy), no longer completes within the stipend. Those proxies are immutable bytecode and can't be repaired in place. Ethereum took the same break at Istanbul ([safe-contracts issue #149][safe149]) and again at Berlin ([folia-app/eip-2929][folia2929]).
-
-A failure needs a **pair**: a payer that forwards exactly the stipend, and a recipient whose fallback no longer fits in it. Unaffected are plain value transfers from an externally-owned account (a top-level transaction isn't a `CALL` and forwards all of its gas), any call made with adequate gas, `call{value: n}("")` forwarding all remaining gas, and payouts back to `msg.sender`, where the recipient is already warm because the access sets are transaction-wide. What breaks is **a contract paying with `transfer()` or `send()` to a second contract that the transaction hasn't touched yet**: a splitter, an escrow release, a router refunding a third party.
-
-Every contract on both networks was surveyed for this RSKIP (mainnet at block 9,216,000, testnet at block 7,615,296). Each side of the pair was sized separately:
-
-| | Mainnet | Testnet |
-| :-- | --: | --: |
-| Recipients that accept a bare `transfer()` today and stop fitting the stipend | 14,361 of 16,183 | 18,670 of 26,611 |
-| of which proxy fallbacks | 99.2% | 96.4% |
-| Payers using the `transfer()`/`send()` idiom (upper bound) | 945 | 10,058 |
-
-The breakage rate is the intersection of the two, which wasn't measured. Since the recipients are immutable, the fix belongs to the payers: contracts still using `transfer()` or `send()` should move to `call{value: n}("")` with an explicit gas budget and a checked return value. The survey method, the breakdown by cause and the payer review are in the discussion thread for this RSKIP.
+The 2300 gas call stipend is unchanged, but it now covers at most one cold access. A contract that pays with `transfer()` or `send()` to a second contract that the transaction hasn't touched yet fails when that contract's fallback does a cold `SLOAD` and a `DELEGATECALL`, which is every proxy. Payouts to `msg.sender`, transfers from externally-owned accounts and calls with adequate gas are unaffected. A survey of every deployed contract found 14,361 such recipients on mainnet and 945 contracts using the `transfer()`/`send()` idiom. Payers should move to `call{value: n}("")` with a checked return value. Ethereum took the same break at Istanbul ([safe-contracts issue #149][safe149]) and Berlin ([folia-app/eip-2929][folia2929]). The survey and its discussion are in the forum thread for this RSKIP.
 
 ## Security Considerations
 
 For client implementations, this RSKIP reduces the worst-case state access a single block can force, as described in [Motivation](#motivation). Denial of service based on cheap state reads becomes considerably less effective, and the block gas limit can be raised without raising worst-case block validation time along with it.
 
-For deployed contracts, this RSKIP introduces one failure mode where there previously was none: a contract paying with `transfer()` or `send()` to a cold contract recipient now reverts. Its scope is in [Backward Compatibility](#the-2300-gas-call-stipend).
+For deployed contracts, this RSKIP introduces one failure mode where there previously was none: a contract paying with `transfer()` or `send()` to a cold contract recipient now reverts. Its scope is in [Backward Compatibility](#backward-compatibility).
 
 EIP-1706 closes a reentrancy surface rather than opening one. `SSTORE` is rejected outright when the remaining gas is at or below the stipend, instead of being left to fail partway through.
 
@@ -291,39 +226,29 @@ Ethereum's execution-spec fixtures at `tests/berlin/eip2929_gas_cost_increases` 
 
 [5] [EIP-1884: Repricing for trie-size-dependent opcodes][eip1884]
 
-[6] [EIP-2930: Optional access lists][eip2930]
+[6] [EIP-3529: Reduction in refunds][eip3529]
 
-[7] [EIP-2565: ModExp gas cost][eip2565]
+[7] [RSKIP-131: Preventing CREATE2-after-SUICIDE in the same block][rskip131]
 
-[8] [EIP-3529: Reduction in refunds][eip3529]
+[8] [RSKIP-125: Create2][rskip125]
 
-[9] [RSKIP-243: Intra-transaction Gas Refunds][rskip243]
+[9] [safe-contracts issue #149, "With istanbul it is not possible to use `send` or `transfer` to send funds to a Safe"][safe149]
 
-[10] [RSKIP-131: Preventing CREATE2-after-SUICIDE in the same block][rskip131]
+[10] [folia-app/eip-2929, fixing `.transfer()` to Gnosis Safe with an access list][folia2929]
 
-[11] [RSKIP-125: Create2][rskip125]
+[11] [go-ethereum, `core/vm/operations_acl.go` (`makeGasSStoreFunc`)][gethacl] and [`core/vm/evm.go` (`create`)][gethevm]
 
-[12] [safe-contracts issue #149, "With istanbul it is not possible to use `send` or `transfer` to send funds to a Safe"][safe149]
+[12] [ethereum/execution-specs, Berlin `vm/instructions/storage.py` (`sstore`)][esstorage] and [`system.py` (`generic_create`)][essystem]
 
-[13] [folia-app/eip-2929, fixing `.transfer()` to Gnosis Safe with an access list][folia2929]
-
-[14] [go-ethereum, `core/vm/operations_acl.go` (`makeGasSStoreFunc`)][gethacl] and [`core/vm/evm.go` (`create`)][gethevm]
-
-[15] [ethereum/execution-specs, Berlin `vm/instructions/storage.py` (`sstore`)][esstorage] and [`system.py` (`generic_create`)][essystem]
-
-[eip1087]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1087.md
 [eip1283]: https://eips.ethereum.org/EIPS/eip-1283
 [eip1706]: https://eips.ethereum.org/EIPS/eip-1706
 [eip1884]: https://eips.ethereum.org/EIPS/eip-1884
 [eip2200]: https://eips.ethereum.org/EIPS/eip-2200
-[eip2565]: https://eips.ethereum.org/EIPS/eip-2565
 [eip2929]: https://eips.ethereum.org/EIPS/eip-2929
-[eip2930]: https://eips.ethereum.org/EIPS/eip-2930
 [eip3529]: https://eips.ethereum.org/EIPS/eip-3529
 [eip3651]: https://eips.ethereum.org/EIPS/eip-3651
 [rskip125]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP125.md
 [rskip131]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP131.md
-[rskip243]: https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP243.md
 [safe149]: https://github.com/safe-global/safe-contracts/issues/149
 [folia2929]: https://github.com/folia-app/eip-2929
 [execspecs]: https://github.com/ethereum/execution-specs/tree/master/tests/berlin/eip2929_gas_cost_increases
