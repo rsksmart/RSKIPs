@@ -1,6 +1,6 @@
 ---
 rskip: 546
-title: Implement Transactions and Receipts encoding following Ethereum's Type 1 and Type 2 Envelope formats
+title: Implement EVM's Type 1 and Type 2 Envelope formats
 created: 27-JAN-2026
 author: PDG (@patogallaiovlabs), SM (@smishraiov)
 purpose: Usa

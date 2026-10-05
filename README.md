@@ -255,10 +255,10 @@ You can find an easily browseable version of this information [here](https://ips
 | 535 |[Add the `baseEvent` field to the Block header extension](IPs/RSKIP535.md)| 08-OCT-2025 | SDL | Sca | Core | 1 | Adopted (Testnet) |
 | 536 |[Additional methods for BlockHeader precompiled contract](IPs/RSKIP536.md)| 10-OCT-2025 | MI | Usa | Core | 1 | Adopted |
 | 540 |[Bridge method `getEstimatedFeesForNextPegOutEvent` improvements and new parameterized method](IPs/RSKIP540.md)| 04-DEC-2025 | MI | Usa | Core | 1 | Adopted |
-| 543 |[Implement EIP-2718 Style Typed Transactions in Rootstock](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
+| 543 |[Typed Transaction Envelope](IPs/RSKIP543.md)| 05-JAN-2026 | PDG, SM | Sca, Usa | Core | 2 | Draft |
 | 544 |[Reject new contract code starting with the `0xEF` byte](IPs/RSKIP544.md)| 05-JAN-2026 | PDG, SM | Usa | Core | 1 | Adopted |
-| 545 |[Implement EIP-7702 Account Abstraction in Rootstock](IPs/RSKIP545.md)| 06-JAN-2026 | PDG, SM, SDL | Sca, Usa | Core | 3 | Draft |
-| 546 |[Implement Transactions and Receipts encoding following Ethereum's Type 1 and Type 2 Envelope formats](IPs/RSKIP546.md)| 27-JAN-2026 | PDG, SM | Usa | Core | 1 | Draft |
+| 545 |[Set Code for EOAs](IPs/RSKIP545.md)| 06-JAN-2026 | PDG, SM, SDL | Sca, Usa | Core | 3 | Draft |
+| 546 |[Implement EVM's Type 1 and Type 2 Envelope formats](IPs/RSKIP546.md)| 27-JAN-2026 | PDG, SM | Usa | Core | 1 | Draft |
 | 551 |[Deprecate RSKIP459](IPs/RSKIP551.md)| 18-MAR-26 | MI | Usa | Core | 1 | Adopted |
 | 552 |[Improve Blake2F Input Validation](IPs/RSKIP552.md)| 16-MAR-2026 | FML | Sec | Core | 1 | Adopted |
 | 553 |[Network Upgrade: Vetiver](IPs/RSKIP553.md)| 23-MAR-2026 | AE | Usa, Sca, Sec | Core | 2 | Adopted |
@@ -267,6 +267,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 567 |[Introducing the Fork-Aware Consensus module](IPs/RSKIP567.md)| 26-MAY-2026 | DC, SDL | Sec | Core | 2 | Draft |
 | 643 |[Registering peg-out and migration transactions by hash](IPs/RSKIP643.md)| 29-SEP-2026 | JT | Sca | Core | 2 | Draft |
 | 692 |[Direct Precompile Call Failure Semantics](IPs/RSKIP692.md)| 15-SEP-2026 | IS | Sec | Core | 2 | Draft |
+| 694 |[Network Upgrade: Cardamom](IPs/RSKIP694.md)| 2-OCT-2026 | AE | Usa, Sec | Core | 2 | Draft |
 | 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
 
 
