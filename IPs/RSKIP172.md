@@ -2,7 +2,7 @@
 rskip: 172
 title: Simple Subroutines for the EVM
 description: 
-status: Draft
+status: Withdrawn
 purpose: ST
 author: AL
 layer: Core
@@ -20,7 +20,7 @@ created: 2020/09/
 |**Purpose**    |ST |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 
 # **Abstract**
