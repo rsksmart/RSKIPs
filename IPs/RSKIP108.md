@@ -2,7 +2,7 @@
 rskip: 108
 title: More Efficient Unitrie Key Mapping
 description: 
-status: Draft
+status: Deferred
 purpose: Sca, Usa
 author: SDL (@sergiodemianlerner), AL <angel@iovlabs.org>
 layer: 
@@ -19,7 +19,7 @@ created: 2019
 |                |                                    |
 | **Layer**      | Sca, Usa                           |
 | **Complexity** | 2                                  |
-| **Status**     | Draft                              |
+| **Status**     | Deferred                           |
 
 # Abstract
 
