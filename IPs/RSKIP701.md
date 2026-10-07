@@ -81,7 +81,7 @@ Every marked account, whether deleted or cleared, is recorded as deleted for the
 ### What does not change
 
 - The refund of 24,000 gas for each marked account is unchanged, and so is the cap on refunds. A delegated account is never marked, so it earns no refund.
-- The RSKIP131 check refuses a `CREATE` or `CREATE2` at the address of an account deleted by an earlier transaction of the same block. A delegated account is never marked, so RSKIP131 never treats it as deleted.
+- The RSKIP131 check refuses a `CREATE2` at the address of an account deleted by an earlier transaction of the same block. A delegated account is never marked, so RSKIP131 never treats it as deleted.
 - The RSKIP125 collision rule is unchanged. It refuses a deployment at the address of a cleared account because the nonce of that account is not zero.
 - `SELFDESTRUCT` inside a static call causes an exceptional halt, as before activation.
 
