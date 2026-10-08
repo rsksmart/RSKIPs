@@ -10,16 +10,6 @@ status: Draft
 description: Adds a safety margin for the size (SegWit virtual size, following BIP 141) of the release transactions the Bridge creates (peg-outs and migrations).
 ---
 
-|RSKIP          |378           |
-| :------------ |:-------------|
-|**Title**      |Enforce release transaction size limit |
-|**Created**    |06-JUL-26 |
-|**Author**     |JZ |
-|**Purpose**    |Usa, Sec |
-|**Layer**      |Core |
-|**Complexity** |1 |
-|**Status**     |Draft |
-
 ## Abstract
 
 This RSKIP adds a safety margin below Bitcoin's standard transaction size limit for the release transactions the Bridge creates (peg-outs and migrations after a federation change), keeping them conservatively within the size that Bitcoin nodes will relay. During construction, the Bridge measures a transaction's SegWit virtual size (vsize) following BIP 141 and rejects it if the vsize exceeds the standard limit reduced by the margin. The behavior is gated by this RSKIP's activation and takes effect only from the corresponding network upgrade onwards.
