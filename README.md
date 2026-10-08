@@ -268,6 +268,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 643 |[Registering peg-out and migration transactions by hash](IPs/RSKIP643.md)| 29-SEP-2026 | JT | Sca | Core | 2 | Draft |
 | 692 |[Direct Precompile Call Failure Semantics](IPs/RSKIP692.md)| 15-SEP-2026 | IS | Sec | Core | 2 | Draft |
 | 694 |[Network Upgrade: Cardamom](IPs/RSKIP694.md)| 2-OCT-2026 | AE | Usa, Sec | Core | 2 | Draft |
+| 701 |[SELFDESTRUCT Preserves Account Nonces](IPs/RSKIP701.md)| 5-OCT-2026 | IS | Sec | Core | 2 | Draft |
 | 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
 
 
