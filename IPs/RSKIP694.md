@@ -35,6 +35,7 @@ No rejected RSKIPs
 
 ### Proposed RSKIPs
 
+- [RSKIP-378](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP378.md): Enforce release transaction size limit
 - [RSKIP-455](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP455.md): PowPeg migration to multiple outputs
 - [RSKIP-543](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP543.md): Typed Transaction Envelope
 - [RSKIP-545](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP545.md): Set Code for EOAs
@@ -46,6 +47,7 @@ No rejected RSKIPs
 ## Timeline
 
 - OCT-2-26: RSKIP created with an initial list of proposed RSKIPs
+- OCT-8-26: RSKIP 378 added to the list of proposed RSKIPs
 
 ## References
 
