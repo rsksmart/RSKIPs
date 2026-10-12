@@ -268,6 +268,7 @@ You can find an easily browseable version of this information [here](https://ips
 | 643 |[Registering peg-out and migration transactions by hash](IPs/RSKIP643.md)| 29-SEP-2026 | JT | Sca | Core | 2 | Draft |
 | 692 |[Direct Precompile Call Failure Semantics](IPs/RSKIP692.md)| 15-SEP-2026 | IS | Sec | Core | 2 | Draft |
 | 694 |[Network Upgrade: Cardamom](IPs/RSKIP694.md)| 2-OCT-2026 | AE | Usa, Sec | Core | 2 | Draft |
+| XXX |[Peg-in v2: segwit and taproot refunds](IPs/RSKIPXXX.md)| 12-OCT-2026 | JP | Usa | Core | 2 | Draft |
 | 712 |[RSK typed structured data hashing and signing](IPs/RSKIP712.md)| 02-NOV-2020 | JL | ST | UI | 2 | Adopted |
 
 
@@ -290,6 +291,7 @@ You can find an easily browseable version of this information [here](https://ips
 | JIO      | Jose Ignacio Orlicki      |                                        |
 | JD       | Jose Dahlquist            | jose@rootstocklabs.com                 |
 | JL       | Julian Len                | julian@rootstocklabs.com               |
+| JP       | Juraj Piar                | juraj@rootstocklabs.com                |
 | JT       | Jeremy Then               | jeremy.then@rootstocklabs.com          |
 | JZ       | Julia Zack                | julia.zack@rootstocklabs.com           |
 | KI       | Kelvin Isievwore          |                                        |
