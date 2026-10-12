@@ -1,5 +1,5 @@
 ---
-rskip: XXX
+rskip: 704
 title: Peg-in v2: segwit and taproot refunds
 description: Extend the RSKIP170 peg-in instructions so the Bitcoin refund address can be a P2WPKH, P2WSH or P2TR output as well as P2PKH or P2SH, and state when a version-2 refund address is used
 status: Draft
