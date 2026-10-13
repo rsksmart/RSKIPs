@@ -2,7 +2,7 @@
 rskip: 242
 title: Proxy code Incentive
 description: 
-status: Draft
+status: Deferred
 purpose: Sca, Fair
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2021-05-15
 |**Purpose**    |Sca, Fair |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Deferred |
 |**discussions-to**     ||
 
 # **Abstract**
