@@ -43,12 +43,14 @@ A new field is added to the  Block Header Extension:
 
 - For version 2:
   ```
-  blockHeaderExtensionEncoded = RLP(logsBloom, txExecutionSublistsEdges,baseEvent
+  blockHeaderExtensionEncoded = RLP(logsBloom, baseEvent, txExecutionSublistsEdges)
   blockHeaderExtensionHash = Keccak256(RLP(
-    Keccak256(logsBloom), txExecutionSublistsEdges,baseEvent))
+    Keccak256(logsBloom), baseEvent, txExecutionSublistsEdges))
   ```
 
-If parallel transaction is not activated, then the value `txExecutionSublistsEdges` is left empty.
+The `baseEvent` element is always present. If the block has no base event, `baseEvent` is an empty byte array.
+
+If parallel transaction execution ([RSKIP 144](./RSKIP144.md)) is not active, the `txExecutionSublistsEdges` element is omitted from the list.
 
 This RSKIP does not specify how the content of `baseEvent` is selected by the miners, not how the content is verified by the consensus code (these rules will be specified in a separate RSKIP).
 
@@ -58,7 +60,9 @@ However, to prevent large blocks being forwarded, a rule establishes a maximum s
 
 RSKIP 144 and RSKIP351 defines how new fields are added using an header extension and how the block header is serialized. RSKIP351 also adds a new field to help parallel transaction processing. This RSKIP adds another field to the header extension and defines a new version number higher than the previous one.
  
-Alternatively, we could use a bitmap for the version field, so that each bit specifies the presence (or absence) of each conditional field in the block header extension. However, this complicates consensus code when parsing the header as allows all field subsets to exist. If no parallel transaction processing is activated, leaving the field `txExecutionSublistsEdges` empty and adding a new element to the RLP list is simpler.
+Alternatively, we could use a bitmap for the version field, so that each bit specifies the presence (or absence) of each conditional field in the block header extension. However, this complicates consensus code when parsing the header as allows all field subsets to exist. With a version number, `txExecutionSublistsEdges` is the only element that can be omitted, so the number of elements in the list (2 or 3) tells whether it is present.
+
+`baseEvent` comes before `txExecutionSublistsEdges` because this is the order activated on Testnet. A different order changes the block hash, so it requires a new network upgrade.
 
 
 ## Backwards compatibility
