@@ -43,6 +43,7 @@ No rejected RSKIPs
 - [RSKIP-559](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP559.md): Deterministic selection of the next pegout to confirm
 - [RSKIP-643](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP643.md): New pegout registration method
 - [RSKIP-692](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP692.md): Direct precompile call failure semantics
+- [RSKIP-701](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP701.md): SELFDESTRUCT preserves account nonces
 
 ## Timeline
 
