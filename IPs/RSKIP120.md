@@ -2,7 +2,7 @@
 rskip: 120
 title: Shifting opcodes  
 description: 
-status: Draft
+status: Adopted
 purpose: Sca
 author: SMS (@sebastians)
 layer: Core
@@ -19,7 +19,7 @@ created: 2019-04-23
 |**Purpose**    |Sca |
 |**Layer**      |Core|
 |**Complexity** | 1 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Abstract
 
