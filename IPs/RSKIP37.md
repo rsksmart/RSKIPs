@@ -2,7 +2,7 @@
 rskip: 37
 title: Single Address Smart Wallets
 description: 
-status: Draft
+status: Rejected
 purpose: Sca, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-02-18
 |**Purpose**    |Sca/Usa |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft |
+|**Status**     |Rejected in favor of RSKIP545 |
 
 # **Abstract**
 
