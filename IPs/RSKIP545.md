@@ -26,9 +26,11 @@ The specification is intended to mirror that of [EIP-7702](https://eips.ethereum
 
 ### Prerequisites
 
-EIP-7702 has several prerequisites that have not been implemented in Rootstock. Some of them are not strictly necessary for this RSKIP. For example, we do not necessarily require EIP-2929, EIP-2930, EIP-3607, or EIP-4844. However, we do require the implementation of [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) style typed transactions. While transaction versions have not been implemented in Rootstock - *Transaction Receipts* have already been modified to include a “type” field consistent with EIP-2718. We also require [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541) to prevent deployments of contracts that contain deployed bytecode starting with `0xEF`. This is to avoid interference with EIP-7702’s “delegation indicator”. As initial drafts (corresponding to EIP-2718 and EIP-3541) we present the pull requests for [RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543) and [RSKIP-544](https://github.com/rsksmart/RSKIPs/pull/544). Another helpful proposal [RSKIP-546](https://github.com/rsksmart/RSKIPs/pull/546) introduces Ethereum's Type 1 and Type 2 transaction formats, which contain some fields that are referenced in this RSKIP (e.g. `access_list`, `max_fee_per_gas` and `max_priority_fee_per_gas`).
+EIP-7702 has several prerequisites that have not been implemented in Rootstock. Some of them are not strictly necessary for this RSKIP. For example, we do not necessarily require EIP-2929, EIP-2930, EIP-3607, or EIP-4844. This RSKIP requires:
 
-Todo: if the PRs for new RSKIPs are merged into main, then update the links. 
+* [RSKIP-543](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP543.md), which introduces [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) style typed transactions.
+* [RSKIP-546](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP546.md), which introduces Ethereum's Type 1 and Type 2 transaction formats. The set-code transaction reuses their fields (`access_list`, `max_fee_per_gas` and `max_priority_fee_per_gas`) and the rules that apply to them.
+* [RSKIP-701](https://github.com/rsksmart/RSKIPs/pull/701), which specifies `SELFDESTRUCT` for delegated accounts. Without it, a delegated account that executes `SELFDESTRUCT` would be deleted and lose its nonce, so the authorizations it has signed could be replayed.
 
 ### Parameters
 
@@ -39,7 +41,7 @@ Todo: if the PRs for new RSKIPs are merged into main, then update the links.
 | `PER_AUTH_BASE_COST` | `15500` |
 | `PER_EMPTY_ACCOUNT_COST` | `25000`  |
 
-A new (EIP-2718 style) transaction known as the “set-code transaction” is introduced, where the `TransactionType` is `SET_CODE_TX_TYPE` . Though not strictly necessary, the transaction type  `0x04` is maintained for consistency with Ethereum. This only matters if [RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543) (or something similar) corresponding to EIP-2718 is also implemented in Rootstock.
+A new (EIP-2718 style) transaction known as the “set-code transaction” is introduced, where the `TransactionType` is `SET_CODE_TX_TYPE` . Though not strictly necessary, the transaction type `0x04` is maintained for consistency with Ethereum.
 
 `MAGIC` is used to recover (`ecrecover` from signed message) the address of the EOA (an *authorizer*) that authorizes  the change to set code into its own account. 
 
@@ -160,6 +162,12 @@ succeed with no execution when given enough gas to initiate the call.
 
 In case a delegation indicator points to another delegation, creating a potential chain or loop of delegations, clients must retrieve only the first code and then stop following the delegation chain.
 
+### Activation
+
+This RSKIP is proposed for the Cardamom network upgrade ([RSKIP-694](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP694.md)). Activation block heights are TBD.
+
+This RSKIP MUST NOT activate before RSKIP-543, RSKIP-546 and RSKIP-701. Set-code transactions are valid only when all of them and this RSKIP are active; before that, nodes MUST reject them.
+
 ## Rationale
 
 The original EIP has [extensive rationale](https://eips.ethereum.org/EIPS/eip-7702#rationale) section with detailed discussion of several aspects such as no initcode, no contract creation, no precompiles, etc. For the sake of brevity, we do not replicate them here. However, reviewers and implementers should pay particular attention to the issues mentioned therein. One example is the transaction origin invariant.  Allowing `tx.origin` to set code and execute its own delegated code enables what is called self-sponsoring. It allows users to take advantage of EIP-7702 without relying on any third party infrastructure. However, that means the EIP breaks the invariant that `msg.sender == tx.origin`
@@ -184,7 +192,7 @@ This change is a hard-fork and therefore all full nodes must be updated. SPV lig
 
 ## Implementation
 
-Todo: There is currently no implementation for this proposal.
+The implementation is in the RSKJ repository under the consensus rule `RSKIP545`, in [pull request 3558](https://github.com/rsksmart/rskj/pull/3558), which is not yet merged.
 
 ## Test cases
 
