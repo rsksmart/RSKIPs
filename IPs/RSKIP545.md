@@ -151,7 +151,11 @@ Of the code-reading instructions, only `CODESIZE` and `CODECOPY` are affected by
 
 ### Transaction origination
 
-EOAs with valid delegation indicators i.e. `0xef0100 || address`, can originate transactions. Accounts with any other code values may not originate transactions - continuing the current restriction that transactions cannot originate from contracts. Since EIP-3607, Ethereum  rejects any transaction that originate from accounts that contain code.  EIP-7702 creates an exception to this rule. There is no such explicit restriction on Rootstock. In Rootstock, we implicitly assume that the origin of a transaction is always an EOA. Therefore, no exception needs to be created. However, if EIP-3607 is introduced in the future, then an exception will have to be carved out for EOAs that have a delegation indicator to originate transactions.
+Delegated accounts can originate transactions. Since EIP-3607, Ethereum rejects any transaction whose sender has code, and EIP-7702 makes an exception for delegation indicators. Rootstock has not adopted EIP-3607 and does not, in general, check the code of a transaction's sender, so a delegated account can send legacy, Type 1 and Type 2 transactions without any exception being needed. If EIP-3607 is introduced on Rootstock in the future, it will need the same exception for delegated accounts.
+
+The set-code transaction adds one check of its own: nodes MUST reject a set-code transaction whose sender has code, unless the sender is a delegated account.
+
+As recommended by EIP-7702 (see [Security](#security)), the RSKJ transaction pool accepts at most one pending transaction from a sender whose code is a delegation indicator.
 
 ### Gas Costs
 
