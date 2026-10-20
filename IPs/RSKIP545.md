@@ -101,8 +101,10 @@ following:
 3. Let `authority = ecrecover(msg, y_parity, r, s)`.
     - Where `msg = keccak(MAGIC || rlp([chain_id, address, nonce]))` and  `MAGIC` is defined above in parameters.
     - Verify `s` is less than or equal to `secp256k1n/2`, as specified in [EIP-2](https://eips.ethereum.org/EIPS/eip-2).
+    - Verify `authority` is not the zero address `0x0000000000000000000000000000000000000000`.
 4. Verify the code of `authority` is empty or `authority` is a delegated account (see *delegation indicator* below).
 5. Verify the nonce of `authority` is equal to `nonce`.
+    - This uses the current nonce of `authority`. When `authority` is the transaction sender (self-sponsoring), the sender's nonce has already been incremented for the transaction, so the tuple's `nonce` must be the transaction's nonce plus one.
 6. Add `PER_EMPTY_ACCOUNT_COST - PER_AUTH_BASE_COST` gas to the global refund
 counter if `authority` is not empty.
 7. Set the code of `authority` to be `0xef0100 || address`. This is a delegation
