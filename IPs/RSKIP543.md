@@ -127,7 +127,7 @@ The main difference from EIP-2718 is the extension of the Type-2 transaction for
 
 ## Backward compatibility
 
-This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.
+This change is a hard-fork and therefore all full nodes must be updated. Light clients that only verify block headers do not need to be updated, since the block header format is unchanged. Clients and tools that decode transactions or receipts, or verify inclusion proofs against the transactions or receipts trie, must be updated to handle typed encodings. Legacy transactions and their receipts are unchanged.
 
 ## Implementation
 
