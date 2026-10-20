@@ -85,7 +85,7 @@ This change is a hard-fork and therefore all full nodes must be updated. SPV lig
 
 ## Implementation
 
-An initial implementation for this proposal is in [pull request 3462](https://github.com/rsksmart/rskj/pull/3462) in the RSKJ repository.
+The implementation is in the RSKJ repository on the `account-abstraction` integration branch, under the consensus rule `RSKIP543`; it is not yet merged into `master`. Typed-envelope support was added in [pull request 3462](https://github.com/rsksmart/rskj/pull/3462).
 
 ## Test cases
 
