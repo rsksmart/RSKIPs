@@ -61,7 +61,9 @@ Unlike Ethereum, Rootstock does not have the dynamic fee market of EIP-1559. The
 
 The sender's balance is checked against the normalized transaction, as for a legacy transaction: it must cover `value + gasLimit * effective gas price`. EIP-1559's additional requirement that the balance cover `gasLimit * maxFeePerGas` does not apply.
 
-The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. Thus, the full receipt will be `02 || ReceiptPayload`. 
+The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. Thus, the full receipt will be `02 || ReceiptPayload`.
+
+Both receipt payloads use the typed receipt format of RSKIP-543, which differs from Rootstock's legacy receipt `rlp([postTxState, cumulativeGas, bloom, logs, gasUsed, status])`: it omits `postTxState` and `gasUsed`, as described in RSKIP-543. The `status` field is encoded as in the legacy receipt (`0x01` for success, the empty string for failure). Receipts of legacy transactions are unchanged.
 
 
 ### Inconsistencies in Field Names
