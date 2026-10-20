@@ -1,7 +1,7 @@
 ---
 rskip: 545
 title: Set Code for EOAs
-description: Injects code into an EOA account through a set-code transaction  
+description: Injects code into an EOA account through a set-code transaction
 status: Draft
 purpose: Sca, Usa
 author: PDG (@patogallaiovlabs), SM (@smishraiov), SDL (@sergiodemianlerner)
@@ -18,13 +18,13 @@ This RSKIP proposes to implement [EIP-7702](https://eips.ethereum.org/EIPS/eip-7
 
 There have been several proposals for Account Abstraction in Ethereum and also in Rootstock ([RSKIP-167](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP167.md)).  EIP-7702 was the version that finally received very strong support and has seen strong adoption since it was included in Ethereum’s Pectra upgrade. Some benefits of EIP-7702 include batched transactions, sponsored transactions, and fine grained access control and permissions for smart-contract  wallets. This approach can even work with existing infrastructure and tooling for other account abstraction mechanisms, such as ERC-4337 wallets.
 
-The existence of prior RSKIPS (such as Install Code Precompile, RSKIP-167), the sponsored transaction mechanism RIF Relay, and direct queries from Rootstock community members about the availability of EIP-7702 (and ERC-4337 in the past) provide further motivation to implement this proposal for Account Abstraction.
+The existence of prior RSKIPs (such as Install Code Precompile, RSKIP-167), the sponsored transaction mechanism RIF Relay, and direct queries from Rootstock community members about the availability of EIP-7702 (and ERC-4337 in the past) provide further motivation to implement this proposal for Account Abstraction.
 
 ## Specification
 
 The specification is intended to mirror that of [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). Large sections of text are copied verbatim from EIP-7702. Points of divergence from the EIP specification are noted. 
 
-### **Prerequisites**
+### Prerequisites
 
 EIP-7702 has several prerequisites that have not been implemented in Rootstock. Some of them are not strictly necessary for this RSKIP. For example, we do not necessarily require EIP-2929, EIP-2930, EIP-3607, or EIP-4844. However, we do require the implementation of [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) style typed transactions. While transaction versions have not been implemented in Rootstock - *Transaction Receipts* have already been modified to include a “type” field consistent with EIP-2718. We also require [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541) to prevent deployments of contracts that contain deployed bytecode starting with `0xEF`. This is to avoid interference with EIP-7702’s “delegation indicator”. As initial drafts (corresponding to EIP-2718 and EIP-3541) we present the pull requests for [RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543) and [RSKIP-544](https://github.com/rsksmart/RSKIPs/pull/544). Another helpful proposal [RSKIP-546](https://github.com/rsksmart/RSKIPs/pull/546) introduces Ethereum's Type 1 and Type 2 transaction formats, which contain some fields that are referenced in this RSKIP (e.g. `access_list`, `max_fee_per_gas` and `max_priority_fee_per_gas`).
 
@@ -80,7 +80,7 @@ assert auth.r < 2**256
 assert auth.s < 2**256
 ``` 
 
-Note that these initial assertsions are only to ensure the values fit into appropriately-sized unsigned integers (e.g. `uint64` for `nonce`). Additional checks are performed later, for example step 2 (below) ensures an authority's nonce can still be incremented safely without overflowing.
+Note that these initial assertions are only to ensure the values fit into appropriately-sized unsigned integers (e.g. `uint64` for `nonce`). Additional checks are performed later, for example step 2 (below) ensures an authority's nonce can still be incremented safely without overflowing.
 
 ### Transaction Receipt
 
@@ -111,11 +111,11 @@ indicator.
 
 If any step above fails, immediately stop processing the tuple and continue to the next tuple in the list. When multiple tuples from the same authority are present, set the code using the address in the last valid occurrence.
 
-Note, if transaction execution results in failure (e.g. any exceptional condition or code reverting), the processed delegation indicators is *not rolled back*.
+Note, if transaction execution results in failure (e.g. any exceptional condition or code reverting), the processed delegation indicators are *not rolled back*.
 
 ### Delegation indicator
 
-Delegation indicators use the undefined EVM opcode `0xEF` from  [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541). This EIP has not been implemented on Rootstock. Since its adoption in Ethereum , EIP-3541 made it  impossible to deploy a contract if the intended deployed bytecode starts with `0xEF`.   EIP-7702 takes advantage of this “banned opcode” and uses it as a delegation marker for an EOA. This indicates that the code must be handled differently than regular code. The complete delegation indicator is a sequence of 3 bytes `0xEF0100.` This is followed by the address of the contract with the actual implementation logic. The 3-byte format starting with `0xEF` follows a pattern introduced in [EIP-3540](https://eips.ethereum.org/EIPS/eip-3540) where the first two bytes represent a “magic” sequence and the next byte represents a version number.
+Delegation indicators use the undefined EVM opcode `0xEF` from  [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541). This EIP has not been implemented on Rootstock. Since its adoption in Ethereum, EIP-3541 made it impossible to deploy a contract if the intended deployed bytecode starts with `0xEF`.   EIP-7702 takes advantage of this “banned opcode” and uses it as a delegation marker for an EOA. This indicates that the code must be handled differently than regular code. The complete delegation indicator is a sequence of 3 bytes `0xEF0100`. This is followed by the address of the contract with the actual implementation logic. The 3-byte format starting with `0xEF` follows a pattern introduced in [EIP-3540](https://eips.ethereum.org/EIPS/eip-3540) where the first two bytes represent a “magic” sequence and the next byte represents a version number.
 
 The presence of a delegation indicator (`0xef0100 || address`) forces all code-executing operations to follow the address pointer to obtain the code to execute. For example, `CALL` loads the code at `address` and executes it in the context of `authority` i.e. the EOA.
 
@@ -132,7 +132,7 @@ For code reading, only `CODESIZE` and `CODECOPY` instructions are affected. They
 
 ### Transaction origination
 
-EOA’s with valid delegation indicators i.e. `0xef0100 || address`, can originate transactions. Accounts with any other code values may not originate transactions - continuing the current restriction that transactions cannot originate from contracts. Since EIP-3607, Ethereum  rejects any transaction that originate from accounts that contain code.  EIP-7702 creates an exception to this rule. There is no such such explicit restriction on Rootstock. In Rootstock, we implicitly assume that the origin of a transaction is always an EOA. Therefore, no exception needs to be created. However, if EIP-3607 is introduced in the future, then an exception will have to be carved out for EOAs that have a delegation indicator to originate transactions.
+EOAs with valid delegation indicators i.e. `0xef0100 || address`, can originate transactions. Accounts with any other code values may not originate transactions - continuing the current restriction that transactions cannot originate from contracts. Since EIP-3607, Ethereum  rejects any transaction that originate from accounts that contain code.  EIP-7702 creates an exception to this rule. There is no such explicit restriction on Rootstock. In Rootstock, we implicitly assume that the origin of a transaction is always an EOA. Therefore, no exception needs to be created. However, if EIP-3607 is introduced in the future, then an exception will have to be carved out for EOAs that have a delegation indicator to originate transactions.
 
 ### Gas Costs
 
@@ -153,30 +153,26 @@ The authors of EIP-7702 estimate the cumulative impact of the above at `12016` g
 
 ### No Precompiles
 
-An EOA cannot use a precompile address as a delegate. When a precompile address is the target of a delegation, the retrieved code is considered empty and `CALL`, `CALLCODE`, `STATICCALL`, `DELEGATECALL`instructions targeting this account will execute empty code, and therefore
+An EOA cannot use a precompile address as a delegate. When a precompile address is the target of a delegation, the retrieved code is considered empty and `CALL`, `CALLCODE`, `STATICCALL`, `DELEGATECALL` instructions targeting this account will execute empty code, and therefore
 succeed with no execution when given enough gas to initiate the call.
 
 ### No Chained Delegation (no loops)
 
 In case a delegation indicator points to another delegation, creating a potential chain or loop of delegations, clients must retrieve only the first code and then stop following the delegation chain.
 
-## Implementation
-
-Todo: There is currently no implementation for this proposal.
-
 ## Rationale
 
-The original EIP has [extensive rationale](https://eips.ethereum.org/EIPS/eip-7702#rationale) section with detailed discussion of several aspects such as no initcode, no contract creation, no precompiles, etc. For the sake of brevity, we do not replicate them here. However, reviewers and implementers should pay particular attention to the the issues mentioned therein. One example is the transaction origin invariant.  Allowing `tx.origin` to set code and execute its own delegated code enables what is called self-sponsoring. It allows users to take advantage of EIP-7702 without relying on any third party infrastructure. However, that means the EIP breaks the invariant that `msg.sender == tx.origin`
+The original EIP has [extensive rationale](https://eips.ethereum.org/EIPS/eip-7702#rationale) section with detailed discussion of several aspects such as no initcode, no contract creation, no precompiles, etc. For the sake of brevity, we do not replicate them here. However, reviewers and implementers should pay particular attention to the issues mentioned therein. One example is the transaction origin invariant.  Allowing `tx.origin` to set code and execute its own delegated code enables what is called self-sponsoring. It allows users to take advantage of EIP-7702 without relying on any third party infrastructure. However, that means the EIP breaks the invariant that `msg.sender == tx.origin`
 only happens in the topmost execution frame of a transaction. This will affect smart contracts containing `require(msg.sender == tx.origin)` style checks.
 
 Reviewers and implementers should pay attention to the discussion on [security considerations](https://eips.ethereum.org/EIPS/eip-7702#security-considerations)  in the  EIP, some of which are listed below.
 
-# Security
+## Security
 
 - A poorly implemented delegate can *allow a malicious actor to take near complete
 control over a signer’s EOA*.
 - Attackers can try to front run an EOA’s set-code transaction, so developers must check for signed authorizations using `ecrecover`.
-- When upgrading an EOA’s code (delegate address or code therein), care must be taken to manage storage slots since all delegated code (existing and new) will run in the context of the EOA. ****
+- When upgrading an EOA’s code (delegate address or code therein), care must be taken to manage storage slots since all delegated code (existing and new) will run in the context of the EOA.
 - Breaks in atomic sandwich protections which rely on `tx.origin` and reentrancy guards of the style `require(tx.origin == msg.sender)`
 - Transaction (gas) sponsors may require their users to post some bond or use reputational mechanisms. This is to guard against the possibility of relayers not being reimbursed for gas due to change in a EOA’s authorized code or asset sweeping.
 - Transaction propagation: An EOA’s nonce may be incremented more than once per transaction.
@@ -185,6 +181,10 @@ control over a signer’s EOA*.
 ## Backward compatibility
 
 This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.
+
+## Implementation
+
+Todo: There is currently no implementation for this proposal.
 
 ## Test cases
 
