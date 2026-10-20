@@ -108,6 +108,11 @@ EIP-2718 specifies the following for receipts. The receipt root in the block hea
 * The type prefix of the receipt MUST match the type prefix of the transaction with a matching `Index`: a legacy transaction has a `LegacyReceipt`, and a typed transaction has a receipt with the same one-byte or two-byte prefix. 
 * `ReceiptPayload` is byte array whose interpretation is dependent on the `TransactionType` and defined in a RSKIP where such a transaction type is proposed. For example, currently there are four defined typed transaction formats in Ethereum  - and all of them use the following format for the receipt payload: `rlp(statusRLP, cumulativeGasRLP, bloomRLP, logInfoListRLP)`. If Rootstock implements any of these types, then it MUST use the same receipt payload format. On the other hand, if Rootstock implements a new transaction type, it will also need to specify the format of the receipt payload.
 
+Compared with `LegacyReceipt`, this typed receipt payload omits two fields:
+
+* `postTxState`: in Rootstock this field only signals success (`0x01`) or failure (empty), which `status` already carries.
+* `gasUsed`: the gas used by the transaction alone. It can be derived as the transaction's `cumulativeGas` minus that of the previous transaction in the block. If parallel transaction execution ([RSKIP-144](RSKIP144.md)) is activated, `cumulativeGas` accumulates per execution sublist, and the previous transaction is the one in the same sublist.
+
 ### Activation
 
 Block height at which activated is TBD.
