@@ -106,7 +106,8 @@ following:
 5. Verify the nonce of `authority` is equal to `nonce`.
     - This uses the current nonce of `authority`. When `authority` is the transaction sender (self-sponsoring), the sender's nonce has already been incremented for the transaction, so the tuple's `nonce` must be the transaction's nonce plus one.
 6. Add `PER_EMPTY_ACCOUNT_COST - PER_AUTH_BASE_COST` gas to the global refund
-counter if `authority` is not empty.
+counter if the code of `authority` is not empty, which by step 4 means `authority` is already a delegated account.
+    - This differs from EIP-7702, where the refund applies whenever `authority` exists in the state. On Rootstock, an `authority` that has a balance or a nonce but no code receives no refund.
 7. Set the code of `authority` to be `0xef0100 || address`. This is a delegation
 indicator. Also set the delegation authority flag of `authority` (see *delegation indicator* below).
     - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator or set the flag. Clear the account’s code by resetting the account’s code hash to the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`.
