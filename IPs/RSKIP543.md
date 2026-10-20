@@ -86,7 +86,15 @@ Nodes MUST reject a transaction that the table classifies as invalid, or whose t
 
 ### Signatures
 
-Just as now, transaction signatures (when required, e.g. not REMASC) should be computed over the entire encoded raw transaction including type prefixes (if any). There is no change in signatures for legacy transactions since they do not have a type prefix (as mentioned earlier, there is NO type zero transaction).
+The signature of a typed transaction MUST be computed over a hash that includes its type prefix. The signing hash is
+
+`keccak256(prefix || rlp([unsigned fields]))`
+
+where `prefix` is the single `TransactionType` byte, or the two bytes `0x02 || rsk-tx-type` for a Rootstock-specific transaction, and the unsigned fields are the payload fields other than the signature, as defined by the RSKIP that introduces the type. No other domain separator is used: the prefix already separates the signing hashes of different types from each other and from legacy transactions.
+
+Every typed transaction MUST include a `chainId` field among its signed fields, and the `chainId` MUST be nonzero and equal to the chain ID of the network. This provides replay protection across networks for all typed transactions.
+
+There is no change in signatures for legacy transactions since they do not have a type prefix (as mentioned earlier, there is NO type zero transaction).
 
 ### Transaction Receipts
 
