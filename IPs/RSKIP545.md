@@ -110,7 +110,8 @@ counter if the code of `authority` is not empty, which by step 4 means `authorit
     - This differs from EIP-7702, where the refund applies whenever `authority` exists in the state. On Rootstock, an `authority` that has a balance or a nonce but no code receives no refund.
 7. Set the code of `authority` to be `0xef0100 || address`. This is a delegation
 indicator. Also set the delegation authority flag of `authority` (see *delegation indicator* below).
-    - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator or set the flag. Clear the account’s code by resetting the account’s code hash to the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`.
+    - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator or set the flag. Clear the account’s code by removing the value at its code key from the Unitrie. Afterwards `EXTCODEHASH` on the account returns the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470` (`keccak256` of the empty string), as for an account that never had code.
+    - In the Unitrie, writing the delegation indicator stores it as the value at the account's code key, and also writes the value `0x01` at the account's storage prefix key if it is not already present, as for a contract. Neither step touches any storage cell.
     - A set-code transaction can therefore set a delegation on an EOA, change it to point to a different address, or clear it. These operations change only the account's code (and, when setting a delegation, its delegation authority flag). They never read, write or clear any storage cell of the account.
     - Clearing a delegation therefore does not return the account to its state before it was delegated: storage written while it was delegated remains, and the delegation authority flag stays set. A later delegation runs its code against that storage. As a result, an EOA can now hold persistent storage that no protocol operation clears, and any application logic that assumes an EOA has no storage must account for this. As with a proxy contract, the storage can only be cleared by code running in the account's context: for example, by delegating to a contract that writes zero to the slots in use and then calling the account. `SELFDESTRUCT` does not clear it: under RSKIP-701, a delegated account that executes `SELFDESTRUCT` keeps its storage.
 8. Increase the nonce of `authority` by one.
@@ -142,7 +143,9 @@ The affected executing operations are:
 - any transaction where `destination` points to an address with a delegation
 indicator present
 
-For code reading, only `CODESIZE` and `CODECOPY` instructions are affected. They operate directly on the executing code instead of the delegation. For example, when executing a delegated account `EXTCODESIZE` returns `23` (the size of `0xEF0100 || address`) whereas `CODESIZE` returns the size of the code residing at `address` (the actual implementation). *This means during delegated execution `CODESIZE` and `CODECOPY` produce a different result compared to calling `EXTCODESIZE` and `EXTCODECOPY` on the authority (the EOA).*
+The code-reading operations `EXTCODESIZE`, `EXTCODECOPY` and `EXTCODEHASH` on a delegated account operate on the delegation indicator itself and do not follow it: they return `23`, copy the 23 bytes `0xef0100 || address`, and return `keccak256(0xef0100 || address)`, respectively.
+
+Of the code-reading instructions, only `CODESIZE` and `CODECOPY` are affected by delegation. They operate directly on the executing code instead of the delegation. For example, when executing a delegated account `EXTCODESIZE` returns `23` (the size of `0xEF0100 || address`) whereas `CODESIZE` returns the size of the code residing at `address` (the actual implementation). *This means during delegated execution `CODESIZE` and `CODECOPY` produce a different result compared to calling `EXTCODESIZE` and `EXTCODECOPY` on the authority (the EOA).*
 
 ### Transaction origination
 
