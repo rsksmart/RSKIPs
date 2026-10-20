@@ -84,11 +84,11 @@ A Type 1 or Type 2 transaction is valid only if all of the following hold. Nodes
 
 Recall the legacy transaction format: `rlp([nonce, gasPrice, gasLimit, to, value, data, v, r, s])`, where `v` carries the signature's y-parity and, as in EIP-155, optionally the chain ID. The new fields in Type 1 and Type 2 transactions are required to validate the signature. After signature validation the new transaction types can be *normalized* to the legacy format by ignoring the `accessList` field and, for Type 2, setting `gasPrice = maxPriorityFeePerGas` (the effective gas price defined above). After which they can be executed in the same way as legacy transactions.
 
-In Ethereum, the `accessList` field is expected to be of type `[[{20 bytes}, [{32 bytes}...]]...]`, where `...` means “zero or more of the thing to the left”. However, this detail is not relevant for Rootstock since Access Lists are not supported.
+The `accessList` MUST have the same shape as in Ethereum, `[[{20 bytes}, [{32 bytes}...]]...]`, where `...` means “zero or more of the thing to the left”: an RLP list of zero or more entries, each an RLP list of exactly two elements, a 20-byte address string and an RLP list of zero or more 32-byte storage-key strings. A transaction whose access list does not have this shape is invalid.
 
-Depending on the type (1 or 2), the `accessList` will be the 8th or 9th element of the RLP encoded transaction payload. If the list is empty, it will be encoded as `0xc0`. In any case, even though we retain the raw bytes for verifying the signature we do not need to fully deserialize the `accessList` field. If `accessList` is not empty, we only need the length in bytes of the data without deserializing the list elements. This is useful for calculating the additional gas cost for the access list.
+Depending on the type (1 or 2), the `accessList` is the 8th or 9th element of the RLP encoded transaction payload. An empty access list is encoded as `0xc0`. Beyond checking its shape, nodes do not interpret the access list; the additional gas below depends only on its encoded length.
 
-**Additional Gas for Access Lists**: Even though the access list has no effect on execution under this RSKIP, the transaction sender will be charged an additional amount of gas to cover bandwidth costs and to reduce spam. In Ethereum the additional gas cost for access list items is computed using a formula that works out to around 120 gas/byte for "addresses" and 60 gas/byte for "storage keys". In Rootstock, we propose charging `80 gas/byte` for the accessList field. This additional gas can be collected at the same time as for calldata which is based on the transaction's `data` field.
+**Additional Gas for Access Lists**: Even though the access list has no effect on execution under this RSKIP, the transaction sender will be charged an additional amount of gas to cover bandwidth costs and to reduce spam. In Ethereum the additional gas cost for access list items is computed using a formula that works out to around 120 gas/byte for "addresses" and 60 gas/byte for "storage keys". In Rootstock, the additional gas is `80 * len(accessList)`, where `len(accessList)` is the length in bytes of the access list's complete RLP encoding, including its list header. An empty access list (`0xc0`) is charged no additional gas. This additional gas can be collected at the same time as for calldata which is based on the transaction's `data` field.
 
 ### Activation
 
@@ -98,7 +98,7 @@ This RSKIP MUST NOT activate before RSKIP-543. Type 1 and Type 2 transactions ar
 
 ## Rationale
 
-The additional gas cost of access list is set somewhat arbitrarily at 80 gas/byte. This is in the range of 60-120 gas/byte used in Ethereum. Since access lists have no effect on execution under this RSKIP, we expect this field to be empty in practice. However, to deter abuse or spam, the additional gas cost has to be meaningful.
+The additional gas cost of access list is set somewhat arbitrarily at 80 gas/byte. This is in the range of 60-120 gas/byte used in Ethereum. Since access lists have no effect on execution under this RSKIP, we expect this field to be empty in practice, and an empty list is free so that ordinary transactions pay nothing extra. However, to deter abuse or spam, the additional gas cost has to be meaningful.
 
 ## Backwards compatibility
 
