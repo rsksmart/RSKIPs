@@ -108,8 +108,6 @@ EIP-2718 specifies the following for receipts. The receipt root in the block hea
 * The type prefix of the receipt MUST match the type prefix of the transaction with a matching `Index`: a legacy transaction has a `LegacyReceipt`, and a typed transaction has a receipt with the same one-byte or two-byte prefix. 
 * `ReceiptPayload` is byte array whose interpretation is dependent on the `TransactionType` and defined in a RSKIP where such a transaction type is proposed. For example, currently there are four defined typed transaction formats in Ethereum  - and all of them use the following format for the receipt payload: `rlp(statusRLP, cumulativeGasRLP, bloomRLP, logInfoListRLP)`. If Rootstock implements any of these types, then it MUST use the same receipt payload format. On the other hand, if Rootstock implements a new transaction type, it will also need to specify the format of the receipt payload.
 
-RSKJ includes a type field in receipts (currently hardcoded to `0x0`).  The value is stored in `TransactionResult` and `TransactionReceipt` classes as a string. Note that this field was introduced in [pull request 1984](https://github.com/rsksmart/rskj/pull/1984) primarily for JSON RPC compatibility with Ethereum. In RPC responses for receipts for legacy transactions, Ethereum clients (like geth) include a type field with value `0x0` - even though legacy transactions technically do not have a EIP-2718 type. This allows the reuse of the same JSON schema for all (currently defined) transaction types.
-
 ### Activation
 
 Block height at which activated is TBD.
