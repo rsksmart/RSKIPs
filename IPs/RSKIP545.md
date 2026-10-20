@@ -61,7 +61,7 @@ where
 
 `authorization_list = [[chain_id, address, nonce, y_parity, r, s], ...]`
 
-and this is described more fully below.  Note that the transaction payload includes fields that do not currently exist on Rootstock. This includes the fields `max_priority_fee_per_gas` and  `max_fee_per_gas` from EIP-1559 and `access_list` from EIP-2930. These field names are retained to ensure compatibility for preexisting wallet software and tooling in use in Ethereum. The `access_list` can simply be ignored. The transaction's `gasPrice` can be set to the lower of `max_priority_fee_per_gas` and  `max_fee_per_gas`. Of course, all of the fields have to be used when validating the transaction's signature.
+and this is described more fully below.  Note that the transaction payload includes the fields `max_priority_fee_per_gas` and `max_fee_per_gas` from EIP-1559 and `access_list` from EIP-2930, which RSKIP-546 introduces on Rootstock. These field names are retained to ensure compatibility for preexisting wallet software and tooling in use in Ethereum. The `access_list` follows the rules of RSKIP-546: it MUST have the shape given there, it has no effect on execution under this RSKIP, and it is charged `80` gas per byte of its complete RLP encoding, with an empty list (`0xc0`) charged nothing. The transaction's `gasPrice` can be set to the lower of `max_priority_fee_per_gas` and  `max_fee_per_gas`. Of course, all of the fields have to be used when validating the transaction's signature.
 
 Following EIP-7702, a null destination is not valid for the set-code transaction. Thus, it cannot be used for contract creation. The original EIP also prohibits the use of this transaction for EIP-4844 style blobs. Since Rootstock currently has no implementation for Ethereum’s blob-carrying transactions, this restriction is currently moot. However, we leave this remark here for future reference in case there is a RSKIP to implement a system similar to EIP-4844.
 
@@ -147,7 +147,7 @@ EOAs with valid delegation indicators i.e. `0xef0100 || address`, can originate 
 ### Gas Costs
 
 The transaction sender will pay for all authorization tuples, regardless of validity or duplication. The cost of a set-code transaction will be at least  `21000 + 16 * non-zero calldata bytes +
-4 * zero calldata bytes`  plus the cost of reading accounts and storage cells. 
+4 * zero calldata bytes`, plus the access-list charge of RSKIP-546, plus the cost of reading accounts and storage cells. 
 
 Additionally, an up front cost of `PER_EMPTY_ACCOUNT_COST * authorization list length` is collected, but some of these will be reimbursed after accounting for actual cost of setting code. This is reflected in `PER_AUTH_BASE_COST` which accounts for the cost to process each authorization tuple and set the delegation destination. The cost for this operation is decomposed into several components such as: 101 bytes of calldata, recovering the `authority` address from their signature, reading the nonce and code of `authority` , storing values in the account, and the cost to deploy code.
 
