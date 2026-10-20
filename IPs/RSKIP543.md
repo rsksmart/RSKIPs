@@ -43,7 +43,7 @@ As specified (in EIP-2718's  Backwards Compatibility section), clients can diffe
 
 Note that the range for type values includes `0`. At present, there is no formal specification in Ethereum for a "type-0" transaction. In other words, there is no "formal" Type-0 transaction. Ethereum clients include a type field in their JSON RPC response for transaction receipts. This is just for convenience as it allows the use of the same JSON schema for receipts of different types. It should be clear that, in consensus, there is no Type-0 transaction. A transaction encoded in the EIP-2718 format with a leading `0x00` should NOT be interpreted as a legacy transaction - as noted later, the signature rules are different for EIP-2718 transactions. Implementers may wish to reject such transactions either explicitly (or they can reject them by treating them the same way as any undefined type). 
 
-## Rootstock-specific transactions
+### Rootstock-specific transactions
 
 To introduce  transactions specific to Rootstock, we create a special case from the existing format by extending Ethereum’s Type-2 (EIP-1559) format. In the future, it is possible that the Rootstock community may consider introducing Ethereum’s Type 1 transactions (EIP-2930) which allows for Access Lists. This is why we do not interfere with this Type-1 format. Instead, we extend Ethereum’s Type-2 transaction format as we believe this type is highly unlikely to be implemented on Rootstock, since it (EIP-1559) requires the burning of a “base fee” component of transaction fees.
 
@@ -75,10 +75,6 @@ RSKJ includes a type field in receipts (currently hardcoded to `0x0`).  The valu
 
 Block height at which activated is TBD.
 
-## Implementation
-
-An initial implementation for this proposal is in [pull request 3462](https://github.com/rsksmart/rskj/pull/3462) in the RSKJ repository.
-
 ## Rationale
 
 The main difference from EIP-2718 is the extension of the Type-2 transaction format to allow for transaction types (numbers) that are unique to Rootstock. The rationale is that, a Type-2 transaction with its dynamic fee market and burning of base fees is unlikely to be implemented in Rootstock - at least not in the way specified in EIP-1559. However, this does not preclude the implementation of a Type-2 transaction on Rootstock. Type-2 transactions are the most commonly used type on Ethereum, and they will very likely be implemented in Rootstock as well. However, internally they will have to be handled a bit differently in Rootstock.
@@ -86,6 +82,10 @@ The main difference from EIP-2718 is the extension of the Type-2 transaction for
 ## Backward compatibility
 
 This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.
+
+## Implementation
+
+An initial implementation for this proposal is in [pull request 3462](https://github.com/rsksmart/rskj/pull/3462) in the RSKJ repository.
 
 ## Test cases
 
