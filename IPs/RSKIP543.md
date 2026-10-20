@@ -43,6 +43,20 @@ As specified (in EIP-2718's  Backwards Compatibility section), clients can diffe
 
 Note that the range for type values includes `0`. At present, there is no formal specification in Ethereum for a "type-0" transaction. In other words, there is no "formal" Type-0 transaction. Ethereum clients include a type field in their JSON RPC response for transaction receipts. This is just for convenience as it allows the use of the same JSON schema for receipts of different types. It should be clear that, in consensus, there is no Type-0 transaction. A transaction encoded in the EIP-2718 format with a leading `0x00` should NOT be interpreted as a legacy transaction - as noted later, the signature rules are different for EIP-2718 transactions. Implementers may wish to reject such transactions either explicitly (or they can reject them by treating them the same way as any undefined type). 
 
+### Transactions
+
+Following EIP-2718, a transaction is one of:
+
+* `LegacyTransaction`: the existing Rootstock format, `rlp([nonce, gasPrice, gasLimit, to, value, data, v, r, s])`, unchanged by this proposal.
+* `TransactionType || TransactionPayload`: a typed transaction. `TransactionType` is a single byte in the range `[0x01, 0x7f]`, and the format of `TransactionPayload` is defined by the RSKIP that introduces the type.
+* `0x02 || rsk-tx-type || TransactionPayload`: a Rootstock-specific transaction, described in [Rootstock-specific transactions](#rootstock-specific-transactions).
+
+The transaction hash is `keccak256` of the full encoding, including the type prefix of a typed transaction. Hashes of legacy transactions are unchanged.
+
+A typed transaction such as `0x04 || rlp([...])` is not itself valid RLP: it is a type byte followed by an RLP-encoded payload. In block bodies and network messages, which are RLP lists of transactions, a legacy transaction is included as is (it is already an RLP list), while a typed transaction is RLP-encoded as a string, i.e. `rlp(TransactionType || TransactionPayload)`. Decoders tell them apart by whether an element is an RLP list or an RLP string.
+
+The transactions root in the block header is the root hash of `Trie(rlp(Index) => Transaction)`, where `Transaction` is the full encoding above. For a typed transaction this is `TransactionType || TransactionPayload` itself, not its RLP string encoding used in block bodies.
+
 ### Rootstock-specific transactions
 
 To introduce  transactions specific to Rootstock, we create a special case from the existing format by extending Ethereum’s Type-2 (EIP-1559) format. In the future, it is possible that the Rootstock community may consider introducing Ethereum’s Type 1 transactions (EIP-2930) which allows for Access Lists. This is why we do not interfere with this Type-1 format. Instead, we extend Ethereum’s Type-2 transaction format as we believe this type is highly unlikely to be implemented on Rootstock, since it (EIP-1559) requires the burning of a “base fee” component of transaction fees.
