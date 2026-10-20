@@ -135,7 +135,33 @@ The implementation is in the RSKJ repository on the `account-abstraction` integr
 
 ## Test cases
 
-Todo.
+The vectors below exercise the [Classification](#classification) rules and the envelope framing. The two complete transactions are taken from the RSKJ encoder test vectors. They use chain ID `33` (`0x21`) and placeholder signature values (`r = 0x11…11`, `s = 0x22…22`), so they test encoding and classification only, not signature validity.
+
+Legacy transaction. The first byte `0xf8` is in `[0xc0, 0xfe]`, so it is classified as legacy:
+
+```
+f86b01843b9aca00825208941234567890123456789012345678901234567890880de0b6b3a76400008066a01111111111111111111111111111111111111111111111111111111111111111a02222222222222222222222222222222222222222222222222222222222222222
+```
+
+Ethereum Type-2 transaction. The first byte is `0x02` and the second byte `0xf8` is in `[0xc0, 0xff]`, so it is classified as a typed transaction with `TransactionType` `0x02`:
+
+```
+02f8722101843b9aca008477359400825208941234567890123456789012345678901234567890880de0b6b3a764000080c001a01111111111111111111111111111111111111111111111111111111111111111a02222222222222222222222222222222222222222222222222222222222222222
+```
+
+This Type-2 transaction is 117 bytes long. In a block body it is RLP-encoded as a string, so its element begins `b875 02f872…`. The transactions trie stores the unwrapped bytes `02f872…`.
+
+The following encodings MUST be rejected. Only the leading bytes matter; the rest of the encoding is irrelevant to the result.
+
+| Leading bytes | Reason |
+|---|---|
+| `00 f8 72 …` | `0x00` prefix: there is no Type-0 transaction |
+| `02 00 f8 72 …` | Rootstock-specific `rsk-tx-type` `0x00` is reserved |
+| `02 7f …` | Rootstock-specific `rsk-tx-type` `0x7f` is reserved |
+| `02 80 …`, `02 bf …` | Second byte after `0x02` is in `[0x80, 0xbf]` |
+| `05 f8 72 …`, `7f …` | Undefined type |
+| `80 …`, `bf …` | First byte is in `[0x80, 0xbf]` |
+| `ff …` | Reserved first byte |
 
 ## References
 
