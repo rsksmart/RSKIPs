@@ -40,6 +40,7 @@ EIP-7702 has several prerequisites that have not been implemented in Rootstock. 
 | `MAGIC` | `0x05` |
 | `PER_AUTH_BASE_COST` | `15500` |
 | `PER_EMPTY_ACCOUNT_COST` | `25000`  |
+| `DELEGATION_RESOLUTION_COST` | `700` |
 
 A new (EIP-2718 style) transaction known as the “set-code transaction” is introduced, where the `TransactionType` is `SET_CODE_TX_TYPE` . Though not strictly necessary, the transaction type `0x04` is maintained for consistency with Ethereum.
 
@@ -168,6 +169,13 @@ The `PER_AUTH_BASE_COST` is the cost to process the authorization tuple and se
 - cost to deploy code = `200 * 23 = 4600`
 
 The authors of EIP-7702 estimate the cumulative impact of the above at `12016` gas, which they rounded up to `PER_AUTH_BASE_COST = 12500`. They then set the upfront cost to be twice of this value `PER_EMPTY_ACCOUNT_COST = 25000` . As noted above, the gas schedule in Rootstock is different (arising mainly from EIP-2929). We set our base cost about 3K higher, at  `PER_AUTH_BASE_COST = 15500` . However, we keep the upfront cost the same as in Ethereum at  `PER_EMPTY_ACCOUNT_COST = 25000` . Once there is an implementation for the proposal, these values can be updated further after some benchmarking.
+
+**Delegation resolution.** Following a delegation reads a second account, the delegate, in addition to the delegated account itself. In EIP-7702 this read is priced through EIP-2929 (`2600` gas cold, `100` warm). Rootstock does not implement EIP-2929, so the read is charged a flat `DELEGATION_RESOLUTION_COST = 700` gas, Rootstock's price for reading an account (as for `EXTCODESIZE`). The charge applies:
+
+- to a `CALL`, `CALLCODE`, `DELEGATECALL` or `STATICCALL` whose target is a delegated account, in addition to the instruction's own cost;
+- to a transaction whose `destination` is a delegated account, at the start of execution, from the gas that remains after the intrinsic cost. If not enough gas remains, execution fails as out of gas.
+
+It is charged whether or not the delegate has code, including when the delegate is a precompile (see [No Precompiles](#no-precompiles)).
 
 ### No Precompiles
 
