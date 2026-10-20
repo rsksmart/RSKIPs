@@ -155,7 +155,7 @@ Delegated accounts can originate transactions. Since EIP-3607, Ethereum rejects 
 
 The set-code transaction adds one check of its own: nodes MUST reject a set-code transaction whose sender has code, unless the sender is a delegated account.
 
-As recommended by EIP-7702 (see [Security](#security)), the RSKJ transaction pool accepts at most one pending transaction from a sender whose code is a delegation indicator.
+As recommended by EIP-7702 (see [Security](#security)), nodes SHOULD accept at most one pending transaction from a delegated account. This is a transaction pool policy, not a consensus rule.
 
 ### Gas Costs
 
@@ -221,7 +221,15 @@ control over a signer’s EOA*.
 
 ## Backward compatibility
 
-This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.
+This change is a hard fork and therefore all full nodes must be updated. Light clients that only verify block headers do not need to be updated. Clients and tools that decode transactions, receipts or account state must be updated to handle set-code transactions and the delegation authority flag.
+
+As in Ethereum, this change breaks several invariants that applications and tooling may rely on. On Rootstock they apply as follows:
+
+- An account's balance can decrease as a result of a call made by anyone, not only through a transaction the account itself signed, because delegated code runs in the account's context.
+- An EOA's nonce can increase during execution, since delegated code can execute `CREATE`, and it can increase more than once in a single transaction, through authorization processing (step 8 of [Behavior](#behavior)). Nodes therefore SHOULD accept at most one pending transaction from a delegated account (see [Transaction origination](#transaction-origination)).
+- `tx.origin == msg.sender` can now hold in a nested call frame through self-sponsoring, which breaks guards of the form `require(tx.origin == msg.sender)`.
+- An EOA can hold persistent storage (see step 7 of [Behavior](#behavior)).
+- Delegated EOAs carry code. Un-upgraded tooling will see `EXTCODESIZE` return `23` and `EXTCODEHASH` return `keccak256(0xef0100 || address)` for accounts that previously looked like plain EOAs, and tooling that treats any account with code as a contract will classify them as contracts.
 
 ## Implementation
 
