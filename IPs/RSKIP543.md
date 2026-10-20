@@ -22,7 +22,7 @@ The usefulness of a transaction versioning system in Rootstock is evident from p
 
 ## Specification
 
-Currently, the raw RLP representation of all transactions in Rootstock starts with an initial byte that exceeds the Hex value `0xc0`. In RLP, any value lower than this corresponds to a “scalar” or “string”, while larger values are interpreted as “lists”.  Take an explicit example of a recent transaction from rootstock
+Currently, the raw RLP representation of all transactions in Rootstock starts with an initial byte that is at least the Hex value `0xc0`. In RLP, any value lower than this corresponds to a “scalar” or “string”, while larger values are interpreted as “lists”.  Take an explicit example of a recent transaction from rootstock
 
 ```bash
 # example of RLP encoded raw transaction using Foundry's cast tool
@@ -61,11 +61,26 @@ The transactions root in the block header is the root hash of `Trie(rlp(Index) =
 
 To introduce  transactions specific to Rootstock, we create a special case from the existing format by extending Ethereum’s Type-2 (EIP-1559) format. In the future, it is possible that the Rootstock community may consider introducing Ethereum’s Type 1 transactions (EIP-2930) which allows for Access Lists. This is why we do not interfere with this Type-1 format. Instead, we extend Ethereum’s Type-2 transaction format as we believe this type is highly unlikely to be implemented on Rootstock, since it (EIP-1559) requires the burning of a “base fee” component of transaction fees.
 
-We retain the base EIP-2718 structure of `tx-type || TransactionPayload` — except when `tx-type == 02` . If the initial byte of the encoded transaction is `0x02`, then we create an additional check to see if the second byte is less than `7f`. This is essentially repeating the logic used to distinguish EIP-2718 typed transactions from legacy ones. If the second byte is indeed less than or equal to `7f`, then we interpret it as a Rootstock-specific transaction type. We can do this (use `7f`) because Ethereum’s Type 2 transactions use the RLP format for the payload (which is a list), so the first byte of the payload cannot be less than `7f`. If the second byte is larger than `7f` we interpret this as a (currently unimplemented) dynamic fee (EIP-1559) transaction format from Ethereum. This leaves the path open for future implementation of this type on Rootstock - should there be a need for it.
+We retain the base EIP-2718 structure of `tx-type || TransactionPayload` — except when `tx-type == 02` . If the initial byte of the encoded transaction is `0x02`, then we create an additional check to see if the second byte is in the range `[0x00, 0x7f]`. This is essentially repeating the logic used to distinguish EIP-2718 typed transactions from legacy ones. If it is, then we interpret it as a Rootstock-specific transaction type. We can do this because Ethereum’s Type 2 transactions use the RLP format for the payload (which is a list), so the first byte of the payload is in the range `[0xc0, 0xff]`. If the second byte is in that range, we interpret this as a (currently unimplemented) dynamic fee (EIP-1559) transaction format from Ethereum. A second byte in the range `[0x80, 0xbf]` is invalid: it is neither a Rootstock-specific type nor the start of an RLP list. This leaves the path open for future implementation of this type on Rootstock - should there be a need for it.
 
-Thus, the raw encoding of a Rootstock-specific transaction will be `0x02 || rsk-tx-type || TransactionPayload`  where `rsk-tx-type` is between `0`  and `0x7f`. This allows for the introduction of Rootstock-specific transaction types with no risk of conflicts with Ethereum’s type numbers.
+Thus, the raw encoding of a Rootstock-specific transaction will be `0x02 || rsk-tx-type || TransactionPayload`  where `rsk-tx-type` is in the range `[0x00, 0x7f]`. This allows for the introduction of Rootstock-specific transaction types with no risk of conflicts with Ethereum’s type numbers.
 
 For example, suppose we were to implement a transaction type that is identical to Ethereum’s Type-4 transactions for Account Abstraction (EIP-7702). Then we can do so by directly using the identical EIP-2718 format i.e. `0x04 || TransactionPayload`  as used in Ethereum. However, if we were to implement a different system for account abstraction (e.g. RSKIP167’s Install Code), then we could encode the transaction as `0x02 || rsk-AA-type || TransactionPayload` where the value for `rsk-AA-type`  (some value in `0-7f` ) will be specified in a RSKIP where such a transaction type is proposed.
+
+### Classification
+
+The following table summarizes how an encoded transaction is classified by its first byte and, when the first byte is `0x02`, its second byte. All ranges are inclusive. A defined type is valid only once the RSKIP that defines it is activated; every other type in the range `[0x01, 0x7f]` is undefined.
+
+| First byte | Second byte | Classification |
+|---|---|---|
+| `0x00` | any | Invalid: there is no Type-0 transaction |
+| `0x01`, `[0x03, 0x7f]` | any | Typed transaction whose `TransactionType` is the first byte |
+| `0x02` | `[0x00, 0x7f]` | Rootstock-specific transaction whose `rsk-tx-type` is the second byte; reserved, and invalid until an RSKIP defines that `rsk-tx-type` |
+| `0x02` | `[0x80, 0xbf]` | Invalid |
+| `0x02` | `[0xc0, 0xff]` | Typed transaction with `TransactionType` `0x02` (EIP-1559 format) |
+| `[0x80, 0xbf]` | any | Invalid: neither a typed transaction nor an RLP list |
+| `[0xc0, 0xfe]` | any | Legacy transaction |
+| `0xff` | any | Invalid: reserved for future use |
 
 ### Signatures
 
