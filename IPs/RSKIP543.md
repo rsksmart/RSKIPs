@@ -20,6 +20,8 @@ The usefulness of typed transactions is evident from their adoption in Ethereum 
 
 The usefulness of a transaction versioning system in Rootstock is evident from past proposals such as  [RSKIP145](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP145.md) and [RSKIP213](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP213.md). To improve compatibility with tooling and frameworks in the Ethereum ecosystem, we propose a versioning system that closely follows EIP-2718. A bit of evidence in support for such compatibility is the fact that RSKJ already has a [field for transaction type](https://github.com/rsksmart/rskj/pull/1984) (currently using just `0x0`  for legacy transactions) in Transaction Result and Transaction Receipt objects.
 
+The earlier proposals addressed transaction versioning differently. RSKIP145 (status: Withdrawn) proposed a field-identifier transaction format. RSKIP213 (status: Draft) embeds a version field in the nonce position of the legacy RLP list. This proposal instead follows EIP-2718, placing the type outside the RLP payload. RSKIP213-style transactions remain RLP lists, so they would fall in the legacy range `[0xc0, 0xfe]` defined here and would not conflict with typed envelopes at the classification level. This RSKIP does not change the status of RSKIP145 or RSKIP213.
+
 ## Specification
 
 Currently, the raw RLP representation of all transactions in Rootstock starts with an initial byte that is at least the Hex value `0xc0`. In RLP, any value lower than this corresponds to a “scalar” or “string”, while larger values are interpreted as “lists”.  Take an explicit example of a recent transaction from rootstock
@@ -115,7 +117,9 @@ Compared with `LegacyReceipt`, this typed receipt payload omits two fields:
 
 ### Activation
 
-Block height at which activated is TBD.
+This RSKIP is proposed for the Cardamom network upgrade ([RSKIP-694](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP694.md)). Activation block heights are TBD.
+
+Before activation, nodes MUST reject all typed transactions.
 
 ## Rationale
 
