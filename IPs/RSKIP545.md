@@ -140,8 +140,9 @@ The affected executing operations are:
 - `CALLCODE`
 - `DELEGATECALL`
 - `STATICCALL`
-- any transaction where `destination` points to an address with a delegation
-indicator present
+- any transaction where `destination` is a delegated account
+
+Only these operations follow a delegation. Balance credits that the protocol makes directly, rather than through a call, such as REMASC payouts and Bridge transfers (for example, peg-ins), add to the balance of a delegated account without executing its delegated code, as for any other account.
 
 The code-reading operations `EXTCODESIZE`, `EXTCODECOPY` and `EXTCODEHASH` on a delegated account operate on the delegation indicator itself and do not follow it: they return `23`, copy the 23 bytes `0xef0100 || address`, and return `keccak256(0xef0100 || address)`, respectively.
 
