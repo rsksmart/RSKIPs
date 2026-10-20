@@ -101,13 +101,13 @@ following:
 3. Let `authority = ecrecover(msg, y_parity, r, s)`.
     - Where `msg = keccak(MAGIC || rlp([chain_id, address, nonce]))` and  `MAGIC` is defined above in parameters.
     - Verify `s` is less than or equal to `secp256k1n/2`, as specified in [EIP-2](https://eips.ethereum.org/EIPS/eip-2).
-4. Verify the code of `authority` is empty or already delegated (see *delegation indicator* below).
+4. Verify the code of `authority` is empty or `authority` is a delegated account (see *delegation indicator* below).
 5. Verify the nonce of `authority` is equal to `nonce`.
 6. Add `PER_EMPTY_ACCOUNT_COST - PER_AUTH_BASE_COST` gas to the global refund
 counter if `authority` is not empty.
 7. Set the code of `authority` to be `0xef0100 || address`. This is a delegation
-indicator.
-    - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator. Clear the account’s code by resetting the account’s code hash to the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`.
+indicator. Also set the delegation authority flag of `authority` (see *delegation indicator* below).
+    - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator or set the flag. Clear the account’s code by resetting the account’s code hash to the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470`.
     - This indicates that set-code transaction can be used to ‘insert code’ (delegate address, actually) into a pure EOA, to update the account to point to a code in a different delegated address, or to delete delegation entirely in order to reset the account back to a pure EOA.
 8. Increase the nonce of `authority` by one.
 
@@ -117,9 +117,17 @@ Note, if transaction execution results in failure (e.g. any exceptional conditio
 
 ### Delegation indicator
 
-Delegation indicators use the undefined EVM opcode `0xEF` from  [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541). This EIP has not been implemented on Rootstock. Since its adoption in Ethereum, EIP-3541 made it impossible to deploy a contract if the intended deployed bytecode starts with `0xEF`.   EIP-7702 takes advantage of this “banned opcode” and uses it as a delegation marker for an EOA. This indicates that the code must be handled differently than regular code. The complete delegation indicator is a sequence of 3 bytes `0xEF0100`. This is followed by the address of the contract with the actual implementation logic. The 3-byte format starting with `0xEF` follows a pattern introduced in [EIP-3540](https://eips.ethereum.org/EIPS/eip-3540) where the first two bytes represent a “magic” sequence and the next byte represents a version number.
+Delegation indicators use the undefined EVM opcode `0xEF` from  [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541). Since its adoption in Ethereum, EIP-3541 made it impossible to deploy a contract if the intended deployed bytecode starts with `0xEF`. On Rootstock, the same rule was introduced by [RSKIP-544](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP544.md) in the Vetiver network upgrade, so contracts deployed before Vetiver can still have code that starts with `0xEF`.   EIP-7702 takes advantage of this “banned opcode” and uses it as a delegation marker for an EOA. This indicates that the code must be handled differently than regular code. The complete delegation indicator is a sequence of 3 bytes `0xEF0100`. This is followed by the address of the contract with the actual implementation logic. The 3-byte format starting with `0xEF` follows a pattern introduced in [EIP-3540](https://eips.ethereum.org/EIPS/eip-3540) where the first two bytes represent a “magic” sequence and the next byte represents a version number.
 
-The presence of a delegation indicator (`0xef0100 || address`) forces all code-executing operations to follow the address pointer to obtain the code to execute. For example, `CALL` loads the code at `address` and executes it in the context of `authority` i.e. the EOA.
+#### Delegation authority flag
+
+A contract deployed before Vetiver may have code that is exactly a delegation indicator, so the presence of a delegation indicator in an account's code is not enough to recognize a delegation. Each account therefore has a **delegation authority flag**. Step 7 of [Behavior](#behavior) sets the flag whenever it writes a delegation indicator, and nothing clears it, including clearing the delegation. The flag is bit 1 (value `2`) of the account's state flags. An account's state is encoded as `rlp([nonce, balance])` when its state flags are zero and `rlp([nonce, balance, stateFlags])` otherwise; bit 0 (value `1`) is the existing hibernation flag.
+
+A **delegated account** is an account that carries the delegation authority flag and whose code is exactly the 23-byte delegation indicator `0xef0100 || address`. Only the delegation of a delegated account is followed. An account whose code is a delegation indicator but that does not carry the flag, such as a contract deployed before Vetiver, is not a delegated account, and its code is executed as is.
+
+#### Delegated execution
+
+The presence of a delegation indicator (`0xef0100 || address`) in a delegated account forces all code-executing operations to follow the address pointer to obtain the code to execute. For example, `CALL` loads the code at `address` and executes it in the context of `authority` i.e. the EOA.
 
 The affected executing operations are:
 
