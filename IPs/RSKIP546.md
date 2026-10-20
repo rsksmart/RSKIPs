@@ -12,7 +12,7 @@ created: 2026-01-27
 
 ## Abstract
 
-This is a proposal to support Ethereum's Type 1 and Type 2 formatted transactions in Rootstock. Apart from the new (EIP-2718 based) encodings for transactions and receipts, this proposal does not introduce any other changes to Rootstock's consensus rules. In particular, neither "Access Lists" (EIP-2930) nor "Dynamic GasPrice" parameters (EIP-1559) will be implemented. Transactions encoded in these new formats will be executed in the same way as legacy transactions. Access Lists, if provided, will not be used in the EVM, but will result in additional gas fees  as specified below. For Type 2 transactions, the lower of the two EIP-1559 gas price fields will be used as the transaction’s effective gas price.
+This is a proposal to support Ethereum's Type 1 and Type 2 formatted transactions in Rootstock. Apart from the new (EIP-2718 based) encodings for transactions and receipts, this proposal does not introduce any other changes to Rootstock's consensus rules. In particular, it does not implement the execution semantics of access lists (EIP-2930) or the dynamic fee market (EIP-1559). Transactions encoded in these new formats will be executed in the same way as legacy transactions. An access list, if provided, has no effect on execution under this RSKIP, but results in additional gas fees  as specified below. For Type 2 transactions, the lower of the two EIP-1559 gas price fields will be used as the transaction’s effective gas price.
 
 ## Motivation
 
@@ -29,7 +29,7 @@ This RSKIP requires [RSKIP-543](https://github.com/rsksmart/RSKIPs/blob/master/I
 
 ### Type 1 Transactions
 
-The encoding of Type 1 transactions is intended to match EIP-2930, but only the transaction format is introduced. Access Lists are not supported in Rootstock and will be ignored.
+The encoding of Type 1 transactions is intended to match EIP-2930, but only the transaction format is introduced. This RSKIP introduces the access list only as part of the encoding: it is validated and charged for as described below, but has no effect on execution. Access-list semantics may be specified in a future RSKIP.
 
 The EIP-2718 `TransactionPayload` for this transaction is `rlp([chainId, nonce, gasPrice, gasLimit, to, value, data, accessList, signatureYParity, signatureR, signatureS])`.
 
@@ -85,7 +85,7 @@ In Ethereum, the `accessList` field is expected to be of type `[[{20 bytes}, [{3
 
 Depending on the type (1 or 2), the `accessList` will be the 8th or 9th element of the RLP encoded transaction payload. If the list is empty, it will be encoded as `0xc0`. In any case, even though we retain the raw bytes for verifying the signature we do not need to fully deserialize the `accessList` field. If `accessList` is not empty, we only need the length in bytes of the data without deserializing the list elements. This is useful for calculating the additional gas cost for the access list.
 
-**Additional Gas for Access Lists**: Even though Access Lists will not be used, the transaction sender will be charged an additional amount of gas to cover bandwidth costs and to reduce spam. In Ethereum the additional gas cost for access list items is computed using a formula that works out to around 120 gas/byte for "addresses" and 60 gas/byte for "storage keys". In Rootstock, we propose charging `80 gas/byte` for the accessList field. This additional gas can be collected at the same time as for calldata which is based on the transaction's `data` field.
+**Additional Gas for Access Lists**: Even though the access list has no effect on execution under this RSKIP, the transaction sender will be charged an additional amount of gas to cover bandwidth costs and to reduce spam. In Ethereum the additional gas cost for access list items is computed using a formula that works out to around 120 gas/byte for "addresses" and 60 gas/byte for "storage keys". In Rootstock, we propose charging `80 gas/byte` for the accessList field. This additional gas can be collected at the same time as for calldata which is based on the transaction's `data` field.
 
 ### Activation
 
@@ -95,7 +95,7 @@ This RSKIP MUST NOT activate before RSKIP-543. Type 1 and Type 2 transactions ar
 
 ## Rationale
 
-The additional gas cost of access list is set somewhat arbitrarily at 80 gas/byte. This is in the range of 60-120 gas/byte used in Ethereum. Since access lists are not supported in Rootstock, we expect this field to be empty. However, to deter abuse or spam, the additional gas cost has to be meaningful.
+The additional gas cost of access list is set somewhat arbitrarily at 80 gas/byte. This is in the range of 60-120 gas/byte used in Ethereum. Since access lists have no effect on execution under this RSKIP, we expect this field to be empty in practice. However, to deter abuse or spam, the additional gas cost has to be meaningful.
 
 ## Backwards compatibility
 
