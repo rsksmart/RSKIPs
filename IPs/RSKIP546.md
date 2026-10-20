@@ -36,7 +36,7 @@ The EIP-2718 `TransactionPayload` for this transaction is `rlp([chainId, nonce, 
 The `signatureYParity`, `signatureR`, `signatureS` elements of this transaction represent a secp256k1 signature over `keccak256(0x01 || rlp([chainId, nonce, gasPrice, gasLimit, to, value, data, accessList]))`.
 
 
-After validating the signature, and ignoring the `accessList` field, the transaction can be processed in the same way as a legacy transaction. See the "Transaction Normalization and Additional Gas" section below.
+After the checks in [Validity](#validity), and ignoring the `accessList` field, the transaction can be processed in the same way as a legacy transaction. See the "Transaction Normalization and Additional Gas" section below.
 
 The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulativeGasUsed, logsBloom, logs])`. Thus, the full receipt will be `01 || ReceiptPayload`.
 
@@ -65,6 +65,17 @@ The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulative_t
 ### Inconsistencies in Field Names
 
 Note that the names of several fields differ across the different transaction types. For example, `to` and `value` fields from legacy transactions (and type 1) become `destination` and `amount` respectively in Type 2 transactions. There are also inconsistencies in the signature fields: legacy transactions carry `v`, `r`, `s`, while Type 1 uses `signatureYParity`, `signatureR`, `signatureS` and Type 2 uses `signature_y_parity`, `signature_r`, `signature_s`. Unlike the legacy `v`, the y-parity of a typed transaction is only `0` or `1` and does not encode the chain ID, which is a separate field. Minor differences show up in the names of receipt fields as well, such as `cumulativeGasUsed` vs `cumulative_transaction_gas_used`. These inconsistencies are a result of following the notation and text from the original EIPs. Implementers should use field names consistently.
+
+### Validity
+
+A Type 1 or Type 2 transaction is valid only if all of the following hold. Nodes MUST reject a transaction that fails any of them, as specified in RSKIP-543 for invalid transactions.
+
+* **Shape.** The `TransactionPayload` is an RLP list with exactly 11 elements (Type 1) or 12 elements (Type 2). Every element is an RLP string, except the access list, which is an RLP list.
+* **Canonical encoding.** The payload is canonically RLP-encoded: re-encoding the decoded list yields the same bytes.
+* **Integers.** `chainId`, `nonce`, `gasPrice`, `maxPriorityFeePerGas`, `maxFeePerGas`, `gasLimit` and `value` are at most 32 bytes long and have no leading zero bytes; zero is encoded as the empty string.
+* **Destination.** `to` is either empty (contract creation) or exactly 20 bytes.
+* **Chain ID.** `chainId` is nonzero and equal to the chain ID of the network, as required by RSKIP-543.
+* **Signature.** The y-parity is `0` or `1` (with `0` encoded as the empty string). `r` and `s` are at most 32 bytes long with no leading zero bytes, `r` and `s` are in the range `[1, secp256k1n - 1]`, and `s < secp256k1n / 2` (integer division), the same low-`s` rule Rootstock applies to legacy transactions.
 
 ### Transaction Normalization and Additional Gas
 
