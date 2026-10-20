@@ -164,15 +164,20 @@ The transaction sender will pay for all authorization tuples, regardless of vali
 
 Additionally, an up front cost of `PER_EMPTY_ACCOUNT_COST * authorization list length` is collected, but some of these will be reimbursed after accounting for actual cost of setting code. This is reflected in `PER_AUTH_BASE_COST` which accounts for the cost to process each authorization tuple and set the delegation destination. The cost for this operation is decomposed into several components such as: 101 bytes of calldata, recovering the `authority` address from their signature, reading the nonce and code of `authority` , storing values in the account, and the cost to deploy code.
 
-The `PER_AUTH_BASE_COST` is the cost to process the authorization tuple and set the delegation destination. To compute a fair cost for this operation, the authors of EIP-7702 reviewed its impact on the system as follows:
+The `PER_AUTH_BASE_COST` is the cost to process the authorization tuple and set the delegation destination. The authors of EIP-7702 derived it from the components below. The same components priced with Rootstock's gas schedule give the value used here:
 
-- ferry 101 bytes of calldata = `101 * non-zero cost (16) = 1616`
-- recovering the `authority` address = `3000`
-- reading the nonce and code of `authority` = `2600` (this read operation is `700` on Rootstock)
-- storing values in already warm account = `200` (this write operation is about `5000` on Rootstock)
-- cost to deploy code = `200 * 23 = 4600`
+| Component | EIP-7702 | Rootstock |
+| --- | --- | --- |
+| Ferry 101 bytes of calldata (`101 * 16`) | `1616` | `1616` |
+| Recover the `authority` address | `3000` | `3000` |
+| Read the nonce and code of `authority` | `2600` | `700` |
+| Store values in the account | `200` | `5000` |
+| Deploy code (`200 * 23`) | `4600` | `4600` |
+| **Total** | `12016` | `14916` |
 
-The authors of EIP-7702 estimate the cumulative impact of the above at `12016` gas, which they rounded up to `PER_AUTH_BASE_COST = 12500`. They then set the upfront cost to be twice of this value `PER_EMPTY_ACCOUNT_COST = 25000` . As noted above, the gas schedule in Rootstock is different (arising mainly from EIP-2929). We set our base cost about 3K higher, at  `PER_AUTH_BASE_COST = 15500` . However, we keep the upfront cost the same as in Ethereum at  `PER_EMPTY_ACCOUNT_COST = 25000` . Once there is an implementation for the proposal, these values can be updated further after some benchmarking.
+EIP-7702 rounds its total up to `PER_AUTH_BASE_COST = 12500` and sets `PER_EMPTY_ACCOUNT_COST = 25000`, twice that value. Rootstock's total differs mainly because Rootstock does not implement EIP-2929, under which the account is already warm when the values are stored. This RSKIP rounds the Rootstock total up to `PER_AUTH_BASE_COST = 15500` and keeps `PER_EMPTY_ACCOUNT_COST = 25000`, as in Ethereum. These values may be revised after benchmarking the implementation.
+
+The refund in step 6 of [Behavior](#behavior) is therefore `25000 - 15500 = 9500` gas per authorization whose `authority` is already a delegated account. It is added to the same refund counter as other refunds, such as those for `SSTORE` and `SELFDESTRUCT`, and the total refund is capped at half of the gas used by the transaction, as for any other refund. The refund actually received can therefore be less than `9500` per authorization.
 
 **Delegation resolution.** Following a delegation reads a second account, the delegate, in addition to the delegated account itself. In EIP-7702 this read is priced through EIP-2929 (`2600` gas cold, `100` warm). Rootstock does not implement EIP-2929, so the read is charged a flat `DELEGATION_RESOLUTION_COST = 700` gas, Rootstock's price for reading an account (as for `EXTCODESIZE`). The charge applies:
 
