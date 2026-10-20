@@ -1,13 +1,13 @@
 ---
 rskip: 546
 title: Implement EVM's Type 1 and Type 2 Envelope formats
-created: 27-JAN-2026
-author: PDG (@patogallaiovlabs), SM (@smishraiov)
-purpose: Usa
-layer: Core 
-complexity: 1
+description: Support Ethereum's Type 1 (EIP-2930) and Type 2 (EIP-1559) transaction encodings
 status: Draft
-description: 
+purpose: Usa
+author: PDG (@patogallaiovlabs), SM (@smishraiov)
+layer: Core
+complexity: 1
+created: 2026-01-27
 ---
 
 ## Abstract
