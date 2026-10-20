@@ -12,7 +12,7 @@ created: 2026-01-27
 
 ## Abstract
 
-This is a proposal to support Ethereum's Type 1 and Type 2 formatted transactions in Rootstock. Apart from the new (EIP-2718 based) encodings for transactions and receipts, this proposal does not introduce any other changes to Rootstock's consensus rules. In particular, it does not implement the execution semantics of access lists (EIP-2930) or the dynamic fee market (EIP-1559). Transactions encoded in these new formats will be executed in the same way as legacy transactions. An access list, if provided, has no effect on execution under this RSKIP, but results in additional gas fees  as specified below. For Type 2 transactions, the lower of the two EIP-1559 gas price fields will be used as the transaction’s effective gas price.
+This is a proposal to support Ethereum's Type 1 and Type 2 formatted transactions in Rootstock. Apart from the new (EIP-2718 based) encodings for transactions and receipts, this proposal does not introduce any other changes to Rootstock's consensus rules. In particular, it does not implement the execution semantics of access lists (EIP-2930) or the dynamic fee market (EIP-1559). Transactions encoded in these new formats will be executed in the same way as legacy transactions. An access list, if provided, has no effect on execution under this RSKIP, but results in additional gas fees as specified below. For Type 2 transactions, `maxPriorityFeePerGas` is used as the transaction’s effective gas price.
 
 ## Motivation
 
@@ -57,7 +57,9 @@ priority_fee_per_gas = min(transaction.max_priority_fee_per_gas, transaction.max
 #Note: in Rootstock, there is no base_fee_per_gas
 ```
 
-Unlike Ethereum, Rootstock does not support the dynamic fee market of EIP-1559. The “Base Fee” is effectively zero. Therefore, in Rootstock,  one of `maxPriorityFeePerGas` or `maxFeePerGas` fields, whichever is lower, will become the effective gas price for this transaction. This is what the `GASPRICE` opcode (`0x3a`) will return in the context of this transaction.
+Unlike Ethereum, Rootstock does not have the dynamic fee market of EIP-1559. The “Base Fee” is effectively zero. As in EIP-1559, nodes MUST reject a Type 2 transaction with `maxPriorityFeePerGas > maxFeePerGas`. With a zero base fee, EIP-1559's `effective_gas_price` is then exactly `maxPriorityFeePerGas`, and this is the gas price the transaction pays; `maxFeePerGas` only serves as the cap required by that rule. This is what the `GASPRICE` opcode (`0x3a`) returns in the context of this transaction, and, as for legacy transactions, it MUST be at least the block's minimum gas price.
+
+The sender's balance is checked against the normalized transaction, as for a legacy transaction: it must cover `value + gasLimit * effective gas price`. EIP-1559's additional requirement that the balance cover `gasLimit * maxFeePerGas` does not apply.
 
 The EIP-2718 `ReceiptPayload` for this transaction is `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. Thus, the full receipt will be `02 || ReceiptPayload`. 
 
@@ -73,13 +75,14 @@ A Type 1 or Type 2 transaction is valid only if all of the following hold. Nodes
 * **Shape.** The `TransactionPayload` is an RLP list with exactly 11 elements (Type 1) or 12 elements (Type 2). Every element is an RLP string, except the access list, which is an RLP list.
 * **Canonical encoding.** The payload is canonically RLP-encoded: re-encoding the decoded list yields the same bytes.
 * **Integers.** `chainId`, `nonce`, `gasPrice`, `maxPriorityFeePerGas`, `maxFeePerGas`, `gasLimit` and `value` are at most 32 bytes long and have no leading zero bytes; zero is encoded as the empty string.
+* **Fee caps (Type 2).** `maxPriorityFeePerGas <= maxFeePerGas`.
 * **Destination.** `to` is either empty (contract creation) or exactly 20 bytes.
 * **Chain ID.** `chainId` is nonzero and equal to the chain ID of the network, as required by RSKIP-543.
 * **Signature.** The y-parity is `0` or `1` (with `0` encoded as the empty string). `r` and `s` are at most 32 bytes long with no leading zero bytes, `r` and `s` are in the range `[1, secp256k1n - 1]`, and `s < secp256k1n / 2` (integer division), the same low-`s` rule Rootstock applies to legacy transactions.
 
 ### Transaction Normalization and Additional Gas
 
-Recall the legacy transaction format: `rlp([nonce, gasPrice, gasLimit, to, value, data, v, r, s])`, where `v` carries the signature's y-parity and, as in EIP-155, optionally the chain ID. The new fields in Type 1 and Type 2 transactions are required to validate the signature. After signature validation the new transaction types can be *normalized* to the legacy format by ignoring the `accessList` field and setting the `gasPrice = min(maxPriorityFeePerGas, maxFeePerGas)`. After which they can be executed in the same way as legacy transactions.
+Recall the legacy transaction format: `rlp([nonce, gasPrice, gasLimit, to, value, data, v, r, s])`, where `v` carries the signature's y-parity and, as in EIP-155, optionally the chain ID. The new fields in Type 1 and Type 2 transactions are required to validate the signature. After signature validation the new transaction types can be *normalized* to the legacy format by ignoring the `accessList` field and, for Type 2, setting `gasPrice = maxPriorityFeePerGas` (the effective gas price defined above). After which they can be executed in the same way as legacy transactions.
 
 In Ethereum, the `accessList` field is expected to be of type `[[{20 bytes}, [{32 bytes}...]]...]`, where `...` means “zero or more of the thing to the left”. However, this detail is not relevant for Rootstock since Access Lists are not supported.
 
