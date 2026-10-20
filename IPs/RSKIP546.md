@@ -18,13 +18,13 @@ This is a proposal to support Ethereum's Type 1 and Type 2 formatted transaction
 
 At present, Rootstock only supports legacy transactions. Since the adoption of EIP-2718 in Ethereum, there are now four transaction types based on that format. In Ethereum, wallets and applications have largely migrated away from legacy transactions. 
 
-[RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543/) is a proposal to introduce EIP-2718 in Rootstock. The current RSKIP builds on that and proposes to support Type 1 and Type 2 transaction formats used in Ethereum. As noted in the abstract, these changes only introduce the encodings, while keeping the same semantics as legacy transactions. While these changes are superficial, they will be useful for Account Abstraction (EIP-7702, [RSKIP-545](https://github.com/rsksmart/RSKIPs/pull/545/)) in Rootstock. Following EIP-7702, the "Type 4" transaction proposed in RSKIP-545 contains the fields introduced successively in Type 1 and Type 2 transactions. Introducing these new formats will also be a convenience for developers integrating wallets or porting applications from other EVM chains to Rootstock. This can help improve Rootstock's compatibility with Ethereum's developer ecosystem.
+[RSKIP-543](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP543.md) is a proposal to introduce EIP-2718 in Rootstock. The current RSKIP builds on that and proposes to support Type 1 and Type 2 transaction formats used in Ethereum. As noted in the abstract, these changes only introduce the encodings, while keeping the same semantics as legacy transactions. While these changes are superficial, they will be useful to enable Account Abstraction (EIP-7702, [RSKIP-545](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP545.md)) in Rootstock. Following EIP-7702, the "Type 4" transaction proposed in RSKIP-545 contains the fields introduced successively in Type 1 and Type 2 transactions. Introducing these new formats will also be a convenience for developers integrating wallets or porting applications from other EVM chains to Rootstock. This can help improve Rootstock's compatibility with Ethereum's developer ecosystem.
 
 ## Specification
 
 ### Prerequisites
 
-This RSKIP requires [RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543/) which introduces EIP-2718 typed transaction envelope format in Rootstock.
+This RSKIP requires [RSKIP-543](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP543.md) which introduces EIP-2718 typed transaction envelope format in Rootstock. Under RSKIP-543's classification rules, a Type 2 transaction is one whose first byte is `0x02` and whose second byte is in the range `[0xc0, 0xff]` (the start of an RLP list). Note that `0x02` followed by a byte in `[0x00, 0x7f]` is the Rootstock-specific namespace and is not a Type 2 transaction.
 
 
 ### Type 1 Transactions
@@ -76,6 +76,11 @@ Depending on the type (1 or 2), the `accessList` will be the 8th or 9th element 
 
 **Additional Gas for Access Lists**: Even though Access Lists will not be used, the transaction sender will be charged an additional amount of gas to cover bandwidth costs and to reduce spam. In Ethereum the additional gas cost for access list items is computed using a formula that works out to around 120 gas/byte for "addresses" and 60 gas/byte for "storage keys". In Rootstock, we propose charging `80 gas/byte` for the accessList field. This additional gas can be collected at the same time as for calldata which is based on the transaction's `data` field.
 
+### Activation
+
+This RSKIP is proposed for the Cardamom network upgrade ([RSKIP-694](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP694.md)). Activation block heights are TBD.
+
+This RSKIP MUST NOT activate before RSKIP-543. Type 1 and Type 2 transactions are valid only when both RSKIP-543 and this RSKIP are active; before that, nodes MUST reject them.
 
 ## Rationale
 
@@ -83,7 +88,11 @@ The additional gas cost of access list is set somewhat arbitrarily at 80 gas/byt
 
 ## Backwards compatibility
 
-This change requires a network upgrade. All full nodes must be upgraded.
+This change is a hard fork and requires a network upgrade. All full nodes must be upgraded.
+
+## Implementation
+
+The implementation is in the RSKJ repository under the consensus rule `RSKIP546`, in [pull request 3558](https://github.com/rsksmart/rskj/pull/3558), which is not yet merged.
 
 ## References
 
