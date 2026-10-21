@@ -183,7 +183,7 @@ The refund in step 6 of [Behavior](#behavior) is therefore `25000 - 15500 = 9500
 
 **Delegation resolution.** Following a delegation reads a second account, the delegate, in addition to the delegated account itself. In EIP-7702 this read is priced through EIP-2929 (`2600` gas cold, `100` warm). Rootstock does not implement EIP-2929, so the read is charged a flat `DELEGATION_RESOLUTION_COST = 700` gas, Rootstock's price for reading an account (as for `EXTCODESIZE`). The charge applies:
 
-- to a `CALL`, `CALLCODE`, `DELEGATECALL` or `STATICCALL` whose target is a delegated account, in addition to the instruction's own cost;
+- to a `CALL`, `CALLCODE`, `DELEGATECALL` or `STATICCALL` whose target is a delegated account. It is added to the instruction's own base cost and charged to the calling frame before the gas to forward to the callee is computed, as in EIP-7702. If the calling frame cannot pay it, the calling frame runs out of gas, not the callee;
 - to a transaction whose `destination` is a delegated account, at the start of execution, from the gas that remains after the intrinsic cost. If not enough gas remains, execution fails as out of gas.
 
 It is charged whether or not the delegate has code, including when the delegate is a precompile (see [No Precompiles](#no-precompiles)).
