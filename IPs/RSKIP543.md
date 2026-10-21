@@ -133,6 +133,8 @@ This change is a hard-fork and therefore all full nodes must be updated. Light c
 
 The implementation is in the RSKJ repository on the `account-abstraction` integration branch, under the consensus rule `RSKIP543`; it is not yet merged into `master`. Typed-envelope support was added in [pull request 3462](https://github.com/rsksmart/rskj/pull/3462).
 
+Note: when decoding a block body, the implementation does not check how each transaction is framed. A legacy transaction wrapped as an RLP string, instead of included as an RLP list, is also accepted. The transactions root is computed over the unwrapped encoding, so this does not change which transactions a block contains, but a block body can have more than one valid encoding.
+
 ## Test cases
 
 The vectors below exercise the [Classification](#classification) rules and the envelope framing. The two complete transactions are taken from the RSKJ encoder test vectors. They use chain ID `33` (`0x21`) and placeholder signature values (`r = 0x11…11`, `s = 0x22…22`), so they test encoding and classification only, not signature validity.
@@ -162,6 +164,7 @@ The following encodings MUST be rejected. Only the leading bytes matter; the res
 | `05 f8 72 …`, `7f …` | Undefined type |
 | `80 …`, `bf …` | First byte is in `[0x80, 0xbf]` |
 | `ff …` | Reserved first byte |
+
 
 ## References
 
