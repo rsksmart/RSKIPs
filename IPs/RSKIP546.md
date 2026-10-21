@@ -154,6 +154,20 @@ Signed envelope:
 
 Normalized legacy form: `nonce = 1`, `gasPrice = maxPriorityFeePerGas = 10^9`, `gasLimit = 21000`, `to`, `value` and `data` as above. `maxFeePerGas` is not charged. The empty access list adds no gas.
 
+### Type 2 with a real signature
+
+The same transaction as the Type 2 vector, so with the same signing preimage and signing hash, signed with the well-known test private key `0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`:
+
+Signature: `signature_y_parity = 1`, `signature_r = 0x14d9ac90c52a5015b6e096156ce2a38db4fab631334e9eef3bb1d75bc95a7115`, `signature_s = 0x420c601b56dae76ead6abc4b56fbda5f01472c0f4f7420cc8f1cf568c4124eaa`. The y-parity is `0` or `1` itself, not `27`/`28` or an EIP-155 `v`.
+
+Signed envelope:
+
+```
+02f8722101843b9aca008477359400825208941234567890123456789012345678901234567890880de0b6b3a764000080c001a014d9ac90c52a5015b6e096156ce2a38db4fab631334e9eef3bb1d75bc95a7115a0420c601b56dae76ead6abc4b56fbda5f01472c0f4f7420cc8f1cf568c4124eaa
+```
+
+The signature MUST recover to the sender `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`.
+
 ### Type 1 with a non-empty access list
 
 As the Type 1 vector, with the access list `[[0x00…00 (20 bytes), [0x00…00 (32 bytes)]]]`. Its RLP encoding is 58 bytes long (`f838…`), so the additional gas is `80 * 58 = 4640`.
