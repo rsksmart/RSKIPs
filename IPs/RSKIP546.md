@@ -79,7 +79,7 @@ A Type 1 or Type 2 transaction is valid only if all of the following hold. Nodes
 * **Integers.** `chainId`, `nonce`, `gasPrice`, `maxPriorityFeePerGas`, `maxFeePerGas`, `gasLimit` and `value` are at most 32 bytes long and have no leading zero bytes; zero is encoded as the empty string.
 * **Fee caps (Type 2).** `maxPriorityFeePerGas <= maxFeePerGas`.
 * **Destination.** `to` is either empty (contract creation) or exactly 20 bytes.
-* **Chain ID.** `chainId` is nonzero and equal to the chain ID of the network, as required by RSKIP-543.
+* **Chain ID.** `chainId` is nonzero and equal to the chain ID of the network, as required by RSKIP-543. It is compared as a full integer and MUST NOT be truncated.
 * **Signature.** The y-parity is `0` or `1` (with `0` encoded as the empty string). `r` and `s` are at most 32 bytes long with no leading zero bytes, `r` and `s` are in the range `[1, secp256k1n - 1]`, and `s < secp256k1n / 2` (integer division), the same low-`s` rule Rootstock applies to legacy transactions.
 
 ### Transaction Normalization and Additional Gas
@@ -187,7 +187,7 @@ The additional gas is `80 * 126 = 10080`, so the intrinsic gas is `21000 + 10080
 | Case | Expected |
 | --- | --- |
 | `chainId = 200`, encoded as `81c8` (a single-byte string, since `0xc8 > 0x7f`) | Valid encoding. For example, the Type 2 envelope `02f87381c801843b9aca008477359400…` from the RSKJ encoder test vectors; valid only on a network whose chain ID is `200` |
-| `chainId = 286`, encoded as `82011e` | Invalid. It MUST NOT be truncated to a single byte, which would give `30`, the chain ID of Rootstock Mainnet |
+| `chainId = 286`, encoded as `82011e` | Invalid on Rootstock Mainnet (chain ID `30`): `chainId` is compared as a full integer, and truncating it to a single byte would wrongly give `30` |
 | `chainId = 0`, encoded as `80` | Invalid |
 
 ### Canonical encoding
