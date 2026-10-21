@@ -190,6 +190,8 @@ It is charged whether or not the delegate has code, including when the delegate 
 
 ### No Precompiles
 
+On Rootstock, a delegate is a precompile if its address is in the set of precompiled contracts active at the block being executed. This set includes the Ethereum precompiles at `0x01`–`0x09` and Rootstock's native contracts, such as the Bridge (`0x0000000000000000000000000000000001000006`) and REMASC (`0x0000000000000000000000000000000001000008`), and it can grow with network upgrades. Delegating to a native contract therefore never runs that contract's logic in the context of the delegated account.
+
 An EOA cannot use a precompile address as a delegate. When a precompile address is the target of a delegation, the retrieved code is considered empty and `CALL`, `CALLCODE`, `STATICCALL`, `DELEGATECALL` instructions targeting this account will execute empty code, and therefore
 succeed with no execution when given enough gas to initiate the call.
 
