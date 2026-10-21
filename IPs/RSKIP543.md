@@ -177,6 +177,30 @@ The following encodings MUST be rejected. Only the leading bytes matter; the res
 
 The Ethereum Type-2 vector above with one extra byte appended, `02f872…2222 00`, MUST also be rejected: bytes follow the payload's RLP list, so the payload is not canonically encoded.
 
+### Signed typed transaction
+
+This vector has the same fields as the Ethereum Type-2 vector above, but a real signature, made with the well-known test private key `0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`, whose address is `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`.
+
+Unsigned fields: `chainId = 33`, `nonce = 1`, `maxPriorityFeePerGas = 10^9`, `maxFeePerGas = 2 * 10^9`, `gasLimit = 21000`, `to = 0x1234567890123456789012345678901234567890`, `value = 10^18`, empty `data`, empty access list.
+
+Signing preimage, `prefix || rlp([unsigned fields])` with the one-byte prefix `0x02`:
+
+```
+02ef2101843b9aca008477359400825208941234567890123456789012345678901234567890880de0b6b3a764000080c0
+```
+
+Signing hash: `0xda29f69ce83037cdfc5a06235bd6510b9dc72727026220b6105254aa7e74c9f4`
+
+Signature: `y_parity = 1`, `r = 0x14d9ac90c52a5015b6e096156ce2a38db4fab631334e9eef3bb1d75bc95a7115`, `s = 0x420c601b56dae76ead6abc4b56fbda5f01472c0f4f7420cc8f1cf568c4124eaa`.
+
+Signed transaction:
+
+```
+02f8722101843b9aca008477359400825208941234567890123456789012345678901234567890880de0b6b3a764000080c001a014d9ac90c52a5015b6e096156ce2a38db4fab631334e9eef3bb1d75bc95a7115a0420c601b56dae76ead6abc4b56fbda5f01472c0f4f7420cc8f1cf568c4124eaa
+```
+
+The signature MUST recover to the sender `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`. The transaction hash is `0x4609694581ca3ff41347db29e179da17aabdab68e22c7759af7db08a8fb4e91b`.
+
 ### Activation boundary
 
 Let `H` be the activation block of this RSKIP, and assume the RSKIP that defines the type used is also active at `H`.
