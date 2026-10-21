@@ -96,11 +96,11 @@ Nodes MUST reject a transaction that the table classifies as invalid, or whose t
 
 ### Signatures
 
-The signature of a typed transaction MUST be computed over a hash that includes its type prefix. The signing hash is
+The signature of a typed transaction MUST be computed over a hash that includes its type prefix. For a type whose `TransactionPayload` is an RLP list, the signing hash is
 
 `keccak256(prefix || rlp([unsigned fields]))`
 
-where `prefix` is the single `TransactionType` byte, or the two bytes `0x02 || rsk-tx-type` for a Rootstock-specific transaction, and the unsigned fields are the payload fields other than the signature, as defined by the RSKIP that introduces the type. No other domain separator is used: the prefix already separates the signing hashes of different types from each other and from legacy transactions.
+unless the RSKIP that defines the type specifies otherwise. A type whose payload is not an RLP list MUST define its own signing preimage, which MUST include the type prefix. Here `prefix` is the single `TransactionType` byte, or the two bytes `0x02 || rsk-tx-type` for a Rootstock-specific transaction, and the unsigned fields are the payload fields other than the signature, as defined by the RSKIP that introduces the type. No other domain separator is used: the prefix already separates the signing hashes of different types from each other and from legacy transactions.
 
 Every typed transaction MUST include a `chainId` field among its signed fields, and the `chainId` MUST be nonzero and equal to the chain ID of the network. This provides replay protection across networks for all typed transactions.
 
