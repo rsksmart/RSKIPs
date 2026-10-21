@@ -119,7 +119,7 @@ indicator. Also set the delegation authority flag of `authority` (see *delegatio
 
 If any step above fails, immediately stop processing the tuple and continue to the next tuple in the list. When multiple tuples from the same authority are present, set the code using the address in the last valid occurrence.
 
-Note, if transaction execution results in failure (e.g. any exceptional condition or code reverting), the processed delegation indicators are *not rolled back*.
+Note, if transaction execution results in failure (e.g. any exceptional condition or code reverting), the processed delegation indicators are *not rolled back*. Neither are the refunds added in step 6: they are still applied at the end of the transaction, subject to the refund cap described in [Gas Costs](#gas-costs), even when execution ends in an exceptional halt that consumes all remaining gas.
 
 ### Delegation indicator
 
@@ -237,7 +237,97 @@ The implementation is in the RSKJ repository under the consensus rule `RSKIP545`
 
 ## Test cases
 
-Todo.
+### Authorization signing
+
+The authorization below is signed with the well-known test private key `0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`, whose address is `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`. It delegates to `address = 0x1234567890123456789012345678901234567890` on chain ID `33` (`0x21`) with `nonce = 0`.
+
+Signing preimage, `MAGIC || rlp([chain_id, address, nonce])`:
+
+```
+05d72194123456789012345678901234567890123456789080
+```
+
+Message hash, `msg = keccak256(MAGIC || rlp([chain_id, address, nonce]))`:
+
+```
+0x84697cf20ff2af42b3c4a186e0daab3adcb423ac8c0df0c21d5d48405fa2f23f
+```
+
+Signed authorization tuple, `rlp([chain_id, address, nonce, y_parity, r, s])`:
+
+```
+f85a219412345678901234567890123456789012345678908001a01ee45ad498fc0c39f6abb56072a4a6fd35a21053ed245b4bafee8f67b2d3dab1a00c4caf636ce61912cb585918862a7d449fbb4c9daebb3c37c57021656f5a491b
+```
+
+Here `y_parity = 1`, `r = 0x1ee45ad498fc0c39f6abb56072a4a6fd35a21053ed245b4bafee8f67b2d3dab1` and `s = 0x0c4caf636ce61912cb585918862a7d449fbb4c9daebb3c37c57021656f5a491b`, with `s <= secp256k1n/2`. Step 3 of [Behavior](#behavior) MUST recover `authority = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`.
+
+### Code reading on a delegated account
+
+Let account `A` be a delegated account whose delegation indicator points to a contract `D` at `0x1234567890123456789012345678901234567890`. The code of `D` is the 9 bytes `0x3860005260206000f3` (`CODESIZE PUSH1 0x00 MSTORE PUSH1 0x20 PUSH1 0x00 RETURN`), which returns the size of the code being executed. Then:
+
+| Operation | Result |
+| --- | --- |
+| Call `A` (executes the code of `D` in the context of `A`) | Returns `9`: `CODESIZE` sees the code of `D` |
+| `EXTCODESIZE(A)` | `23` |
+| `EXTCODECOPY(A, …)` | The 23 bytes `0xef01001234567890123456789012345678901234567890` |
+| `EXTCODEHASH(A)` | `0x50ee8ea5591e28c2efaa0b2d630b17069144a5c286ff271c822335086104b976` |
+| `EXTCODESIZE(D)` | `9` |
+
+The call to `A` also costs `DELEGATION_RESOLUTION_COST` (see [Gas Costs](#gas-costs)).
+
+### Gas used by authorizations
+
+In these cases the sender is not an authority, the transaction's `destination` is an EOA with no code, `value` and `data` are empty, and the access list is empty, so no execution gas is used.
+
+| Case | Expected |
+| --- | --- |
+| Intrinsic gas with one tuple | `21000 + 25000 = 46000` |
+| Intrinsic gas with two tuples | `21000 + 2 * 25000 = 71000` |
+| One tuple; `authority` has no code (first delegation) | Gas used `46000` (no refund) |
+| One tuple; `authority` is already a delegated account (re-delegation, or clearing with `address = 0x0`) | Gas used `46000 - 9500 = 36500` |
+| One tuple, gas limit `45999` | Transaction is invalid (gas limit below intrinsic gas) |
+| One tuple, gas limit `46000` | Transaction is valid |
+
+### Skipped tuples and invalid transactions
+
+A tuple that fails any step of [Behavior](#behavior) is skipped: the code and nonce of its `authority` are unchanged, the transaction still executes, and the tuple is still charged `PER_EMPTY_ACCOUNT_COST`. Each of the following MUST cause the tuple to be skipped:
+
+| Tuple condition | Step |
+| --- | --- |
+| `chain_id` is neither `0` nor the chain ID of the network | 1 |
+| `nonce >= 2**64 - 1` | 2 |
+| `y_parity` is not `0` or `1` | 3 |
+| `r` or `s` is `0` or not less than `secp256k1n` | 3 |
+| `s > secp256k1n/2` (`s = secp256k1n/2` is accepted) | 3 |
+| The signature recovers to the zero address | 3 |
+| `authority` has code and is not a delegated account | 4 |
+| `nonce` is not equal to the nonce of `authority` | 5 |
+
+By contrast, the following make the whole set-code transaction invalid:
+
+- `destination` is empty (contract creation).
+- `authorization_list` is empty.
+- A tuple does not have exactly 6 elements, or `address` is not exactly 20 bytes.
+- A tuple field is not canonically RLP-encoded, or exceeds the bounds in [Set-code transaction](#set-code-transaction).
+
+### Ordering and nonces
+
+| Case | Expected |
+| --- | --- |
+| Self-sponsoring: the sender is the `authority`, transaction nonce `0`, tuple nonce `1` | Tuple applied; sender nonce ends at `2` |
+| Self-sponsoring with tuple nonce `0` | Tuple skipped; sender nonce ends at `1` |
+| External `authority` with nonce `0`, tuple nonce `0` | Tuple applied; `authority` nonce `1`; sender nonce increases by `1` |
+| Two tuples from the same `authority`, nonces `0` and `1`, different addresses | Both applied; the second address is the delegation; `authority` nonce `2` |
+| Two identical tuples, nonce `0` | First applied, second skipped (stale nonce); both charged, intrinsic gas `71000` |
+| An invalid tuple followed by a valid tuple from another `authority` | Second tuple applied |
+
+### Failed execution
+
+`A` is already a delegated account. A set-code transaction with gas limit `200000` and effective gas price `1` carries one valid tuple from `A`, re-delegating it to a new address, and its `destination` is a contract that is not delegated and whose code is `0xfe` (`INVALID`). Then:
+
+- The receipt status is failure, and execution consumes all remaining gas.
+- The new delegation of `A` is in place and the nonce of `A` is incremented: the tuple is not rolled back.
+- The refund of `9500` still applies, so the gas used is `200000 - 9500 = 190500` and the sender pays `190500`.
 
 ## References
 
