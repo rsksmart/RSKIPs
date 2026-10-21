@@ -133,7 +133,7 @@ This change is a hard-fork and therefore all full nodes must be updated. Light c
 
 The implementation is in the RSKJ repository on the `account-abstraction` integration branch, under the consensus rule `RSKIP543`; it is not yet merged into `master`. Typed-envelope support was added in [pull request 3462](https://github.com/rsksmart/rskj/pull/3462).
 
-Note: when decoding a block body, the implementation does not check how each transaction is framed. A legacy transaction wrapped as an RLP string, instead of included as an RLP list, is also accepted. The transactions root is computed over the unwrapped encoding, so this does not change which transactions a block contains, but a block body can have more than one valid encoding.
+Note: when decoding a block body, RSKJ does not check how each transaction is framed, and this predates this RSKIP. A legacy transaction wrapped as an RLP string, instead of included as an RLP list, is accepted. The transactions root is computed over the unwrapped encoding, so this does not change which transactions a block contains, but a block body can have more than one valid encoding. This RSKIP does not change that behaviour.
 
 ## Test cases
 
