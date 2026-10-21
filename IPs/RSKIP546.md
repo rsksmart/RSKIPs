@@ -172,6 +172,47 @@ Signed envelope:
 01f8a62101843b9aca00825208941234567890123456789012345678901234567890880de0b6b3a764000080f838f7940000000000000000000000000000000000000000e1a0000000000000000000000000000000000000000000000000000000000000000001a01111111111111111111111111111111111111111111111111111111111111111a02222222222222222222222222222222222222222222222222222222222222222
 ```
 
+### Access list above the gas limit
+
+As the Type 1 vector, with `gasLimit = 21000` and the access list `[[0x1234567890123456789012345678901234567890, [0x00…00, 0x00…01, 0x00…02]]]` (one address, three 32-byte storage keys). Its RLP encoding is 126 bytes long:
+
+```
+f87cf87a941234567890123456789012345678901234567890f863a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002
+```
+
+The additional gas is `80 * 126 = 10080`, so the intrinsic gas is `21000 + 10080 = 31080`. This exceeds the gas limit, and the transaction is invalid.
+
+### Chain ID
+
+| Case | Expected |
+| --- | --- |
+| `chainId = 200`, encoded as `81c8` (a single-byte string, since `0xc8 > 0x7f`) | Valid encoding. For example, the Type 2 envelope `02f87381c801843b9aca008477359400…` from the RSKJ encoder test vectors; valid only on a network whose chain ID is `200` |
+| `chainId = 286`, encoded as `82011e` | Invalid. It MUST NOT be truncated to a single byte, which would give `30`, the chain ID of Rootstock Mainnet |
+| `chainId = 0`, encoded as `80` | Invalid |
+
+### Canonical encoding
+
+| Case | Expected |
+| --- | --- |
+| y-parity `0`, encoded as `80`, as in the Type 2 envelope `02f8722101843b9aca008477359400825208941234567890123456789012345678901234567890880de0b6b3a764000080c080a0…` | Valid encoding |
+| y-parity `0` encoded as `00` | Invalid (leading zero byte) |
+| y-parity `2`, `27` (`1b`) or `255` (`ff`) | Invalid |
+| y-parity encoded as the two bytes `0100` | Invalid |
+| `nonce = 5` encoded in long form as `8105` instead of `05` | Invalid (not canonical) |
+| Empty access list encoded in long form as `f800` instead of `c0` | Invalid (not canonical) |
+
+### Access-list shape
+
+Each of the following access lists makes the transaction invalid:
+
+| Access list | Reason |
+| --- | --- |
+| `80` | An RLP string, not a list |
+| `81c0` | An RLP string whose content is `c0`, not a list |
+| `[[<address encoded as a 20-element RLP list>, []]]` | The address must be a 20-byte RLP string |
+| `[[<20-byte address>, [<32-element RLP list>]]]` | Each storage key must be a 32-byte RLP string |
+| `c401` | Truncated: the list header announces 4 bytes but only 1 follows |
+
 ## References
 
 [1] https://eips.ethereum.org/EIPS/eip-1559
