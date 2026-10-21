@@ -165,6 +165,25 @@ The following encodings MUST be rejected. Only the leading bytes matter; the res
 | `80 …`, `bf …` | First byte is in `[0x80, 0xbf]` |
 | `ff …` | Reserved first byte |
 
+### Activation boundary
+
+Let `H` be the activation block of this RSKIP, and assume the RSKIP that defines the type used is also active at `H`.
+
+| Case | Expected |
+| --- | --- |
+| A block at height `H - 1` that includes a typed transaction | The block is invalid |
+| A block at height `H` that includes a typed transaction followed by a legacy transaction | The block is valid; the first receipt starts with the transaction's type byte, and the second is a `LegacyReceipt` |
+| A legacy transaction and its receipt | Encoded identically before and after `H` |
+
+### REMASC
+
+The REMASC transaction is the last transaction of a block that is sent to the REMASC address `0x0000000000000000000000000000000001000008` with empty `data`, no signature, and zero `value`, `gasLimit` and `gasPrice`.
+
+| Case | Expected |
+| --- | --- |
+| The REMASC transaction is a legacy transaction | The block is valid |
+| A typed transaction matching all of the conditions above is the last transaction of the block | The block is invalid |
+| A signed typed transaction is the last transaction of the block | It is not a REMASC transaction; it is processed as an ordinary typed transaction |
 
 ## References
 
