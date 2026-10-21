@@ -235,6 +235,12 @@ As in Ethereum, this change breaks several invariants that applications and tool
 
 The implementation is in the RSKJ repository under the consensus rule `RSKIP545`, in [pull request 3558](https://github.com/rsksmart/rskj/pull/3558), which is not yet merged.
 
+The implementation currently differs from this specification in the following points, which need to be resolved before activation:
+
+- **Recognizing a delegation.** The implementation sets and keeps the delegation authority flag as specified, but recognizes a delegation from the account's code alone: when following a delegation, in step 4 of [Behavior](#behavior), and when checking the sender of a set-code transaction. This specification requires the flag as well.
+- **Delegation resolution cost.** The implementation does not charge `DELEGATION_RESOLUTION_COST`.
+- **RSKIP-701.** The implementation does not yet include RSKIP-701 or require it for activation, so `SELFDESTRUCT` in a delegated account deletes the account, including its nonce.
+
 ## Test cases
 
 ### Authorization signing
