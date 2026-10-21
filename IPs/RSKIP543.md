@@ -53,6 +53,8 @@ Following EIP-2718, a transaction is one of:
 * `TransactionType || TransactionPayload`: a typed transaction. `TransactionType` is a single byte in the range `[0x01, 0x7f]`, and the format of `TransactionPayload` is defined by the RSKIP that introduces the type.
 * `0x02 || rsk-tx-type || TransactionPayload`: a Rootstock-specific transaction, described in [Rootstock-specific transactions](#rootstock-specific-transactions).
 
+When the RSKIP that defines a type specifies its `TransactionPayload` as an RLP list, the payload MUST be canonically encoded: decoding it and re-encoding the result MUST yield exactly the same bytes. In particular, every length prefix MUST be minimal, and no bytes may follow the list. A transaction that violates this is invalid.
+
 The transaction hash is `keccak256` of the full encoding, including the type prefix of a typed transaction. Hashes of legacy transactions are unchanged.
 
 A typed transaction such as `0x04 || rlp([...])` is not itself valid RLP: it is a type byte followed by an RLP-encoded payload. In block bodies and network messages, which are RLP lists of transactions, a legacy transaction is included as is (it is already an RLP list), while a typed transaction is RLP-encoded as a string, i.e. `rlp(TransactionType || TransactionPayload)`. Decoders tell them apart by whether an element is an RLP list or an RLP string.
@@ -164,6 +166,8 @@ The following encodings MUST be rejected. Only the leading bytes matter; the res
 | `05 f8 72 …`, `7f …` | Undefined type |
 | `80 …`, `bf …` | First byte is in `[0x80, 0xbf]` |
 | `ff …` | Reserved first byte |
+
+The Ethereum Type-2 vector above with one extra byte appended, `02f872…2222 00`, MUST also be rejected: bytes follow the payload's RLP list, so the payload is not canonically encoded.
 
 ### Activation boundary
 
