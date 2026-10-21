@@ -57,7 +57,13 @@ When the RSKIP that defines a type specifies its `TransactionPayload` as an RLP 
 
 The transaction hash is `keccak256` of the full encoding, including the type prefix of a typed transaction. Hashes of legacy transactions are unchanged.
 
-A typed transaction such as `0x04 || rlp([...])` is not itself valid RLP: it is a type byte followed by an RLP-encoded payload. In block bodies and network messages, which are RLP lists of transactions, a legacy transaction is included as is (it is already an RLP list), while a typed transaction is RLP-encoded as a string, i.e. `rlp(TransactionType || TransactionPayload)`. Decoders tell them apart by whether an element is an RLP list or an RLP string.
+A typed transaction such as `0x04 || rlp([...])` is not itself valid RLP: it is a type byte followed by an RLP-encoded payload. Block bodies and network messages carry transactions as an RLP list, whose elements are framed as follows:
+
+* A legacy transaction is included as is, as an RLP list.
+* A typed transaction MUST be included as an RLP string whose content is its full encoding, i.e. `rlp(TransactionType || TransactionPayload)`.
+* As before this RSKIP, a legacy transaction MAY also be included as an RLP string whose content is its encoding.
+
+An element that is an RLP list is a legacy transaction. The content of an element that is an RLP string is classified by the [Classification](#classification) rules. Both framings of a legacy transaction are valid and denote the same transaction.
 
 The transactions root in the block header is the root hash of `Trie(rlp(Index) => Transaction)`, where `Transaction` is the full encoding above. For a typed transaction this is `TransactionType || TransactionPayload` itself, not its RLP string encoding used in block bodies.
 
@@ -135,7 +141,7 @@ This change is a hard-fork and therefore all full nodes must be updated. Light c
 
 The implementation is in the RSKJ repository on the `account-abstraction` integration branch, under the consensus rule `RSKIP543`; it is not yet merged into `master`. Typed-envelope support was added in [pull request 3462](https://github.com/rsksmart/rskj/pull/3462).
 
-Note: when decoding a block body, RSKJ does not check how each transaction is framed, and this predates this RSKIP. A legacy transaction wrapped as an RLP string, instead of included as an RLP list, is accepted. The transactions root is computed over the unwrapped encoding, so this does not change which transactions a block contains, but a block body can have more than one valid encoding. This RSKIP does not change that behaviour.
+Note: RSKJ accepts both framings of a legacy transaction in a block body, as specified in [Transactions](#transactions). This predates this RSKIP. Since the transactions root is computed over the unwrapped encoding, both framings give the same block.
 
 ## Test cases
 
@@ -154,6 +160,8 @@ Ethereum Type-2 transaction. The first byte is `0x02` and the second byte `0xf8`
 ```
 
 This Type-2 transaction is 117 bytes long. In a block body it is RLP-encoded as a string, so its element begins `b875 02f872…`. The transactions trie stores the unwrapped bytes `02f872…`.
+
+The legacy transaction above is 109 bytes long. In a block body it is normally included as is (`f86b…`), but it may also be included as the RLP string `b86d f86b…`. Both denote the same transaction, and the transactions trie stores `f86b…` in either case.
 
 The following encodings MUST be rejected. Only the leading bytes matter; the rest of the encoding is irrelevant to the result.
 
