@@ -40,7 +40,7 @@ EIP-2718 introduced a new format by concatenating a transaction type prefix with
 
 EIP-2718 restricts transaction type numbers to unsigned 8 bit numbers between `0`  and `0x7f`. We propose to follow this strictly on Rootstock as well. However, to avoid conflicts between new transaction types specifically introduced in Rootstock from those in Ethereum, we need a differentiator, or a namespace separator.
 
-As specified (in EIP-2718's  Backwards Compatibility section), clients can differentiate between the legacy transactions and typed transactions by looking at the first byte. If it starts with a value in the range `[0, 0x7f]` then it is a new transaction type, if it starts with a value in the range `[0xc0, 0xfe]` then it is a legacy transaction type. `0xff` is not realistic for an RLP encoded transaction, so it is reserved for future use as an extension sentinel value. A transaction typically cannot exceed 128KB. Therefore, in terms of RLP list sizes, anything higher than `0xfa` is impractical (as `0xfa` is enough to store 16MB). However, to be consistent with EIP-2718, for the present, we only reserve `0xff` for future sentinel use. The range `[0xc0, 0xfe]` includes both long and short lists in RLP format. In Rootstock, REMASC transactions do not need gas or signatures and can be represented using short lists in RLP format. This is aligned with EIP-2718's range for legacy transactions (`[0xc0, 0xfe]`), therefore we can treat remasc transactions as legacy without additional special handling. A REMASC transaction MUST be a legacy transaction; a block whose REMASC transaction is typed is invalid.
+As specified (in EIP-2718's  Backwards Compatibility section), clients can differentiate between the legacy transactions and typed transactions by looking at the first byte. If it starts with a value in the range `[0, 0x7f]` then it is a new transaction type, if it starts with a value in the range `[0xc0, 0xfe]` then it is a legacy transaction type. `0xff` is not realistic for an RLP encoded transaction, so it is reserved for future use as an extension sentinel value. A transaction typically cannot exceed 128KB. Therefore, in terms of RLP list sizes, anything higher than `0xfa` is impractical (as `0xfa` is enough to store 16MB). However, to be consistent with EIP-2718, for the present, we only reserve `0xff` for future sentinel use. The range `[0xc0, 0xfe]` includes both long and short lists in RLP format. In Rootstock, REMASC transactions do not need gas or signatures and can be represented using short lists in RLP format. This is aligned with EIP-2718's range for legacy transactions (`[0xc0, 0xfe]`), therefore we can treat remasc transactions as legacy without additional special handling. As before this RSKIP, the REMASC transaction MUST be a legacy transaction; a block whose REMASC transaction is typed is invalid.
 
 
 Note that the range for type values includes `0`. At present, there is no formal specification in Ethereum for a "type-0" transaction. In other words, there is no "formal" Type-0 transaction. Ethereum clients include a type field in their JSON RPC response for transaction receipts. This is just for convenience as it allows the use of the same JSON schema for receipts of different types. It should be clear that, in consensus, there is no Type-0 transaction. A transaction encoded in the EIP-2718 format with a leading `0x00` MUST NOT be interpreted as a legacy transaction - as noted later, the signature rules are different for EIP-2718 transactions. Nodes MUST reject such a transaction, in the same way as a transaction of any undefined type (see [Classification](#classification)).
@@ -189,13 +189,13 @@ Let `H` be the activation block of this RSKIP, and assume the RSKIP that defines
 
 ### REMASC
 
-The REMASC transaction is the last transaction of a block that is sent to the REMASC address `0x0000000000000000000000000000000001000008` with empty `data`, no signature, and zero `value`, `gasLimit` and `gasPrice`.
+As before this RSKIP, every block MUST end with a REMASC transaction, and the REMASC transaction MUST continue to be a legacy transaction. The REMASC transaction is the last transaction of a block that is sent to the REMASC address `0x0000000000000000000000000000000001000008` with empty `data`, no signature, and zero `value`, `gasLimit` and `gasPrice`.
 
 | Case | Expected |
 | --- | --- |
-| The REMASC transaction is a legacy transaction | The block is valid |
-| A typed transaction matching all of the conditions above is the last transaction of the block | The block is invalid |
-| A signed typed transaction is the last transaction of the block | It is not a REMASC transaction; it is processed as an ordinary typed transaction |
+| The last transaction is a legacy transaction matching all of the conditions above | Valid REMASC transaction, as before this RSKIP |
+| The last transaction is a typed transaction matching all of the conditions above | The block is invalid: the REMASC transaction MUST be legacy |
+| The last transaction is a signed typed transaction | The block is invalid: it does not end with a REMASC transaction |
 
 ## References
 
