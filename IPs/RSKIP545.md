@@ -69,8 +69,7 @@ Apart from having 13 elements and carrying the `authorization_list`, the set-cod
 Following EIP-7702, a null destination is not valid for the set-code transaction. Thus, it cannot be used for contract creation. The original EIP also prohibits the use of this transaction for EIP-4844 style blobs. Since Rootstock currently has no implementation for Ethereum’s blob-carrying transactions, this restriction is currently moot. However, we leave this remark here for future reference in case there is a RSKIP to implement a system similar to EIP-4844.
 
 The `signature_y_parity, signature_r, signature_s` elements of this transaction
-represent a secp256k1 signature over `keccak256(SET_CODE_TX_TYPE ||
-TransactionPayload)`.
+represent a secp256k1 signature over `keccak256(SET_CODE_TX_TYPE || rlp([chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, destination, value, data, access_list, authorization_list]))`, that is, over the type prefix and the unsigned fields, as specified in RSKIP-543.
 
 The `authorization_list` is a list of tuples that indicate what code the signer of each tuple (signer is called an “authorizer”) desires to execute in the context of their EOA.  A single set-code transaction can therefore be used to set or modify code for multiple EOAs. Each EOA’s authorization is a tuple in the list. While each EOA must sign its own authorization, they need not send their set-code transaction themselves. The owner of an EOA can send their own set code transaction - if they wish. A set-code transaction is invalid if the length of `authorization_list` is zero. 
 
