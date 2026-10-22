@@ -46,7 +46,7 @@ A new (EIP-2718 style) transaction known as the “set-code transaction” is in
 
 `MAGIC` is used to recover (`ecrecover` from signed message) the address of the EOA (an *authorizer*) that authorizes  the change to set code into its own account. 
 
-A set-code transaction will attempt to set or modify code for a list of EOAs (called *authorizers*). `PER_EMPTY_ACCOUNT_COST`  is the up-front gas collected from the transaction sender for each EOA in the list. This is collected based on just the size of the list regardless of whether the code for an EOA is actually modified or not. `PER_AUTH_BASE_COST` is the cost for each EOA whose code is actually modified successfully, through this transaction. The difference between upfront and ultimate costs (per EOA) is refunded to the sender. To account for gas schedule differences between Rootstock and Ethereum, the base cost in this RSKIP is a bit higher than the value in the EIP.
+A set-code transaction will attempt to set or modify code for a list of EOAs (called *authorizers*). `PER_EMPTY_ACCOUNT_COST`  is the up-front gas collected from the transaction sender for each EOA in the list. This is collected based on just the size of the list regardless of whether the code for an EOA is actually modified or not. `PER_AUTH_BASE_COST` is the cost of processing an authorization and setting the delegation. When an authorization succeeds and its EOA is already a delegated account, the difference `PER_EMPTY_ACCOUNT_COST - PER_AUTH_BASE_COST` is refunded to the sender (step 6 of [Behavior](#behavior)); otherwise the full up-front cost is kept. To account for gas schedule differences between Rootstock and Ethereum, the base cost in this RSKIP is a bit higher than the value in the EIP.
 
 ### Set-code transaction
 
