@@ -50,9 +50,20 @@ A new field is added to the  Block Header Extension:
 
 The `baseEvent` element is always present. If the block has no base event, `baseEvent` is an empty byte array.
 
-If parallel transaction execution ([RSKIP 144](./RSKIP144.md)) is not active, the `txExecutionSublistsEdges` element is omitted from the list.
+If parallel transaction execution ([RSKIP 144](./RSKIP144.md)) is not active, the `txExecutionSublistsEdges` element is omitted from the list, so the extension has two elements. The two-element form is what nodes produce on a network that activates this RSKIP without RSKIP 144. Today RSKIP 535 is active only on Testnet, where RSKIP 144 is also active, so the extension has three elements there.
 
-This RSKIP does not specify how the content of `baseEvent` is selected by the miners, not how the content is verified by the consensus code (these rules will be specified in a separate RSKIP).
+### Extended header
+
+When serializing the block header for transmission or storage, the data structure includes, after the fields defined in [RSKIP 351](./RSKIP351.md):
+
+* The blockVersion field (integer, value 2) (1 byte)
+* The bloom filter data (256 bytes)
+* `txExecutionSublistsEdges` (present only when RSKIP 144 is active)
+* `baseEvent` (at most 128 bytes; an empty byte array when the block has no base event)
+
+Note that the extended header places `txExecutionSublistsEdges` before `baseEvent`, while the block header extension places `baseEvent` before `txExecutionSublistsEdges`. Only the extension order affects the block hash.
+
+This RSKIP does not specify how the content of `baseEvent` is selected by the miners, nor how the content is verified by the consensus code (these rules will be specified in a separate RSKIP).
 
 However, to prevent large blocks being forwarded, a rule establishes a maximum size of 128 bytes for the `baseEvent` field.
 
@@ -62,14 +73,13 @@ RSKIP 144 and RSKIP351 defines how new fields are added using an header extensio
  
 Alternatively, we could use a bitmap for the version field, so that each bit specifies the presence (or absence) of each conditional field in the block header extension. However, this complicates consensus code when parsing the header as allows all field subsets to exist. With a version number, `txExecutionSublistsEdges` is the only element that can be omitted, so the number of elements in the list (2 or 3) tells whether it is present.
 
-`baseEvent` comes before `txExecutionSublistsEdges` because this is the order activated on Testnet. A different order changes the block hash, so it requires a new network upgrade.
-
 
 ## Backwards compatibility
 
 - This change requires a network upgrade. All full nodes must be upgraded
 - RPC responses related to block queries will only add new fields to the returned JSON payload. RPC clients do not need to be updated.
-- Powpeg nodes no not need to decode the new field, nor the HSM firmware needs to be upgraded.
+- Powpeg nodes do not need to decode the new field, nor the HSM firmware needs to be upgraded.
+- In the block header extension, `baseEvent` comes before `txExecutionSublistsEdges`. This is the order active on Testnet since block 7,604,200. Changing it changes the block hash, so it requires a new network upgrade.
 
 ## Security considerations
 
