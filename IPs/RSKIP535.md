@@ -54,12 +54,12 @@ If parallel transaction execution ([RSKIP 144](./RSKIP144.md)) is not active, th
 
 ### Extended header
 
-When serializing the block header for transmission or storage, the data structure includes, after the fields defined in [RSKIP 351](./RSKIP351.md):
+When serializing the block header for transmission or storage, version 2 updates the layout defined in [RSKIP 351](./RSKIP351.md). No field moves; one field is added:
 
-* The blockVersion field (integer, value 2) (1 byte)
-* The bloom filter data (256 bytes)
-* `txExecutionSublistsEdges` (present only when RSKIP 144 is active)
-* `baseEvent` (at most 128 bytes; an empty byte array when the block has no base event)
+* The bloom filter data (256 bytes) stays in its original slot, in place of the extension data.
+* The blockVersion field (integer, value 2) (1 byte) follows `ummRoot`, as in version 1.
+* `txExecutionSublistsEdges` follows the version field (present only when RSKIP 144 is active), as in version 1.
+* `baseEvent` (at most 128 bytes; an empty byte array when the block has no base event) is new. It follows `txExecutionSublistsEdges` and precedes the merged mining fields.
 
 Note that the extended header places `txExecutionSublistsEdges` before `baseEvent`, while the block header extension places `baseEvent` before `txExecutionSublistsEdges`. Only the extension order affects the block hash.
 
