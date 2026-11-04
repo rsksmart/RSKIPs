@@ -65,7 +65,7 @@ where
 
 and this is described more fully below.  Note that the transaction payload includes the fields `max_priority_fee_per_gas` and `max_fee_per_gas` from EIP-1559 and `access_list` from EIP-2930, which RSKIP-546 introduces on Rootstock. These field names are retained to ensure compatibility for preexisting wallet software and tooling in use in Ethereum. The `access_list` follows the rules of RSKIP-546: it MUST have the shape given there, it has no effect on execution under this RSKIP, and it is charged `80` gas per byte of its complete RLP encoding, with an empty list (`0xc0`) charged nothing. The fee fields also follow the rules of RSKIP-546 for Type 2 transactions: nodes MUST reject a set-code transaction with `max_priority_fee_per_gas > max_fee_per_gas`, and the transaction's effective gas price is `max_priority_fee_per_gas`. Of course, all of the fields have to be used when validating the transaction's signature.
 
-Apart from having 13 elements and carrying the `authorization_list`, the set-code transaction MUST meet the validity rules of RSKIP-546 for Type 2 transactions: canonical RLP encoding, integer bounds, a nonzero `chain_id` equal to the chain ID of the network, a `signature_y_parity` of `0` or `1`, and `signature_s < secp256k1n/2`. This rule for the transaction's own signature is stricter than the rule for authorization tuples in step 3 of [Behavior](#behavior), which accepts `s = secp256k1n/2`.
+Apart from having 13 elements and carrying the `authorization_list`, the set-code transaction MUST meet the validity rules of RSKIP-546 for Type 2 transactions: canonical RLP encoding, integer bounds, a nonzero `chain_id` equal to the chain ID of the network, a `signature_y_parity` of `0` or `1`, and `signature_s < secp256k1n/2`. This rule for the transaction's own signature is stricter than the rule for authorization tuples in step 3 of [Behavior](#behavior), which accepts `s = secp256k1n/2`. Thus, unlike EIP-2 which accepts `s <= secp256k1n/2`, the outer signature here rejects `s == secp256k1n/2`.
 
 Following EIP-7702, a null destination is not valid for the set-code transaction. Thus, it cannot be used for contract creation. The original EIP also prohibits the use of this transaction for EIP-4844 style blobs. Since Rootstock currently has no implementation for Ethereum’s blob-carrying transactions, this restriction is currently moot. However, we leave this remark here for future reference in case there is a RSKIP to implement a system similar to EIP-4844.
 
@@ -91,8 +91,8 @@ Note that these initial assertions are only to ensure the values fit into approp
 
 ### Transaction Receipt
 
-The  `ReceiptPayload` (expected to be in EIP-2718 format) for this transaction is
-`rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. So the overall EIP-2718 encoding for the receipt is `04 || rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`
+The  `ReceiptPayload`, following [RSKIP543](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP543.md) (and EIP-2718), for this transaction is
+`rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`. So the overall RSKIP543 (EIP-2718) encoding for the receipt is `04 || rlp([status, cumulative_transaction_gas_used, logs_bloom, logs])`
 
 ### Behavior
 
@@ -101,7 +101,7 @@ The authorization list is processed before the execution portion of the transact
 For each `[chain_id, address, nonce, y_parity, r, s]` tuple, perform the
 following:
 
-1. Verify the chain ID is 0 or the ID of the current chain (which for Rootstock can be 30, 31 or 33).
+1. Verify the chain ID is 0 or the ID of the current chain.
     - A chain ID of 0 makes the authorization valid on every chain that implements EIP-7702 or this RSKIP, including Rootstock. Following EIP-7702, the chain ID can be set to reduce the scope of the authorization; when universal deployment is preferred, it is set to 0 (see [Security](#security)).
 2. Verify the nonce is less than `2**64 - 1`.
 3. Let `authority = ecrecover(msg, y_parity, r, s)`.
@@ -114,8 +114,8 @@ following:
 6. Add `PER_EMPTY_ACCOUNT_COST - PER_AUTH_BASE_COST` gas to the global refund counter if `authority` is not empty. Here, "empty" has the meaning of EIP-161: an account is empty if it has zero nonce, zero balance and no code.
 7. Set the code of `authority` to be `0xef0100 || address`. This is a delegation
 indicator. Also set the delegation authority flag of `authority` (see *delegation indicator* and *authority flag* below).
-    - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator or set the flag. Clear the account’s code by removing the value at its code key from the Unitrie. The storage initialization entry and the delegation authority flag are left in place. Afterwards `EXTCODEHASH` on the account returns the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470` (`keccak256` of the empty string), as for an account that never had code.
-    - In the Unitrie, writing the delegation indicator stores it as the value at the account's code key, and also writes the value `0x01` at the account's storage prefix key, as for a contract. This is the account's *storage initialization entry*. With the key mapping of [RSKIP-108](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP108.md), the account key is `0x00 || keccak256(authority)[0:10] || authority`, the code key is the account key followed by `0x80`, and the storage prefix key is the account key followed by `0x00`. Neither step touches any storage cell.
+    - If `address` is `0x0000000000000000000000000000000000000000`, do not write the delegation indicator or set the flag. Clear the account’s code (writing an empty value at a key removes it from the Unitrie). The storage initialization entry and the delegation authority flag are left in place. Afterwards `EXTCODEHASH` on the account returns the empty code hash `0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470` (`keccak256` of the empty string), as for an account that never had code.
+    - In the Unitrie, writing the delegation indicator stores it as the value at the account's code key, and also writes the value `0x01` at the account's storage prefix key, as for a contract. This is the account's *storage initialization entry*. With the key mapping of [RSKIP-108](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP108.md), the account key is `0x00 || keccak256(authority)[0:10] || authority`, the code key is the account key followed by `0x80`, and the storage prefix key is the account key followed by `0x00`. Neither step touches any storage cell. Under RSKIP-108 an account's storage cells sit under its storage prefix key, and the entry marks that storage as initialized. Without this entry, a delegated account that writes storage would be inconsistent.
     - A set-code transaction can therefore set a delegation on an EOA, change it to point to a different address, or clear it. These operations change only the account's code (and, when setting a delegation, its delegation authority flag). They never read, write or clear any storage cell of the account.
     - Clearing a delegation therefore does not return the account to its state before it was delegated: storage written while it was delegated remains, and the delegation authority flag stays set. A later delegation runs its code against that storage. As a result, an EOA can now hold persistent storage that no protocol operation clears, and any application logic that assumes an EOA has no storage must account for this. As with a proxy contract, the storage can only be cleared by code running in the account's context: for example, by delegating to a contract that writes zero to the slots in use and then calling the account. `SELFDESTRUCT` does not clear it: under RSKIP-701, a delegated account that executes `SELFDESTRUCT` keeps its storage.
 8. Increase the nonce of `authority` by one.
@@ -156,7 +156,7 @@ Of the code-reading instructions, only `CODESIZE` and `CODECOPY` are affected by
 
 Delegated accounts can originate transactions. Since EIP-3607, Ethereum rejects any transaction whose sender has code, and EIP-7702 makes an exception for delegation indicators. Rootstock has not adopted EIP-3607 and does not, in general, check the code of a transaction's sender, so a delegated account can send legacy, Type 1 and Type 2 transactions without any exception being needed. If EIP-3607 is introduced on Rootstock in the future, it will need the same exception for delegated accounts.
 
-The set-code transaction adds one check of its own: nodes MUST reject a set-code transaction whose sender has code, unless the sender is a delegated account.
+The set-code transaction adds one check of its own: before it is executed, nodes MUST reject a set-code transaction whose sender has code, unless the sender is a delegated account.
 
 As recommended by EIP-7702 (see [Security](#security)), nodes SHOULD accept at most one pending transaction from a delegated account. This is a transaction pool policy, not a consensus rule.
 
@@ -185,20 +185,20 @@ The refund in step 6 of [Behavior](#behavior) is therefore `25000 - 15500 = 9500
 **Delegation resolution.** Following a delegation reads a second account, the delegate, in addition to the delegated account itself. In EIP-7702 this read is priced through EIP-2929 (`2600` gas cold, `100` warm). Rootstock does not implement EIP-2929, so the read is charged a flat `DELEGATION_RESOLUTION_COST = 700` gas, Rootstock's price for reading an account (as for `EXTCODESIZE`). The charge applies:
 
 - to a `CALL`, `CALLCODE`, `DELEGATECALL` or `STATICCALL` whose target is a delegated account. It is added to the instruction's own base cost and charged to the calling frame before the gas to forward to the callee is computed, as in EIP-7702. If the calling frame cannot pay it, the calling frame runs out of gas, not the callee;
-- to a transaction whose `destination` is a delegated account, at the start of execution, from the gas that remains after the intrinsic cost. If not enough gas remains, execution fails as out of gas.
+- to a transaction whose `destination` is a delegated account, at the start of execution, from the gas that remains after the intrinsic cost. If not enough gas remains, execution fails as out of gas. This is different from EIP-7702 which only charges a resolution cost for internal calls (code executing insructions). However, this is algned with upcoming changes in Ethereum (see EIP-2780).
 
-It is charged whether or not the delegate has code, including when the delegate is a precompile (see [No Precompiles](#no-precompiles)).
+It is charged whether or not the delegate has code, including when the delegate is a precompile (see [No Precompiles](#no-precompiles)). One implication of this is that sending RBTC to a delegated EOA as the destination will cost at least 21,000+700 = 21,700 gas. This is also aligned with EIP-2780, though the gas cost for delegation resolution is different in EIP-2780 (3000 gas for "cold", 100 gas for "warm" and precompiles).
 
 ### No Precompiles
 
 On Rootstock, a delegate is a precompile if its address is in the set of precompiled contracts active at the block being executed. This set includes the Ethereum precompiles at `0x01`–`0x09` and Rootstock's native contracts, such as the Bridge (`0x0000000000000000000000000000000001000006`) and REMASC (`0x0000000000000000000000000000000001000008`), and it can grow with network upgrades. Delegating to a native contract therefore never runs that contract's logic in the context of the delegated account.
 
-An EOA cannot use a precompile address as a delegate. When a precompile address is the target of a delegation, the retrieved code is considered empty and `CALL`, `CALLCODE`, `STATICCALL`, `DELEGATECALL` instructions targeting this account will execute empty code, and therefore
+If a precompile address is used as the target of a delegation, then the retrieved code is considered empty and `CALL`, `CALLCODE`, `STATICCALL`, `DELEGATECALL` instructions targeting this account will execute empty code, and therefore
 succeed with no execution when given enough gas to initiate the call.
 
 ### No Chained Delegation (no loops)
 
-In case a delegation indicator points to another delegation, creating a potential chain or loop of delegations, clients must retrieve only the first code and then stop following the delegation chain.
+In case a delegation indicator points to another delegation, creating a potential chain or loop of delegations, clients must retrieve only the first code and then stop following the delegation chain. The first code retrieved is executed as is (not interpreted as another delegation) and if it happens to be in the form of a delegation indicator, then its leading `0xEF` will make the call fail with an exceptional halt.
 
 ### Activation
 
@@ -249,7 +249,7 @@ As in Ethereum, this change breaks several invariants that applications and tool
 
 ## Implementation
 
-The implementation is in the RSKJ repository under the consensus rule `RSKIP545`, in [pull request 3558](https://github.com/rsksmart/rskj/pull/3558), which is not yet merged.
+An implementation is in the RSKJ repository under the consensus rule `RSKIP545` in [this branch](https://github.com/rsksmart/rskj/tree/rskip545-security-review). For example, the delegation authority flag and storage initialization are part of [rskj#3723](https://github.com/rsksmart/rskj/pull/3723).
 
 The implementation currently differs from this specification in the following points, which need to be resolved before activation:
 
@@ -358,6 +358,8 @@ By contrast, the following make the whole set-code transaction invalid:
 \[1] [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702): Set Code for EOAs
 
 \[2] [RSKIP167](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP167.md): Install Code Precompile
+
+\[3] [EIP-2780](https://eips.ethereum.org/EIPS/eip-2780): Resource-Based Intrinsic Transaction Gas
 
 ## Copyright
 
