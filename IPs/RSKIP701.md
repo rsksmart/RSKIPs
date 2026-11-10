@@ -111,6 +111,7 @@ Delegated accounts exist only once RSKIP545 is active, so no existing account is
 - A `CALL` to the address does not pay the 25,000 gas charged for a call to an account that does not exist. A `SELFDESTRUCT` that names the address as beneficiary does not pay the 25,000 gas charged for a beneficiary that does not exist.
 - No contract can be deployed at the address again. Before activation a deployment was possible from the next block on. A balance sent to the address after destruction cannot be recovered by redeploying a contract there.
 - Explorers, indexers and wallets see the address as an account with a nonce and no code.
+- The `suicide` trace is still emitted for every `SELFDESTRUCT`, as on Ethereum after EIP-6780. It records the execution of the opcode and the balance transfer, not the removal of the account. A delegated account and a cleared account remain in the state after it.
 
 Accounts deleted before activation are not affected.
 
