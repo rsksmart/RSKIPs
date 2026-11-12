@@ -77,7 +77,7 @@ recorded, so its hash is not in the index and trying to register it does nothing
 index does not hold.
 
 This index is how the Bridge now recognizes its own release transactions, in place of the peg-out
-transaction index of RSKIP379 [2]. That one is still read during the transition described below.
+transaction index of RSKIP379 [2].
 
 ### The height of credited outputs
 
@@ -109,28 +109,19 @@ peg-in does, and carries the derivation hash that identifies it.
 
 ### Coexistence with registerBtcTransaction
 
-`registerBtcTransaction` keeps working and keeps accepting every transaction type, including
+`registerBtcTransaction` keeps working and accepting every transaction type, including
 peg-outs and migrations.
 
 From the activation on, every release transaction the Bridge creates goes into the new index, and
 the RSKIP379 index is no longer written. A release transaction created before the activation went
 into the RSKIP379 index instead, and it may still be waiting to be confirmed.
 
-So up to a cutoff, `registerBtcTransaction` looks for the transaction in the new index first and in
-the RSKIP379 index second, and from the cutoff on it looks only in the new index.
+`registerBtcTransaction` keeps looking for the transaction in the new index first and in
+the RSKIP379 index second.
 `registerPegoutTransaction` only ever looks in the new index.
 
-A caller therefore does not have to tell the two apart while the window is open.
-`registerBtcTransaction` covers release transactions created on either side of the activation, so a
+A caller therefore does not have to tell the two apart. `registerBtcTransaction` covers release transactions created on either side of the activation, so a
 caller that does not know which side a given transaction falls on can keep using it.
-
-The cutoff is a Bitcoin block height, fixed per network, and applies to transactions confirmed at
-that height or above.
-
-The cutoff MUST be high enough for every release transaction created before the activation to be
-confirmed and registered before it is reached. After the cutoff neither method recognizes one of
-those transactions, and the funds it pays back to a federation stay out of the Bridge's
-accounting.
 
 ## Rationale
 

@@ -234,6 +234,9 @@ control over a signer’s EOA*.
 ### Bridge MUST be destination for Pegout transactions
 Peg-outs from delegated code: the Bridge treats any call to it from executing code as a contract caller (RSKIP-185): the peg-out is rejected and the value is not refunded. This applies to a delegated account's own code, including when the account calls itself. A delegated account must send a peg-out as a transaction with the Bridge as `destination`. Wallets SHOULD NOT send peg-outs through delegated code. A change to the bridge contract to allow pegouts via delegated code is out of scope (for this proposal) and will be treated in a separate RSKIP.
 
+### Bridge MUST be destination for Pegout transactions
+Peg-outs from delegated code: the Bridge treats any call to it from executing code as a contract caller (RSKIP-185): the peg-out is rejected and the value is not refunded. This applies to a delegated account's own code, including when the account calls itself. A delegated account must send a peg-out as a transaction with the Bridge as `destination`. Wallets SHOULD NOT send peg-outs through delegated code. A change to the bridge contract to allow pegouts via delegated code is out of scope (for this proposal) and will be treated in a separate RSKIP.
+
 ## Backward compatibility
 
 This change is a hard fork and therefore all full nodes must be updated. Light clients that only verify block headers do not need to be updated. Clients and tools that decode transactions, receipts or account state must be updated to handle set-code transactions and the delegation authority flag.
