@@ -182,6 +182,9 @@ control over a signer’s EOA*.
 - Transaction propagation: An EOA’s nonce may be incremented more than once per transaction.
 - Transaction propagation:  once an EOA has delegated to code, that code can be called by anyone. It becomes possible to cause transactions from other accounts to become stale. The authors of EIP-7702 recommend that clients do not accept more than one pending transaction from any EOA with a non-zero delegation indicator.
 
+### Bridge MUST be destination for Pegout transactions
+Peg-outs from delegated code: the Bridge treats any call to it from executing code as a contract caller (RSKIP-185): the peg-out is rejected and the value is not refunded. This applies to a delegated account's own code, including when the account calls itself. A delegated account must send a peg-out as a transaction with the Bridge as `destination`. Wallets SHOULD NOT send peg-outs through delegated code. A change to the bridge contract to allow pegouts via delegated code is out of scope (for this proposal) and will be treated in a separate RSKIP.
+
 ## Backward compatibility
 
 This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.
