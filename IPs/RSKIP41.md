@@ -2,7 +2,7 @@
 rskip: 41
 title: Extended Bitcoin Bridge Transactions
 description: 
-status: Draft
+status: Deferred
 purpose: Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-04-25
 |**Purpose**    |Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft | 
+|**Status**     |Deferred | 
 
 # **Abstract**
 
