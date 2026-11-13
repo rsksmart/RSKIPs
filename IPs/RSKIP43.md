@@ -2,7 +2,7 @@
 rskip: 43
 title: Sequential Address format
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-06-23
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft | 
+|**Status**     |Withdrawn | 
 
 # **Abstract**
 
