@@ -2,7 +2,7 @@
 rskip: 336
 title: Simple Parallelizable Semaphore
 description: 
-status: Draft
+status: Rejected
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -19,7 +19,7 @@ created: 2022-07-11
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Draft |
+|**Status**     |Rejected |
 |**discussions-to**     ||
 
 # **Abstract**
