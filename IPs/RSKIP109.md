@@ -2,7 +2,7 @@
 rskip: 109
 title:  Lower Storage Gas Costs for Shorter Keys 
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca, Usa
 author: SDL (@sergiodemianlerner)
 layer: 
@@ -18,7 +18,7 @@ created: 2019
 | **Author**     | SDL                                      |
 | **Layer**      | Sca, Usa                                 |
 | **Complexity** | 2                                        |
-| **Status**     | Draft                                    |
+| **Status**     | Withdrawn                                |
 
 # Abstract
 
