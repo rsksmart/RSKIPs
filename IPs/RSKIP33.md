@@ -2,7 +2,7 @@
 rskip: 33
 title: CODEREPLACE opcode
 description: 
-status: Adopted
+status: Withdrawn
 purpose: Sec, Usa
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2017-01-17
 |**Purpose**    |Sec/Usa |
 |**Layer**      |Core |
 |**Complexity** |2 |
-|**Status**     |Adopted |
+|**Status**     |Withdrawn |
 
 # **Abstract**
 
