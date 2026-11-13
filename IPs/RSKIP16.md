@@ -2,7 +2,7 @@
 rskip: 16
 title: Combined State Tree 
 description: 
-status: Draft
+status: Adopted
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2016-11-01
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |3 |
-|**Status**     |Draft |
+|**Status**     |Adopted |
 
 ## Pre-git revisions
 
