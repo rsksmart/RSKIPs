@@ -2,7 +2,7 @@
 rskip: 194
 title: Bloom filter compression
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2020-11
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 |**discussions-to**     |https://research.rsk.dev/t/rskip-194-bloom-filter-compression/73|
 
 
