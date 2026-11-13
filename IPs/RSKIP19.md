@@ -2,7 +2,7 @@
 rskip: 19
 title: RSK Address formats
 description: 
-status: Draft
+status: Withdrawn
 purpose: Sca
 author: SDL (@sergiodemianlerner)
 layer: Core
@@ -20,7 +20,7 @@ created: 2016-11-24
 |**Purpose**    |Sca |
 |**Layer**      |Core |
 |**Complexity** |1 |
-|**Status**     |Draft |
+|**Status**     |Withdrawn |
 
 ## Pre-git revisions
 
