@@ -408,7 +408,7 @@ Ephemeral calldata cannot be accessed in the same block it is transmitted, but i
 The goal of enabling a user-specified hash function is two-fold:
 
 - If the hasher computes a Merkle-tree of the ECD and returns its root, it enables selective disputes that require proving that a certain element in the **ecd**. 
-- If the ecd is used as L2 transaction data for a a ZK-rollup, then the rollup designer may choose to implement a SNARK-friendly hashing function, so that the ZK proofs can be created with much lower resources.
+- If the ecd is used as L2 transaction data for a ZK-rollup, then the rollup designer may choose to implement a SNARK-friendly hashing function, so that the ZK proofs can be created with much lower resources.
 
 
 
