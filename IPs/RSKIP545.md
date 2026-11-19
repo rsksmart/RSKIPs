@@ -28,6 +28,8 @@ The specification is intended to mirror that of [EIP-7702](https://eips.ethereum
 
 EIP-7702 has several prerequisites that have not been implemented in Rootstock. Some of them are not strictly necessary for this RSKIP. For example, we do not necessarily require EIP-2929, EIP-2930, EIP-3607, or EIP-4844. However, we do require the implementation of [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) style typed transactions. While transaction versions have not been implemented in Rootstock - *Transaction Receipts* have already been modified to include a “type” field consistent with EIP-2718. We also require [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541) to prevent deployments of contracts that contain deployed bytecode starting with `0xEF`. This is to avoid interference with EIP-7702’s “delegation indicator”. As initial drafts (corresponding to EIP-2718 and EIP-3541) we present the pull requests for [RSKIP-543](https://github.com/rsksmart/RSKIPs/pull/543) and [RSKIP-544](https://github.com/rsksmart/RSKIPs/pull/544). Another helpful proposal [RSKIP-546](https://github.com/rsksmart/RSKIPs/pull/546) introduces Ethereum's Type 1 and Type 2 transaction formats, which contain some fields that are referenced in this RSKIP (e.g. `access_list`, `max_fee_per_gas` and `max_priority_fee_per_gas`).
 
+This RSKIP also requires [RSKIP-701](https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP701.md), and it must not activate before RSKIP-701. An authorization binds to an address, not to code. Under RSKIP-701, the code at a delegate address that outlived its creating transaction can be removed but never replaced. EIP-7702 was written for Ethereum, where [EIP-6780](https://eips.ethereum.org/EIPS/eip-6780) keeps that code from being removed at all. The `SELFDESTRUCT` rule of this RSKIP is also written as an exception to RSKIP-701 and uses the definitions of RSKIP-701.
+
 Todo: if the PRs for new RSKIPs are merged into main, then update the links. 
 
 ### Parameters
@@ -160,6 +162,23 @@ succeed with no execution when given enough gas to initiate the call.
 
 In case a delegation indicator points to another delegation, creating a potential chain or loop of delegations, clients must retrieve only the first code and then stop following the delegation chain.
 
+### SELFDESTRUCT in an account with a delegation indicator
+
+The terms *executing account*, *marked accounts* and *moving the balance* are those that RSKIP-701 defines.
+
+From the activation of this RSKIP, the following rule takes precedence over RSKIP-701. It applies when `SELFDESTRUCT` executes and the code stored in the executing account is exactly a 23-byte delegation indicator `0xef0100 || address`.
+
+1. **Balance.** `SELFDESTRUCT` moves the balance of the executing account to the beneficiary. When the beneficiary is the executing account itself, its balance is unchanged.
+2. **Account.** `SELFDESTRUCT` does not change the nonce, the code or the storage of the executing account. Writes made earlier in the transaction stand.
+3. **Marking.** The executing account is not added to the marked accounts.
+4. **Execution and gas.** The frame ends successfully, as it does after `STOP`, and `SELFDESTRUCT` charges the same gas as in any other account.
+
+`SELFDESTRUCT` inside a static call causes an exceptional halt, as in any other account.
+
+The executing account is never marked, so it earns no refund of 24,000 gas. The RSKIP-131 check never treats it as deleted. The `suicide` trace is still emitted for this `SELFDESTRUCT`, and the account remains in the state after it.
+
+`SELFDESTRUCT` in any other account follows RSKIP-701.
+
 ## Implementation
 
 Todo: There is currently no implementation for this proposal.
@@ -168,6 +187,10 @@ Todo: There is currently no implementation for this proposal.
 
 The original EIP has [extensive rationale](https://eips.ethereum.org/EIPS/eip-7702#rationale) section with detailed discussion of several aspects such as no initcode, no contract creation, no precompiles, etc. For the sake of brevity, we do not replicate them here. However, reviewers and implementers should pay particular attention to the the issues mentioned therein. One example is the transaction origin invariant.  Allowing `tx.origin` to set code and execute its own delegated code enables what is called self-sponsoring. It allows users to take advantage of EIP-7702 without relying on any third party infrastructure. However, that means the EIP breaks the invariant that `msg.sender == tx.origin`
 only happens in the topmost execution frame of a transaction. This will affect smart contracts containing `require(msg.sender == tx.origin)` style checks.
+
+**`SELFDESTRUCT` keeps an account with a delegation indicator.** Under RSKIP-701 alone, an account with a delegation indicator would lose its code and its storage when it executes `SELFDESTRUCT`. This RSKIP keeps both. The account chose the delegation, and the storage belongs to the account rather than to the delegate. Only the balance moves, so a beneficiary other than the account itself receives the same amount as under RSKIP-701. Ethereum behaves the same way: under EIP-6780, `SELFDESTRUCT` in an account not created in the same transaction only moves the balance.
+
+**The `SELFDESTRUCT` rule keys on the code.** A contract deployed before RSKIP-544 activated can have code that is a delegation indicator, although it never signed an authorization. A call to such a contract runs the code at the address that its indicator names. When that code executes `SELFDESTRUCT`, the rule covers the contract too. The contract keeps its code, its storage and its nonce, and only its balance moves. The rule takes nothing from such a contract, because before this RSKIP its code could not execute. Its first byte `0xEF` is an undefined opcode and halts execution. The code of the contract is not empty, so the RSKIP-125 collision rule refuses any later deployment at its address.
 
 Reviewers and implementers should pay attention to the discussion on [security considerations](https://eips.ethereum.org/EIPS/eip-7702#security-considerations)  in the  EIP, some of which are listed below.
 
@@ -181,6 +204,8 @@ control over a signer’s EOA*.
 - Transaction (gas) sponsors may require their users to post some bond or use reputational mechanisms. This is to guard against the possibility of relayers not being reimbursed for gas due to change in a EOA’s authorized code or asset sweeping.
 - Transaction propagation: An EOA’s nonce may be incremented more than once per transaction.
 - Transaction propagation:  once an EOA has delegated to code, that code can be called by anyone. It becomes possible to cause transactions from other accounts to become stale. The authors of EIP-7702 recommend that clients do not accept more than one pending transaction from any EOA with a non-zero delegation indicator.
+- `SELFDESTRUCT` in an account with a delegation indicator keeps the nonce of the account, so the authorizations that the account signed cannot be replayed.
+- When a delegate that outlived its creating transaction executes `SELFDESTRUCT` in its own context, RSKIP-701 removes its code, and no other code can be deployed at its address later. An account delegated to it then runs empty code until it signs a new authorization. An authorization for an address that has no code yet, or for a delegate created and destroyed in one transaction, has no such protection. EIP-7702 leaves the same gap on Ethereum.
 
 ### Bridge MUST be destination for Pegout transactions
 Peg-outs from delegated code: the Bridge treats any call to it from executing code as a contract caller (RSKIP-185): the peg-out is rejected and the value is not refunded. This applies to a delegated account's own code, including when the account calls itself. A delegated account must send a peg-out as a transaction with the Bridge as `destination`. Wallets SHOULD NOT send peg-outs through delegated code. A change to the bridge contract to allow pegouts via delegated code is out of scope (for this proposal) and will be treated in a separate RSKIP.
@@ -188,6 +213,8 @@ Peg-outs from delegated code: the Bridge treats any call to it from executing co
 ## Backward compatibility
 
 This change is a hard-fork and therefore all full nodes must be updated. SPV light-clients do not need to be updated.
+
+The `SELFDESTRUCT` rule of this RSKIP also reaches a contract deployed before RSKIP-544 whose code is a delegation indicator. The Rationale explains why it takes nothing from such a contract.
 
 ## Test cases
 
